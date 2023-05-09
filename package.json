@@ -43,6 +43,7 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "compression-webpack-plugin": "^8.0.0",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^5.2.6",
     "eslint": "^8.20.0",
     "fork-ts-checker-webpack-plugin": "^6.2.13",

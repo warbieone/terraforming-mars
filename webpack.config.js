@@ -10,6 +10,8 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 // import mapping that often begins with @.
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 const zlib = require('zlib');
 
 const plugins = [
@@ -26,6 +28,11 @@ const plugins = [
     },
   }),
   new VueLoaderPlugin(),
+  new CopyWebpackPlugin({
+    patterns: [
+      { from: 'assets', to: 'assets' },
+    ],
+  }),
 ];
 
 if (process.env.NODE_ENV === 'production') {
