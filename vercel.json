@@ -1,2 +1,15 @@
 {
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/assets/index.html"
+    }
+  ],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    }
+  ]
 }
