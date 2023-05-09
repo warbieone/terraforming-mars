@@ -6,22 +6,23 @@ const Types_1 = require("../../common/Types");
 const GameSetup_1 = require("../GameSetup");
 class Cloner {
     static clone(newGameId, players, firstPlayerIndex, serialized) {
-        const sourceGameId = serialized.id;
-        const oldPlayerIds = serialized.players.map((player) => player.id);
-        const newPlayerIds = players.map((player) => player.id);
-        if (oldPlayerIds.length !== newPlayerIds.length) {
-            throw new Error(`Failing to clone from a ${oldPlayerIds.length} game ${sourceGameId} to a ${newPlayerIds.length} game.`);
+        const serializedGameId = serialized.id;
+        const serializedPlayerIds = serialized.players.map((player) => player.id);
+        const playerIds = players.map((player) => player.id);
+        if (serializedPlayerIds.length !== playerIds.length) {
+            throw new Error(`Failing to clone from a ${serializedPlayerIds.length} game ${serializedGameId} to a ${playerIds.length} game.`);
         }
-        Cloner.replacePlayerIds(serialized, oldPlayerIds, newPlayerIds);
-        if (oldPlayerIds.length === 1) {
-            Cloner.replacePlayerIds(serialized, [GameSetup_1.GameSetup.neutralPlayerFor(sourceGameId).id], [GameSetup_1.GameSetup.neutralPlayerFor(newGameId).id]);
+        Cloner.replacePlayerIds(serialized, serializedPlayerIds, playerIds);
+        if (serializedPlayerIds.length === 1) {
+            Cloner.replacePlayerIds(serialized, [GameSetup_1.GameSetup.neutralPlayerFor(serializedGameId).id], [GameSetup_1.GameSetup.neutralPlayerFor(newGameId).id]);
         }
         serialized.id = newGameId;
         for (let idx = 0; idx < players.length; idx++) {
             this.updatePlayer(players[idx], serialized.players[idx]);
         }
         serialized.first = serialized.players[firstPlayerIndex].id;
-        serialized.clonedGamedId = '#' + sourceGameId;
+        serialized.clonedGamedId = '#' + serializedGameId;
+        serialized.createdTimeMs = new Date().getTime();
         const game = Game_1.Game.deserialize(serialized);
         return game;
     }
