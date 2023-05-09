@@ -10,8 +10,6 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 // import mapping that often begins with @.
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
 const zlib = require('zlib');
 
 const plugins = [
