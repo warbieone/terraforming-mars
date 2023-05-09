@@ -1,12 +1,13 @@
 {
-    "rewrites": [
-      {
-        "source": "/",
-        "destination": "/assets/index.html"
-      },
-      {
-        "source": "/assets/(.*)",
-        "destination": "/assets/$1"
-      }
-    ]
-  }
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/assets/index.html",
+      "continue": true
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    }
+  ]
+}
