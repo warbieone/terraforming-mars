@@ -1,14 +1,15 @@
 {
-    "version": 2,
     "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/build/$1",
-        "continue": true
-      },
-      {
-        "src": "/.*",
-        "dest": "/build/index.html"
+        {
+          "src": "/",
+          "dest": "/assets/index.html"
+        },
+        {
+          "src": "/assets/(.*)",
+          "dest": "/assets/$1"
+        }
+      ],
+    "engines": {
+        "node": "16.20"
       }
-    ]
   }

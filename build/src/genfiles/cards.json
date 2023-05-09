@@ -31869,7 +31869,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R20",
-            "description": "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play",
+            "description": "You start with 45 M€. As your first action, put an additional Colony Tile of your choice into play",
             "renderData": {
                 "rows": [
                     [],
@@ -31877,7 +31877,7 @@
                     [
                         {
                             "type": "megacredits",
-                            "amount": 40,
+                            "amount": 45,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -31971,7 +31971,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 40,
+        "startingMegaCredits": 45,
         "compatibility": [
             "colonies"
         ]
@@ -31990,7 +31990,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R04",
-            "description": "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.",
+            "description": "You start with 50 M€. 1 VP per 2 animals on this card.",
             "renderData": {
                 "rows": [
                     [
@@ -32074,6 +32074,25 @@
                                             ],
                                             [
                                                 {
+                                                    "rows": [
+                                                        [
+                                                            {
+                                                                "type": "megacredits",
+                                                                "amount": 1,
+                                                                "is": "item",
+                                                                "multiplier": false,
+                                                                "clone": false,
+                                                                "cancelled": false,
+                                                                "questionMark": false,
+                                                                "showDigit": false,
+                                                                "amountInside": true,
+                                                                "size": "M"
+                                                            }
+                                                        ]
+                                                    ],
+                                                    "is": "production-box"
+                                                },
+                                                {
                                                     "type": "animals",
                                                     "amount": 1,
                                                     "is": "item",
@@ -32082,7 +32101,7 @@
                                                     "cancelled": false,
                                                     "questionMark": false
                                                 },
-                                                "Effect: When you play an animal or plant tag, including this, add 1 animal to this card."
+                                                "Effect: When you play an animal or plant tag, including this, gain 1 M€ production and add 1 animal to this card."
                                             ]
                                         ],
                                         "is": "effect"
@@ -32126,7 +32145,7 @@
             "heat": 0
         },
         "resourceType": "Animal",
-        "startingMegaCredits": 45,
+        "startingMegaCredits": 50,
         "compatibility": []
     },
     {
