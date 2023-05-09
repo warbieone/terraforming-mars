@@ -5,6 +5,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
+import {IProjectCard} from '../IProjectCard';
+import {Player} from '../../Player';
 
 export class CheungShingMARS extends Card implements ICorporationCard {
   constructor() {
@@ -18,7 +20,7 @@ export class CheungShingMARS extends Card implements ICorporationCard {
         production: {megacredits: 3},
       },
 
-      cardDiscount: {tag: Tag.BUILDING, amount: 2},
+      // cardDiscount: {tag: Tag.BUILDING, amount: 2},
       metadata: {
         cardNumber: 'R16',
         description: 'You start with 3 M€ production and 44 M€.',
@@ -26,12 +28,20 @@ export class CheungShingMARS extends Card implements ICorporationCard {
           b.br.br;
           b.production((pb) => pb.megacredits(3)).nbsp.megacredits(44);
           b.corpBox('effect', (ce) => {
-            ce.effect('When you play a building tag, you pay 2 M€ less for it.', (eb) => {
-              eb.building(1, {played}).startEffect.megacredits(-2);
+            ce.effect('When you play a building tag, gain 2 M€.', (eb) => {
+              eb.building(1, {played}).startEffect.megacredits(2);
             });
           });
         }),
       },
     });
+  }
+  public onCardPlayed(player: Player, card: IProjectCard) {
+    if (player.isCorporation(this.name)) {
+      const tagCount = player.tags.cardTagCount(card, Tag.BUILDING);
+      if (tagCount > 0) {
+        player.megaCredits += 2;
+      }
+    }
   }
 }
