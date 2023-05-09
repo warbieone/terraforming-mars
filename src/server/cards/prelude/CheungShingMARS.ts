@@ -40,7 +40,7 @@ export class CheungShingMARS extends Card implements ICorporationCard {
     if (player.isCorporation(this.name)) {
       const tagCount = player.tags.cardTagCount(card, Tag.BUILDING);
       if (tagCount > 0) {
-        player.megaCredits += 2;
+        player.megaCredits += 2,{log: true};
       }
     }
   }
