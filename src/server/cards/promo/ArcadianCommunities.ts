@@ -20,7 +20,7 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
 
       behavior: {
         stock: {steel: 10},
-        production: {steel: 2},
+        production: {steel: 1},
       },
 
       metadata: {

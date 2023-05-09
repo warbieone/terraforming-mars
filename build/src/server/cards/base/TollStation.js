@@ -1,0 +1,32 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TollStation = void 0;
+const Tag_1 = require("../../../common/cards/Tag");
+const Card_1 = require("../Card");
+const CardType_1 = require("../../../common/cards/CardType");
+const CardName_1 = require("../../../common/cards/CardName");
+const CardRenderer_1 = require("../render/CardRenderer");
+const Options_1 = require("../Options");
+class TollStation extends Card_1.Card {
+    constructor() {
+        super({
+            type: CardType_1.CardType.AUTOMATED,
+            name: CardName_1.CardName.TOLL_STATION,
+            tags: [Tag_1.Tag.SPACE],
+            cost: 12,
+            behavior: {
+                production: { megacredits: { tag: Tag_1.Tag.SPACE, others: true } },
+            },
+            metadata: {
+                cardNumber: '099',
+                renderData: CardRenderer_1.CardRenderer.builder((b) => {
+                    b.production((pb) => {
+                        pb.megacredits(1).slash().space({ played: Options_1.played, all: Options_1.all }).asterix();
+                    });
+                }),
+                description: 'Increase your M€ production 1 step for each space tag your OPPONENTS have.',
+            },
+        });
+    }
+}
+exports.TollStation = TollStation;

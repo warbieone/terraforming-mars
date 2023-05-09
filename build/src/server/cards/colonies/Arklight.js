@@ -1,0 +1,44 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Arklight = void 0;
+const Tag_1 = require("../../../common/cards/Tag");
+const CardResource_1 = require("../../../common/CardResource");
+const CardType_1 = require("../../../common/cards/CardType");
+const CardName_1 = require("../../../common/cards/CardName");
+const Card_1 = require("../Card");
+const CardRenderer_1 = require("../render/CardRenderer");
+const Options_1 = require("../Options");
+class Arklight extends Card_1.Card {
+    constructor() {
+        super({
+            name: CardName_1.CardName.ARKLIGHT,
+            tags: [Tag_1.Tag.ANIMAL],
+            startingMegaCredits: 50,
+            resourceType: CardResource_1.CardResource.ANIMAL,
+            type: CardType_1.CardType.CORPORATION,
+            victoryPoints: { resourcesHere: {}, per: 2 },
+            behavior: {
+                addResources: 1,
+            },
+            metadata: {
+                cardNumber: 'R04',
+                description: 'You start with 50 M€. 1 VP per 2 animals on this card.',
+                renderData: CardRenderer_1.CardRenderer.builder((b) => {
+                    b.megacredits(45).nbsp.production((pb) => pb.megacredits(2));
+                    b.corpBox('effect', (ce) => {
+                        ce.effect('When you play an animal or plant tag, including this, gain 1 M€ production and add 1 animal to this card.', (eb) => {
+                            eb.animals(1, { played: Options_1.played }).slash().plants(1, { played: Options_1.played }).startEffect.production((pb) => pb.megacredits(1)).animals(1);
+                        });
+                        ce.vSpace();
+                    });
+                }),
+            },
+        });
+    }
+    onCardPlayed(player, card) {
+        if (player.isCorporation(CardName_1.CardName.ARKLIGHT)) {
+            player.addResourceTo(this, { qty: card.tags.filter((cardTag) => cardTag === Tag_1.Tag.ANIMAL || cardTag === Tag_1.Tag.PLANT).length, log: true });
+        }
+    }
+}
+exports.Arklight = Arklight;
