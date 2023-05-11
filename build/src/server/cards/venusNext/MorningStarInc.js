@@ -18,14 +18,18 @@ class MorningStarInc extends Card_1.Card {
                 text: 'Draw 3 cards with a Venus tag',
                 drawCard: { count: 3, tag: Tag_1.Tag.VENUS },
             },
+            cardDiscount: { tag: Tag_1.Tag.VENUS, amount: 1 },
             metadata: {
                 cardNumber: 'R06',
                 description: 'You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.megacredits(50).nbsp.cards(3, { secondaryTag: Tag_1.Tag.VENUS });
                     b.corpBox('effect', (ce) => {
-                        ce.effect('Your Venus requirements are +/- 2 steps, your choice in each case.', (eb) => {
-                            eb.plate('Venus requirements').startEffect.text('+/- 2');
+                        ce.effect('Your Venus requirements are +/- 3 steps.', (eb) => {
+                            eb.plate('Venus requirements').startEffect.text('+/- 3');
+                        });
+                        ce.effect('When you play a Venus tag, you pay 1 M€ less for it.', (eb) => {
+                            eb.venus(1).startEffect.megacredits(-1);
                         });
                     });
                 }),
@@ -33,7 +37,7 @@ class MorningStarInc extends Card_1.Card {
         });
     }
     getRequirementBonus(_player, parameter) {
-        return parameter === GlobalParameter_1.GlobalParameter.VENUS ? 2 : 0;
+        return parameter === GlobalParameter_1.GlobalParameter.VENUS ? 3 : 0;
     }
 }
 exports.MorningStarInc = MorningStarInc;

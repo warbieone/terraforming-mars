@@ -9,7 +9,7 @@ class MartianIndustries extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
             name: CardName_1.CardName.MARTIAN_INDUSTRIES,
-            tags: [Tag_1.Tag.BUILDING],
+            tags: [Tag_1.Tag.BUILDING, Tag_1.Tag.POWER],
             behavior: {
                 production: { energy: 1, steel: 1 },
                 stock: { megacredits: 6 },

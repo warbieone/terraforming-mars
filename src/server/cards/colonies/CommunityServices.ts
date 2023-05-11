@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class CommunityServices extends Card implements IProjectCard {
   constructor() {
     super({
-      cost: 13,
+      cost: 11,
       name: CardName.COMMUNITY_SERVICES,
       type: CardType.AUTOMATED,
       victoryPoints: 1,

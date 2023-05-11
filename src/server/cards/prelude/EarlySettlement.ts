@@ -11,6 +11,7 @@ export class EarlySettlement extends PreludeCard {
 
       behavior: {
         production: {plants: 1},
+        stock: {plants: 3},
         city: {},
       },
 
@@ -19,7 +20,7 @@ export class EarlySettlement extends PreludeCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1)).city();
         }),
-        description: 'Increase your plant production 1 step. Place a city tile.',
+        description: 'Increase your plant production 1 step. Gain 3 plants. Place a city tile.',
       },
     });
   }

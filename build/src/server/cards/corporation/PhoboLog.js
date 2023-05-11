@@ -14,17 +14,21 @@ class PhoboLog extends Card_1.Card {
             type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.PHOBOLOG,
             tags: [Tag_1.Tag.SPACE],
-            startingMegaCredits: 23,
+            startingMegaCredits: 30,
             behavior: {
-                stock: { titanium: 10 },
+                stock: { titanium: 8 },
                 titanumValue: 1,
+            },
+            firstAction: {
+                text: 'Draw 2 cards with a space tag',
+                drawCard: { count: 2, tag: Tag_1.Tag.SPACE },
             },
             metadata: {
                 cardNumber: 'R09',
-                description: 'You start with 10 titanium and 23 M€.',
+                description: 'You start with 8 titanium and 30 M€.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br.br;
-                    b.megacredits(23).nbsp.titanium(10, { digit: Options_1.digit });
+                    b.megacredits(23).nbsp.titanium(10, { digit: Options_1.digit }).nbsp.cards(2, { secondaryTag: Tag_1.Tag.SPACE });
                     b.corpBox('effect', (ce) => {
                         ce.effect('Your titanium resources are each worth 1 M€ extra.', (eb) => {
                             eb.titanium(1).startEffect.plus(Size_1.Size.SMALL).megacredits(1);

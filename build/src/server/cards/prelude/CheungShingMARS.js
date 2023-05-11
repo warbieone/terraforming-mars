@@ -17,7 +17,6 @@ class CheungShingMARS extends Card_1.Card {
             behavior: {
                 production: { megacredits: 3 },
             },
-            cardDiscount: { tag: Tag_1.Tag.BUILDING, amount: 2 },
             metadata: {
                 cardNumber: 'R16',
                 description: 'You start with 3 M€ production and 44 M€.',
@@ -25,13 +24,21 @@ class CheungShingMARS extends Card_1.Card {
                     b.br.br;
                     b.production((pb) => pb.megacredits(3)).nbsp.megacredits(44);
                     b.corpBox('effect', (ce) => {
-                        ce.effect('When you play a building tag, you pay 2 M€ less for it.', (eb) => {
-                            eb.building(1, { played: Options_1.played }).startEffect.megacredits(-2);
+                        ce.effect('When you play a building tag, gain 2 M€ test.', (eb) => {
+                            eb.building(1, { played: Options_1.played }).startEffect.megacredits(2);
                         });
                     });
                 }),
             },
         });
+    }
+    onCardPlayed(player, card) {
+        if (player.isCorporation(this.name)) {
+            const tagCount = player.tags.cardTagCount(card, Tag_1.Tag.BUILDING);
+            if (tagCount > 0) {
+                player.megaCredits += 2, { log: true };
+            }
+        }
     }
 }
 exports.CheungShingMARS = CheungShingMARS;

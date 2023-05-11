@@ -7,6 +7,7 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
+const Turmoil_1 = require("../../turmoil/Turmoil");
 class Pristar extends Card_1.Card {
     constructor() {
         super({
@@ -29,6 +30,7 @@ class Pristar extends Card_1.Card {
                 }),
             },
         });
+        this.hasReceivedInfluenceBonus = false;
     }
     bespokePlay(player) {
         player.decreaseTerraformRatingSteps(2);
@@ -38,6 +40,18 @@ class Pristar extends Card_1.Card {
         if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
             player.megaCredits += 6;
             player.addResourceTo(this, 1);
+            if (!this.hasReceivedInfluenceBonus) {
+                Turmoil_1.Turmoil.ifTurmoil((player.game), (turmoil) => {
+                    turmoil.addInfluenceBonus(player);
+                });
+                this.hasReceivedInfluenceBonus = true;
+            }
+        }
+        if (this.hasReceivedInfluenceBonus) {
+            Turmoil_1.Turmoil.ifTurmoil((player.game), (turmoil) => {
+                turmoil.addInfluenceBonus(player, -1);
+            });
+            this.hasReceivedInfluenceBonus = false;
         }
         return undefined;
     }

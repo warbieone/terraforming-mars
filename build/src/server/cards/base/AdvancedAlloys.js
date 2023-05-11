@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdvancedAlloys = void 0;
-const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
@@ -12,7 +11,6 @@ class AdvancedAlloys extends Card_1.Card {
         super({
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.ADVANCED_ALLOYS,
-            tags: [Tag_1.Tag.SCIENCE],
             cost: 9,
             behavior: {
                 steelValue: 1,

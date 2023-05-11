@@ -25,14 +25,14 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
 
       metadata: {
         cardNumber: 'R22',
-        description: 'You start with 37 M€. Increase your steel production 1 step.',
+        description: 'You start with 40 M€. Increase your steel production 1 step.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(37).nbsp.production((pb) => pb.steel(1));
+          b.megacredits(40).nbsp.production((pb) => pb.steel(1));
           b.corpBox('action', (ce) => {
             ce.vSpace(Size.LARGE);
-            ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.', (eb) => {
+            ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 1 Energy to draw a building card.', (eb) => {
               eb.empty().arrow().production((pb) => pb.energy(1)).asterix();
-              eb.or().megacredits(3).startAction.cards(1, {secondaryTag: Tag.BUILDING});
+              eb.or().energy(1).startAction.cards(1, {secondaryTag: Tag.BUILDING});
             });
           });
         }),
@@ -54,11 +54,9 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
       },
     );
 
-    const drawBuildingCard = new SelectOption('Spend 3 M€ to draw a building card', 'Draw card', () => {
-      player.payMegacreditsDeferred(
-        3,
-        'Select how to pay for Factorum action.',
-        () => player.drawCard(1, {tag: Tag.BUILDING}));
+    const drawBuildingCard = new SelectOption('Spend 1 Energy to draw a building card', 'Draw card', () => {
+      player.energy -= 1;
+      player.drawCard(1, {tag: Tag.BUILDING});
       return undefined;
     });
 

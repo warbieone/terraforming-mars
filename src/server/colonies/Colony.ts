@@ -88,8 +88,8 @@ export abstract class Colony implements IColony {
 
       // Poseidon hook
       const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
-      if (poseidon !== undefined) {
-        poseidon.production.add(Resource.MEGACREDITS, 1);
+      if (poseidon !== undefined && poseidon === player ) {
+        poseidon.production.add(Resource.MEGACREDITS, 2);
       }
 
       // CEO Naomi hook

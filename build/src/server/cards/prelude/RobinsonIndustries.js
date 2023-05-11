@@ -8,18 +8,23 @@ const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
+const Tag_1 = require("../../../common/cards/Tag");
 class RobinsonIndustries extends Card_1.Card {
     constructor() {
         super({
             type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.ROBINSON_INDUSTRIES,
-            startingMegaCredits: 47,
+            tags: [Tag_1.Tag.WILD],
+            startingMegaCredits: 40,
+            behavior: {
+                production: { megacredits: 2 },
+            },
             metadata: {
                 cardNumber: 'R27',
-                description: 'You start with 47 M€.',
+                description: 'You start with 40 M€.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br.br.br;
-                    b.megacredits(47);
+                    b.megacredits(40);
                     b.corpBox('action', (ce) => {
                         ce.action('Spend 4 M€ to increase (one of) your LOWEST production 1 step.', (eb) => {
                             eb.megacredits(4).startAction.production((pb) => pb.wild(1).asterix());

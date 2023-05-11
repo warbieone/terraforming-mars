@@ -14,16 +14,14 @@ class GalileanMining extends PreludeCard_1.PreludeCard {
             behavior: {
                 production: { titanium: 2 },
             },
-            startingMegacredits: -5,
             metadata: {
                 cardNumber: 'P13',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => {
                         pb.titanium(2);
-                    }).br;
-                    b.megacredits(-5);
+                    });
                 }),
-                description: 'Increase your titanium production 2 steps. Pay 5 M€.',
+                description: 'Increase your titanium production 2 steps.',
             },
         });
     }

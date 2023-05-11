@@ -10560,7 +10560,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R17",
-            "description": "You start with 2 plant production, 3 plants, and 36 M€.",
+            "description": "You start with 3 plant production, and 37 M€.",
             "renderData": {
                 "rows": [
                     [],
@@ -10570,7 +10570,7 @@
                                 [
                                     {
                                         "type": "plants",
-                                        "amount": 2,
+                                        "amount": 3,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -10589,7 +10589,7 @@
                         },
                         {
                             "type": "megacredits",
-                            "amount": 36,
+                            "amount": 37,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -10598,15 +10598,6 @@
                             "showDigit": false,
                             "amountInside": true,
                             "size": "M"
-                        },
-                        {
-                            "type": "plants",
-                            "amount": 3,
-                            "is": "item",
-                            "multiplier": false,
-                            "clone": false,
-                            "cancelled": false,
-                            "showDigit": true
                         }
                     ],
                     [
@@ -10617,36 +10608,82 @@
                                         "rows": [
                                             [
                                                 {
-                                                    "type": "plants",
-                                                    "amount": 7,
+                                                    "type": "animals",
+                                                    "amount": 1,
                                                     "is": "item",
                                                     "multiplier": false,
                                                     "clone": false,
                                                     "cancelled": false,
-                                                    "showDigit": true
+                                                    "isPlayed": true
+                                                },
+                                                {
+                                                    "type": "/",
+                                                    "size": "M",
+                                                    "isIcon": false,
+                                                    "is": "symbol"
+                                                },
+                                                {
+                                                    "type": "plants",
+                                                    "amount": 1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "isPlayed": true
+                                                },
+                                                {
+                                                    "type": "/",
+                                                    "size": "M",
+                                                    "isIcon": false,
+                                                    "is": "symbol"
+                                                },
+                                                {
+                                                    "type": "microbes",
+                                                    "amount": 1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "isPlayed": true
                                                 }
                                             ],
                                             [
                                                 {
-                                                    "type": "->",
+                                                    "type": ":",
                                                     "size": "M",
-                                                    "isIcon": true,
+                                                    "isIcon": false,
                                                     "is": "symbol"
                                                 }
                                             ],
                                             [
                                                 {
-                                                    "type": "greenery",
-                                                    "amount": -1,
+                                                    "type": "megacredits",
+                                                    "amount": 2,
                                                     "is": "item",
                                                     "multiplier": false,
                                                     "clone": false,
                                                     "cancelled": false,
                                                     "questionMark": false,
-                                                    "size": "M",
-                                                    "secondaryTag": "oxygen"
+                                                    "showDigit": false,
+                                                    "amountInside": true,
+                                                    "size": "M"
                                                 },
-                                                "Effect: You may always pay 7 plants, instead of 8, to place greenery."
+                                                {
+                                                    "type": "OR",
+                                                    "size": "S",
+                                                    "isIcon": false,
+                                                    "is": "symbol"
+                                                },
+                                                {
+                                                    "type": "plants",
+                                                    "amount": 1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false
+                                                },
+                                                "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2MC or 1 plant."
                                             ]
                                         ],
                                         "is": "effect"
@@ -10668,7 +10705,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 36,
+        "startingMegaCredits": 37,
         "compatibility": []
     },
     {
@@ -10811,7 +10848,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R19",
-            "description": "You start with 20 steel and 30 M€.",
+            "description": "You start with 12 steel and 40 M€.",
             "renderData": {
                 "rows": [
                     [],
@@ -10820,7 +10857,7 @@
                     [
                         {
                             "type": "megacredits",
-                            "amount": 30,
+                            "amount": 40,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -10838,7 +10875,7 @@
                         },
                         {
                             "type": "steel",
-                            "amount": 20,
+                            "amount": 12,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -10874,7 +10911,7 @@
                                             [
                                                 {
                                                     "type": "megacredits",
-                                                    "amount": 2,
+                                                    "amount": 3,
                                                     "is": "item",
                                                     "multiplier": false,
                                                     "clone": false,
@@ -10884,7 +10921,7 @@
                                                     "amountInside": true,
                                                     "size": "M"
                                                 },
-                                                "Effect: Each time you play an event, you gain 2 M€."
+                                                "Effect: Each time you play an event, you gain 3 M€."
                                             ]
                                         ],
                                         "is": "effect"
@@ -10906,7 +10943,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 30,
+        "startingMegaCredits": 40,
         "compatibility": []
     },
     {
@@ -10989,12 +11026,12 @@
                                                     "clone": false,
                                                     "cancelled": false,
                                                     "questionMark": false,
-                                                    "text": "+/- 2",
+                                                    "text": "+/- 3",
                                                     "size": "M",
                                                     "isUppercase": false,
                                                     "isBold": true
                                                 },
-                                                "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case."
+                                                "Effect: Your temperature, oxygen, ocean, and Venus requirements are +3 or -3 steps, your choice in each case."
                                             ]
                                         ],
                                         "is": "effect"
@@ -11030,7 +11067,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R24",
-            "description": "You start with 30 M€, 5 steel and 1 steel production.",
+            "description": "You start with 36 M€, 2 steel and 1 steel production.",
             "renderData": {
                 "rows": [
                     [],
@@ -11109,10 +11146,26 @@
                                                     "is": "symbol"
                                                 },
                                                 {
-                                                    "type": "/",
+                                                    "type": ":",
                                                     "size": "M",
                                                     "isIcon": false,
                                                     "is": "symbol"
+                                                },
+                                                {
+                                                    "rows": [
+                                                        [
+                                                            {
+                                                                "type": "steel",
+                                                                "amount": 1,
+                                                                "is": "item",
+                                                                "multiplier": false,
+                                                                "clone": false,
+                                                                "cancelled": false,
+                                                                "questionMark": false
+                                                            }
+                                                        ]
+                                                    ],
+                                                    "is": "production-box"
                                                 },
                                                 {
                                                     "type": "titanium",
@@ -11143,7 +11196,7 @@
                                                     "rows": [
                                                         [
                                                             {
-                                                                "type": "steel",
+                                                                "type": "titanium",
                                                                 "amount": 1,
                                                                 "is": "item",
                                                                 "multiplier": false,
@@ -11155,7 +11208,7 @@
                                                     ],
                                                     "is": "production-box"
                                                 },
-                                                "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step."
+                                                "Effect: Each time you get any steel as a placement bonus on the map, increase your steel production 1 step. Same for titanium."
                                             ]
                                         ],
                                         "is": "effect"
@@ -11177,7 +11230,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 30,
+        "startingMegaCredits": 36,
         "compatibility": []
     },
     {
@@ -11190,7 +11243,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R09",
-            "description": "You start with 10 titanium and 23 M€.",
+            "description": "You start with 8 titanium and 30 M€.",
             "renderData": {
                 "rows": [
                     [],
@@ -11222,6 +11275,21 @@
                             "clone": false,
                             "cancelled": false,
                             "showDigit": true
+                        },
+                        {
+                            "type": "nbsp",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "cards",
+                            "amount": 2,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "secondaryTag": "space"
                         }
                     ],
                     [
@@ -11290,14 +11358,15 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 23,
+        "startingMegaCredits": 30,
         "compatibility": []
     },
     {
         "module": "base",
         "name": "Tharsis Republic",
         "tags": [
-            "building"
+            "building",
+            "city"
         ],
         "cost": 0,
         "type": "corporation",
@@ -11581,7 +11650,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R32",
-            "description": "You start with 40 M€.",
+            "description": "You start with 50 M€.",
             "renderData": {
                 "rows": [
                     [],
@@ -11640,7 +11709,7 @@
                                             [
                                                 {
                                                     "type": "megacredits",
-                                                    "amount": 3,
+                                                    "amount": 1,
                                                     "is": "item",
                                                     "multiplier": false,
                                                     "clone": false,
@@ -11675,7 +11744,7 @@
                                                     "isIcon": false,
                                                     "is": "symbol"
                                                 },
-                                                "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more."
+                                                "Action: If your Terraform Rating was raised this generation, you may pay 1 M€ to raise it 1 step more."
                                             ]
                                         ],
                                         "is": "effect"
@@ -11697,7 +11766,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 40,
+        "startingMegaCredits": 50,
         "compatibility": []
     },
     {
@@ -21468,7 +21537,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R21",
-            "description": "You start with 35 M€ and 3 asteroid resources.",
+            "description": "You start with 40 M€ and 4 asteroid resources.",
             "renderData": {
                 "rows": [
                     [],
@@ -21631,7 +21700,7 @@
             "heat": 0
         },
         "resourceType": "Asteroid",
-        "startingMegaCredits": 35,
+        "startingMegaCredits": 40,
         "compatibility": []
     },
     {
@@ -21645,13 +21714,13 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R22",
-            "description": "You start with 37 M€. Increase your steel production 1 step.",
+            "description": "You start with 40 M€. Increase your steel production 1 step.",
             "renderData": {
                 "rows": [
                     [
                         {
                             "type": "megacredits",
-                            "amount": 37,
+                            "amount": 40,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -21738,16 +21807,13 @@
                                                     "is": "symbol"
                                                 },
                                                 {
-                                                    "type": "megacredits",
-                                                    "amount": 3,
+                                                    "type": "energy",
+                                                    "amount": 1,
                                                     "is": "item",
                                                     "multiplier": false,
                                                     "clone": false,
                                                     "cancelled": false,
-                                                    "questionMark": false,
-                                                    "showDigit": false,
-                                                    "amountInside": true,
-                                                    "size": "M"
+                                                    "questionMark": false
                                                 }
                                             ],
                                             [
@@ -21768,7 +21834,7 @@
                                                     "cancelled": false,
                                                     "secondaryTag": "building"
                                                 },
-                                                "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card."
+                                                "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 1 Energy to draw a building card."
                                             ]
                                         ],
                                         "is": "effect"
@@ -22123,7 +22189,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R46",
-            "description": "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.",
+            "description": "You start with 48 M€. Increase your M€ production 2 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.",
             "renderData": {
                 "rows": [
                     [
@@ -22144,7 +22210,7 @@
                                 [
                                     {
                                         "type": "megacredits",
-                                        "amount": 4,
+                                        "amount": 2,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -22258,7 +22324,7 @@
                                                 },
                                                 {
                                                     "type": "megacredits",
-                                                    "amount": 3,
+                                                    "amount": 2,
                                                     "is": "item",
                                                     "multiplier": false,
                                                     "clone": false,
@@ -22268,7 +22334,7 @@
                                                     "amountInside": true,
                                                     "size": "M"
                                                 },
-                                                "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible."
+                                                "Effect: When a player causes another player to decrease production or lose resources, pay 2M€ to the victim, or as much as possible."
                                             ]
                                         ],
                                         "is": "effect"
@@ -22304,7 +22370,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R26",
-            "description": "You start with 38 M€ and 1 steel production.",
+            "description": "You start with 40 M€ and 2 steel production.",
             "renderData": {
                 "rows": [
                     [],
@@ -22312,7 +22378,7 @@
                     [
                         {
                             "type": "megacredits",
-                            "amount": 38,
+                            "amount": 40,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -22440,7 +22506,7 @@
             "heat": 0
         },
         "resourceType": "Microbe",
-        "startingMegaCredits": 38,
+        "startingMegaCredits": 40,
         "compatibility": []
     },
     {
@@ -22453,13 +22519,13 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R28",
-            "description": "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.",
+            "description": "You start with 48 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.",
             "renderData": {
                 "rows": [
                     [
                         {
                             "type": "megacredits",
-                            "amount": 44,
+                            "amount": 48,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -22619,7 +22685,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 48,
+        "startingMegaCredits": 52,
         "compatibility": []
     },
     {
@@ -27511,6 +27577,10 @@
         "tags": [
             "venus"
         ],
+        "cardDiscount": {
+            "tag": "venus",
+            "amount": 1
+        },
         "cost": 0,
         "type": "corporation",
         "metadata": {
@@ -27584,12 +27654,51 @@
                                                     "clone": false,
                                                     "cancelled": false,
                                                     "questionMark": false,
-                                                    "text": "+/- 2",
+                                                    "text": "+/- 3",
                                                     "size": "M",
                                                     "isUppercase": false,
                                                     "isBold": true
                                                 },
-                                                "Effect: Your Venus requirements are +/- 2 steps, your choice in each case."
+                                                "Effect: Your Venus requirements are +/- 3 steps."
+                                            ]
+                                        ],
+                                        "is": "effect"
+                                    },
+                                    {
+                                        "rows": [
+                                            [
+                                                {
+                                                    "type": "venus",
+                                                    "amount": 1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    "type": ":",
+                                                    "size": "M",
+                                                    "isIcon": false,
+                                                    "is": "symbol"
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    "type": "megacredits",
+                                                    "amount": -1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false,
+                                                    "showDigit": false,
+                                                    "amountInside": true,
+                                                    "size": "M"
+                                                },
+                                                "Effect: When you play a Venus tag, you pay 1 M€ less for it."
                                             ]
                                         ],
                                         "is": "effect"
@@ -27626,7 +27735,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R12",
-            "description": "You start with 48 M€.",
+            "description": "You start with 54 M€.",
             "renderData": {
                 "rows": [
                     [],
@@ -27635,7 +27744,7 @@
                     [
                         {
                             "type": "megacredits",
-                            "amount": 48,
+                            "amount": 54,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -27697,7 +27806,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 48,
+        "startingMegaCredits": 54,
         "compatibility": []
     },
     {
@@ -32156,14 +32265,14 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R11",
-            "description": "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.",
+            "description": "You start with 55 M€. Increase your M€ production 5 steps. Gain 5 titanium.",
             "renderData": {
                 "rows": [
                     [],
                     [
                         {
                             "type": "megacredits",
-                            "amount": 50,
+                            "amount": 55,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -32262,6 +32371,51 @@
                                             ]
                                         ],
                                         "is": "effect"
+                                    },
+                                    {
+                                        "rows": [
+                                            [
+                                                {
+                                                    "type": "megacredits",
+                                                    "amount": 20,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false,
+                                                    "showDigit": false,
+                                                    "amountInside": true,
+                                                    "size": "M"
+                                                },
+                                                {
+                                                    "type": "*",
+                                                    "size": "M",
+                                                    "isIcon": false,
+                                                    "is": "symbol"
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    "type": ":",
+                                                    "size": "M",
+                                                    "isIcon": false,
+                                                    "is": "symbol"
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    "type": "cards",
+                                                    "amount": 1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false
+                                                },
+                                                "Effect: When playing a card with a basic cost of 20MC or more, draw a card."
+                                            ]
+                                        ],
+                                        "is": "effect"
                                     }
                                 ]
                             ],
@@ -32280,7 +32434,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 50,
+        "startingMegaCredits": 55,
         "cardCost": 5,
         "compatibility": []
     },
@@ -32292,7 +32446,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R02",
-            "description": "You start with 45 M€. As your first action, place a colony.",
+            "description": "You start with 40 M€. As your first action, place a colony.",
             "renderData": {
                 "rows": [
                     [],
@@ -32341,8 +32495,8 @@
                                                     "multiplier": false,
                                                     "clone": false,
                                                     "cancelled": false,
-                                                    "size": "M",
-                                                    "anyPlayer": true
+                                                    "questionMark": false,
+                                                    "size": "M"
                                                 }
                                             ],
                                             [
@@ -32359,7 +32513,7 @@
                                                         [
                                                             {
                                                                 "type": "megacredits",
-                                                                "amount": 1,
+                                                                "amount": 2,
                                                                 "is": "item",
                                                                 "multiplier": false,
                                                                 "clone": false,
@@ -32373,7 +32527,7 @@
                                                     ],
                                                     "is": "production-box"
                                                 },
-                                                "Effect: When any colony is placed, including this, raise your M€ production 1 step."
+                                                "Effect: When you place a colony, including this, raise your M€ production 2 step."
                                             ]
                                         ],
                                         "is": "effect"
@@ -32395,7 +32549,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 45,
+        "startingMegaCredits": 40,
         "compatibility": [
             "colonies"
         ]
@@ -33057,10 +33211,6 @@
         "tags": [
             "building"
         ],
-        "cardDiscount": {
-            "tag": "building",
-            "amount": 2
-        },
         "cost": 0,
         "type": "corporation",
         "metadata": {
@@ -33137,7 +33287,7 @@
                                             [
                                                 {
                                                     "type": "megacredits",
-                                                    "amount": -2,
+                                                    "amount": 2,
                                                     "is": "item",
                                                     "multiplier": false,
                                                     "clone": false,
@@ -33147,7 +33297,7 @@
                                                     "amountInside": true,
                                                     "size": "M"
                                                 },
-                                                "Effect: When you play a building tag, you pay 2 M€ less for it."
+                                                "Effect: When you play a building tag, gain 2 M€ test."
                                             ]
                                         ],
                                         "is": "effect"
@@ -33183,7 +33333,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R10",
-            "description": "You start with 1 titanium production and 38 M€.",
+            "description": "You start with 1 titanium production and 48 M€.",
             "renderData": {
                 "rows": [
                     [],
@@ -33212,7 +33362,7 @@
                         },
                         {
                             "type": "megacredits",
-                            "amount": 38,
+                            "amount": 48,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -33258,7 +33408,22 @@
                                                     "cancelled": false,
                                                     "questionMark": false
                                                 },
-                                                "Effect: When you play an Earth tag, including this, draw a card."
+                                                {
+                                                    "type": "-",
+                                                    "size": "M",
+                                                    "isIcon": true,
+                                                    "is": "symbol"
+                                                },
+                                                {
+                                                    "type": "cards",
+                                                    "amount": 1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false
+                                                },
+                                                "Effect: When you play an Earth tag, including this, draw a card then discard a card."
                                             ]
                                         ],
                                         "is": "effect"
@@ -33280,18 +33445,20 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 38,
+        "startingMegaCredits": 48,
         "compatibility": []
     },
     {
         "module": "prelude",
         "name": "Robinson Industries",
-        "tags": [],
+        "tags": [
+            "wild"
+        ],
         "cost": 0,
         "type": "corporation",
         "metadata": {
             "cardNumber": "R27",
-            "description": "You start with 47 M€.",
+            "description": "You start with 40 M€.",
             "renderData": {
                 "rows": [
                     [],
@@ -33300,7 +33467,7 @@
                     [
                         {
                             "type": "megacredits",
-                            "amount": 47,
+                            "amount": 40,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -33384,7 +33551,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 47,
+        "startingMegaCredits": 40,
         "compatibility": []
     },
     {
@@ -33514,7 +33681,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R35",
-            "description": "You start with 45 M€. As your first action, fund an award for free.",
+            "description": "You start with 52 M€. As your first action, fund an award for free.",
             "renderData": {
                 "rows": [
                     [],
@@ -33522,7 +33689,7 @@
                     [
                         {
                             "type": "megacredits",
-                            "amount": 45,
+                            "amount": 52,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -33582,7 +33749,7 @@
                                             [
                                                 {
                                                     "type": "megacredits",
-                                                    "amount": 3,
+                                                    "amount": 2,
                                                     "is": "item",
                                                     "multiplier": false,
                                                     "clone": false,
@@ -33592,7 +33759,7 @@
                                                     "amountInside": true,
                                                     "size": "M"
                                                 },
-                                                "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€."
+                                                "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 2 M€."
                                             ]
                                         ],
                                         "is": "effect"
@@ -33614,7 +33781,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 48,
+        "startingMegaCredits": 54,
         "compatibility": []
     },
     {
@@ -33697,12 +33864,6 @@
                             "rows": [
                                 [
                                     {
-                                        "type": "-",
-                                        "size": "M",
-                                        "isIcon": true,
-                                        "is": "symbol"
-                                    },
-                                    {
                                         "type": "megacredits",
                                         "amount": 1,
                                         "is": "item",
@@ -33733,7 +33894,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your plant production 2 steps. Decrease your M€ production 1 step."
+            "description": "Increase your plant production 2 steps and M€ production 1 step."
         },
         "productionBox": {
             "megacredits": 0,
@@ -33856,8 +34017,8 @@
                             "is": "production-box"
                         },
                         {
-                            "type": "heat",
-                            "amount": 2,
+                            "type": "steel",
+                            "amount": 5,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -33868,7 +34029,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat."
+            "description": "Increase your steel production 1 step and heat production 2 steps. Gain 5 steel."
         },
         "productionBox": {
             "megacredits": 0,
@@ -33925,7 +34086,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your plant production 1 step. Place a city tile."
+            "description": "Increase your plant production 1 step. Gain 3 plants. Place a city tile."
         },
         "productionBox": {
             "megacredits": 0,
@@ -33942,7 +34103,8 @@
         "module": "prelude",
         "name": "Biofuels",
         "tags": [
-            "microbe"
+            "microbe",
+            "power"
         ],
         "cost": 0,
         "type": "prelude",
@@ -33956,7 +34118,7 @@
                                 [
                                     {
                                         "type": "energy",
-                                        "amount": 1,
+                                        "amount": 2,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -33991,7 +34153,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your energy and plant production 1 step. Gain 2 plants."
+            "description": "Increase your energy by two steps and plant production 1 step Gain 2 plants."
         },
         "productionBox": {
             "megacredits": 0,
@@ -34084,6 +34246,20 @@
                             "is": "production-box"
                         },
                         {
+                            "type": "megacredits",
+                            "amount": 3,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        }
+                    ],
+                    [
+                        {
                             "type": "city",
                             "amount": -1,
                             "is": "item",
@@ -34097,7 +34273,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your M€ production 2 steps. Place a city tile."
+            "description": "Increase your money production 2 steps. Gain 3 MC. Place a City tile."
         },
         "productionBox": {
             "megacredits": 0,
@@ -34107,7 +34283,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 0,
+        "startingMegaCredits": 3,
         "compatibility": []
     },
     {
@@ -34236,7 +34412,7 @@
                                 [
                                     {
                                         "type": "megacredits",
-                                        "amount": 2,
+                                        "amount": 3,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -34263,7 +34439,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your M€ production 2 steps and plant production 1 step."
+            "description": "Increase your M€ production 3 steps and plant production 1 step."
         },
         "productionBox": {
             "megacredits": 0,
@@ -34352,7 +34528,7 @@
                     [
                         {
                             "type": "megacredits",
-                            "amount": 21,
+                            "amount": 23,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -34366,7 +34542,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Gain 21 M€."
+            "description": "Gain 23 M€."
         },
         "productionBox": {
             "megacredits": 0,
@@ -34376,7 +34552,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 21,
+        "startingMegaCredits": 23,
         "compatibility": []
     },
     {
@@ -34391,24 +34567,8 @@
                 "rows": [
                     [
                         {
-                            "rows": [
-                                [
-                                    {
-                                        "type": "plants",
-                                        "amount": 1,
-                                        "is": "item",
-                                        "multiplier": false,
-                                        "clone": false,
-                                        "cancelled": false,
-                                        "questionMark": false
-                                    }
-                                ]
-                            ],
-                            "is": "production-box"
-                        },
-                        {
                             "type": "tr",
-                            "amount": 1,
+                            "amount": 2,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -34418,22 +34578,19 @@
                     ],
                     [
                         {
-                            "type": "megacredits",
+                            "type": "plants",
                             "amount": 5,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
                             "cancelled": false,
-                            "questionMark": false,
-                            "showDigit": false,
-                            "amountInside": true,
-                            "size": "M"
+                            "questionMark": false
                         }
                     ]
                 ],
                 "is": "root"
             },
-            "description": "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€."
+            "description": "Increase your TR 2 step. Gain 5 plants."
         },
         "productionBox": {
             "megacredits": 0,
@@ -34443,7 +34600,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 5,
+        "startingMegaCredits": 0,
         "compatibility": []
     },
     {
@@ -34472,18 +34629,19 @@
                     [
                         {
                             "type": "steel",
-                            "amount": 5,
+                            "amount": 6,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
                             "cancelled": false,
-                            "questionMark": false
+                            "questionMark": false,
+                            "showDigit": true
                         }
                     ]
                 ],
                 "is": "root"
             },
-            "description": "Raise oxygen 2 steps. Gain 5 steel."
+            "description": "Raise oxygen 2 steps. Gain 6 steel."
         },
         "productionBox": {
             "megacredits": 0,
@@ -34706,7 +34864,8 @@
         "module": "prelude",
         "name": "Martian Industries",
         "tags": [
-            "building"
+            "building",
+            "power"
         ],
         "cost": 0,
         "type": "prelude",
@@ -34805,7 +34964,7 @@
                     [
                         {
                             "type": "cards",
-                            "amount": 1,
+                            "amount": 2,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -34816,7 +34975,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your titanium production 1 step. Draw a card."
+            "description": "Increase your titanium production 1 step. Draw 2 cards."
         },
         "productionBox": {
             "megacredits": 0,
@@ -34868,12 +35027,24 @@
                             "clone": false,
                             "cancelled": false,
                             "questionMark": false
+                        },
+                        {
+                            "type": "megacredits",
+                            "amount": 5,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
                         }
                     ]
                 ],
                 "is": "root"
             },
-            "description": "Increase your heat production 2 steps. Place an ocean tile."
+            "description": "Increase your heat production 2 steps. Gain 5 mc. Place an Ocean tile."
         },
         "productionBox": {
             "megacredits": 0,
@@ -34883,7 +35054,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 0,
+        "startingMegaCredits": 5,
         "compatibility": []
     },
     {
@@ -34901,18 +35072,6 @@
                             "rows": [
                                 [
                                     {
-                                        "type": "megacredits",
-                                        "amount": -1,
-                                        "is": "item",
-                                        "multiplier": false,
-                                        "clone": false,
-                                        "cancelled": false,
-                                        "questionMark": false,
-                                        "showDigit": false,
-                                        "amountInside": true,
-                                        "size": "M"
-                                    },
-                                    {
                                         "type": "plants",
                                         "amount": 1,
                                         "is": "item",
@@ -34920,9 +35079,7 @@
                                         "clone": false,
                                         "cancelled": false,
                                         "questionMark": false
-                                    }
-                                ],
-                                [
+                                    },
                                     {
                                         "type": "energy",
                                         "amount": 1,
@@ -34949,7 +35106,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step."
+            "description": "Increase your plant, energy and heat production 1 step. Pay 3 M€."
         },
         "productionBox": {
             "megacredits": 0,
@@ -34959,7 +35116,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 0,
+        "startingMegaCredits": -3,
         "compatibility": []
     },
     {
@@ -34991,25 +35148,11 @@
                             ],
                             "is": "production-box"
                         }
-                    ],
-                    [
-                        {
-                            "type": "megacredits",
-                            "amount": -5,
-                            "is": "item",
-                            "multiplier": false,
-                            "clone": false,
-                            "cancelled": false,
-                            "questionMark": false,
-                            "showDigit": false,
-                            "amountInside": true,
-                            "size": "M"
-                        }
                     ]
                 ],
                 "is": "root"
             },
-            "description": "Increase your titanium production 2 steps. Pay 5 M€."
+            "description": "Increase your titanium production 2 steps."
         },
         "productionBox": {
             "megacredits": 0,
@@ -35019,7 +35162,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": -5,
+        "startingMegaCredits": 0,
         "compatibility": []
     },
     {
@@ -35046,7 +35189,7 @@
                     [
                         {
                             "type": "megacredits",
-                            "amount": -5,
+                            "amount": -2,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -35060,7 +35203,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase temperature 3 steps. Pay 5 M€."
+            "description": "Increase temperature 3 steps. Pay 2 M€."
         },
         "productionBox": {
             "megacredits": 0,
@@ -35070,7 +35213,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": -5,
+        "startingMegaCredits": -2,
         "compatibility": []
     },
     {
@@ -35178,7 +35321,7 @@
                     [
                         {
                             "type": "megacredits",
-                            "amount": 30,
+                            "amount": 32,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -35192,7 +35335,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Gain 30 M€. Decrease your M€ production 2 steps."
+            "description": "Gain 32 M€. Decrease your M€ production 2 steps."
         },
         "productionBox": {
             "megacredits": 0,
@@ -35202,7 +35345,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 30,
+        "startingMegaCredits": 32,
         "compatibility": []
     },
     {
@@ -35223,7 +35366,16 @@
                                 [
                                     {
                                         "type": "heat",
-                                        "amount": 3,
+                                        "amount": 2,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    {
+                                        "type": "energy",
+                                        "amount": 1,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -35238,6 +35390,15 @@
                     [
                         {
                             "type": "heat",
+                            "amount": 5,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "energy",
                             "amount": 3,
                             "is": "item",
                             "multiplier": false,
@@ -35249,7 +35410,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your heat production 3 steps. Gain 3 heat."
+            "description": "Increase your heat production 2 steps and energy production 1 step. Gain 3 energy and 5 heat"
         },
         "productionBox": {
             "megacredits": 0,
@@ -35352,7 +35513,7 @@
                     [
                         {
                             "type": "titanium",
-                            "amount": 4,
+                            "amount": 5,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -35363,7 +35524,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your titanium production 1 step. Gain 4 titanium."
+            "description": "Increase your titanium production 1 step. Gain 5 titanium."
         },
         "productionBox": {
             "megacredits": 0,
@@ -35504,7 +35665,7 @@
                             "clone": false,
                             "cancelled": false,
                             "questionMark": false,
-                            "text": "Play a card from hand, reducing its cost by 25 M€",
+                            "text": "Play a card from hand, reducing its cost by 27 M€",
                             "size": "S",
                             "isUppercase": true,
                             "isBold": true
@@ -37127,14 +37288,14 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R14",
-            "description": "You start with 14 M€. Lower your TR 1 step.",
+            "description": "You start with 30 M€. Lower your TR 1 step.",
             "renderData": {
                 "rows": [
                     [],
                     [
                         {
                             "type": "megacredits",
-                            "amount": 14,
+                            "amount": 30,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -37226,7 +37387,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 14,
+        "startingMegaCredits": 30,
         "cardCost": 1,
         "compatibility": []
     },
@@ -37240,14 +37401,14 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R33",
-            "description": "You start with 40 M€. Increase your steel and titanium production 1 step each.",
+            "description": "You start with 48 M€. Increase your steel and titanium production 1 step each.",
             "renderData": {
                 "rows": [
                     [],
                     [
                         {
                             "type": "megacredits",
-                            "amount": 40,
+                            "amount": 48,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -37353,7 +37514,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 40,
+        "startingMegaCredits": 48,
         "compatibility": []
     },
     {

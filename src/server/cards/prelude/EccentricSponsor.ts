@@ -13,14 +13,14 @@ export class EccentricSponsor extends PreludeCard {
       metadata: {
         cardNumber: 'P11',
         renderData: CardRenderer.builder((b) => {
-          b.text('Play a card from hand, reducing its cost by 25 M€', Size.SMALL, true);
+          b.text('Play a card from hand, reducing its cost by 27 M€', Size.SMALL, true);
         }),
       },
     });
   }
   public override getCardDiscount(player: Player) {
     if (player.lastCardPlayed === this.name) {
-      return 25;
+      return 27;
     }
     return 0;
   }

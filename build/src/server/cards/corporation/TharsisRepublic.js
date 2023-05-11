@@ -19,7 +19,7 @@ class TharsisRepublic extends Card_1.Card {
         super({
             type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.THARSIS_REPUBLIC,
-            tags: [Tag_1.Tag.BUILDING],
+            tags: [Tag_1.Tag.BUILDING, Tag_1.Tag.CITY],
             startingMegaCredits: 40,
             firstAction: {
                 text: 'Place a city tile',

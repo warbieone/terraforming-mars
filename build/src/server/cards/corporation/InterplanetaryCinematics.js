@@ -13,19 +13,19 @@ class InterplanetaryCinematics extends Card_1.Card {
             type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.INTERPLANETARY_CINEMATICS,
             tags: [Tag_1.Tag.BUILDING],
-            startingMegaCredits: 30,
+            startingMegaCredits: 40,
             behavior: {
-                stock: { steel: 20 },
+                stock: { steel: 12 },
             },
             metadata: {
                 cardNumber: 'R19',
-                description: 'You start with 20 steel and 30 M€.',
+                description: 'You start with 12 steel and 40 M€.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br.br.br;
-                    b.megacredits(30).nbsp.steel(20, { digit: Options_1.digit });
+                    b.megacredits(40).nbsp.steel(12, { digit: Options_1.digit });
                     b.corpBox('effect', (ce) => {
-                        ce.effect('Each time you play an event, you gain 2 M€.', (eb) => {
-                            eb.event({ played: Options_1.played }).startEffect.megacredits(2);
+                        ce.effect('Each time you play an event, you gain 3 M€.', (eb) => {
+                            eb.event({ played: Options_1.played }).startEffect.megacredits(3);
                         });
                     });
                 }),
@@ -34,7 +34,7 @@ class InterplanetaryCinematics extends Card_1.Card {
     }
     onCardPlayed(player, card) {
         if (player.isCorporation(this.name) && card.type === CardType_1.CardType.EVENT) {
-            player.megaCredits += 2;
+            player.megaCredits += 3;
         }
     }
 }

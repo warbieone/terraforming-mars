@@ -11,16 +11,17 @@ class Mohole extends PreludeCard_1.PreludeCard {
             name: CardName_1.CardName.MOHOLE,
             tags: [Tag_1.Tag.BUILDING],
             behavior: {
-                production: { heat: 3 },
-                stock: { heat: 3 },
+                production: { heat: 2, energy: 1 },
+                stock: { heat: 5, energy: 3 },
             },
             metadata: {
                 cardNumber: 'P22',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => pb.heat(3)).br;
-                    b.heat(3);
+                    b.production((pb) => pb.heat(2).energy(1)).br;
+                    b.heat(5);
+                    b.energy(3);
                 }),
-                description: 'Increase your heat production 3 steps. Gain 3 heat.',
+                description: 'Increase your heat production 2 steps and energy production 1 step. Gain 3 energy and 5 heat',
             },
         });
     }

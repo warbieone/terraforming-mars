@@ -17,16 +17,16 @@ export class BactoviralResearch extends Card implements IProjectCard {
 
       behavior: {
         drawCard: 1,
-        addResourcesToAnyCard: {count: {tag: Tag.SCIENCE}, type: CardResource.MICROBE},
+        addResourcesToAnyCard: {count: {tag: Tag.MICROBE}, type: CardResource.MICROBE},
       },
 
       metadata: {
         cardNumber: 'X35',
         renderData: CardRenderer.builder((b) => {
           b.cards(1).br.br; // double br is intentional for visual appeal
-          b.microbes(1).asterix().slash().science(1, {played});
+          b.microbes(1).asterix().slash().microbes(1, {played});
         }),
-        description: 'Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.',
+        description: 'Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each mirobe tag you have, including this.',
       },
     });
   }

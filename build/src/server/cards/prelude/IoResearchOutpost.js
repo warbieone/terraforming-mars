@@ -12,15 +12,15 @@ class IoResearchOutpost extends PreludeCard_1.PreludeCard {
             tags: [Tag_1.Tag.JOVIAN, Tag_1.Tag.SCIENCE],
             behavior: {
                 production: { titanium: 1 },
-                drawCard: 1,
+                drawCard: 2,
             },
             metadata: {
                 cardNumber: 'P16',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.titanium(1)).br;
-                    b.cards(1);
+                    b.cards(2);
                 }),
-                description: 'Increase your titanium production 1 step. Draw a card.',
+                description: 'Increase your titanium production 1 step. Draw 2 cards.',
             },
         });
     }

@@ -11,16 +11,16 @@ class SmeltingPlant extends PreludeCard_1.PreludeCard {
             name: CardName_1.CardName.SMELTING_PLANT,
             tags: [Tag_1.Tag.BUILDING],
             behavior: {
-                stock: { steel: 5 },
+                stock: { steel: 6 },
                 global: { oxygen: 2 },
             },
             metadata: {
                 cardNumber: 'P30',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.oxygen(2).br;
-                    b.steel(5);
+                    b.steel(6);
                 }),
-                description: 'Raise oxygen 2 steps. Gain 5 steel.',
+                description: 'Raise oxygen 2 steps. Gain 6 steel.',
             },
         });
     }

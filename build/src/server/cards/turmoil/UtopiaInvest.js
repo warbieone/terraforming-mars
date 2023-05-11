@@ -15,17 +15,17 @@ class UtopiaInvest extends Card_1.Card {
         super({
             name: CardName_1.CardName.UTOPIA_INVEST,
             tags: [Tag_1.Tag.BUILDING],
-            startingMegaCredits: 40,
+            startingMegaCredits: 48,
             type: CardType_1.CardType.CORPORATION,
             behavior: {
                 production: { steel: 1, titanium: 1 },
             },
             metadata: {
                 cardNumber: 'R33',
-                description: 'You start with 40 M€. Increase your steel and titanium production 1 step each.',
+                description: 'You start with 48 M€. Increase your steel and titanium production 1 step each.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br;
-                    b.megacredits(40).nbsp.production((pb) => pb.steel(1).titanium(1));
+                    b.megacredits(48).nbsp.production((pb) => pb.steel(1).titanium(1));
                     b.corpBox('action', (ce) => {
                         ce.action('Decrease any production to gain 4 resources of that kind.', (eb) => {
                             eb.production((eb) => eb.wild(1)).startAction.wild(4, { digit: Options_1.digit });

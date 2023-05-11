@@ -8,7 +8,7 @@ export class MartianIndustries extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.MARTIAN_INDUSTRIES,
-      tags: [Tag.BUILDING],
+      tags: [Tag.BUILDING,Tag.POWER],
 
       behavior: {
         production: {energy: 1, steel: 1},

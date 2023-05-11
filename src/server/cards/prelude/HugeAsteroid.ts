@@ -9,7 +9,7 @@ export class HugeAsteroid extends PreludeCard {
     super({
       name: CardName.HUGE_ASTEROID,
 
-      startingMegacredits: -5,
+      startingMegacredits: -2,
 
       behavior: {
         global: {temperature: 3},
@@ -19,9 +19,9 @@ export class HugeAsteroid extends PreludeCard {
         cardNumber: 'P15',
         renderData: CardRenderer.builder((b) => {
           b.temperature(3).br;
-          b.megacredits(-5);
+          b.megacredits(-2);
         }),
-        description: 'Increase temperature 3 steps. Pay 5 M€.',
+        description: 'Increase temperature 3 steps. Pay 2 M€.',
       },
     });
   }

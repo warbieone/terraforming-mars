@@ -65,8 +65,8 @@ class Colony {
             this.trackPosition = this.colonies.length;
         }
         const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName_1.CardName.POSEIDON));
-        if (poseidon !== undefined) {
-            poseidon.production.add(Resource_1.Resource.MEGACREDITS, 1);
+        if (poseidon !== undefined && poseidon === player) {
+            poseidon.production.add(Resource_1.Resource.MEGACREDITS, 2);
         }
         if (player.cardIsInEffect(CardName_1.CardName.NAOMI)) {
             player.addResource(Resource_1.Resource.ENERGY, 2, { log: true });

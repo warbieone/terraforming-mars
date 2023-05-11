@@ -13,7 +13,7 @@ export class Cartel extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.CARTEL,
       tags: [Tag.EARTH],
-      cost: 8,
+      cost: 10,
 
       behavior: {
         production: {megacredits: {tag: Tag.EARTH}},

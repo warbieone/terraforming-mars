@@ -12,7 +12,7 @@ class AdaptedLichen extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.ADAPTED_LICHEN,
             tags: [Tag_1.Tag.PLANT],
-            cost: 9,
+            cost: 8,
             behavior: {
                 production: { plants: 1 },
             },

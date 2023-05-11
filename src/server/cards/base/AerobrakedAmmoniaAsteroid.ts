@@ -15,19 +15,19 @@ export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
       cost: 26,
 
       behavior: {
-        production: {heat: 3, plants: 1},
-        addResourcesToAnyCard: {count: 2, type: CardResource.MICROBE},
+        production: {heat: 4, plants: 1},
+        addResourcesToAnyCard: {count: 3, type: CardResource.MICROBE},
       },
 
       metadata: {
-        description: 'Increase your heat production 3 steps and your plant production 1 step. Add 2 microbes to ANOTHER card.',
+        description: 'Increase your heat production 4 steps and your plant production 1 step. Add 3 Microbes to ANOTHER card.',
         cardNumber: '170',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.heat(3).br;
+            pb.heat(4).br;
             pb.plants(1);
           }).br;
-          b.microbes(2).asterix();
+          b.microbes(3).asterix();
         }),
       },
     });

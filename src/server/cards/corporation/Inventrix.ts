@@ -25,8 +25,8 @@ export class Inventrix extends Card implements ICorporationCard {
           b.br;
           b.megacredits(45).nbsp.cards(3);
           b.corpBox('effect', (ce) => {
-            ce.effect('Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.', (eb) => {
-              eb.plate('Global requirements').startEffect.text('+/- 2');
+            ce.effect('Your temperature, oxygen, ocean, and Venus requirements are +3 or -3 steps, your choice in each case.', (eb) => {
+              eb.plate('Global requirements').startEffect.text('+/- 3');
             });
           });
         }),

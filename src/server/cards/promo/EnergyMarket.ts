@@ -18,7 +18,7 @@ export class EnergyMarket extends Card implements IProjectCard {
       type: CardType.ACTIVE,
       name: CardName.ENERGY_MARKET,
       tags: [Tag.POWER],
-      cost: 3,
+      cost: 5,
 
       metadata: {
         cardNumber: 'X03',

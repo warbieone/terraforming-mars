@@ -20,14 +20,19 @@ export class MorningStarInc extends Card implements ICorporationCard {
         drawCard: {count: 3, tag: Tag.VENUS},
       },
 
+      cardDiscount: {tag: Tag.VENUS, amount: 1},
+
       metadata: {
         cardNumber: 'R06',
         description: 'You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(50).nbsp.cards(3, {secondaryTag: Tag.VENUS});
           b.corpBox('effect', (ce) => {
-            ce.effect('Your Venus requirements are +/- 2 steps, your choice in each case.', (eb) => {
-              eb.plate('Venus requirements').startEffect.text('+/- 2');
+            ce.effect('Your Venus requirements are +/- 3 steps.', (eb) => {
+              eb.plate('Venus requirements').startEffect.text('+/- 3');
+            });
+            ce.effect('When you play a Venus tag, you pay 1 M€ less for it.', (eb)=> {
+              eb.venus(1).startEffect.megacredits(-1);
             });
           });
         }),
@@ -35,7 +40,8 @@ export class MorningStarInc extends Card implements ICorporationCard {
     });
   }
 
+
   public getRequirementBonus(_player: Player, parameter: GlobalParameter): number {
-    return parameter === GlobalParameter.VENUS ? 2 : 0;
+    return parameter === GlobalParameter.VENUS ? 3 : 0;
   }
 }

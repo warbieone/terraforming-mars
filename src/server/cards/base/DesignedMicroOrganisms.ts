@@ -13,7 +13,7 @@ export class DesignedMicroOrganisms extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.DESIGNED_MICROORGANISMS,
       tags: [Tag.SCIENCE, Tag.MICROBE],
-      cost: 16,
+      cost: 15,
 
       behavior: {
         production: {plants: 2},

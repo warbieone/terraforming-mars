@@ -23,11 +23,11 @@ class Astrodrill extends Card_1.Card {
             startingMegaCredits: 40,
             resourceType: CardResource_1.CardResource.ASTEROID,
             behavior: {
-                addResources: 3,
+                addResources: 4,
             },
             metadata: {
                 cardNumber: 'R21',
-                description: 'You start with 40 M€ and 3 asteroid resources.',
+                description: 'You start with 40 M€ and 4 asteroid resources.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br;
                     b.megacredits(35).nbsp.asteroids(3, { digit: Options_1.digit });

@@ -9,18 +9,18 @@ class Biofuels extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
             name: CardName_1.CardName.BIOFUELS,
-            tags: [Tag_1.Tag.MICROBE],
+            tags: [Tag_1.Tag.MICROBE, Tag_1.Tag.POWER],
             behavior: {
-                production: { energy: 1, plants: 1 },
+                production: { energy: 2, plants: 1 },
                 stock: { plants: 2 },
             },
             metadata: {
                 cardNumber: 'P03',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => pb.energy(1).plants(1)).br;
+                    b.production((pb) => pb.energy(2).plants(1)).br;
                     b.plants(2);
                 }),
-                description: 'Increase your energy and plant production 1 step. Gain 2 plants.',
+                description: 'Increase your energy by two steps and plant production 1 step Gain 2 plants.',
             },
         });
     }

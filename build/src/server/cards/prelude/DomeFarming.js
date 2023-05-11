@@ -11,14 +11,14 @@ class DomeFarming extends PreludeCard_1.PreludeCard {
             name: CardName_1.CardName.DOME_FARMING,
             tags: [Tag_1.Tag.PLANT, Tag_1.Tag.BUILDING],
             behavior: {
-                production: { megacredits: 2, plants: 1 },
+                production: { megacredits: 3, plants: 1 },
             },
             metadata: {
                 cardNumber: 'P07',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => pb.megacredits(2).plants(1));
+                    b.production((pb) => pb.megacredits(3).plants(1));
                 }),
-                description: 'Increase your M€ production 2 steps and plant production 1 step.',
+                description: 'Increase your M€ production 3 steps and plant production 1 step.',
             },
         });
         this.migrated = true;

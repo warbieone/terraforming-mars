@@ -6,12 +6,14 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
+import {Tag} from '../../../common/cards/Tag';
 
 export class CloudSeeding extends Card implements IProjectCard {
   constructor() {
     super({
       type: CardType.AUTOMATED,
       name: CardName.CLOUD_SEEDING,
+      tags: [Tag.PLANT],
       cost: 11,
 
       behavior: {

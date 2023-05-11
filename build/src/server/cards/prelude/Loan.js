@@ -10,15 +10,15 @@ class Loan extends PreludeCard_1.PreludeCard {
             name: CardName_1.CardName.LOAN,
             behavior: {
                 production: { megacredits: -2 },
-                stock: { megacredits: 30 },
+                stock: { megacredits: 32 },
             },
             metadata: {
                 cardNumber: 'P17',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.minus().megacredits(2)).br;
-                    b.megacredits(30);
+                    b.megacredits(32);
                 }),
-                description: 'Gain 30 M€. Decrease your M€ production 2 steps.',
+                description: 'Gain 32 M€. Decrease your M€ production 2 steps.',
             },
         });
     }

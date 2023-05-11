@@ -19,7 +19,7 @@ export class MassConverter extends Card implements IProjectCard {
         production: {energy: 6},
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 5)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 6)),
       cardDiscount: {tag: Tag.SPACE, amount: 2, per: 'card'},
       metadata: {
         cardNumber: '094',
@@ -29,7 +29,7 @@ export class MassConverter extends Card implements IProjectCard {
           }).br;
           b.production((pb) => pb.energy(6));
         }),
-        description: 'Requires 5 science tags. Increase your energy production 6 steps.',
+        description: 'Requires 6 science tags. Increase your energy production 6 steps.',
       },
     });
   }

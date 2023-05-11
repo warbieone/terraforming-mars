@@ -6,8 +6,10 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {Turmoil} from '../../turmoil/Turmoil';
 
 export class Pristar extends Card implements ICorporationCard {
+  public hasReceivedInfluenceBonus: boolean;
   constructor() {
     super({
       name: CardName.PRISTAR,
@@ -32,7 +34,10 @@ export class Pristar extends Card implements ICorporationCard {
         }),
       },
     });
+    this.hasReceivedInfluenceBonus = false;
   }
+
+
 
   public override bespokePlay(player: Player) {
     player.decreaseTerraformRatingSteps(2);
@@ -43,7 +48,20 @@ export class Pristar extends Card implements ICorporationCard {
     if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
       player.megaCredits += 6;
       player.addResourceTo(this, 1);
+      
+      if (!this.hasReceivedInfluenceBonus) {
+        Turmoil.ifTurmoil((player.game), (turmoil) => {
+          turmoil.addInfluenceBonus(player);
+        });
+        this.hasReceivedInfluenceBonus = true;
+      }
     }
+    if (this.hasReceivedInfluenceBonus) {
+      Turmoil.ifTurmoil((player.game), (turmoil) => {
+        turmoil.addInfluenceBonus(player,-1);
+      });
+      this.hasReceivedInfluenceBonus = false
+    } 
     return undefined;
   }
 }

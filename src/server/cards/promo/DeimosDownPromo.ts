@@ -17,21 +17,21 @@ export class DeimosDownPromo extends Card implements IProjectCard {
       renderData: CardRenderer.builder((b) => {
         b.temperature(3).br;
         b.tile(TileType.DEIMOS_DOWN, true).asterix().br;
-        b.steel(4, {digit}).nbsp.minus().plants(-6, {all});
+        b.steel(4, {digit}).nbsp.minus().plants(-8, {all});
       }),
-      description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.',
+      description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 8 plants from any player.',
     },
   ) {
     super({
       type: CardType.EVENT,
       name,
       tags: [Tag.SPACE],
-      cost: 31,
+      cost: 35,
       metadata,
       behavior: {
         stock: {steel: 4},
         global: {temperature: 3},
-        removeAnyPlants: 6,
+        removeAnyPlants: 8,
         tile: {
           type: TileType.DEIMOS_DOWN,
           on: 'city',

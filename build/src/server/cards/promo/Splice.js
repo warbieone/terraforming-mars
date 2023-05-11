@@ -19,16 +19,16 @@ class Splice extends Card_1.Card {
             type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.SPLICE,
             tags: [Tag_1.Tag.MICROBE],
-            startingMegaCredits: 48,
+            startingMegaCredits: 52,
             firstAction: {
                 text: 'Draw a card with a microbe tag',
                 drawCard: { count: 1, tag: Tag_1.Tag.MICROBE },
             },
             metadata: {
                 cardNumber: 'R28',
-                description: 'You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.',
+                description: 'You start with 48 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.megacredits(44).nbsp.cards(1, { secondaryTag: Tag_1.Tag.MICROBE });
+                    b.megacredits(48).nbsp.cards(1, { secondaryTag: Tag_1.Tag.MICROBE });
                     b.corpBox('effect', (ce) => {
                         ce.vSpace(Size_1.Size.LARGE);
                         ce.effect(undefined, (eb) => {

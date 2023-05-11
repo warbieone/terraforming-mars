@@ -17,7 +17,7 @@ export class GMOContract extends Card implements IProjectCard {
       type: CardType.ACTIVE,
       name: CardName.GMO_CONTRACT,
       tags: [Tag.MICROBE, Tag.SCIENCE],
-      cost: 3,
+      cost: 8,
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
       metadata: {

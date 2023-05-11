@@ -17,7 +17,7 @@ export class OutdoorSports extends Card implements IProjectCard {
       victoryPoints: 1,
 
       behavior: {
-        production: {megacredits: 2},
+        production: {megacredits: 3},
       },
 
       requirements: CardRequirements.builder((b) => b.cities(1, {all, text: ' next to'}).oceans(1)),
@@ -25,7 +25,7 @@ export class OutdoorSports extends Card implements IProjectCard {
         cardNumber: 'X38',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.megacredits(2);
+            pb.megacredits(3);
           });
         }),
         description: 'Requires any city adjacent to an ocean. Increase your M€ production 2 steps.',

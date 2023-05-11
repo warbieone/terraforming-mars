@@ -13,14 +13,16 @@ class PolarIndustries extends PreludeCard_1.PreludeCard {
             behavior: {
                 production: { heat: 2 },
                 ocean: {},
+                stock: { megacredits: 5 }
             },
             metadata: {
                 cardNumber: 'P26',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.heat(2)).br;
                     b.oceans(1);
+                    b.megacredits(5);
                 }),
-                description: 'Increase your heat production 2 steps. Place an ocean tile.',
+                description: 'Increase your heat production 2 steps. Gain 5 mc. Place an Ocean tile.',
             },
         });
     }

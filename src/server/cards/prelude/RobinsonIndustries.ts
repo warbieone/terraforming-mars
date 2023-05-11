@@ -8,20 +8,26 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
 
 export class RobinsonIndustries extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       type: CardType.CORPORATION,
       name: CardName.ROBINSON_INDUSTRIES,
-      startingMegaCredits: 47,
+      tags: [Tag.WILD],
+      startingMegaCredits: 40,
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       metadata: {
         cardNumber: 'R27',
-        description: 'You start with 47 M€.',
+        description: 'You start with 40 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
-          b.megacredits(47);
+          b.megacredits(40);
           b.corpBox('action', (ce) => {
             ce.action('Spend 4 M€ to increase (one of) your LOWEST production 1 step.', (eb) => {
               eb.megacredits(4).startAction.production((pb) => pb.wild(1).asterix());

@@ -18,7 +18,7 @@ export class ExtractorBalloons extends Card implements IActionCard {
       name: CardName.EXTRACTOR_BALLOONS,
       type: CardType.ACTIVE,
       tags: [Tag.VENUS],
-      cost: 21,
+      cost: 18,
       resourceType: CardResource.FLOATER,
 
       behavior: {

@@ -10,7 +10,7 @@ import {played} from '../Options';
 export class WarpDrive extends Card implements IProjectCard {
   constructor() {
     super({
-      cost: 14,
+      cost: 16,
       tags: [Tag.SCIENCE],
       name: CardName.WARP_DRIVE,
       type: CardType.ACTIVE,

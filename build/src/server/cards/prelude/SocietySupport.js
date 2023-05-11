@@ -9,17 +9,17 @@ class SocietySupport extends PreludeCard_1.PreludeCard {
         super({
             name: CardName_1.CardName.SOCIETY_SUPPORT,
             behavior: {
-                production: { plants: 1, energy: 1, heat: 1, megacredits: -1 },
+                production: { plants: 1, energy: 1, heat: 1 },
+                stock: { megacredits: -3 }
             },
             metadata: {
                 cardNumber: 'P31',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => {
-                        pb.megacredits(-1).plants(1).br;
-                        pb.energy(1).heat(1);
+                        pb.plants(1).energy(1).heat(1);
                     });
                 }),
-                description: 'Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.',
+                description: 'Increase your plant, energy and heat production 1 step. Pay 3 M€.',
             },
         });
     }

@@ -9,14 +9,14 @@ class Donation extends PreludeCard_1.PreludeCard {
         super({
             name: CardName_1.CardName.DONATION,
             behavior: {
-                stock: { megacredits: 21 },
+                stock: { megacredits: 23 },
             },
             metadata: {
                 cardNumber: 'P08',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.megacredits(21);
+                    b.megacredits(23);
                 }),
-                description: 'Gain 21 M€.',
+                description: 'Gain 23 M€.',
             },
         });
     }

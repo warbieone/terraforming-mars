@@ -12,7 +12,7 @@ class MoholeExcavation extends PreludeCard_1.PreludeCard {
             tags: [Tag_1.Tag.BUILDING],
             behavior: {
                 production: { steel: 1, heat: 2 },
-                stock: { heat: 2 },
+                stock: { steel: 5 },
             },
             metadata: {
                 cardNumber: 'P23',
@@ -20,9 +20,9 @@ class MoholeExcavation extends PreludeCard_1.PreludeCard {
                     b.production((pb) => {
                         pb.steel(1).br;
                         pb.heat(2);
-                    }).heat(2);
+                    }).steel(5);
                 }),
-                description: 'Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.',
+                description: 'Increase your steel production 1 step and heat production 2 steps. Gain 5 steel.',
             },
         });
     }

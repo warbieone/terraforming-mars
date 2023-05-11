@@ -12,15 +12,15 @@ class OrbitalConstructionYard extends PreludeCard_1.PreludeCard {
             tags: [Tag_1.Tag.SPACE],
             behavior: {
                 production: { titanium: 1 },
-                stock: { titanium: 4 },
+                stock: { titanium: 5 },
             },
             metadata: {
                 cardNumber: 'P25',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.titanium(1)).br;
-                    b.titanium(4);
+                    b.titanium(5);
                 }),
-                description: 'Increase your titanium production 1 step. Gain 4 titanium.',
+                description: 'Increase your titanium production 1 step. Gain 5 titanium.',
             },
         });
     }

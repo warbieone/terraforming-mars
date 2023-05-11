@@ -22,14 +22,14 @@ class Factorum extends Card_1.Card {
             },
             metadata: {
                 cardNumber: 'R22',
-                description: 'You start with 37 M€. Increase your steel production 1 step.',
+                description: 'You start with 40 M€. Increase your steel production 1 step.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.megacredits(37).nbsp.production((pb) => pb.steel(1));
+                    b.megacredits(40).nbsp.production((pb) => pb.steel(1));
                     b.corpBox('action', (ce) => {
                         ce.vSpace(Size_1.Size.LARGE);
-                        ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.', (eb) => {
+                        ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 1 Energy to draw a building card.', (eb) => {
                             eb.empty().arrow().production((pb) => pb.energy(1)).asterix();
-                            eb.or().megacredits(3).startAction.cards(1, { secondaryTag: Tag_1.Tag.BUILDING });
+                            eb.or().energy(1).startAction.cards(1, { secondaryTag: Tag_1.Tag.BUILDING });
                         });
                     });
                 }),
@@ -44,8 +44,9 @@ class Factorum extends Card_1.Card {
             player.production.add(Resource_1.Resource.ENERGY, 1, { log: true });
             return undefined;
         });
-        const drawBuildingCard = new SelectOption_1.SelectOption('Spend 3 M€ to draw a building card', 'Draw card', () => {
-            player.payMegacreditsDeferred(3, 'Select how to pay for Factorum action.', () => player.drawCard(1, { tag: Tag_1.Tag.BUILDING }));
+        const drawBuildingCard = new SelectOption_1.SelectOption('Spend 1 Energy to draw a building card', 'Draw card', () => {
+            player.energy -= 1;
+            player.drawCard(1, { tag: Tag_1.Tag.BUILDING });
             return undefined;
         });
         if (player.energy > 0)

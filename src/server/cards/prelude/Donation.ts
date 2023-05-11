@@ -8,15 +8,15 @@ export class Donation extends PreludeCard {
       name: CardName.DONATION,
 
       behavior: {
-        stock: {megacredits: 21},
+        stock: {megacredits: 23},
       },
 
       metadata: {
         cardNumber: 'P08',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(21);
+          b.megacredits(23);
         }),
-        description: 'Gain 21 M€.',
+        description: 'Gain 23 M€.',
       },
     });
   }
