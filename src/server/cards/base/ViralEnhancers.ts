@@ -18,7 +18,7 @@ export class ViralEnhancers extends Card implements IProjectCard {
       type: CardType.ACTIVE,
       name: CardName.VIRAL_ENHANCERS,
       tags: [Tag.SCIENCE, Tag.MICROBE],
-      cost: 9,
+      cost: 10,
 
       metadata: {
         cardNumber: '074',

@@ -13,7 +13,7 @@ export class SkyDocks extends Card implements IProjectCard {
       tags: [Tag.SPACE, Tag.EARTH],
       name: CardName.SKY_DOCKS,
       type: CardType.ACTIVE,
-      victoryPoints: 2,
+      victoryPoints: 1,
 
       behavior: {
         colonies: {addTradeFleet: 1},

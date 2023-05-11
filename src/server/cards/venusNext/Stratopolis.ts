@@ -13,10 +13,10 @@ export class Stratopolis extends ActionCard {
       name: CardName.STRATOPOLIS,
       type: CardType.ACTIVE,
       tags: [Tag.CITY, Tag.VENUS],
-      cost: 22,
+      cost: 20,
 
       resourceType: CardResource.FLOATER,
-      victoryPoints: {resourcesHere: {}, per: 3},
+      victoryPoints: {resourcesHere: {}, per: 2},
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
 
       behavior: {
@@ -40,7 +40,7 @@ export class Stratopolis extends ActionCard {
             eb.empty().startAction.floaters(2, {secondaryTag: Tag.VENUS});
           }).br;
           b.production((pb) => pb.megacredits(2)).city().asterix();
-          b.vpText('1 VP for every 3rd Floater on this card.');
+          b.vpText('1 VP for every 2nd Floater on this card.');
         }),
         description: {
           text: 'Requires 2 science tags. Increase your M€ production 2 steps. Place a city tile ON THE RESERVED AREA',

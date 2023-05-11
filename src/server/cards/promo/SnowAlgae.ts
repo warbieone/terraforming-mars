@@ -11,7 +11,7 @@ export class SnowAlgae extends Card implements IProjectCard {
     super({
       type: CardType.AUTOMATED,
       name: CardName.SNOW_ALGAE,
-      cost: 12,
+      cost: 11,
       tags: [Tag.PLANT],
 
       behavior: {

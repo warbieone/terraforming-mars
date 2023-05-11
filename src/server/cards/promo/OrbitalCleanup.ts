@@ -20,15 +20,15 @@ export class OrbitalCleanup extends ActionCard implements IProjectCard {
       },
 
       action: {
-        stock: {megacredits: {tag: Tag.SCIENCE}},
+        stock: {megacredits: {tag: Tag.SCIENCE, per: 2}},
       },
 
       metadata: {
         cardNumber: 'X08',
 
         renderData: CardRenderer.builder((b) => {
-          b.action('Gain 1 M€ per science tag you have.', (eb) => {
-            eb.empty().startAction.megacredits(1).slash().science(1, {played});
+          b.action('Gain 1 M€ per 2 science tags you have.', (eb) => {
+            eb.empty().startAction.megacredits(1).slash().science(2, {played});
           }).br;
           b.production((pb) => {
             pb.megacredits(-2);

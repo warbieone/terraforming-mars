@@ -11,10 +11,10 @@ export class SoilFactory extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.SOIL_FACTORY,
       tags: [Tag.BUILDING],
-      cost: 9,
+      cost: 10,
 
       behavior: {
-        production: {energy: -1, plants: 1},
+        production: {energy: -1, plants: 2},
       },
       victoryPoints: 1,
 
@@ -23,10 +23,10 @@ export class SoilFactory extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).br;
-            pb.plus().plants(1);
+            pb.plus().plants(2);
           });
         }),
-        description: 'Decrease your energy production 1 step and increase your plant production 1 step.',
+        description: 'Decrease your energy production 1 step and increase your plant production 2 steps.',
       },
     });
   }

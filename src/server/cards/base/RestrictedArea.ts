@@ -25,7 +25,7 @@ export class RestrictedArea extends ActionCard implements IProjectCard {
       type: CardType.ACTIVE,
       name,
       tags: [Tag.SCIENCE],
-      cost: 11,
+      cost: 13,
 
       behavior: {
         tile: {
