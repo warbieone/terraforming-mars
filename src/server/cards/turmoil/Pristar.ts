@@ -6,7 +6,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Turmoil} from '../../turmoil/Turmoil';
 
 export class Pristar extends Card implements ICorporationCard {
 
@@ -45,7 +44,7 @@ export class Pristar extends Card implements ICorporationCard {
 
   public onProductionPhase(player: Player) {
     if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
-      player.megaCredits += 6;
+      player.addResource(Resource.MEGACREDITS, 6, {log: true, from: this});
       player.addResourceTo(this, 1);
       // Check whether the player has already received the bonus
       if (!this.hasReceivedInfluenceBonus) {

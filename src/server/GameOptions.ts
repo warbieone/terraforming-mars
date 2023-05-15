@@ -37,7 +37,7 @@ export type GameOptions = {
   // Variants
   draftVariant: boolean;
   initialDraftVariant: boolean;
-  corporationsDraft: boolean;
+  // corporationsDraft: boolean;
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: RandomMAOptionType;
