@@ -36,3 +36,4 @@ function main() {
     });
 }
 main();
+//# sourceMappingURL=create_game_ids_table.js.map

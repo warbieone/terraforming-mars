@@ -47,3 +47,4 @@ var GlobalEventName;
     GlobalEventName["COMMUNICATION_BOOM"] = "Communication Boom";
     GlobalEventName["SPACE_RACE_TO_MARS"] = "Space Race to Mars";
 })(GlobalEventName = exports.GlobalEventName || (exports.GlobalEventName = {}));
+//# sourceMappingURL=GlobalEventName.js.map

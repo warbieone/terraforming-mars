@@ -41,3 +41,4 @@ class CrewTraining extends PreludeCard_1.PreludeCard {
     }
 }
 exports.CrewTraining = CrewTraining;
+//# sourceMappingURL=CrewTraining.js.map

@@ -28,3 +28,4 @@ class CarbonateProcessing extends Card_1.Card {
     }
 }
 exports.CarbonateProcessing = CarbonateProcessing;
+//# sourceMappingURL=CarbonateProcessing.js.map

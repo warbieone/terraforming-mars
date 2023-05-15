@@ -31,3 +31,4 @@ class MediaArchives extends Card_1.Card {
     }
 }
 exports.MediaArchives = MediaArchives;
+//# sourceMappingURL=MediaArchives.js.map

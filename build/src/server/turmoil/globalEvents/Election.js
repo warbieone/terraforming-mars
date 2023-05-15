@@ -71,3 +71,4 @@ class Election extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.Election = Election;
+//# sourceMappingURL=Election.js.map

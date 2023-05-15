@@ -64,3 +64,4 @@ class EcologicalZone extends Card_1.Card {
     }
 }
 exports.EcologicalZone = EcologicalZone;
+//# sourceMappingURL=EcologicalZone.js.map

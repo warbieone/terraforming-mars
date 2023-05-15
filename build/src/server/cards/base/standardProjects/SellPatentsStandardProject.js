@@ -43,3 +43,4 @@ class SellPatentsStandardProject extends StandardProjectCard_1.StandardProjectCa
     }
 }
 exports.SellPatentsStandardProject = SellPatentsStandardProject;
+//# sourceMappingURL=SellPatentsStandardProject.js.map

@@ -12,7 +12,7 @@ class StripMine extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.STRIP_MINE,
             tags: [Tag_1.Tag.BUILDING],
-            cost: 25,
+            cost: 23,
             behavior: {
                 production: { energy: -2, steel: 2, titanium: 1 },
                 global: { oxygen: 2 },
@@ -32,3 +32,4 @@ class StripMine extends Card_1.Card {
     }
 }
 exports.StripMine = StripMine;
+//# sourceMappingURL=StripMine.js.map

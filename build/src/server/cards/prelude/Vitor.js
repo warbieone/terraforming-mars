@@ -67,3 +67,4 @@ class Vitor extends Card_1.Card {
     }
 }
 exports.Vitor = Vitor;
+//# sourceMappingURL=Vitor.js.map

@@ -112,6 +112,7 @@ export class GameHandler extends Handler {
             soloTR: gameReq.soloTR,
             customCorporationsList: gameReq.customCorporationsList,
             bannedCards: gameReq.bannedCards,
+            extraCards: gameReq.extraCards,
             customColoniesList: gameReq.customColoniesList,
             customPreludes: gameReq.customPreludes,
             requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,

@@ -69,3 +69,4 @@ class MarketCard extends Card_1.Card {
     }
 }
 exports.MarketCard = MarketCard;
+//# sourceMappingURL=MarketCard.js.map

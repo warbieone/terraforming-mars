@@ -46,3 +46,4 @@ exports.COMMUNITY_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.SPECIAL_DESIGN_PROXY]: { Factory: SpecialDesignProxy_1.SpecialDesignProxy, instantiate: false },
     },
 });
+//# sourceMappingURL=CommunityCardManifest.js.map

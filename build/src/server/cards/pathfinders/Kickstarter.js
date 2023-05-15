@@ -33,3 +33,4 @@ class Kickstarter extends Card_1.Card {
     }
 }
 exports.Kickstarter = Kickstarter;
+//# sourceMappingURL=Kickstarter.js.map

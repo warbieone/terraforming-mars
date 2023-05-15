@@ -31,3 +31,4 @@ class HeavyTaxation extends Card_1.Card {
     }
 }
 exports.HeavyTaxation = HeavyTaxation;
+//# sourceMappingURL=HeavyTaxation.js.map

@@ -158,3 +158,4 @@ function parseConfigString(stringValue) {
         options.sleepMillis = sleepMillis;
     return options;
 }
+//# sourceMappingURL=GameLoader.js.map

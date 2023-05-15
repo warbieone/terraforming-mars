@@ -19,3 +19,4 @@ class LogBuilder extends MessageBuilder_1.MessageBuilder {
     }
 }
 exports.LogBuilder = LogBuilder;
+//# sourceMappingURL=LogBuilder.js.map

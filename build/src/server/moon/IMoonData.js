@@ -34,3 +34,4 @@ var IMoonData;
     }
     IMoonData.deserialize = deserialize;
 })(IMoonData = exports.IMoonData || (exports.IMoonData = {}));
+//# sourceMappingURL=IMoonData.js.map

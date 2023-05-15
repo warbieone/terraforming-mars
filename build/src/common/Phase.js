@@ -15,3 +15,4 @@ var Phase;
     Phase["SOLAR"] = "solar";
     Phase["INTERGENERATION"] = "intergeneration";
 })(Phase = exports.Phase || (exports.Phase = {}));
+//# sourceMappingURL=Phase.js.map

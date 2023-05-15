@@ -29,3 +29,4 @@ class Midas extends Card_1.Card {
     }
 }
 exports.Midas = Midas;
+//# sourceMappingURL=Midas.js.map

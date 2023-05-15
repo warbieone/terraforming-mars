@@ -18,3 +18,4 @@ function getMilestoneAwardDescription(name) {
     return description;
 }
 exports.getMilestoneAwardDescription = getMilestoneAwardDescription;
+//# sourceMappingURL=MilestoneAwardManifest.js.map

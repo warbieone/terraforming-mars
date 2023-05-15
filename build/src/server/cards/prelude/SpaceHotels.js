@@ -31,3 +31,4 @@ class SpaceHotels extends Card_1.Card {
     }
 }
 exports.SpaceHotels = SpaceHotels;
+//# sourceMappingURL=SpaceHotels.js.map

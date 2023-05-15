@@ -51,3 +51,4 @@ class CopernicusTower extends ActionCard_1.ActionCard {
     }
 }
 exports.CopernicusTower = CopernicusTower;
+//# sourceMappingURL=CopernicusTower.js.map

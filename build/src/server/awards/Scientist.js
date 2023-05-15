@@ -12,3 +12,4 @@ class Scientist {
     }
 }
 exports.Scientist = Scientist;
+//# sourceMappingURL=Scientist.js.map

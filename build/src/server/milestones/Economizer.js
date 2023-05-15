@@ -11,3 +11,4 @@ class Economizer extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Economizer = Economizer;
+//# sourceMappingURL=Economizer.js.map

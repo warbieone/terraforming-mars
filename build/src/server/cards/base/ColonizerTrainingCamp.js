@@ -24,3 +24,4 @@ class ColonizerTrainingCamp extends Card_1.Card {
     }
 }
 exports.ColonizerTrainingCamp = ColonizerTrainingCamp;
+//# sourceMappingURL=ColonizerTrainingCamp.js.map

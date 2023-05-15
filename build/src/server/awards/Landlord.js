@@ -15,3 +15,4 @@ class Landlord {
     }
 }
 exports.Landlord = Landlord;
+//# sourceMappingURL=Landlord.js.map

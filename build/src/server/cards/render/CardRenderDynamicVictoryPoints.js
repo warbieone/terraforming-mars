@@ -96,3 +96,4 @@ class CardRenderDynamicVictoryPoints {
     }
 }
 exports.CardRenderDynamicVictoryPoints = CardRenderDynamicVictoryPoints;
+//# sourceMappingURL=CardRenderDynamicVictoryPoints.js.map

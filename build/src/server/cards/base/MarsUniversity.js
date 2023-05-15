@@ -17,8 +17,7 @@ class MarsUniversity extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.MARS_UNIVERSITY,
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.BUILDING],
-            cost: 8,
-            victoryPoints: 1,
+            cost: 12,
             metadata: {
                 cardNumber: '073',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -52,3 +51,4 @@ class MarsUniversity extends Card_1.Card {
     }
 }
 exports.MarsUniversity = MarsUniversity;
+//# sourceMappingURL=MarsUniversity.js.map

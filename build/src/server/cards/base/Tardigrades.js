@@ -32,3 +32,4 @@ class Tardigrades extends ActionCard_1.ActionCard {
     }
 }
 exports.Tardigrades = Tardigrades;
+//# sourceMappingURL=Tardigrades.js.map

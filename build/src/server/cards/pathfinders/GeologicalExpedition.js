@@ -79,3 +79,4 @@ class GeologicalExpedition extends Card_1.Card {
     }
 }
 exports.GeologicalExpedition = GeologicalExpedition;
+//# sourceMappingURL=GeologicalExpedition.js.map

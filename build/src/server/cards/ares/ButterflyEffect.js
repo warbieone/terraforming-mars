@@ -42,3 +42,4 @@ class ButterflyEffect extends Card_1.Card {
     }
 }
 exports.ButterflyEffect = ButterflyEffect;
+//# sourceMappingURL=ButterflyEffect.js.map

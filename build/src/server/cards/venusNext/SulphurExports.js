@@ -30,3 +30,4 @@ class SulphurExports extends Card_1.Card {
     }
 }
 exports.SulphurExports = SulphurExports;
+//# sourceMappingURL=SulphurExports.js.map

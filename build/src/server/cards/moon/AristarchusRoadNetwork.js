@@ -36,3 +36,4 @@ class AristarchusRoadNetwork extends Card_1.Card {
     }
 }
 exports.AristarchusRoadNetwork = AristarchusRoadNetwork;
+//# sourceMappingURL=AristarchusRoadNetwork.js.map

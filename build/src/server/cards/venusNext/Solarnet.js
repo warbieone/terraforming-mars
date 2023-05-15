@@ -29,3 +29,4 @@ class Solarnet extends Card_1.Card {
     }
 }
 exports.Solarnet = Solarnet;
+//# sourceMappingURL=Solarnet.js.map

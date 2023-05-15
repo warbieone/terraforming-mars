@@ -103,3 +103,4 @@ function giveAwards(player, vpb) {
         }
     });
 }
+//# sourceMappingURL=calculateVictoryPoints.js.map

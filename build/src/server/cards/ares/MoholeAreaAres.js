@@ -20,3 +20,4 @@ class MoholeAreaAres extends MoholeArea_1.MoholeArea {
     }
 }
 exports.MoholeAreaAres = MoholeAreaAres;
+//# sourceMappingURL=MoholeAreaAres.js.map

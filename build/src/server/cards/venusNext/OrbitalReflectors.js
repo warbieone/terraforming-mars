@@ -31,3 +31,4 @@ class OrbitalReflectors extends Card_1.Card {
     }
 }
 exports.OrbitalReflectors = OrbitalReflectors;
+//# sourceMappingURL=OrbitalReflectors.js.map

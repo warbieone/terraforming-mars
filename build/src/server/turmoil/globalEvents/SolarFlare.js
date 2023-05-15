@@ -32,3 +32,4 @@ class SolarFlare extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.SolarFlare = SolarFlare;
+//# sourceMappingURL=SolarFlare.js.map

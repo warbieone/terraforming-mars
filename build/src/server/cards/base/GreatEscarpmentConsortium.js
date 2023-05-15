@@ -36,3 +36,4 @@ class GreatEscarpmentConsortium extends Card_1.Card {
     }
 }
 exports.GreatEscarpmentConsortium = GreatEscarpmentConsortium;
+//# sourceMappingURL=GreatEscarpmentConsortium.js.map

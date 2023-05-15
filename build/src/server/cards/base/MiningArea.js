@@ -24,3 +24,4 @@ class MiningArea extends MiningCard_1.MiningCard {
     }
 }
 exports.MiningArea = MiningArea;
+//# sourceMappingURL=MiningArea.js.map

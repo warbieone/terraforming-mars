@@ -84,3 +84,4 @@ var CardRenderItemType;
     CardRenderItemType["HAZARD_TILE"] = "hazard-tile";
     CardRenderItemType["ADJACENCY_BONUS"] = "adjacency-bonus";
 })(CardRenderItemType = exports.CardRenderItemType || (exports.CardRenderItemType = {}));
+//# sourceMappingURL=CardRenderItemType.js.map

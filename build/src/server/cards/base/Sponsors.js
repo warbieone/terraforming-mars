@@ -27,3 +27,4 @@ class Sponsors extends Card_1.Card {
     }
 }
 exports.Sponsors = Sponsors;
+//# sourceMappingURL=Sponsors.js.map

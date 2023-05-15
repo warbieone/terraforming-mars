@@ -39,3 +39,4 @@ class ReturntoAbandonedTechnology extends Card_1.Card {
     }
 }
 exports.ReturntoAbandonedTechnology = ReturntoAbandonedTechnology;
+//# sourceMappingURL=ReturntoAbandonedTechnology.js.map

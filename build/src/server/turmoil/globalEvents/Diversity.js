@@ -29,3 +29,4 @@ class Diversity extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.Diversity = Diversity;
+//# sourceMappingURL=Diversity.js.map

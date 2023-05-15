@@ -26,3 +26,4 @@ class SnowCover extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.SnowCover = SnowCover;
+//# sourceMappingURL=SnowCover.js.map

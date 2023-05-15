@@ -5,3 +5,4 @@ function isICloneTagCard(obj) {
     return 'cloneTag' in obj;
 }
 exports.isICloneTagCard = isICloneTagCard;
+//# sourceMappingURL=ICloneTagCard.js.map

@@ -31,3 +31,4 @@ class Bjorn extends CeoCard_1.CeoCard {
     }
 }
 exports.Bjorn = Bjorn;
+//# sourceMappingURL=Bjorn.js.map

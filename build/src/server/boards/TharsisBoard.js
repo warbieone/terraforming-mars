@@ -54,3 +54,4 @@ class TharsisBoard extends Board_1.Board {
     }
 }
 exports.TharsisBoard = TharsisBoard;
+//# sourceMappingURL=TharsisBoard.js.map

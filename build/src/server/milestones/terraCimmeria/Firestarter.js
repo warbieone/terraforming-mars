@@ -11,3 +11,4 @@ class Firestarter extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Firestarter = Firestarter;
+//# sourceMappingURL=Firestarter.js.map

@@ -25,3 +25,4 @@ class AdaptedLichen extends Card_1.Card {
     }
 }
 exports.AdaptedLichen = AdaptedLichen;
+//# sourceMappingURL=AdaptedLichen.js.map

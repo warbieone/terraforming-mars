@@ -9,7 +9,9 @@ import {Size} from '../../../common/cards/render/Size';
 import {Turmoil} from '../../turmoil/Turmoil';
 
 export class Pristar extends Card implements ICorporationCard {
-  public hasReceivedInfluenceBonus: boolean;
+
+  private hasReceivedInfluenceBonus: boolean = false;
+
   constructor() {
     super({
       name: CardName.PRISTAR,
@@ -27,17 +29,14 @@ export class Pristar extends Card implements ICorporationCard {
           b.br.br.br;
           b.megacredits(53).nbsp.nbsp.minus().tr(2, {size: Size.SMALL});
           b.corpBox('effect', (ce) => {
-            ce.effect('During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.', (eb) => {
-              eb.tr(1, {size: Size.SMALL, cancelled: true}).startEffect.preservation(1).megacredits(6);
+            ce.effect('During production phase, if you did not get TR so far this generation, add one preservation resource here, gain 6 M€, and 1 influence.', (eb) => {
+              eb.tr(1, {size: Size.SMALL, cancelled: true}).startEffect.preservation(1).megacredits(6).influence();
             });
           });
         }),
       },
     });
-    this.hasReceivedInfluenceBonus = false;
   }
-
-
 
   public override bespokePlay(player: Player) {
     player.decreaseTerraformRatingSteps(2);
@@ -48,20 +47,21 @@ export class Pristar extends Card implements ICorporationCard {
     if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
       player.megaCredits += 6;
       player.addResourceTo(this, 1);
-      
+      // Check whether the player has already received the bonus
       if (!this.hasReceivedInfluenceBonus) {
-        Turmoil.ifTurmoil((player.game), (turmoil) => {
+        Turmoil.ifTurmoil(player.game, (turmoil) => {
           turmoil.addInfluenceBonus(player);
         });
+        // Mark that the player has received the bonus
         this.hasReceivedInfluenceBonus = true;
-      }
+      } 
     }
-    if (this.hasReceivedInfluenceBonus) {
-      Turmoil.ifTurmoil((player.game), (turmoil) => {
+    else {
+      this.hasReceivedInfluenceBonus = false;
+      Turmoil.ifTurmoil(player.game, (turmoil) => {
         turmoil.addInfluenceBonus(player,-1);
-      });
-      this.hasReceivedInfluenceBonus = false
-    } 
+      })
+    }
     return undefined;
   }
 }

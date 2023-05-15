@@ -34,3 +34,4 @@ class TradingColony extends Card_1.Card {
     }
 }
 exports.TradingColony = TradingColony;
+//# sourceMappingURL=TradingColony.js.map

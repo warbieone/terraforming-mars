@@ -39,3 +39,4 @@ class TheNewSpaceRace extends PreludeCard_1.PreludeCard {
     }
 }
 exports.TheNewSpaceRace = TheNewSpaceRace;
+//# sourceMappingURL=TheNewSpaceRace.js.map

@@ -77,3 +77,4 @@ class Splice extends Card_1.Card {
     }
 }
 exports.Splice = Splice;
+//# sourceMappingURL=Splice.js.map

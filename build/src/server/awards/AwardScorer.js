@@ -19,3 +19,4 @@ class AwardScorer {
     }
 }
 exports.AwardScorer = AwardScorer;
+//# sourceMappingURL=AwardScorer.js.map

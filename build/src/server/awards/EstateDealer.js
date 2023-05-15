@@ -16,3 +16,4 @@ class EstateDealer {
     }
 }
 exports.EstateDealer = EstateDealer;
+//# sourceMappingURL=EstateDealer.js.map

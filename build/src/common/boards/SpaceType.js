@@ -9,3 +9,4 @@ var SpaceType;
     SpaceType["LUNAR_MINE"] = "lunar_mine";
     SpaceType["COVE"] = "cove";
 })(SpaceType = exports.SpaceType || (exports.SpaceType = {}));
+//# sourceMappingURL=SpaceType.js.map

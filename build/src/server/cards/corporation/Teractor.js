@@ -32,3 +32,4 @@ class Teractor extends Card_1.Card {
     }
 }
 exports.Teractor = Teractor;
+//# sourceMappingURL=Teractor.js.map

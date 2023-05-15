@@ -33,3 +33,4 @@ class RareEarthElements extends Card_1.Card {
     }
 }
 exports.RareEarthElements = RareEarthElements;
+//# sourceMappingURL=RareEarthElements.js.map

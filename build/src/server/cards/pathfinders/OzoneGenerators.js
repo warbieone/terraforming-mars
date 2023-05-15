@@ -30,3 +30,4 @@ class OzoneGenerators extends ActionCard_1.ActionCard {
     }
 }
 exports.OzoneGenerators = OzoneGenerators;
+//# sourceMappingURL=OzoneGenerators.js.map

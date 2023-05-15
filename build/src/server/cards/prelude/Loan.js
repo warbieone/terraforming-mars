@@ -24,3 +24,4 @@ class Loan extends PreludeCard_1.PreludeCard {
     }
 }
 exports.Loan = Loan;
+//# sourceMappingURL=Loan.js.map

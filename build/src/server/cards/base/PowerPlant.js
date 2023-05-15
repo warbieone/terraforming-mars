@@ -27,3 +27,4 @@ class PowerPlant extends Card_1.Card {
     }
 }
 exports.PowerPlant = PowerPlant;
+//# sourceMappingURL=PowerPlant.js.map

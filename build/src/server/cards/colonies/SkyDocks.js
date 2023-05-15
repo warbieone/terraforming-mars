@@ -14,7 +14,7 @@ class SkyDocks extends Card_1.Card {
             tags: [Tag_1.Tag.SPACE, Tag_1.Tag.EARTH],
             name: CardName_1.CardName.SKY_DOCKS,
             type: CardType_1.CardType.ACTIVE,
-            victoryPoints: 2,
+            victoryPoints: 1,
             behavior: {
                 colonies: { addTradeFleet: 1 },
             },
@@ -34,3 +34,4 @@ class SkyDocks extends Card_1.Card {
     }
 }
 exports.SkyDocks = SkyDocks;
+//# sourceMappingURL=SkyDocks.js.map

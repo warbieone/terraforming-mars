@@ -17,7 +17,7 @@ class GMOContract extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.GMO_CONTRACT,
             tags: [Tag_1.Tag.MICROBE, Tag_1.Tag.SCIENCE],
-            cost: 3,
+            cost: 8,
             requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.GREENS)),
             metadata: {
                 description: 'Requires that Greens are ruling or that you have 2 delegates there.',
@@ -42,3 +42,4 @@ class GMOContract extends Card_1.Card {
     }
 }
 exports.GMOContract = GMOContract;
+//# sourceMappingURL=GMOContract.js.map

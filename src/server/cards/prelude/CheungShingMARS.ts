@@ -14,7 +14,7 @@ export class CheungShingMARS extends Card implements ICorporationCard {
       type: CardType.CORPORATION,
       name: CardName.CHEUNG_SHING_MARS,
       tags: [Tag.BUILDING],
-      startingMegaCredits: 44,
+      startingMegaCredits: 46,
 
       behavior: {
         production: {megacredits: 3},
@@ -28,7 +28,7 @@ export class CheungShingMARS extends Card implements ICorporationCard {
           b.br.br;
           b.production((pb) => pb.megacredits(3)).nbsp.megacredits(44);
           b.corpBox('effect', (ce) => {
-            ce.effect('When you play a building tag, gain 2 M€ test.', (eb) => {
+            ce.effect('When you play a building tag, gain 2 M€.', (eb) => {
               eb.building(1, {played}).startEffect.megacredits(2);
             });
           });

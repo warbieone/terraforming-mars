@@ -31,3 +31,4 @@ class ShiftAresGlobalParameters extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.ShiftAresGlobalParameters = ShiftAresGlobalParameters;
+//# sourceMappingURL=ShiftAresGlobalParameters.js.map

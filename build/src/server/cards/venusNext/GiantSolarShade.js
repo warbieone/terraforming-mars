@@ -25,3 +25,4 @@ class GiantSolarShade extends Card_1.Card {
     }
 }
 exports.GiantSolarShade = GiantSolarShade;
+//# sourceMappingURL=GiantSolarShade.js.map

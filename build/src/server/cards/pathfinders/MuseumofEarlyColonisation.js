@@ -34,3 +34,4 @@ class MuseumofEarlyColonisation extends Card_1.Card {
     }
 }
 exports.MuseumofEarlyColonisation = MuseumofEarlyColonisation;
+//# sourceMappingURL=MuseumofEarlyColonisation.js.map

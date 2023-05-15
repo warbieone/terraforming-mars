@@ -10,7 +10,7 @@ class BlackPolarDust extends Card_1.Card {
         super({
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.BLACK_POLAR_DUST,
-            cost: 15,
+            cost: 14,
             behavior: {
                 ocean: {},
                 production: { megacredits: -2, heat: 3 },
@@ -29,3 +29,4 @@ class BlackPolarDust extends Card_1.Card {
     }
 }
 exports.BlackPolarDust = BlackPolarDust;
+//# sourceMappingURL=BlackPolarDust.js.map

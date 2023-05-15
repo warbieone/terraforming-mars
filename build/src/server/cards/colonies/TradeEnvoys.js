@@ -27,3 +27,4 @@ class TradeEnvoys extends Card_1.Card {
     }
 }
 exports.TradeEnvoys = TradeEnvoys;
+//# sourceMappingURL=TradeEnvoys.js.map

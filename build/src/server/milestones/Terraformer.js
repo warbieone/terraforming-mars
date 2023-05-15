@@ -19,3 +19,4 @@ class Terraformer {
     }
 }
 exports.Terraformer = Terraformer;
+//# sourceMappingURL=Terraformer.js.map

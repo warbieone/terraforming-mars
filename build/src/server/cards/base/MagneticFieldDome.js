@@ -32,3 +32,4 @@ class MagneticFieldDome extends Card_1.Card {
     }
 }
 exports.MagneticFieldDome = MagneticFieldDome;
+//# sourceMappingURL=MagneticFieldDome.js.map

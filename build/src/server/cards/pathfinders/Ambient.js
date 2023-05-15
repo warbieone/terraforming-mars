@@ -65,3 +65,4 @@ class Ambient extends Card_1.Card {
     }
 }
 exports.Ambient = Ambient;
+//# sourceMappingURL=Ambient.js.map

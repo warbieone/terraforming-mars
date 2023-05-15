@@ -26,3 +26,4 @@ class RichDeposits extends Card_1.Card {
     }
 }
 exports.RichDeposits = RichDeposits;
+//# sourceMappingURL=RichDeposits.js.map

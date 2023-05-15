@@ -33,7 +33,8 @@ class Inventrix extends Card_1.Card {
         });
     }
     getRequirementBonus() {
-        return 2;
+        return 3;
     }
 }
 exports.Inventrix = Inventrix;
+//# sourceMappingURL=Inventrix.js.map

@@ -945,10 +945,6 @@ class Player {
         return this.heat + (floaters * 2);
     }
     spendHeat(amount, cb = () => undefined) {
-        const stormcraft = this.getCorporation(CardName_1.CardName.STORMCRAFT_INCORPORATED);
-        if ((stormcraft === null || stormcraft === void 0 ? void 0 : stormcraft.resourceCount) > 0) {
-            return stormcraft.spendHeat(this, amount, cb);
-        }
         this.deductResource(Resource_1.Resource.HEAT, amount);
         return cb();
     }
@@ -1552,3 +1548,4 @@ class Player {
     }
 }
 exports.Player = Player;
+//# sourceMappingURL=Player.js.map

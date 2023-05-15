@@ -15,3 +15,4 @@ var AltSecondaryTag;
     AltSecondaryTag["WILD_RESOURCE"] = "wild-resource";
     AltSecondaryTag["DIVERSE"] = "diverse";
 })(AltSecondaryTag = exports.AltSecondaryTag || (exports.AltSecondaryTag = {}));
+//# sourceMappingURL=AltSecondaryTag.js.map

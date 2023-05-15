@@ -16,3 +16,4 @@ function isSpectatorId(object) {
     return ((_a = object === null || object === void 0 ? void 0 : object.charAt) === null || _a === void 0 ? void 0 : _a.call(object, 0)) === 's';
 }
 exports.isSpectatorId = isSpectatorId;
+//# sourceMappingURL=Types.js.map

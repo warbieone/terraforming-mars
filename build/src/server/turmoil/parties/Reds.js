@@ -226,3 +226,4 @@ exports.REDS_POLICY_1 = new RedsPolicy01();
 exports.REDS_POLICY_2 = new RedsPolicy02();
 exports.REDS_POLICY_3 = new RedsPolicy03();
 exports.REDS_POLICY_4 = new RedsPolicy04();
+//# sourceMappingURL=Reds.js.map

@@ -52,3 +52,4 @@ class SelectResources extends AndOptions_1.AndOptions {
     }
 }
 exports.SelectResources = SelectResources;
+//# sourceMappingURL=SelectResources.js.map

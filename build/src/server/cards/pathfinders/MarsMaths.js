@@ -41,3 +41,4 @@ class MarsMaths extends Card_1.Card {
     }
 }
 exports.MarsMaths = MarsMaths;
+//# sourceMappingURL=MarsMaths.js.map

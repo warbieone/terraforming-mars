@@ -40,3 +40,4 @@ class TradeAdvance extends PreludeCard_1.PreludeCard {
     }
 }
 exports.TradeAdvance = TradeAdvance;
+//# sourceMappingURL=TradeAdvance.js.map

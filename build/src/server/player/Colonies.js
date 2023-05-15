@@ -175,3 +175,4 @@ class TradeWithMegacredits {
     }
 }
 exports.TradeWithMegacredits = TradeWithMegacredits;
+//# sourceMappingURL=Colonies.js.map

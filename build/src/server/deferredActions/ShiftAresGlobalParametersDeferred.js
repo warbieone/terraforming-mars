@@ -44,3 +44,4 @@ class ShiftAresGlobalParametersDeferred extends DeferredAction_1.DeferredAction 
     }
 }
 exports.ShiftAresGlobalParametersDeferred = ShiftAresGlobalParametersDeferred;
+//# sourceMappingURL=ShiftAresGlobalParametersDeferred.js.map

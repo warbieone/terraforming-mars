@@ -44,3 +44,4 @@ class AirScrappingExpedition extends Card_1.Card {
     }
 }
 exports.AirScrappingExpedition = AirScrappingExpedition;
+//# sourceMappingURL=AirScrappingExpedition.js.map

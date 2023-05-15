@@ -20,3 +20,4 @@ class Ganymede extends Colony_1.Colony {
     }
 }
 exports.Ganymede = Ganymede;
+//# sourceMappingURL=Ganymede.js.map

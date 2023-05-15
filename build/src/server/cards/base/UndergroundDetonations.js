@@ -12,16 +12,16 @@ class UndergroundDetonations extends ActionCard_1.ActionCard {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.UNDERGROUND_DETONATIONS,
             tags: [Tag_1.Tag.BUILDING],
-            cost: 6,
+            cost: 2,
             action: {
-                spend: { megacredits: 10 },
+                spend: { megacredits: 8 },
                 production: { heat: 2 },
             },
             metadata: {
                 cardNumber: '202',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.action('Spend 10M€ to increase your heat production 2 steps.', (eb) => {
-                        eb.megacredits(10).startAction.production((pb) => pb.heat(2));
+                    b.action('Spend 8M€ to increase your heat production 2 steps.', (eb) => {
+                        eb.megacredits(8).startAction.production((pb) => pb.heat(2));
                     });
                 }),
             },
@@ -29,3 +29,4 @@ class UndergroundDetonations extends ActionCard_1.ActionCard {
     }
 }
 exports.UndergroundDetonations = UndergroundDetonations;
+//# sourceMappingURL=UndergroundDetonations.js.map

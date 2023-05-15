@@ -35,3 +35,4 @@ class BioSol extends ActionCard_1.ActionCard {
     }
 }
 exports.BioSol = BioSol;
+//# sourceMappingURL=BioSol.js.map

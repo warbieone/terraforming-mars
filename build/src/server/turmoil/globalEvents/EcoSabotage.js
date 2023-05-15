@@ -30,3 +30,4 @@ class EcoSabotage extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.EcoSabotage = EcoSabotage;
+//# sourceMappingURL=EcoSabotage.js.map

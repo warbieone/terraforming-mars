@@ -16,3 +16,4 @@ function timeAsync(promise) {
     });
 }
 exports.timeAsync = timeAsync;
+//# sourceMappingURL=timer.js.map

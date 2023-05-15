@@ -8,3 +8,4 @@ class UndoActionOption extends SelectOption_1.SelectOption {
     }
 }
 exports.UndoActionOption = UndoActionOption;
+//# sourceMappingURL=UndoActionOption.js.map

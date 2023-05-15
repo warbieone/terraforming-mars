@@ -47,3 +47,4 @@ class ApiPlayer extends Handler_1.Handler {
 }
 exports.ApiPlayer = ApiPlayer;
 ApiPlayer.INSTANCE = new ApiPlayer();
+//# sourceMappingURL=ApiPlayer.js.map

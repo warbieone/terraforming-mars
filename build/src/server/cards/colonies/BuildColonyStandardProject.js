@@ -43,3 +43,4 @@ class BuildColonyStandardProject extends StandardProjectCard_1.StandardProjectCa
     }
 }
 exports.BuildColonyStandardProject = BuildColonyStandardProject;
+//# sourceMappingURL=BuildColonyStandardProject.js.map

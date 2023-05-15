@@ -14,7 +14,7 @@ class DesignedMicroOrganisms extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.DESIGNED_MICROORGANISMS,
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.MICROBE],
-            cost: 16,
+            cost: 15,
             behavior: {
                 production: { plants: 2 },
             },
@@ -30,3 +30,4 @@ class DesignedMicroOrganisms extends Card_1.Card {
     }
 }
 exports.DesignedMicroOrganisms = DesignedMicroOrganisms;
+//# sourceMappingURL=DesignedMicroOrganisms.js.map

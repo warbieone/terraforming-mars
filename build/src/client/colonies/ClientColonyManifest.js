@@ -18,3 +18,4 @@ function getColony(name) {
     return metadata;
 }
 exports.getColony = getColony;
+//# sourceMappingURL=ClientColonyManifest.js.map

@@ -42,3 +42,4 @@ exports.milestoneNames = [
     'Irrigator',
     'Capitalist',
 ];
+//# sourceMappingURL=MilestoneName.js.map

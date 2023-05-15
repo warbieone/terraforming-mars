@@ -33,3 +33,4 @@ class PlaceTile extends DeferredAction_1.DeferredAction {
     }
 }
 exports.PlaceTile = PlaceTile;
+//# sourceMappingURL=PlaceTile.js.map

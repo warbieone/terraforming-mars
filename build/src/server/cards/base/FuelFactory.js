@@ -12,7 +12,7 @@ class FuelFactory extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.FUEL_FACTORY,
             tags: [Tag_1.Tag.BUILDING],
-            cost: 6,
+            cost: 5,
             behavior: {
                 production: { energy: -1, megacredits: 1, titanium: 1 },
             },
@@ -30,3 +30,4 @@ class FuelFactory extends Card_1.Card {
     }
 }
 exports.FuelFactory = FuelFactory;
+//# sourceMappingURL=FuelFactory.js.map

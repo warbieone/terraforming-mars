@@ -111,3 +111,4 @@ class Philares extends Card_1.Card {
     }
 }
 exports.Philares = Philares;
+//# sourceMappingURL=Philares.js.map

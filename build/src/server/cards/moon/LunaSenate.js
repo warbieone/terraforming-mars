@@ -32,3 +32,4 @@ class LunaSenate extends Card_1.Card {
     }
 }
 exports.LunaSenate = LunaSenate;
+//# sourceMappingURL=LunaSenate.js.map

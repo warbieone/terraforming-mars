@@ -31,3 +31,4 @@ class LTFHeadquarters extends Card_1.Card {
     }
 }
 exports.LTFHeadquarters = LTFHeadquarters;
+//# sourceMappingURL=LTFHeadquarters.js.map

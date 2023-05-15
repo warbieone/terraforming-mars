@@ -28,3 +28,4 @@ class ArchaeBacteria extends Card_1.Card {
     }
 }
 exports.ArchaeBacteria = ArchaeBacteria;
+//# sourceMappingURL=ArchaeBacteria.js.map

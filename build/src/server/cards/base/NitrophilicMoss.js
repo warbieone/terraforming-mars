@@ -40,3 +40,4 @@ class NitrophilicMoss extends Card_1.Card {
     }
 }
 exports.NitrophilicMoss = NitrophilicMoss;
+//# sourceMappingURL=NitrophilicMoss.js.map

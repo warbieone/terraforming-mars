@@ -23,3 +23,4 @@ class SelectPlayer extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectPlayer = SelectPlayer;
+//# sourceMappingURL=SelectPlayer.js.map

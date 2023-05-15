@@ -41,3 +41,4 @@ class ApiGameHistory extends Handler_1.Handler {
 }
 exports.ApiGameHistory = ApiGameHistory;
 ApiGameHistory.INSTANCE = new ApiGameHistory();
+//# sourceMappingURL=ApiGameHistory.js.map

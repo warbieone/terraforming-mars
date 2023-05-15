@@ -53,3 +53,4 @@ class Thermophiles extends ActionCard_1.ActionCard {
     }
 }
 exports.Thermophiles = Thermophiles;
+//# sourceMappingURL=Thermophiles.js.map

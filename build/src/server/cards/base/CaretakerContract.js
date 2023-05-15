@@ -39,3 +39,4 @@ class CaretakerContract extends Card_1.Card {
     }
 }
 exports.CaretakerContract = CaretakerContract;
+//# sourceMappingURL=CaretakerContract.js.map

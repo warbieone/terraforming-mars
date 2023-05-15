@@ -20,3 +20,4 @@ class TransNeptuneProbe extends Card_1.Card {
     }
 }
 exports.TransNeptuneProbe = TransNeptuneProbe;
+//# sourceMappingURL=TransNeptuneProbe.js.map

@@ -29,3 +29,4 @@ class AsteroidMining extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.AsteroidMining = AsteroidMining;
+//# sourceMappingURL=AsteroidMining.js.map

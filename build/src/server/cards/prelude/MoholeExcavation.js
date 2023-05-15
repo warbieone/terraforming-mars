@@ -28,3 +28,4 @@ class MoholeExcavation extends PreludeCard_1.PreludeCard {
     }
 }
 exports.MoholeExcavation = MoholeExcavation;
+//# sourceMappingURL=MoholeExcavation.js.map

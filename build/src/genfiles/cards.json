@@ -78,7 +78,7 @@
         "tags": [
             "plant"
         ],
-        "cost": 9,
+        "cost": 8,
         "type": "automated",
         "metadata": {
             "description": "Increase your plant production 1 step.",
@@ -177,7 +177,7 @@
         "cost": 26,
         "type": "event",
         "metadata": {
-            "description": "Increase your heat production 3 steps and your plant production 1 step. Add 2 microbes to ANOTHER card.",
+            "description": "Increase your heat production 4 steps and your plant production 1 step. Add 3 Microbes to ANOTHER card.",
             "cardNumber": "170",
             "renderData": {
                 "rows": [
@@ -187,7 +187,7 @@
                                 [
                                     {
                                         "type": "heat",
-                                        "amount": 3,
+                                        "amount": 4,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -213,7 +213,7 @@
                     [
                         {
                             "type": "microbes",
-                            "amount": 2,
+                            "amount": 3,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -1212,7 +1212,7 @@
         "module": "base",
         "name": "Black Polar Dust",
         "tags": [],
-        "cost": 15,
+        "cost": 14,
         "type": "automated",
         "metadata": {
             "cardNumber": "022",
@@ -1584,7 +1584,9 @@
     {
         "module": "base",
         "name": "Cloud Seeding",
-        "tags": [],
+        "tags": [
+            "plant"
+        ],
         "cost": 11,
         "type": "automated",
         "requirements": {
@@ -2188,7 +2190,7 @@
             "science",
             "microbe"
         ],
-        "cost": 16,
+        "cost": 15,
         "type": "automated",
         "requirements": {
             "requirements": [
@@ -2527,7 +2529,8 @@
         "module": "base",
         "name": "Energy Saving",
         "tags": [
-            "power"
+            "power",
+            "building"
         ],
         "cost": 15,
         "type": "automated",
@@ -4870,7 +4873,7 @@
         "tags": [
             "microbe"
         ],
-        "cost": 9,
+        "cost": 11,
         "type": "automated",
         "requirements": {
             "requirements": [
@@ -5958,7 +5961,7 @@
         "tags": [
             "building"
         ],
-        "cost": 13,
+        "cost": 12,
         "type": "active",
         "metadata": {
             "cardNumber": "007",
@@ -6115,7 +6118,7 @@
         "module": "base",
         "name": "Micro-Mills",
         "tags": [],
-        "cost": 3,
+        "cost": 2,
         "type": "automated",
         "metadata": {
             "cardNumber": "164",
@@ -8197,7 +8200,7 @@
         "module": "base",
         "name": "Release of Inert Gases",
         "tags": [],
-        "cost": 14,
+        "cost": 13,
         "type": "event",
         "metadata": {
             "cardNumber": "036",
@@ -8240,6 +8243,7 @@
         "cardDiscount": {
             "amount": 1
         },
+        "victoryPoints": -1,
         "cost": 18,
         "type": "active",
         "metadata": {
@@ -8299,7 +8303,8 @@
                 ],
                 "is": "root"
             },
-            "description": "Place a city tile NEXT TO NO OTHER TILE."
+            "description": "Place a city tile NEXT TO NO OTHER TILE.",
+            "victoryPoints": -1
         },
         "productionBox": {
             "megacredits": 0,
@@ -8800,7 +8805,7 @@
             "building"
         ],
         "victoryPoints": 1,
-        "cost": 9,
+        "cost": 10,
         "type": "automated",
         "metadata": {
             "cardNumber": "179",
@@ -8835,7 +8840,7 @@
                                     },
                                     {
                                         "type": "plants",
-                                        "amount": 1,
+                                        "amount": 2,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -8850,7 +8855,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Decrease your energy production 1 step and increase your plant production 1 step.",
+            "description": "Decrease your energy production 1 step and increase your plant production 2 steps.",
             "victoryPoints": 1
         },
         "productionBox": {
@@ -8871,7 +8876,7 @@
             "building"
         ],
         "victoryPoints": 1,
-        "cost": 11,
+        "cost": 10,
         "type": "automated",
         "metadata": {
             "cardNumber": "113",
@@ -9229,7 +9234,7 @@
         "tags": [
             "building"
         ],
-        "cost": 25,
+        "cost": 23,
         "type": "automated",
         "metadata": {
             "cardNumber": "138",
@@ -9711,7 +9716,7 @@
                                     },
                                     {
                                         "type": "energy",
-                                        "amount": 2,
+                                        "amount": 1,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -9759,7 +9764,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps."
+            "description": "Place a city tile. Decrease your energy production 1 step and increase your steel production 2 steps."
         },
         "productionBox": {
             "megacredits": 0,
@@ -9777,7 +9782,7 @@
         "tags": [
             "building"
         ],
-        "cost": 6,
+        "cost": 2,
         "type": "active",
         "metadata": {
             "cardNumber": "202",
@@ -9789,7 +9794,7 @@
                                 [
                                     {
                                         "type": "megacredits",
-                                        "amount": 10,
+                                        "amount": 8,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -9825,7 +9830,7 @@
                                         ],
                                         "is": "production-box"
                                     },
-                                    "Action: Spend 10M€ to increase your heat production 2 steps."
+                                    "Action: Spend 8M€ to increase your heat production 2 steps."
                                 ]
                             ],
                             "is": "effect"
@@ -10320,7 +10325,7 @@
         "name": "Zeppelins",
         "tags": [],
         "victoryPoints": 1,
-        "cost": 13,
+        "cost": 11,
         "type": "automated",
         "requirements": {
             "requirements": [
@@ -11521,7 +11526,8 @@
         "module": "base",
         "name": "Thorgate",
         "tags": [
-            "power"
+            "power",
+            "science"
         ],
         "cardDiscount": {
             "tag": "power",
@@ -11531,7 +11537,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R13",
-            "description": "You start with 1 energy production and 48 M€.",
+            "description": "You start with 1 energy production and 40 M€.",
             "renderData": {
                 "rows": [
                     [],
@@ -11560,7 +11566,7 @@
                         },
                         {
                             "type": "megacredits",
-                            "amount": 48,
+                            "amount": 40,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -11576,6 +11582,64 @@
                             "rows": [
                                 [
                                     {
+                                        "type": "vspace",
+                                        "size": "L",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "rows": [
+                                            [
+                                                {
+                                                    "rows": [
+                                                        [
+                                                            {
+                                                                "type": "energy",
+                                                                "amount": 1,
+                                                                "is": "item",
+                                                                "multiplier": false,
+                                                                "clone": false,
+                                                                "cancelled": false,
+                                                                "questionMark": false
+                                                            }
+                                                        ]
+                                                    ],
+                                                    "is": "production-box"
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    "type": "->",
+                                                    "size": "M",
+                                                    "isIcon": true,
+                                                    "is": "symbol"
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    "type": "megacredits",
+                                                    "amount": 6,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false,
+                                                    "showDigit": false,
+                                                    "amountInside": true,
+                                                    "size": "M"
+                                                },
+                                                "Action: Decr. energy prod. gain 6 M€."
+                                            ]
+                                        ],
+                                        "is": "effect"
+                                    },
+                                    {
+                                        "type": "vspace",
+                                        "size": "S",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    },
+                                    {
                                         "rows": [
                                             [
                                                 {
@@ -11585,7 +11649,44 @@
                                                     "multiplier": false,
                                                     "clone": false,
                                                     "cancelled": false,
-                                                    "isPlayed": true
+                                                    "questionMark": false
+                                                },
+                                                {
+                                                    "type": "*",
+                                                    "size": "M",
+                                                    "isIcon": false,
+                                                    "is": "symbol"
+                                                },
+                                                {
+                                                    "type": "/",
+                                                    "size": "M",
+                                                    "isIcon": false,
+                                                    "is": "symbol"
+                                                },
+                                                {
+                                                    "rows": [
+                                                        [
+                                                            {
+                                                                "type": "energy",
+                                                                "amount": 1,
+                                                                "is": "item",
+                                                                "multiplier": false,
+                                                                "clone": false,
+                                                                "cancelled": false,
+                                                                "questionMark": false
+                                                            },
+                                                            {
+                                                                "type": "heat",
+                                                                "amount": 1,
+                                                                "is": "item",
+                                                                "multiplier": false,
+                                                                "clone": false,
+                                                                "cancelled": false,
+                                                                "questionMark": false
+                                                            }
+                                                        ]
+                                                    ],
+                                                    "is": "production-box"
                                                 },
                                                 {
                                                     "type": "*",
@@ -11615,7 +11716,7 @@
                                                     "amountInside": true,
                                                     "size": "M"
                                                 },
-                                                "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it."
+                                                "Effect: When playing a power card OR SP POWER OR TURMOIL KELVINISTS ACTION, you pay 3 M€ less for it."
                                             ]
                                         ],
                                         "is": "effect"
@@ -11637,7 +11738,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 48,
+        "startingMegaCredits": 40,
         "compatibility": []
     },
     {
@@ -12444,9 +12545,7 @@
     {
         "module": "corpera",
         "name": "Advanced Alloys",
-        "tags": [
-            "science"
-        ],
+        "tags": [],
         "cost": 9,
         "type": "active",
         "metadata": {
@@ -12757,11 +12856,10 @@
         "requirements": {
             "requirements": [
                 {
-                    "type": "production",
-                    "amount": 1,
+                    "type": "Generation",
+                    "amount": 4,
                     "isMax": false,
-                    "isAny": false,
-                    "resource": "titanium"
+                    "isAny": false
                 }
             ]
         },
@@ -12872,7 +12970,7 @@
         "tags": [
             "building"
         ],
-        "cost": 6,
+        "cost": 5,
         "type": "automated",
         "metadata": {
             "cardNumber": "065",
@@ -13199,7 +13297,7 @@
         "tags": [
             "earth"
         ],
-        "cost": 8,
+        "cost": 10,
         "type": "automated",
         "metadata": {
             "cardNumber": "137",
@@ -13425,7 +13523,7 @@
             "city",
             "building"
         ],
-        "victoryPoints": -2,
+        "victoryPoints": -1,
         "cost": 11,
         "type": "automated",
         "metadata": {
@@ -13502,7 +13600,7 @@
                 ],
                 "is": "root"
             },
-            "victoryPoints": -2
+            "victoryPoints": -1
         },
         "productionBox": {
             "megacredits": 0,
@@ -13588,8 +13686,8 @@
         "cardDiscount": {
             "amount": 2
         },
-        "victoryPoints": 2,
-        "cost": 23,
+        "victoryPoints": 1,
+        "cost": 28,
         "type": "active",
         "metadata": {
             "cardNumber": "070",
@@ -13636,7 +13734,7 @@
                 ],
                 "is": "root"
             },
-            "victoryPoints": 2
+            "victoryPoints": 1
         },
         "productionBox": {
             "megacredits": 0,
@@ -13658,7 +13756,7 @@
             "tag": "earth",
             "amount": 3
         },
-        "cost": 1,
+        "cost": 4,
         "type": "active",
         "metadata": {
             "cardNumber": "105",
@@ -13917,7 +14015,7 @@
         "tags": [
             "building"
         ],
-        "cost": 6,
+        "cost": 5,
         "type": "automated",
         "metadata": {
             "cardNumber": "180",
@@ -14181,7 +14279,7 @@
                                     },
                                     {
                                         "type": "megacredits",
-                                        "amount": 2,
+                                        "amount": 3,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -14199,7 +14297,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.",
+            "description": "Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 3 steps.",
             "victoryPoints": -1
         },
         "productionBox": {
@@ -14374,7 +14472,7 @@
                                 [
                                     {
                                         "type": "megacredits",
-                                        "amount": 7,
+                                        "amount": 6,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -14410,7 +14508,7 @@
                                         ],
                                         "is": "production-box"
                                     },
-                                    "Action: Spend 7 M€ to increase your steel production 1 step."
+                                    "Action: Spend 6 M€ to increase your steel production 1 step."
                                 ]
                             ],
                             "is": "effect"
@@ -14907,8 +15005,7 @@
             "science",
             "building"
         ],
-        "victoryPoints": 1,
-        "cost": 8,
+        "cost": 12,
         "type": "active",
         "metadata": {
             "cardNumber": "073",
@@ -14981,8 +15078,7 @@
                     ]
                 ],
                 "is": "root"
-            },
-            "victoryPoints": 1
+            }
         },
         "productionBox": {
             "megacredits": 0,
@@ -15012,7 +15108,7 @@
             "requirements": [
                 {
                     "type": "tag",
-                    "amount": 5,
+                    "amount": 6,
                     "isMax": false,
                     "isAny": false,
                     "tag": "science"
@@ -15086,7 +15182,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Requires 5 science tags. Increase your energy production 6 steps."
+            "description": "Requires 6 science tags. Increase your energy production 6 steps."
         },
         "productionBox": {
             "megacredits": 0,
@@ -16147,7 +16243,7 @@
         "tags": [
             "science"
         ],
-        "cost": 11,
+        "cost": 13,
         "type": "active",
         "metadata": {
             "cardNumber": "199",
@@ -17073,7 +17169,7 @@
         "tags": [
             "space"
         ],
-        "cost": 12,
+        "cost": 18,
         "type": "automated",
         "metadata": {
             "cardNumber": "099",
@@ -17168,7 +17264,7 @@
             "building"
         ],
         "victoryPoints": 2,
-        "cost": 13,
+        "cost": 11,
         "type": "automated",
         "metadata": {
             "cardNumber": "098",
@@ -17289,7 +17385,7 @@
             "science",
             "microbe"
         ],
-        "cost": 9,
+        "cost": 10,
         "type": "active",
         "metadata": {
             "cardNumber": "074",
@@ -18022,7 +18118,7 @@
         "tags": [
             "plant"
         ],
-        "cost": 12,
+        "cost": 11,
         "type": "automated",
         "requirements": {
             "requirements": [
@@ -18454,14 +18550,14 @@
                                     },
                                     {
                                         "type": "science",
-                                        "amount": 1,
+                                        "amount": 2,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
                                         "cancelled": false,
                                         "isPlayed": true
                                     },
-                                    "Action: Gain 1 M€ per science tag you have."
+                                    "Action: Gain 1 M€ per 2 science tags you have."
                                 ]
                             ],
                             "is": "effect"
@@ -18648,7 +18744,7 @@
         "tags": [
             "power"
         ],
-        "cost": 3,
+        "cost": 5,
         "type": "active",
         "metadata": {
             "cardNumber": "X03",
@@ -18900,7 +18996,7 @@
         ],
         "victoryPoints": {
             "resourcesHere": {},
-            "per": 2
+            "per": 1
         },
         "cost": 16,
         "type": "active",
@@ -18974,7 +19070,7 @@
                             "clone": false,
                             "cancelled": false,
                             "questionMark": false,
-                            "text": "1VP for each 2 asteroids on this card.",
+                            "text": "1VP for each asteroids on this card.",
                             "size": "XS",
                             "isUppercase": true,
                             "isBold": true
@@ -18994,7 +19090,7 @@
                     "questionMark": false
                 },
                 "points": 1,
-                "target": 2,
+                "target": 1,
                 "targetOneOrMore": false,
                 "anyPlayer": false
             }
@@ -19296,7 +19392,7 @@
             "science"
         ],
         "victoryPoints": 1,
-        "cost": 12,
+        "cost": 14,
         "type": "active",
         "metadata": {
             "cardNumber": "X18",
@@ -19999,7 +20095,7 @@
             "microbe",
             "earth"
         ],
-        "cost": 8,
+        "cost": 10,
         "type": "active",
         "metadata": {
             "cardNumber": "X30",
@@ -20449,7 +20545,7 @@
         "tags": [
             "building"
         ],
-        "cost": 5,
+        "cost": 10,
         "type": "active",
         "metadata": {
             "cardNumber": "X25",
@@ -20605,7 +20701,7 @@
         "tags": [
             "space"
         ],
-        "cost": 31,
+        "cost": 35,
         "type": "event",
         "metadata": {
             "cardNumber": "X31",
@@ -20660,7 +20756,7 @@
                         },
                         {
                             "type": "plants",
-                            "amount": -6,
+                            "amount": -8,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -20672,7 +20768,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player."
+            "description": "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 8 plants from any player."
         },
         "productionBox": {
             "megacredits": 0,
@@ -21110,7 +21206,7 @@
                             "is": "symbol"
                         },
                         {
-                            "type": "science",
+                            "type": "microbes",
                             "amount": 1,
                             "is": "item",
                             "multiplier": false,
@@ -21122,7 +21218,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this."
+            "description": "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each mirobe tag you have, including this."
         },
         "productionBox": {
             "megacredits": 0,
@@ -21219,7 +21315,7 @@
                                 [
                                     {
                                         "type": "megacredits",
-                                        "amount": 2,
+                                        "amount": 3,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -21544,7 +21640,7 @@
                     [
                         {
                             "type": "megacredits",
-                            "amount": 35,
+                            "amount": 40,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -21562,7 +21658,7 @@
                         },
                         {
                             "type": "asteroids",
-                            "amount": 3,
+                            "amount": 4,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -23755,7 +23851,7 @@
         "tags": [
             "venus"
         ],
-        "cost": 21,
+        "cost": 18,
         "type": "active",
         "metadata": {
             "cardNumber": "223",
@@ -24108,7 +24204,7 @@
         "tags": [
             "venus"
         ],
-        "cost": 8,
+        "cost": 4,
         "type": "active",
         "metadata": {
             "cardNumber": "226",
@@ -24379,7 +24475,7 @@
             "space",
             "venus"
         ],
-        "cost": 23,
+        "cost": 20,
         "type": "event",
         "metadata": {
             "description": "Raise Venus 1 step. Increase your heat production 3 steps.",
@@ -24768,7 +24864,7 @@
         "tags": [
             "venus"
         ],
-        "cost": 12,
+        "cost": 7,
         "type": "active",
         "metadata": {
             "cardNumber": "234",
@@ -25628,9 +25724,9 @@
         ],
         "victoryPoints": {
             "resourcesHere": {},
-            "per": 3
+            "per": 2
         },
-        "cost": 22,
+        "cost": 20,
         "type": "active",
         "requirements": {
             "requirements": [
@@ -25726,7 +25822,7 @@
                             "clone": false,
                             "cancelled": false,
                             "questionMark": false,
-                            "text": "1 VP for every 3rd Floater on this card.",
+                            "text": "1 VP for every 2nd Floater on this card.",
                             "size": "XS",
                             "isUppercase": true,
                             "isBold": true
@@ -25750,7 +25846,7 @@
                     "questionMark": false
                 },
                 "points": 1,
-                "target": 3,
+                "target": 2,
                 "targetOneOrMore": false,
                 "anyPlayer": false
             }
@@ -27404,7 +27500,22 @@
                                                     "isIcon": false,
                                                     "is": "symbol"
                                                 },
-                                                "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card."
+                                                {
+                                                    "type": "floaters",
+                                                    "amount": 1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false
+                                                },
+                                                {
+                                                    "type": "*",
+                                                    "size": "M",
+                                                    "isIcon": false,
+                                                    "is": "symbol"
+                                                },
+                                                "Action: Action: Add a floater each to 1 or 2 different cards. 1 VP per 3 floaters on this card."
                                             ]
                                         ],
                                         "is": "effect"
@@ -28306,7 +28417,7 @@
         "name": "Community Services",
         "tags": [],
         "victoryPoints": 1,
-        "cost": 13,
+        "cost": 11,
         "type": "automated",
         "metadata": {
             "cardNumber": "C04",
@@ -28756,7 +28867,7 @@
                         },
                         {
                             "type": "floaters",
-                            "amount": 3,
+                            "amount": 2,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -28767,7 +28878,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your M€ production 1 step PER 3 floaters you have."
+            "description": "Increase your M€ production 1 step PER 2 floaters you have."
         },
         "productionBox": {
             "megacredits": 0,
@@ -30751,7 +30862,7 @@
         "cardDiscount": {
             "amount": 1
         },
-        "victoryPoints": 2,
+        "victoryPoints": 1,
         "cost": 18,
         "type": "active",
         "requirements": {
@@ -30822,7 +30933,7 @@
                 "is": "root"
             },
             "description": "Requires 2 Earth tags. Gain 1 Trade Fleet.",
-            "victoryPoints": 2
+            "victoryPoints": 1
         },
         "productionBox": {
             "megacredits": 0,
@@ -31058,7 +31169,7 @@
         "tags": [
             "building"
         ],
-        "cost": 10,
+        "cost": 13,
         "type": "active",
         "metadata": {
             "cardNumber": "C41",
@@ -31319,14 +31430,14 @@
                                 [
                                     {
                                         "type": "floaters",
-                                        "amount": 2,
+                                        "amount": 4,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
                                         "cancelled": false,
                                         "questionMark": false
                                     },
-                                    "Action: Spend 1 titanium to add 2 floaters here."
+                                    "Action: Spend 1 titanium to add 4 floaters here."
                                 ]
                             ],
                             "is": "effect"
@@ -31896,7 +32007,7 @@
             "amount": 4
         },
         "victoryPoints": 2,
-        "cost": 14,
+        "cost": 16,
         "type": "active",
         "requirements": {
             "requirements": [
@@ -32105,7 +32216,7 @@
                     [
                         {
                             "type": "megacredits",
-                            "amount": 45,
+                            "amount": 50,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -32114,31 +32225,6 @@
                             "showDigit": false,
                             "amountInside": true,
                             "size": "M"
-                        },
-                        {
-                            "type": "nbsp",
-                            "size": "M",
-                            "isIcon": true,
-                            "is": "symbol"
-                        },
-                        {
-                            "rows": [
-                                [
-                                    {
-                                        "type": "megacredits",
-                                        "amount": 2,
-                                        "is": "item",
-                                        "multiplier": false,
-                                        "clone": false,
-                                        "cancelled": false,
-                                        "questionMark": false,
-                                        "showDigit": false,
-                                        "amountInside": true,
-                                        "size": "M"
-                                    }
-                                ]
-                            ],
-                            "is": "production-box"
                         }
                     ],
                     [
@@ -32560,6 +32646,10 @@
         "tags": [
             "jovian"
         ],
+        "victoryPoints": {
+            "tag": "jovian",
+            "per": 2
+        },
         "cost": 0,
         "type": "corporation",
         "metadata": {
@@ -32588,12 +32678,6 @@
                         {
                             "rows": [
                                 [
-                                    {
-                                        "type": "vspace",
-                                        "size": "L",
-                                        "isIcon": true,
-                                        "is": "symbol"
-                                    },
                                     {
                                         "rows": [
                                             [
@@ -32632,53 +32716,6 @@
                                             ]
                                         ],
                                         "is": "effect"
-                                    },
-                                    {
-                                        "type": "vspace",
-                                        "size": "M",
-                                        "isIcon": true,
-                                        "is": "symbol"
-                                    },
-                                    {
-                                        "rows": [
-                                            [],
-                                            [
-                                                {
-                                                    "type": ":",
-                                                    "size": "M",
-                                                    "isIcon": false,
-                                                    "is": "symbol"
-                                                }
-                                            ],
-                                            [
-                                                {
-                                                    "type": "floaters",
-                                                    "amount": 1,
-                                                    "is": "item",
-                                                    "multiplier": false,
-                                                    "clone": false,
-                                                    "cancelled": false,
-                                                    "questionMark": false
-                                                },
-                                                {
-                                                    "type": "=",
-                                                    "size": "M",
-                                                    "isIcon": false,
-                                                    "is": "symbol"
-                                                },
-                                                {
-                                                    "type": "heat",
-                                                    "amount": 2,
-                                                    "is": "item",
-                                                    "multiplier": false,
-                                                    "clone": false,
-                                                    "cancelled": false,
-                                                    "questionMark": false
-                                                },
-                                                "Effect: Floaters on this card may be used as 2 heat each."
-                                            ]
-                                        ],
-                                        "is": "effect"
                                     }
                                 ]
                             ],
@@ -32687,6 +32724,21 @@
                     ]
                 ],
                 "is": "root"
+            },
+            "victoryPoints": {
+                "item": {
+                    "type": "jovian",
+                    "amount": 1,
+                    "is": "item",
+                    "multiplier": false,
+                    "clone": false,
+                    "cancelled": false,
+                    "isPlayed": true
+                },
+                "points": 1,
+                "target": 2,
+                "targetOneOrMore": false,
+                "anyPlayer": false
             }
         },
         "productionBox": {
@@ -32697,7 +32749,6 @@
             "energy": 0,
             "heat": 0
         },
-        "resourceType": "Floater",
         "startingMegaCredits": 48,
         "compatibility": []
     },
@@ -33297,7 +33348,7 @@
                                                     "amountInside": true,
                                                     "size": "M"
                                                 },
-                                                "Effect: When you play a building tag, gain 2 M€ test."
+                                                "Effect: When you play a building tag, gain 2 M€."
                                             ]
                                         ],
                                         "is": "effect"
@@ -33319,7 +33370,7 @@
             "energy": 0,
             "heat": 0
         },
-        "startingMegaCredits": 44,
+        "startingMegaCredits": 46,
         "compatibility": []
     },
     {
@@ -34636,6 +34687,15 @@
                             "cancelled": false,
                             "questionMark": false,
                             "showDigit": true
+                        },
+                        {
+                            "type": "cards",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "secondaryTag": "building"
                         }
                     ]
                 ],
@@ -34733,7 +34793,7 @@
                         },
                         {
                             "type": "steel",
-                            "amount": 8,
+                            "amount": 7,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -34753,7 +34813,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Gain 3 titanium, 8 steel and 3 plants."
+            "description": "Gain 3 titanium, 7 steel and 3 plants."
         },
         "productionBox": {
             "megacredits": 0,
@@ -35060,7 +35120,9 @@
     {
         "module": "prelude",
         "name": "Society Support",
-        "tags": [],
+        "tags": [
+            "wild"
+        ],
         "cost": 0,
         "type": "prelude",
         "metadata": {
@@ -35068,6 +35130,18 @@
             "renderData": {
                 "rows": [
                     [
+                        {
+                            "type": "megacredits",
+                            "amount": -2,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        },
                         {
                             "rows": [
                                 [
@@ -35396,7 +35470,9 @@
                             "clone": false,
                             "cancelled": false,
                             "questionMark": false
-                        },
+                        }
+                    ],
+                    [
                         {
                             "type": "energy",
                             "amount": 3,
@@ -36163,7 +36239,7 @@
             "microbe",
             "science"
         ],
-        "cost": 3,
+        "cost": 8,
         "type": "active",
         "requirements": {
             "requirements": [
@@ -37236,7 +37312,16 @@
                                                     "amountInside": true,
                                                     "size": "M"
                                                 },
-                                                "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€."
+                                                {
+                                                    "type": "influence",
+                                                    "amount": 1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false
+                                                },
+                                                "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here, gain 6 M€, and 1 influence."
                                             ]
                                         ],
                                         "is": "effect"
@@ -39746,7 +39831,7 @@
         "tags": [
             "space"
         ],
-        "cost": 31,
+        "cost": 35,
         "type": "event",
         "metadata": {
             "cardNumber": "A26",
@@ -41229,7 +41314,7 @@
         "tags": [
             "science"
         ],
-        "cost": 11,
+        "cost": 13,
         "type": "active",
         "metadata": {
             "cardNumber": "A24",

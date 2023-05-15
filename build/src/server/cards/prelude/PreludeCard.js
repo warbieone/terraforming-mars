@@ -27,3 +27,4 @@ class PreludeCard extends Card_1.Card {
     }
 }
 exports.PreludeCard = PreludeCard;
+//# sourceMappingURL=PreludeCard.js.map

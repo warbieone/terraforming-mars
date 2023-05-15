@@ -20,3 +20,4 @@ class BufferCache {
     }
 }
 exports.BufferCache = BufferCache;
+//# sourceMappingURL=BufferCache.js.map

@@ -776,3 +776,4 @@ var CardName;
     CardName["XU"] = "Xu";
     CardName["CO_LEADERSHIP"] = "Co-leadership";
 })(CardName = exports.CardName || (exports.CardName = {}));
+//# sourceMappingURL=CardName.js.map

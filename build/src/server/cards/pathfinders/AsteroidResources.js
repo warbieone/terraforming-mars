@@ -49,3 +49,4 @@ class AsteroidResources extends Card_1.Card {
     }
 }
 exports.AsteroidResources = AsteroidResources;
+//# sourceMappingURL=AsteroidResources.js.map

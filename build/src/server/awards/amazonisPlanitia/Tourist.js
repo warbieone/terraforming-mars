@@ -12,3 +12,4 @@ class Tourist {
     }
 }
 exports.Tourist = Tourist;
+//# sourceMappingURL=Tourist.js.map

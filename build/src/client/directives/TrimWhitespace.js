@@ -11,3 +11,4 @@ function trimEmptyTextNodes(el) {
     }
 }
 exports.trimEmptyTextNodes = trimEmptyTextNodes;
+//# sourceMappingURL=TrimWhitespace.js.map

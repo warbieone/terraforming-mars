@@ -41,3 +41,4 @@ function getGlobalEventModel(globalEventName) {
     };
 }
 exports.getGlobalEventModel = getGlobalEventModel;
+//# sourceMappingURL=ClientGlobalEventManifest.js.map

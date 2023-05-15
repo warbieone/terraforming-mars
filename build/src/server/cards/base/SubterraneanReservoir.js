@@ -25,3 +25,4 @@ class SubterraneanReservoir extends Card_1.Card {
     }
 }
 exports.SubterraneanReservoir = SubterraneanReservoir;
+//# sourceMappingURL=SubterraneanReservoir.js.map

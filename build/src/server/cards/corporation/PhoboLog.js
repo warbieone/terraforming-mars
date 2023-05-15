@@ -40,3 +40,4 @@ class PhoboLog extends Card_1.Card {
     }
 }
 exports.PhoboLog = PhoboLog;
+//# sourceMappingURL=PhoboLog.js.map

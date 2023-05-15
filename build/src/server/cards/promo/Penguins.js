@@ -35,3 +35,4 @@ class Penguins extends ActionCard_1.ActionCard {
     }
 }
 exports.Penguins = Penguins;
+//# sourceMappingURL=Penguins.js.map

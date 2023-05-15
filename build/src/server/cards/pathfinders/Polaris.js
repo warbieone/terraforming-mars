@@ -54,3 +54,4 @@ class Polaris extends Card_1.Card {
     }
 }
 exports.Polaris = Polaris;
+//# sourceMappingURL=Polaris.js.map

@@ -51,3 +51,4 @@ class AmazonisBoard extends Board_1.Board {
     }
 }
 exports.AmazonisBoard = AmazonisBoard;
+//# sourceMappingURL=AmazonisBoard.js.map

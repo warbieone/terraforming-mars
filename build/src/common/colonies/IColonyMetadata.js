@@ -7,3 +7,4 @@ function colonyMetadata(partial) {
     return Object.assign({ buildQuantity: DEFAULT_BUILD_QUANTITY, tradeQuantity: DEFAULT_TRADE_QUANTITY, colonyBonusQuantity: 1, shouldIncreaseTrack: 'yes' }, partial);
 }
 exports.colonyMetadata = colonyMetadata;
+//# sourceMappingURL=IColonyMetadata.js.map

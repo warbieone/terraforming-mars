@@ -521,3 +521,4 @@ class CorpEffectBuilderAction extends Builder {
         return new CardRenderCorpBoxAction(this._data);
     }
 }
+//# sourceMappingURL=CardRenderer.js.map

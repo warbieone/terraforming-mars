@@ -30,3 +30,4 @@ class AerosportTournament extends Card_1.Card {
     }
 }
 exports.AerosportTournament = AerosportTournament;
+//# sourceMappingURL=AerosportTournament.js.map

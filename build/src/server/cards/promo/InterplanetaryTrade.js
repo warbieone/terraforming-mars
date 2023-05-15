@@ -32,3 +32,4 @@ class InterplanetaryTrade extends Card_1.Card {
     }
 }
 exports.InterplanetaryTrade = InterplanetaryTrade;
+//# sourceMappingURL=InterplanetaryTrade.js.map

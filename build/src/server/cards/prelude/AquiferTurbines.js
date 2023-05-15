@@ -35,3 +35,4 @@ class AquiferTurbines extends PreludeCard_1.PreludeCard {
     }
 }
 exports.AquiferTurbines = AquiferTurbines;
+//# sourceMappingURL=AquiferTurbines.js.map

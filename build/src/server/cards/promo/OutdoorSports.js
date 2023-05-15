@@ -16,14 +16,14 @@ class OutdoorSports extends Card_1.Card {
             cost: 8,
             victoryPoints: 1,
             behavior: {
-                production: { megacredits: 2 },
+                production: { megacredits: 3 },
             },
             requirements: CardRequirements_1.CardRequirements.builder((b) => b.cities(1, { all: Options_1.all, text: ' next to' }).oceans(1)),
             metadata: {
                 cardNumber: 'X38',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => {
-                        pb.megacredits(2);
+                        pb.megacredits(3);
                     });
                 }),
                 description: 'Requires any city adjacent to an ocean. Increase your M€ production 2 steps.',
@@ -37,3 +37,4 @@ class OutdoorSports extends Card_1.Card {
     }
 }
 exports.OutdoorSports = OutdoorSports;
+//# sourceMappingURL=OutdoorSports.js.map

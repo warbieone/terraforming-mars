@@ -58,3 +58,4 @@ class VastitasBorealisBoard extends Board_1.Board {
     }
 }
 exports.VastitasBorealisBoard = VastitasBorealisBoard;
+//# sourceMappingURL=VastitasBorealisBoard.js.map

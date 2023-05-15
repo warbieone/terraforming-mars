@@ -17,3 +17,4 @@ class PlaceMoonHabitatTile extends BasePlaceMoonTile_1.BasePlaceMoonTile {
     }
 }
 exports.PlaceMoonHabitatTile = PlaceMoonHabitatTile;
+//# sourceMappingURL=PlaceMoonHabitatTile.js.map

@@ -85,3 +85,4 @@ function newMessage(message, f) {
     return builder.getMessage();
 }
 exports.newMessage = newMessage;
+//# sourceMappingURL=MessageBuilder.js.map

@@ -55,3 +55,4 @@ class AgricolaInc extends Card_1.Card {
     }
 }
 exports.AgricolaInc = AgricolaInc;
+//# sourceMappingURL=AgricolaInc.js.map

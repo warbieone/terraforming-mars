@@ -28,3 +28,4 @@ class JovianEmbassy extends Card_1.Card {
     }
 }
 exports.JovianEmbassy = JovianEmbassy;
+//# sourceMappingURL=JovianEmbassy.js.map

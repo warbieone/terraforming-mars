@@ -71,6 +71,9 @@ export class CardRequirement implements ICardRequirement {
     case RequirementType.REMOVED_PLANTS:
       return player.game.someoneHasRemovedOtherPlayersPlants;
 
+    case RequirementType.GENERATION:
+      return this.satisfiesInequality(player.game.getGeneration());
+
     case RequirementType.RESOURCE_TYPES:
       const standardResources = ALL_RESOURCES.filter((res) => player.getResource(res) > 0).length;
       const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;

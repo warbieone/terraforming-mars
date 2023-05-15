@@ -21,3 +21,4 @@ class Ceres extends Colony_1.Colony {
     }
 }
 exports.Ceres = Ceres;
+//# sourceMappingURL=Ceres.js.map

@@ -12,3 +12,4 @@ class Electrician extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Electrician = Electrician;
+//# sourceMappingURL=Electrician.js.map

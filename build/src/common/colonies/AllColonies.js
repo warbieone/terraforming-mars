@@ -27,3 +27,4 @@ exports.COMMUNITY_COLONY_NAMES = [
 exports.PATHFINDERS_COLONY_NAMES = [
     ColonyName_1.ColonyName.IAPETUS_II,
 ];
+//# sourceMappingURL=AllColonies.js.map

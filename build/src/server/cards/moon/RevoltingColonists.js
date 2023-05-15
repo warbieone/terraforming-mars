@@ -49,3 +49,4 @@ class RevoltingColonists extends Card_1.Card {
     }
 }
 exports.RevoltingColonists = RevoltingColonists;
+//# sourceMappingURL=RevoltingColonists.js.map

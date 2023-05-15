@@ -37,3 +37,4 @@ class HAL9000 extends CeoCard_1.CeoCard {
     }
 }
 exports.HAL9000 = HAL9000;
+//# sourceMappingURL=HAL9000.js.map

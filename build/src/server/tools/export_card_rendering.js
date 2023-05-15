@@ -142,3 +142,4 @@ fs.writeFileSync('src/genfiles/cards.json', JSON.stringify(ProjectCardProcessor.
 fs.writeFileSync('src/genfiles/events.json', JSON.stringify(GlobalEventProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/colonies.json', JSON.stringify(ColoniesProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/ma.json', JSON.stringify(MAProcessor.json, null, 2));
+//# sourceMappingURL=export_card_rendering.js.map

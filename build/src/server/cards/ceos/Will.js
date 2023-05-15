@@ -32,3 +32,4 @@ class Will extends CeoCard_1.CeoCard {
     }
 }
 exports.Will = Will;
+//# sourceMappingURL=Will.js.map

@@ -71,6 +71,7 @@
             </li>
 
             <li v-if="gameOptions.bannedCards.length > 0"><div class="setup-item" v-i18n>Banned cards:</div>{{ gameOptions.bannedCards.join(', ') }}</li>
+            <li v-if="gameOptions.extraCards.length > 0"><div class="setup-item" v-i18n>Banned cards:</div>{{ gameOptions.extraCards.join(', ') }}</li>
           </ul>
         </div>
 </template>

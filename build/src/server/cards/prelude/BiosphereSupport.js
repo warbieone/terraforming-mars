@@ -27,3 +27,4 @@ class BiosphereSupport extends PreludeCard_1.PreludeCard {
     }
 }
 exports.BiosphereSupport = BiosphereSupport;
+//# sourceMappingURL=BiosphereSupport.js.map

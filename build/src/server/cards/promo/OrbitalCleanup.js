@@ -19,13 +19,13 @@ class OrbitalCleanup extends ActionCard_1.ActionCard {
                 production: { megacredits: -2 },
             },
             action: {
-                stock: { megacredits: { tag: Tag_1.Tag.SCIENCE } },
+                stock: { megacredits: { tag: Tag_1.Tag.SCIENCE, per: 2 } },
             },
             metadata: {
                 cardNumber: 'X08',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.action('Gain 1 M€ per science tag you have.', (eb) => {
-                        eb.empty().startAction.megacredits(1).slash().science(1, { played: Options_1.played });
+                    b.action('Gain 1 M€ per 2 science tags you have.', (eb) => {
+                        eb.empty().startAction.megacredits(1).slash().science(2, { played: Options_1.played });
                     }).br;
                     b.production((pb) => {
                         pb.megacredits(-2);
@@ -37,3 +37,4 @@ class OrbitalCleanup extends ActionCard_1.ActionCard {
     }
 }
 exports.OrbitalCleanup = OrbitalCleanup;
+//# sourceMappingURL=OrbitalCleanup.js.map

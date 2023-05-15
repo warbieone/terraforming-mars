@@ -45,3 +45,4 @@ class Pets extends Card_1.Card {
     }
 }
 exports.Pets = Pets;
+//# sourceMappingURL=Pets.js.map

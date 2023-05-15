@@ -24,3 +24,4 @@ class CommercialDistrictAres extends CommercialDistrict_1.CommercialDistrict {
     }
 }
 exports.CommercialDistrictAres = CommercialDistrictAres;
+//# sourceMappingURL=CommercialDistrictAres.js.map

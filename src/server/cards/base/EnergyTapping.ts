@@ -9,6 +9,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {GainProduction} from '../../deferredActions/GainProduction';
+import {CardRequirements} from '../CardRequirements';
 
 export class EnergyTapping extends Card implements IProjectCard {
   constructor() {
@@ -19,9 +20,11 @@ export class EnergyTapping extends Card implements IProjectCard {
       cost: 3,
       victoryPoints: -1,
 
+      requirements: CardRequirements.builder((b) => b.generation(4)),
+
       metadata: {
         cardNumber: '201',
-        description: 'Decrease any energy production 1 step and increase your own 1 step.',
+        description: 'Requires that it is Generation 4. Decrease any energy production 1 step and increase your own 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1, {all}).br;

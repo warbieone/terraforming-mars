@@ -23,3 +23,4 @@ class Curator {
     }
 }
 exports.Curator = Curator;
+//# sourceMappingURL=Curator.js.map

@@ -34,3 +34,4 @@ class LavaFlows extends Card_1.Card {
     }
 }
 exports.LavaFlows = LavaFlows;
+//# sourceMappingURL=LavaFlows.js.map

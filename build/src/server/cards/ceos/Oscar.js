@@ -43,3 +43,4 @@ class Oscar extends CeoCard_1.CeoCard {
     }
 }
 exports.Oscar = Oscar;
+//# sourceMappingURL=Oscar.js.map

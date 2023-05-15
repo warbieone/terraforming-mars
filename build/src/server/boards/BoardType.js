@@ -6,3 +6,4 @@ var BoardType;
     BoardType["MARS"] = "mars";
     BoardType["MOON"] = "moon";
 })(BoardType = exports.BoardType || (exports.BoardType = {}));
+//# sourceMappingURL=BoardType.js.map

@@ -30,3 +30,4 @@ class GreatDam extends Card_1.Card {
     }
 }
 exports.GreatDam = GreatDam;
+//# sourceMappingURL=GreatDam.js.map

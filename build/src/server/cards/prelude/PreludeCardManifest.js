@@ -106,3 +106,4 @@ exports.PRELUDE_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.EXPERIMENTAL_FOREST]: { Factory: ExperimentalForest_1.ExperimentalForest },
     },
 });
+//# sourceMappingURL=PreludeCardManifest.js.map

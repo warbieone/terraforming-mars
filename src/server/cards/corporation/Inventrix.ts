@@ -34,7 +34,7 @@ export class Inventrix extends Card implements ICorporationCard {
     });
   }
   public getRequirementBonus(): number {
-    return 2;
+    return 3;
   }
 }
 

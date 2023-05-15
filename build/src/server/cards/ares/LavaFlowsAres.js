@@ -19,3 +19,4 @@ class LavaFlowsAres extends LavaFlows_1.LavaFlows {
     }
 }
 exports.LavaFlowsAres = LavaFlowsAres;
+//# sourceMappingURL=LavaFlowsAres.js.map

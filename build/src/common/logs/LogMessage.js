@@ -16,3 +16,4 @@ class LogMessage {
     }
 }
 exports.LogMessage = LogMessage;
+//# sourceMappingURL=LogMessage.js.map

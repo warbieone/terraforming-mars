@@ -33,3 +33,4 @@ class MartianCulture extends ActionCard_1.ActionCard {
     }
 }
 exports.MartianCulture = MartianCulture;
+//# sourceMappingURL=MartianCulture.js.map

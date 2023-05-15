@@ -37,3 +37,4 @@ class Insulation extends Card_1.Card {
     }
 }
 exports.Insulation = Insulation;
+//# sourceMappingURL=Insulation.js.map

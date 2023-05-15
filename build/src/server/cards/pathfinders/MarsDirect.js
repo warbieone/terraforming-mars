@@ -36,3 +36,4 @@ class MarsDirect extends Card_1.Card {
     }
 }
 exports.MarsDirect = MarsDirect;
+//# sourceMappingURL=MarsDirect.js.map

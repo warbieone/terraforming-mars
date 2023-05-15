@@ -32,3 +32,4 @@ class HypersensitiveSiliconChipFactory extends Card_1.Card {
     }
 }
 exports.HypersensitiveSiliconChipFactory = HypersensitiveSiliconChipFactory;
+//# sourceMappingURL=HypersensitiveSiliconChipFactory.js.map

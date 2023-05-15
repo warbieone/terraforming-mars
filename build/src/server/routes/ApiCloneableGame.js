@@ -41,3 +41,4 @@ class ApiCloneableGame extends Handler_1.Handler {
 }
 exports.ApiCloneableGame = ApiCloneableGame;
 ApiCloneableGame.INSTANCE = new ApiCloneableGame();
+//# sourceMappingURL=ApiCloneableGame.js.map

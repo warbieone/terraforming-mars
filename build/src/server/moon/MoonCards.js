@@ -18,3 +18,4 @@ MoonCards.scienceCardsWithLessThan2VP = new Set([
     CardName_1.CardName.PRIDE_OF_THE_EARTH_ARKSHIP,
     CardName_1.CardName.NANOTECH_INDUSTRIES,
 ]);
+//# sourceMappingURL=MoonCards.js.map

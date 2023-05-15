@@ -24,3 +24,4 @@ class CeoCard extends Card_1.Card {
     }
 }
 exports.CeoCard = CeoCard;
+//# sourceMappingURL=CeoCard.js.map

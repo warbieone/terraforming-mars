@@ -13,12 +13,14 @@ class SmeltingPlant extends PreludeCard_1.PreludeCard {
             behavior: {
                 stock: { steel: 6 },
                 global: { oxygen: 2 },
+                drawCard: { count: 1, tag: Tag_1.Tag.BUILDING },
             },
             metadata: {
                 cardNumber: 'P30',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.oxygen(2).br;
                     b.steel(6);
+                    b.cards(1, { secondaryTag: Tag_1.Tag.BUILDING });
                 }),
                 description: 'Raise oxygen 2 steps. Gain 6 steel.',
             },
@@ -26,3 +28,4 @@ class SmeltingPlant extends PreludeCard_1.PreludeCard {
     }
 }
 exports.SmeltingPlant = SmeltingPlant;
+//# sourceMappingURL=SmeltingPlant.js.map

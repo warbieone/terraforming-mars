@@ -46,3 +46,4 @@ class StealResources extends DeferredAction_1.DeferredAction {
     }
 }
 exports.StealResources = StealResources;
+//# sourceMappingURL=StealResources.js.map

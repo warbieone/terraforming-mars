@@ -262,6 +262,11 @@
                             <label for="bannedCards-checkbox">
                                 <span v-i18n>Exclude some cards</span>
                             </label>
+                            
+                            <input type="checkbox" v-model="showExtraCards" id="extraCards-checkbox">
+                            <label for="extraCards-checkbox">
+                                <span v-i18n>Include cards from other expansions</span>
+                            </label>
 
                             <template v-if="colonies">
                                 <input type="checkbox" v-model="showColoniesList" id="customColonies-checkbox">
@@ -457,6 +462,14 @@
                   v-on:cards-list-changed="updateBannedCards"
               ></CardsFilter>
             </div>
+
+            <div class="create-game--block" v-if="showExtraCards">
+              <ExtraCardsFilter
+                  ref="extraCardsFilter"
+                  v-on:cards-list-changed="updateExtraCards"
+              ></ExtraCardsFilter>
+            </div>
+
           <preferences-icon></preferences-icon>
         </div>
 </template>
@@ -477,6 +490,7 @@ import {translateText, translateTextWithParams} from '@/client/directives/i18n';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
+import ExtraCardsFilter from '@/client/components/create/ExtraCardsFilter.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {playerColorClass, range, zip} from '@/common/utils/utils';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
@@ -496,6 +510,7 @@ type Refs = {
   corporationsFilter: InstanceType<typeof CorporationsFilter>,
   preludesFilter: InstanceType<typeof PreludesFilter>,
   cardsFilter: InstanceType<typeof CardsFilter>,
+  extraCardsFilter: InstanceType<typeof ExtraCardsFilter>,
   file: HTMLInputElement,
 }
 
@@ -530,11 +545,13 @@ export default (Vue as WithRefs<Refs>).extend({
       showCorporationList: false,
       showPreludesList: false,
       showBannedCards: false,
+      showExtraCards: false,
       turmoil: false,
       customColonies: [],
       customCorporations: [],
       customPreludes: [],
       bannedCards: [],
+      extraCards: [],
       board: BoardName.THARSIS,
       boards: [
         BoardName.THARSIS,
@@ -584,6 +601,7 @@ export default (Vue as WithRefs<Refs>).extend({
   components: {
     AppButton,
     CardsFilter,
+    ExtraCardsFilter,
     ColoniesFilter,
     CorporationsFilter,
     PreludesFilter,
@@ -659,12 +677,14 @@ export default (Vue as WithRefs<Refs>).extend({
             const customCorporations = results[json_constants.CUSTOM_CORPORATIONS] || results[json_constants.OLD_CUSTOM_CORPORATIONS] || [];
             const customColonies = results[json_constants.CUSTOM_COLONIES] || results[json_constants.OLD_CUSTOM_COLONIES] || [];
             const bannedCards = results[json_constants.BANNED_CARDS] || results[json_constants.OLD_BANNED_CARDS] || [];
+            const extraCards = results[json_constants.EXTRA_CARDS] || [];
             const customPreludes = results[json_constants.CUSTOM_PRELUDES] || [];
 
             component.playersCount = players.length;
             component.showCorporationList = customCorporations.length > 0;
             component.showColoniesList = customColonies.length > 0;
             component.showBannedCards = bannedCards.length > 0;
+            component.showExtraCards = extraCards.length > 0;
             component.showPreludesList = customPreludes.length > 0;
 
             // Capture the solar phase option since several of the other results will change
@@ -701,6 +721,7 @@ export default (Vue as WithRefs<Refs>).extend({
                 if (component.showCorporationList) refs.corporationsFilter.selectedCorporations = customCorporations;
                 if (component.showPreludesList) refs.preludesFilter.updatePreludes(customPreludes);
                 if (component.showBannedCards) refs.cardsFilter.selectedCardNames = bannedCards;
+                if (component.showExtraCards) refs.extraCardsFilter.selectedCardNames = extraCards;
                 if (!component.seededGame) component.seed = Math.random();
                 // set to alter after any watched properties
                 component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
@@ -739,6 +760,9 @@ export default (Vue as WithRefs<Refs>).extend({
     updateBannedCards(bannedCards: Array<CardName>) {
       this.bannedCards = bannedCards;
     },
+    updateExtraCards(extraCards: Array<CardName>) {
+      this.extraCards = extraCards;
+    },    
     updatecustomColonies(customColonies: Array<ColonyName>) {
       this.customColonies = customColonies;
     },
@@ -924,6 +948,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const customCorporations = this.customCorporations;
       const customPreludes = this.customPreludes;
       const bannedCards = this.bannedCards;
+      const extraCards = this.extraCards;
       const board = this.board;
       const seed = this.seed;
       const promoCardsOption = this.promoCardsOption;
@@ -1082,6 +1107,7 @@ export default (Vue as WithRefs<Refs>).extend({
         customColoniesList: customColonies,
         customPreludes,
         bannedCards,
+        extraCards,
         board,
         seed,
         solarPhaseOption,

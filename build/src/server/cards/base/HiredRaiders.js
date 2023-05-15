@@ -70,3 +70,4 @@ class HiredRaiders extends Card_1.Card {
     }
 }
 exports.HiredRaiders = HiredRaiders;
+//# sourceMappingURL=HiredRaiders.js.map

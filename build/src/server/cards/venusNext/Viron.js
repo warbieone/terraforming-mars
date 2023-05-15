@@ -63,3 +63,4 @@ class Viron extends Card_1.Card {
     }
 }
 exports.Viron = Viron;
+//# sourceMappingURL=Viron.js.map

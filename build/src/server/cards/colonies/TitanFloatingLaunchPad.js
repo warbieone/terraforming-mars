@@ -90,3 +90,4 @@ class TradeWithTitanFloatingLaunchPad {
     }
 }
 exports.TradeWithTitanFloatingLaunchPad = TradeWithTitanFloatingLaunchPad;
+//# sourceMappingURL=TitanFloatingLaunchPad.js.map

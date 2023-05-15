@@ -19,9 +19,9 @@ class AsteroidMiningConsortium extends Card_1.Card {
             tags: [Tag_1.Tag.JOVIAN],
             cost: 13,
             victoryPoints: 1,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.production(Resource_1.Resource.TITANIUM)),
+            requirements: CardRequirements_1.CardRequirements.builder((b) => b.generation(4)),
             metadata: {
-                description: 'Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.',
+                description: 'Requires that it is Generation 4. Decrease any titanium production 1 step and increase your own 1 step.',
                 cardNumber: '002',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => {
@@ -39,3 +39,4 @@ class AsteroidMiningConsortium extends Card_1.Card {
     }
 }
 exports.AsteroidMiningConsortium = AsteroidMiningConsortium;
+//# sourceMappingURL=AsteroidMiningConsortium.js.map

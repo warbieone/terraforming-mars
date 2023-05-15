@@ -41,3 +41,4 @@ class Anthozoa extends Card_1.Card {
     }
 }
 exports.Anthozoa = Anthozoa;
+//# sourceMappingURL=Anthozoa.js.map

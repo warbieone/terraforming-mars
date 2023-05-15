@@ -23,3 +23,4 @@ class SupplyDrop extends PreludeCard_1.PreludeCard {
     }
 }
 exports.SupplyDrop = SupplyDrop;
+//# sourceMappingURL=SupplyDrop.js.map

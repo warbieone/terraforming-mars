@@ -38,3 +38,4 @@ class Urbanist {
     }
 }
 exports.Urbanist = Urbanist;
+//# sourceMappingURL=Urbanist.js.map

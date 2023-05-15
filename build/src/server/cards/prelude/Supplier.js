@@ -26,3 +26,4 @@ class Supplier extends PreludeCard_1.PreludeCard {
     }
 }
 exports.Supplier = Supplier;
+//# sourceMappingURL=Supplier.js.map

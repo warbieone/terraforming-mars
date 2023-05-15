@@ -44,3 +44,4 @@ class PoliticalUprising extends PreludeCard_1.PreludeCard {
     }
 }
 exports.PoliticalUprising = PoliticalUprising;
+//# sourceMappingURL=PoliticalUprising.js.map

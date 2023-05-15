@@ -43,3 +43,4 @@ class Incite extends Card_1.Card {
     }
 }
 exports.Incite = Incite;
+//# sourceMappingURL=Incite.js.map

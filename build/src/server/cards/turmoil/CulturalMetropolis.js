@@ -44,3 +44,4 @@ class CulturalMetropolis extends Card_1.Card {
     }
 }
 exports.CulturalMetropolis = CulturalMetropolis;
+//# sourceMappingURL=CulturalMetropolis.js.map

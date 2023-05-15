@@ -33,3 +33,4 @@ class NoctisFarming extends Card_1.Card {
     }
 }
 exports.NoctisFarming = NoctisFarming;
+//# sourceMappingURL=NoctisFarming.js.map

@@ -41,3 +41,4 @@ class Gordon extends CeoCard_1.CeoCard {
     }
 }
 exports.Gordon = Gordon;
+//# sourceMappingURL=Gordon.js.map

@@ -142,6 +142,11 @@ class Builder {
     return this;
   }
 
+  public generation(amount: number): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.GENERATION, amount));
+    return this;
+  }
+
   public plantsRemoved(): Builder {
     this.reqs.push(new CardRequirement(RequirementType.REMOVED_PLANTS));
     return this;

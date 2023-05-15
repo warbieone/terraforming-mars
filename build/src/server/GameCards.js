@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameCards = void 0;
 const ColoniesCardManifest_1 = require("./cards/colonies/ColoniesCardManifest");
+const NonColoniesCardManifest_1 = require("./cards/colonies/NonColoniesCardManifest");
 const PreludeCardManifest_1 = require("./cards/prelude/PreludeCardManifest");
 const PromoCardManifest_1 = require("./cards/promo/PromoCardManifest");
 const StandardCardManifests_1 = require("./cards/StandardCardManifests");
@@ -25,6 +26,7 @@ class GameCards {
             [gameOptions.preludeExtension, PreludeCardManifest_1.PRELUDE_CARD_MANIFEST],
             [gameOptions.venusNextExtension, VenusCardManifest_1.VENUS_CARD_MANIFEST],
             [gameOptions.coloniesExtension, ColoniesCardManifest_1.COLONIES_CARD_MANIFEST],
+            [!gameOptions.coloniesExtension, NonColoniesCardManifest_1.NON_COLONIES_CARD_MANIFEST],
             [gameOptions.turmoilExtension, TurmoilCardManifest_1.TURMOIL_CARD_MANIFEST],
             [gameOptions.aresExtension, AresCardManifest_1.ARES_CARD_MANIFEST],
             [gameOptions.promoCardsOption, PromoCardManifest_1.PROMO_CARD_MANIFEST],
@@ -117,6 +119,7 @@ class GameCards {
         }
         cards = this.filterBannedCards(cards);
         cards = this.filterReplacedCards(cards);
+        cards = this.includeExtraCards(cards, cards);
         return cards;
     }
     filterBannedCards(cards) {
@@ -133,5 +136,14 @@ class GameCards {
             return true;
         });
     }
+    includeExtraCards(cards, extraCards) {
+        for (const card of extraCards) {
+            if (!cards.find((existingCard) => existingCard.name === card.name)) {
+                cards.push(card);
+            }
+        }
+        return cards;
+    }
 }
 exports.GameCards = GameCards;
+//# sourceMappingURL=GameCards.js.map

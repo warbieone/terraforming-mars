@@ -32,3 +32,4 @@ class TitaniumMarketMonopolists extends MarketCard_1.MarketCard {
     }
 }
 exports.TitaniumMarketMonopolists = TitaniumMarketMonopolists;
+//# sourceMappingURL=TitaniumMarketMonopolists.js.map

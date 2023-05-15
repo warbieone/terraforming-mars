@@ -24,3 +24,4 @@ class MagneticFieldStimulationDelays extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.MagneticFieldStimulationDelays = MagneticFieldStimulationDelays;
+//# sourceMappingURL=MagneticFieldStimulationDelays.js.map

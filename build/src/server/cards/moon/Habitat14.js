@@ -35,3 +35,4 @@ class Habitat14 extends Card_1.Card {
     }
 }
 exports.Habitat14 = Habitat14;
+//# sourceMappingURL=Habitat14.js.map

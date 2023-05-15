@@ -32,3 +32,4 @@ class MinersOnStrike extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.MinersOnStrike = MinersOnStrike;
+//# sourceMappingURL=MinersOnStrike.js.map

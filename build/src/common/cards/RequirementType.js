@@ -25,4 +25,6 @@ var RequirementType;
     RequirementType["HABITAT_TILES"] = "Habitat tiles";
     RequirementType["MINING_TILES"] = "Mine tiles";
     RequirementType["ROAD_TILES"] = "Road tiles";
+    RequirementType["GENERATION"] = "Generation";
 })(RequirementType = exports.RequirementType || (exports.RequirementType = {}));
+//# sourceMappingURL=RequirementType.js.map

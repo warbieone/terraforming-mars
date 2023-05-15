@@ -17,3 +17,4 @@ class Pluto extends Colony_1.Colony {
     }
 }
 exports.Pluto = Pluto;
+//# sourceMappingURL=Pluto.js.map

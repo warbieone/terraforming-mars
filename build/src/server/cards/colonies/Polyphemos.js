@@ -42,3 +42,4 @@ class Polyphemos extends Card_1.Card {
     }
 }
 exports.Polyphemos = Polyphemos;
+//# sourceMappingURL=Polyphemos.js.map

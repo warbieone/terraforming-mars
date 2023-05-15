@@ -213,3 +213,4 @@ exports.mainAppSettings = {
 function getLastPathSegment() {
     return window.location.pathname.replace(/.*\//g, '');
 }
+//# sourceMappingURL=App.js.map

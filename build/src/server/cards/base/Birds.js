@@ -42,3 +42,4 @@ class Birds extends ActionCard_1.ActionCard {
     }
 }
 exports.Birds = Birds;
+//# sourceMappingURL=Birds.js.map

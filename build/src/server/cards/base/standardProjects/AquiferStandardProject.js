@@ -29,3 +29,4 @@ class AquiferStandardProject extends StandardProjectCard_1.StandardProjectCard {
     }
 }
 exports.AquiferStandardProject = AquiferStandardProject;
+//# sourceMappingURL=AquiferStandardProject.js.map

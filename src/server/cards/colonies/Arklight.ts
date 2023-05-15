@@ -8,6 +8,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
+import {Resource} from '../../../common/Resource';
+
 
 export class Arklight extends Card implements ICorporationCard {
   constructor() {
@@ -27,7 +29,7 @@ export class Arklight extends Card implements ICorporationCard {
         cardNumber: 'R04',
         description: 'You start with 50 M€. 1 VP per 2 animals on this card.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(45).nbsp.production((pb) => pb.megacredits(2));
+          b.megacredits(50);
           b.corpBox('effect', (ce) => {
             ce.effect('When you play an animal or plant tag, including this, gain 1 M€ production and add 1 animal to this card.', (eb) => {
               eb.animals(1, {played}).slash().plants(1, {played}).startEffect.production((pb) => pb.megacredits(1)).animals(1);
@@ -41,7 +43,10 @@ export class Arklight extends Card implements ICorporationCard {
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
     if (player.isCorporation(CardName.ARKLIGHT)) {
-      player.addResourceTo(this, {qty: card.tags.filter((cardTag) => cardTag === Tag.ANIMAL || cardTag === Tag.PLANT).length, log: true});
+      const plantAnimalTagCount = card.tags.filter((cardTag) => cardTag === Tag.ANIMAL || cardTag === Tag.PLANT).length;
+      player.addResourceTo(this, plantAnimalTagCount);
+      player.production.add(Resource.MEGACREDITS, plantAnimalTagCount);
+      
     }
   }
 }

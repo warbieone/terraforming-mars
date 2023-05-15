@@ -29,3 +29,4 @@ class StanfordTorus extends Card_1.Card {
     }
 }
 exports.StanfordTorus = StanfordTorus;
+//# sourceMappingURL=StanfordTorus.js.map

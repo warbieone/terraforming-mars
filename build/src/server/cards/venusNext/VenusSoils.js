@@ -31,3 +31,4 @@ class VenusSoils extends Card_1.Card {
     }
 }
 exports.VenusSoils = VenusSoils;
+//# sourceMappingURL=VenusSoils.js.map

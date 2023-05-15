@@ -45,3 +45,4 @@ class SpaceRaceToMars extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.SpaceRaceToMars = SpaceRaceToMars;
+//# sourceMappingURL=SpaceRaceToMars.js.map

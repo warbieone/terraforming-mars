@@ -29,3 +29,4 @@ class Duncan extends CeoCard_1.CeoCard {
     }
 }
 exports.Duncan = Duncan;
+//# sourceMappingURL=Duncan.js.map

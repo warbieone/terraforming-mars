@@ -30,3 +30,4 @@ class TectonicStressPower extends Card_1.Card {
     }
 }
 exports.TectonicStressPower = TectonicStressPower;
+//# sourceMappingURL=TectonicStressPower.js.map

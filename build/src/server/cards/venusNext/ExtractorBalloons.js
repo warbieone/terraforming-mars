@@ -18,7 +18,7 @@ class ExtractorBalloons extends Card_1.Card {
             name: CardName_1.CardName.EXTRACTOR_BALLOONS,
             type: CardType_1.CardType.ACTIVE,
             tags: [Tag_1.Tag.VENUS],
-            cost: 21,
+            cost: 18,
             resourceType: CardResource_1.CardResource.FLOATER,
             behavior: {
                 addResources: 3,
@@ -59,3 +59,4 @@ class ExtractorBalloons extends Card_1.Card {
     }
 }
 exports.ExtractorBalloons = ExtractorBalloons;
+//# sourceMappingURL=ExtractorBalloons.js.map

@@ -49,3 +49,4 @@ class AsteroidDeflectionSystem extends Card_1.Card {
     }
 }
 exports.AsteroidDeflectionSystem = AsteroidDeflectionSystem;
+//# sourceMappingURL=AsteroidDeflectionSystem.js.map

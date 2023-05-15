@@ -39,3 +39,4 @@ class ApiGame extends Handler_1.Handler {
 }
 exports.ApiGame = ApiGame;
 ApiGame.INSTANCE = new ApiGame();
+//# sourceMappingURL=ApiGame.js.map

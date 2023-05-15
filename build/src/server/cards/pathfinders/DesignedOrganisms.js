@@ -37,3 +37,4 @@ class DesignedOrganisms extends Card_1.Card {
     }
 }
 exports.DesignedOrganisms = DesignedOrganisms;
+//# sourceMappingURL=DesignedOrganisms.js.map

@@ -29,3 +29,4 @@ class Harvest extends Card_1.Card {
     }
 }
 exports.Harvest = Harvest;
+//# sourceMappingURL=Harvest.js.map

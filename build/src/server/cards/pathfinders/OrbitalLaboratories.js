@@ -28,3 +28,4 @@ class OrbitalLaboratories extends Card_1.Card {
     }
 }
 exports.OrbitalLaboratories = OrbitalLaboratories;
+//# sourceMappingURL=OrbitalLaboratories.js.map

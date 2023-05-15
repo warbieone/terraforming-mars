@@ -30,3 +30,4 @@ class Ulrich extends CeoCard_1.CeoCard {
     }
 }
 exports.Ulrich = Ulrich;
+//# sourceMappingURL=Ulrich.js.map

@@ -67,3 +67,4 @@ class MonsInsurance extends Card_1.Card {
     }
 }
 exports.MonsInsurance = MonsInsurance;
+//# sourceMappingURL=MonsInsurance.js.map

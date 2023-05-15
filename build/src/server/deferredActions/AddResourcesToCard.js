@@ -45,3 +45,4 @@ class AddResourcesToCard extends DeferredAction_1.DeferredAction {
     }
 }
 exports.AddResourcesToCard = AddResourcesToCard;
+//# sourceMappingURL=AddResourcesToCard.js.map

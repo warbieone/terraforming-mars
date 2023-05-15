@@ -23,3 +23,4 @@ class GainResources extends DeferredAction_1.DeferredAction {
     }
 }
 exports.GainResources = GainResources;
+//# sourceMappingURL=GainResources.js.map

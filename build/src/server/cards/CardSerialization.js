@@ -73,3 +73,4 @@ function deserializeProjectCard(element, cardFinder) {
     return card;
 }
 exports.deserializeProjectCard = deserializeProjectCard;
+//# sourceMappingURL=CardSerialization.js.map

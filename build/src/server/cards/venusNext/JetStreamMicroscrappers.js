@@ -17,7 +17,7 @@ class JetStreamMicroscrappers extends Card_1.Card {
             name: CardName_1.CardName.JET_STREAM_MICROSCRAPPERS,
             type: CardType_1.CardType.ACTIVE,
             tags: [Tag_1.Tag.VENUS],
-            cost: 12,
+            cost: 7,
             resourceType: CardResource_1.CardResource.FLOATER,
             metadata: {
                 cardNumber: '234',
@@ -69,3 +69,4 @@ class JetStreamMicroscrappers extends Card_1.Card {
     }
 }
 exports.JetStreamMicroscrappers = JetStreamMicroscrappers;
+//# sourceMappingURL=JetStreamMicroscrappers.js.map

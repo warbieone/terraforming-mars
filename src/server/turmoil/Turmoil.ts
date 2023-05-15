@@ -386,6 +386,12 @@ export class Turmoil {
     } else {
       if (delegateCount > 0) influence++;
     }
+    
+/*     if (player.isCorporation(CardName.PRISTAR)) {
+      if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
+        influence++;
+      }
+    } */
 
     if (this.playersInfluenceBonus.has(player.id)) {
       const bonus = this.playersInfluenceBonus.get(player.id);
@@ -396,10 +402,11 @@ export class Turmoil {
     return influence;
   }
 
+  
   public addInfluenceBonus(player: Player, bonus:number = 1) {
     if (this.playersInfluenceBonus.has(player.id)) {
       let current = this.playersInfluenceBonus.get(player.id);
-      if (current) {
+      if (current !== null && current !== undefined) {
         current += bonus;
         this.playersInfluenceBonus.set(player.id, current);
       }

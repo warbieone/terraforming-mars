@@ -63,3 +63,4 @@ function load(gameId) {
     });
 }
 main();
+//# sourceMappingURL=export_game.js.map

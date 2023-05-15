@@ -53,3 +53,4 @@ class ValleyTrust extends Card_1.Card {
     }
 }
 exports.ValleyTrust = ValleyTrust;
+//# sourceMappingURL=ValleyTrust.js.map

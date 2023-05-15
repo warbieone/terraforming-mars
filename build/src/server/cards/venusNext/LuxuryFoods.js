@@ -25,3 +25,4 @@ class LuxuryFoods extends Card_1.Card {
     }
 }
 exports.LuxuryFoods = LuxuryFoods;
+//# sourceMappingURL=LuxuryFoods.js.map

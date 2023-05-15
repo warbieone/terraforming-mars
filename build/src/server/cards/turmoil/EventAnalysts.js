@@ -30,3 +30,4 @@ class EventAnalysts extends Card_1.Card {
     }
 }
 exports.EventAnalysts = EventAnalysts;
+//# sourceMappingURL=EventAnalysts.js.map

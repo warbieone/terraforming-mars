@@ -1,6 +1,7 @@
 import {ARES_CARD_MANIFEST} from './ares/AresCardManifest';
 import {ModuleManifest} from './ModuleManifest';
 import {COLONIES_CARD_MANIFEST} from './colonies/ColoniesCardManifest';
+import {NON_COLONIES_CARD_MANIFEST} from './colonies/NonColoniesCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './community/CommunityCardManifest';
 import {PRELUDE_CARD_MANIFEST} from './prelude/PreludeCardManifest';
 import {PROMO_CARD_MANIFEST} from './promo/PromoCardManifest';
@@ -20,6 +21,7 @@ export const ALL_MODULE_MANIFESTS: Array<ModuleManifest> = [
   PROMO_CARD_MANIFEST,
   VENUS_CARD_MANIFEST,
   COLONIES_CARD_MANIFEST,
+  NON_COLONIES_CARD_MANIFEST,
   PRELUDE_CARD_MANIFEST,
   TURMOIL_CARD_MANIFEST,
   COMMUNITY_CARD_MANIFEST,

@@ -24,3 +24,4 @@ exports.PLAYER_INPUT = 'player/input';
 exports.RESET = 'reset';
 exports.SPECTATOR = 'spectator';
 exports.THE_END = 'the-end';
+//# sourceMappingURL=paths.js.map

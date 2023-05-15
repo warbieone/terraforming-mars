@@ -27,3 +27,4 @@ class IndustrialMicrobes extends Card_1.Card {
     }
 }
 exports.IndustrialMicrobes = IndustrialMicrobes;
+//# sourceMappingURL=IndustrialMicrobes.js.map

@@ -35,3 +35,4 @@ class AquiferPumping extends Card_1.Card {
     }
 }
 exports.AquiferPumping = AquiferPumping;
+//# sourceMappingURL=AquiferPumping.js.map

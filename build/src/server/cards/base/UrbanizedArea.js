@@ -45,3 +45,4 @@ class UrbanizedArea extends Card_1.Card {
     }
 }
 exports.UrbanizedArea = UrbanizedArea;
+//# sourceMappingURL=UrbanizedArea.js.map

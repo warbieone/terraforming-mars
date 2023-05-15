@@ -12,7 +12,7 @@ class TropicalResort extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.TROPICAL_RESORT,
             tags: [Tag_1.Tag.BUILDING],
-            cost: 13,
+            cost: 11,
             behavior: {
                 production: { megacredits: 3, heat: -2 },
             },
@@ -31,3 +31,4 @@ class TropicalResort extends Card_1.Card {
     }
 }
 exports.TropicalResort = TropicalResort;
+//# sourceMappingURL=TropicalResort.js.map

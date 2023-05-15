@@ -32,3 +32,4 @@ class HugeAsteroid extends PreludeCard_1.PreludeCard {
     }
 }
 exports.HugeAsteroid = HugeAsteroid;
+//# sourceMappingURL=HugeAsteroid.js.map

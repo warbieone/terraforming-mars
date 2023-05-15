@@ -50,3 +50,4 @@ class GHGProducingBacteria extends ActionCard_1.ActionCard {
     }
 }
 exports.GHGProducingBacteria = GHGProducingBacteria;
+//# sourceMappingURL=GHGProducingBacteria.js.map

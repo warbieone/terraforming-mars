@@ -58,3 +58,4 @@ class Odyssey extends Card_1.Card {
     }
 }
 exports.Odyssey = Odyssey;
+//# sourceMappingURL=Odyssey.js.map

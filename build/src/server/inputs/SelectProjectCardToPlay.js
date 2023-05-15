@@ -45,3 +45,4 @@ class SelectProjectCardToPlay extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectProjectCardToPlay = SelectProjectCardToPlay;
+//# sourceMappingURL=SelectProjectCardToPlay.js.map

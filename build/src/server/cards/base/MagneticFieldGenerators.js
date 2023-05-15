@@ -33,3 +33,4 @@ class MagneticFieldGenerators extends Card_1.Card {
     }
 }
 exports.MagneticFieldGenerators = MagneticFieldGenerators;
+//# sourceMappingURL=MagneticFieldGenerators.js.map

@@ -32,3 +32,4 @@ class SubCrustMeasurements extends ActionCard_1.ActionCard {
     }
 }
 exports.SubCrustMeasurements = SubCrustMeasurements;
+//# sourceMappingURL=SubCrustMeasurements.js.map

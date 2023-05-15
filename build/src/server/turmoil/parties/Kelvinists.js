@@ -57,7 +57,7 @@ class KelvinistsPolicy01 {
         return `Pay ${cost} M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)`;
     }
     cost(player) {
-        return player.cardIsInEffect(CardName_1.CardName.HIGH_TEMP_SUPERCONDUCTORS) ? 7 : 10;
+        return player.cardIsInEffect(CardName_1.CardName.HIGH_TEMP_SUPERCONDUCTORS) || player.isCorporation(CardName_1.CardName.THORGATE) ? 7 : 10;
     }
     canAct(player) {
         return player.canAfford(this.cost(player));
@@ -118,3 +118,4 @@ exports.KELVINISTS_POLICY_1 = new KelvinistsPolicy01();
 exports.KELVINISTS_POLICY_2 = new KelvinistsPolicy02();
 exports.KELVINISTS_POLICY_3 = new KelvinistsPolicy03();
 exports.KELVINISTS_POLICY_4 = new KelvinistsPolicy04();
+//# sourceMappingURL=Kelvinists.js.map

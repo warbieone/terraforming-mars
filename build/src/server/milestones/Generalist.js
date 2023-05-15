@@ -25,3 +25,4 @@ class Generalist extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Generalist = Generalist;
+//# sourceMappingURL=Generalist.js.map

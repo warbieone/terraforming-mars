@@ -24,3 +24,4 @@ class AntidesertificationTechniques extends PreludeCard_1.PreludeCard {
     }
 }
 exports.AntidesertificationTechniques = AntidesertificationTechniques;
+//# sourceMappingURL=AntidesertificationTechniques.js.map

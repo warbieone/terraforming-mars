@@ -43,3 +43,4 @@ class ArcticAlgae extends Card_1.Card {
     }
 }
 exports.ArcticAlgae = ArcticAlgae;
+//# sourceMappingURL=ArcticAlgae.js.map

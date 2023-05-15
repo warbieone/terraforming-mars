@@ -26,3 +26,4 @@ class AlliedBanks extends PreludeCard_1.PreludeCard {
     }
 }
 exports.AlliedBanks = AlliedBanks;
+//# sourceMappingURL=AlliedBanks.js.map

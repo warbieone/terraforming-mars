@@ -57,3 +57,4 @@ class Cryptocurrency extends Card_1.Card {
     }
 }
 exports.Cryptocurrency = Cryptocurrency;
+//# sourceMappingURL=Cryptocurrency.js.map

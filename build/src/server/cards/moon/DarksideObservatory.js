@@ -56,3 +56,4 @@ class DarksideObservatory extends Card_1.Card {
     }
 }
 exports.DarksideObservatory = DarksideObservatory;
+//# sourceMappingURL=DarksideObservatory.js.map

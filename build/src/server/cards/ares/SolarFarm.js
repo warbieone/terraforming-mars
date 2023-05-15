@@ -52,3 +52,4 @@ class SolarFarm extends Card_1.Card {
     }
 }
 exports.SolarFarm = SolarFarm;
+//# sourceMappingURL=SolarFarm.js.map

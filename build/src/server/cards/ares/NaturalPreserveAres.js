@@ -18,3 +18,4 @@ class NaturalPreserveAres extends NaturalPreserve_1.NaturalPreserve {
     }
 }
 exports.NaturalPreserveAres = NaturalPreserveAres;
+//# sourceMappingURL=NaturalPreserveAres.js.map

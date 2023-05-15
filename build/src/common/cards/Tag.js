@@ -38,3 +38,4 @@ exports.ALL_TAGS = [
     Tag.EVENT,
     Tag.CLONE,
 ];
+//# sourceMappingURL=Tag.js.map

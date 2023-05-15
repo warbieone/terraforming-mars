@@ -26,3 +26,4 @@ class LeadershipSummit extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.LeadershipSummit = LeadershipSummit;
+//# sourceMappingURL=LeadershipSummit.js.map

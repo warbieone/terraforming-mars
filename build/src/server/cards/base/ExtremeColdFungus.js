@@ -63,3 +63,4 @@ class ExtremeColdFungus extends Card_1.Card {
     }
 }
 exports.ExtremeColdFungus = ExtremeColdFungus;
+//# sourceMappingURL=ExtremeColdFungus.js.map

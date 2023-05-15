@@ -39,3 +39,4 @@ class Recruitment extends Card_1.Card {
     }
 }
 exports.Recruitment = Recruitment;
+//# sourceMappingURL=Recruitment.js.map

@@ -17,7 +17,7 @@ class CorporateStronghold extends Card_1.Card {
                 production: { energy: -1, megacredits: 3 },
                 city: {},
             },
-            victoryPoints: -2,
+            victoryPoints: -1,
             metadata: {
                 cardNumber: '182',
                 description: 'Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile.',
@@ -32,3 +32,4 @@ class CorporateStronghold extends Card_1.Card {
     }
 }
 exports.CorporateStronghold = CorporateStronghold;
+//# sourceMappingURL=CorporateStronghold.js.map

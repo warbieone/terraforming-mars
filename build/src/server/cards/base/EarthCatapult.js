@@ -12,8 +12,8 @@ class EarthCatapult extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.EARTH_CATAPULT,
             tags: [Tag_1.Tag.EARTH],
-            cost: 23,
-            victoryPoints: 2,
+            cost: 28,
+            victoryPoints: 1,
             cardDiscount: { amount: 2 },
             metadata: {
                 cardNumber: '070',
@@ -27,3 +27,4 @@ class EarthCatapult extends Card_1.Card {
     }
 }
 exports.EarthCatapult = EarthCatapult;
+//# sourceMappingURL=EarthCatapult.js.map

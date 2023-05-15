@@ -29,3 +29,4 @@ class AlgaeBioreactors extends Card_1.Card {
     }
 }
 exports.AlgaeBioreactors = AlgaeBioreactors;
+//# sourceMappingURL=AlgaeBioreactors.js.map

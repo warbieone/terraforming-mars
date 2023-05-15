@@ -37,3 +37,4 @@ class TychoRoadNetwork extends Card_1.Card {
     }
 }
 exports.TychoRoadNetwork = TychoRoadNetwork;
+//# sourceMappingURL=TychoRoadNetwork.js.map

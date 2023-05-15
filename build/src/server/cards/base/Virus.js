@@ -60,3 +60,4 @@ class Virus extends Card_1.Card {
     }
 }
 exports.Virus = Virus;
+//# sourceMappingURL=Virus.js.map

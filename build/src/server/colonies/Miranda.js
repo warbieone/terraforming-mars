@@ -19,3 +19,4 @@ class Miranda extends Colony_1.Colony {
     }
 }
 exports.Miranda = Miranda;
+//# sourceMappingURL=Miranda.js.map

@@ -56,3 +56,4 @@ class ProjectInspection extends Card_1.Card {
     }
 }
 exports.ProjectInspection = ProjectInspection;
+//# sourceMappingURL=ProjectInspection.js.map

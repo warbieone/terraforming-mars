@@ -20,3 +20,4 @@ class MiningRights extends MiningCard_1.MiningCard {
     }
 }
 exports.MiningRights = MiningRights;
+//# sourceMappingURL=MiningRights.js.map

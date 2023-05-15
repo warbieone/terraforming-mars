@@ -13,7 +13,7 @@ class EarthOffice extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.EARTH_OFFICE,
             tags: [Tag_1.Tag.EARTH],
-            cost: 1,
+            cost: 4,
             cardDiscount: { tag: Tag_1.Tag.EARTH, amount: 3 },
             metadata: {
                 cardNumber: '105',
@@ -27,3 +27,4 @@ class EarthOffice extends Card_1.Card {
     }
 }
 exports.EarthOffice = EarthOffice;
+//# sourceMappingURL=EarthOffice.js.map

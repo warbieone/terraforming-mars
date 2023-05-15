@@ -9,3 +9,4 @@ function isIActionCard(object) {
     return object !== undefined && object.canAct !== undefined && object.action !== undefined;
 }
 exports.isIActionCard = isIActionCard;
+//# sourceMappingURL=ICard.js.map

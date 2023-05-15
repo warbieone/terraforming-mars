@@ -30,3 +30,4 @@ class StrongSociety extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.StrongSociety = StrongSociety;
+//# sourceMappingURL=StrongSociety.js.map

@@ -6,3 +6,4 @@ function isCeoCard(card) {
     return card.type === CardType_1.CardType.CEO;
 }
 exports.isCeoCard = isCeoCard;
+//# sourceMappingURL=ICeoCard.js.map

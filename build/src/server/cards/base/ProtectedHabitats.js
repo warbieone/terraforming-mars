@@ -23,3 +23,4 @@ class ProtectedHabitats extends Card_1.Card {
     }
 }
 exports.ProtectedHabitats = ProtectedHabitats;
+//# sourceMappingURL=ProtectedHabitats.js.map

@@ -80,3 +80,4 @@ class _AresHazardPlacement {
     }
 }
 exports._AresHazardPlacement = _AresHazardPlacement;
+//# sourceMappingURL=AresHazards.js.map

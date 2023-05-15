@@ -27,3 +27,4 @@ class NewColonyPlanningInitiaitives extends Card_1.Card {
     }
 }
 exports.NewColonyPlanningInitiaitives = NewColonyPlanningInitiaitives;
+//# sourceMappingURL=NewColonyPlanningInitiaitives.js.map

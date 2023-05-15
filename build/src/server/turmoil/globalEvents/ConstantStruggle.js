@@ -36,3 +36,4 @@ class ConstantStruggle extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.ConstantStruggle = ConstantStruggle;
+//# sourceMappingURL=ConstantStruggle.js.map

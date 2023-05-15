@@ -38,3 +38,4 @@ class PowerSupplyConsortium extends Card_1.Card {
     }
 }
 exports.PowerSupplyConsortium = PowerSupplyConsortium;
+//# sourceMappingURL=PowerSupplyConsortium.js.map

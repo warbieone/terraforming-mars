@@ -32,3 +32,4 @@ class IoSulphurResearch extends Card_1.Card {
     }
 }
 exports.IoSulphurResearch = IoSulphurResearch;
+//# sourceMappingURL=IoSulphurResearch.js.map

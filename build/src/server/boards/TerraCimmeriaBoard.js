@@ -48,3 +48,4 @@ class TerraCimmeriaBoard extends Board_1.Board {
     }
 }
 exports.TerraCimmeriaBoard = TerraCimmeriaBoard;
+//# sourceMappingURL=TerraCimmeriaBoard.js.map

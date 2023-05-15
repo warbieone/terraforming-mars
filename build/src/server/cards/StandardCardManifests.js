@@ -481,3 +481,4 @@ exports.CORP_ERA_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.TERACTOR]: { Factory: Teractor_1.Teractor },
     },
 });
+//# sourceMappingURL=StandardCardManifests.js.map

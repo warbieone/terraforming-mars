@@ -41,3 +41,4 @@ class VeneraBase extends ActionCard_1.ActionCard {
     }
 }
 exports.VeneraBase = VeneraBase;
+//# sourceMappingURL=VeneraBase.js.map

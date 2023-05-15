@@ -17,3 +17,4 @@ class Tropicalist extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Tropicalist = Tropicalist;
+//# sourceMappingURL=Tropicalist.js.map

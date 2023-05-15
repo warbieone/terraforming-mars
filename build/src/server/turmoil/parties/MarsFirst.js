@@ -108,3 +108,4 @@ exports.MARS_FIRST_POLICY_1 = new MarsFirstPolicy01();
 exports.MARS_FIRST_POLICY_2 = new MarsFirstPolicy02();
 exports.MARS_FIRST_POLICY_3 = new MarsFirstPolicy03();
 exports.MARS_FIRST_POLICY_4 = new MarsFirstPolicy04();
+//# sourceMappingURL=MarsFirst.js.map

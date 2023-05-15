@@ -30,3 +30,4 @@ class GanymedeColony extends Card_1.Card {
     }
 }
 exports.GanymedeColony = GanymedeColony;
+//# sourceMappingURL=GanymedeColony.js.map

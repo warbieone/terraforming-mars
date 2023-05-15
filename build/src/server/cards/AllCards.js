@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ALL_MODULE_MANIFESTS = void 0;
 const AresCardManifest_1 = require("./ares/AresCardManifest");
 const ColoniesCardManifest_1 = require("./colonies/ColoniesCardManifest");
+const NonColoniesCardManifest_1 = require("./colonies/NonColoniesCardManifest");
 const CommunityCardManifest_1 = require("./community/CommunityCardManifest");
 const PreludeCardManifest_1 = require("./prelude/PreludeCardManifest");
 const PromoCardManifest_1 = require("./promo/PromoCardManifest");
@@ -18,6 +19,7 @@ exports.ALL_MODULE_MANIFESTS = [
     PromoCardManifest_1.PROMO_CARD_MANIFEST,
     VenusCardManifest_1.VENUS_CARD_MANIFEST,
     ColoniesCardManifest_1.COLONIES_CARD_MANIFEST,
+    NonColoniesCardManifest_1.NON_COLONIES_CARD_MANIFEST,
     PreludeCardManifest_1.PRELUDE_CARD_MANIFEST,
     TurmoilCardManifest_1.TURMOIL_CARD_MANIFEST,
     CommunityCardManifest_1.COMMUNITY_CARD_MANIFEST,
@@ -26,3 +28,4 @@ exports.ALL_MODULE_MANIFESTS = [
     PathfindersCardManifest_1.PATHFINDERS_CARD_MANIFEST,
     CeoCardManifest_1.CEO_CARD_MANIFEST,
 ];
+//# sourceMappingURL=AllCards.js.map

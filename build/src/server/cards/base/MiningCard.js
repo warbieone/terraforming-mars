@@ -80,3 +80,4 @@ class MiningCard extends Card_1.Card {
     }
 }
 exports.MiningCard = MiningCard;
+//# sourceMappingURL=MiningCard.js.map

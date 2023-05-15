@@ -14,7 +14,7 @@ class MeatIndustry extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.MEAT_INDUSTRY,
             tags: [Tag_1.Tag.BUILDING],
-            cost: 5,
+            cost: 10,
             metadata: {
                 cardNumber: 'X25',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -32,3 +32,4 @@ class MeatIndustry extends Card_1.Card {
     }
 }
 exports.MeatIndustry = MeatIndustry;
+//# sourceMappingURL=MeatIndustry.js.map

@@ -34,3 +34,4 @@ class ArtificialLake extends Card_1.Card {
     }
 }
 exports.ArtificialLake = ArtificialLake;
+//# sourceMappingURL=ArtificialLake.js.map

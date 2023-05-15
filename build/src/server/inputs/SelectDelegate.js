@@ -24,3 +24,4 @@ class SelectDelegate extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectDelegate = SelectDelegate;
+//# sourceMappingURL=SelectDelegate.js.map

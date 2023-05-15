@@ -11,3 +11,4 @@ class Farmer extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Farmer = Farmer;
+//# sourceMappingURL=Farmer.js.map

@@ -29,3 +29,4 @@ class ImprovedEnergyTemplates extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.ImprovedEnergyTemplates = ImprovedEnergyTemplates;
+//# sourceMappingURL=ImprovedEnergyTemplates.js.map

@@ -57,3 +57,4 @@ class GiveColonyBonus extends DeferredAction_1.DeferredAction {
     }
 }
 exports.GiveColonyBonus = GiveColonyBonus;
+//# sourceMappingURL=GiveColonyBonus.js.map

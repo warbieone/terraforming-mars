@@ -59,3 +59,4 @@ class StratosphericBirds extends ActionCard_1.ActionCard {
     }
 }
 exports.StratosphericBirds = StratosphericBirds;
+//# sourceMappingURL=StratosphericBirds.js.map

@@ -9,6 +9,7 @@ import {Player} from '../../Player';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
+import {Priority} from '../../deferredActions/DeferredAction';
 
 export class EcoLine extends Card implements ICorporationCard {
   constructor() {
@@ -39,18 +40,24 @@ export class EcoLine extends Card implements ICorporationCard {
     });
   }
 
-  private gainBonus(player: Player, amount: number) {
+  public override play(player: Player) {
+    this.gainBonus(player, 1);
+    return undefined;
+  }
+
+  private gainBonus(player: Player, amount: number): void {
     for (let i = 0; i < amount; i++) {
-      const addCredits = new SelectOption('Gain 2 MC', 'Gain MC', () => {
-        player.megaCredits += 2, {log:true}
-        return undefined;
-      });
-  
-      const addPlant = new SelectOption('Gain 1 plant', 'Gain plant', () => {
-        player.plants += 1, {log:true}
-        return undefined;
-      });
-      return new OrOptions(addCredits, addPlant);
+          const options = new OrOptions(
+        new SelectOption('Gain 2 MC', 'Gain MC', () => {
+          player.megaCredits += 2, {log:true}
+          return undefined;
+        }),
+        new SelectOption('Gain 1 plant', 'Gain plant', () => {
+          player.plants += 1, {log:true}
+          return undefined;
+        }),
+      );
+      player.defer(options, Priority.GAIN_RESOURCE_OR_PRODUCTION);
     }
     return undefined;
   }

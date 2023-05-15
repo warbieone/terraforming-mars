@@ -109,3 +109,4 @@ class PlayerInput extends Handler_1.Handler {
 }
 exports.PlayerInput = PlayerInput;
 PlayerInput.INSTANCE = new PlayerInput();
+//# sourceMappingURL=PlayerInput.js.map

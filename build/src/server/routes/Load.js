@@ -14,3 +14,4 @@ class Load extends Handler_1.Handler {
 }
 exports.Load = Load;
 Load.INSTANCE = new Load();
+//# sourceMappingURL=Load.js.map

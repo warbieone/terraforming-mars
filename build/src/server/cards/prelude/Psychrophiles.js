@@ -37,3 +37,4 @@ class Psychrophiles extends ActionCard_1.ActionCard {
     }
 }
 exports.Psychrophiles = Psychrophiles;
+//# sourceMappingURL=Psychrophiles.js.map

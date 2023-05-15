@@ -13,7 +13,7 @@ class Cartel extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.CARTEL,
             tags: [Tag_1.Tag.EARTH],
-            cost: 8,
+            cost: 10,
             behavior: {
                 production: { megacredits: { tag: Tag_1.Tag.EARTH } },
             },
@@ -28,3 +28,4 @@ class Cartel extends Card_1.Card {
     }
 }
 exports.Cartel = Cartel;
+//# sourceMappingURL=Cartel.js.map

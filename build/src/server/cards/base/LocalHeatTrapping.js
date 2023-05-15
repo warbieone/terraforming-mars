@@ -60,3 +60,4 @@ class LocalHeatTrapping extends Card_1.Card {
     }
 }
 exports.LocalHeatTrapping = LocalHeatTrapping;
+//# sourceMappingURL=LocalHeatTrapping.js.map

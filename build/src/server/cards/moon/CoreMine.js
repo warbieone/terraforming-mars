@@ -28,3 +28,4 @@ class CoreMine extends PreludeCard_1.PreludeCard {
     }
 }
 exports.CoreMine = CoreMine;
+//# sourceMappingURL=CoreMine.js.map

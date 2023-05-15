@@ -30,3 +30,4 @@ class Plantation extends Card_1.Card {
     }
 }
 exports.Plantation = Plantation;
+//# sourceMappingURL=Plantation.js.map

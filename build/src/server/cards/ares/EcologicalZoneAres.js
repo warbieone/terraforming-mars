@@ -26,3 +26,4 @@ class EcologicalZoneAres extends EcologicalZone_1.EcologicalZone {
     }
 }
 exports.EcologicalZoneAres = EcologicalZoneAres;
+//# sourceMappingURL=EcologicalZoneAres.js.map

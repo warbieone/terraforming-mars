@@ -30,3 +30,4 @@ class SubterraneanHabitats extends Card_1.Card {
     }
 }
 exports.SubterraneanHabitats = SubterraneanHabitats;
+//# sourceMappingURL=SubterraneanHabitats.js.map

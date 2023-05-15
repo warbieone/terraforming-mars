@@ -31,3 +31,4 @@ class Airliners extends Card_1.Card {
     }
 }
 exports.Airliners = Airliners;
+//# sourceMappingURL=Airliners.js.map

@@ -36,3 +36,4 @@ class SpaceRelay extends Card_1.Card {
     }
 }
 exports.SpaceRelay = SpaceRelay;
+//# sourceMappingURL=SpaceRelay.js.map

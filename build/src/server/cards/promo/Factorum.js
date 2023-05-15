@@ -57,3 +57,4 @@ class Factorum extends Card_1.Card {
     }
 }
 exports.Factorum = Factorum;
+//# sourceMappingURL=Factorum.js.map

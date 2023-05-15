@@ -8,11 +8,13 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRequirements_1 = require("../CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
+const Tag_1 = require("../../../common/cards/Tag");
 class CloudSeeding extends Card_1.Card {
     constructor() {
         super({
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.CLOUD_SEEDING,
+            tags: [Tag_1.Tag.PLANT],
             cost: 11,
             behavior: {
                 production: { megacredits: -1, plants: 2 },
@@ -31,3 +33,4 @@ class CloudSeeding extends Card_1.Card {
     }
 }
 exports.CloudSeeding = CloudSeeding;
+//# sourceMappingURL=CloudSeeding.js.map

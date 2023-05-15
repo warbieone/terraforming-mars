@@ -28,3 +28,4 @@ class GrandLunaAcademy extends Card_1.Card {
     }
 }
 exports.GrandLunaAcademy = GrandLunaAcademy;
+//# sourceMappingURL=GrandLunaAcademy.js.map

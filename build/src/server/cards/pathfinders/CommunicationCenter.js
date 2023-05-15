@@ -46,3 +46,4 @@ class CommunicationCenter extends Card_1.Card {
     }
 }
 exports.CommunicationCenter = CommunicationCenter;
+//# sourceMappingURL=CommunicationCenter.js.map

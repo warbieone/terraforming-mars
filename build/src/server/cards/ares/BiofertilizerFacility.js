@@ -44,3 +44,4 @@ class BiofertilizerFacility extends Card_1.Card {
     }
 }
 exports.BiofertilizerFacility = BiofertilizerFacility;
+//# sourceMappingURL=BiofertilizerFacility.js.map

@@ -30,3 +30,4 @@ class RegoPlastics extends Card_1.Card {
     }
 }
 exports.RegoPlastics = RegoPlastics;
+//# sourceMappingURL=RegoPlastics.js.map

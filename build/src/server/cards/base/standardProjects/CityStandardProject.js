@@ -44,3 +44,4 @@ class CityStandardProject extends StandardProjectCard_1.StandardProjectCard {
     }
 }
 exports.CityStandardProject = CityStandardProject;
+//# sourceMappingURL=CityStandardProject.js.map

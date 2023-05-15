@@ -7,3 +7,4 @@ exports.digit = true;
 exports.played = true;
 exports.multiplier = true;
 exports.max = true;
+//# sourceMappingURL=Options.js.map

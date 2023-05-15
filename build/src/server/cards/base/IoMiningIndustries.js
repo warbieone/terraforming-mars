@@ -29,3 +29,4 @@ class IoMiningIndustries extends Card_1.Card {
     }
 }
 exports.IoMiningIndustries = IoMiningIndustries;
+//# sourceMappingURL=IoMiningIndustries.js.map

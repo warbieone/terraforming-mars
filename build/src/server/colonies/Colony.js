@@ -260,3 +260,4 @@ class Colony {
     }
 }
 exports.Colony = Colony;
+//# sourceMappingURL=Colony.js.map

@@ -24,3 +24,4 @@ class LastResortIngenuity extends Card_1.Card {
     }
 }
 exports.LastResortIngenuity = LastResortIngenuity;
+//# sourceMappingURL=LastResortIngenuity.js.map

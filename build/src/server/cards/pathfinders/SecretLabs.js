@@ -69,3 +69,4 @@ class SecretLabs extends Card_1.Card {
     }
 }
 exports.SecretLabs = SecretLabs;
+//# sourceMappingURL=SecretLabs.js.map

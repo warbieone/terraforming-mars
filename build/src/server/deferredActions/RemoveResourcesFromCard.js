@@ -81,3 +81,4 @@ class RemoveResourcesFromCard extends DeferredAction_1.DeferredAction {
     }
 }
 exports.RemoveResourcesFromCard = RemoveResourcesFromCard;
+//# sourceMappingURL=RemoveResourcesFromCard.js.map

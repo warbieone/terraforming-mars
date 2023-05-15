@@ -40,3 +40,4 @@ class SinusIridiumRoadNetwork extends Card_1.Card {
     }
 }
 exports.SinusIridiumRoadNetwork = SinusIridiumRoadNetwork;
+//# sourceMappingURL=SinusIridiumRoadNetwork.js.map

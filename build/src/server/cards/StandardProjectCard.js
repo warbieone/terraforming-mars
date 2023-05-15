@@ -53,3 +53,4 @@ class StandardProjectCard extends Card_1.Card {
     }
 }
 exports.StandardProjectCard = StandardProjectCard;
+//# sourceMappingURL=StandardProjectCard.js.map

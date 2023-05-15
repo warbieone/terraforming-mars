@@ -36,3 +36,4 @@ class Potatoes extends Card_1.Card {
     }
 }
 exports.Potatoes = Potatoes;
+//# sourceMappingURL=Potatoes.js.map

@@ -49,3 +49,4 @@ class AncientShipyards extends Card_1.Card {
     }
 }
 exports.AncientShipyards = AncientShipyards;
+//# sourceMappingURL=AncientShipyards.js.map

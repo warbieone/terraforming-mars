@@ -34,3 +34,4 @@ class DuskLaserMining extends Card_1.Card {
     }
 }
 exports.DuskLaserMining = DuskLaserMining;
+//# sourceMappingURL=DuskLaserMining.js.map

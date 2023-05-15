@@ -55,3 +55,4 @@ class Capital extends Card_1.Card {
     }
 }
 exports.Capital = Capital;
+//# sourceMappingURL=Capital.js.map

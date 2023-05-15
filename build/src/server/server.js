@@ -106,3 +106,4 @@ catch (err) {
     console.error('Cannot start server:');
     console.error(err);
 }
+//# sourceMappingURL=server.js.map

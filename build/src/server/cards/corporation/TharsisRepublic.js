@@ -61,3 +61,4 @@ class TharsisRepublic extends Card_1.Card {
     }
 }
 exports.TharsisRepublic = TharsisRepublic;
+//# sourceMappingURL=TharsisRepublic.js.map

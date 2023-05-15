@@ -37,3 +37,4 @@ class ScienceTagCard {
     }
 }
 exports.ScienceTagCard = ScienceTagCard;
+//# sourceMappingURL=ScienceTagCard.js.map

@@ -16,17 +16,17 @@ class Hackers extends Card_1.Card {
             cost: 3,
             victoryPoints: -1,
             behavior: {
-                production: { energy: -1, megacredits: 2 },
+                production: { energy: -1, megacredits: 3 },
             },
             metadata: {
                 cardNumber: '125',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => {
                         pb.minus().energy(1).megacredits(2, { all: Options_1.all }).br;
-                        pb.plus().megacredits(2);
+                        pb.plus().megacredits(3);
                     });
                 }),
-                description: 'Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.',
+                description: 'Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 3 steps.',
             },
         });
     }
@@ -36,3 +36,4 @@ class Hackers extends Card_1.Card {
     }
 }
 exports.Hackers = Hackers;
+//# sourceMappingURL=Hackers.js.map

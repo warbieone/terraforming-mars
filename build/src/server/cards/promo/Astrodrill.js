@@ -30,7 +30,7 @@ class Astrodrill extends Card_1.Card {
                 description: 'You start with 40 M€ and 4 asteroid resources.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br;
-                    b.megacredits(35).nbsp.asteroids(3, { digit: Options_1.digit });
+                    b.megacredits(40).nbsp.asteroids(4, { digit: Options_1.digit });
                     b.corpBox('action', (ce) => {
                         ce.vSpace(Size_1.Size.LARGE);
                         ce.action(undefined, (eb) => {
@@ -94,3 +94,4 @@ class Astrodrill extends Card_1.Card {
     }
 }
 exports.Astrodrill = Astrodrill;
+//# sourceMappingURL=Astrodrill.js.map

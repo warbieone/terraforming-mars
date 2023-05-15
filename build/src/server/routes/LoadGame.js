@@ -51,3 +51,4 @@ class LoadGame extends Handler_1.Handler {
 }
 exports.LoadGame = LoadGame;
 LoadGame.INSTANCE = new LoadGame();
+//# sourceMappingURL=LoadGame.js.map

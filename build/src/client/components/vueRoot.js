@@ -5,3 +5,4 @@ function vueRoot(component) {
     return component.$root;
 }
 exports.vueRoot = vueRoot;
+//# sourceMappingURL=vueRoot.js.map

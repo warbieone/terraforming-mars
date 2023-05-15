@@ -12,7 +12,7 @@ class SolarPower extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.SOLAR_POWER,
             tags: [Tag_1.Tag.POWER, Tag_1.Tag.BUILDING],
-            cost: 11,
+            cost: 10,
             behavior: {
                 production: { energy: 1 },
             },
@@ -28,3 +28,4 @@ class SolarPower extends Card_1.Card {
     }
 }
 exports.SolarPower = SolarPower;
+//# sourceMappingURL=SolarPower.js.map

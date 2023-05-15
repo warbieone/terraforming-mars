@@ -35,3 +35,4 @@ class EarlyExpedition extends Card_1.Card {
     }
 }
 exports.EarlyExpedition = EarlyExpedition;
+//# sourceMappingURL=EarlyExpedition.js.map

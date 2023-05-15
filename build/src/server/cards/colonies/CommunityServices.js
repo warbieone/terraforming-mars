@@ -9,7 +9,7 @@ const CardRenderer_1 = require("../render/CardRenderer");
 class CommunityServices extends Card_1.Card {
     constructor() {
         super({
-            cost: 13,
+            cost: 11,
             name: CardName_1.CardName.COMMUNITY_SERVICES,
             type: CardType_1.CardType.AUTOMATED,
             victoryPoints: 1,
@@ -30,3 +30,4 @@ class CommunityServices extends Card_1.Card {
     }
 }
 exports.CommunityServices = CommunityServices;
+//# sourceMappingURL=CommunityServices.js.map

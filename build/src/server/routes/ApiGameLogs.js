@@ -57,3 +57,4 @@ class ApiGameLogs extends Handler_1.Handler {
 }
 exports.ApiGameLogs = ApiGameLogs;
 ApiGameLogs.INSTANCE = new ApiGameLogs();
+//# sourceMappingURL=ApiGameLogs.js.map

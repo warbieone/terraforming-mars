@@ -28,3 +28,4 @@ class GrantResourceDeferred extends DeferredAction_1.DeferredAction {
     }
 }
 exports.GrantResourceDeferred = GrantResourceDeferred;
+//# sourceMappingURL=GrantResourceDeferred.js.map

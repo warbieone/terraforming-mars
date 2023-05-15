@@ -32,3 +32,4 @@ var Payment;
     }
     Payment.of = of;
 })(Payment = exports.Payment || (exports.Payment = {}));
+//# sourceMappingURL=Payment.js.map

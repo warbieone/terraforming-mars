@@ -17,15 +17,16 @@ class FloaterLeasing extends Card_1.Card {
             metadata: {
                 cardNumber: 'C10',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => pb.megacredits(1)).slash().floaters(3, { digit: Options_1.digit });
+                    b.production((pb) => pb.megacredits(1)).slash().floaters(2, { digit: Options_1.digit });
                 }),
-                description: 'Increase your M€ production 1 step PER 3 floaters you have.',
+                description: 'Increase your M€ production 1 step PER 2 floaters you have.',
             },
         });
     }
     bespokePlay(player) {
-        player.production.add(Resource_1.Resource.MEGACREDITS, Math.floor(player.getResourceCount(CardResource_1.CardResource.FLOATER) / 3), { log: true });
+        player.production.add(Resource_1.Resource.MEGACREDITS, Math.floor(player.getResourceCount(CardResource_1.CardResource.FLOATER) / 2), { log: true });
         return undefined;
     }
 }
 exports.FloaterLeasing = FloaterLeasing;
+//# sourceMappingURL=FloaterLeasing.js.map

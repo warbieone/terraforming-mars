@@ -20,9 +20,9 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
       cost: 13,
       victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.production(Resource.TITANIUM)),
+      requirements: CardRequirements.builder((b) => b.generation(4)),
       metadata: {
-        description: 'Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.',
+        description: 'Requires that it is Generation 4. Decrease any titanium production 1 step and increase your own 1 step.',
         cardNumber: '002',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {

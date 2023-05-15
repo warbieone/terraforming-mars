@@ -38,3 +38,4 @@ class ColoniesHandler {
     }
 }
 exports.ColoniesHandler = ColoniesHandler;
+//# sourceMappingURL=ColoniesHandler.js.map

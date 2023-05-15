@@ -29,3 +29,4 @@ class Hygiea extends Colony_1.Colony {
     }
 }
 exports.Hygiea = Hygiea;
+//# sourceMappingURL=Hygiea.js.map

@@ -14,3 +14,4 @@ class GamesOverview extends Handler_1.Handler {
 }
 exports.GamesOverview = GamesOverview;
 GamesOverview.INSTANCE = new GamesOverview();
+//# sourceMappingURL=GamesOverview.js.map

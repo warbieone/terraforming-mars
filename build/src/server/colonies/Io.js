@@ -21,3 +21,4 @@ class Io extends Colony_1.Colony {
     }
 }
 exports.Io = Io;
+//# sourceMappingURL=Io.js.map

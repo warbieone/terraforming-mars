@@ -30,3 +30,4 @@ class SupportedResearch extends Card_1.Card {
     }
 }
 exports.SupportedResearch = SupportedResearch;
+//# sourceMappingURL=SupportedResearch.js.map

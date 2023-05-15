@@ -8,6 +8,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
+import {Resource} from '../../../common/Resource';
 
 export class PointLuna extends Card implements ICorporationCard {
   constructor() {
@@ -16,10 +17,6 @@ export class PointLuna extends Card implements ICorporationCard {
       name: CardName.POINT_LUNA,
       tags: [Tag.SPACE, Tag.EARTH],
       startingMegaCredits: 48,
-
-      behavior: {
-        production: {titanium: 1},
-      },
 
       metadata: {
         cardNumber: 'R10',
@@ -52,6 +49,7 @@ export class PointLuna extends Card implements ICorporationCard {
   }
 
   public override play(player: Player) {
+    player.production.add(Resource.TITANIUM, 1);
     player.drawCard();
     player.game.defer(new DiscardCards(player, 1));
     return undefined;

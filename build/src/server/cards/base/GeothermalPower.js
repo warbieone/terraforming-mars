@@ -25,3 +25,4 @@ class GeothermalPower extends Card_1.Card {
     }
 }
 exports.GeothermalPower = GeothermalPower;
+//# sourceMappingURL=GeothermalPower.js.map

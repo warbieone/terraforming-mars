@@ -43,3 +43,4 @@ var SpaceName;
     SpaceName["HADRIACUS_MONS"] = "38";
     SpaceName["TYRRHENUS_MONS"] = "21";
 })(SpaceName = exports.SpaceName || (exports.SpaceName = {}));
+//# sourceMappingURL=SpaceName.js.map

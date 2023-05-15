@@ -26,3 +26,4 @@ class ResearchGrant extends PreludeCard_1.PreludeCard {
     }
 }
 exports.ResearchGrant = ResearchGrant;
+//# sourceMappingURL=ResearchGrant.js.map

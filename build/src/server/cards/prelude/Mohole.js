@@ -18,7 +18,7 @@ class Mohole extends PreludeCard_1.PreludeCard {
                 cardNumber: 'P22',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.heat(2).energy(1)).br;
-                    b.heat(5);
+                    b.heat(5).br;
                     b.energy(3);
                 }),
                 description: 'Increase your heat production 2 steps and energy production 1 step. Gain 3 energy and 5 heat',
@@ -27,3 +27,4 @@ class Mohole extends PreludeCard_1.PreludeCard {
     }
 }
 exports.Mohole = Mohole;
+//# sourceMappingURL=Mohole.js.map

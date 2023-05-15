@@ -36,3 +36,4 @@ class BiomassCombustors extends Card_1.Card {
     }
 }
 exports.BiomassCombustors = BiomassCombustors;
+//# sourceMappingURL=BiomassCombustors.js.map

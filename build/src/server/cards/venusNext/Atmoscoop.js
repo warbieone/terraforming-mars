@@ -79,3 +79,4 @@ class Atmoscoop extends Card_1.Card {
     }
 }
 exports.Atmoscoop = Atmoscoop;
+//# sourceMappingURL=Atmoscoop.js.map

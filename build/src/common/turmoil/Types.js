@@ -7,3 +7,4 @@ var AgendaStyle;
     AgendaStyle["RANDOM"] = "Random";
     AgendaStyle["CHAIRMAN"] = "Chairman";
 })(AgendaStyle = exports.AgendaStyle || (exports.AgendaStyle = {}));
+//# sourceMappingURL=Types.js.map

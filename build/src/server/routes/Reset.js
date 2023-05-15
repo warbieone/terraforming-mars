@@ -69,3 +69,4 @@ class Reset extends Handler_1.Handler {
 }
 exports.Reset = Reset;
 Reset.INSTANCE = new Reset();
+//# sourceMappingURL=Reset.js.map

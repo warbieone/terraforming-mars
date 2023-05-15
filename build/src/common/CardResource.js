@@ -21,3 +21,4 @@ var CardResource;
     CardResource["AGENDA"] = "Agenda";
     CardResource["ORBITAL"] = "Orbital";
 })(CardResource = exports.CardResource || (exports.CardResource = {}));
+//# sourceMappingURL=CardResource.js.map

@@ -20,3 +20,4 @@ class IapetusII extends Colony_1.Colony {
     }
 }
 exports.IapetusII = IapetusII;
+//# sourceMappingURL=IapetusII.js.map

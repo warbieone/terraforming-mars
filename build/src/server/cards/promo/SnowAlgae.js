@@ -12,7 +12,7 @@ class SnowAlgae extends Card_1.Card {
         super({
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.SNOW_ALGAE,
-            cost: 12,
+            cost: 11,
             tags: [Tag_1.Tag.PLANT],
             behavior: {
                 production: { plants: 1, heat: 1 },
@@ -31,3 +31,4 @@ class SnowAlgae extends Card_1.Card {
     }
 }
 exports.SnowAlgae = SnowAlgae;
+//# sourceMappingURL=SnowAlgae.js.map

@@ -26,3 +26,4 @@ class Biolab extends PreludeCard_1.PreludeCard {
     }
 }
 exports.Biolab = Biolab;
+//# sourceMappingURL=Biolab.js.map

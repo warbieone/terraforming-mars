@@ -13,8 +13,8 @@ class IndustrialCenter extends ActionCard_1.ActionCard {
     constructor(name = CardName_1.CardName.INDUSTRIAL_CENTER, adjacencyBonus = undefined, metadata = {
         cardNumber: '123',
         renderData: CardRenderer_1.CardRenderer.builder((b) => {
-            b.action('Spend 7 M€ to increase your steel production 1 step.', (eb) => {
-                eb.megacredits(7).startAction.production((pb) => pb.steel(1));
+            b.action('Spend 6 M€ to increase your steel production 1 step.', (eb) => {
+                eb.megacredits(6).startAction.production((pb) => pb.steel(1));
             }).br;
             b.tile(TileType_1.TileType.INDUSTRIAL_CENTER, true, false).asterix();
         }),
@@ -28,7 +28,7 @@ class IndustrialCenter extends ActionCard_1.ActionCard {
             adjacencyBonus,
             action: {
                 spend: {
-                    megacredits: 7,
+                    megacredits: 6,
                 },
                 production: { steel: 1 },
             },
@@ -51,3 +51,4 @@ class IndustrialCenter extends ActionCard_1.ActionCard {
     }
 }
 exports.IndustrialCenter = IndustrialCenter;
+//# sourceMappingURL=IndustrialCenter.js.map

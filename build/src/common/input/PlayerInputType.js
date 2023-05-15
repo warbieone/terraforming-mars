@@ -19,3 +19,4 @@ var PlayerInputType;
     PlayerInputType[PlayerInputType["SELECT_PRODUCTION_TO_LOSE"] = 13] = "SELECT_PRODUCTION_TO_LOSE";
     PlayerInputType[PlayerInputType["SHIFT_ARES_GLOBAL_PARAMETERS"] = 14] = "SHIFT_ARES_GLOBAL_PARAMETERS";
 })(PlayerInputType = exports.PlayerInputType || (exports.PlayerInputType = {}));
+//# sourceMappingURL=PlayerInputType.js.map

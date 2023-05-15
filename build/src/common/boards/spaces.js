@@ -9,3 +9,4 @@ function isMarsSpace(spaceId) {
     return !isMoonSpace(spaceId);
 }
 exports.isMarsSpace = isMarsSpace;
+//# sourceMappingURL=spaces.js.map

@@ -9,3 +9,4 @@ class Log {
     }
 }
 exports.Log = Log;
+//# sourceMappingURL=Log.js.map

@@ -30,3 +30,4 @@ class LightningHarvest extends Card_1.Card {
     }
 }
 exports.LightningHarvest = LightningHarvest;
+//# sourceMappingURL=LightningHarvest.js.map

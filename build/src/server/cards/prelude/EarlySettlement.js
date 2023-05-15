@@ -26,3 +26,4 @@ class EarlySettlement extends PreludeCard_1.PreludeCard {
     }
 }
 exports.EarlySettlement = EarlySettlement;
+//# sourceMappingURL=EarlySettlement.js.map

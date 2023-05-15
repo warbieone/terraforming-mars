@@ -84,3 +84,4 @@ exports.CEO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.CO_LEADERSHIP]: { Factory: CoLeadership_1.CoLeadership },
     },
 });
+//# sourceMappingURL=CeoCardManifest.js.map

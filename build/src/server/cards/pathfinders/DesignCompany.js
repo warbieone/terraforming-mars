@@ -26,3 +26,4 @@ class DesignCompany extends PreludeCard_1.PreludeCard {
     }
 }
 exports.DesignCompany = DesignCompany;
+//# sourceMappingURL=DesignCompany.js.map

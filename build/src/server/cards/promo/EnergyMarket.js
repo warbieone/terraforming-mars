@@ -18,7 +18,7 @@ class EnergyMarket extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.ENERGY_MARKET,
             tags: [Tag_1.Tag.POWER],
-            cost: 3,
+            cost: 5,
             metadata: {
                 cardNumber: 'X03',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -69,3 +69,4 @@ class EnergyMarket extends Card_1.Card {
     }
 }
 exports.EnergyMarket = EnergyMarket;
+//# sourceMappingURL=EnergyMarket.js.map

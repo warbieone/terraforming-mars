@@ -37,3 +37,4 @@ function initialize() {
     });
 }
 initialize();
+//# sourceMappingURL=ClientCardManifest.js.map

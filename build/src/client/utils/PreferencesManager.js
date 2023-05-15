@@ -69,3 +69,4 @@ function getPreferences() {
     return PreferencesManager.INSTANCE.values();
 }
 exports.getPreferences = getPreferences;
+//# sourceMappingURL=PreferencesManager.js.map

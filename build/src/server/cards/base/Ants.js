@@ -45,3 +45,4 @@ class Ants extends Card_1.Card {
     }
 }
 exports.Ants = Ants;
+//# sourceMappingURL=Ants.js.map

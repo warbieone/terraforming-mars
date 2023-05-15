@@ -865,7 +865,8 @@ class Game {
         }
         const aphrodite = this.players.find((player) => player.isCorporation(CardName_1.CardName.APHRODITE));
         if (aphrodite !== undefined) {
-            aphrodite.megaCredits += steps * 2;
+            aphrodite.addResource(Resource_1.Resource.MEGACREDITS, steps * 3, { log: true });
+            player.addResource(Resource_1.Resource.MEGACREDITS, steps * 2, { log: true });
         }
         this.venusScaleLevel += steps * 2;
         return steps;
@@ -1334,3 +1335,4 @@ class Game {
     }
 }
 exports.Game = Game;
+//# sourceMappingURL=Game.js.map

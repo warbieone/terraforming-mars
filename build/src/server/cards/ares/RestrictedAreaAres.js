@@ -21,3 +21,4 @@ class RestrictedAreaAres extends RestrictedArea_1.RestrictedArea {
     }
 }
 exports.RestrictedAreaAres = RestrictedAreaAres;
+//# sourceMappingURL=RestrictedAreaAres.js.map

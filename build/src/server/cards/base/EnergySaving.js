@@ -13,7 +13,7 @@ class EnergySaving extends Card_1.Card {
         super({
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.ENERGY_SAVING,
-            tags: [Tag_1.Tag.POWER],
+            tags: [Tag_1.Tag.POWER, Tag_1.Tag.BUILDING],
             cost: 15,
             behavior: {
                 production: { energy: { cities: {} } },
@@ -29,3 +29,4 @@ class EnergySaving extends Card_1.Card {
     }
 }
 exports.EnergySaving = EnergySaving;
+//# sourceMappingURL=EnergySaving.js.map

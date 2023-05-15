@@ -23,3 +23,4 @@ class Europa extends Colony_1.Colony {
     }
 }
 exports.Europa = Europa;
+//# sourceMappingURL=Europa.js.map

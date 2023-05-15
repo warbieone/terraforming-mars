@@ -11,3 +11,4 @@ class Politician {
     }
 }
 exports.Politician = Politician;
+//# sourceMappingURL=Politician.js.map

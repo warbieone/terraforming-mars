@@ -29,3 +29,4 @@ class MiningRobotsManufCenter extends Card_1.Card {
     }
 }
 exports.MiningRobotsManufCenter = MiningRobotsManufCenter;
+//# sourceMappingURL=MiningRobotsManufCenter.js.map

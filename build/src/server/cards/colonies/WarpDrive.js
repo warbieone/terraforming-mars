@@ -11,7 +11,7 @@ const Options_1 = require("../Options");
 class WarpDrive extends Card_1.Card {
     constructor() {
         super({
-            cost: 14,
+            cost: 16,
             tags: [Tag_1.Tag.SCIENCE],
             name: CardName_1.CardName.WARP_DRIVE,
             type: CardType_1.CardType.ACTIVE,
@@ -31,3 +31,4 @@ class WarpDrive extends Card_1.Card {
     }
 }
 exports.WarpDrive = WarpDrive;
+//# sourceMappingURL=WarpDrive.js.map

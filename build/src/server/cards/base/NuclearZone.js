@@ -36,3 +36,4 @@ class NuclearZone extends Card_1.Card {
     }
 }
 exports.NuclearZone = NuclearZone;
+//# sourceMappingURL=NuclearZone.js.map

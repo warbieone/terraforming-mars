@@ -97,3 +97,4 @@ class TradeWithCollegiumCopernicus {
     }
 }
 exports.TradeWithCollegiumCopernicus = TradeWithCollegiumCopernicus;
+//# sourceMappingURL=CollegiumCopernicus.js.map

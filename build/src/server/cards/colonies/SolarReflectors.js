@@ -28,3 +28,4 @@ class SolarReflectors extends Card_1.Card {
     }
 }
 exports.SolarReflectors = SolarReflectors;
+//# sourceMappingURL=SolarReflectors.js.map

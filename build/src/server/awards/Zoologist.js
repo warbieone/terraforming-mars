@@ -12,3 +12,4 @@ class Zoologist {
     }
 }
 exports.Zoologist = Zoologist;
+//# sourceMappingURL=Zoologist.js.map

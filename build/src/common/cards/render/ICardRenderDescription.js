@@ -5,3 +5,4 @@ function isIDescription(item) {
     return item && item.text && typeof (item.text) === 'string';
 }
 exports.isIDescription = isIDescription;
+//# sourceMappingURL=ICardRenderDescription.js.map

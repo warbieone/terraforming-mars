@@ -18,7 +18,7 @@ class MassConverter extends Card_1.Card {
             behavior: {
                 production: { energy: 6 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 5)),
+            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 6)),
             cardDiscount: { tag: Tag_1.Tag.SPACE, amount: 2, per: 'card' },
             metadata: {
                 cardNumber: '094',
@@ -28,9 +28,10 @@ class MassConverter extends Card_1.Card {
                     }).br;
                     b.production((pb) => pb.energy(6));
                 }),
-                description: 'Requires 5 science tags. Increase your energy production 6 steps.',
+                description: 'Requires 6 science tags. Increase your energy production 6 steps.',
             },
         });
     }
 }
 exports.MassConverter = MassConverter;
+//# sourceMappingURL=MassConverter.js.map

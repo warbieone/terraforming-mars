@@ -169,3 +169,4 @@ class ServeAsset extends Handler_1.Handler {
 }
 exports.ServeAsset = ServeAsset;
 ServeAsset.INSTANCE = new ServeAsset();
+//# sourceMappingURL=ServeAsset.js.map

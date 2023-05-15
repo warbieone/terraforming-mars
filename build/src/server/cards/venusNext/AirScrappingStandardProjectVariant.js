@@ -31,3 +31,4 @@ class AirScrappingStandardProjectVariant extends AirScrappingStandardProject_1.A
     }
 }
 exports.AirScrappingStandardProjectVariant = AirScrappingStandardProjectVariant;
+//# sourceMappingURL=AirScrappingStandardProjectVariant.js.map

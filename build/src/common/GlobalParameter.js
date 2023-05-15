@@ -11,3 +11,4 @@ var GlobalParameter;
     GlobalParameter[GlobalParameter["MOON_MINING_RATE"] = 5] = "MOON_MINING_RATE";
     GlobalParameter[GlobalParameter["MOON_LOGISTICS_RATE"] = 6] = "MOON_LOGISTICS_RATE";
 })(GlobalParameter = exports.GlobalParameter || (exports.GlobalParameter = {}));
+//# sourceMappingURL=GlobalParameter.js.map

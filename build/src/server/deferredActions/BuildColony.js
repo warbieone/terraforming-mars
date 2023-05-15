@@ -24,3 +24,4 @@ class BuildColony extends DeferredAction_1.DeferredAction {
     }
 }
 exports.BuildColony = BuildColony;
+//# sourceMappingURL=BuildColony.js.map

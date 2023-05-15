@@ -41,3 +41,4 @@ class SeptumTribus extends Card_1.Card {
     }
 }
 exports.SeptumTribus = SeptumTribus;
+//# sourceMappingURL=SeptumTribus.js.map

@@ -54,3 +54,4 @@ exports.TURMOIL_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.SEPTUM_TRIBUS]: { Factory: SeptumTribus_1.SeptumTribus, compatibility: 'turmoil' },
     },
 });
+//# sourceMappingURL=TurmoilCardManifest.js.map

@@ -28,3 +28,4 @@ class SponsoredProjects extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.SponsoredProjects = SponsoredProjects;
+//# sourceMappingURL=SponsoredProjects.js.map

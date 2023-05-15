@@ -270,3 +270,4 @@ class SQLite {
     }
 }
 exports.SQLite = SQLite;
+//# sourceMappingURL=SQLite.js.map

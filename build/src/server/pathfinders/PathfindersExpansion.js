@@ -231,3 +231,4 @@ class PathfindersExpansion {
     }
 }
 exports.PathfindersExpansion = PathfindersExpansion;
+//# sourceMappingURL=PathfindersExpansion.js.map

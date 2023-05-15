@@ -34,3 +34,4 @@ class Farming extends Card_1.Card {
     }
 }
 exports.Farming = Farming;
+//# sourceMappingURL=Farming.js.map

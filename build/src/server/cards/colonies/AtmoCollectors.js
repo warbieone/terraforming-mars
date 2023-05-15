@@ -61,3 +61,4 @@ class AtmoCollectors extends ActionCard_1.ActionCard {
     }
 }
 exports.AtmoCollectors = AtmoCollectors;
+//# sourceMappingURL=AtmoCollectors.js.map

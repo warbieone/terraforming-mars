@@ -35,3 +35,4 @@ class SpacePort extends Card_1.Card {
     }
 }
 exports.SpacePort = SpacePort;
+//# sourceMappingURL=SpacePort.js.map

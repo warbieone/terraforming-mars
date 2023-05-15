@@ -55,3 +55,4 @@ function getColonyModule(name) {
     return 'colonies';
 }
 exports.getColonyModule = getColonyModule;
+//# sourceMappingURL=ColonyManifest.js.map

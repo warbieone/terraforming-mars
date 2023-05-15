@@ -9,7 +9,7 @@ const Card_1 = require("../Card");
 class SpinoffDepartment extends Card_1.Card {
     constructor() {
         super({
-            cost: 10,
+            cost: 13,
             tags: [Tag_1.Tag.BUILDING],
             name: CardName_1.CardName.SPINOFF_DEPARTMENT,
             type: CardType_1.CardType.ACTIVE,
@@ -35,3 +35,4 @@ class SpinoffDepartment extends Card_1.Card {
     }
 }
 exports.SpinoffDepartment = SpinoffDepartment;
+//# sourceMappingURL=SpinoffDepartment.js.map

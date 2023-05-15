@@ -43,3 +43,4 @@ class EcologyResearch extends Card_1.Card {
     }
 }
 exports.EcologyResearch = EcologyResearch;
+//# sourceMappingURL=EcologyResearch.js.map

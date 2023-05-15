@@ -60,3 +60,4 @@ class BioengineeringEnclosure extends Card_1.Card {
     }
 }
 exports.BioengineeringEnclosure = BioengineeringEnclosure;
+//# sourceMappingURL=BioengineeringEnclosure.js.map

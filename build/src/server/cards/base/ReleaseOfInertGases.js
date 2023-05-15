@@ -10,7 +10,7 @@ class ReleaseOfInertGases extends Card_1.Card {
         super({
             type: CardType_1.CardType.EVENT,
             name: CardName_1.CardName.RELEASE_OF_INERT_GASES,
-            cost: 14,
+            cost: 13,
             behavior: {
                 tr: 2,
             },
@@ -25,3 +25,4 @@ class ReleaseOfInertGases extends Card_1.Card {
     }
 }
 exports.ReleaseOfInertGases = ReleaseOfInertGases;
+//# sourceMappingURL=ReleaseOfInertGases.js.map

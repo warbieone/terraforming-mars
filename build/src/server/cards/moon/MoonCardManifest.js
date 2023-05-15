@@ -226,3 +226,4 @@ exports.MOON_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.MINING_COMPLEX]: { Factory: MiningComplex_1.MiningComplex, compatibility: 'moon' },
     },
 });
+//# sourceMappingURL=MoonCardManifest.js.map

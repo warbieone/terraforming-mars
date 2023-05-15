@@ -38,3 +38,4 @@ class ArtificialPhotosynthesis extends Card_1.Card {
     }
 }
 exports.ArtificialPhotosynthesis = ArtificialPhotosynthesis;
+//# sourceMappingURL=ArtificialPhotosynthesis.js.map

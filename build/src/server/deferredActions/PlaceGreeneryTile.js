@@ -27,3 +27,4 @@ class PlaceGreeneryTile extends DeferredAction_1.DeferredAction {
     }
 }
 exports.PlaceGreeneryTile = PlaceGreeneryTile;
+//# sourceMappingURL=PlaceGreeneryTile.js.map

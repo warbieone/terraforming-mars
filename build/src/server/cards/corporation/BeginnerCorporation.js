@@ -26,3 +26,4 @@ class BeginnerCorporation extends Card_1.Card {
     }
 }
 exports.BeginnerCorporation = BeginnerCorporation;
+//# sourceMappingURL=BeginnerCorporation.js.map

@@ -31,3 +31,4 @@ class StandardTechnology extends Card_1.Card {
     }
 }
 exports.StandardTechnology = StandardTechnology;
+//# sourceMappingURL=StandardTechnology.js.map

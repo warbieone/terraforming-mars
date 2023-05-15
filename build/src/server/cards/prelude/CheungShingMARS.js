@@ -13,7 +13,7 @@ class CheungShingMARS extends Card_1.Card {
             type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.CHEUNG_SHING_MARS,
             tags: [Tag_1.Tag.BUILDING],
-            startingMegaCredits: 44,
+            startingMegaCredits: 46,
             behavior: {
                 production: { megacredits: 3 },
             },
@@ -24,7 +24,7 @@ class CheungShingMARS extends Card_1.Card {
                     b.br.br;
                     b.production((pb) => pb.megacredits(3)).nbsp.megacredits(44);
                     b.corpBox('effect', (ce) => {
-                        ce.effect('When you play a building tag, gain 2 M€ test.', (eb) => {
+                        ce.effect('When you play a building tag, gain 2 M€.', (eb) => {
                             eb.building(1, { played: Options_1.played }).startEffect.megacredits(2);
                         });
                     });
@@ -42,3 +42,4 @@ class CheungShingMARS extends Card_1.Card {
     }
 }
 exports.CheungShingMARS = CheungShingMARS;
+//# sourceMappingURL=CheungShingMARS.js.map

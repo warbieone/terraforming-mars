@@ -6,3 +6,4 @@ var RandomBoardOption;
     RandomBoardOption["OFFICIAL"] = "random official";
     RandomBoardOption["ALL"] = "random all";
 })(RandomBoardOption = exports.RandomBoardOption || (exports.RandomBoardOption = {}));
+//# sourceMappingURL=RandomBoardOption.js.map

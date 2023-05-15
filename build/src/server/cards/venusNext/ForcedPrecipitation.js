@@ -18,7 +18,7 @@ class ForcedPrecipitation extends Card_1.Card {
             name: CardName_1.CardName.FORCED_PRECIPITATION,
             type: CardType_1.CardType.ACTIVE,
             tags: [Tag_1.Tag.VENUS],
-            cost: 8,
+            cost: 4,
             resourceType: CardResource_1.CardResource.FLOATER,
             metadata: {
                 cardNumber: '226',
@@ -71,3 +71,4 @@ class ForcedPrecipitation extends Card_1.Card {
     }
 }
 exports.ForcedPrecipitation = ForcedPrecipitation;
+//# sourceMappingURL=ForcedPrecipitation.js.map

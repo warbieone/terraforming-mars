@@ -65,3 +65,4 @@ class SulphurEatingBacteria extends Card_1.Card {
     }
 }
 exports.SulphurEatingBacteria = SulphurEatingBacteria;
+//# sourceMappingURL=SulphurEatingBacteria.js.map

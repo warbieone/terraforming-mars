@@ -35,3 +35,4 @@ class Meltworks extends Card_1.Card {
     }
 }
 exports.Meltworks = Meltworks;
+//# sourceMappingURL=Meltworks.js.map

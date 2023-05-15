@@ -30,3 +30,4 @@ class OptimalAerobraking extends Card_1.Card {
     }
 }
 exports.OptimalAerobraking = OptimalAerobraking;
+//# sourceMappingURL=OptimalAerobraking.js.map

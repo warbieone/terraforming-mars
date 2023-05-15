@@ -35,3 +35,4 @@ class PowerPlantStandardProject extends StandardProjectCard_1.StandardProjectCar
     }
 }
 exports.PowerPlantStandardProject = PowerPlantStandardProject;
+//# sourceMappingURL=PowerPlantStandardProject.js.map

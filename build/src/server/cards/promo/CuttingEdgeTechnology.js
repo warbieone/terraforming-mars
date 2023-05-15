@@ -13,7 +13,7 @@ class CuttingEdgeTechnology extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.CUTTING_EDGE_TECHNOLOGY,
             tags: [Tag_1.Tag.SCIENCE],
-            cost: 12,
+            cost: 14,
             victoryPoints: 1,
             metadata: {
                 cardNumber: 'X18',
@@ -32,3 +32,4 @@ class CuttingEdgeTechnology extends Card_1.Card {
     }
 }
 exports.CuttingEdgeTechnology = CuttingEdgeTechnology;
+//# sourceMappingURL=CuttingEdgeTechnology.js.map

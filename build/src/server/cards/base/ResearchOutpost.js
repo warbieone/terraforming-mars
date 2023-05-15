@@ -13,6 +13,7 @@ class ResearchOutpost extends Card_1.Card {
             name: CardName_1.CardName.RESEARCH_OUTPOST,
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.CITY, Tag_1.Tag.BUILDING],
             cost: 18,
+            victoryPoints: -1,
             behavior: {
                 city: { on: 'isolated' },
             },
@@ -31,3 +32,4 @@ class ResearchOutpost extends Card_1.Card {
     }
 }
 exports.ResearchOutpost = ResearchOutpost;
+//# sourceMappingURL=ResearchOutpost.js.map

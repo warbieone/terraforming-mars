@@ -42,3 +42,4 @@ class Aurorai extends Card_1.Card {
     }
 }
 exports.Aurorai = Aurorai;
+//# sourceMappingURL=Aurorai.js.map

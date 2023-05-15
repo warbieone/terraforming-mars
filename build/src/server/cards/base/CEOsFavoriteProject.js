@@ -44,3 +44,4 @@ class CEOsFavoriteProject extends Card_1.Card {
     }
 }
 exports.CEOsFavoriteProject = CEOsFavoriteProject;
+//# sourceMappingURL=CEOsFavoriteProject.js.map

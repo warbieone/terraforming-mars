@@ -43,3 +43,4 @@ class SelectCard extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectCard = SelectCard;
+//# sourceMappingURL=SelectCard.js.map

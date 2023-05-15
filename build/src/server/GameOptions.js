@@ -11,6 +11,7 @@ exports.DEFAULT_GAME_OPTIONS = {
     aresHazards: true,
     boardName: BoardName_1.BoardName.THARSIS,
     bannedCards: [],
+    extraCards: [],
     ceoExtension: false,
     clonedGamedId: undefined,
     coloniesExtension: false,
@@ -52,3 +53,4 @@ exports.DEFAULT_GAME_OPTIONS = {
     venusNextExtension: false,
     twoCorpsVariant: false,
 };
+//# sourceMappingURL=GameOptions.js.map

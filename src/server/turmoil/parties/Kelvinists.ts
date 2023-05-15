@@ -58,7 +58,8 @@ class KelvinistsPolicy01 implements Policy {
   }
 
   cost(player: Player): number {
-    return player.cardIsInEffect(CardName.HIGH_TEMP_SUPERCONDUCTORS) ? 7: 10;
+    return player.cardIsInEffect(CardName.HIGH_TEMP_SUPERCONDUCTORS) || player.isCorporation(CardName.THORGATE) ? 7: 10;
+    //return player.cardIsInEffect(CardName.HIGH_TEMP_SUPERCONDUCTORS) ? 7: 10;
   }
   canAct(player: Player) {
     return player.canAfford(this.cost(player));

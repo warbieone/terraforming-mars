@@ -20,3 +20,4 @@ class GainStock extends DeferredAction_1.DeferredAction {
     }
 }
 exports.GainStock = GainStock;
+//# sourceMappingURL=GainStock.js.map

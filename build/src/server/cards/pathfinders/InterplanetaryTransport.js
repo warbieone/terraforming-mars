@@ -29,3 +29,4 @@ class InterplanetaryTransport extends Card_1.Card {
     }
 }
 exports.InterplanetaryTransport = InterplanetaryTransport;
+//# sourceMappingURL=InterplanetaryTransport.js.map

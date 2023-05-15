@@ -15,3 +15,4 @@ class StandardActionCard extends Card_1.Card {
     }
 }
 exports.StandardActionCard = StandardActionCard;
+//# sourceMappingURL=StandardActionCard.js.map

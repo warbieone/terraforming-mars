@@ -31,3 +31,4 @@ class Comet extends Card_1.Card {
     }
 }
 exports.Comet = Comet;
+//# sourceMappingURL=Comet.js.map

@@ -282,7 +282,7 @@ class Turmoil {
     addInfluenceBonus(player, bonus = 1) {
         if (this.playersInfluenceBonus.has(player.id)) {
             let current = this.playersInfluenceBonus.get(player.id);
-            if (current) {
+            if (current !== null && current !== undefined) {
                 current += bonus;
                 this.playersInfluenceBonus.set(player.id, current);
             }
@@ -381,3 +381,4 @@ class Turmoil {
     }
 }
 exports.Turmoil = Turmoil;
+//# sourceMappingURL=Turmoil.js.map

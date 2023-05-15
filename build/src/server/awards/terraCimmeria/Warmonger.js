@@ -56,3 +56,4 @@ Warmonger.attackCards = [
     CardName_1.CardName.SOLAR_STORM,
     CardName_1.CardName.BJORN,
 ];
+//# sourceMappingURL=Warmonger.js.map

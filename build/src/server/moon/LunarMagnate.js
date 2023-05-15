@@ -14,3 +14,4 @@ class LunarMagnate {
     }
 }
 exports.LunarMagnate = LunarMagnate;
+//# sourceMappingURL=LunarMagnate.js.map

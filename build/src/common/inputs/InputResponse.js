@@ -69,3 +69,4 @@ function isAresGlobalParametersResponse(obj) {
     return matches(obj, ['lowOceanDelta', 'highOceanDelta', 'temperatureDelta', 'oxygenDelta']);
 }
 exports.isAresGlobalParametersResponse = isAresGlobalParametersResponse;
+//# sourceMappingURL=InputResponse.js.map

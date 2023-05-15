@@ -30,3 +30,4 @@ class EccentricSponsor extends PreludeCard_1.PreludeCard {
     }
 }
 exports.EccentricSponsor = EccentricSponsor;
+//# sourceMappingURL=EccentricSponsor.js.map

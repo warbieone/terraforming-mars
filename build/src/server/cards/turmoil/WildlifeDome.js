@@ -30,3 +30,4 @@ class WildlifeDome extends Card_1.Card {
     }
 }
 exports.WildlifeDome = WildlifeDome;
+//# sourceMappingURL=WildlifeDome.js.map

@@ -14,7 +14,7 @@ class Insects extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.INSECTS,
             tags: [Tag_1.Tag.MICROBE],
-            cost: 9,
+            cost: 11,
             behavior: {
                 production: { plants: { tag: Tag_1.Tag.PLANT } },
             },
@@ -30,3 +30,4 @@ class Insects extends Card_1.Card {
     }
 }
 exports.Insects = Insects;
+//# sourceMappingURL=Insects.js.map

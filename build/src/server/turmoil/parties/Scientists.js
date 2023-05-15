@@ -100,3 +100,4 @@ exports.SCIENTISTS_POLICY_1 = new ScientistsPolicy01();
 exports.SCIENTISTS_POLICY_2 = new ScientistsPolicy02();
 exports.SCIENTISTS_POLICY_3 = new ScientistsPolicy03();
 exports.SCIENTISTS_POLICY_4 = new ScientistsPolicy04();
+//# sourceMappingURL=Scientists.js.map

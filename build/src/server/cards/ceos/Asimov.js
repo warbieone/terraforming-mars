@@ -92,3 +92,4 @@ class Asimov extends CeoCard_1.CeoCard {
     }
 }
 exports.Asimov = Asimov;
+//# sourceMappingURL=Asimov.js.map

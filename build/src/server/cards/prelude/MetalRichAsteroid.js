@@ -24,3 +24,4 @@ class MetalRichAsteroid extends PreludeCard_1.PreludeCard {
     }
 }
 exports.MetalRichAsteroid = MetalRichAsteroid;
+//# sourceMappingURL=MetalRichAsteroid.js.map

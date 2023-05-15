@@ -100,3 +100,4 @@ function isHazardTileType(tile) {
     return exports.HAZARD_TILES.has(tile);
 }
 exports.isHazardTileType = isHazardTileType;
+//# sourceMappingURL=TileType.js.map

@@ -12,7 +12,7 @@ class GHGImportFromVenus extends Card_1.Card {
             name: CardName_1.CardName.GHG_IMPORT_FROM_VENUS,
             type: CardType_1.CardType.EVENT,
             tags: [Tag_1.Tag.SPACE, Tag_1.Tag.VENUS],
-            cost: 23,
+            cost: 20,
             behavior: {
                 production: { heat: 3 },
                 global: { venus: 1 },
@@ -30,3 +30,4 @@ class GHGImportFromVenus extends Card_1.Card {
     }
 }
 exports.GHGImportFromVenus = GHGImportFromVenus;
+//# sourceMappingURL=GHGImportFromVenus.js.map

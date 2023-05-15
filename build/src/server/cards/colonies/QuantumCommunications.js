@@ -39,3 +39,4 @@ class QuantumCommunications extends Card_1.Card {
     }
 }
 exports.QuantumCommunications = QuantumCommunications;
+//# sourceMappingURL=QuantumCommunications.js.map

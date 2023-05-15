@@ -8,3 +8,4 @@ var SpecialTags;
     SpecialTags["CITY_COUNT"] = "city-count";
     SpecialTags["COLONY_COUNT"] = "colony-count";
 })(SpecialTags = exports.SpecialTags || (exports.SpecialTags = {}));
+//# sourceMappingURL=SpecialTags.js.map

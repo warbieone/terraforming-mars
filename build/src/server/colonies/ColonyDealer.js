@@ -64,3 +64,4 @@ class ColonyDealer {
     }
 }
 exports.ColonyDealer = ColonyDealer;
+//# sourceMappingURL=ColonyDealer.js.map

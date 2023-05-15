@@ -115,3 +115,4 @@ class Space {
         return new Space(id, SpaceType_1.SpaceType.OCEAN, bonus, x, y);
     }
 }
+//# sourceMappingURL=BoardBuilder.js.map

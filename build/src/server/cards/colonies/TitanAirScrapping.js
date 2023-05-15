@@ -21,8 +21,8 @@ class TitanAirScrapping extends Card_1.Card {
             metadata: {
                 cardNumber: 'C43',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.action('Spend 1 titanium to add 2 floaters here.', (eb) => {
-                        eb.titanium(1).startAction.floaters(2);
+                    b.action('Spend 1 titanium to add 4 floaters here.', (eb) => {
+                        eb.titanium(1).startAction.floaters(4);
                     }).br;
                     b.or().br;
                     b.action('Spend 2 floaters here to increase your TR 1 step.', (eb) => {
@@ -43,7 +43,7 @@ class TitanAirScrapping extends Card_1.Card {
     }
     action(player) {
         const opts = [];
-        const addResource = new SelectOption_1.SelectOption('Spend 1 titanium to add 2 floaters on this card', 'Spend titanium', () => this.addResource(player));
+        const addResource = new SelectOption_1.SelectOption('Spend 1 titanium to add 4 floaters on this card', 'Spend titanium', () => this.addResource(player));
         const spendResource = new SelectOption_1.SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters', () => this.spendResource(player));
         if (this.resourceCount >= 2 && player.canAfford(0, { tr: { tr: 1 } })) {
             opts.push(spendResource);
@@ -57,7 +57,7 @@ class TitanAirScrapping extends Card_1.Card {
         return new OrOptions_1.OrOptions(...opts);
     }
     addResource(player) {
-        player.addResourceTo(this, 2);
+        player.addResourceTo(this, 4);
         player.titanium--;
         return undefined;
     }
@@ -68,3 +68,4 @@ class TitanAirScrapping extends Card_1.Card {
     }
 }
 exports.TitanAirScrapping = TitanAirScrapping;
+//# sourceMappingURL=TitanAirScrapping.js.map

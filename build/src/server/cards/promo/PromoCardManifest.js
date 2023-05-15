@@ -127,3 +127,4 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.SPLICE]: { Factory: Splice_1.Splice },
     },
 });
+//# sourceMappingURL=PromoCardManifest.js.map

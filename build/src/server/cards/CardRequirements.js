@@ -114,6 +114,10 @@ class Builder {
         this.reqs.push(new CardRequirement_1.PartyCardRequirement(party));
         return this;
     }
+    generation(amount) {
+        this.reqs.push(new CardRequirement_1.CardRequirement(RequirementType_1.RequirementType.GENERATION, amount));
+        return this;
+    }
     plantsRemoved() {
         this.reqs.push(new CardRequirement_1.CardRequirement(RequirementType_1.RequirementType.REMOVED_PLANTS));
         return this;
@@ -143,3 +147,4 @@ class Builder {
         return this;
     }
 }
+//# sourceMappingURL=CardRequirements.js.map

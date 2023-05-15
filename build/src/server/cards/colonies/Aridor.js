@@ -89,3 +89,4 @@ class Aridor extends Card_1.Card {
     }
 }
 exports.Aridor = Aridor;
+//# sourceMappingURL=Aridor.js.map

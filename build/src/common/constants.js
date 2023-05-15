@@ -68,3 +68,4 @@ exports.LANGUAGES = [
 exports.APP_NAME = 'Terraforming Mars';
 exports.DISCORD_INVITE = 'https://discord.gg/afeyggbN6Y';
 exports.PRELUDE_CARDS_DEALT_PER_PLAYER = 4;
+//# sourceMappingURL=constants.js.map

@@ -35,3 +35,4 @@ class ModuleManifest {
     }
 }
 exports.ModuleManifest = ModuleManifest;
+//# sourceMappingURL=ModuleManifest.js.map

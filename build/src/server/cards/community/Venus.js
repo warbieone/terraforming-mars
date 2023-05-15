@@ -17,3 +17,4 @@ class Venus extends Colony_1.Colony {
     }
 }
 exports.Venus = Venus;
+//# sourceMappingURL=Venus.js.map

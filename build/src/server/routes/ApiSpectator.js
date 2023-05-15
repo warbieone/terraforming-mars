@@ -38,3 +38,4 @@ class ApiSpectator extends Handler_1.Handler {
 }
 exports.ApiSpectator = ApiSpectator;
 ApiSpectator.INSTANCE = new ApiSpectator();
+//# sourceMappingURL=ApiSpectator.js.map

@@ -49,3 +49,4 @@ class DesperateMeasures extends Card_1.Card {
     }
 }
 exports.DesperateMeasures = DesperateMeasures;
+//# sourceMappingURL=DesperateMeasures.js.map

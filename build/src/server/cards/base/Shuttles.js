@@ -41,3 +41,4 @@ class Shuttles extends Card_1.Card {
     }
 }
 exports.Shuttles = Shuttles;
+//# sourceMappingURL=Shuttles.js.map

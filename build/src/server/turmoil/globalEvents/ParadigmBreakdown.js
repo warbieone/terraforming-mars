@@ -33,3 +33,4 @@ class ParadigmBreakdown extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.ParadigmBreakdown = ParadigmBreakdown;
+//# sourceMappingURL=ParadigmBreakdown.js.map

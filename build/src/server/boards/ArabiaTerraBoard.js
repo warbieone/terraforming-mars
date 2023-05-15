@@ -54,3 +54,4 @@ class ArabiaTerraBoard extends Board_1.Board {
     }
 }
 exports.ArabiaTerraBoard = ArabiaTerraBoard;
+//# sourceMappingURL=ArabiaTerraBoard.js.map

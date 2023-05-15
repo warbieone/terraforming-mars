@@ -31,3 +31,4 @@ class SelectResourceTypeDeferred extends DeferredAction_1.DeferredAction {
     }
 }
 exports.SelectResourceTypeDeferred = SelectResourceTypeDeferred;
+//# sourceMappingURL=SelectResourceTypeDeferred.js.map

@@ -47,3 +47,4 @@ class LocalShading extends ActionCard_1.ActionCard {
     }
 }
 exports.LocalShading = LocalShading;
+//# sourceMappingURL=LocalShading.js.map

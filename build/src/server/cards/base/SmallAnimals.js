@@ -44,3 +44,4 @@ class SmallAnimals extends ActionCard_1.ActionCard {
     }
 }
 exports.SmallAnimals = SmallAnimals;
+//# sourceMappingURL=SmallAnimals.js.map

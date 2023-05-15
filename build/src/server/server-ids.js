@@ -7,3 +7,4 @@ function generateRandomId(prefix) {
 exports.generateRandomId = generateRandomId;
 exports.serverId = process.env.SERVER_ID || generateRandomId('');
 exports.statsId = process.env.STATS_ID || generateRandomId('');
+//# sourceMappingURL=server-ids.js.map

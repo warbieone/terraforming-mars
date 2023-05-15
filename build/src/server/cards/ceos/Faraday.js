@@ -76,3 +76,4 @@ class Faraday extends CeoCard_1.CeoCard {
     }
 }
 exports.Faraday = Faraday;
+//# sourceMappingURL=Faraday.js.map

@@ -25,3 +25,4 @@ class DiscardCards extends DeferredAction_1.DeferredAction {
     }
 }
 exports.DiscardCards = DiscardCards;
+//# sourceMappingURL=DiscardCards.js.map

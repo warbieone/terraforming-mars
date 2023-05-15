@@ -32,3 +32,4 @@ class TerraformingControlStation extends Card_1.Card {
     }
 }
 exports.TerraformingControlStation = TerraformingControlStation;
+//# sourceMappingURL=TerraformingControlStation.js.map

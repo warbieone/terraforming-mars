@@ -14,7 +14,7 @@ class MartianRails extends ActionCard_1.ActionCard {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.MARTIAN_RAILS,
             tags: [Tag_1.Tag.BUILDING],
-            cost: 13,
+            cost: 12,
             action: {
                 spend: { energy: 1 },
                 stock: { megacredits: { cities: { where: 'onmars' } } },
@@ -32,3 +32,4 @@ class MartianRails extends ActionCard_1.ActionCard {
     }
 }
 exports.MartianRails = MartianRails;
+//# sourceMappingURL=MartianRails.js.map

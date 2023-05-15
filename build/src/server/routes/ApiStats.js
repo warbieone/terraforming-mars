@@ -31,3 +31,4 @@ class ApiStats extends Handler_1.Handler {
 }
 exports.ApiStats = ApiStats;
 ApiStats.INSTANCE = new ApiStats();
+//# sourceMappingURL=ApiStats.js.map

@@ -32,3 +32,4 @@ class ApiMetrics extends Handler_1.Handler {
 }
 exports.ApiMetrics = ApiMetrics;
 ApiMetrics.INSTANCE = new ApiMetrics();
+//# sourceMappingURL=ApiMetrics.js.map

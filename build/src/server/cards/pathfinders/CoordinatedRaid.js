@@ -34,3 +34,4 @@ class CoordinatedRaid extends Card_1.Card {
     }
 }
 exports.CoordinatedRaid = CoordinatedRaid;
+//# sourceMappingURL=CoordinatedRaid.js.map

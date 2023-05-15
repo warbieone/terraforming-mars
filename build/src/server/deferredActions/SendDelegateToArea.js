@@ -61,3 +61,4 @@ class SendDelegateToArea extends DeferredAction_1.DeferredAction {
     }
 }
 exports.SendDelegateToArea = SendDelegateToArea;
+//# sourceMappingURL=SendDelegateToArea.js.map

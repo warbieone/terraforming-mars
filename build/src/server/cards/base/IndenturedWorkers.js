@@ -30,3 +30,4 @@ class IndenturedWorkers extends Card_1.Card {
     }
 }
 exports.IndenturedWorkers = IndenturedWorkers;
+//# sourceMappingURL=IndenturedWorkers.js.map

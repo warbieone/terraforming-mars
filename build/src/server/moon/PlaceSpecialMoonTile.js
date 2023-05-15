@@ -23,3 +23,4 @@ class PlaceSpecialMoonTile extends DeferredAction_1.DeferredAction {
     }
 }
 exports.PlaceSpecialMoonTile = PlaceSpecialMoonTile;
+//# sourceMappingURL=PlaceSpecialMoonTile.js.map

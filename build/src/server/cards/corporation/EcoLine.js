@@ -9,6 +9,7 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
+const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 class EcoLine extends Card_1.Card {
     constructor() {
         super({
@@ -35,17 +36,20 @@ class EcoLine extends Card_1.Card {
             },
         });
     }
+    play(player) {
+        this.gainBonus(player, 1);
+        return undefined;
+    }
     gainBonus(player, amount) {
         for (let i = 0; i < amount; i++) {
-            const addCredits = new SelectOption_1.SelectOption('Gain 2 MC', 'Gain MC', () => {
+            const options = new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Gain 2 MC', 'Gain MC', () => {
                 player.megaCredits += 2, { log: true };
                 return undefined;
-            });
-            const addPlant = new SelectOption_1.SelectOption('Gain 1 plant', 'Gain plant', () => {
+            }), new SelectOption_1.SelectOption('Gain 1 plant', 'Gain plant', () => {
                 player.plants += 1, { log: true };
                 return undefined;
-            });
-            return new OrOptions_1.OrOptions(addCredits, addPlant);
+            }));
+            player.defer(options, DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
         }
         return undefined;
     }
@@ -59,3 +63,4 @@ class EcoLine extends Card_1.Card {
     }
 }
 exports.EcoLine = EcoLine;
+//# sourceMappingURL=EcoLine.js.map

@@ -1,4 +1,5 @@
 import {COLONIES_CARD_MANIFEST} from './cards/colonies/ColoniesCardManifest';
+import {NON_COLONIES_CARD_MANIFEST} from './cards/colonies/NonColoniesCardManifest';
 import {PRELUDE_CARD_MANIFEST} from './cards/prelude/PreludeCardManifest';
 import {PROMO_CARD_MANIFEST} from './cards/promo/PromoCardManifest';
 import {BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST} from './cards/StandardCardManifests';
@@ -49,6 +50,7 @@ export class GameCards {
       [gameOptions.preludeExtension, PRELUDE_CARD_MANIFEST],
       [gameOptions.venusNextExtension, VENUS_CARD_MANIFEST],
       [gameOptions.coloniesExtension, COLONIES_CARD_MANIFEST],
+      [!gameOptions.coloniesExtension, NON_COLONIES_CARD_MANIFEST],
       [gameOptions.turmoilExtension, TURMOIL_CARD_MANIFEST],
       [gameOptions.aresExtension, ARES_CARD_MANIFEST],
       [gameOptions.promoCardsOption, PROMO_CARD_MANIFEST],
@@ -158,6 +160,8 @@ export class GameCards {
 
     cards = this.filterBannedCards(cards);
     cards = this.filterReplacedCards(cards);
+    cards = this.includeExtraCards(cards,cards);
+
     return cards;
   }
 
@@ -177,4 +181,15 @@ export class GameCards {
       return true;
     });
   }
+
+  /* Add extra cards that are specified and not already in the game */
+  private includeExtraCards<T extends ICard>(cards: Array<T>, extraCards: Array<T>): Array<T> {
+    for (const card of extraCards) {
+      if (!cards.find((existingCard) => existingCard.name === card.name)) {
+        cards.push(card);
+      }
+    }
+  
+    return cards;
+}
 }

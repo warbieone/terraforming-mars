@@ -48,3 +48,4 @@ class LunaTradeFederation extends Card_1.Card {
     }
 }
 exports.LunaTradeFederation = LunaTradeFederation;
+//# sourceMappingURL=LunaTradeFederation.js.map

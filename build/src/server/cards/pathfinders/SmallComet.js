@@ -46,3 +46,4 @@ class SmallComet extends Card_1.Card {
     }
 }
 exports.SmallComet = SmallComet;
+//# sourceMappingURL=SmallComet.js.map

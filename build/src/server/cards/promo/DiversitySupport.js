@@ -26,3 +26,4 @@ class DiversitySupport extends Card_1.Card {
     }
 }
 exports.DiversitySupport = DiversitySupport;
+//# sourceMappingURL=DiversitySupport.js.map

@@ -31,3 +31,4 @@ class OreProcessor extends ActionCard_1.ActionCard {
     }
 }
 exports.OreProcessor = OreProcessor;
+//# sourceMappingURL=OreProcessor.js.map

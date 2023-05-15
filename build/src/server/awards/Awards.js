@@ -123,3 +123,4 @@ var Awards;
     }
     Awards.getByName = getByName;
 })(Awards = exports.Awards || (exports.Awards = {}));
+//# sourceMappingURL=Awards.js.map

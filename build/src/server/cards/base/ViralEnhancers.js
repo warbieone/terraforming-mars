@@ -17,7 +17,7 @@ class ViralEnhancers extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.VIRAL_ENHANCERS,
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.MICROBE],
-            cost: 9,
+            cost: 10,
             metadata: {
                 cardNumber: '074',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -52,3 +52,4 @@ class ViralEnhancers extends Card_1.Card {
     }
 }
 exports.ViralEnhancers = ViralEnhancers;
+//# sourceMappingURL=ViralEnhancers.js.map

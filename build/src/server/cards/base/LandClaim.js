@@ -34,3 +34,4 @@ class LandClaim extends Card_1.Card {
     }
 }
 exports.LandClaim = LandClaim;
+//# sourceMappingURL=LandClaim.js.map

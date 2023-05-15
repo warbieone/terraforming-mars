@@ -19,3 +19,4 @@ class BasePlaceMoonTile extends DeferredAction_1.DeferredAction {
     }
 }
 exports.BasePlaceMoonTile = BasePlaceMoonTile;
+//# sourceMappingURL=BasePlaceMoonTile.js.map

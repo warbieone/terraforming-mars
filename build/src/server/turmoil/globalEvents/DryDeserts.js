@@ -33,3 +33,4 @@ class DryDeserts extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.DryDeserts = DryDeserts;
+//# sourceMappingURL=DryDeserts.js.map

@@ -32,3 +32,4 @@ class HomeworldSupport extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.HomeworldSupport = HomeworldSupport;
+//# sourceMappingURL=HomeworldSupport.js.map

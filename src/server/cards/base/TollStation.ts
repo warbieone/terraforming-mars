@@ -5,6 +5,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, played} from '../Options';
+import {Player} from '../../Player';
+import {Resource} from '../../../common/Resource';
+
 
 export class TollStation extends Card implements IProjectCard {
   constructor() {
@@ -14,9 +17,9 @@ export class TollStation extends Card implements IProjectCard {
       tags: [Tag.SPACE],
       cost: 18,
 
-      behavior: {
+/*       behavior: {
         production: {megacredits: {tag: Tag.SPACE, others: true}},
-      },
+      }, */
 
       metadata: {
         cardNumber: '099',
@@ -29,5 +32,17 @@ export class TollStation extends Card implements IProjectCard {
       },
     });
   }
+  
+  public override play(player: Player) {
+    if (player.game.isSoloMode()) {
+      return undefined;
+    }
 
+    const opponentSpaceTagCounts = player.game.getPlayers()
+      .filter((aPlayer) => aPlayer !== player)
+      .map((opponent) => opponent.tags.count(Tag.SPACE, 'raw'));
+    const maxOpponentSpaceTagCount = Math.max(...opponentSpaceTagCounts);
+    player.production.add(Resource.MEGACREDITS, maxOpponentSpaceTagCount, {log: true});
+    return undefined;
+  }
 }

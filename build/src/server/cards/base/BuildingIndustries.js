@@ -12,7 +12,7 @@ class BuildingIndustries extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.BUILDING_INDUSTRIES,
             tags: [Tag_1.Tag.BUILDING],
-            cost: 6,
+            cost: 5,
             behavior: {
                 production: { energy: -1, steel: 2 },
             },
@@ -30,3 +30,4 @@ class BuildingIndustries extends Card_1.Card {
     }
 }
 exports.BuildingIndustries = BuildingIndustries;
+//# sourceMappingURL=BuildingIndustries.js.map

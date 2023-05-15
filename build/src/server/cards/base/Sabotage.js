@@ -10,12 +10,14 @@ const SelectOption_1 = require("../../inputs/SelectOption");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
+const CardRequirements_1 = require("../CardRequirements");
 class Sabotage extends Card_1.Card {
     constructor() {
         super({
             type: CardType_1.CardType.EVENT,
             name: CardName_1.CardName.SABOTAGE,
             cost: 1,
+            requirements: CardRequirements_1.CardRequirements.builder((b) => b.generation(4)),
             metadata: {
                 cardNumber: '121',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -23,7 +25,7 @@ class Sabotage extends Card_1.Card {
                     b.minus().steel(4, { all: Options_1.all, digit: Options_1.digit }).br.or(Size_1.Size.SMALL).nbsp;
                     b.minus().megacredits(7, { all: Options_1.all });
                 }),
-                description: 'Remove up to 3 titanium from any player, or 4 steel, or 7 M€.',
+                description: 'Requires that it is Generation 4. Remove up to 3 titanium from any player, or 4 steel, or 7 M€.',
             },
         });
     }
@@ -68,3 +70,4 @@ class Sabotage extends Card_1.Card {
     }
 }
 exports.Sabotage = Sabotage;
+//# sourceMappingURL=Sabotage.js.map

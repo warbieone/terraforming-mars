@@ -36,3 +36,4 @@ class DarksideMiningSyndicate extends Card_1.Card {
     }
 }
 exports.DarksideMiningSyndicate = DarksideMiningSyndicate;
+//# sourceMappingURL=DarksideMiningSyndicate.js.map

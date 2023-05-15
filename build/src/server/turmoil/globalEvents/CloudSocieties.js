@@ -36,3 +36,4 @@ class CloudSocieties extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.CloudSocieties = CloudSocieties;
+//# sourceMappingURL=CloudSocieties.js.map

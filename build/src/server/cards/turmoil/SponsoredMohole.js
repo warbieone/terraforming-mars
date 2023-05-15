@@ -30,3 +30,4 @@ class SponsoredMohole extends Card_1.Card {
     }
 }
 exports.SponsoredMohole = SponsoredMohole;
+//# sourceMappingURL=SponsoredMohole.js.map

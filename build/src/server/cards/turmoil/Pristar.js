@@ -23,8 +23,8 @@ class Pristar extends Card_1.Card {
                     b.br.br.br;
                     b.megacredits(53).nbsp.nbsp.minus().tr(2, { size: Size_1.Size.SMALL });
                     b.corpBox('effect', (ce) => {
-                        ce.effect('During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.', (eb) => {
-                            eb.tr(1, { size: Size_1.Size.SMALL, cancelled: true }).startEffect.preservation(1).megacredits(6);
+                        ce.effect('During production phase, if you did not get TR so far this generation, add one preservation resource here, gain 6 M€, and 1 influence.', (eb) => {
+                            eb.tr(1, { size: Size_1.Size.SMALL, cancelled: true }).startEffect.preservation(1).megacredits(6).influence();
                         });
                     });
                 }),
@@ -41,19 +41,20 @@ class Pristar extends Card_1.Card {
             player.megaCredits += 6;
             player.addResourceTo(this, 1);
             if (!this.hasReceivedInfluenceBonus) {
-                Turmoil_1.Turmoil.ifTurmoil((player.game), (turmoil) => {
+                Turmoil_1.Turmoil.ifTurmoil(player.game, (turmoil) => {
                     turmoil.addInfluenceBonus(player);
                 });
                 this.hasReceivedInfluenceBonus = true;
             }
         }
-        if (this.hasReceivedInfluenceBonus) {
-            Turmoil_1.Turmoil.ifTurmoil((player.game), (turmoil) => {
+        else {
+            this.hasReceivedInfluenceBonus = false;
+            Turmoil_1.Turmoil.ifTurmoil(player.game, (turmoil) => {
                 turmoil.addInfluenceBonus(player, -1);
             });
-            this.hasReceivedInfluenceBonus = false;
         }
         return undefined;
     }
 }
 exports.Pristar = Pristar;
+//# sourceMappingURL=Pristar.js.map

@@ -87,3 +87,4 @@ class BannedDelegate extends Card_1.Card {
     }
 }
 exports.BannedDelegate = BannedDelegate;
+//# sourceMappingURL=BannedDelegate.js.map

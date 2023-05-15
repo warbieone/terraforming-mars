@@ -29,3 +29,4 @@ class Advertising extends Card_1.Card {
     }
 }
 exports.Advertising = Advertising;
+//# sourceMappingURL=Advertising.js.map

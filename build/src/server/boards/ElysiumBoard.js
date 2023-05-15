@@ -40,3 +40,4 @@ class ElysiumBoard extends Board_1.Board {
     }
 }
 exports.ElysiumBoard = ElysiumBoard;
+//# sourceMappingURL=ElysiumBoard.js.map

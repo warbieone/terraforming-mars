@@ -53,3 +53,4 @@ class PublicSponsoredGrant extends Card_1.Card {
     }
 }
 exports.PublicSponsoredGrant = PublicSponsoredGrant;
+//# sourceMappingURL=PublicSponsoredGrant.js.map

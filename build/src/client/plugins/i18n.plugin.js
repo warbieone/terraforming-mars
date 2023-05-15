@@ -10,3 +10,4 @@ exports.default = {
         });
     },
 };
+//# sourceMappingURL=i18n.plugin.js.map

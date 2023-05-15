@@ -50,3 +50,4 @@ class HE3ProductionQuotas extends Card_1.Card {
     }
 }
 exports.HE3ProductionQuotas = HE3ProductionQuotas;
+//# sourceMappingURL=HE3ProductionQuotas.js.map

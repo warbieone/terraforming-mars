@@ -35,3 +35,4 @@ var PathfindersData;
     }
     PathfindersData.deserialize = deserialize;
 })(PathfindersData = exports.PathfindersData || (exports.PathfindersData = {}));
+//# sourceMappingURL=PathfindersData.js.map

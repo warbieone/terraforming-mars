@@ -30,3 +30,4 @@ class PlaceCityTile extends DeferredAction_1.DeferredAction {
     }
 }
 exports.PlaceCityTile = PlaceCityTile;
+//# sourceMappingURL=PlaceCityTile.js.map

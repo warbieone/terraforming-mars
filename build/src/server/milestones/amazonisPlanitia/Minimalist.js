@@ -14,3 +14,4 @@ class Minimalist {
     }
 }
 exports.Minimalist = Minimalist;
+//# sourceMappingURL=Minimalist.js.map

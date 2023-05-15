@@ -42,3 +42,4 @@ exports.awardNames = [
     'Naturalist',
     'Voyager',
 ];
+//# sourceMappingURL=AwardName.js.map

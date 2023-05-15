@@ -97,6 +97,7 @@ class GameHandler extends Handler_1.Handler {
                         soloTR: gameReq.soloTR,
                         customCorporationsList: gameReq.customCorporationsList,
                         bannedCards: gameReq.bannedCards,
+                        extraCards: gameReq.extraCards,
                         customColoniesList: gameReq.customColoniesList,
                         customPreludes: gameReq.customPreludes,
                         requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
@@ -134,3 +135,4 @@ class GameHandler extends Handler_1.Handler {
 }
 exports.GameHandler = GameHandler;
 GameHandler.INSTANCE = new GameHandler();
+//# sourceMappingURL=Game.js.map

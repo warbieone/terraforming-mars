@@ -30,3 +30,4 @@ class SyndicatePirateRaids extends Card_1.Card {
     }
 }
 exports.SyndicatePirateRaids = SyndicatePirateRaids;
+//# sourceMappingURL=SyndicatePirateRaids.js.map

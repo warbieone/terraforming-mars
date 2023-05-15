@@ -14,20 +14,20 @@ class DeimosDownPromo extends Card_1.Card {
         renderData: CardRenderer_1.CardRenderer.builder((b) => {
             b.temperature(3).br;
             b.tile(TileType_1.TileType.DEIMOS_DOWN, true).asterix().br;
-            b.steel(4, { digit: Options_1.digit }).nbsp.minus().plants(-6, { all: Options_1.all });
+            b.steel(4, { digit: Options_1.digit }).nbsp.minus().plants(-8, { all: Options_1.all });
         }),
-        description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.',
+        description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 8 plants from any player.',
     }) {
         super({
             type: CardType_1.CardType.EVENT,
             name,
             tags: [Tag_1.Tag.SPACE],
-            cost: 31,
+            cost: 35,
             metadata,
             behavior: {
                 stock: { steel: 4 },
                 global: { temperature: 3 },
-                removeAnyPlants: 6,
+                removeAnyPlants: 8,
                 tile: {
                     type: TileType_1.TileType.DEIMOS_DOWN,
                     on: 'city',
@@ -38,3 +38,4 @@ class DeimosDownPromo extends Card_1.Card {
     }
 }
 exports.DeimosDownPromo = DeimosDownPromo;
+//# sourceMappingURL=DeimosDownPromo.js.map

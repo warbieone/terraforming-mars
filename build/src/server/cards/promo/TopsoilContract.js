@@ -14,7 +14,7 @@ class TopsoilContract extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.TOPSOIL_CONTRACT,
             tags: [Tag_1.Tag.MICROBE, Tag_1.Tag.EARTH],
-            cost: 8,
+            cost: 10,
             behavior: {
                 stock: { plants: 3 },
             },
@@ -37,3 +37,4 @@ class TopsoilContract extends Card_1.Card {
     }
 }
 exports.TopsoilContract = TopsoilContract;
+//# sourceMappingURL=TopsoilContract.js.map

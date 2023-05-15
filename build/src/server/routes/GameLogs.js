@@ -62,3 +62,4 @@ class GameLogs {
     }
 }
 exports.GameLogs = GameLogs;
+//# sourceMappingURL=GameLogs.js.map

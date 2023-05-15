@@ -34,3 +34,4 @@ class CommunicationBoom extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.CommunicationBoom = CommunicationBoom;
+//# sourceMappingURL=CommunicationBoom.js.map

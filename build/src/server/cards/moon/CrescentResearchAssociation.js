@@ -34,3 +34,4 @@ class CrescentResearchAssociation extends Card_1.Card {
     }
 }
 exports.CrescentResearchAssociation = CrescentResearchAssociation;
+//# sourceMappingURL=CrescentResearchAssociation.js.map

@@ -32,3 +32,4 @@ class SteelMarketMonopolists extends MarketCard_1.MarketCard {
     }
 }
 exports.SteelMarketMonopolists = SteelMarketMonopolists;
+//# sourceMappingURL=SteelMarketMonopolists.js.map

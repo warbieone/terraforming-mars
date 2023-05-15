@@ -27,3 +27,4 @@ class SolarPanelFoundry extends ActionCard_1.ActionCard {
     }
 }
 exports.SolarPanelFoundry = SolarPanelFoundry;
+//# sourceMappingURL=SolarPanelFoundry.js.map

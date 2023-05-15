@@ -34,3 +34,4 @@ class HeatTrappers extends Card_1.Card {
     }
 }
 exports.HeatTrappers = HeatTrappers;
+//# sourceMappingURL=HeatTrappers.js.map

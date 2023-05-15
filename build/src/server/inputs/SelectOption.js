@@ -18,3 +18,4 @@ class SelectOption extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectOption = SelectOption;
+//# sourceMappingURL=SelectOption.js.map

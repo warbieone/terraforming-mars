@@ -7,3 +7,4 @@ exports.HAZARD_CONSTRAINTS = [
     'severeErosionTemperature',
     'severeDustStormOxygen',
 ];
+//# sourceMappingURL=AresData.js.map

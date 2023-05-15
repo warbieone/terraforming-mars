@@ -55,3 +55,4 @@ class Steelaris extends Card_1.Card {
     }
 }
 exports.Steelaris = Steelaris;
+//# sourceMappingURL=Steelaris.js.map

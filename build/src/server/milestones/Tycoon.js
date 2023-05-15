@@ -13,3 +13,4 @@ class Tycoon extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Tycoon = Tycoon;
+//# sourceMappingURL=Tycoon.js.map

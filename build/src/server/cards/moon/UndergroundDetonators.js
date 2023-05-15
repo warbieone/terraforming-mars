@@ -28,3 +28,4 @@ class UndergroundDetonators extends Card_1.Card {
     }
 }
 exports.UndergroundDetonators = UndergroundDetonators;
+//# sourceMappingURL=UndergroundDetonators.js.map

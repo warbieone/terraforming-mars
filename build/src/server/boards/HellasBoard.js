@@ -50,3 +50,4 @@ class HellasBoard extends Board_1.Board {
     }
 }
 exports.HellasBoard = HellasBoard;
+//# sourceMappingURL=HellasBoard.js.map

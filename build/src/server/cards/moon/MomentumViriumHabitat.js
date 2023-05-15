@@ -40,3 +40,4 @@ class MomentumViriumHabitat extends Card_1.Card {
     }
 }
 exports.MomentumViriumHabitat = MomentumViriumHabitat;
+//# sourceMappingURL=MomentumViriumHabitat.js.map

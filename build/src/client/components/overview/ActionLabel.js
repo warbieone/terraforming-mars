@@ -10,3 +10,4 @@ var ActionLabel;
     ActionLabel["DRAFTING"] = "drafting";
     ActionLabel["RESEARCHING"] = "researching";
 })(ActionLabel = exports.ActionLabel || (exports.ActionLabel = {}));
+//# sourceMappingURL=ActionLabel.js.map

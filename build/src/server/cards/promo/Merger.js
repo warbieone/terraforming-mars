@@ -89,3 +89,4 @@ class Merger extends PreludeCard_1.PreludeCard {
 }
 exports.Merger = Merger;
 Merger.mergerCost = 42;
+//# sourceMappingURL=Merger.js.map

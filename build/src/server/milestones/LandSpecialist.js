@@ -23,3 +23,4 @@ class LandSpecialist extends IMilestone_1.BaseMilestone {
     }
 }
 exports.LandSpecialist = LandSpecialist;
+//# sourceMappingURL=LandSpecialist.js.map

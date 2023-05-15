@@ -6,3 +6,4 @@ function isPreludeCard(card) {
     return card.type === CardType_1.CardType.PRELUDE;
 }
 exports.isPreludeCard = isPreludeCard;
+//# sourceMappingURL=IPreludeCard.js.map

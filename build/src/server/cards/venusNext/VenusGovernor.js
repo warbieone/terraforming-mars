@@ -29,3 +29,4 @@ class VenusGovernor extends Card_1.Card {
     }
 }
 exports.VenusGovernor = VenusGovernor;
+//# sourceMappingURL=VenusGovernor.js.map

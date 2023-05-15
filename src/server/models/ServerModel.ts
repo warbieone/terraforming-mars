@@ -546,6 +546,7 @@ export class Server {
       aresExtension: options.aresExtension,
       boardName: options.boardName,
       bannedCards: options.bannedCards,
+      extraCards: options.extraCards,
       ceoExtension: options.ceoExtension,
       coloniesExtension: options.coloniesExtension,
       communityCardsOption: options.communityCardsOption,

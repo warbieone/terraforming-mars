@@ -27,3 +27,4 @@ class BasicInfrastructure extends PreludeCard_1.PreludeCard {
     }
 }
 exports.BasicInfrastructure = BasicInfrastructure;
+//# sourceMappingURL=BasicInfrastructure.js.map

@@ -42,3 +42,4 @@ class VoteOfNoConfidence extends Card_1.Card {
     }
 }
 exports.VoteOfNoConfidence = VoteOfNoConfidence;
+//# sourceMappingURL=VoteOfNoConfidence.js.map

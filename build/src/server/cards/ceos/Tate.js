@@ -40,3 +40,4 @@ class Tate extends CeoCard_1.CeoCard {
     }
 }
 exports.Tate = Tate;
+//# sourceMappingURL=Tate.js.map

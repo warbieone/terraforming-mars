@@ -31,3 +31,4 @@ class TiredEarth extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.TiredEarth = TiredEarth;
+//# sourceMappingURL=TiredEarth.js.map

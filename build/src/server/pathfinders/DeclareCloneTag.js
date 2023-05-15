@@ -33,3 +33,4 @@ class DeclareCloneTag extends DeferredAction_1.DeferredAction {
     }
 }
 exports.DeclareCloneTag = DeclareCloneTag;
+//# sourceMappingURL=DeclareCloneTag.js.map

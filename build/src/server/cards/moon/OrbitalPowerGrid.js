@@ -29,3 +29,4 @@ class OrbitalPowerGrid extends Card_1.Card {
     }
 }
 exports.OrbitalPowerGrid = OrbitalPowerGrid;
+//# sourceMappingURL=OrbitalPowerGrid.js.map

@@ -119,3 +119,4 @@ const $t = function (msg) {
     return translateMessage(msg);
 };
 exports.$t = $t;
+//# sourceMappingURL=i18n.js.map

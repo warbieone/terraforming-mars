@@ -45,3 +45,4 @@ class Predators extends Card_1.Card {
     }
 }
 exports.Predators = Predators;
+//# sourceMappingURL=Predators.js.map

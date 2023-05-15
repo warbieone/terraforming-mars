@@ -64,3 +64,4 @@ class EconomicHelp extends Card_1.Card {
     }
 }
 exports.EconomicHelp = EconomicHelp;
+//# sourceMappingURL=EconomicHelp.js.map

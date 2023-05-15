@@ -13,7 +13,7 @@ class Zeppelins extends Card_1.Card {
         super({
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.ZEPPELINS,
-            cost: 13,
+            cost: 11,
             victoryPoints: 1,
             behavior: {
                 production: { megacredits: { cities: { where: 'onmars' } } },
@@ -33,3 +33,4 @@ class Zeppelins extends Card_1.Card {
     }
 }
 exports.Zeppelins = Zeppelins;
+//# sourceMappingURL=Zeppelins.js.map

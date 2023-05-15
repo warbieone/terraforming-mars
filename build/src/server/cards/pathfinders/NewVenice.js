@@ -46,3 +46,4 @@ class NewVenice extends Card_1.Card {
     }
 }
 exports.NewVenice = NewVenice;
+//# sourceMappingURL=NewVenice.js.map

@@ -61,3 +61,4 @@ class MiningGuild extends Card_1.Card {
     }
 }
 exports.MiningGuild = MiningGuild;
+//# sourceMappingURL=MiningGuild.js.map

@@ -33,3 +33,4 @@ class Riots extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.Riots = Riots;
+//# sourceMappingURL=Riots.js.map

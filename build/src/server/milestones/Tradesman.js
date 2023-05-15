@@ -12,3 +12,4 @@ class Tradesman extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Tradesman = Tradesman;
+//# sourceMappingURL=Tradesman.js.map

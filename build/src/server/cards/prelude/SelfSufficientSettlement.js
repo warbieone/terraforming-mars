@@ -27,3 +27,4 @@ class SelfSufficientSettlement extends PreludeCard_1.PreludeCard {
     }
 }
 exports.SelfSufficientSettlement = SelfSufficientSettlement;
+//# sourceMappingURL=SelfSufficientSettlement.js.map

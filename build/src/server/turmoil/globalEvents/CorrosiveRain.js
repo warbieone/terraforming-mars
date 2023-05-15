@@ -27,3 +27,4 @@ class CorrosiveRain extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.CorrosiveRain = CorrosiveRain;
+//# sourceMappingURL=CorrosiveRain.js.map

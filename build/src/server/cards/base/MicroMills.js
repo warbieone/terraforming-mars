@@ -10,7 +10,7 @@ class MicroMills extends Card_1.Card {
         super({
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.MICRO_MILLS,
-            cost: 3,
+            cost: 2,
             behavior: {
                 production: { heat: 1 },
             },
@@ -25,3 +25,4 @@ class MicroMills extends Card_1.Card {
     }
 }
 exports.MicroMills = MicroMills;
+//# sourceMappingURL=MicroMills.js.map

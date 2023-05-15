@@ -28,3 +28,4 @@ class FirstLunarSettlement extends PreludeCard_1.PreludeCard {
     }
 }
 exports.FirstLunarSettlement = FirstLunarSettlement;
+//# sourceMappingURL=FirstLunarSettlement.js.map

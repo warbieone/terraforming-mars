@@ -67,3 +67,4 @@ class MarketManipulation extends Card_1.Card {
     }
 }
 exports.MarketManipulation = MarketManipulation;
+//# sourceMappingURL=MarketManipulation.js.map

@@ -63,3 +63,4 @@ class Party {
     }
 }
 exports.Party = Party;
+//# sourceMappingURL=Party.js.map

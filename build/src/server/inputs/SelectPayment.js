@@ -32,3 +32,4 @@ class SelectPayment extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectPayment = SelectPayment;
+//# sourceMappingURL=SelectPayment.js.map

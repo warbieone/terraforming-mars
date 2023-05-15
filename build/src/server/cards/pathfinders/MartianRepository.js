@@ -39,3 +39,4 @@ class MartianRepository extends Card_1.Card {
     }
 }
 exports.MartianRepository = MartianRepository;
+//# sourceMappingURL=MartianRepository.js.map

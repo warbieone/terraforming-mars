@@ -43,3 +43,4 @@ class NitrogenRichAsteroid extends Card_1.Card {
     }
 }
 exports.NitrogenRichAsteroid = NitrogenRichAsteroid;
+//# sourceMappingURL=NitrogenRichAsteroid.js.map

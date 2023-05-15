@@ -37,3 +37,4 @@ class GeodesicTents extends Card_1.Card {
     }
 }
 exports.GeodesicTents = GeodesicTents;
+//# sourceMappingURL=GeodesicTents.js.map

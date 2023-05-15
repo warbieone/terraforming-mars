@@ -22,7 +22,7 @@ class RestrictedArea extends ActionCard_1.ActionCard {
             type: CardType_1.CardType.ACTIVE,
             name,
             tags: [Tag_1.Tag.SCIENCE],
-            cost: 11,
+            cost: 13,
             behavior: {
                 tile: {
                     type: TileType_1.TileType.RESTRICTED_AREA,
@@ -39,3 +39,4 @@ class RestrictedArea extends ActionCard_1.ActionCard {
     }
 }
 exports.RestrictedArea = RestrictedArea;
+//# sourceMappingURL=RestrictedArea.js.map

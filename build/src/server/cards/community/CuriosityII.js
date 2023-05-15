@@ -68,3 +68,4 @@ class CuriosityII extends Card_1.Card {
     }
 }
 exports.CuriosityII = CuriosityII;
+//# sourceMappingURL=CuriosityII.js.map

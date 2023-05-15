@@ -44,3 +44,4 @@ const TO_STRING_MAP = new Map([
     }
     SpaceBonus.toString = toString;
 })(SpaceBonus = exports.SpaceBonus || (exports.SpaceBonus = {}));
+//# sourceMappingURL=SpaceBonus.js.map

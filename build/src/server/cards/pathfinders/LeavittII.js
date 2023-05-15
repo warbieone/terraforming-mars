@@ -19,3 +19,4 @@ class LeavittII extends Colony_1.Colony {
     }
 }
 exports.LeavittII = LeavittII;
+//# sourceMappingURL=LeavittII.js.map

@@ -38,3 +38,4 @@ class UnitedNationsMarsInitiative extends Card_1.Card {
     }
 }
 exports.UnitedNationsMarsInitiative = UnitedNationsMarsInitiative;
+//# sourceMappingURL=UnitedNationsMarsInitiative.js.map

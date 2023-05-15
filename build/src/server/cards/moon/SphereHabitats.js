@@ -34,3 +34,4 @@ class SphereHabitats extends Card_1.Card {
     }
 }
 exports.SphereHabitats = SphereHabitats;
+//# sourceMappingURL=SphereHabitats.js.map

@@ -34,3 +34,4 @@ class KelpFarming extends Card_1.Card {
     }
 }
 exports.KelpFarming = KelpFarming;
+//# sourceMappingURL=KelpFarming.js.map

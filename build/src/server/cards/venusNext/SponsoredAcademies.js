@@ -42,3 +42,4 @@ class SponsoredAcademies extends Card_1.Card {
     }
 }
 exports.SponsoredAcademies = SponsoredAcademies;
+//# sourceMappingURL=SponsoredAcademies.js.map

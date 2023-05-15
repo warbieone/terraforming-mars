@@ -5,3 +5,4 @@ exports.SELECT_CORPORATION_TITLE = 'Select corporation';
 exports.SELECT_PRELUDE_TITLE = 'Select 2 Prelude cards';
 exports.SELECT_CEO_TITLE = 'Select CEO';
 exports.SELECT_PROJECTS_TITLE = 'Select initial cards to buy';
+//# sourceMappingURL=SelectInitialCards.js.map

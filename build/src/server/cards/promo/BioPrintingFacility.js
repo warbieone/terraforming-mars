@@ -58,3 +58,4 @@ class BioPrintingFacility extends Card_1.Card {
     }
 }
 exports.BioPrintingFacility = BioPrintingFacility;
+//# sourceMappingURL=BioPrintingFacility.js.map

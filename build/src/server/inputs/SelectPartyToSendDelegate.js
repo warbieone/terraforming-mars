@@ -25,3 +25,4 @@ class SelectPartyToSendDelegate extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectPartyToSendDelegate = SelectPartyToSendDelegate;
+//# sourceMappingURL=SelectPartyToSendDelegate.js.map

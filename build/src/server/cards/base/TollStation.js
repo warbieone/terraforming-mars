@@ -7,16 +7,14 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
+const Resource_1 = require("../../../common/Resource");
 class TollStation extends Card_1.Card {
     constructor() {
         super({
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.TOLL_STATION,
             tags: [Tag_1.Tag.SPACE],
-            cost: 12,
-            behavior: {
-                production: { megacredits: { tag: Tag_1.Tag.SPACE, others: true } },
-            },
+            cost: 18,
             metadata: {
                 cardNumber: '099',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -28,5 +26,17 @@ class TollStation extends Card_1.Card {
             },
         });
     }
+    play(player) {
+        if (player.game.isSoloMode()) {
+            return undefined;
+        }
+        const opponentSpaceTagCounts = player.game.getPlayers()
+            .filter((aPlayer) => aPlayer !== player)
+            .map((opponent) => opponent.tags.count(Tag_1.Tag.SPACE, 'raw'));
+        const maxOpponentSpaceTagCount = Math.max(...opponentSpaceTagCounts);
+        player.production.add(Resource_1.Resource.MEGACREDITS, maxOpponentSpaceTagCount, { log: true });
+        return undefined;
+    }
 }
 exports.TollStation = TollStation;
+//# sourceMappingURL=TollStation.js.map

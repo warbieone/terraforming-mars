@@ -27,3 +27,4 @@ class PlaceHazardTile extends DeferredAction_1.DeferredAction {
     }
 }
 exports.PlaceHazardTile = PlaceHazardTile;
+//# sourceMappingURL=PlaceHazardTile.js.map

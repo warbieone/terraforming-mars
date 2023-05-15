@@ -33,3 +33,4 @@ class AerobrakedAmmoniaAsteroid extends Card_1.Card {
     }
 }
 exports.AerobrakedAmmoniaAsteroid = AerobrakedAmmoniaAsteroid;
+//# sourceMappingURL=AerobrakedAmmoniaAsteroid.js.map

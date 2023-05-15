@@ -38,3 +38,4 @@ class MartianMonuments extends Card_1.Card {
     }
 }
 exports.MartianMonuments = MartianMonuments;
+//# sourceMappingURL=MartianMonuments.js.map

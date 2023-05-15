@@ -29,3 +29,4 @@ class ByElection extends PreludeCard_1.PreludeCard {
     }
 }
 exports.ByElection = ByElection;
+//# sourceMappingURL=ByElection.js.map
