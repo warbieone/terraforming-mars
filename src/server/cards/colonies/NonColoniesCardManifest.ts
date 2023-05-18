@@ -19,10 +19,7 @@ import {LunaGovernor} from './LunaGovernor';
 import {LunarExports} from './LunarExports';
 import {LunarMining} from './LunarMining';
 import {MartianZoo} from './MartianZoo';
-import {MolecularPrinting} from './MolecularPrinting';
 import {NitrogenFromTitan} from './NitrogenFromTitan';
-import {PioneerSettlement} from './PioneerSettlement';
-import {ProductiveOutpost} from './ProductiveOutpost';
 import {RedSpotObservatory} from './RedSpotObservatory';
 import {RefugeeCamps} from './RefugeeCamps';
 import {SolarProbe} from './SolarProbe';
@@ -56,10 +53,7 @@ export const NON_COLONIES_CARD_MANIFEST = new ModuleManifest({
     [CardName.LUNAR_EXPORTS]: {Factory: LunarExports},
     [CardName.LUNAR_MINING]: {Factory: LunarMining},
     [CardName.MARTIAN_ZOO]: {Factory: MartianZoo},
-    [CardName.MOLECULAR_PRINTING]: {Factory: MolecularPrinting},
     [CardName.NITROGEN_FROM_TITAN]: {Factory: NitrogenFromTitan},
-    [CardName.PIONEER_SETTLEMENT]: {Factory: PioneerSettlement},
-    [CardName.PRODUCTIVE_OUTPOST]: {Factory: ProductiveOutpost},
     [CardName.RED_SPOT_OBSERVATORY]: {Factory: RedSpotObservatory},
     [CardName.REFUGEE_CAMPS]: {Factory: RefugeeCamps},
     [CardName.SOLAR_PROBE]: {Factory: SolarProbe},
