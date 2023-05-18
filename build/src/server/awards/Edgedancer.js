@@ -5,7 +5,7 @@ const TileType_1 = require("../../common/TileType");
 class Edgedancer {
     constructor() {
         this.name = 'Edgedancer';
-        this.description = 'Most tiles on the edges of the board';
+        this.description = 'Own the most tiles on the edges of the board';
     }
     getScore(player) {
         return player.game.board.spaces

@@ -34,11 +34,11 @@ class SQLite {
             yield this.asyncRun('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))');
             yield this.asyncRun('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participant varchar, PRIMARY KEY (game_id, participant))');
             yield this.asyncRun('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
-            yield this.asyncRun(`CREATE TABLE IF NOT EXISTS purges(
-        game_id varchar not null,
-        last_save_id number not null,
-        completed_time timestamp not null default (strftime('%s', 'now')),
-        PRIMARY KEY (game_id))`);
+            yield this.asyncRun(`CREATE TABLE IF NOT EXISTS completed_game(
+      game_id varchar not null,
+      completed_time timestamp not null default (strftime('%s', 'now')),
+      PRIMARY KEY (game_id))`);
+            yield this.asyncRun('DROP TABLE IF EXISTS purges');
         });
     }
     getPlayerCount(gameId) {
@@ -126,25 +126,22 @@ class SQLite {
             return row.save_id;
         });
     }
-    cleanGame(gameId) {
+    markFinished(gameId) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const saveId = yield this.getMaxSaveId(gameId);
-                yield this.asyncRun('INSERT into purges (game_id, last_save_id) values (?, ?)', [gameId, saveId]);
-                yield this.asyncRun('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [gameId, saveId]);
-                yield this.asyncRun('UPDATE games SET status = \'finished\' WHERE game_id = ?', [gameId]);
-                yield this.purgeUnfinishedGames();
-            }
-            catch (err) {
-                console.error(`SQLite: cleanGame for ${gameId} ` + err);
-            }
+            const promise1 = this.asyncRun('INSERT into completed_game (game_id) values (?)', [gameId]);
+            const promise2 = this.asyncRun('UPDATE games SET status = \'finished\' WHERE game_id = ?', [gameId]);
+            const promise3 = this.maintenance();
+            yield Promise.all([promise1, promise2, promise3]);
         });
+    }
+    maintenance() {
+        return Promise.all([this.purgeUnfinishedGames(), this.compressCompletedGames()]);
     }
     purgeUnfinishedGames(maxGameDays = process.env.MAX_GAME_DAYS) {
         return __awaiter(this, void 0, void 0, function* () {
             if (maxGameDays !== undefined) {
                 const dateToSeconds = (0, utils_1.daysAgoToSeconds)(maxGameDays, 0);
-                const selectResult = yield this.asyncAll('SELECT distinct game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
+                const selectResult = yield this.asyncAll('SELECT DISTINCT game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
                 const gameIds = selectResult.map((row) => row.game_id);
                 if (gameIds.length > 0) {
                     console.log(`About to purge ${gameIds.length} games`);
@@ -158,6 +155,33 @@ class SQLite {
             else {
                 return Promise.resolve();
             }
+        });
+    }
+    compressCompletedGames(compressCompletedGamesDays = process.env.COMPRESS_COMPLETED_GAMES_DAYS) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (compressCompletedGamesDays === undefined) {
+                return;
+            }
+            const dateToSeconds = (0, utils_1.daysAgoToSeconds)(compressCompletedGamesDays, 0);
+            const selectResult = yield this.asyncAll('SELECT DISTINCT game_id FROM completed_game WHERE completed_time < ?', [dateToSeconds]);
+            const gameIds = selectResult.map((row) => row.game_id);
+            console.log(`${gameIds.length} completed games to be compressed.`);
+            if (gameIds.length > 1000) {
+                gameIds.length = 1000;
+                console.log('Compressing 1000 games.');
+            }
+            for (const gameId of gameIds) {
+                this.compressCompletedGame(gameId);
+            }
+        });
+    }
+    compressCompletedGame(gameId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const maxSaveId = yield this.getMaxSaveId(gameId);
+            return this.asyncRun('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [gameId, maxSaveId])
+                .then(() => {
+                return this.asyncRun('DELETE FROM completed_games where game_id = ?', [gameId]);
+            });
         });
     }
     saveGame(game) {

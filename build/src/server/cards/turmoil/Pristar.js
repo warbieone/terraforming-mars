@@ -7,7 +7,8 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
-const Turmoil_1 = require("../../turmoil/Turmoil");
+const Turmoil_1 = require("../../../server/turmoil/Turmoil");
+const Resource_1 = require("../../../common/Resource");
 class Pristar extends Card_1.Card {
     constructor() {
         super({
@@ -38,7 +39,7 @@ class Pristar extends Card_1.Card {
     }
     onProductionPhase(player) {
         if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
-            player.megaCredits += 6;
+            player.addResource(Resource_1.Resource.MEGACREDITS, 6, { log: true, from: this });
             player.addResourceTo(this, 1);
             if (!this.hasReceivedInfluenceBonus) {
                 Turmoil_1.Turmoil.ifTurmoil(player.game, (turmoil) => {

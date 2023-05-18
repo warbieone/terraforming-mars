@@ -5,7 +5,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardResource_1 = require("../../../common/CardResource");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const CardRenderer_1 = require("../render/CardRenderer");
 class JovianLanterns extends Card_1.Card {

@@ -6,7 +6,7 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
 const RemoveResourcesFromCard_1 = require("../../deferredActions/RemoveResourcesFromCard");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
 class StratosphericBirds extends ActionCard_1.ActionCard {

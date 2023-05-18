@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Game = void 0;
 const constants = require("../common/constants");
@@ -59,9 +68,6 @@ const utils_1 = require("./database/utils");
 const Tag_1 = require("../common/cards/Tag");
 class Game {
     constructor(id, players, first, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck) {
-        this.id = id;
-        this.players = players;
-        this.gameOptions = gameOptions;
         this.lastSaveId = 0;
         this.deferredActions = new DeferredActionsQueue_1.DeferredActionsQueue();
         this.createdTime = new Date(0);
@@ -82,8 +88,6 @@ class Game {
         this.draftRound = 1;
         this.initialDraftIteration = 1;
         this.unDraftedCards = new Map();
-        this.corporationsDraftDirection = 'before';
-        this.corporationsToDraft = [];
         this.claimedMilestones = [];
         this.milestones = [];
         this.fundedAwards = [];
@@ -91,6 +95,9 @@ class Game {
         this.colonies = [];
         this.discardedColonies = [];
         this.someoneHasRemovedOtherPlayersPlants = false;
+        this.id = id;
+        this.gameOptions = Object.assign({}, gameOptions);
+        this.players = players;
         const playerIds = players.map((p) => p.id);
         if (playerIds.includes(first.id) === false) {
             throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
@@ -130,7 +137,8 @@ class Game {
             return true;
         });
     }
-    static newInstance(id, players, firstPlayer, gameOptions = Object.assign({}, GameOptions_1.DEFAULT_GAME_OPTIONS), seed = 0, spectatorId = undefined) {
+    static newInstance(id, players, firstPlayer, options = {}, seed = 0, spectatorId = undefined) {
+        const gameOptions = Object.assign(Object.assign({}, GameOptions_1.DEFAULT_GAME_OPTIONS), options);
         if (gameOptions.clonedGamedId !== undefined) {
             throw new Error('Cloning should not come through this execution path.');
         }
@@ -149,7 +157,6 @@ class Game {
         if (players.length === 1) {
             gameOptions.draftVariant = false;
             gameOptions.initialDraftVariant = false;
-            gameOptions.corporationsDraft = false;
             gameOptions.randomMA = RandomMAOptionType_1.RandomMAOptionType.NONE;
             players[0].setTerraformRating(14);
             players[0].terraformRatingAtGenerationStart = 14;
@@ -208,10 +215,8 @@ class Game {
                 gameOptions.turmoilExtension ||
                 gameOptions.initialDraftVariant ||
                 gameOptions.ceoExtension) {
-                if (gameOptions.corporationsDraft === false) {
-                    for (let i = 0; i < gameOptions.startingCorporations; i++) {
-                        player.dealtCorporationCards.push(corporationDeck.draw(game));
-                    }
+                for (let i = 0; i < gameOptions.startingCorporations; i++) {
+                    player.dealtCorporationCards.push(corporationDeck.draw(game));
                 }
                 if (gameOptions.initialDraftVariant === false) {
                     for (let i = 0; i < 10; i++) {
@@ -242,17 +247,7 @@ class Game {
             game.log('Good luck ${0}!', (b) => b.player(player), { reservedFor: player });
         });
         game.log('Generation ${0}', (b) => b.forNewGeneration().number(game.generation));
-        if (gameOptions.corporationsDraft) {
-            game.phase = Phase_1.Phase.CORPORATIONDRAFTING;
-            for (let i = 0; i < gameOptions.startingCorporations * players.length; i++) {
-                game.corporationsToDraft.push(game.corporationDeck.draw(game));
-            }
-            const playerStartingCorporationsDraft = game.getPlayerBefore(firstPlayer);
-            playerStartingCorporationsDraft.runDraftCorporationPhase(playerStartingCorporationsDraft.name, game.corporationsToDraft);
-        }
-        else {
-            game.gotoInitialPhase();
-        }
+        game.gotoInitialPhase();
         return game;
     }
     gotoInitialPhase() {
@@ -317,8 +312,6 @@ class Game {
                 ];
             }),
             venusScaleLevel: this.venusScaleLevel,
-            corporationsDraftDirection: this.corporationsDraftDirection,
-            corporationsToDraft: this.corporationsToDraft.map((c) => c.name),
         };
         if (this.aresData !== undefined) {
             result.aresData = this.aresData;
@@ -678,31 +671,6 @@ class Game {
             this.gotoInitialResearchPhase();
         }
     }
-    playerIsFinishedWithDraftingCorporationPhase(player, cards) {
-        const nextPlayer = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-        const passTo = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(nextPlayer) : this.getPlayerBefore(nextPlayer);
-        if (cards.length > 1) {
-            if ((this.draftRound + 1) % this.players.length === 0) {
-                nextPlayer.runDraftCorporationPhase(nextPlayer.name, cards);
-            }
-            else if (this.draftRound % this.players.length === 0) {
-                player.runDraftCorporationPhase(nextPlayer.name, cards);
-                this.corporationsDraftDirection = this.corporationsDraftDirection === 'after' ? 'before' : 'after';
-            }
-            else {
-                nextPlayer.runDraftCorporationPhase(passTo.name, cards);
-            }
-            this.draftRound++;
-            return;
-        }
-        nextPlayer.draftedCorporations.push(...cards);
-        this.players.forEach((player) => {
-            player.dealtCorporationCards = player.draftedCorporations;
-        });
-        this.initialDraftIteration = 1;
-        this.draftRound = 1;
-        this.gotoInitialPhase();
-    }
     getDraftCardsFrom(player) {
         if (this.generation === 1 && this.initialDraftIteration === 2) {
             return this.getPlayerBefore(player);
@@ -749,27 +717,27 @@ class Game {
         }
     }
     gotoEndGame() {
-        if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
-            const clonedGamedId = this.clonedGamedId;
-            this.log('This game was a clone from game ${0}', (b) => b.rawString(clonedGamedId));
-        }
-        else {
-            const id = this.id;
-            this.log('This game id was ${0}', (b) => b.rawString(id));
-        }
-        const scores = [];
-        this.players.forEach((player) => {
-            const corporation = player.corporations.map((c) => c.name).join('|');
-            const vpb = player.getVictoryPoints();
-            scores.push({ corporation: corporation, playerScore: vpb.total });
-        });
-        Database_1.Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
-        this.phase = Phase_1.Phase.END;
-        Database_1.Database.getInstance().saveGame(this).then(() => {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
+                const clonedGamedId = this.clonedGamedId;
+                this.log('This game was a clone from game ${0}', (b) => b.rawString(clonedGamedId));
+            }
+            else {
+                const id = this.id;
+                this.log('This game id was ${0}', (b) => b.rawString(id));
+            }
+            const scores = [];
+            this.players.forEach((player) => {
+                const corporation = player.corporations.map((c) => c.name).join('|');
+                const vpb = player.getVictoryPoints();
+                scores.push({ corporation: corporation, playerScore: vpb.total });
+            });
+            Database_1.Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
+            this.phase = Phase_1.Phase.END;
+            yield Database_1.Database.getInstance().saveGame(this);
             GameLoader_1.GameLoader.getInstance().mark(this.id);
-            return Database_1.Database.getInstance().cleanGame(this.id);
-        }).catch((err) => {
-            console.error(err);
+            yield Database_1.Database.getInstance().markFinished(this.id);
+            Database_1.Database.getInstance().maintenance();
         });
     }
     canPlaceGreenery(player) {
@@ -1074,7 +1042,7 @@ class Game {
             this.increaseOxygenLevel(player, 1);
         return undefined;
     }
-    addCityTile(player, space, cardName = undefined) {
+    addCity(player, space, cardName = undefined) {
         this.addTile(player, space, {
             tileType: TileType_1.TileType.CITY,
             card: cardName,
@@ -1087,7 +1055,7 @@ class Game {
         const count = this.board.getOceanCount();
         return count > 0 && count < constants.MAX_OCEAN_TILES;
     }
-    addOceanTile(player, space) {
+    addOcean(player, space) {
         if (this.canAddOcean() === false)
             return;
         this.addTile(player, space, {
@@ -1213,7 +1181,7 @@ class Game {
         return (0, utils_1.addDays)(this.createdTime, days).getTime();
     }
     static deserialize(d) {
-        var _a, _b, _c;
+        var _a, _b;
         const gameOptions = d.gameOptions;
         gameOptions.bannedCards = (_a = gameOptions.bannedCards) !== null && _a !== void 0 ? _a : [];
         const players = d.players.map((element) => Player_1.Player.deserialize(element));
@@ -1278,8 +1246,6 @@ class Game {
         d.unDraftedCards.forEach((unDraftedCard) => {
             game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
         });
-        game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft);
-        game.corporationsDraftDirection = (_b = d.corporationsDraftDirection) !== null && _b !== void 0 ? _b : false;
         game.lastSaveId = d.lastSaveId;
         game.clonedGamedId = d.clonedGamedId;
         game.gameAge = d.gameAge;
@@ -1287,7 +1253,7 @@ class Game {
         game.generation = d.generation;
         game.phase = d.phase;
         game.oxygenLevel = d.oxygenLevel;
-        game.undoCount = (_c = d.undoCount) !== null && _c !== void 0 ? _c : 0;
+        game.undoCount = (_b = d.undoCount) !== null && _b !== void 0 ? _b : 0;
         game.temperature = d.temperature;
         game.venusScaleLevel = d.venusScaleLevel;
         game.activePlayer = d.activePlayer;

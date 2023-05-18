@@ -5,7 +5,7 @@ const MoonExpansion_1 = require("./MoonExpansion");
 class LunarMagnate {
     constructor() {
         this.name = 'Lunar Magnate';
-        this.description = 'Owning the most tiles on The Moon.';
+        this.description = 'Own the most tiles on The Moon';
     }
     getScore(player) {
         return MoonExpansion_1.MoonExpansion.ifElseMoon(player.game, (moonData) => {

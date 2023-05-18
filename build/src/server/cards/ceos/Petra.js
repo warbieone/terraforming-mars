@@ -55,6 +55,7 @@ class Petra extends CeoCard_1.CeoCard {
             turmoil.delegateReserve.remove(player.id);
             count += 1;
         }
+        player.totalDelegatesPlaced += count;
         player.addResource(Resource_1.Resource.MEGACREDITS, count * 3, { log: true });
         const availableParties = turmoil.parties.map((party) => party.name);
         const title = 'Select where to send a Neutral delegate';

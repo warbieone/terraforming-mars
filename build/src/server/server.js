@@ -87,7 +87,7 @@ function start() {
         catch (err) {
             console.error(err);
         }
-        Database_1.Database.getInstance().purgeUnfinishedGames();
+        Database_1.Database.getInstance().maintenance();
         const port = process.env.PORT || 8080;
         console.log(`Starting ${raw_settings.head}, built at ${raw_settings.builtAt}`);
         console.log(`Starting server on port ${port}`);

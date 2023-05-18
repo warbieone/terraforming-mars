@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.calculateVictoryPoints = void 0;
 const constants = require("../../common/constants");
 const Phase_1 = require("../../common/Phase");
-const CeoExtension_1 = require("../CeoExtension");
 const Board_1 = require("../boards/Board");
 const MoonExpansion_1 = require("../moon/MoonExpansion");
 const PathfindersExpansion_1 = require("../pathfinders/PathfindersExpansion");
@@ -47,7 +46,6 @@ function calculateVictoryPoints(player) {
     player.colonies.calculateVictoryPoints(victoryPointsBreakdown);
     MoonExpansion_1.MoonExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
     PathfindersExpansion_1.PathfindersExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
-    CeoExtension_1.CeoExtension.calculateVictoryPoints(player, victoryPointsBreakdown);
     if (player.game.gameOptions.escapeVelocityMode) {
         const threshold = player.game.gameOptions.escapeVelocityThreshold;
         const period = player.game.gameOptions.escapeVelocityPeriod;

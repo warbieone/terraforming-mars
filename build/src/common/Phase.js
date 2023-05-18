@@ -8,7 +8,6 @@ var Phase;
     Phase["PRODUCTION"] = "production";
     Phase["RESEARCH"] = "research";
     Phase["INITIALDRAFTING"] = "initial_drafting";
-    Phase["CORPORATIONDRAFTING"] = "corporation_drafting";
     Phase["DRAFTING"] = "drafting";
     Phase["PRELUDES"] = "preludes";
     Phase["CEOS"] = "ceos";

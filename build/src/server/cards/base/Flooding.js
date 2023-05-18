@@ -37,7 +37,7 @@ class Flooding extends Card_1.Card {
         if (!player.game.canAddOcean())
             return undefined;
         return new SelectSpace_1.SelectSpace('Select space for ocean tile', player.game.board.getAvailableSpacesForOcean(player), (space) => {
-            player.game.addOceanTile(player, space);
+            player.game.addOcean(player, space);
             const adjacentPlayers = new Set();
             player.game.board.getAdjacentSpaces(space).forEach((space) => {
                 if (space.player && space.player !== player && space.tile) {

@@ -136,10 +136,16 @@ class LocalFilesystem {
         const text = JSON.stringify(obj, null, 2);
         (0, fs_1.writeFileSync)(this.completedFilename(gameId), text);
     }
-    cleanGame(_gameId) {
+    markFinished(_gameId) {
         return Promise.resolve();
     }
+    maintenance() {
+        return this.purgeUnfinishedGames();
+    }
     purgeUnfinishedGames() {
+        return Promise.resolve();
+    }
+    compressCompletedGames() {
         return Promise.resolve();
     }
     deleteGameNbrSaves(gameId, rollbackCount) {

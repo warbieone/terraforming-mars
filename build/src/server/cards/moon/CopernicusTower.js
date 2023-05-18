@@ -7,7 +7,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
 const CardResource_1 = require("../../../common/CardResource");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const Size_1 = require("../../../common/cards/render/Size");
 const ActionCard_1 = require("../ActionCard");
 class CopernicusTower extends ActionCard_1.ActionCard {

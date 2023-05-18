@@ -801,4 +801,26 @@ export enum CardName {
     XU = 'Xu',
     // CEO Preludes
     CO_LEADERSHIP = 'Co-leadership',
+
+    //League Cards
+    AMPHIBIAN_FARMING = 'Amphibian Farming',
+    ASSEMBLY_LINES = 'Assembly Lines',
+    BANK_UNIONS = 'Bank Unions',
+    BORINGVILLE_POPULATION_YOU = 'Boringville Population You',
+    DACTYL_AND_IDA = 'Dactyl and Ida',
+    DNA_EXTRACTION_FROM_SOIL = 'DNA Extraction From Soil',
+    EDIBLE_FUNGI = 'Edible Fungi',
+    FIRE_SALE = 'Fire Sale',
+    HEAVY_METAL_BIOREMEDIATION = 'Heavy Metal Bioremediation',
+    INCINERATOR = 'Incinerator',
+    INVESTMENT_BANKS = 'Investment Banks',
+    LABORATORY_MICE = 'Labratory Mice',
+    MARS_HEAVY_INDUSTRY = 'Mars Heavy Industry',
+    MATING_SEASON = 'Mating Season',
+    NOMON_NOCRY_INSURANCE = 'Nomon Nocry Insurance',
+    OUTER_RIM_UNIVERSITY = 'Outer Rim University',
+    RECYCLED_PROJECTS = 'Recycled Projects',
+    SAVE_OUR_SHIP = 'Save Our Ship',
+    SOIL_ENHANCERS = 'Soil Enhancers',
+    
 }

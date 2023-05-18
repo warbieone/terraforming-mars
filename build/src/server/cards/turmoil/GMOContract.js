@@ -9,7 +9,7 @@ const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Resource_1 = require("../../../common/Resource");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 class GMOContract extends Card_1.Card {
     constructor() {

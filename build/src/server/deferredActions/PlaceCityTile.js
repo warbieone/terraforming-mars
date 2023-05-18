@@ -17,7 +17,7 @@ class PlaceCityTile extends DeferredAction_1.DeferredAction {
             return undefined;
         }
         return new SelectSpace_1.SelectSpace(title, spaces, (space) => {
-            this.player.game.addCityTile(this.player, space);
+            this.player.game.addCity(this.player, space);
             return undefined;
         });
     }

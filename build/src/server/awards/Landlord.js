@@ -6,7 +6,7 @@ const MoonExpansion_1 = require("../moon/MoonExpansion");
 class Landlord {
     constructor() {
         this.name = 'Landlord';
-        this.description = 'Owning the most tiles in play';
+        this.description = 'Own the most tiles';
     }
     getScore(player) {
         const marsSpaces = player.game.board.spaces.filter((space) => space.tile !== undefined && (0, TileType_1.isHazardTileType)(space.tile.tileType) === false && space.tile.tileType !== TileType_1.TileType.OCEAN && space.player === player).length;

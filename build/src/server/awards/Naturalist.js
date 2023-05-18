@@ -4,7 +4,7 @@ exports.Naturalist = void 0;
 class Naturalist {
     constructor() {
         this.name = 'Naturalist';
-        this.description = 'Most plant and heat production';
+        this.description = 'Have the most plant and heat production';
     }
     getScore(player) {
         return player.production.heat + player.production.plants;

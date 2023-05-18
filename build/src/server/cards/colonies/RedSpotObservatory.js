@@ -8,7 +8,7 @@ const CardResource_1 = require("../../../common/CardResource");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 class RedSpotObservatory extends Card_1.Card {
     constructor() {

@@ -4,7 +4,7 @@ exports.Cultivator = void 0;
 class Cultivator {
     constructor() {
         this.name = 'Cultivator';
-        this.description = 'Most greenery tiles';
+        this.description = 'Own the most greenery tiles';
     }
     getScore(player) {
         return player.game.getGreeneriesCount(player);

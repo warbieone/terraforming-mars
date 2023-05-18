@@ -116,6 +116,20 @@ a:active {
 @font-face {
   font-family: Prototype;
   src: url(./assets/Prototype.ttf);
+  unicode-range: U+000-5FF;
+  /* Latin glyphs */
+}
+@font-face {
+  font-family: Prototype;
+  src: url(./assets/Prototype-ru.ttf);
+  unicode-range: U+0410-044F;
+  /* Russian glyphs */
+}
+@font-face {
+  font-family: Prototype;
+  src: url(./assets/Prototype-pl.ttf);
+  unicode-range: U+0104-0107, U+0118-0119, U+0141-0144, U+00D3, U+00F3, U+015A, U+015B, U+0179, U+017A-017C;
+  /* Polish glyphs */
 }
 body {
   background: #303030;
@@ -5337,6 +5351,9 @@ input[type="radio"]:checked + .filterDiv::after {
   font-weight: bold;
   fill: white;
   pointer-events: none;
+  color: white;
+  line-height: 12px;
+  text-align-last: center;
 }
 .board-line {
   stroke: white;
@@ -6660,10 +6677,17 @@ body {
   padding: 8px 0px 4px 8px;
   box-sizing: border-box;
 }
-.resource_item.resource_item--energy {
-  margin-right: -9px;
-  padding-right: 9px;
-  clip-path: polygon(90% 0, 90% 50%, 100% 75%, 100% 75%, 90% 100%, 0 100%, 0 0);
+.resource_item.resource_item--energy:after {
+  content: " ";
+  background: linear-gradient(rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.3) 50%);
+  clip-path: polygon(0% 50%, 100% 75%, 100% 75%, -5% 100%);
+  width: 10px;
+  height: 86px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  transform: translateX(76px) translateY(-8px);
+  z-index: 0;
 }
 .resource_item_stock {
   white-space: nowrap;
@@ -6696,18 +6720,6 @@ body {
 .resource_icon--megacredits {
   background-image: url(./assets/resources/megacredit.png);
 }
-.resource_icon--megacredits::after {
-  position: absolute;
-  content: "€";
-  color: rgba(0, 0, 0, 0.3);
-  font-style: normal;
-  font-family: Arial;
-  font-weight: bold;
-  width: 36px;
-  height: 36px;
-  text-align: center;
-  line-height: 36px;
-}
 .resource_icon--megacredit-value {
   background-image: url(./assets/resources/megacredit.png);
   background-size: 20px 20px;
@@ -6721,6 +6733,7 @@ body {
   margin-left: -14px;
   margin-top: -37px;
   text-align: center;
+  position: relative;
 }
 .resource_icon--microbe {
   background-image: url("assets/resources/microbe.png");
@@ -6877,13 +6890,13 @@ body {
 }
 .start-screen-title-top {
   transform: scaleX(2);
-  margin-left: 162px;
+  text-align: center;
   padding-top: 15px;
 }
 .start-screen-title-bottom {
   transform: scaleX(2);
+  text-align: center;
   font-size: 30px;
-  margin-left: 190px;
 }
 .start-screen-link--new-game {
   background-position: 0px -90px;
@@ -10164,6 +10177,12 @@ input[type="radio"]:checked + .party-container::after {
   height: 51px !important;
   background-size: auto !important;
 }
+.card-tile-magnetic-field-generators-ares {
+  background: url(./assets/board_icons_ares.png) -534px -139px no-repeat;
+  width: 47px !important;
+  height: 51px !important;
+  background-size: auto !important;
+}
 .card-tile-metallic-asteroid {
   background: url(./assets/board_icons_ares.png) -294px -83px no-repeat;
   width: 47px !important;
@@ -10271,6 +10290,9 @@ input[type="radio"]:checked + .party-container::after {
 }
 .board-space-tile--solar-farm {
   background: url(./assets/board_icons_ares.png) -246px -83px no-repeat;
+}
+.board-space-tile--magnetic-field-generators-ares {
+  background: url(./assets/board_icons_ares.png) -534px -139px no-repeat;
 }
 .board-space-tile--metallic-asteroid {
   background: url(./assets/board_icons_ares.png) -294px -83px no-repeat;
@@ -10772,19 +10794,19 @@ input[type="radio"]:checked + .party-container::after {
   height: 32px;
   background-size: 30px 32px;
 }
-.card-tile-lunar-colony {
+.card-tile-lunar-habitat {
   background-image: url(./assets/moon/colonytile.png);
   filter: none;
   width: 44px;
   height: 51px;
 }
-.card-tile-lunar-colony-rate {
+.card-tile-lunar-habitat-rate {
   background-image: url(./assets/moon/play-colonytile.png);
   filter: none;
   width: 52px;
   height: 51px;
 }
-.card-tile-lunar-colony--S {
+.card-tile-lunar-habitat--S {
   background-image: url(./assets/moon/colonytile.png);
   width: 30px;
   height: 32px;
@@ -11246,11 +11268,35 @@ input[type="radio"]:checked + .party-container::after {
 .board-space-tile--martian-nature-wonders {
   background: url("./assets/pathfinders/martian-nature-wonders.png");
 }
+.card-tile-crashlanding {
+  background: url("./assets/pathfinders/crashlanding.png");
+  width: 40px;
+  height: 47px;
+  background-size: 40px;
+  background-repeat: no-repeat;
+}
+.board-space-tile--crashlanding {
+  background: url("./assets/pathfinders/crashlanding.png");
+  width: 44px;
+  height: 50px;
+  background-size: 44px, 50px;
+}
+.board-space-tile--crashlanding-rotated {
+  background: url("./assets/pathfinders/crashlanding.png");
+  width: 44px;
+  height: 50px;
+  background-size: 44px, 50px;
+  transform: rotate(60deg);
+}
 .card-planetary-track {
   background: url("./assets/pathfinders/planetary-track.png");
   width: 50px;
   height: 50px;
   background-size: 50px, 50px;
+}
+.select-tile-cont {
+  height: 50px;
+  padding: 10px;
 }
 .ma-name--colonizer {
   background-image: url(./assets/ma/fanmade/colonizer.png);
@@ -11374,6 +11420,9 @@ input[type="radio"]:checked + .party-container::after {
 }
 .language-icon--ko {
   background-position: 0 47.52%;
+}
+.language-icon--nl {
+  background-position: 0 -4740px;
 }
 .language-text {
   cursor: pointer;

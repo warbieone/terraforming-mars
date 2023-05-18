@@ -4,7 +4,7 @@ exports.Excentric = void 0;
 class Excentric {
     constructor() {
         this.name = 'Excentric';
-        this.description = 'Most resources on cards';
+        this.description = 'Have the most resources on cards';
     }
     getScore(player) {
         let score = 0;

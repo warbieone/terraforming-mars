@@ -4,7 +4,7 @@ exports.Historian = void 0;
 class Historian {
     constructor() {
         this.name = 'Historian';
-        this.description = 'Most event cards played';
+        this.description = 'Play the most event cards';
     }
     getScore(player) {
         return player.getPlayedEventsCount();

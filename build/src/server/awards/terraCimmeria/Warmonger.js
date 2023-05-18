@@ -5,7 +5,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 class Warmonger {
     constructor() {
         this.name = 'Warmonger';
-        this.description = 'Most cards that reduce other players\' resources or production';
+        this.description = 'Play the most cards that reduce other players\' resources or production';
     }
     getScore(player) {
         const cardNames = player.playedCards.map((card) => card.name);

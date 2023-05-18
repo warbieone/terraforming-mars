@@ -4,7 +4,7 @@ exports.Politician = void 0;
 class Politician {
     constructor() {
         this.name = 'Politician';
-        this.description = 'Most delegates placed during the game';
+        this.description = 'Place the most delegates';
     }
     getScore(player) {
         return player.totalDelegatesPlaced;

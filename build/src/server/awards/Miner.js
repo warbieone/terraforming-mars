@@ -4,7 +4,7 @@ exports.Miner = void 0;
 class Miner {
     constructor() {
         this.name = 'Miner';
-        this.description = 'Having the most steel and titanium resource cubes (after final production round)';
+        this.description = 'Have the most steel and titanium (after final production round)';
     }
     getScore(player) {
         if (player.game.isDoneWithFinalProduction()) {

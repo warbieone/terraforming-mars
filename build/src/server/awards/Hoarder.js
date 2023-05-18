@@ -4,7 +4,7 @@ exports.Hoarder = void 0;
 class Hoarder {
     constructor() {
         this.name = 'Hoarder';
-        this.description = 'Most cards in hand';
+        this.description = 'Have the most cards in hand';
     }
     getScore(player) {
         return player.cardsInHand.length;

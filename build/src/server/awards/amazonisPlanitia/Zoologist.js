@@ -5,7 +5,7 @@ const CardResource_1 = require("../../../common/CardResource");
 class Zoologist2 {
     constructor() {
         this.name = 'A. Zoologist';
-        this.description = 'Most animal and microbe resources';
+        this.description = 'Own the most animal and microbe resources';
     }
     getScore(player) {
         const resourceTypes = [CardResource_1.CardResource.ANIMAL, CardResource_1.CardResource.MICROBE];

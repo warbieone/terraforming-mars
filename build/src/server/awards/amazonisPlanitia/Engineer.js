@@ -5,7 +5,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 class Engineer {
     constructor() {
         this.name = 'Engineer';
-        this.description = 'Most cards that directly alter your own production';
+        this.description = 'Play the most cards that directly alter your own production';
     }
     getScore(player) {
         const score = player.tableau.filter((card) => {

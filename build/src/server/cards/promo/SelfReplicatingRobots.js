@@ -8,7 +8,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const Size_1 = require("../../../common/cards/render/Size");
 class SelfReplicatingRobots extends Card_1.Card {
     constructor() {

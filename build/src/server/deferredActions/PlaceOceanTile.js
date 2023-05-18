@@ -17,7 +17,7 @@ class PlaceOceanTile extends DeferredAction_1.DeferredAction {
         const availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, on);
         const title = (_c = (_b = this.options) === null || _b === void 0 ? void 0 : _b.title) !== null && _c !== void 0 ? _c : this.getTitle(on);
         return new SelectSpace_1.SelectSpace(title, availableSpaces, (space) => {
-            this.player.game.addOceanTile(this.player, space);
+            this.player.game.addOcean(this.player, space);
             return undefined;
         });
     }

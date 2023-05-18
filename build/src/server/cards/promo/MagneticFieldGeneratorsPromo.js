@@ -9,10 +9,20 @@ const TileType_1 = require("../../../common/TileType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class MagneticFieldGeneratorsPromo extends Card_1.Card {
-    constructor() {
+    constructor(name = CardName_1.CardName.MAGNETIC_FIELD_GENERATORS_PROMO, adjacencyBonus = undefined, metadata = {
+        cardNumber: 'X33',
+        renderData: CardRenderer_1.CardRenderer.builder((b) => {
+            b.production((pb) => {
+                pb.minus().energy(4, { digit: Options_1.digit }).br;
+                pb.plus().plants(2);
+            }).br;
+            b.tr(3, { digit: Options_1.digit }).tile(TileType_1.TileType.MAGNETIC_FIELD_GENERATORS, true).asterix();
+        }),
+        description: 'Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.',
+    }) {
         super({
             type: CardType_1.CardType.AUTOMATED,
-            name: CardName_1.CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
+            name: name,
             tags: [Tag_1.Tag.BUILDING],
             cost: 22,
             behavior: {
@@ -21,19 +31,10 @@ class MagneticFieldGeneratorsPromo extends Card_1.Card {
                 tile: {
                     type: TileType_1.TileType.MAGNETIC_FIELD_GENERATORS,
                     on: 'land',
+                    adjacencyBonus: adjacencyBonus,
                 },
             },
-            metadata: {
-                cardNumber: 'X33',
-                renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => {
-                        pb.minus().energy(4, { digit: Options_1.digit }).br;
-                        pb.plus().plants(2);
-                    }).br;
-                    b.tr(3, { digit: Options_1.digit }).tile(TileType_1.TileType.MAGNETIC_FIELD_GENERATORS, true).asterix();
-                }),
-                description: 'Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.',
-            },
+            metadata,
         });
     }
 }

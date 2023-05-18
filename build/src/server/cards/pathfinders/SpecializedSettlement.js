@@ -62,7 +62,7 @@ class SpecializedSettlement extends Card_1.Card {
         this.defaultProduce(player);
         return new SelectSpace_1.SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space) => {
             const coveringExistingTile = space.tile !== undefined;
-            player.game.addCityTile(player, space);
+            player.game.addCity(player, space);
             if (coveringExistingTile)
                 return;
             const bonusResources = this.bonusResources(space);

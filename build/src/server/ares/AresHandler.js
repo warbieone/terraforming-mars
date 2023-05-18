@@ -12,6 +12,7 @@ const DeferredAction_1 = require("../deferredActions/DeferredAction");
 const SelectPaymentDeferred_1 = require("../deferredActions/SelectPaymentDeferred");
 const SelectProductionToLoseDeferred_1 = require("../deferredActions/SelectProductionToLoseDeferred");
 const AresHazards_1 = require("./AresHazards");
+const CrashlandingBonus_1 = require("../pathfinders/CrashlandingBonus");
 var HazardSeverity;
 (function (HazardSeverity) {
     HazardSeverity[HazardSeverity["NONE"] = 0] = "NONE";
@@ -30,7 +31,7 @@ class AresHandler {
     static earnAdjacencyBonuses(aresData, player, space) {
         let incrementMilestone = false;
         for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
-            const grantedBonus = this.earnAdacencyBonus(adjacentSpace, player);
+            const grantedBonus = this.earnAdacencyBonus(space, adjacentSpace, player);
             incrementMilestone || (incrementMilestone = grantedBonus);
         }
         if (incrementMilestone) {
@@ -41,7 +42,8 @@ class AresHandler {
             entry.count++;
         }
     }
-    static earnAdacencyBonus(adjacentSpace, player, adjacentTileOwnerGainsBonus = true) {
+    static earnAdacencyBonus(newTileSpace, adjacentSpace, player, adjacentTileOwnerGainsBonus = true) {
+        var _a;
         if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
             return false;
         }
@@ -65,26 +67,39 @@ class AresHandler {
             }
         };
         const bonuses = new mnemonist_1.MultiSet();
-        adjacentSpace.adjacency.bonus.forEach((bonus) => {
-            bonuses.add(bonus);
-            switch (bonus) {
-                case SpaceBonus_1.SpaceBonus.ANIMAL:
-                    addResourceToCard(player, CardResource_1.CardResource.ANIMAL, 'animal');
-                    break;
-                case SpaceBonus_1.SpaceBonus.MEGACREDITS:
-                    player.megaCredits++;
-                    break;
-                case SpaceBonus_1.SpaceBonus.ENERGY:
-                    player.energy++;
-                    break;
-                case SpaceBonus_1.SpaceBonus.MICROBE:
-                    addResourceToCard(player, CardResource_1.CardResource.MICROBE, 'microbe');
-                    break;
-                default:
-                    player.game.grantSpaceBonus(player, bonus);
-                    break;
+        for (const bonus of adjacentSpace.adjacency.bonus) {
+            if (bonus !== 'callback') {
+                bonuses.add(bonus);
+                continue;
             }
-        });
+            const cardName = (_a = adjacentSpace.tile) === null || _a === void 0 ? void 0 : _a.card;
+            if (cardName !== CardName_1.CardName.CRASHLANDING) {
+                throw new Error('\'callback\' only applies to Crashlanding now.');
+            }
+            const adjacentBonuses = CrashlandingBonus_1.CrashlandingBonus.onTilePlacedAdjacentToCrashlanding(player.game, adjacentSpace, newTileSpace);
+            adjacentBonuses.forEach((bonus) => bonuses.add(bonus));
+        }
+        for (const [bonus, qty] of bonuses.multiplicities()) {
+            for (let idx = 0; idx < qty; idx++) {
+                switch (bonus) {
+                    case SpaceBonus_1.SpaceBonus.ANIMAL:
+                        addResourceToCard(player, CardResource_1.CardResource.ANIMAL, 'animal');
+                        break;
+                    case SpaceBonus_1.SpaceBonus.MEGACREDITS:
+                        player.megaCredits++;
+                        break;
+                    case SpaceBonus_1.SpaceBonus.ENERGY:
+                        player.energy++;
+                        break;
+                    case SpaceBonus_1.SpaceBonus.MICROBE:
+                        addResourceToCard(player, CardResource_1.CardResource.MICROBE, 'microbe');
+                        break;
+                    default:
+                        player.game.grantSpaceBonus(player, bonus);
+                        break;
+                }
+            }
+        }
         const bonusText = Array.from(bonuses.multiplicities())
             .map(([bonus, count]) => `${count} ${SpaceBonus_1.SpaceBonus.toString(bonus)}`)
             .join(', ');
@@ -119,7 +134,7 @@ class AresHandler {
     }
     static earnAdjacencyBonusesForGaia(player, space) {
         for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
-            this.earnAdacencyBonus(adjacentSpace, player, false);
+            this.earnAdacencyBonus(space, adjacentSpace, player, false);
         }
     }
     static computeAdjacencyCosts(game, space, subjectToHazardAdjacency) {

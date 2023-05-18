@@ -284,7 +284,7 @@ class Executor {
         if (behavior.city !== undefined) {
             if (behavior.city.space !== undefined) {
                 const space = player.game.board.getSpace(behavior.city.space);
-                player.game.addCityTile(player, space);
+                player.game.addCity(player, space);
             }
             else {
                 player.game.defer(new PlaceCityTile_1.PlaceCityTile(player, { on: behavior.city.on }));

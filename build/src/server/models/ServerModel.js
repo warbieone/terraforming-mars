@@ -63,7 +63,6 @@ class Server {
             undoCount: game.undoCount,
             venusScaleLevel: game.getVenusScaleLevel(),
             step: game.lastSaveId,
-            corporationsToDraft: this.getCards(game.getPlayers()[0], game.corporationsToDraft),
         };
     }
     static getPlayerModel(player) {
@@ -432,6 +431,7 @@ class Server {
         const volcanicSpaceIds = board.getVolcanicSpaceIds();
         const noctisCitySpaceIds = board.getNoctisCitySpaceId();
         return board.spaces.map((space) => {
+            var _a, _b;
             let highlight = undefined;
             if (volcanicSpaceIds.includes(space.id)) {
                 highlight = 'volcanic';
@@ -439,16 +439,22 @@ class Server {
             else if (noctisCitySpaceIds === space.id) {
                 highlight = 'noctis';
             }
-            return {
+            const model = {
                 x: space.x,
                 y: space.y,
                 id: space.id,
-                bonus: space.bonus,
                 spaceType: space.spaceType,
-                tileType: space.tile && space.tile.tileType,
+                bonus: space.bonus,
+                tileType: (_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType,
                 color: this.getColor(space),
-                highlight: highlight,
             };
+            if (highlight === undefined) {
+                model.highlight = highlight;
+            }
+            if (((_b = space.tile) === null || _b === void 0 ? void 0 : _b.rotated) === true) {
+                model.rotated = true;
+            }
+            return model;
         });
     }
     static getGameOptionsAsModel(options) {
@@ -463,7 +469,6 @@ class Server {
             communityCardsOption: options.communityCardsOption,
             corporateEra: options.corporateEra,
             draftVariant: options.draftVariant,
-            corporationsDraft: options.corporationsDraft,
             escapeVelocityMode: options.escapeVelocityMode,
             escapeVelocityThreshold: options.escapeVelocityThreshold,
             escapeVelocityPeriod: options.escapeVelocityPeriod,

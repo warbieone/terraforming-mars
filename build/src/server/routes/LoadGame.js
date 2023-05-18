@@ -27,14 +27,14 @@ class LoadGame extends Handler_1.Handler {
             req.once('end', () => __awaiter(this, void 0, void 0, function* () {
                 try {
                     const gameReq = JSON.parse(body);
-                    const game_id = gameReq.game_id;
+                    const gameId = gameReq.gameId;
                     const rollbackCount = gameReq.rollbackCount;
                     if (rollbackCount > 0) {
-                        Database_1.Database.getInstance().deleteGameNbrSaves(game_id, rollbackCount);
+                        Database_1.Database.getInstance().deleteGameNbrSaves(gameId, rollbackCount);
                     }
-                    const game = yield GameLoader_1.GameLoader.getInstance().getGame(game_id, true);
+                    const game = yield GameLoader_1.GameLoader.getInstance().getGame(gameId, true);
                     if (game === undefined) {
-                        console.warn(`unable to find ${game_id} in database`);
+                        console.warn(`unable to find ${gameId} in database`);
                         ctx.route.notFound(req, res, 'game_id not found');
                     }
                     else {

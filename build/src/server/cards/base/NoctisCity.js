@@ -41,11 +41,11 @@ class NoctisCity extends Card_1.Card {
         const noctisCitySpaceId = player.game.board.getNoctisCitySpaceId();
         if (noctisCitySpaceId !== undefined) {
             const space = player.game.board.getSpace(noctisCitySpaceId);
-            player.game.addCityTile(player, space);
+            player.game.addCity(player, space);
             return undefined;
         }
         return new SelectSpace_1.SelectSpace('Select space for Noctis city', player.game.board.getAvailableSpacesForCity(player), (space) => {
-            player.game.addCityTile(player, space);
+            player.game.addCity(player, space);
             return undefined;
         });
     }

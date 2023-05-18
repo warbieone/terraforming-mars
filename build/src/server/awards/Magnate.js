@@ -5,7 +5,7 @@ const CardType_1 = require("../../common/cards/CardType");
 class Magnate {
     constructor() {
         this.name = 'Magnate';
-        this.description = 'Most automated cards in play (green cards)';
+        this.description = 'Play the most automated cards (green cards)';
     }
     getScore(player) {
         return player.playedCards

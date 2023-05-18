@@ -4,7 +4,7 @@ exports.Thermalist = void 0;
 class Thermalist {
     constructor() {
         this.name = 'Thermalist';
-        this.description = 'Having the most heat resource cubes (after final production round)';
+        this.description = 'Have the most heat (after final production round)';
     }
     getScore(player) {
         if (player.game.isDoneWithFinalProduction()) {

@@ -8,6 +8,7 @@ const SelectOption_1 = require("../../inputs/SelectOption");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
+const Resource_1 = require("../../../common/Resource");
 class Vitor extends Card_1.Card {
     constructor() {
         super({
@@ -63,7 +64,7 @@ class Vitor extends Card_1.Card {
             if (victoryPoints.points <= 0)
                 return;
         }
-        player.megaCredits += 2;
+        player.addResource(Resource_1.Resource.MEGACREDITS, 2, { log: true, from: this });
     }
 }
 exports.Vitor = Vitor;

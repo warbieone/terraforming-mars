@@ -16,6 +16,7 @@ const GeologicalSurvey_1 = require("./GeologicalSurvey");
 const GreatDamAres_1 = require("./GreatDamAres");
 const IndustrialCenterAres_1 = require("./IndustrialCenterAres");
 const LavaFlowsAres_1 = require("./LavaFlowsAres");
+const MagneticFieldGeneratorsAres_1 = require("./MagneticFieldGeneratorsAres");
 const MarketingExperts_1 = require("./MarketingExperts");
 const MetallicAsteroid_1 = require("./MetallicAsteroid");
 const MiningAreaAres_1 = require("./MiningAreaAres");
@@ -44,6 +45,7 @@ exports.ARES_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.INDUSTRIAL_CENTER_ARES]: { Factory: IndustrialCenterAres_1.IndustrialCenterAres },
         [CardName_1.CardName.GREAT_DAM_ARES]: { Factory: GreatDamAres_1.GreatDamAres },
         [CardName_1.CardName.LAVA_FLOWS_ARES]: { Factory: LavaFlowsAres_1.LavaFlowsAres },
+        [CardName_1.CardName.MAGNETIC_FIELD_GENERATORS_ARES]: { Factory: MagneticFieldGeneratorsAres_1.MagneticFieldGeneratorsAres },
         [CardName_1.CardName.MARKETING_EXPERTS]: { Factory: MarketingExperts_1.MarketingExperts },
         [CardName_1.CardName.METALLIC_ASTEROID]: { Factory: MetallicAsteroid_1.MetallicAsteroid },
         [CardName_1.CardName.MINING_AREA_ARES]: { Factory: MiningAreaAres_1.MiningAreaAres },

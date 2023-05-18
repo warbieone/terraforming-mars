@@ -437,6 +437,7 @@ export class Player {
     if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
       this.resolveInsurance();
     }
+
   }
 
   /**
@@ -570,6 +571,10 @@ export class Player {
       const monsInsurance = <MonsInsurance> monsInsuranceOwner.getCorporationOrThrow(CardName.MONS_INSURANCE);
       monsInsurance.payDebt(monsInsuranceOwner, this);
     }
+
+
+
+
   }
 
   /**

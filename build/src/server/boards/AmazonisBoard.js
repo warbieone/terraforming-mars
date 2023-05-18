@@ -46,8 +46,8 @@ class AmazonisBoard extends Board_1.Board {
             SpaceName_1.SpaceName.ULYSSES_THOLUS,
         ];
     }
-    getNoctisCitySpaceIds() {
-        return [];
+    getNoctisCitySpaceId() {
+        return undefined;
     }
 }
 exports.AmazonisBoard = AmazonisBoard;

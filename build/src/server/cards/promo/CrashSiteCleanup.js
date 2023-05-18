@@ -7,7 +7,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const Resource_1 = require("../../../common/Resource");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class CrashSiteCleanup extends Card_1.Card {
     constructor() {

@@ -6,7 +6,7 @@ const Board_1 = require("../boards/Board");
 class EstateDealer {
     constructor() {
         this.name = 'Estate Dealer';
-        this.description = 'Most tiles adjacent to ocean tiles';
+        this.description = 'Own the most tiles adjacent to ocean tiles';
     }
     getScore(player) {
         return player.game.board.spaces.filter((space) => space.player === player &&

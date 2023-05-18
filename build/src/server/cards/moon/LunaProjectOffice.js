@@ -7,7 +7,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const Card_1 = require("../Card");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const Size_1 = require("../../../common/cards/render/Size");
 class LunaProjectOffice extends Card_1.Card {
     constructor() {

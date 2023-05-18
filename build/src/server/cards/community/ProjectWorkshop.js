@@ -51,13 +51,15 @@ class ProjectWorkshop extends Card_1.Card {
         });
     }
     getEligibleCards(player) {
-        const cards = player.getCardsByCardType(CardType_1.CardType.ACTIVE);
-        if (!PartyHooks_1.PartyHooks.shouldApplyPolicy(player, PartyName_1.PartyName.REDS))
+        const cards = player.playedCards.filter((card) => card.type === CardType_1.CardType.ACTIVE);
+        if (!PartyHooks_1.PartyHooks.shouldApplyPolicy(player, PartyName_1.PartyName.REDS)) {
             return cards;
+        }
         return cards.filter((card) => {
             const vp = card.getVictoryPoints(player);
-            if (vp <= 0)
+            if (vp <= 0) {
                 return true;
+            }
             return player.canAfford(constants_1.REDS_RULING_POLICY_COST * vp);
         });
     }

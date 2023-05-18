@@ -47,6 +47,8 @@ class CardRequirement {
                 return this.satisfiesInequality(parties);
             case RequirementType_1.RequirementType.OCEANS:
                 return this.checkGlobalRequirement(player, GlobalParameter_1.GlobalParameter.OCEANS);
+            case RequirementType_1.RequirementType.GENERATION:
+                return this.satisfiesInequality(player.game.getGeneration());
             case RequirementType_1.RequirementType.OXYGEN:
                 return this.checkGlobalRequirement(player, GlobalParameter_1.GlobalParameter.OXYGEN);
             case RequirementType_1.RequirementType.TEMPERATURE:
@@ -57,8 +59,6 @@ class CardRequirement {
                 return this.satisfiesInequality(player.getTerraformRating());
             case RequirementType_1.RequirementType.REMOVED_PLANTS:
                 return player.game.someoneHasRemovedOtherPlayersPlants;
-            case RequirementType_1.RequirementType.GENERATION:
-                return this.satisfiesInequality(player.game.getGeneration());
             case RequirementType_1.RequirementType.RESOURCE_TYPES:
                 const standardResources = Resource_1.ALL_RESOURCES.filter((res) => player.getResource(res) > 0).length;
                 const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;

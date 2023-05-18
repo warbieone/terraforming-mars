@@ -47,9 +47,11 @@ class PostgreSQL {
             yield this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))');
             yield this.client.query('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participants varchar[], PRIMARY KEY (game_id))');
             yield this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
+            yield this.client.query('CREATE TABLE IF NOT EXISTS completed_game(game_id varchar not null, completed_time timestamp default now(), PRIMARY KEY (game_id))');
             yield this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)');
             yield this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)');
             yield this.client.query('CREATE INDEX IF NOT EXISTS participants_idx_ids on participants USING GIN (participants)');
+            yield this.client.query('CREATE INDEX IF NOT EXISTS completed_game_idx_completed_time on completed_game(completed_time)');
         });
     }
     getPlayerCount(gameId) {
@@ -143,14 +145,16 @@ class PostgreSQL {
             throw err;
         }
     }
-    cleanGame(gameId) {
+    markFinished(gameId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const maxSaveId = yield this.getMaxSaveId(gameId);
-            const delete1 = this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId]);
-            const delete2 = this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [gameId]);
-            const delete3 = this.purgeUnfinishedGames();
-            yield Promise.all([delete1, delete2, delete3]);
+            const promise1 = this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [gameId]);
+            const promise2 = this.client.query('INSERT INTO completed_game(game_id) VALUES ($1)', [gameId]);
+            const promise3 = this.maintenance();
+            yield Promise.all([promise1, promise2, promise3]);
         });
+    }
+    maintenance() {
+        return Promise.all([this.purgeUnfinishedGames(), this.compressCompletedGames()]);
     }
     purgeUnfinishedGames(maxGameDays = process.env.MAX_GAME_DAYS) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -166,6 +170,33 @@ class PostgreSQL {
             console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
             const deleteParticipantsResult = yield this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
             console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
+        });
+    }
+    compressCompletedGames(compressCompletedGamesDays = process.env.COMPRESS_COMPLETED_GAMES_DAYS) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (compressCompletedGamesDays === undefined) {
+                return;
+            }
+            const dateToSeconds = (0, utils_1.daysAgoToSeconds)(compressCompletedGamesDays, 0);
+            const selectResult = yield this.client.query('SELECT DISTINCT game_id FROM completed_game WHERE completed_time < to_timestamp($1)', [dateToSeconds]);
+            const gameIds = selectResult.rows.slice(0, 1000).map((row) => row.game_id);
+            console.log(`${gameIds.length} completed games to be compressed.`);
+            if (gameIds.length > 1000) {
+                gameIds.length = 1000;
+                console.log('Compressing 1000 games.');
+            }
+            for (const gameId of gameIds) {
+                this.compressCompletedGame(gameId);
+            }
+        });
+    }
+    compressCompletedGame(gameId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const maxSaveId = yield this.getMaxSaveId(gameId);
+            return this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId])
+                .then(() => {
+                return this.client.query('DELETE FROM completed_games where game_id = $1', [gameId]);
+            });
         });
     }
     saveGame(game) {

@@ -4,7 +4,7 @@ exports.Banker = void 0;
 class Banker {
     constructor() {
         this.name = 'Banker';
-        this.description = 'Having the highest M€ production';
+        this.description = 'Have the most M€ production';
     }
     getScore(player) {
         return player.production.megacredits;

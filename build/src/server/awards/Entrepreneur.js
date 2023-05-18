@@ -5,7 +5,7 @@ const Board_1 = require("../boards/Board");
 class Entrepreneur {
     constructor() {
         this.name = 'Entrepreneur';
-        this.description = 'Most tiles that grant adjacency bonuses';
+        this.description = 'Own the most tiles that grant adjacency bonuses';
     }
     getScore(player) {
         return player.game.board.spaces

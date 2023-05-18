@@ -16,7 +16,9 @@ class Board {
         this.maxX = Math.max(...spaces.map((s) => s.x));
         this.maxY = Math.max(...spaces.map((s) => s.y));
         spaces.forEach((space) => {
-            this.adjacentSpaces.set(space.id, this.computeAdjacentSpaces(space));
+            const adjacentSpaces = this.computeAdjacentSpaces(space);
+            const filtered = adjacentSpaces.filter((space) => space !== undefined);
+            this.adjacentSpaces.set(space.id, filtered);
             this.map.set(space.id, space);
         });
     }
@@ -68,14 +70,8 @@ class Board {
                 bottomLeftSpace,
                 leftSpace,
             ];
-            const spaces = [];
-            for (const [x, y] of coords) {
-                const adj = this.spaces.find((adj) => adj.x === x && adj.y === y &&
-                    space !== adj && adj.spaceType !== SpaceType_1.SpaceType.COLONY);
-                if (adj !== undefined) {
-                    spaces.push(adj);
-                }
-            }
+            const spaces = coords.map(([x, y]) => this.spaces.find((adj) => adj.x === x && adj.y === y &&
+                space !== adj && adj.spaceType !== SpaceType_1.SpaceType.COLONY));
             return spaces;
         }
         return [];
@@ -86,6 +82,9 @@ class Board {
             throw new Error(`Unexpected space ID ${space.id}`);
         }
         return spaces;
+    }
+    getAdjacentSpacesClockwise(space) {
+        return this.computeAdjacentSpaces(space);
     }
     getSpaceByTileCard(cardName) {
         return this.spaces.find((space) => space.tile !== undefined && space.tile.card === cardName);

@@ -6,7 +6,7 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const Size_1 = require("../../../common/cards/render/Size");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 class LunarSecurityStations extends Card_1.Card {
     constructor() {

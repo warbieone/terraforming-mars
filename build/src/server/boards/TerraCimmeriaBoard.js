@@ -43,8 +43,8 @@ class TerraCimmeriaBoard extends Board_1.Board {
             SpaceName_1.SpaceName.TYRRHENUS_MONS,
         ];
     }
-    getNoctisCitySpaceIds() {
-        return [];
+    getNoctisCitySpaceId() {
+        return undefined;
     }
 }
 exports.TerraCimmeriaBoard = TerraCimmeriaBoard;

@@ -39,7 +39,7 @@ class UrbanizedArea extends Card_1.Card {
     }
     bespokePlay(player) {
         return new SelectSpace_1.SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player), (space) => {
-            player.game.addCityTile(player, space);
+            player.game.addCity(player, space);
             return undefined;
         });
     }

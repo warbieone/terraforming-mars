@@ -7,7 +7,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardResource_1 = require("../../../common/CardResource");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 class PrideoftheEarthArkship extends ActionCard_1.ActionCard {
     constructor() {

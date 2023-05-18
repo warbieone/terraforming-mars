@@ -9,7 +9,7 @@ const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const TileType_1 = require("../../../common/TileType");
 const SelectSpace_1 = require("../../inputs/SelectSpace");
 const Card_1 = require("../Card");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 class LunarMineUrbanization extends Card_1.Card {
     constructor() {
         super({

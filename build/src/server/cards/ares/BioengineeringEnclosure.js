@@ -8,7 +8,7 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class BioengineeringEnclosure extends Card_1.Card {
     constructor() {

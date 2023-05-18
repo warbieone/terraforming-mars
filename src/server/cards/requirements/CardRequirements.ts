@@ -9,6 +9,7 @@ import {ChairmanRequirement} from './ChairmanRequirement';
 import {CitiesRequirement} from './CitiesRequirement';
 import {ColoniesRequirement} from './ColoniesRequirement';
 import {FloatersRequirement} from './FloatersRequirement';
+import {GenerationRequirement} from './GenerationRequirement';
 import {GreeneriesRequirement} from './GreeneriesRequirement';
 import {HabitatRateRequirement} from './HabitatRateRequirement';
 import {HabitatTilesRequirement} from './HabitatTilesRequirement';
@@ -92,6 +93,11 @@ class Builder {
 
   public resourceTypes(amount: number = 1, options?: Options): Builder {
     this.reqs.push(new ResourceTypeRequirement(amount, options));
+    return this;
+  }
+
+  public generation(amount: number): Builder {
+    this.reqs.push(new GenerationRequirement(amount));
     return this;
   }
 

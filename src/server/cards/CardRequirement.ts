@@ -56,6 +56,9 @@ export class CardRequirement implements ICardRequirement {
     case RequirementType.OCEANS:
       return this.checkGlobalRequirement(player, GlobalParameter.OCEANS);
 
+    case RequirementType.GENERATION:
+      return this.satisfiesInequality(player.game.getGeneration());
+
     case RequirementType.OXYGEN:
       return this.checkGlobalRequirement(player, GlobalParameter.OXYGEN);
 
@@ -70,9 +73,6 @@ export class CardRequirement implements ICardRequirement {
 
     case RequirementType.REMOVED_PLANTS:
       return player.game.someoneHasRemovedOtherPlayersPlants;
-
-    case RequirementType.GENERATION:
-      return this.satisfiesInequality(player.game.getGeneration());
 
     case RequirementType.RESOURCE_TYPES:
       const standardResources = ALL_RESOURCES.filter((res) => player.getResource(res) > 0).length;

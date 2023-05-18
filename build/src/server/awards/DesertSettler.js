@@ -6,7 +6,7 @@ const Board_1 = require("../boards/Board");
 class DesertSettler {
     constructor() {
         this.name = 'Desert Settler';
-        this.description = 'Most tiles south of the equator (the four bottom rows)';
+        this.description = 'Own the most tiles south of the equator (the four bottom rows)';
     }
     getScore(player) {
         return player.game.board.spaces

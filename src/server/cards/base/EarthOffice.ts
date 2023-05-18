@@ -15,6 +15,7 @@ export class EarthOffice extends Card implements IProjectCard {
       cost: 4,
 
       cardDiscount: {tag: Tag.EARTH, amount: 3},
+      
       metadata: {
         cardNumber: '105',
         renderData: CardRenderer.builder((b) => {

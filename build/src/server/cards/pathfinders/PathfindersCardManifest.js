@@ -23,6 +23,7 @@ const CollegiumCopernicus_1 = require("./CollegiumCopernicus");
 const CommunicationCenter_1 = require("./CommunicationCenter");
 const ControlledBloom_1 = require("./ControlledBloom");
 const CoordinatedRaid_1 = require("./CoordinatedRaid");
+const Crashlanding_1 = require("./Crashlanding");
 const CrewTraining_1 = require("./CrewTraining");
 const Cryptocurrency_1 = require("./Cryptocurrency");
 const CultivationOfVenus_1 = require("./CultivationOfVenus");
@@ -155,6 +156,7 @@ exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.CULTIVATION_OF_VENUS]: { Factory: CultivationOfVenus_1.CultivationOfVenus, compatibility: 'venus' },
         [CardName_1.CardName.EXPEDITION_TO_THE_SURFACE_VENUS]: { Factory: ExpeditionToTheSurfaceVenus_1.ExpeditionToTheSurfaceVenus, compatibility: 'venus' },
         [CardName_1.CardName.LAST_RESORT_INGENUITY]: { Factory: LastResortIngenuity_1.LastResortIngenuity },
+        [CardName_1.CardName.CRASHLANDING]: { Factory: Crashlanding_1.Crashlanding, compatibility: 'ares' },
         [CardName_1.CardName.BOTANICAL_EXPERIENCE]: { Factory: BotanicalExperience_1.BotanicalExperience },
         [CardName_1.CardName.CRYPTOCURRENCY]: { Factory: Cryptocurrency_1.Cryptocurrency },
         [CardName_1.CardName.RICH_DEPOSITS]: { Factory: RichDeposits_1.RichDeposits },

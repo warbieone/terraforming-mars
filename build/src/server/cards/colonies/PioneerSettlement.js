@@ -8,7 +8,7 @@ const Resource_1 = require("../../../common/Resource");
 const ColonyName_1 = require("../../../common/colonies/ColonyName");
 const BuildColony_1 = require("../../deferredActions/BuildColony");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const Options_1 = require("../Options");
 class PioneerSettlement extends Card_1.Card {

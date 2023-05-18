@@ -4,7 +4,7 @@ exports.Benefactor = void 0;
 class Benefactor {
     constructor() {
         this.name = 'Benefactor';
-        this.description = 'Highest terraform rating';
+        this.description = 'Have the highest terraform rating';
     }
     getScore(player) {
         return player.getTerraformRating();

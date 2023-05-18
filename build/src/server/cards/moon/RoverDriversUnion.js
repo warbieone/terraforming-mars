@@ -8,7 +8,7 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const Resource_1 = require("../../../common/Resource");
 const Card_1 = require("../Card");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 class RoverDriversUnion extends Card_1.Card {
     constructor() {
         super({

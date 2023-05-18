@@ -7,7 +7,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const SendDelegateToArea_1 = require("../../deferredActions/SendDelegateToArea");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Turmoil_1 = require("../../turmoil/Turmoil");
 class CulturalMetropolis extends Card_1.Card {

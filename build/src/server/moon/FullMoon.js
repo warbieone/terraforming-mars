@@ -5,7 +5,7 @@ const Tag_1 = require("../../common/cards/Tag");
 class FullMoon {
     constructor() {
         this.name = 'Full Moon';
-        this.description = 'Having the most moon tags in play.';
+        this.description = 'Have the most moon tags';
     }
     getScore(player) {
         return player.tags.count(Tag_1.Tag.MOON, 'award');

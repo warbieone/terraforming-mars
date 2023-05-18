@@ -247,7 +247,10 @@ class Player {
             if (from instanceof Player) {
                 b.player(from);
             }
-            else if (from !== undefined) {
+            else if (typeof (from) === 'object') {
+                b.cardName(from.name);
+            }
+            else if (typeof (from) === 'string') {
                 b.globalEventName(from);
             }
         });
@@ -473,9 +476,6 @@ class Player {
         });
         return count;
     }
-    getCardsByCardType(cardType) {
-        return this.playedCards.filter((card) => card.type === cardType);
-    }
     deferInputCb(result) {
         this.defer(result, DeferredAction_1.Priority.DEFAULT);
     }
@@ -546,7 +546,7 @@ class Player {
         }
         if (game.canAddOcean()) {
             action.options.push(new SelectSpace_1.SelectSpace('Add an ocean', game.board.getAvailableSpacesForOcean(this), (space) => {
-                game.addOceanTile(this, space);
+                game.addOcean(this, space);
                 game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
                 return undefined;
             }));
@@ -621,18 +621,6 @@ class Player {
             this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
             return undefined;
         }, { min: cardsToKeep, max: cardsToKeep, played: false }));
-    }
-    runDraftCorporationPhase(playerName, passedCards) {
-        let cards = passedCards;
-        this.setWaitingFor(new SelectCard_1.SelectCard((0, MessageBuilder_1.newMessage)('Select a corporation to keep and pass the rest to ${0}', (b) => b.rawString(playerName)), 'Keep', cards, (foundCards) => {
-            foundCards.forEach((card) => {
-                this.draftedCorporations.push(card);
-                this.game.log('${0} kept ${1}', (b) => b.player(this).card(card));
-                cards = cards.filter((c) => c !== card);
-            });
-            this.game.playerIsFinishedWithDraftingCorporationPhase(this, cards);
-            return undefined;
-        }, { min: 1, max: 1, played: false }));
     }
     spendableMegacredits() {
         let total = this.megaCredits;
@@ -959,7 +947,7 @@ class Player {
             });
             const vanAllen = this.game.getCardPlayerOrUndefined(CardName_1.CardName.VANALLEN);
             if (vanAllen !== undefined) {
-                vanAllen.addResource(Resource_1.Resource.MEGACREDITS, 3, { log: true });
+                vanAllen.addResource(Resource_1.Resource.MEGACREDITS, 3, { log: true, from: this });
             }
             if (!this.cardIsInEffect(CardName_1.CardName.VANALLEN)) {
                 this.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(this, constants_1.MILESTONE_COST, { title: 'Select how to pay for milestone' }));

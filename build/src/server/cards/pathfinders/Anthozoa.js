@@ -7,7 +7,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Resource_1 = require("../../../common/Resource");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardResource_1 = require("../../../common/CardResource");
 class Anthozoa extends Card_1.Card {
     constructor() {

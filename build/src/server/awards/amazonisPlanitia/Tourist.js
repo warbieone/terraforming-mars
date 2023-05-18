@@ -5,7 +5,7 @@ const RedTourismWave_1 = require("../../cards/turmoil/RedTourismWave");
 class Tourist {
     constructor() {
         this.name = 'Tourist';
-        this.description = 'Most empty spaces adjacent to your tiles';
+        this.description = 'Have the most empty spaces adjacent to your tiles';
     }
     getScore(player) {
         return RedTourismWave_1.RedTourismWave.getAdjacentEmptySpacesCount(player);

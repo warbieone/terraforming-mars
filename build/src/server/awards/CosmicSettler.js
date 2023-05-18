@@ -4,7 +4,7 @@ exports.CosmicSettler = void 0;
 class CosmicSettler {
     constructor() {
         this.name = 'Cosmic Settler';
-        this.description = 'Having the most city tiles not on Mars';
+        this.description = 'Own the most cities not on Mars';
     }
     getScore(player) {
         return player.game.getCitiesOffMarsCount(player);

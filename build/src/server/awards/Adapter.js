@@ -5,7 +5,7 @@ const CardType_1 = require("../../common/cards/CardType");
 class Adapter {
     constructor() {
         this.name = 'Adapter';
-        this.description = 'Most cards in play with requirements';
+        this.description = 'Play the most cards with requirements';
     }
     getScore(player) {
         const validCards = player.playedCards.filter((card) => {

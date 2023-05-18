@@ -6,6 +6,8 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {Turmoil} from '../../../server/turmoil/Turmoil';
+import {Resource} from '../../../common/Resource';
 
 export class Pristar extends Card implements ICorporationCard {
 

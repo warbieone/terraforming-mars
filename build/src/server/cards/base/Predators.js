@@ -8,7 +8,7 @@ const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
 const RemoveResourcesFromCard_1 = require("../../deferredActions/RemoveResourcesFromCard");
-const CardRequirements_1 = require("../CardRequirements");
+const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class Predators extends Card_1.Card {

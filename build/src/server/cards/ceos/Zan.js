@@ -28,11 +28,12 @@ class Zan extends CeoCard_1.CeoCard {
         this.isDisabled = true;
         const game = player.game;
         const turmoil = Turmoil_1.Turmoil.getTurmoil(game);
-        const totalDelegatesPlaced = turmoil.getAvailableDelegateCount(player.id);
+        const totalAvailableDelegates = turmoil.getAvailableDelegateCount(player.id);
         while (turmoil.getAvailableDelegateCount(player.id) > 0) {
             turmoil.sendDelegateToParty(player.id, PartyName_1.PartyName.REDS, game);
         }
-        player.addResource(Resource_1.Resource.MEGACREDITS, totalDelegatesPlaced, { log: true });
+        player.totalDelegatesPlaced += totalAvailableDelegates;
+        player.addResource(Resource_1.Resource.MEGACREDITS, totalAvailableDelegates, { log: true });
         return undefined;
     }
 }

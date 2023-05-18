@@ -7,6 +7,7 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
+const Resource_1 = require("../../../common/Resource");
 class OptimalAerobraking extends Card_1.Card {
     constructor() {
         super({
@@ -24,8 +25,8 @@ class OptimalAerobraking extends Card_1.Card {
     }
     onCardPlayed(player, card) {
         if (card.type === CardType_1.CardType.EVENT && card.tags.includes(Tag_1.Tag.SPACE)) {
-            player.megaCredits += 3;
-            player.heat += 3;
+            player.addResource(Resource_1.Resource.MEGACREDITS, 3, { log: true, from: this });
+            player.addResource(Resource_1.Resource.HEAT, 3, { log: true, from: this });
         }
     }
 }

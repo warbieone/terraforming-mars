@@ -5,7 +5,7 @@ const Tag_1 = require("../../common/cards/Tag");
 class Voyager {
     constructor() {
         this.name = 'Voyager';
-        this.description = 'Having the most Jovian tags in play';
+        this.description = 'Have the most Jovian tags';
     }
     getScore(player) {
         return player.tags.count(Tag_1.Tag.JOVIAN, 'award');

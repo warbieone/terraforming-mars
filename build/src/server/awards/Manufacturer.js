@@ -5,7 +5,7 @@ const CardType_1 = require("../../common/cards/CardType");
 class Manufacturer {
     constructor() {
         this.name = 'Manufacturer';
-        this.description = 'Having the most active (blue) cards in play';
+        this.description = 'Have the most active (blue) cards';
     }
     getScore(player) {
         return player.playedCards.filter((card) => card.type === CardType_1.CardType.ACTIVE).length;

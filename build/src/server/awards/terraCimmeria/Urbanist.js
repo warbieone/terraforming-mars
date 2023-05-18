@@ -6,7 +6,7 @@ const TileType_1 = require("../../../common/TileType");
 class Urbanist {
     constructor() {
         this.name = 'Urbanist';
-        this.description = 'Most VP from city tile adjacencies on Mars';
+        this.description = 'Have the most VP from city tile adjacencies on Mars';
     }
     getScore(player) {
         let score = 0;
