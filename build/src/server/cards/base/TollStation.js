@@ -22,7 +22,7 @@ class TollStation extends Card_1.Card {
                         pb.megacredits(1).slash().space({ played: Options_1.played, all: Options_1.all }).asterix();
                     });
                 }),
-                description: 'Increase your M€ production 1 step for each space tag your OPPONENTS have.',
+                description: 'Increase your M€ production 1 step for each space tag of the OPPONENT who has the most space tags.',
             },
         });
     }
