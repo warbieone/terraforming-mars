@@ -33,6 +33,7 @@ export type GameOptions = {
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
   ceoExtension: boolean;
+  leagueCardsOption: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -107,4 +108,5 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   undoOption: false,
   venusNextExtension: false,
   twoCorpsVariant: false,
+  leagueCardsOption: false,
 };

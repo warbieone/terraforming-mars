@@ -66,7 +66,6 @@ import {newMessage} from './logs/MessageBuilder';
 import {calculateVictoryPoints} from './game/calculateVictoryPoints';
 import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
 
-
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
 /**

@@ -69,6 +69,9 @@ export default Vue.extend({
     promoCardsOption: {
       type: Boolean,
     },
+    leagueCardsOption: {
+      type: Boolean,
+    },
     communityCardsOption: {
       type: Boolean,
     },
@@ -104,6 +107,7 @@ export default Vue.extend({
         ...this.colonies ? corpCardNames('colonies') : [],
         ...this.turmoil ? corpCardNames('turmoil') : [],
         ...this.promoCardsOption ? corpCardNames('promo') : [],
+        ...this.leagueCardsOption ? corpCardNames('league') : [],
         ...this.communityCardsOption ? corpCardNames('community') : [],
         ...this.moonExpansion ? corpCardNames('moon') : [],
         ...this.pathfindersExpansion ? corpCardNames('pathfinders') : [],
@@ -170,6 +174,7 @@ export default Vue.extend({
       case 'base': return 'Base';
       case 'corpera': return 'Corporate Era';
       case 'promo': return 'Promo';
+      case 'league': return 'League';
       case 'venus': return 'Venus Next';
       case 'colonies': return 'Colonies';
       case 'prelude': return 'Prelude';
@@ -203,6 +208,9 @@ export default Vue.extend({
     },
     promoCardsOption(enabled) {
       this.watchSelect('promo', enabled);
+    },
+    leagueCardsOption(enabled) {
+      this.watchSelect('league', enabled);
     },
     communityCardsOption(enabled) {
       this.watchSelect('community', enabled);

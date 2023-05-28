@@ -55,6 +55,7 @@ export interface NewGameConfig {
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
   ceoExtension: boolean;
+  leagueCardsOption: boolean;
 
   // Variants
   draftVariant: boolean;

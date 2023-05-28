@@ -19,7 +19,6 @@ export class SaveOurShip extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'L419',
-        victoryPoints: -1,
         description: 'Discard 2 cards, then draw 3 cards.',
         renderData: CardRenderer.builder((b) => {
           b.minus().cards(2).br;

@@ -83,6 +83,7 @@ class GameHandler extends Handler_1.Handler {
                         moonExpansion: gameReq.moonExpansion,
                         pathfindersExpansion: gameReq.pathfindersExpansion,
                         promoCardsOption: gameReq.promoCardsOption,
+                        leagueCardsOption: gameReq.leagueCardsOption,
                         communityCardsOption: gameReq.communityCardsOption,
                         solarPhaseOption: gameReq.solarPhaseOption,
                         removeNegativeGlobalEventsOption: gameReq.removeNegativeGlobalEventsOption,

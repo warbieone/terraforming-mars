@@ -6,6 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {TileType} from '../../../common/TileType';
 import {Behavior} from '../../behavior/Behavior';
 import {IPreludeCard} from './IPreludeCard';
+//import { IVictoryPoints } from '../../../common/cards/IVictoryPoints';
 
 interface StaticPreludeProperties {
     metadata: ICardMetadata;

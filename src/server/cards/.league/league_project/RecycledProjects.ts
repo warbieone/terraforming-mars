@@ -6,6 +6,7 @@ import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
 import {CardRequirements} from '../../CardRequirements';
 import {Player} from '../../../Player';
+import {played} from '../../Options';
 
 export class RecycledProjects extends Card implements IProjectCard {
   // author: ThreadPacifist
@@ -23,11 +24,10 @@ export class RecycledProjects extends Card implements IProjectCard {
         cardNumber: 'L304',
         renderData: CardRenderer.builder((b) => {
           b.effect(undefined, (eb) => {
-            eb.building(1).slash().space().startEffect.steel(1);
+            eb.building(1,{played}).slash().space({played}).startEffect.steel(1);
           }).br;
         }),
         description: 'After playing a building or space tag, receive a steel resource.',
-        victoryPoints: 1,
       },
     });
   }

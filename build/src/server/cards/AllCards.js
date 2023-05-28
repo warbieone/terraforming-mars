@@ -7,6 +7,7 @@ const NonColoniesCardManifest_1 = require("./colonies/NonColoniesCardManifest");
 const CommunityCardManifest_1 = require("./community/CommunityCardManifest");
 const PreludeCardManifest_1 = require("./prelude/PreludeCardManifest");
 const PromoCardManifest_1 = require("./promo/PromoCardManifest");
+const LeagueCardManifest_1 = require("./.league/LeagueCardManifest");
 const CeoCardManifest_1 = require("./ceos/CeoCardManifest");
 const StandardCardManifests_1 = require("./StandardCardManifests");
 const TurmoilCardManifest_1 = require("./turmoil/TurmoilCardManifest");
@@ -17,6 +18,7 @@ exports.ALL_MODULE_MANIFESTS = [
     StandardCardManifests_1.BASE_CARD_MANIFEST,
     StandardCardManifests_1.CORP_ERA_CARD_MANIFEST,
     PromoCardManifest_1.PROMO_CARD_MANIFEST,
+    LeagueCardManifest_1.LEAGUE_CARD_MANIFEST,
     VenusCardManifest_1.VENUS_CARD_MANIFEST,
     ColoniesCardManifest_1.COLONIES_CARD_MANIFEST,
     NonColoniesCardManifest_1.NON_COLONIES_CARD_MANIFEST,

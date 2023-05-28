@@ -481,6 +481,7 @@ class Server {
             pathfindersExpansion: options.pathfindersExpansion,
             preludeExtension: options.preludeExtension,
             promoCardsOption: options.promoCardsOption,
+            leagueCardsOption: options.leagueCardsOption,
             politicalAgendasExtension: options.politicalAgendasExtension,
             removeNegativeGlobalEvents: options.removeNegativeGlobalEventsOption,
             showOtherPlayersVP: options.showOtherPlayersVP,

@@ -22,7 +22,6 @@ export class OuterRimUniversity extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'L418',
-        victoryPoints: 1,
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Jovian tag, including this, you may discard a card from hand to draw a card.', (eb) => {
             eb.jovian().startEffect.minus().cards(1).nbsp.plus().cards(1);
@@ -33,8 +32,8 @@ export class OuterRimUniversity extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
-    for (let i = 0; i < scienceTags; i++) {
+    const jovianTags = player.tags.cardTagCount(card, Tag.JOVIAN);
+    for (let i = 0; i < jovianTags; i++) {
       player.game.defer(new SimpleDeferredAction(
         player,
         () => {

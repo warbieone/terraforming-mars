@@ -822,5 +822,11 @@ export enum CardName {
     RECYCLED_PROJECTS = 'Recycled Projects',
     SAVE_OUR_SHIP = 'Save Our Ship',
     SOIL_ENHANCERS = 'Soil Enhancers',
-    
+    SPACE_DEBRIS_COLLECTION = 'Space Debri Collection',
+    STEEL_CASTING = 'Steel Casting',
+    SULPHURIC_IMPORT = 'Sulphuric Import',
+    TITANIUM_ISOTOPES = 'Titanium Isotopes',
+    WORLD_GOVERNMENT_PARTNERSHIP = 'World Government Partnership',
+    JOVIAN_OUTPOST = 'Jovian Outpost',
+    SCAVENGERS = 'Scavengers',
 }

@@ -14,5 +14,6 @@ exports.GAME_MODULES = [
     'moon',
     'pathfinders',
     'ceo',
+    'league',
 ];
 //# sourceMappingURL=GameModule.js.map

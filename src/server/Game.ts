@@ -312,9 +312,22 @@ export class Game implements Logger {
         gameOptions.turmoilExtension ||
         gameOptions.initialDraftVariant ||
         gameOptions.ceoExtension) {
-        for (let i = 0; i < gameOptions.startingCorporations; i++) {
-          player.dealtCorporationCards.push(corporationDeck.draw(game));
+
+        const specificCards = ['Teractor', 'EcoLine', 'Tharsis Republic'];
+        const dealtCards = corporationDeck.drawSpecific(specificCards);
+
+        if (player.name !== 'Owen Tournament'){
+          for (let i = 0; i < gameOptions.startingCorporations; i++) {
+            player.dealtCorporationCards.push(corporationDeck.draw(game));
+          }
         }
+
+        if (player.name === 'Owen'){
+          for (let i = 0; i < dealtCards.length; i++) {
+            player.dealtCorporationCards.push(dealtCards[i]);
+          }
+        }
+
         if (gameOptions.initialDraftVariant === false) {
           for (let i = 0; i < 10; i++) {
             player.dealtProjectCards.push(projectDeck.draw(game));
@@ -1275,11 +1288,14 @@ export class Game implements Logger {
   public grantSpaceBonuses(player: Player, space: ISpace) {
     const bonuses = MultiSet.from(space.bonus);
     bonuses.forEachMultiplicity((count: number, bonus: SpaceBonus) => {
-      this.grantSpaceBonus(player, bonus, count);
+      this.grantSpaceBonus(player, bonus, count, space);
     });
   }
 
-  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
+  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1, space?: ISpace) {
+    // Scavengers league corp hook
+    if (player.isCorporation(CardName.SCAVENGERS) && space?.tile?.tileType !== TileType.OCEAN) count += 1;
+
     switch (spaceBonus) {
     case SpaceBonus.DRAW_CARD:
       player.drawCard(count);

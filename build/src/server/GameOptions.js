@@ -51,5 +51,6 @@ exports.DEFAULT_GAME_OPTIONS = {
     undoOption: false,
     venusNextExtension: false,
     twoCorpsVariant: false,
+    leagueCardsOption: false,
 };
 //# sourceMappingURL=GameOptions.js.map

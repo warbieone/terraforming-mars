@@ -194,6 +194,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
   turmoil: 't',
   community: '*',
   promo: 'r',
+  league: 'e',
   ares: 'a',
   moon: 'm',
   pathfinders: 'P',
@@ -311,6 +312,7 @@ export default (Vue as WithRefs<Refs>).extend({
         ares: true,
         moon: true,
         promo: true,
+        league: true,
         pathfinders: true,
         ceo: true,
       },
@@ -499,6 +501,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'colonies': return 'Colonies';
       case 'turmoil': return 'Turmoil';
       case 'promo': return 'Promos';
+      case 'league': return 'League';
       case 'ares': return 'Ares';
       case 'community': return 'Community';
       case 'moon': return 'The Moon';

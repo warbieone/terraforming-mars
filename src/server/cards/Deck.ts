@@ -58,6 +58,34 @@ export class Deck<T extends ICard> {
     }
   }
 
+
+
+
+  public drawSpecific(cardNames: string[]): T[] {
+    const cards: T[] = [];
+
+    for (const cardName of cardNames) {
+      const cardIndex = this.drawPile.findIndex(card => card.name === cardName);
+
+      if (cardIndex === -1) {
+        throw new Error(`Card ${cardName} not found in ${this.type} deck`);
+      }
+
+      const card = this.drawPile.splice(cardIndex, 1)[0];
+      cards.push(card);
+    }
+
+    if (this.drawPile.length === 0) {
+      this.shuffle();
+    }
+
+    return cards;
+  }
+
+
+
+
+
   public draw(logger: Logger, source: 'top' | 'bottom' = 'top'): T {
     const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
 

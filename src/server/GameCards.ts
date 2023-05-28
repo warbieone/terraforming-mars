@@ -10,6 +10,7 @@ import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
 import {PATHFINDERS_CARD_MANIFEST} from './cards/pathfinders/PathfindersCardManifest';
 import {CEO_CARD_MANIFEST} from './cards/ceos/CeoCardManifest';
+import {LEAGUE_CARD_MANIFEST} from './cards/.league/LeagueCardManifest';
 import {CardManifest, ModuleManifest} from './cards/ModuleManifest';
 import {CardName} from '../common/cards/CardName';
 import {ICard} from './cards/ICard';
@@ -58,6 +59,7 @@ export class GameCards {
       [gameOptions.moonExpansion, MOON_CARD_MANIFEST],
       [gameOptions.pathfindersExpansion, PATHFINDERS_CARD_MANIFEST],
       [gameOptions.ceoExtension, CEO_CARD_MANIFEST],
+      [gameOptions.leagueCardsOption, LEAGUE_CARD_MANIFEST],
     ];
 
     this.moduleManifests = manifests.filter((a) => a[0]).map((a) => a[1]);

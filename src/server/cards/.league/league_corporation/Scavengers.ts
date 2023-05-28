@@ -1,21 +1,21 @@
 import {Card} from '../../Card';
 import {Player} from '../../../Player';
-import {CardName} from '../../../CardName';
-import {CardType} from '../../CardType';
+import {CardType} from '../../../../common/cards/CardType';
+import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
-import {CorporationCard} from '../../corporation/CorporationCard';
-import {TileType} from '../../../TileType';
+import { ICorporationCard } from '../../corporation/ICorporationCard';
+import {TileType} from '../../../../common/TileType';
 import {ISpace} from '../../../boards/ISpace';
 import {SelectSpace} from '../../../inputs/SelectSpace';
 // import {Resources} from '../../../Resources';
 // import {SelectScavengersStartingProd} from '../../../deferredActions/SelectScavengersStartingProd';
 
-export class Scavengers extends Card implements CorporationCard {
+export class Scavengers extends Card implements ICorporationCard {
   // burner
   // SCAVENGERS TilePlacement hook in Game.grantSpaceBonus()
   constructor() {
     super({
-      cardType: CardType.CORPORATION,
+      type: CardType.CORPORATION,
       name: CardName.SCAVENGERS,
       startingMegaCredits: 46,
       initialActionText: 'Place the crashed space ship tile on mars',
@@ -38,14 +38,20 @@ export class Scavengers extends Card implements CorporationCard {
   }
 
   public initialAction(player: Player) {
-    const availableSpaces = player.game.board.getAvailableSpacesOnLand(player);
-    return new SelectSpace('Select space for tile', availableSpaces, (foundSpace: ISpace) => {
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.SCAVENGERS});
-      return undefined;
-    });
+    return new SelectSpace(
+      'Select space for Scavengers tile',
+      player.game.board.getAvailableSpacesOnLand(player),
+      (space: ISpace) => {
+        player.game.addTile(player, space, {
+          tileType: TileType.SCAVENGERS,
+          card: this.name,
+        });
+        return undefined;
+      },
+    );
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     // player.addProduction(Resources.MEGACREDITS, -3);
     player.steel++;
     player.titanium++;

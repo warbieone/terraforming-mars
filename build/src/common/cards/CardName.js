@@ -795,5 +795,12 @@ var CardName;
     CardName["RECYCLED_PROJECTS"] = "Recycled Projects";
     CardName["SAVE_OUR_SHIP"] = "Save Our Ship";
     CardName["SOIL_ENHANCERS"] = "Soil Enhancers";
+    CardName["SPACE_DEBRIS_COLLECTION"] = "Space Debri Collection";
+    CardName["STEEL_CASTING"] = "Steel Casting";
+    CardName["SULPHURIC_IMPORT"] = "Sulphuric Import";
+    CardName["TITANIUM_ISOTOPES"] = "Titanium Isotopes";
+    CardName["WORLD_GOVERNMENT_PARTNERSHIP"] = "World Government Partnership";
+    CardName["JOVIAN_OUTPOST"] = "Jovian Outpost";
+    CardName["SCAVENGERS"] = "Scavengers";
 })(CardName = exports.CardName || (exports.CardName = {}));
 //# sourceMappingURL=CardName.js.map

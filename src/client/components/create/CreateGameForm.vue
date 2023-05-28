@@ -65,6 +65,12 @@
                                 <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
+                            <input type="checkbox" name="league" id="league-checkbox" v-model="leagueCardsOption">
+                            <label for="league-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-league"></div>
+                                <span v-i18n>League</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
                             <div class="create-game-subsection-label" v-i18n>Fan-made</div>
 
                             <input type="checkbox" name="ares" id="ares-checkbox" v-model="aresExtension">
@@ -428,6 +434,7 @@
                   v-bind:colonies="colonies"
                   v-bind:turmoil="turmoil"
                   v-bind:promoCardsOption="promoCardsOption"
+                  v-bind:leagueCardsOption="leagueCardsOption"
                   v-bind:communityCardsOption="communityCardsOption"
                   v-bind:moonExpansion="moonExpansion"
                   v-bind:pathfindersExpansion="pathfindersExpansion"
@@ -450,6 +457,7 @@
                   ref="preludesFilter"
                   v-on:prelude-list-changed="updateCustomPreludes"
                   v-bind:promoCardsOption="promoCardsOption"
+                  v-bind:leagueCardsOption="leagueCardsOption"
                   v-bind:communityCardsOption="communityCardsOption"
                   v-bind:moonExpansion="moonExpansion"
                   v-bind:pathfindersExpansion="pathfindersExpansion"
@@ -569,6 +577,7 @@ export default (Vue as WithRefs<Refs>).extend({
       solarPhaseOption: false,
       shuffleMapOption: false,
       promoCardsOption: false,
+      leagueCardsOption: false,
       communityCardsOption: false,
       aresExtension: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
@@ -615,6 +624,7 @@ export default (Vue as WithRefs<Refs>).extend({
       this.colonies = value;
       this.turmoil = value;
       this.promoCardsOption = value;
+      this.leagueCardsOption = value;
       this.solarPhaseOption = value;
     },
     venusNext(value: boolean) {
@@ -859,6 +869,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'base': return true;
       case 'corpera': return model.corporateEra;
       case 'promo': return model.promoCardsOption;
+      case 'league': return model.leagueCardsOption;
       case 'venus': return model.venusNext;
       case 'colonies': return model.colonies;
       case 'prelude': return model.prelude;
@@ -952,6 +963,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const board = this.board;
       const seed = this.seed;
       const promoCardsOption = this.promoCardsOption;
+      const leagueCardsOption = this.leagueCardsOption;
       const communityCardsOption = this.communityCardsOption;
       const aresExtension = this.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
@@ -1112,6 +1124,7 @@ export default (Vue as WithRefs<Refs>).extend({
         seed,
         solarPhaseOption,
         promoCardsOption,
+        leagueCardsOption,
         communityCardsOption,
         aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,

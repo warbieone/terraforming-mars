@@ -17349,7 +17349,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Increase your M€ production 1 step for each space tag your OPPONENTS have."
+            "description": "Increase your M€ production 1 step for each space tag of the OPPONENT who has the most space tags."
         },
         "productionBox": {
             "megacredits": 0,
@@ -23145,6 +23145,2053 @@
         "compatibility": [
             "prelude"
         ]
+    },
+    {
+        "module": "league",
+        "name": "Amphibian Farming",
+        "tags": [
+            "plant"
+        ],
+        "cost": 7,
+        "type": "automated",
+        "requirements": {
+            "requirements": [
+                {
+                    "type": "Ocean",
+                    "amount": 2,
+                    "isMax": true,
+                    "isAny": false
+                }
+            ]
+        },
+        "metadata": {
+            "cardNumber": "L406",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "plants",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Requires 2 or less ocean tiles. Increase your Plant production 1 step."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Assembly Lines",
+        "tags": [
+            "building"
+        ],
+        "cost": 7,
+        "type": "automated",
+        "metadata": {
+            "cardNumber": "L404",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 2,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Increase your M€ production 2 steps."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Bank Unions",
+        "tags": [
+            "building"
+        ],
+        "cost": 8,
+        "type": "automated",
+        "metadata": {
+            "cardNumber": "L405",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 3,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Increase your M€ production 3 steps."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Boringville Population You",
+        "tags": [
+            "building",
+            "city"
+        ],
+        "cost": 22,
+        "type": "automated",
+        "metadata": {
+            "cardNumber": "L424",
+            "description": "Increase your M€ production 2 steps. Place a City tile.",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 2,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        },
+                        {
+                            "type": "nbsp",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "nbsp",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "city",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "size": "M"
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Dactyl and Ida",
+        "tags": [
+            "space"
+        ],
+        "cost": 18,
+        "type": "event",
+        "metadata": {
+            "description": "Raise temperature 1 step and raise oxygen 1 step. Add 2 asteroid resources to ANY card.",
+            "cardNumber": "L411",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "temperature",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "oxygen",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ],
+                    [
+                        {
+                            "type": "asteroids",
+                            "amount": 2,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "DNA Extraction From Soil",
+        "tags": [
+            "microbe"
+        ],
+        "cost": 6,
+        "type": "active",
+        "metadata": {
+            "cardNumber": "L415",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": " ",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "microbes",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    {
+                                        "type": "OR",
+                                        "size": "S",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "microbes",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "cards",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    "Action: Add 1 microbe to this card, or remove 1 microbe here to draw a card."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "resourceType": "Microbe",
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Edible Fungi",
+        "tags": [
+            "microbe"
+        ],
+        "cost": 12,
+        "type": "automated",
+        "requirements": {
+            "requirements": [
+                {
+                    "type": "tag",
+                    "amount": 1,
+                    "isMax": false,
+                    "isAny": false,
+                    "tag": "microbe"
+                }
+            ]
+        },
+        "metadata": {
+            "cardNumber": "L403",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "plants",
+                                        "amount": 2,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Requires 1 Microbe tag. Increase your Plant production 2 steps."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Fire Sale",
+        "tags": [
+            "earth"
+        ],
+        "cost": 3,
+        "type": "automated",
+        "requirements": {
+            "requirements": [
+                {
+                    "type": "C",
+                    "amount": 6,
+                    "isMax": true,
+                    "isAny": false
+                }
+            ]
+        },
+        "metadata": {
+            "cardNumber": "L301",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "-X",
+                            "size": "M",
+                            "isUppercase": false,
+                            "isBold": true
+                        },
+                        {
+                            "type": "heat",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "nbsp",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "+",
+                            "size": "M",
+                            "isUppercase": false,
+                            "isBold": true
+                        },
+                        {
+                            "type": "megacredits",
+                            "amount": 0,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Convert all heat to M€."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Heavy Metal Bioremediation",
+        "tags": [
+            "microbe",
+            "building"
+        ],
+        "victoryPoints": 1,
+        "cost": 10,
+        "type": "active",
+        "requirements": {
+            "requirements": [
+                {
+                    "type": "O2",
+                    "amount": 9,
+                    "isMax": false,
+                    "isAny": false
+                }
+            ]
+        },
+        "metadata": {
+            "cardNumber": "L309",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "x",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    {
+                                        "type": "steel",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 0,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    },
+                                    null
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "type": "OR",
+                            "size": "S",
+                            "isIcon": false,
+                            "is": "symbol"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "x",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    {
+                                        "type": "titanium",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 0,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    },
+                                    null
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    []
+                ],
+                "is": "root"
+            },
+            "description": "Convert up to 3 of a metal for it's monetary value (including bonuses).",
+            "victoryPoints": 1
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Incinerator",
+        "tags": [
+            "building"
+        ],
+        "cost": 8,
+        "type": "active",
+        "requirements": {
+            "requirements": [
+                {
+                    "type": "O2",
+                    "amount": 5,
+                    "isMax": false,
+                    "isAny": false
+                }
+            ]
+        },
+        "metadata": {
+            "cardNumber": "L303",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "plants",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "heat",
+                                        "amount": 6,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": true
+                                    },
+                                    null
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    []
+                ],
+                "is": "root"
+            },
+            "description": "Spend 1 plant to gain 6 heat."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Investment Banks",
+        "tags": [],
+        "cost": 12,
+        "type": "automated",
+        "metadata": {
+            "cardNumber": "L409",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 4,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Increase your M€ production 4 steps."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Labratory Mice",
+        "tags": [
+            "science",
+            "animal"
+        ],
+        "victoryPoints": {
+            "resourcesHere": {},
+            "per": 3
+        },
+        "cost": 8,
+        "type": "active",
+        "requirements": {
+            "requirements": [
+                {
+                    "type": "O2",
+                    "amount": 3,
+                    "isMax": false,
+                    "isAny": false
+                }
+            ]
+        },
+        "metadata": {
+            "cardNumber": "L305",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": " ",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "animals",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    "Action: Add 1 Animal to this card."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "type": "animals",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ],
+                    [
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "1 VP per 3 Animals on this card.",
+                            "size": "XS",
+                            "isUppercase": true,
+                            "isBold": true
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Add 1 Animal to this card.",
+            "victoryPoints": {
+                "item": {
+                    "type": "animals",
+                    "amount": -1,
+                    "is": "item",
+                    "multiplier": false,
+                    "clone": false,
+                    "cancelled": false,
+                    "questionMark": false
+                },
+                "points": 1,
+                "target": 3,
+                "targetOneOrMore": false,
+                "anyPlayer": false
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "resourceType": "Animal",
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Mars Heavy Industry",
+        "tags": [
+            "building"
+        ],
+        "victoryPoints": 1,
+        "cost": 8,
+        "type": "active",
+        "metadata": {
+            "cardNumber": "L302",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "x",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    {
+                                        "type": "steel",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "x",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    {
+                                        "type": "energy",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    null
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "type": "OR",
+                            "size": "S",
+                            "isIcon": false,
+                            "is": "symbol"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "x",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    {
+                                        "type": "steel",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "2x",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    {
+                                        "type": "heat",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    null
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    []
+                ],
+                "is": "root"
+            },
+            "description": "Spend X (up to 5) steel to get X energy OR 2X heat.",
+            "victoryPoints": 1
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Mating Season",
+        "tags": [
+            "animal"
+        ],
+        "cost": 5,
+        "type": "event",
+        "metadata": {
+            "cardNumber": "L306",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "2",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    {
+                                        "type": "animals",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "+1",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    {
+                                        "type": "animals",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    null
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    []
+                ],
+                "is": "root"
+            },
+            "description": "Add an animal to each of your cards with at least two animals on it."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Outer Rim University",
+        "tags": [
+            "jovian"
+        ],
+        "victoryPoints": 1,
+        "cost": 10,
+        "type": "active",
+        "metadata": {
+            "cardNumber": "L418",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "jovian",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "-",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "cards",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    {
+                                        "type": "nbsp",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "+",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "cards",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    "Effect: When you play a Jovian tag, including this, you may discard a card from hand to draw a card."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "victoryPoints": 1
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Recycled Projects",
+        "tags": [
+            "science"
+        ],
+        "victoryPoints": 1,
+        "cost": 12,
+        "type": "active",
+        "requirements": {
+            "requirements": [
+                {
+                    "type": "tag",
+                    "amount": 4,
+                    "isMax": false,
+                    "isAny": false,
+                    "tag": "science"
+                }
+            ]
+        },
+        "metadata": {
+            "cardNumber": "L304",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "building",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "isPlayed": true
+                                    },
+                                    {
+                                        "type": "/",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "space",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "isPlayed": true
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "steel",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    null
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    []
+                ],
+                "is": "root"
+            },
+            "description": "After playing a building or space tag, receive a steel resource.",
+            "victoryPoints": 1
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Save Our Ship",
+        "tags": [],
+        "victoryPoints": -1,
+        "cost": 0,
+        "type": "event",
+        "metadata": {
+            "cardNumber": "L419",
+            "description": "Discard 2 cards, then draw 3 cards.",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "-",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "cards",
+                            "amount": 2,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ],
+                    [
+                        {
+                            "type": "+",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "cards",
+                            "amount": 3,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "victoryPoints": -1
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Soil Enhancers",
+        "tags": [
+            "microbe"
+        ],
+        "cost": 7,
+        "type": "active",
+        "metadata": {
+            "description": "Every time you place a non-ocean tile ON MARS, gain 1 plant.",
+            "cardNumber": "L420",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "empty_tile",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "size": "M"
+                                    },
+                                    {
+                                        "type": "*",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "plants",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    null
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    []
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Space Debri Collection",
+        "tags": [
+            "space"
+        ],
+        "cost": 10,
+        "type": "active",
+        "requirements": {
+            "requirements": [
+                {
+                    "isMax": true,
+                    "isAny": false,
+                    "amount": 3,
+                    "type": "tag",
+                    "tag": "science"
+                }
+            ]
+        },
+        "metadata": {
+            "cardNumber": "L417",
+            "description": "Add 2 asteroids to this card.",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": " ",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "asteroids",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    {
+                                        "type": "nbsp",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "OR",
+                                        "size": "S",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    },
+                                    "Action: Add 1 asteroid to this card."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "asteroids",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "cards",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    "Action: Spend 1 asteroid here to draw a card."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "type": "asteroids",
+                            "amount": 2,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "resourceType": "Asteroid",
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Steel Casting",
+        "tags": [],
+        "cost": 3,
+        "type": "automated",
+        "metadata": {
+            "cardNumber": "L408",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "steel",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Increase your Steel production 1 step."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Sulphuric Import",
+        "tags": [
+            "space"
+        ],
+        "cost": 11,
+        "type": "event",
+        "metadata": {
+            "description": "Raise Venus 1 step OR raise temperature 1 step. Remove up to 3 plants, 3 microbes or 2 animals from ANOTHER CARD owned by ANY player.",
+            "cardNumber": "L413",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "venus",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "OR",
+                            "size": "S",
+                            "isIcon": false,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "temperature",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ],
+                    [
+                        {
+                            "type": "-",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "plants",
+                            "amount": -3,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "/",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "microbes",
+                            "amount": 3,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "/",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "animals",
+                            "amount": 2,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Titanium Isotopes",
+        "tags": [
+            "space"
+        ],
+        "victoryPoints": 1,
+        "cost": 12,
+        "type": "automated",
+        "metadata": {
+            "cardNumber": "L407",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "titanium",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Increase your Titanium production 1 step.",
+            "victoryPoints": 1
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "World Government Partnership",
+        "tags": [
+            "earth",
+            "space"
+        ],
+        "cost": 28,
+        "type": "event",
+        "metadata": {
+            "description": "Raise temperature 1 step, raise oxygen 1 step and place an ocean tile. Remove up to 3 plants from EACH opponent.",
+            "cardNumber": "L412",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "temperature",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "oxygen",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "oceans",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ],
+                    [
+                        {
+                            "type": "-",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "plants",
+                            "amount": -3,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "league",
+        "name": "Scavengers",
+        "tags": [],
+        "cost": 0,
+        "type": "corporation",
+        "metadata": {
+            "cardNumber": "L421",
+            "description": "You start with 46 M€ and 1 of every other resource. As your first action, place the crashed space ship tile on mars.",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "megacredits",
+                            "amount": 46,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        },
+                        {
+                            "type": "wild",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "tile": 40,
+                            "hasSymbol": true,
+                            "isAres": false,
+                            "is": "tile"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "rows": [
+                                            [
+                                                {
+                                                    "type": "text",
+                                                    "amount": -1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false,
+                                                    "text": "n",
+                                                    "size": "M",
+                                                    "isUppercase": false,
+                                                    "isBold": true
+                                                },
+                                                {
+                                                    "type": "wild",
+                                                    "amount": 1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    "type": ":",
+                                                    "size": "M",
+                                                    "isIcon": false,
+                                                    "is": "symbol"
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    "type": "text",
+                                                    "amount": -1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false,
+                                                    "text": "(n+1)",
+                                                    "size": "M",
+                                                    "isUppercase": false,
+                                                    "isBold": true
+                                                },
+                                                {
+                                                    "type": "wild",
+                                                    "amount": 1,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false
+                                                },
+                                                "Effect: When you place a standard (non ocean) tile on mars, gain an additional bonus of each type printed on the tile."
+                                            ]
+                                        ],
+                                        "is": "effect"
+                                    }
+                                ]
+                            ],
+                            "is": "corp-box-effect"
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "startingMegaCredits": 46,
+        "compatibility": []
     },
     {
         "module": "venus",

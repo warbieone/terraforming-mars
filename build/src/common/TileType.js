@@ -43,6 +43,7 @@ var TileType;
     TileType[TileType["RED_CITY"] = 37] = "RED_CITY";
     TileType[TileType["MARTIAN_NATURE_WONDERS"] = 38] = "MARTIAN_NATURE_WONDERS";
     TileType[TileType["CRASHLANDING"] = 39] = "CRASHLANDING";
+    TileType[TileType["SCAVENGERS"] = 40] = "SCAVENGERS";
 })(TileType = exports.TileType || (exports.TileType = {}));
 const TO_STRING_MAP = {
     [TileType.GREENERY]: 'greenery',
@@ -85,6 +86,7 @@ const TO_STRING_MAP = {
     [TileType.RED_CITY]: 'Red City',
     [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders',
     [TileType.CRASHLANDING]: 'Crashlanding',
+    [TileType.SCAVENGERS]: 'Scavengers',
 };
 (function (TileType) {
     function toString(tileType) {

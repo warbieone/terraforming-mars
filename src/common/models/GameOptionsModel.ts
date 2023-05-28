@@ -26,6 +26,7 @@ export type GameOptionsModel = {
   pathfindersExpansion: boolean,
   preludeExtension: boolean,
   promoCardsOption: boolean,
+  leagueCardsOption: boolean,
   politicalAgendasExtension: AgendaStyle,
   removeNegativeGlobalEvents: boolean,
   showOtherPlayersVP: boolean,

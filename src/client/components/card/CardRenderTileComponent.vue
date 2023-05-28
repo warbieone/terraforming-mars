@@ -52,6 +52,10 @@ const TILE_CLASSES: Record<TileType, Classes> = {
     aresTile: 'card-tile-lava-flows-ares',
     symbol: 'card-tile-symbol-lava-flows',
   },
+    [TileType.SCAVENGERS]: {
+    aresTile: 'card-tile-lava-scavengers',
+    symbol: 'card-tile-symbol-scavengers',
+  },
   [TileType.LUNA_TRADE_STATION]: {
     symbol: 'card-tile-symbol-luna-trade-station',
   },

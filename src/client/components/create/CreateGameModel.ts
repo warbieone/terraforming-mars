@@ -36,6 +36,7 @@ export interface CreateGameModel {
   solarPhaseOption: boolean;
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
+  leagueCardsOption: boolean;
   communityCardsOption: boolean;
   aresExtension: boolean;
   politicalAgendasExtension: AgendaStyle;

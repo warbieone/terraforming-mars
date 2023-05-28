@@ -1,22 +1,19 @@
 import {IProjectCard} from '../../IProjectCard';
-import {Tags} from '../../Tags';
+import {Tag} from '../../../../common/cards/Tag';
 import {Card} from '../../Card';
-import {CardType} from '../../CardType';
+import {CardType} from '../../../../common/cards/CardType';
 import {Player} from '../../../Player';
-import {CardName} from '../../../CardName';
-import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../../constants';
-import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../../turmoil/parties/PartyName';
+import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
+import {Resource} from '../../../../common/Resource';
 import {PlaceOceanTile} from '../../../deferredActions/PlaceOceanTile';
-import {Resources} from '../../../Resources';
 
 export class WorldGovernmentPartnership extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.WORLD_GOVERNMENT_PARTNERSHIP,
-      tags: [Tags.EARTH, Tags.SPACE],
+      tags: [Tag.EARTH, Tag.SPACE],
       cost: 28,
 
       metadata: {
@@ -24,33 +21,20 @@ export class WorldGovernmentPartnership extends Card implements IProjectCard {
         cardNumber: 'L412',
         renderData: CardRenderer.builder((b) => {
           b.temperature(1).oxygen(1).oceans(1).br;
-          b.minus().plants(-3).any.asterix();
+          b.minus().plants(-3).asterix();
         }),
       },
     });
   }
 
-  public canPlay(player: Player): boolean {
-    const temperatureSteps = player.game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
-    const oxygenSteps = player.game.getTemperature() < MAX_OXYGEN_LEVEL ? 1 : 0;
-    const oceansSteps = player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
-    const totalSteps = temperatureSteps + oxygenSteps + oceansSteps;
-
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + totalSteps * REDS_RULING_POLICY_COST, {titanium: true});
-    }
-
-    return true;
-  }
-
-  public play(player: Player) {
+  public override play(player: Player) {
     player.game.increaseTemperature(player, 1);
     player.game.increaseOxygenLevel(player, 1);
     player.game.defer(new PlaceOceanTile(player));
 
     const candidates = player.game.getPlayers().filter((p) => p.id !== player.id && !p.plantsAreProtected() && p.plants > 0);
     candidates.forEach((p) => {
-      p.deductResource(Resources.PLANTS, 3, {log: true, from: player});
+      p.deductResource(Resource.PLANTS, 3, {log: true, from: player});
       return undefined;
     });
     return undefined;

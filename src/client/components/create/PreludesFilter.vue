@@ -53,6 +53,9 @@ export default Vue.extend({
     promoCardsOption: {
       type: Boolean,
     },
+    leagueCardsOption: {
+      type: Boolean,
+    },
     communityCardsOption: {
       type: Boolean,
     },
@@ -81,6 +84,7 @@ export default Vue.extend({
         // A bit sloppy since map is just above, but it will do.
         ...preludeCardNames('prelude'),
         ...this.promoCardsOption ? preludeCardNames('promo') : [],
+        ...this.leagueCardsOption ? preludeCardNames('league') : [],
         ...this.communityCardsOption ? preludeCardNames('community') : [],
         ...this.moonExpansion ? preludeCardNames('moon') : [],
         ...this.pathfindersExpansion ? preludeCardNames('pathfinders') : [],
@@ -155,6 +159,7 @@ export default Vue.extend({
     moduleName(module: GameModule) {
       switch (module) {
       case 'promo': return 'Promo';
+      case 'league': return 'League';
       case 'prelude': return 'Prelude';
       case 'community': return 'Community';
       case 'moon': return 'The Moon';
@@ -170,8 +175,8 @@ export default Vue.extend({
     prelude(enabled) {
       this.watchSelect('prelude', enabled);
     },
-    promoCardsOption(enabled) {
-      this.watchSelect('promo', enabled);
+    leagueCardsOption(enabled) {
+      this.watchSelect('league', enabled);
     },
     communityCardsOption(enabled) {
       this.watchSelect('community', enabled);

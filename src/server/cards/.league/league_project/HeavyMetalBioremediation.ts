@@ -35,7 +35,6 @@ export class HeavyMetalBioremediation extends Card implements IProjectCard {
           }).br;
         }),
         description: 'Convert up to 3 of a metal for it\'s monetary value (including bonuses).',
-        victoryPoints: 1,
       },
     });
   }

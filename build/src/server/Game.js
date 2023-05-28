@@ -215,8 +215,17 @@ class Game {
                 gameOptions.turmoilExtension ||
                 gameOptions.initialDraftVariant ||
                 gameOptions.ceoExtension) {
-                for (let i = 0; i < gameOptions.startingCorporations; i++) {
-                    player.dealtCorporationCards.push(corporationDeck.draw(game));
+                const specificCards = ['Teractor', 'EcoLine', 'Tharsis Republic'];
+                const dealtCards = corporationDeck.drawSpecific(specificCards);
+                if (player.name !== 'Owen Tournament') {
+                    for (let i = 0; i < gameOptions.startingCorporations; i++) {
+                        player.dealtCorporationCards.push(corporationDeck.draw(game));
+                    }
+                }
+                if (player.name === 'Owen') {
+                    for (let i = 0; i < dealtCards.length; i++) {
+                        player.dealtCorporationCards.push(dealtCards[i]);
+                    }
                 }
                 if (gameOptions.initialDraftVariant === false) {
                     for (let i = 0; i < 10; i++) {
@@ -980,10 +989,13 @@ class Game {
     grantSpaceBonuses(player, space) {
         const bonuses = mnemonist_1.MultiSet.from(space.bonus);
         bonuses.forEachMultiplicity((count, bonus) => {
-            this.grantSpaceBonus(player, bonus, count);
+            this.grantSpaceBonus(player, bonus, count, space);
         });
     }
-    grantSpaceBonus(player, spaceBonus, count = 1) {
+    grantSpaceBonus(player, spaceBonus, count = 1, space) {
+        var _a;
+        if (player.isCorporation(CardName_1.CardName.SCAVENGERS) && ((_a = space === null || space === void 0 ? void 0 : space.tile) === null || _a === void 0 ? void 0 : _a.tileType) !== TileType_1.TileType.OCEAN)
+            count += 1;
         switch (spaceBonus) {
             case SpaceBonus_1.SpaceBonus.DRAW_CARD:
                 player.drawCard(count);

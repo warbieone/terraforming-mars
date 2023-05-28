@@ -13,6 +13,7 @@ const AresCardManifest_1 = require("./cards/ares/AresCardManifest");
 const MoonCardManifest_1 = require("./cards/moon/MoonCardManifest");
 const PathfindersCardManifest_1 = require("./cards/pathfinders/PathfindersCardManifest");
 const CeoCardManifest_1 = require("./cards/ceos/CeoCardManifest");
+const LeagueCardManifest_1 = require("./cards/.league/LeagueCardManifest");
 const ModuleManifest_1 = require("./cards/ModuleManifest");
 const CardName_1 = require("../common/cards/CardName");
 const CardFinder_1 = require("./CardFinder");
@@ -34,6 +35,7 @@ class GameCards {
             [gameOptions.moonExpansion, MoonCardManifest_1.MOON_CARD_MANIFEST],
             [gameOptions.pathfindersExpansion, PathfindersCardManifest_1.PATHFINDERS_CARD_MANIFEST],
             [gameOptions.ceoExtension, CeoCardManifest_1.CEO_CARD_MANIFEST],
+            [gameOptions.leagueCardsOption, LeagueCardManifest_1.LEAGUE_CARD_MANIFEST],
         ];
         this.moduleManifests = manifests.filter((a) => a[0]).map((a) => a[1]);
     }

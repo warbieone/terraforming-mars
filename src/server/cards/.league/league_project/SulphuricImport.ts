@@ -1,16 +1,14 @@
 import {IProjectCard} from '../../IProjectCard';
-import {Tags} from '../../Tags';
+import {Tag} from '../../../../common/cards/Tag';
 import {Card} from '../../Card';
-import {CardType} from '../../CardType';
+import {CardType} from '../../../../common/cards/CardType';
 import {Player} from '../../../Player';
-import {CardName} from '../../../CardName';
-import {MAX_TEMPERATURE, MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../../constants';
-import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../../turmoil/parties/PartyName';
+import {CardName} from '../../../../common/cards/CardName';
+import {MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../../../common/constants';
 import {CardRenderer} from '../../render/CardRenderer';
 import {SelectOption} from '../../../inputs/SelectOption';
 import {OrOptions} from '../../../inputs/OrOptions';
-import {ResourceType} from '../../../ResourceType';
+import {CardResource} from '../../../../common/CardResource';
 import {RemoveResourcesFromCard} from '../../../deferredActions/RemoveResourcesFromCard';
 import {RemoveAnyPlants} from '../../../deferredActions/RemoveAnyPlants';
 import {SelectCard} from '../../../inputs/SelectCard';
@@ -19,9 +17,9 @@ import {ICard} from '../../ICard';
 export class SulphuricImport extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.EVENT,
+      type: CardType.EVENT,
       name: CardName.SULPHURIC_IMPORT,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 11,
 
       metadata: {
@@ -29,28 +27,16 @@ export class SulphuricImport extends Card implements IProjectCard {
         cardNumber: 'L413',
         renderData: CardRenderer.builder((b) => {
           b.venus(1).or().temperature(1).br;
-          b.minus().plants(-3).digit.slash().microbes(3).digit.any.asterix().slash().animals(2).digit.any.asterix();
+          b.minus().plants(-3).slash().microbes(3).asterix().slash().animals(2).asterix();
         }),
       },
     });
   }
 
-  public canPlay(player: Player): boolean {
-    const temperatureSteps = player.game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
-    const venusMaxed = player.game.getVenusScaleLevel() < MAX_VENUS_SCALE ? 1 : 0;
-    const totalSteps = Math.max(temperatureSteps, venusMaxed);
-
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + totalSteps * REDS_RULING_POLICY_COST, {titanium: true});
-    }
-
-    return true;
-  }
-
-  public play(player: Player) {
+  public override play(player: Player) {
     const game = player.game;
-    const availableMicrobeCards = RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.MICROBE);
-    const availableAnimalCards = RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.ANIMAL);
+    const availableMicrobeCards = RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource.MICROBE);
+    const availableAnimalCards = RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource.ANIMAL);
 
     const temperatureSteps = player.game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
     const venusSteps = player.game.getVenusScaleLevel() < MAX_VENUS_SCALE ? 1 : 0;
@@ -69,14 +55,14 @@ export class SulphuricImport extends Card implements IProjectCard {
 
     if (availableMicrobeCards.length > 0) {
       availableRemovalActions.push(new SelectOption('Remove 3 microbes from a card', 'Remove microbes', () => {
-        player.game.defer(new RemoveResourcesFromCard(player, ResourceType.MICROBE, 3));
+        player.game.defer(new RemoveResourcesFromCard(player, CardResource.MICROBE, 3));
         return undefined;
       }));
     }
 
     if (availableAnimalCards.length > 0) {
       availableRemovalActions.push(new SelectOption('Remove 2 animals from a card', 'Remove animals', () => {
-        player.game.defer(new RemoveResourcesFromCard(player, ResourceType.ANIMAL, 2));
+        player.game.defer(new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2));
         return undefined;
       }));
     }

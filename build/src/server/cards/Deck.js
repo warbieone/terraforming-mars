@@ -40,6 +40,21 @@ class Deck {
             this.drawPile.push(...rest, ...top);
         }
     }
+    drawSpecific(cardNames) {
+        const cards = [];
+        for (const cardName of cardNames) {
+            const cardIndex = this.drawPile.findIndex(card => card.name === cardName);
+            if (cardIndex === -1) {
+                throw new Error(`Card ${cardName} not found in ${this.type} deck`);
+            }
+            const card = this.drawPile.splice(cardIndex, 1)[0];
+            cards.push(card);
+        }
+        if (this.drawPile.length === 0) {
+            this.shuffle();
+        }
+        return cards;
+    }
     draw(logger, source = 'top') {
         const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
         if (card === undefined) {

@@ -4568,6 +4568,12 @@ input[type="radio"]:checked + .filterDiv::after {
   left: -2px;
   top: 0px;
 }
+.card-container .card-content-wrapper .card-content .card-tile-symbol-scavengers {
+  background-image: url(./assets/tiles/special_tile_icons/nuclear_zone.png);
+  position: relative;
+  left: -2px;
+  top: 0px;
+}
 .card-container .card-content-wrapper .card-content .city-tile--M {
   background-image: url(./assets/tiles/city.png);
   filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
@@ -5472,6 +5478,9 @@ input[type="radio"]:checked + .filterDiv::after {
   background: url(./assets/board_icons.png) -534px -27px no-repeat;
 }
 .board-space-tile--lava_flows {
+  background: url(./assets/board_icons.png) -246px -27px no-repeat;
+}
+.board-space-tile--scavengers {
   background: url(./assets/board_icons.png) -246px -27px no-repeat;
 }
 .board-space-tile--mining_area,

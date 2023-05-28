@@ -1,8 +1,6 @@
 import {IProjectCard} from '../../IProjectCard';
-import {CardType} from '../../CardType';
-import {Player} from '../../../Player';
-import {CardName} from '../../../CardName';
-import {Resources} from '../../../Resources';
+import {CardType} from '../../../../common/cards/CardType';
+import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
 
@@ -11,7 +9,11 @@ export class SteelCasting extends Card implements IProjectCard {
     super({
       cost: 3,
       name: CardName.STEEL_CASTING,
-      cardType: CardType.AUTOMATED,
+      type: CardType.AUTOMATED,
+
+      behavior: {
+        production: {steel: 1},
+      },
 
       metadata: {
         cardNumber: 'L408',
@@ -23,8 +25,4 @@ export class SteelCasting extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.addProduction(Resources.STEEL, 1);
-    return undefined;
-  }
 }

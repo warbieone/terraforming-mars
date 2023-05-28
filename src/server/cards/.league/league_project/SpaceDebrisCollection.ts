@@ -1,28 +1,30 @@
 import {IProjectCard} from '../../IProjectCard';
-import {IActionCard, IResourceCard} from '../../ICard';
+import {IActionCard} from '../../ICard';
+import {Tag} from '../../../../common/cards/Tag';
+import {CardType} from '../../../../common/cards/CardType';
+import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
-import {CardName} from '../../../CardName';
-import {CardType} from '../../CardType';
-import {ResourceType} from '../../../ResourceType';
-import {Tags} from '../../Tags';
+import {CardRenderer} from '../../render/CardRenderer';
 import {Player} from '../../../Player';
+import {CardRequirements} from '../../requirements/CardRequirements';
+import {max} from '../../Options';
 import {OrOptions} from '../../../inputs/OrOptions';
 import {SelectOption} from '../../../inputs/SelectOption';
-import {CardRenderer} from '../../render/CardRenderer';
-import {CardRequirements} from '../../CardRequirements';
+import {CardResource} from '../../../../common/CardResource';
 
-export class SpaceDebrisCollection extends Card implements IActionCard, IProjectCard, IResourceCard {
-  public resourceCount = 0;
+export class SpaceDebrisCollection extends Card implements IActionCard, IProjectCard {
+  public override resourceCount = 0;
 
   constructor() {
     super({
-      cardType: CardType.ACTIVE,
+      type: CardType.ACTIVE,
       name: CardName.SPACE_DEBRIS_COLLECTION,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 10,
-      resourceType: ResourceType.ASTEROID,
+      resourceType: CardResource.ASTEROID,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3).max()),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3, {max})),
+      
       metadata: {
         cardNumber: 'L417',
         description: 'Add 2 asteroids to this card.',
@@ -39,11 +41,7 @@ export class SpaceDebrisCollection extends Card implements IActionCard, IProject
     });
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE, false, false) <= 3;
-  }
-
-  public play() {
+  public override bespokePlay() {
     this.resourceCount = 2;
     return undefined;
   }
