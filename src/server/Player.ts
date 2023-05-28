@@ -978,7 +978,7 @@ export class Player {
       microbes: card.tags.includes(Tag.PLANT),
       science: card.tags.includes(Tag.MOON),
       // TODO(kberg): add this.corporation.name === CardName.AURORAI
-      data: card.type === CardType.STANDARD_PROJECT,
+      auroraiData: card.type === CardType.STANDARD_PROJECT,
     };
   }
 
@@ -1063,10 +1063,10 @@ export class Player {
       if (soylent === undefined) throw new Error('Cannot pay with seeds without ' + CardName.SOYLENT_SEEDLING_SYSTEMS);
       this.removeResourceFrom(soylent, payment.seeds);
     }
-    if (payment.data > 0) {
+    if (payment.auroraiData > 0) {
       const aurorai = this.getCorporation(CardName.AURORAI);
       if (aurorai === undefined) throw new Error('Cannot pay with data without ' + CardName.AURORAI);
-      this.removeResourceFrom(aurorai, payment.data);
+      this.removeResourceFrom(aurorai, payment.auroraiData);
     }
   }
 
@@ -1457,7 +1457,7 @@ export class Player {
       microbes: this.getSpendableMicrobes(),
       science: this.getSpendableScienceResources(),
       seeds: this.getSpendableSeedResources(),
-      data: this.getSpendableData(),
+      auroraiData: this.getSpendableData(),
     };
   }
 
@@ -1488,7 +1488,7 @@ export class Player {
       floaters: DEFAULT_FLOATERS_VALUE,
       science: 1,
       seeds: constants.SEED_VALUE,
-      data: constants.DATA_VALUE,
+      auroraiData: constants.DATA_VALUE,
     };
 
     const usable: {[key in PaymentKey]: boolean} = {
@@ -1500,7 +1500,7 @@ export class Player {
       floaters: options?.floaters ?? false,
       science: options?.science ?? false,
       seeds: options?.seeds ?? false,
-      data: options?.data ?? false,
+      auroraiData: options?.auroraiData ?? false,
     };
 
     // HOOK: Luna Trade Federation
