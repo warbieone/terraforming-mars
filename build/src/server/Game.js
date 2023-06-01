@@ -215,17 +215,8 @@ class Game {
                 gameOptions.turmoilExtension ||
                 gameOptions.initialDraftVariant ||
                 gameOptions.ceoExtension) {
-                const specificCards = ['Teractor', 'EcoLine', 'Tharsis Republic'];
-                const dealtCards = corporationDeck.drawSpecific(specificCards);
-                if (player.name !== 'Owen Tournament') {
-                    for (let i = 0; i < gameOptions.startingCorporations; i++) {
-                        player.dealtCorporationCards.push(corporationDeck.draw(game));
-                    }
-                }
-                if (player.name === 'Owen') {
-                    for (let i = 0; i < dealtCards.length; i++) {
-                        player.dealtCorporationCards.push(dealtCards[i]);
-                    }
+                for (let i = 0; i < gameOptions.startingCorporations; i++) {
+                    player.dealtCorporationCards.push(corporationDeck.draw(game));
                 }
                 if (gameOptions.initialDraftVariant === false) {
                     for (let i = 0; i < 10; i++) {
