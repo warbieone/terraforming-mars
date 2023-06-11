@@ -2,13 +2,13 @@
 
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {ITagCount} from '../../common/cards/ITagCount';
+import {TagCount} from '../../common/cards/TagCount';
 import {ALL_TAGS, Tag} from '../../common/cards/Tag';
 import {ICorporationCard, isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {CeoExtension} from '../CeoExtension';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 
 export type CountingMode =
   'raw' | // Count face-up tags literally, including Leavitt Station.
@@ -30,13 +30,12 @@ export type MultipleCountMode =
 export class Tags {
   private static COUNTED_TAGS = ALL_TAGS.filter((tag) => tag !== Tag.CLONE && tag !== Tag.EVENT);
 
-  private player: Player;
-  constructor(player: Player) {
+  private player: IPlayer;
+  constructor(player: IPlayer) {
     this.player = player;
   }
 
-  // TODO(kberg): Rename to countAllTags
-  public getAllTags(): Array<ITagCount> {
+  public countAllTags(): Array<TagCount> {
     const counts = Tags.COUNTED_TAGS.map((tag) => {
       return {tag, count: this.count(tag, 'raw')};
     }).filter((tag) => tag.count > 0);

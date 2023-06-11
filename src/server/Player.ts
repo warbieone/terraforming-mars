@@ -22,7 +22,6 @@ import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
-import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
 import {SelectProjectCardToPlay} from './inputs/SelectProjectCardToPlay';
@@ -44,7 +43,6 @@ import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {GlobalParameter} from '../common/GlobalParameter';
-import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
@@ -68,21 +66,11 @@ import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
+import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
-/**
- * Behavior when playing a card:
- *   add it to the tableau
- *   discard it from the tableau
- *   or do nothing.
- */
-
-export type CardAction ='add' | 'discard' | 'nothing';
-
-export type ResourceSource = Player | GlobalEventName | ICard;
-
-export class Player {
+export class Player implements IPlayer {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
   protected waitingForCb?: () => void;
@@ -362,7 +350,7 @@ export class Player {
         .string(resource)
         .string(modifier)
         .number(absAmount);
-      if (from instanceof Player) {
+      if (isIPlayer(from)) {
         b.player(from);
       } else if (typeof(from) === 'object') {
         b.cardName(from.name);
@@ -443,14 +431,14 @@ export class Player {
   }
 
   /**
-   * Steal up to `qty` units of `resource` from `from`. Or, at least as
+   * `from` steals up to `qty` units of `resource` from this player. Or, at least as
    * much as possible.
    */
-  public stealResource(resource: Resource, qty: number, from: Player) {
+  public stealResource(resource: Resource, qty: number, thief: IPlayer) {
     const qtyToSteal = Math.min(this.getResource(resource), qty);
     if (qtyToSteal > 0) {
-      this.deductResource(resource, qtyToSteal, {log: true, from: from, stealing: true});
-      from.addResource(resource, qtyToSteal);
+      this.deductResource(resource, qtyToSteal, {log: true, from: thief, stealing: true});
+      thief.addResource(resource, qtyToSteal);
     }
   }
 
@@ -523,7 +511,7 @@ export class Player {
     return game.getPlayers().some((p) => p.canHaveProductionReduced(resource, minQuantity, this));
   }
 
-  public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: Player) {
+  public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer) {
     if (resource === Resource.MEGACREDITS) {
       if ((this.production[resource] + 5) < minQuantity) return false;
     } else {
@@ -539,7 +527,7 @@ export class Player {
     return true;
   }
 
-  public productionIsProtected(attacker: Player): boolean {
+  public productionIsProtected(attacker: IPlayer): boolean {
     return attacker !== this && this.cardIsInEffect(CardName.PRIVATE_SECURITY);
   }
 
@@ -631,7 +619,7 @@ export class Player {
     return requirementsBonus;
   }
 
-  public removeResourceFrom(card: ICard, count: number = 1, options?: {removingPlayer? : Player, log?: boolean}): void {
+  public removeResourceFrom(card: ICard, count: number = 1, options?: {removingPlayer? : IPlayer, log?: boolean}): void {
     const removingPlayer = options?.removingPlayer;
     if (card.resourceCount) {
       const amountRemoved = Math.min(card.resourceCount, count);
@@ -769,6 +757,11 @@ export class Player {
       if (isCeoCard(card)) {
         card.opgActionIsActive = false;
       }
+    }
+    const solBank = this.getCorporation(CardName.SOLBANK);
+    if (solBank !== undefined && solBank.resourceCount > 0) {
+      this.megaCredits += solBank.resourceCount;
+      solBank.resourceCount = 0;
     }
   }
 
@@ -1081,6 +1074,13 @@ export class Player {
       if (aurorai === undefined) throw new Error('Cannot pay with data without ' + CardName.AURORAI);
       this.removeResourceFrom(aurorai, payment.auroraiData);
     }
+
+    if (payment.megaCredits > 0 || payment.steel > 0 || payment. titanium > 0) {
+      const solBank = this.getCorporation(CardName.SOLBANK);
+      if (solBank !== undefined) {
+        this.addResourceTo(solBank, {qty: 1, log: true});
+      }
+    }
   }
 
   public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: 'add' | 'discard' | 'nothing' | 'action-only' = 'add'): undefined {
@@ -1190,7 +1190,8 @@ export class Player {
     PathfindersExpansion.onCardPlayed(this, card);
   }
 
-  private playActionCard(): PlayerInput {
+  /* Visible for testing */
+  public playActionCard(): PlayerInput {
     return new SelectCard<ICard & IActionCard>(
       'Perform an action from a played card',
       'Take action',
@@ -1617,6 +1618,15 @@ export class Player {
     );
   }
 
+  private headStartIsInEffect() {
+    if (this.game.phase === Phase.PRELUDES && this.cardIsInEffect(CardName.HEAD_START)) {
+      if (this.actionsTakenThisRound < 2) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * Set up a player taking their next action.
    *
@@ -1638,49 +1648,56 @@ export class Player {
     if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) game.save();
     // if (saveBeforeTakingAction) game.save();
 
-    // Prelude cards have to be played first
-    if (this.preludeCardsInHand.length > 0) {
-      game.phase = Phase.PRELUDES;
+    const headStartIsInEffect = this.headStartIsInEffect();
 
-      // If no playable prelude card in hand, end player turn
-      if (this.getPlayablePreludeCards().length === 0) {
-        LogHelper.logDiscardedCards(game, this.preludeCardsInHand);
-        this.preludeCardsInHand = [];
-        game.playerIsFinishedTakingActions();
+    if (!headStartIsInEffect) {
+      // Prelude cards have to be played first
+      if (this.preludeCardsInHand.length > 0) {
+        game.phase = Phase.PRELUDES;
+
+        // If no playable prelude card in hand, end player turn
+        if (this.getPlayablePreludeCards().length === 0) {
+          LogHelper.logDiscardedCards(game, this.preludeCardsInHand);
+          this.preludeCardsInHand = [];
+          game.playerIsFinishedTakingActions();
+          return;
+        }
+
+        this.setWaitingFor(this.playPreludeCard(), () => {
+          if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
+            game.playerIsFinishedTakingActions();
+            return;
+          }
+
+          this.takeAction();
+        });
         return;
       }
 
-      this.setWaitingFor(this.playPreludeCard(), () => {
-        if (this.preludeCardsInHand.length === 1) {
-          this.takeAction();
-        } else {
-          game.playerIsFinishedTakingActions();
+      if (this.ceoCardsInHand.length > 0) {
+        // The CEO phase occurs between the Prelude phase and before the Action phase.
+        // All CEO cards are played before players take their first normal actions.
+        game.phase = Phase.CEOS;
+        const playableCeoCards = this.getPlayableCeoCards();
+        for (let i = playableCeoCards.length - 1; i >= 0; i--) {
+          // start from the end of the list and work backwards, we're removing items as we go.
+          const card = this.ceoCardsInHand[i];
+          this.playCard(card);
         }
-      });
-      return;
-    } else if (this.ceoCardsInHand.length > 0) {
-      // The CEO phase occurs between the Prelude phase and before the Action phase.
-      // All CEO cards are played before players take their first normal actions.
-      game.phase = Phase.CEOS;
-      const playableCeoCards = this.getPlayableCeoCards();
-      for (let i = playableCeoCards.length - 1; i >= 0; i--) {
-        // start from the end of the list and work backwards, we're removing items as we go.
-        const card = this.ceoCardsInHand[i];
-        this.playCard(card);
+        // Null out ceoCardsInHand, anything left was unplayable.
+        this.ceoCardsInHand = [];
+        this.takeAction(); // back to top
+      } else {
+        game.phase = Phase.ACTION;
       }
-      // Null out ceoCardsInHand, anything left was unplayable.
-      this.ceoCardsInHand = [];
-      this.takeAction(); // back to top
-    } else {
-      game.phase = Phase.ACTION;
-    }
 
-    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
-      this.actionsTakenThisRound = 0;
-      this.availableActionsThisRound = 2;
-      game.resettable = true;
-      game.playerIsFinishedTakingActions();
-      return;
+      if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
+        this.actionsTakenThisRound = 0;
+        this.availableActionsThisRound = 2;
+        game.resettable = true;
+        game.playerIsFinishedTakingActions();
+        return;
+      }
     }
 
     // Terraforming Mars FAQ says:
@@ -1692,7 +1709,6 @@ export class Player {
     if (vitor !== undefined && this.game.allAwardsFunded()) {
       this.pendingInitialActions = this.pendingInitialActions.filter((card) => card !== vitor);
     }
-
 
     if (this.pendingInitialActions.length > 0) {
       const orOptions = new OrOptions();
@@ -1709,7 +1725,9 @@ export class Player {
         orOptions.options.push(option);
       });
 
-      orOptions.options.push(this.passOption());
+      if (!headStartIsInEffect) {
+        orOptions.options.push(this.passOption());
+      }
 
       this.setWaitingFor(orOptions, () => {
         this.actionsTakenThisRound++;
@@ -1802,21 +1820,9 @@ export class Player {
 
     // If you can pay to add a delegate to a party.
     Turmoil.ifTurmoil(this.game, (turmoil) => {
-      if (turmoil.hasDelegatesInReserve(this.id)) {
-        let sendDelegate;
-        if (!turmoil.usedFreeDelegateAction.has(this.id)) {
-          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)', {freeStandardAction: true});
-        } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3)) {
-          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3});
-        } else if (this.canAfford(5)) {
-          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5});
-        }
-        if (sendDelegate) {
-          const input = sendDelegate.execute();
-          if (input !== undefined) {
-            action.options.push(input);
-          }
-        }
+      const input = turmoil.getSendDelegateInput(this);
+      if (input !== undefined) {
+        action.options.push(input);
       }
     });
 
@@ -2050,7 +2056,7 @@ export class Player {
     player.titanium = d.titanium;
     player.titaniumValue = d.titaniumValue;
     player.totalDelegatesPlaced = d.totalDelegatesPlaced;
-    player.colonies.tradesThisGeneration = d.tradesThisTurn ?? d.tradesThisGeneration ?? 0;
+    player.colonies.tradesThisGeneration = d.tradesThisGeneration;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
 
@@ -2107,7 +2113,6 @@ export class Player {
   }
 }
 
-export interface CanAffordOptions extends Partial<Payment.Options> {
-  reserveUnits?: Units,
-  tr?: TRSource | DynamicTRSource,
+export function asPlayer(player: IPlayer): Player {
+  return player as Player;
 }

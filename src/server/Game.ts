@@ -25,6 +25,7 @@ import {ALL_AWARDS} from './awards/Awards';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from '../common/Phase';
 import {Player} from './Player';
+import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
@@ -787,15 +788,15 @@ export class Game implements Logger {
     return true;
   }
 
-  public playerHasPassed(player: Player): void {
+  public playerHasPassed(player: IPlayer): void {
     this.passedPlayers.add(player.id);
   }
 
-  public hasResearched(player: Player): boolean {
+  public hasResearched(player: IPlayer): boolean {
     return this.researchedPlayers.has(player.id);
   }
 
-  private hasDrafted(player: Player): boolean {
+  private hasDrafted(player: IPlayer): boolean {
     return this.draftedPlayers.has(player.id);
   }
 
@@ -1025,7 +1026,7 @@ export class Game implements Logger {
     player.takeAction();
   }
 
-  public increaseOxygenLevel(player: Player, increments: -2 | -1 | 1 | 2): void {
+  public increaseOxygenLevel(player: IPlayer, increments: -2 | -1 | 1 | 2): void {
     if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
       return undefined;
     }
@@ -1058,7 +1059,7 @@ export class Game implements Logger {
     return this.oxygenLevel;
   }
 
-  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): number {
+  public increaseVenusScaleLevel(player: IPlayer, increments: -1 | 1 | 2 | 3): number {
     if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
       return 0;
     }
@@ -1112,7 +1113,7 @@ export class Game implements Logger {
     return this.venusScaleLevel;
   }
 
-  public increaseTemperature(player: Player, increments: -2 | -1 | 1 | 2 | 3): undefined {
+  public increaseTemperature(player: IPlayer, increments: -2 | -1 | 1 | 2 | 3): undefined {
     if (this.temperature >= constants.MAX_TEMPERATURE) {
       return undefined;
     }
@@ -1168,28 +1169,28 @@ export class Game implements Logger {
     return passedPlayersColors;
   }
 
-  public getCitiesOffMarsCount(player?: Player): number {
+  public getCitiesOffMarsCount(player?: IPlayer): number {
     return this.getCitiesCount(player, (space) => space.spaceType === SpaceType.COLONY);
   }
 
-  public getCitiesOnMarsCount(player?: Player): number {
+  public getCitiesOnMarsCount(player?: IPlayer): number {
     return this.getCitiesCount(player, (space) => space.spaceType !== SpaceType.COLONY);
   }
 
-  public getCitiesCount(player?: Player, filter?: (space: ISpace) => boolean): number {
+  public getCitiesCount(player?: IPlayer, filter?: (space: ISpace) => boolean): number {
     let cities = this.board.spaces.filter(Board.isCitySpace);
     if (player !== undefined) cities = cities.filter(Board.ownedBy(player));
     if (filter) cities = cities.filter(filter);
     return cities.length;
   }
 
-  public getGreeneriesCount(player?: Player): number {
+  public getGreeneriesCount(player?: IPlayer): number {
     let greeneries = this.board.spaces.filter((space) => Board.isGreenerySpace(space));
     if (player !== undefined) greeneries = greeneries.filter(Board.ownedBy(player));
     return greeneries.length;
   }
 
-  public getSpaceCount(tileType: TileType, player: Player): number {
+  public getSpaceCount(tileType: TileType, player: IPlayer): number {
     return this.board.spaces.filter(Board.ownedBy(player))
       .filter((space) => space.tile?.tileType === tileType)
       .length;
@@ -1198,7 +1199,7 @@ export class Game implements Logger {
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
   // a tile on The Moon.
   public addTile(
-    player: Player,
+    player: IPlayer,
     space: ISpace,
     tile: Tile): void {
     // Part 1, basic validation checks.
@@ -1285,7 +1286,7 @@ export class Game implements Logger {
     });
   }
 
-  public simpleAddTile(player: Player, space: ISpace, tile: Tile) {
+  public simpleAddTile(player: IPlayer, space: ISpace, tile: Tile) {
     space.tile = tile;
     space.player = player;
     if (tile.tileType === TileType.OCEAN || tile.tileType === TileType.MARTIAN_NATURE_WONDERS) {
@@ -1294,17 +1295,16 @@ export class Game implements Logger {
     LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 
-  public grantSpaceBonuses(player: Player, space: ISpace) {
+  public grantSpaceBonuses(player: IPlayer, space: ISpace) {
     const bonuses = MultiSet.from(space.bonus);
     bonuses.forEachMultiplicity((count: number, bonus: SpaceBonus) => {
       this.grantSpaceBonus(player, bonus, count, space);
     });
   }
 
-  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1, space?: ISpace) {
+  public grantSpaceBonus(player: IPlayer, spaceBonus: SpaceBonus, count: number = 1) {
     // Scavengers league corp hook
     if (player.isCorporation(CardName.SCAVENGERS) && space?.tile?.tileType !== TileType.OCEAN) count += 1;
-
     switch (spaceBonus) {
     case SpaceBonus.DRAW_CARD:
       player.drawCard(count);
@@ -1360,7 +1360,7 @@ export class Game implements Logger {
   }
 
   public addGreenery(
-    player: Player, space: ISpace,
+    player: IPlayer, space: ISpace,
     shouldRaiseOxygen: boolean = true): undefined {
     this.addTile(player, space, {
       tileType: TileType.GREENERY,
@@ -1373,7 +1373,7 @@ export class Game implements Logger {
   }
 
   public addCity(
-    player: Player, space: ISpace,
+    player: IPlayer, space: ISpace,
     cardName: CardName | undefined = undefined): void {
     this.addTile(player, space, {
       tileType: TileType.CITY,
@@ -1468,15 +1468,15 @@ export class Game implements Logger {
     return [undefined, undefined];
   }
 
-  public getCardsInHandByResource(player: Player, resourceType: CardResource) {
+  public getCardsInHandByResource(player: IPlayer, resourceType: CardResource) {
     return player.cardsInHand.filter((card) => card.resourceType === resourceType);
   }
 
-  public getCardsInHandByType(player: Player, cardType: CardType) {
+  public getCardsInHandByType(player: IPlayer, cardType: CardType) {
     return player.cardsInHand.filter((card) => card.type === cardType);
   }
 
-  public log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: Player}) {
+  public log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: IPlayer}) {
     const builder = new LogBuilder(message);
     f?.(builder);
     const logMessage = builder.build();

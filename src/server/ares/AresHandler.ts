@@ -3,7 +3,7 @@ import {ICard} from '../cards/ICard';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 import {ISpace} from '../boards/ISpace';
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
@@ -34,7 +34,7 @@ export class AresHandler {
     }
   }
 
-  public static earnAdjacencyBonuses(aresData: AresData, player: Player, space: ISpace) {
+  public static earnAdjacencyBonuses(aresData: AresData, player: IPlayer, space: ISpace) {
     let incrementMilestone = false;
     for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
       const grantedBonus = this.earnAdacencyBonus(space, adjacentSpace, player);
@@ -51,7 +51,7 @@ export class AresHandler {
 
   // |player| placed a tile at |space| next to |adjacentSpace|.
   // Returns true if the adjacent space contains a bonus for adjacency.
-  private static earnAdacencyBonus(newTileSpace: ISpace, adjacentSpace: ISpace, player: Player, adjacentTileOwnerGainsBonus: boolean = true): boolean {
+  private static earnAdacencyBonus(newTileSpace: ISpace, adjacentSpace: ISpace, player: IPlayer, adjacentTileOwnerGainsBonus: boolean = true): boolean {
     if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
       return false;
     }
@@ -60,7 +60,7 @@ export class AresHandler {
       throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
     }
 
-    const addResourceToCard = function(player: Player, resourceType: CardResource, resourceAsText: string) {
+    const addResourceToCard = function(player: IPlayer, resourceType: CardResource, resourceAsText: string) {
       const availableCards = player.getResourceCards(resourceType);
       if (availableCards.length === 0) {
         return;
@@ -168,7 +168,7 @@ export class AresHandler {
 
   // A light version of `earnAdjacencyBonuses` but does not increment the milestone,
   // and does not grant the 1MC bonus for ares tile owners.
-  public static earnAdjacencyBonusesForGaia(player: Player, space: ISpace) {
+  public static earnAdjacencyBonusesForGaia(player: IPlayer, space: ISpace) {
     for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
       this.earnAdacencyBonus(space, adjacentSpace, player, false);
     }
@@ -207,7 +207,7 @@ export class AresHandler {
     return {megacredits: megaCreditCost, production: productionCost};
   }
 
-  public static assertCanPay(player: Player, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
+  public static assertCanPay(player: IPlayer, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
     if (player.game.phase === Phase.SOLAR) {
       return {megacredits: 0, production: 0};
     }
@@ -232,7 +232,7 @@ export class AresHandler {
     }
   }
 
-  public static payAdjacencyAndHazardCosts(player: Player, space: ISpace, subjectToHazardAdjacency: boolean) {
+  public static payAdjacencyAndHazardCosts(player: IPlayer, space: ISpace, subjectToHazardAdjacency: boolean) {
     const cost = this.assertCanPay(player, space, subjectToHazardAdjacency);
 
     if (cost.production > 0) {
@@ -265,7 +265,7 @@ export class AresHandler {
     _AresHazardPlacement.onTemperatureChange(game, aresData);
   }
 
-  public static onOceanPlaced(aresData: AresData, player: Player) {
+  public static onOceanPlaced(aresData: AresData, player: IPlayer) {
     _AresHazardPlacement.onOceanPlaced(aresData, player);
   }
 
@@ -273,7 +273,7 @@ export class AresHandler {
     _AresHazardPlacement.onOxygenChange(game, aresData);
   }
 
-  public static grantBonusForRemovingHazard(player: Player, initialTileType: TileType | undefined) {
+  public static grantBonusForRemovingHazard(player: IPlayer, initialTileType: TileType | undefined) {
     if (player.game.phase === Phase.SOLAR) {
       return;
     }

@@ -20,6 +20,9 @@ import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {SelectOption} from '../inputs/SelectOption';
 import {OrOptions} from '../inputs/OrOptions';
 import {MultiSet} from 'mnemonist';
+import {IPlayer} from '../IPlayer';
+import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
+import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = PlayerId | NeutralPlayer;
@@ -326,7 +329,7 @@ export class Turmoil {
     }
   }
 
-  public chooseRulingParty(player: Player): void {
+  public chooseRulingParty(player: IPlayer): void {
     const setRulingParty = new OrOptions();
 
     setRulingParty.title = 'Select new ruling party';
@@ -372,7 +375,7 @@ export class Turmoil {
     }
   }
 
-  public getPlayerInfluence(player: Player) {
+  public getPlayerInfluence(player: IPlayer) {
     let influence = 0;
     if (this.chairman !== undefined && this.chairman === player.id) influence++;
 
@@ -402,8 +405,7 @@ export class Turmoil {
     return influence;
   }
 
-  
-  public addInfluenceBonus(player: Player, bonus:number = 1) {
+  public addInfluenceBonus(player: IPlayer, bonus:number = 1) {
     if (this.playersInfluenceBonus.has(player.id)) {
       let current = this.playersInfluenceBonus.get(player.id);
       if (current !== null && current !== undefined) {
@@ -415,7 +417,7 @@ export class Turmoil {
     }
   }
 
-  public canPlay(player: Player, partyName : PartyName): boolean {
+  public canPlay(player: IPlayer, partyName : PartyName): boolean {
     if (this.rulingParty.name === partyName) {
       return true;
     }
@@ -440,7 +442,7 @@ export class Turmoil {
   }
 
   // Get Victory Points
-  public getPlayerVictoryPoints(player: Player): number {
+  public getPlayerVictoryPoints(player: IPlayer): number {
     let victory = 0;
     if (this.chairman !== undefined && this.chairman === player.id) victory++;
     this.parties.forEach(function(party) {
@@ -449,6 +451,24 @@ export class Turmoil {
       }
     });
     return victory;
+  }
+
+  public getSendDelegateInput(player: Player): SelectPartyToSendDelegate | undefined {
+    if (this.hasDelegatesInReserve(player.id)) {
+      let sendDelegate;
+      if (!this.usedFreeDelegateAction.has(player.id)) {
+        sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (from lobby)', {freeStandardAction: true});
+      } else if (player.isCorporation(CardName.INCITE) && player.canAfford(3)) {
+        sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (3 M€)', {cost: 3});
+      } else if (player.canAfford(5)) {
+        sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (5 M€)', {cost: 5});
+      }
+      if (sendDelegate) {
+        const input = sendDelegate.execute();
+        return input;
+      }
+    }
+    return undefined;
   }
 
   public serialize(): SerializedTurmoil {

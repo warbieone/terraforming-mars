@@ -1,4 +1,5 @@
-import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
+import {asPlayer} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -6,7 +7,7 @@ import {PlacementType} from '../boards/PlacementType';
 
 export class PlaceCityTile extends DeferredAction {
   constructor(
-    player: Player,
+    player: IPlayer,
     private options?: {
       on?: PlacementType,
       title?: string,
@@ -27,7 +28,7 @@ export class PlaceCityTile extends DeferredAction {
       title,
       spaces,
       (space: ISpace) => {
-        this.player.game.addCity(this.player, space);
+        this.player.game.addCity(asPlayer(this.player), space);
         return undefined;
       },
     );

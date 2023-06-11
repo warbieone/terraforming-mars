@@ -6,6 +6,7 @@ import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
 import {Tag} from '../../common/cards/Tag';
 import {Player} from '../Player';
+import {IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
 import {CardRequirements} from './requirements/CardRequirements';
@@ -21,6 +22,7 @@ import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 import {Counter} from '../behavior/Counter';
+import {PartialField} from '../../common/utils/types';
 
 const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
@@ -57,12 +59,7 @@ type Properties = {
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
-// TODO(kberg): move this out.
-// Makes fields in T Partial.
-type PartialField<T, K extends keyof T> = Omit<T, K> & {[k in K]: Partial<T[K]>};
-
 /* External representation of card properties. */
-// type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 export type StaticCardProperties = PartialField<Properties, 'reserveUnits'>;
 
 export const staticCardProperties = new Map<CardName, Properties>();
@@ -218,7 +215,7 @@ export abstract class Card {
   public bespokeOnDiscard(_player: Player): void {
   }
 
-  public getVictoryPoints(player: Player): number {
+  public getVictoryPoints(player: IPlayer): number {
     const vp = this.properties.victoryPoints;
     if (typeof(vp) === 'number') {
       return vp;
@@ -318,7 +315,7 @@ export abstract class Card {
     }
   }
 
-  public getCardDiscount(_player?: Player, card?: IProjectCard): number {
+  public getCardDiscount(_player?: IPlayer, card?: IProjectCard): number {
     if (this.cardDiscount === undefined) {
       return 0;
     }
