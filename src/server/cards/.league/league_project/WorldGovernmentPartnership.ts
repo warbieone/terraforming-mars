@@ -2,7 +2,7 @@ import {IProjectCard} from '../../IProjectCard';
 import {Tag} from '../../../../common/cards/Tag';
 import {Card} from '../../Card';
 import {CardType} from '../../../../common/cards/CardType';
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../../server/IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Resource} from '../../../../common/Resource';
@@ -27,7 +27,7 @@ export class WorldGovernmentPartnership extends Card implements IProjectCard {
     });
   }
 
-  public override play(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.increaseTemperature(player, 1);
     player.game.increaseOxygenLevel(player, 1);
     player.game.defer(new PlaceOceanTile(player));

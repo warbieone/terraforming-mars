@@ -2,7 +2,7 @@ import {IProjectCard} from '../../IProjectCard';
 import {Tag} from '../../../../common/cards/Tag';
 import {Card} from '../../Card';
 import {CardType} from '../../../../common/cards/CardType';
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../../server/IPlayer';
 import {CardName} from '../../../../common/cards/CardName';
 import {MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../../../common/constants';
 import {CardRenderer} from '../../render/CardRenderer';
@@ -33,7 +33,7 @@ export class SulphuricImport extends Card implements IProjectCard {
     });
   }
 
-  public override play(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const availableMicrobeCards = RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource.MICROBE);
     const availableAnimalCards = RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource.ANIMAL);

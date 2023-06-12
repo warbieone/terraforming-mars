@@ -5,7 +5,7 @@ import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
 import {DiscardCards} from '../../../deferredActions/DiscardCards';
 import {DrawCards} from '../../../deferredActions/DrawCards';
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../../server/IPlayer';
 
 
 export class SaveOurShip extends Card implements IProjectCard {
@@ -28,12 +28,12 @@ export class SaveOurShip extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     // Only playable if you have 2 cards to discard + this card in hand
     return super.canPlay(player) && player.cardsInHand.length > 2;
   }
 
-  public override play(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.game.defer(new DiscardCards(player, 2));
     player.game.defer(DrawCards.keepAll(player, 3));
     return undefined;

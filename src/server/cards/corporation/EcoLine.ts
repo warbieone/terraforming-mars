@@ -5,7 +5,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
-import {Player} from '../../Player';
+import {IPlayer} from '../../../server/IPlayer';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
@@ -40,12 +40,12 @@ export class EcoLine extends Card implements ICorporationCard {
     });
   }
 
-  public override play(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     this.gainBonus(player, 1);
     return undefined;
   }
 
-  private gainBonus(player: Player, amount: number): void {
+  private gainBonus(player: IPlayer, amount: number): void {
     for (let i = 0; i < amount; i++) {
           const options = new OrOptions(
         new SelectOption('Gain 2 MC', 'Gain MC', () => {
@@ -62,7 +62,7 @@ export class EcoLine extends Card implements ICorporationCard {
     return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (player.isCorporation(this.name)){
       const amount = card.tags.filter((tag) => tag === Tag.ANIMAL || tag === Tag.PLANT || tag === Tag.MICROBE).length;
       if (amount > 0) {

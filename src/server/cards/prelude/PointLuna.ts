@@ -48,7 +48,7 @@ export class PointLuna extends Card implements ICorporationCard {
     return undefined;
   }
 
-  public override play(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.production.add(Resource.TITANIUM, 1);
     player.drawCard();
     player.game.defer(new DiscardCards(player, 1));

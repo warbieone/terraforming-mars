@@ -4,7 +4,7 @@ import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../../server/IPlayer';
 
 
 export class MatingSeason extends Card implements IProjectCard {
@@ -28,7 +28,7 @@ export class MatingSeason extends Card implements IProjectCard {
     });
   }
 
-  public override play(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.getCardsWithResources().forEach((card) => {
       if (card.tags.filter((tag) => tag === Tag.ANIMAL).length === 0 || card.resourceCount === undefined) return undefined;
       if (card.resourceCount >= 2) player.addResourceTo(card);

@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, played} from '../Options';
-import {Player} from '../../Player';
+import {IPlayer} from '../../../../server/IPlayer';
 import {Resource} from '../../../common/Resource';
 
 
@@ -15,7 +15,7 @@ export class TollStation extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.TOLL_STATION,
       tags: [Tag.SPACE],
-      cost: 18,
+      cost: 12,
 
 /*       behavior: {
         production: {megacredits: {tag: Tag.SPACE, others: true}},
@@ -33,7 +33,7 @@ export class TollStation extends Card implements IProjectCard {
     });
   }
   
-  public override play(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     if (player.game.isSoloMode()) {
       return undefined;
     }

@@ -19,7 +19,7 @@ export abstract class CeoCard extends Card implements ICeoCard {
     return this.isDisabled === false;
   }
 
-  public override play(_player: IPlayer) {
+  public override bespokePlay(_player: IPlayer) {
     return undefined;
   }
 

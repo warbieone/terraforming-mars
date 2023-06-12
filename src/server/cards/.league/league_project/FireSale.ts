@@ -7,7 +7,7 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {CardRequirements} from '../../CardRequirements';
 import {max} from '../../Options';
 import {Resource} from '../../../../common/Resource';
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../../server/IPlayer';
 
 export class FireSale extends Card implements IProjectCard {
   // author: markanarmi
@@ -31,7 +31,7 @@ export class FireSale extends Card implements IProjectCard {
     });
   }
 
-  public override play(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     player.addResource(Resource.MEGACREDITS, player.heat, {log: true});
     return player.spendHeat(player.heat);
   }

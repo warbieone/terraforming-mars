@@ -1,5 +1,5 @@
 import {Card} from '../../Card';
-import {Player} from '../../../Player';
+import {IPlayer} from '../../../../server/IPlayer';
 import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
@@ -37,7 +37,7 @@ export class Scavengers extends Card implements ICorporationCard {
     });
   }
 
-  public initialAction(player: Player) {
+  public initialAction(player: IPlayer) {
     return new SelectSpace(
       'Select space for Scavengers tile',
       player.game.board.getAvailableSpacesOnLand(player),
@@ -51,7 +51,7 @@ export class Scavengers extends Card implements ICorporationCard {
     );
   }
 
-  public override play(player: Player) {
+  public override bespokePlay(player: IPlayer) {
     // player.addProduction(Resources.MEGACREDITS, -3);
     player.steel++;
     player.titanium++;
