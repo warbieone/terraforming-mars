@@ -22,9 +22,9 @@ class MessageBuilder {
         return this;
     }
     player(value) {
-        return this.playerId(value.color);
+        return this.playerColor(value.color);
     }
-    playerId(value) {
+    playerColor(value) {
         this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.PLAYER, value });
         return this;
     }

@@ -15,6 +15,7 @@ const Size_1 = require("../../../common/cards/render/Size");
 const Phase_1 = require("../../../common/Phase");
 const Card_1 = require("../Card");
 const Options_1 = require("../Options");
+const Payment_1 = require("../../../common/inputs/Payment");
 class TheDarksideofTheMoonSyndicate extends Card_1.Card {
     constructor() {
         super({
@@ -52,8 +53,8 @@ class TheDarksideofTheMoonSyndicate extends Card_1.Card {
         const orOptions = new OrOptions_1.OrOptions();
         if (player.titanium > 0) {
             orOptions.options.push(new SelectOption_1.SelectOption('Spend 1 titanium to add 1 syndicate fleet on this card', 'Add syndicate fleet', () => {
-                player.titanium--;
-                player.addResourceTo(this);
+                player.pay(Payment_1.Payment.of({ titanium: 1 }));
+                player.addResourceTo(this, { qty: 1, log: true });
                 return undefined;
             }));
         }

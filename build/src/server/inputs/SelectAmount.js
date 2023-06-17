@@ -2,11 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectAmount = void 0;
 const PlayerInput_1 = require("../PlayerInput");
-const PlayerInputType_1 = require("../../common/input/PlayerInputType");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 class SelectAmount extends PlayerInput_1.BasePlayerInput {
     constructor(title, buttonLabel = 'Save', cb, min, max, maxByDefault) {
-        super(PlayerInputType_1.PlayerInputType.SELECT_AMOUNT, title);
+        super('amount', title);
         this.cb = cb;
         this.min = min;
         this.max = max;

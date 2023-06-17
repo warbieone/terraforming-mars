@@ -21,6 +21,7 @@ class Wetlands extends Card_1.Card {
             tr: { oxygen: 1, tr: 1 },
             requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(2)),
             reserveUnits: { plants: 4 },
+            victoryPoints: 1,
             metadata: {
                 cardNumber: 'Pf03',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

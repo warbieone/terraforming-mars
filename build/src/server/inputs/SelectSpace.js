@@ -2,11 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectSpace = void 0;
 const PlayerInput_1 = require("../PlayerInput");
-const PlayerInputType_1 = require("../../common/input/PlayerInputType");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 class SelectSpace extends PlayerInput_1.BasePlayerInput {
     constructor(title, availableSpaces, cb) {
-        super(PlayerInputType_1.PlayerInputType.SELECT_SPACE, title);
+        super('space', title);
         this.availableSpaces = availableSpaces;
         this.cb = cb;
         if (availableSpaces.length === 0) {

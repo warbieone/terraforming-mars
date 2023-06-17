@@ -2,11 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrOptions = void 0;
 const PlayerInput_1 = require("../PlayerInput");
-const PlayerInputType_1 = require("../../common/input/PlayerInputType");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 class OrOptions extends PlayerInput_1.BasePlayerInput {
     constructor(...options) {
-        super(PlayerInputType_1.PlayerInputType.OR_OPTIONS, 'Select one option');
+        super('or', 'Select one option');
         this.options = options;
     }
     cb() {

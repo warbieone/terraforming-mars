@@ -13,7 +13,6 @@ class MartianDustProcessingPlant extends Card_1.Card {
             name: CardName_1.CardName.MARTIAN_DUST_PROCESSING_PLANT,
             cost: 15,
             tags: [Tag_1.Tag.MARS, Tag_1.Tag.BUILDING],
-            victoryPoints: 1,
             behavior: {
                 production: { energy: -1, steel: 2 },
                 tr: 1,

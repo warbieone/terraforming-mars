@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deserializeProjectCard = exports.serializeProjectCard = void 0;
-const MiningCard_1 = require("./base/MiningCard");
 const ICeoCard_1 = require("./ceos/ICeoCard");
 const ICloneTagCard_1 = require("./pathfinders/ICloneTagCard");
 const SelfReplicatingRobots_1 = require("./promo/SelfReplicatingRobots");
@@ -64,8 +63,10 @@ function deserializeProjectCard(element, cardFinder) {
             }
         });
     }
-    if (card instanceof MiningCard_1.MiningCard && element.bonusResource !== undefined) {
-        card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
+    if (!(card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots)) {
+        if (element.bonusResource !== undefined) {
+            card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
+        }
     }
     if ((0, ICeoCard_1.isCeoCard)(card)) {
         card.isDisabled = element.isDisabled;

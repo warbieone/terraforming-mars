@@ -11,6 +11,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 const LogHelper_1 = require("../../LogHelper");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
+const Payment_1 = require("../../../common/inputs/Payment");
 class JetStreamMicroscrappers extends Card_1.Card {
     constructor() {
         super({
@@ -58,7 +59,7 @@ class JetStreamMicroscrappers extends Card_1.Card {
     }
     addResource(player) {
         player.addResourceTo(this, { qty: 2, log: true });
-        player.titanium--;
+        player.pay(Payment_1.Payment.of({ titanium: 1 }));
         return undefined;
     }
     spendResource(player) {

@@ -2,11 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectColony = void 0;
 const PlayerInput_1 = require("../PlayerInput");
-const PlayerInputType_1 = require("../../common/input/PlayerInputType");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 class SelectColony extends PlayerInput_1.BasePlayerInput {
     constructor(title, buttonLabel = 'Save', colonies, cb) {
-        super(PlayerInputType_1.PlayerInputType.SELECT_COLONY, title);
+        super('colony', title);
         this.colonies = colonies;
         this.cb = cb;
         this.showTileOnly = false;

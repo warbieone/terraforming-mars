@@ -12,6 +12,7 @@ const OrOptions_1 = require("../../inputs/OrOptions");
 const LogHelper_1 = require("../../LogHelper");
 const PlaceOceanTile_1 = require("../../deferredActions/PlaceOceanTile");
 const CardRenderer_1 = require("../render/CardRenderer");
+const Payment_1 = require("../../../common/inputs/Payment");
 class CometAiming extends Card_1.Card {
     constructor() {
         super({
@@ -46,12 +47,12 @@ class CometAiming extends Card_1.Card {
     action(player) {
         const asteroidCards = player.getResourceCards(CardResource_1.CardResource.ASTEROID);
         const addAsteroidToSelf = function () {
-            player.titanium--;
+            player.pay(Payment_1.Payment.of({ titanium: 1 }));
             player.addResourceTo(asteroidCards[0], { log: true });
             return undefined;
         };
         const addAsteroidToCard = new SelectCard_1.SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, ([card]) => {
-            player.titanium--;
+            player.pay(Payment_1.Payment.of({ titanium: 1 }));
             player.addResourceTo(card, { log: true });
             return undefined;
         });

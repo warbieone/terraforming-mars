@@ -27,26 +27,26 @@ class Revolution extends GlobalEvent_1.GlobalEvent {
     resolve(game, turmoil) {
         if (game.isSoloMode()) {
             if (this.getScore(game.getPlayersInGenerationOrder()[0], turmoil) >= 4) {
-                game.getPlayersInGenerationOrder()[0].decreaseTerraformRatingSteps(2, { log: true });
+                game.getPlayersInGenerationOrder()[0].decreaseTerraformRating(2, { log: true });
             }
         }
         else {
             const players = [...game.getPlayersInGenerationOrder()].sort((p1, p2) => this.getScore(p2, turmoil) - this.getScore(p1, turmoil));
             if (this.getScore(players[0], turmoil) > this.getScore(players[1], turmoil)) {
-                players[0].decreaseTerraformRatingSteps(2, { log: true });
+                players[0].decreaseTerraformRating(2, { log: true });
                 players.shift();
                 if (players.length === 1 && this.getScore(players[0], turmoil) > 0) {
-                    players[0].decreaseTerraformRating({ log: true });
+                    players[0].decreaseTerraformRating(1, { log: true });
                 }
                 else if (players.length > 1) {
                     if (this.getScore(players[0], turmoil) > this.getScore(players[1], turmoil)) {
-                        players[0].decreaseTerraformRating({ log: true });
+                        players[0].decreaseTerraformRating(1, { log: true });
                     }
                     else {
                         const score = this.getScore(players[0], turmoil);
                         while (players.length > 0 && this.getScore(players[0], turmoil) === score) {
                             if (this.getScore(players[0], turmoil) > 0) {
-                                players[0].decreaseTerraformRating({ log: true });
+                                players[0].decreaseTerraformRating(1, { log: true });
                             }
                             players.shift();
                         }
@@ -57,7 +57,7 @@ class Revolution extends GlobalEvent_1.GlobalEvent {
                 const score = this.getScore(players[0], turmoil);
                 while (players.length > 0 && this.getScore(players[0], turmoil) === score) {
                     if (this.getScore(players[0], turmoil) > 0) {
-                        players[0].decreaseTerraformRatingSteps(2, { log: true });
+                        players[0].decreaseTerraformRating(2, { log: true });
                     }
                     players.shift();
                 }

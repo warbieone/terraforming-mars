@@ -7,6 +7,11 @@ const ColonyBenefit_1 = require("../../../common/colonies/ColonyBenefit");
 class Leavitt extends Colony_1.Colony {
     constructor() {
         super({
+            description: [
+                'Gain 1 science tag',
+                'Draw n cards, keep 1',
+                'Draw 1 card which you may pay to keep',
+            ],
             name: ColonyName_1.ColonyName.LEAVITT,
             buildType: ColonyBenefit_1.ColonyBenefit.GAIN_SCIENCE_TAG,
             tradeType: ColonyBenefit_1.ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE,

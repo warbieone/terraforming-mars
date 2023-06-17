@@ -9,6 +9,11 @@ class Io extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.IO,
+            description: [
+                'Gain 1 heat production',
+                'Gain n heat',
+                'Gain 2 heat',
+            ],
             buildType: ColonyBenefit_1.ColonyBenefit.GAIN_PRODUCTION,
             buildResource: Resource_1.Resource.HEAT,
             tradeType: ColonyBenefit_1.ColonyBenefit.GAIN_RESOURCES,

@@ -9,6 +9,11 @@ class Miranda extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.MIRANDA,
+            description: [
+                'Add 1 animal to ANY card',
+                'Add n animals to ANY card',
+                'Draw 1 card',
+            ],
             cardResource: CardResource_1.CardResource.ANIMAL,
             buildType: ColonyBenefit_1.ColonyBenefit.ADD_RESOURCES_TO_CARD,
             tradeType: ColonyBenefit_1.ColonyBenefit.ADD_RESOURCES_TO_CARD,

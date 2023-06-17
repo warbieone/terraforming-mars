@@ -9,6 +9,11 @@ class Luna extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.LUNA,
+            description: [
+                'Gain 2 M€ production',
+                'Gain n M€',
+                'Gain 2 M€',
+            ],
             buildType: ColonyBenefit_1.ColonyBenefit.GAIN_PRODUCTION,
             buildQuantity: [2, 2, 2],
             buildResource: Resource_1.Resource.MEGACREDITS,

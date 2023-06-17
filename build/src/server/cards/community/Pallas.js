@@ -8,6 +8,11 @@ class Pallas extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.PALLAS,
+            description: [
+                'Gain +1 influence',
+                'Place n delegates',
+                'Gain 1 M€ for each delegate in any party',
+            ],
             buildType: ColonyBenefit_1.ColonyBenefit.GAIN_INFLUENCE,
             tradeType: ColonyBenefit_1.ColonyBenefit.PLACE_DELEGATES,
             tradeQuantity: [1, 1, 1, 2, 2, 2, 3],

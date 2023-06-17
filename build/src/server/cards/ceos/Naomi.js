@@ -8,6 +8,7 @@ const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const constants_1 = require("../../../common/constants");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
+const ColoniesHandler_1 = require("../../colonies/ColoniesHandler");
 class Naomi extends CeoCard_1.CeoCard {
     constructor() {
         super({
@@ -25,11 +26,7 @@ class Naomi extends CeoCard_1.CeoCard {
         });
     }
     canAct(player) {
-        if (!super.canAct(player)) {
-            return false;
-        }
-        const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
-        return openColonies.length > 0;
+        return super.canAct(player) && ColoniesHandler_1.ColoniesHandler.tradeableColonies(player.game).length > 0;
     }
     action(player) {
         this.isDisabled = true;

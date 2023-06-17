@@ -23,6 +23,7 @@ const Resource_1 = require("../../common/Resource");
 const SelectPaymentDeferred_1 = require("../deferredActions/SelectPaymentDeferred");
 const OrOptions_1 = require("../inputs/OrOptions");
 const SelectOption_1 = require("../inputs/SelectOption");
+const Payment_1 = require("../../common/inputs/Payment");
 class Executor {
     canExecute(behavior, player, card) {
         var _a, _b, _c;
@@ -133,6 +134,7 @@ class Executor {
         return true;
     }
     execute(behavior, player, card) {
+        var _a, _b;
         const ctx = new Counter_1.Counter(player, card);
         if (behavior.or !== undefined) {
             const options = behavior.or.behaviors
@@ -163,12 +165,10 @@ class Executor {
                 }));
                 return;
             }
-            if (spend.steel) {
-                player.deductResource(Resource_1.Resource.STEEL, spend.steel);
-            }
-            if (spend.titanium) {
-                player.deductResource(Resource_1.Resource.TITANIUM, spend.titanium);
-            }
+            player.pay(Payment_1.Payment.of({
+                steel: (_a = spend.steel) !== null && _a !== void 0 ? _a : 0,
+                titanium: (_b = spend.titanium) !== null && _b !== void 0 ? _b : 0,
+            }));
             if (spend.plants) {
                 player.deductResource(Resource_1.Resource.PLANTS, spend.plants);
             }
@@ -230,7 +230,7 @@ class Executor {
                 player.game.increaseVenusScaleLevel(player, g.venus);
         }
         if (behavior.tr !== undefined) {
-            player.increaseTerraformRatingSteps(behavior.tr);
+            player.increaseTerraformRating(behavior.tr);
         }
         const addResources = behavior.addResources;
         if (addResources !== undefined) {

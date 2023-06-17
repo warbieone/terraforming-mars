@@ -149,12 +149,8 @@ class PostgreSQL {
         return __awaiter(this, void 0, void 0, function* () {
             const promise1 = this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [gameId]);
             const promise2 = this.client.query('INSERT INTO completed_game(game_id) VALUES ($1)', [gameId]);
-            const promise3 = this.maintenance();
-            yield Promise.all([promise1, promise2, promise3]);
+            yield Promise.all([promise1, promise2]);
         });
-    }
-    maintenance() {
-        return Promise.all([this.purgeUnfinishedGames(), this.compressCompletedGames()]);
     }
     purgeUnfinishedGames(maxGameDays = process.env.MAX_GAME_DAYS) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -170,6 +166,7 @@ class PostgreSQL {
             console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
             const deleteParticipantsResult = yield this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
             console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
+            return gameIds;
         });
     }
     compressCompletedGames(compressCompletedGamesDays = process.env.COMPRESS_COMPLETED_GAMES_DAYS) {

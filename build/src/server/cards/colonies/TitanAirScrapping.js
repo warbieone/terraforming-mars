@@ -9,6 +9,7 @@ const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
+const Payment_1 = require("../../../common/inputs/Payment");
 class TitanAirScrapping extends Card_1.Card {
     constructor() {
         super({
@@ -57,8 +58,8 @@ class TitanAirScrapping extends Card_1.Card {
         return new OrOptions_1.OrOptions(...opts);
     }
     addResource(player) {
-        player.addResourceTo(this, 4);
-        player.titanium--;
+        player.pay(Payment_1.Payment.of({ titanium: 1 }));
+        player.addResourceTo(this, { qty: 2, log: true });
         return undefined;
     }
     spendResource(player) {

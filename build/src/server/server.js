@@ -23,6 +23,7 @@ const requestProcessor_1 = require("./requestProcessor");
 const timer_1 = require("./utils/timer");
 const BehaviorExecutor_1 = require("./behavior/BehaviorExecutor");
 const Executor_1 = require("./behavior/Executor");
+const GameLoader_1 = require("./database/GameLoader");
 process.on('uncaughtException', (err) => {
     console.error('UNCAUGHT EXCEPTION', err);
 });
@@ -87,7 +88,7 @@ function start() {
         catch (err) {
             console.error(err);
         }
-        Database_1.Database.getInstance().maintenance();
+        GameLoader_1.GameLoader.getInstance().maintenance();
         const port = process.env.PORT || 8080;
         console.log(`Starting ${raw_settings.head}, built at ${raw_settings.builtAt}`);
         console.log(`Starting server on port ${port}`);

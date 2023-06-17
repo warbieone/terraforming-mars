@@ -9,6 +9,11 @@ class Europa extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.EUROPA,
+            description: [
+                'Place an ocean tile',
+                'Gain 1 unit of production of the type under the track marker',
+                'Gain 1 M€',
+            ],
             buildType: ColonyBenefit_1.ColonyBenefit.PLACE_OCEAN_TILE,
             tradeType: ColonyBenefit_1.ColonyBenefit.GAIN_PRODUCTION,
             tradeResource: [

@@ -5,11 +5,13 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
+const Tag_1 = require("../../../common/cards/Tag");
 class ImprovedMoonConcrete extends Card_1.Card {
     constructor() {
         super({
             name: CardName_1.CardName.IMPROVED_MOON_CONCRETE,
             type: CardType_1.CardType.ACTIVE,
+            tags: [Tag_1.Tag.MOON],
             cost: 12,
             reserveUnits: { steel: 2 },
             behavior: {

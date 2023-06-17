@@ -36,6 +36,7 @@ class GameLoader {
         this.config = config;
         this.clock = clock;
         this.cache = new Cache_1.Cache(config, clock);
+        this.purgedGames = [];
         (0, timer_1.timeAsync)(this.cache.load())
             .then((v) => {
             metrics.initialize.set(v.duration);
@@ -134,6 +135,34 @@ class GameLoader {
     }
     sweep() {
         this.cache.sweep();
+    }
+    completeGame(game) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const database = Database_1.Database.getInstance();
+            yield database.saveGame(game);
+            try {
+                this.mark(game.id);
+                yield database.markFinished(game.id);
+                yield this.maintenance();
+            }
+            catch (err) {
+                console.error(err);
+            }
+        });
+    }
+    saveGame(game) {
+        if (this.purgedGames.includes(game.id)) {
+            throw new Error('This game no longer exists');
+        }
+        return Database_1.Database.getInstance().saveGame(game);
+    }
+    maintenance() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const database = Database_1.Database.getInstance();
+            const purgedGames = yield database.purgeUnfinishedGames();
+            this.purgedGames.push(...purgedGames);
+            yield database.compressCompletedGames();
+        });
     }
 }
 exports.GameLoader = GameLoader;

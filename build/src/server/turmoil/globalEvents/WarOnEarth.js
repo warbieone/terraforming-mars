@@ -21,7 +21,7 @@ class WarOnEarth extends GlobalEvent_1.GlobalEvent {
     }
     resolve(game, turmoil) {
         game.getPlayersInGenerationOrder().forEach((player) => {
-            player.decreaseTerraformRatingSteps(4 - turmoil.getPlayerInfluence(player), { log: true });
+            player.decreaseTerraformRating(4 - turmoil.getPlayerInfluence(player), { log: true });
         });
     }
 }

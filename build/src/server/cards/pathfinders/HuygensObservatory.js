@@ -11,6 +11,7 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const SelectColony_1 = require("../../inputs/SelectColony");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const ColoniesHandler_1 = require("../../colonies/ColoniesHandler");
 class HuygensObservatory extends Card_1.Card {
     constructor() {
         super({
@@ -37,12 +38,9 @@ class HuygensObservatory extends Card_1.Card {
             return undefined;
         });
     }
-    tradeableColonies(player) {
-        return player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
-    }
     tryToTrade(player) {
         const game = player.game;
-        const tradeableColonies = this.tradeableColonies(player);
+        const tradeableColonies = ColoniesHandler_1.ColoniesHandler.tradeableColonies(player.game);
         if (tradeableColonies.length === 0) {
             game.log('${0} cannot trade with ${1} because there is no colony they may visit.', (b) => b.player(player).card(this));
             return;
@@ -80,7 +78,7 @@ class HuygensObservatory extends Card_1.Card {
         }
     }
     bespokeCanPlay(player) {
-        return player.colonies.getPlayableColonies(true).length > 0 || this.tradeableColonies(player).length > 0;
+        return player.colonies.getPlayableColonies(true).length > 0 || ColoniesHandler_1.ColoniesHandler.tradeableColonies(player.game).length > 0;
     }
     bespokePlay(player) {
         const game = player.game;

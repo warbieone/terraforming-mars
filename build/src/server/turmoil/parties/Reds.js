@@ -30,7 +30,7 @@ class RedsBonus01 {
     }
     getScore(player) {
         const game = player.game;
-        const players = game.getPlayersInGenerationOrder();
+        const players = [...game.getPlayersInGenerationOrder()];
         if (game.isSoloMode() && players[0].getTerraformRating() <= 20)
             return 1;
         players.sort((p1, p2) => p1.getTerraformRating() - p2.getTerraformRating());
@@ -56,7 +56,7 @@ class RedsBonus02 {
     }
     getScore(player) {
         const game = player.game;
-        const players = game.getPlayersInGenerationOrder();
+        const players = [...game.getPlayersInGenerationOrder()];
         if (game.isSoloMode() && players[0].getTerraformRating() > 20)
             return -1;
         players.sort((p1, p2) => p2.getTerraformRating() - p1.getTerraformRating());

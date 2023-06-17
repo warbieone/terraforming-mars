@@ -6,11 +6,13 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
+const Tag_1 = require("../../../common/cards/Tag");
 class NewColonyPlanningInitiaitives extends Card_1.Card {
     constructor() {
         super({
             name: CardName_1.CardName.NEW_COLONY_PLANNING_INITIAITIVES,
             type: CardType_1.CardType.AUTOMATED,
+            tags: [Tag_1.Tag.MOON],
             cost: 6,
             behavior: {
                 moon: { habitatRate: 1 },

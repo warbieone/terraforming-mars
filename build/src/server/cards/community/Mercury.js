@@ -9,6 +9,11 @@ class Mercury extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.MERCURY,
+            description: [
+                'Gain the trade bonus of any colony tile. (This does not move the markers.)',
+                'Gain 1 unit of production of the type below the track marker',
+                'Gain 2 M€',
+            ],
             buildType: ColonyBenefit_1.ColonyBenefit.COPY_TRADE,
             tradeType: ColonyBenefit_1.ColonyBenefit.GAIN_PRODUCTION,
             tradeResource: [

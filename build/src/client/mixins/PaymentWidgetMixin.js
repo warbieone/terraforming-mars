@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PaymentWidgetMixin = exports.unit = void 0;
+exports.PaymentWidgetMixin = void 0;
 const CardName_1 = require("@/common/cards/CardName");
 const constants_1 = require("@/common/constants");
 const CardResource_1 = require("@/common/CardResource");
 const ClientCardManifest_1 = require("../cards/ClientCardManifest");
-exports.unit = ['megaCredits', 'titanium', 'steel', 'heat', 'microbes', 'floaters', 'science', 'seeds', 'data'];
+const Payment_1 = require("@/common/inputs/Payment");
 exports.PaymentWidgetMixin = {
     name: 'PaymentWidgetMixin',
     methods: {
@@ -38,7 +38,7 @@ exports.PaymentWidgetMixin = {
                     return 3;
                 case 'seeds':
                     return constants_1.SEED_VALUE;
-                case 'data':
+                case 'auroraiData':
                     return constants_1.DATA_VALUE;
                 default:
                     return 1;
@@ -81,7 +81,7 @@ exports.PaymentWidgetMixin = {
             var _a;
             const ta = this.asModel();
             let remainingMC = ta.$data.cost;
-            for (const resource of exports.unit) {
+            for (const resource of Payment_1.PAYMENT_KEYS) {
                 if (resource === 'megaCredits')
                     continue;
                 const value = ((_a = ta[resource]) !== null && _a !== void 0 ? _a : 0) * this.getResourceRate(resource);
@@ -121,7 +121,7 @@ exports.PaymentWidgetMixin = {
                 case 'microbes':
                 case 'science':
                 case 'seeds':
-                case 'data':
+                case 'auroraiData':
                     amount = model.playerinput[target];
                     break;
             }

@@ -11,7 +11,7 @@ class CeoCard extends Card_1.Card {
     canAct(_player) {
         return this.isDisabled === false;
     }
-    play(_player) {
+    bespokePlay(_player) {
         return undefined;
     }
     get type() {

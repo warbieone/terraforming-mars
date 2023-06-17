@@ -235,7 +235,7 @@ class AresHandler {
             default:
                 return;
         }
-        player.increaseTerraformRatingSteps(steps);
+        player.increaseTerraformRating(steps);
         player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(TileType_1.TileType.toString(initialTileType)));
     }
 }

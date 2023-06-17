@@ -9,6 +9,11 @@ class IapetusII extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.IAPETUS_II,
+            description: [
+                'Add 3 data to ANY card',
+                'Add n data to ANY card',
+                'Add 1 data to ANY card',
+            ],
             cardResource: CardResource_1.CardResource.DATA,
             buildType: ColonyBenefit_1.ColonyBenefit.ADD_RESOURCES_TO_CARD,
             buildQuantity: [3, 3, 3],

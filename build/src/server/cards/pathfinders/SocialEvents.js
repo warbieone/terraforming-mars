@@ -28,7 +28,7 @@ class SocialEvents extends Card_1.Card {
         return Math.floor((player.tags.count(Tag_1.Tag.MARS) + 1) / 2);
     }
     bespokePlay(player) {
-        player.increaseTerraformRatingSteps(this.getExpectedTr(player), { log: true });
+        player.increaseTerraformRating(this.getExpectedTr(player), { log: true });
         return undefined;
     }
 }

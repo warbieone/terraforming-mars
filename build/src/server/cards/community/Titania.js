@@ -9,6 +9,11 @@ class Titania extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.TITANIA,
+            description: [
+                'Gain 5, 3, or 2 VP',
+                'Gain n VP',
+                'Lose 3 M€',
+            ],
             buildType: ColonyBenefit_1.ColonyBenefit.GAIN_VP,
             buildQuantity: [5, 3, 2],
             tradeType: ColonyBenefit_1.ColonyBenefit.GAIN_VP,

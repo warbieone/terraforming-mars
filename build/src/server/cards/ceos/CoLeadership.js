@@ -29,7 +29,7 @@ class CoLeadership extends PreludeCard_1.PreludeCard {
             var _a;
             if (((_a = ceo.canPlay) === null || _a === void 0 ? void 0 : _a.call(ceo, player)) === false) {
                 game.ceoDeck.discard(ceo);
-                game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(ceo).player(player), { reservedFor: player });
+                game.log('${0} was discarded as ${1} could not play it.', (b) => b.card(ceo).player(player), { reservedFor: player });
                 return false;
             }
             return true;

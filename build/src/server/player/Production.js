@@ -4,7 +4,6 @@ exports.Production = void 0;
 const CardName_1 = require("../../common/cards/CardName");
 const LawSuit_1 = require("../cards/promo/LawSuit");
 const Manutech_1 = require("../cards/venusNext/Manutech");
-const Player_1 = require("../Player");
 const Resource_1 = require("../../common/Resource");
 const Units_1 = require("../../common/Units");
 class Production {
@@ -46,10 +45,11 @@ class Production {
         if ((options === null || options === void 0 ? void 0 : options.log) === true) {
             this.player.logUnitDelta(resource, amount, 'production', options.from, options.stealing);
         }
-        if ((options === null || options === void 0 ? void 0 : options.from) instanceof Player_1.Player) {
-            LawSuit_1.LawSuit.resourceHook(this.player, resource, delta, options.from);
+        const from = options === null || options === void 0 ? void 0 : options.from;
+        if (typeof (from) === 'object') {
+            LawSuit_1.LawSuit.resourceHook(this.player, resource, delta, from);
         }
-        if ((options === null || options === void 0 ? void 0 : options.from) !== undefined && delta < 0 && (options.from instanceof Player_1.Player && options.from.id !== this.player.id)) {
+        if ((options === null || options === void 0 ? void 0 : options.from) !== undefined && delta < 0 && (typeof (from) === 'object' && from.id !== this.player.id)) {
             this.player.resolveInsurance();
         }
         if (this.player.isCorporation(CardName_1.CardName.MANUTECH)) {

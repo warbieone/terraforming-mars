@@ -4,7 +4,7 @@ exports.NewPartner = void 0;
 const PreludeCard_1 = require("../prelude/PreludeCard");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const SelectCard_1 = require("../../inputs/SelectCard");
+const PreludesExpansion_1 = require("../../preludes/PreludesExpansion");
 class NewPartner extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
@@ -22,24 +22,12 @@ class NewPartner extends PreludeCard_1.PreludeCard {
         });
     }
     bespokePlay(player) {
-        const cardsDrawn = [
+        const cards = [
             player.game.preludeDeck.draw(player.game),
             player.game.preludeDeck.draw(player.game),
         ];
-        player.game.log('You drew ${0} and ${1}', (b) => b.card(cardsDrawn[0]).card(cardsDrawn[1]), { reservedFor: player });
-        const playableCards = cardsDrawn.filter((card) => card.canPlay(player) === true);
-        if (playableCards.length === 0) {
-            player.game.log('${0} and ${1} were discarded as ${2} could not pay for both cards.', (b) => b.card(cardsDrawn[0]).card(cardsDrawn[1]).player(player));
-            return undefined;
-        }
-        return new SelectCard_1.SelectCard('Choose prelude card to play', 'Play', playableCards, ([card]) => {
-            if (card.canPlay === undefined || card.canPlay(player)) {
-                return player.playCard(card);
-            }
-            else {
-                throw new Error('You cannot pay for this card');
-            }
-        });
+        PreludesExpansion_1.PreludesExpansion.chooseAndPlayPrelude(player, cards);
+        return undefined;
     }
 }
 exports.NewPartner = NewPartner;

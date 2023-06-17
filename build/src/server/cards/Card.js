@@ -102,7 +102,8 @@ class Card {
     }
     canPlay(player) {
         var _a;
-        if (((_a = this.requirements) === null || _a === void 0 ? void 0 : _a.satisfies(player)) === false) {
+        const satisfied = (_a = this.requirements) === null || _a === void 0 ? void 0 : _a.satisfies(player);
+        if (satisfied === false) {
             return false;
         }
         if (this.behavior !== undefined && !(0, BehaviorExecutor_1.getBehaviorExecutor)().canExecute(this.behavior, player, this)) {

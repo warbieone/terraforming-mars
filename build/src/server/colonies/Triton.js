@@ -9,6 +9,11 @@ class Triton extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.TRITON,
+            description: [
+                'Gain 3 titanium',
+                'Gain n titanium',
+                'Gain 1 titanium',
+            ],
             buildType: ColonyBenefit_1.ColonyBenefit.GAIN_RESOURCES,
             buildQuantity: [3, 3, 3],
             buildResource: Resource_1.Resource.TITANIUM,

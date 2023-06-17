@@ -67,7 +67,7 @@ function translateText(englishText) {
             }
         }
         if (!translated.has(englishText)) {
-            console.log(`${lang} - please translate: ${englishText}`);
+            console.log(`${lang} - please translate: "${englishText}"`);
         }
     }
     return translatedText || englishText;

@@ -71,7 +71,7 @@ class PharmacyUnion extends Card_1.Card {
                     const orOptions = new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€', 'Confirm', () => {
                         const megaCreditsLost = Math.min(player.megaCredits, 4);
                         this.isDisabled = true;
-                        player.increaseTerraformRatingSteps(3);
+                        player.increaseTerraformRating(3);
                         player.deductResource(Resource_1.Resource.MEGACREDITS, megaCreditsLost);
                         game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                         return undefined;
@@ -112,7 +112,7 @@ class PharmacyUnion extends Card_1.Card {
                     }
                     return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Turn this card face down and gain 3 TR', 'Gain TR', () => {
                         this.isDisabled = true;
-                        player.increaseTerraformRatingSteps(3);
+                        player.increaseTerraformRating(3);
                         game.log('${0} turned ${1} face down to gain 3 TR', (b) => b.player(player).card(this));
                         return undefined;
                     }), new SelectOption_1.SelectOption('Do nothing', 'Confirm', () => {

@@ -37,7 +37,7 @@ class AgricolaInc extends Card_1.Card {
         const scorableTags = [Tag_1.Tag.CITY, Tag_1.Tag.EARTH, Tag_1.Tag.POWER, Tag_1.Tag.JOVIAN, Tag_1.Tag.MICROBE, Tag_1.Tag.PLANT, Tag_1.Tag.SCIENCE, Tag_1.Tag.SPACE, Tag_1.Tag.BUILDING, Tag_1.Tag.ANIMAL];
         if (player.game.gameOptions.venusNextExtension)
             scorableTags.push(Tag_1.Tag.VENUS);
-        const playerTags = player.tags.getAllTags();
+        const playerTags = player.tags.countAllTags();
         let points = 0;
         scorableTags.forEach((tag) => {
             const tagData = playerTags.find((data) => data.tag === tag);

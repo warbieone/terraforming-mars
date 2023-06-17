@@ -8,6 +8,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
+const utils_1 = require("../../../common/utils/utils");
 class MediaArchives extends Card_1.Card {
     constructor() {
         super({
@@ -25,7 +26,7 @@ class MediaArchives extends Card_1.Card {
         });
     }
     bespokePlay(player) {
-        const allPlayedEvents = player.game.getPlayers().map((player) => player.getPlayedEventsCount()).reduce((a, c) => a + c, 0);
+        const allPlayedEvents = (0, utils_1.sum)(player.game.getPlayers().map((player) => player.getPlayedEventsCount()));
         player.addResource(Resource_1.Resource.MEGACREDITS, allPlayedEvents, { log: true });
         return undefined;
     }

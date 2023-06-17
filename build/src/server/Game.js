@@ -95,6 +95,7 @@ class Game {
         this.colonies = [];
         this.discardedColonies = [];
         this.someoneHasRemovedOtherPlayersPlants = false;
+        this.gagarinBase = [];
         this.id = id;
         this.gameOptions = Object.assign({}, gameOptions);
         this.players = players;
@@ -260,7 +261,7 @@ class Game {
         }
     }
     save() {
-        Database_1.Database.getInstance().saveGame(this);
+        GameLoader_1.GameLoader.getInstance().saveGame(this);
     }
     toJSON() {
         return JSON.stringify(this.serialize());
@@ -282,6 +283,7 @@ class Game {
             draftRound: this.draftRound,
             first: this.first.id,
             fundedAwards: (0, FundedAward_1.serializeFundedAwards)(this.fundedAwards),
+            gagarinBase: this.gagarinBase,
             gameAge: this.gameAge,
             gameLog: this.gameLog,
             gameOptions: this.gameOptions,
@@ -515,6 +517,13 @@ class Game {
             player.colonies.cardDiscount = 0;
             player.runProductionPhase();
         });
+        this.postProductionPhase();
+    }
+    postProductionPhase() {
+        if (this.deferredActions.length > 0) {
+            this.deferredActions.runAll(() => this.postProductionPhase());
+            return;
+        }
         if (this.gameIsOver()) {
             this.log('Final greenery placement', (b) => b.forNewGeneration());
             this.takeNextFinalGreeneryAction();
@@ -734,10 +743,11 @@ class Game {
             });
             Database_1.Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
             this.phase = Phase_1.Phase.END;
-            yield Database_1.Database.getInstance().saveGame(this);
-            GameLoader_1.GameLoader.getInstance().mark(this.id);
-            yield Database_1.Database.getInstance().markFinished(this.id);
-            Database_1.Database.getInstance().maintenance();
+            const gameLoader = GameLoader_1.GameLoader.getInstance();
+            yield gameLoader.saveGame(this);
+            gameLoader.completeGame(this);
+            gameLoader.mark(this.id);
+            gameLoader.maintenance();
         });
     }
     canPlaceGreenery(player) {
@@ -789,7 +799,7 @@ class Game {
         const steps = Math.min(increments, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
         if (this.phase !== Phase_1.Phase.SOLAR) {
             TurmoilHandler_1.TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter_1.GlobalParameter.OXYGEN, steps);
-            player.increaseTerraformRatingSteps(steps);
+            player.increaseTerraformRating(steps);
         }
         if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
             this.increaseTemperature(player, 1);
@@ -829,7 +839,7 @@ class Game {
                 }
             }
             TurmoilHandler_1.TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter_1.GlobalParameter.VENUS, steps);
-            player.increaseTerraformRatingSteps(steps);
+            player.increaseTerraformRating(steps);
         }
         const aphrodite = this.players.find((player) => player.isCorporation(CardName_1.CardName.APHRODITE));
         if (aphrodite !== undefined) {
@@ -859,7 +869,7 @@ class Game {
                 player.production.add(Resource_1.Resource.HEAT, 1, { log: true });
             }
             TurmoilHandler_1.TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter_1.GlobalParameter.TEMPERATURE, steps);
-            player.increaseTerraformRatingSteps(steps);
+            player.increaseTerraformRating(steps);
         }
         if (this.temperature < 0 && this.temperature + steps * 2 >= 0) {
             this.defer(new PlaceOceanTile_1.PlaceOceanTile(player, { title: 'Select space for ocean from temperature increase' }));
@@ -980,13 +990,10 @@ class Game {
     grantSpaceBonuses(player, space) {
         const bonuses = mnemonist_1.MultiSet.from(space.bonus);
         bonuses.forEachMultiplicity((count, bonus) => {
-            this.grantSpaceBonus(player, bonus, count, space);
+            this.grantSpaceBonus(player, bonus, count);
         });
     }
-    grantSpaceBonus(player, spaceBonus, count = 1, space) {
-        var _a;
-        if (player.isCorporation(CardName_1.CardName.SCAVENGERS) && ((_a = space === null || space === void 0 ? void 0 : space.tile) === null || _a === void 0 ? void 0 : _a.tileType) !== TileType_1.TileType.OCEAN)
-            count += 1;
+    grantSpaceBonus(player, spaceBonus, count = 1) {
         switch (spaceBonus) {
             case SpaceBonus_1.SpaceBonus.DRAW_CARD:
                 player.drawCard(count);
@@ -1184,7 +1191,7 @@ class Game {
         return (0, utils_1.addDays)(this.createdTime, days).getTime();
     }
     static deserialize(d) {
-        var _a, _b;
+        var _a, _b, _c;
         const gameOptions = d.gameOptions;
         gameOptions.bannedCards = (_a = gameOptions.bannedCards) !== null && _a !== void 0 ? _a : [];
         const players = d.players.map((element) => Player_1.Player.deserialize(element));
@@ -1264,6 +1271,7 @@ class Game {
         game.initialDraftIteration = d.initialDraftIteration;
         game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
         game.syndicatePirateRaider = d.syndicatePirateRaider;
+        game.gagarinBase = (_c = d.gagarinBase) !== null && _c !== void 0 ? _c : [];
         if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
             if (game.phase === Phase_1.Phase.INITIALDRAFTING) {
                 if (game.initialDraftIteration === 3) {

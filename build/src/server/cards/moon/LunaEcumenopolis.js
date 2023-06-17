@@ -74,7 +74,7 @@ class LunaEcumenopolis extends Card_1.Card {
         player.game.defer(new CustomPlaceMoonTile(player));
         player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
             const colonyRate = MoonExpansion_1.MoonExpansion.moonData(player.game).colonyRate;
-            player.increaseTerraformRatingSteps(Math.floor(colonyRate / 2));
+            player.increaseTerraformRating(Math.floor(colonyRate / 2));
             return undefined;
         }));
         return undefined;

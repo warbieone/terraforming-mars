@@ -27,7 +27,7 @@ class TerraformingGanymede extends Card_1.Card {
     }
     bespokePlay(player) {
         const steps = 1 + player.tags.count(Tag_1.Tag.JOVIAN);
-        player.increaseTerraformRatingSteps(steps, { log: true });
+        player.increaseTerraformRating(steps, { log: true });
         return undefined;
     }
 }

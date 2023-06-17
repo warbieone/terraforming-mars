@@ -24,7 +24,7 @@ class Midas extends Card_1.Card {
         });
     }
     bespokePlay(player) {
-        player.decreaseTerraformRatingSteps(7);
+        player.decreaseTerraformRating(7);
         return undefined;
     }
 }

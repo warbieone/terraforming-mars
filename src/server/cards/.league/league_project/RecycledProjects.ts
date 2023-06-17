@@ -5,8 +5,9 @@ import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
 import {CardRequirements} from '../../CardRequirements';
-import {Player} from '../../../Player';
 import {played} from '../../Options';
+import {IPlayer} from '../../../IPlayer';
+
 
 export class RecycledProjects extends Card implements IProjectCard {
   // author: ThreadPacifist
@@ -32,7 +33,7 @@ export class RecycledProjects extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
     const numBuildingTags = card.tags.filter((tag) => tag === Tag.BUILDING).length;
     const numSpaceTags = card.tags.filter((tag) => tag === Tag.SPACE).length;
     if (numBuildingTags > 0 || numSpaceTags > 0) player.steel += numBuildingTags + numSpaceTags;

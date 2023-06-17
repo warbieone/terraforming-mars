@@ -25,6 +25,7 @@ const Factorum_1 = require("./Factorum");
 const FieldCappedCity_1 = require("./FieldCappedCity");
 const GreatDamPromo_1 = require("./GreatDamPromo");
 const Harvest_1 = require("./Harvest");
+const HeadStart_1 = require("./HeadStart");
 const HiTechLab_1 = require("./HiTechLab");
 const ImportedNutrients_1 = require("./ImportedNutrients");
 const InterplanetaryTrade_1 = require("./InterplanetaryTrade");
@@ -57,6 +58,7 @@ const SnowAlgae_1 = require("./SnowAlgae");
 const Splice_1 = require("./Splice");
 const StanfordTorus_1 = require("./StanfordTorus");
 const SubCrustMeasurements_1 = require("./SubCrustMeasurements");
+const Supercapacitors_1 = require("./Supercapacitors");
 const TopsoilContract_1 = require("./TopsoilContract");
 exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     module: 'promo',
@@ -104,12 +106,14 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.OUTDOOR_SPORTS]: { Factory: OutdoorSports_1.OutdoorSports },
         [CardName_1.CardName.PSYCHE]: { Factory: _16Psyche_1.Psyche },
         [CardName_1.CardName.ROBOT_POLLINATORS]: { Factory: RobotPollinators_1.RobotPollinators },
+        [CardName_1.CardName.SUPERCAPACITORS]: { Factory: Supercapacitors_1.Supercapacitors },
     },
     preludeCards: {
         [CardName_1.CardName.NEW_PARTNER]: { Factory: NewPartner_1.NewPartner },
         [CardName_1.CardName.MERGER]: { Factory: Merger_1.Merger },
         [CardName_1.CardName.CORPORATE_ARCHIVES]: { Factory: CorporateArchives_1.CorporateArchives },
         [CardName_1.CardName.DOUBLE_DOWN]: { Factory: DoubleDown_1.DoubleDown, compatibility: 'prelude' },
+        [CardName_1.CardName.HEAD_START]: { Factory: HeadStart_1.HeadStart },
     },
     cardsToRemove: [
         CardName_1.CardName.DEIMOS_DOWN,

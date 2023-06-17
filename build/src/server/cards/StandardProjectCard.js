@@ -24,7 +24,7 @@ class StandardProjectCard extends Card_1.Card {
     }
     canAct(player) {
         const canPayWith = this.canPayWith(player);
-        return player.canAfford(this.cost - this.discount(player), Object.assign(Object.assign({}, canPayWith), { tr: this.tr, data: true, reserveUnits: MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, this) }));
+        return player.canAfford(this.cost - this.discount(player), Object.assign(Object.assign({}, canPayWith), { tr: this.tr, auroraiData: true, reserveUnits: MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, this) }));
     }
     canPayWith(_player) {
         return {};

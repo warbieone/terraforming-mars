@@ -10,7 +10,7 @@ class Tags {
     constructor(player) {
         this.player = player;
     }
-    getAllTags() {
+    countAllTags() {
         const counts = Tags.COUNTED_TAGS.map((tag) => {
             return { tag, count: this.count(tag, 'raw') };
         }).filter((tag) => tag.count > 0);
@@ -182,6 +182,9 @@ class Tags {
     }
     gainScienceTag() {
         this.player.scienceTagCount++;
+    }
+    numberOfCardsWithNoTags() {
+        return this.player.tableau.filter((card) => card.type !== CardType_1.CardType.EVENT && card.tags.every((tag) => tag === Tag_1.Tag.WILD)).length;
     }
 }
 exports.Tags = Tags;

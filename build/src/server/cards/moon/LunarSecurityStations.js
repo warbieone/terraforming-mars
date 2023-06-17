@@ -6,6 +6,7 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const Size_1 = require("../../../common/cards/render/Size");
+const Tag_1 = require("../../../common/cards/Tag");
 const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 class LunarSecurityStations extends Card_1.Card {
@@ -13,6 +14,7 @@ class LunarSecurityStations extends Card_1.Card {
         super({
             name: CardName_1.CardName.LUNAR_SECURITY_STATIONS,
             type: CardType_1.CardType.ACTIVE,
+            tags: [Tag_1.Tag.MOON],
             cost: 9,
             requirements: CardRequirements_1.CardRequirements.builder((b) => b.roadTiles(3, { all: Options_1.all })),
             behavior: {

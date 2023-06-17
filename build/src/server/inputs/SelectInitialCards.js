@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectInitialCards = void 0;
 const AndOptions_1 = require("./AndOptions");
-const PlayerInputType_1 = require("../../common/input/PlayerInputType");
 const SelectCard_1 = require("./SelectCard");
 const Merger_1 = require("../cards/promo/Merger");
 const CardName_1 = require("../../common/cards/CardName");
@@ -15,7 +14,7 @@ class SelectInitialCards extends AndOptions_1.AndOptions {
             return undefined;
         });
         this.player = player;
-        this.inputType = PlayerInputType_1.PlayerInputType.SELECT_INITIAL_CARDS;
+        this.inputType = 'initialCards';
         let corporation;
         this.title = ' ';
         this.buttonLabel = 'Start';

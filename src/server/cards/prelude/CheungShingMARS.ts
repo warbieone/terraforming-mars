@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+import {IPlayer} from '../../IPlayer';
 
 export class CheungShingMARS extends Card implements ICorporationCard {
   constructor() {
@@ -36,7 +36,7 @@ export class CheungShingMARS extends Card implements ICorporationCard {
       },
     });
   }
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (player.isCorporation(this.name)) {
       const tagCount = player.tags.cardTagCount(card, Tag.BUILDING);
       if (tagCount > 0) {

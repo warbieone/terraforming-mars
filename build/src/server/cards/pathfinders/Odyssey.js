@@ -36,11 +36,16 @@ class Odyssey extends Card_1.Card {
     availableEventCards(player) {
         this.checkLoops++;
         try {
-            return player.playedCards.filter((card) => {
-                return card.type === CardType_1.CardType.EVENT &&
-                    card.cost <= 16 &&
-                    player.canPlay(card);
-            });
+            const array = [];
+            for (const card of player.playedCards) {
+                if (card.type === CardType_1.CardType.EVENT && card.cost <= 16) {
+                    const details = player.canPlay(card);
+                    if (details !== false) {
+                        array.push({ card, details });
+                    }
+                }
+            }
+            return array;
         }
         finally {
             this.checkLoops--;

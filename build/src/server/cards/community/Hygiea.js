@@ -9,6 +9,11 @@ class Hygiea extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.HYGIEA,
+            description: [
+                'Choose opponent to discard 1 card',
+                'Steal 3 units of the listed type',
+                'Gain 3 M€',
+            ],
             buildType: ColonyBenefit_1.ColonyBenefit.OPPONENT_DISCARD,
             tradeType: ColonyBenefit_1.ColonyBenefit.STEAL_RESOURCES,
             tradeQuantity: [3, 3, 3, 3, 3, 3, 3],

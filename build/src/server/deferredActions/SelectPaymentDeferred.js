@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectPaymentDeferred = void 0;
 const SelectPayment_1 = require("../inputs/SelectPayment");
+const Payment_1 = require("../../common/inputs/Payment");
 const DeferredAction_1 = require("./DeferredAction");
-const Resource_1 = require("../../common/Resource");
 const CardName_1 = require("../../common/cards/CardName");
 class SelectPaymentDeferred extends DeferredAction_1.DeferredAction {
     constructor(player, amount, options = {}) {
@@ -39,7 +39,7 @@ class SelectPaymentDeferred extends DeferredAction_1.DeferredAction {
             if (this.player.megaCredits < this.amount) {
                 throw new Error(`Player does not have ${this.amount} M€`);
             }
-            this.player.deductResource(Resource_1.Resource.MEGACREDITS, this.amount);
+            this.player.pay(Payment_1.Payment.of({ megaCredits: this.amount }));
             (_b = (_a = this.options).afterPay) === null || _b === void 0 ? void 0 : _b.call(_a);
             return undefined;
         }
@@ -55,7 +55,7 @@ class SelectPaymentDeferred extends DeferredAction_1.DeferredAction {
                 floaters: false,
                 microbes: false,
                 science: false,
-                data: this.options.canUseData,
+                auroraiData: this.options.canUseData,
             });
             if (amountPaid < this.amount) {
                 throw new Error('Did not spend enough');

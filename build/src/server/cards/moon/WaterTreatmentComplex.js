@@ -7,11 +7,13 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
+const Tag_1 = require("../../../common/cards/Tag");
 class WaterTreatmentComplex extends Card_1.Card {
     constructor() {
         super({
             name: CardName_1.CardName.WATER_TREATMENT_COMPLEX,
             type: CardType_1.CardType.AUTOMATED,
+            tags: [Tag_1.Tag.MOON],
             cost: 12,
             requirements: CardRequirements_1.CardRequirements.builder((b) => b.habitatTiles(1, { all: Options_1.all })),
             reserveUnits: { titanium: 1 },

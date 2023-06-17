@@ -41,6 +41,9 @@ class LakefrontResorts extends Card_1.Card {
         player.oceanBonus = 3;
         return undefined;
     }
+    onDiscard(player) {
+        player.oceanBonus = 2;
+    }
     onTilePlaced(cardOwner, activePlayer, space) {
         if (Board_1.Board.isUncoveredOceanSpace(space)) {
             cardOwner.game.defer(new GainProduction_1.GainProduction(cardOwner, Resource_1.Resource.MEGACREDITS), cardOwner.id !== activePlayer.id ? DeferredAction_1.Priority.OPPONENT_TRIGGER : undefined);

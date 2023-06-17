@@ -11,6 +11,7 @@ class DeepSpaceOperations extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
             name: CardName_1.CardName.DEEP_SPACE_OPERATIONS,
+            tags: [Tag_1.Tag.SPACE],
             behavior: {
                 stock: { titanium: 4 },
                 drawCard: { count: 2, tag: Tag_1.Tag.SPACE, type: CardType_1.CardType.EVENT },

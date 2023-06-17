@@ -12,7 +12,6 @@ const PlaceMoonMineTile_1 = require("../moon/PlaceMoonMineTile");
 const PlaceMoonRoadTile_1 = require("../moon/PlaceMoonRoadTile");
 const PlaceOceanTile_1 = require("../deferredActions/PlaceOceanTile");
 const PlanetaryTracks_1 = require("../../common/pathfinders/PlanetaryTracks");
-const Player_1 = require("../Player");
 const Resource_1 = require("../../common/Resource");
 const CardResource_1 = require("../../common/CardResource");
 const SelectResourcesDeferred_1 = require("../deferredActions/SelectResourcesDeferred");
@@ -76,7 +75,7 @@ class PathfindersExpansion {
         const distance = lastSpace - space;
         if (distance === 0)
             return;
-        if (from instanceof Player_1.Player) {
+        if (typeof (from) === 'object') {
             game.log('${0} raised the ${1} planetary track ${2} step(s)', (b) => {
                 b.player(from).string(tag).number(distance);
             });
@@ -91,7 +90,7 @@ class PathfindersExpansion {
             data[tag] = space;
             const rewards = track.spaces[space];
             if (gainRewards) {
-                if (from instanceof Player_1.Player) {
+                if (typeof (from) === 'object') {
                     rewards.risingPlayer.forEach((reward) => {
                         PathfindersExpansion.grant(reward, from, tag);
                     });
@@ -102,7 +101,7 @@ class PathfindersExpansion {
                     });
                 });
                 if (rewards.mostTags.length > 0) {
-                    const players = PathfindersExpansion.playersWithMostTags(tag, game.getPlayers().slice(), (from instanceof Player_1.Player) ? from : undefined);
+                    const players = PathfindersExpansion.playersWithMostTags(tag, game.getPlayers().slice(), (typeof (from) === 'object') ? from : undefined);
                     rewards.mostTags.forEach((reward) => {
                         players.forEach((p) => {
                             PathfindersExpansion.grant(reward, p, tag);

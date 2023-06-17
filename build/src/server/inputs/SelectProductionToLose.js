@@ -2,13 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectProductionToLose = void 0;
 const PlayerInput_1 = require("../PlayerInput");
-const PlayerInputType_1 = require("../../common/input/PlayerInputType");
 const Units_1 = require("../../common/Units");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 const utils_1 = require("../../common/utils/utils");
 class SelectProductionToLose extends PlayerInput_1.BasePlayerInput {
     constructor(title, unitsToLose, player, cb, buttonLabel = 'Save') {
-        super(PlayerInputType_1.PlayerInputType.SELECT_PRODUCTION_TO_LOSE, title);
+        super('productionToLose', title);
         this.unitsToLose = unitsToLose;
         this.player = player;
         this.cb = cb;

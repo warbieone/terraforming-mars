@@ -42,6 +42,7 @@ const ExpeditionToTheSurfaceVenus_1 = require("./ExpeditionToTheSurfaceVenus");
 const ExperiencedMartians_1 = require("./ExperiencedMartians");
 const FlatMarsTheory_1 = require("./FlatMarsTheory");
 const FloaterUrbanism_1 = require("./FloaterUrbanism");
+const GagarinMobileBase_1 = require("./GagarinMobileBase");
 const GeologicalExpedition_1 = require("./GeologicalExpedition");
 const HabitatMarte_1 = require("./HabitatMarte");
 const HighTempSuperconductors_1 = require("./HighTempSuperconductors");
@@ -92,6 +93,7 @@ const SocialEvents_1 = require("./SocialEvents");
 const SoilDetoxification_1 = require("./SoilDetoxification");
 const Solarpedia_1 = require("./Solarpedia");
 const SolarStorm_1 = require("./SolarStorm");
+const SolBank_1 = require("./SolBank");
 const SoylentSeedlingSystems_1 = require("./SoylentSeedlingSystems");
 const SpaceDebrisCleaningOperation_1 = require("./SpaceDebrisCleaningOperation");
 const SpaceRelay_1 = require("./SpaceRelay");
@@ -102,6 +104,7 @@ const SurveyMission_1 = require("./SurveyMission");
 const TerraformingControlStation_1 = require("./TerraformingControlStation");
 const TerraformingRobots_1 = require("./TerraformingRobots");
 const TheNewSpaceRace_1 = require("./TheNewSpaceRace");
+const ThinkTank_1 = require("./ThinkTank");
 const ValuableGases_1 = require("./ValuableGases");
 const VeneraBase_1 = require("./VeneraBase");
 const VenusFirst_1 = require("./VenusFirst");
@@ -157,6 +160,7 @@ exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.EXPEDITION_TO_THE_SURFACE_VENUS]: { Factory: ExpeditionToTheSurfaceVenus_1.ExpeditionToTheSurfaceVenus, compatibility: 'venus' },
         [CardName_1.CardName.LAST_RESORT_INGENUITY]: { Factory: LastResortIngenuity_1.LastResortIngenuity },
         [CardName_1.CardName.CRASHLANDING]: { Factory: Crashlanding_1.Crashlanding, compatibility: 'ares' },
+        [CardName_1.CardName.THINK_TANK]: { Factory: ThinkTank_1.ThinkTank },
         [CardName_1.CardName.BOTANICAL_EXPERIENCE]: { Factory: BotanicalExperience_1.BotanicalExperience },
         [CardName_1.CardName.CRYPTOCURRENCY]: { Factory: Cryptocurrency_1.Cryptocurrency },
         [CardName_1.CardName.RICH_DEPOSITS]: { Factory: RichDeposits_1.RichDeposits },
@@ -193,11 +197,13 @@ exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.MARS_MATHS]: { Factory: MarsMaths_1.MarsMaths },
         [CardName_1.CardName.MARS_DIRECT]: { Factory: MarsDirect_1.MarsDirect, compatibility: 'pathfinders' },
         [CardName_1.CardName.MARTIAN_INSURANCE_GROUP]: { Factory: MartianInsuranceGroup_1.MartianInsuranceGroup, compatibility: 'pathfinders' },
+        [CardName_1.CardName.SOLBANK]: { Factory: SolBank_1.SolBank },
         [CardName_1.CardName.BIO_SOL]: { Factory: BioSol_1.BioSol },
         [CardName_1.CardName.AURORAI]: { Factory: Aurorai_1.Aurorai, compatibility: 'pathfinders' },
         [CardName_1.CardName.COLLEGIUM_COPERNICUS]: { Factory: CollegiumCopernicus_1.CollegiumCopernicus, compatibility: 'colonies' },
         [CardName_1.CardName.ROBIN_HAULINGS]: { Factory: RobinHaulings_1.RobinHaulings, compatibility: ['venus', 'pathfinders'] },
         [CardName_1.CardName.ODYSSEY]: { Factory: Odyssey_1.Odyssey },
+        [CardName_1.CardName.GAGARIN_MOBILE_BASE]: { Factory: GagarinMobileBase_1.GagarinMobileBase },
         [CardName_1.CardName.MIND_SET_MARS]: { Factory: MindSetMars_1.MindSetMars, compatibility: 'turmoil' },
         [CardName_1.CardName.HABITAT_MARTE]: { Factory: HabitatMarte_1.HabitatMarte, compatibility: 'pathfinders' },
         [CardName_1.CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: { Factory: AdhaiHighOrbitConstructions_1.AdhaiHighOrbitConstructions, compatibility: 'colonies' },

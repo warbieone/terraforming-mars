@@ -11,6 +11,8 @@ import {LogHelper} from '../../LogHelper';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {Card} from '../Card';
+import {Player} from '../../Player';
+
 
 
 export class Celestic extends Card implements IActionCard, ICorporationCard {

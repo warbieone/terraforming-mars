@@ -25,7 +25,7 @@ class MindSetMars extends Card_1.Card {
                 addResources: 1,
             },
             metadata: {
-                cardNumber: 'PfC23',
+                cardNumber: 'PfC21',
                 description: 'You start with 44 M€ and 1 agenda resource to this card.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br;

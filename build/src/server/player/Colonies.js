@@ -14,6 +14,8 @@ const SelectOption_1 = require("../inputs/SelectOption");
 const SelectColony_1 = require("../inputs/SelectColony");
 const CollegiumCopernicus_1 = require("../cards/pathfinders/CollegiumCopernicus");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
+const DarksideSmugglersUnion_1 = require("../cards/moon/DarksideSmugglersUnion");
+const Payment_1 = require("../../common/inputs/Payment");
 class Colonies {
     constructor(player) {
         this.fleetSize = 1;
@@ -30,18 +32,15 @@ class Colonies {
     }
     coloniesTradeAction() {
         const game = this.player.game;
-        if (game.gameOptions.coloniesExtension) {
-            const openColonies = ColoniesHandler_1.ColoniesHandler.tradeableColonies(game);
-            if (openColonies.length > 0 &&
-                this.fleetSize > this.tradesThisGeneration) {
-                return this.tradeWithColony(openColonies);
-            }
+        if (game.gameOptions.coloniesExtension && this.canTrade()) {
+            return this.tradeWithColony(ColoniesHandler_1.ColoniesHandler.tradeableColonies(game));
         }
         return undefined;
     }
     tradeWithColony(openColonies) {
         const player = this.player;
         const handlers = [
+            new DarksideSmugglersUnion_1.TradeWithDarksideSmugglersUnion(player),
             new TitanFloatingLaunchPad_1.TradeWithTitanFloatingLaunchPad(player),
             new CollegiumCopernicus_1.TradeWithCollegiumCopernicus(player),
             new TradeWithEnergy(player),
@@ -142,7 +141,7 @@ class TradeWithTitanium {
         return (0, MessageBuilder_1.newMessage)('Pay ${0} titanium', (b) => b.number(this.tradeCost));
     }
     trade(colony) {
-        this.player.deductResource(Resource_1.Resource.TITANIUM, this.tradeCost);
+        this.player.pay(Payment_1.Payment.of({ titanium: this.tradeCost }));
         this.player.game.log('${0} spent ${1} titanium to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
         colony.trade(this.player);
     }

@@ -2,12 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectCard = void 0;
 const PlayerInput_1 = require("../PlayerInput");
-const PlayerInputType_1 = require("../../common/input/PlayerInputType");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 class SelectCard extends PlayerInput_1.BasePlayerInput {
     constructor(title, buttonLabel = 'Save', cards, cb, config) {
         var _a, _b, _c, _d, _e;
-        super(PlayerInputType_1.PlayerInputType.SELECT_CARD, title);
+        super('card', title);
         this.cards = cards;
         this.cb = cb;
         this.config = {

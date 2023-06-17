@@ -17,6 +17,7 @@ const DeferredAction_1 = require("../deferredActions/DeferredAction");
 const SelectOption_1 = require("../inputs/SelectOption");
 const OrOptions_1 = require("../inputs/OrOptions");
 const mnemonist_1 = require("mnemonist");
+const SendDelegateToArea_1 = require("../deferredActions/SendDelegateToArea");
 exports.ALL_PARTIES = [
     { partyName: PartyName_1.PartyName.MARS, Factory: MarsFirst_1.MarsFirst },
     { partyName: PartyName_1.PartyName.SCIENTISTS, Factory: Scientists_1.Scientists },
@@ -212,7 +213,7 @@ class Turmoil {
                 steps += 1;
             game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
                 if (steps > 0) {
-                    player.increaseTerraformRatingSteps(steps);
+                    player.increaseTerraformRating(steps);
                     game.log('${0} is the new chairman and gains ${1} TR', (b) => b.player(player).number(steps));
                 }
                 else {
@@ -317,6 +318,25 @@ class Turmoil {
             }
         });
         return victory;
+    }
+    getSendDelegateInput(player) {
+        if (this.hasDelegatesInReserve(player.id)) {
+            let sendDelegate;
+            if (!this.usedFreeDelegateAction.has(player.id)) {
+                sendDelegate = new SendDelegateToArea_1.SendDelegateToArea(player, 'Send a delegate in an area (from lobby)', { freeStandardAction: true });
+            }
+            else if (player.isCorporation(CardName_1.CardName.INCITE) && player.canAfford(3)) {
+                sendDelegate = new SendDelegateToArea_1.SendDelegateToArea(player, 'Send a delegate in an area (3 M€)', { cost: 3 });
+            }
+            else if (player.canAfford(5)) {
+                sendDelegate = new SendDelegateToArea_1.SendDelegateToArea(player, 'Send a delegate in an area (5 M€)', { cost: 5 });
+            }
+            if (sendDelegate) {
+                const input = sendDelegate.execute();
+                return input;
+            }
+        }
+        return undefined;
     }
     serialize() {
         var _a, _b;

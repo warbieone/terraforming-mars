@@ -468,6 +468,8 @@ var CardName;
     CardName["DOUBLE_DOWN"] = "Double Down";
     CardName["PSYCHE"] = "16 Psyche";
     CardName["ROBOT_POLLINATORS"] = "Robot Pollinators";
+    CardName["HEAD_START"] = "Head Start";
+    CardName["SUPERCAPACITORS"] = "Supercapacitors";
     CardName["AGRICOLA_INC"] = "Agricola Inc";
     CardName["CURIOSITY_II"] = "Curiosity II";
     CardName["INCITE"] = "Incite";

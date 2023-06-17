@@ -9,6 +9,11 @@ class Ceres extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.CERES,
+            description: [
+                'Gain 1 steel production',
+                'Gain n steel',
+                'Gain 2 steel',
+            ],
             buildType: ColonyBenefit_1.ColonyBenefit.GAIN_PRODUCTION,
             buildResource: Resource_1.Resource.STEEL,
             tradeType: ColonyBenefit_1.ColonyBenefit.GAIN_RESOURCES,

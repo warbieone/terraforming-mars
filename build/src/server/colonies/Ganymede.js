@@ -9,6 +9,11 @@ class Ganymede extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.GANYMEDE,
+            description: [
+                'Gain 1 plant production',
+                'Gain n plants',
+                'Gain 1 plant',
+            ],
             buildType: ColonyBenefit_1.ColonyBenefit.GAIN_PRODUCTION,
             buildResource: Resource_1.Resource.PLANTS,
             tradeType: ColonyBenefit_1.ColonyBenefit.GAIN_RESOURCES,

@@ -14,7 +14,7 @@ class TollStation extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.TOLL_STATION,
             tags: [Tag_1.Tag.SPACE],
-            cost: 18,
+            cost: 12,
             metadata: {
                 cardNumber: '099',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -26,7 +26,7 @@ class TollStation extends Card_1.Card {
             },
         });
     }
-    play(player) {
+    bespokePlay(player) {
         if (player.game.isSoloMode()) {
             return undefined;
         }

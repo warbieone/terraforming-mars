@@ -97,10 +97,10 @@ class ProjectWorkshop extends Card_1.Card {
     convertCardPointsToTR(player, card) {
         const steps = card.getVictoryPoints(player);
         if (steps > 0) {
-            player.increaseTerraformRatingSteps(steps, { log: true });
+            player.increaseTerraformRating(steps, { log: true });
         }
         else if (steps < 0) {
-            player.decreaseTerraformRatingSteps(-steps, { log: true });
+            player.decreaseTerraformRating(-steps, { log: true });
         }
     }
 }

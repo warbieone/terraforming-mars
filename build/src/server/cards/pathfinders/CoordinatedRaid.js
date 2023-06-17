@@ -26,8 +26,8 @@ class CoordinatedRaid extends Card_1.Card {
         return player.colonies.getFleetSize() > player.colonies.tradesThisGeneration;
     }
     bespokePlay(player) {
-        const colonies = player.game.colonies.filter((colony) => colony.isActive);
-        return new SelectColony_1.SelectColony('Select colony tile for trade', 'trade', colonies, (colony) => {
+        const activeColonies = player.game.colonies.filter((colony) => colony.isActive);
+        return new SelectColony_1.SelectColony('Select colony tile for trade', 'trade', activeColonies, (colony) => {
             colony.trade(player, { selfishTrade: true });
             return undefined;
         });

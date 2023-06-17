@@ -16,7 +16,6 @@ const Resource_1 = require("../common/Resource");
 const CardResource_1 = require("../common/CardResource");
 const SelectCard_1 = require("./inputs/SelectCard");
 const SellPatentsStandardProject_1 = require("./cards/base/standardProjects/SellPatentsStandardProject");
-const SendDelegateToArea_1 = require("./deferredActions/SendDelegateToArea");
 const DeferredAction_1 = require("./deferredActions/DeferredAction");
 const SelectPaymentDeferred_1 = require("./deferredActions/SelectPaymentDeferred");
 const SelectProjectCardToPlay_1 = require("./inputs/SelectProjectCardToPlay");
@@ -50,6 +49,9 @@ const CeoExtension_1 = require("./CeoExtension");
 const ICeoCard_1 = require("./cards/ceos/ICeoCard");
 const MessageBuilder_1 = require("./logs/MessageBuilder");
 const calculateVictoryPoints_1 = require("./game/calculateVictoryPoints");
+const Supercapacitors_1 = require("./cards/promo/Supercapacitors");
+const IPlayer_1 = require("./IPlayer");
+const utils_1 = require("../common/utils/utils");
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 class Player {
     constructor(name, color, beginner, handicap = 0, id) {
@@ -164,13 +166,7 @@ class Player {
     getTerraformRating() {
         return this.terraformRating;
     }
-    decreaseTerraformRating(opts = {}) {
-        this.decreaseTerraformRatingSteps(1, opts);
-    }
-    increaseTerraformRating(opts = {}) {
-        this.increaseTerraformRatingSteps(1, opts);
-    }
-    increaseTerraformRatingSteps(steps, opts = {}) {
+    increaseTerraformRating(steps = 1, opts = {}) {
         const raiseRating = () => {
             this.terraformRating += steps;
             this.hasIncreasedTerraformRatingThisGeneration = true;
@@ -202,7 +198,7 @@ class Player {
             raiseRating();
         }
     }
-    decreaseTerraformRatingSteps(steps, opts = {}) {
+    decreaseTerraformRating(steps = 1, opts = {}) {
         this.terraformRating -= steps;
         if (opts.log === true) {
             this.game.log('${0} lost ${1} TR', (b) => b.player(this).number(steps));
@@ -244,7 +240,7 @@ class Player {
                 .string(resource)
                 .string(modifier)
                 .number(absAmount);
-            if (from instanceof Player) {
+            if ((0, IPlayer_1.isIPlayer)(from)) {
                 b.player(from);
             }
             else if (typeof (from) === 'object') {
@@ -290,11 +286,11 @@ class Player {
             this.resolveInsurance();
         }
     }
-    stealResource(resource, qty, from) {
+    stealResource(resource, qty, thief) {
         const qtyToSteal = Math.min(this.getResource(resource), qty);
         if (qtyToSteal > 0) {
-            this.deductResource(resource, qtyToSteal, { log: true, from: from, stealing: true });
-            from.addResource(resource, qtyToSteal);
+            this.deductResource(resource, qtyToSteal, { log: true, from: thief, stealing: true });
+            thief.addResource(resource, qtyToSteal);
         }
     }
     hasUnits(units) {
@@ -368,12 +364,6 @@ class Player {
     }
     productionIsProtected(attacker) {
         return attacker !== this && this.cardIsInEffect(CardName_1.CardName.PRIVATE_SECURITY);
-    }
-    getNoTagsCount() {
-        let noTagsCount = 0;
-        noTagsCount += this.corporations.filter((card) => card.type !== CardType_1.CardType.EVENT && card.tags.every((tag) => tag === Tag_1.Tag.WILD)).length;
-        noTagsCount += this.playedCards.filter((card) => card.type !== CardType_1.CardType.EVENT && card.tags.every((tag) => tag === Tag_1.Tag.WILD)).length;
-        return noTagsCount;
     }
     resolveInsurance() {
         const game = this.game;
@@ -470,11 +460,7 @@ class Player {
         return result;
     }
     getResourceCount(resource) {
-        let count = 0;
-        this.getCardsWithResources(resource).forEach((card) => {
-            count += card.resourceCount;
-        });
-        return count;
+        return (0, utils_1.sum)(this.getCardsWithResources(resource).map((card) => card.resourceCount));
     }
     deferInputCb(result) {
         this.defer(result, DeferredAction_1.Priority.DEFAULT);
@@ -508,18 +494,32 @@ class Player {
         this.removingPlayers = [];
         this.turmoilPolicyActionUsed = false;
         this.politicalAgendasActionUsedCount = 0;
+        if (this.cardIsInEffect(CardName_1.CardName.SUPERCAPACITORS)) {
+            Supercapacitors_1.Supercapacitors.onProduction(this);
+        }
+        else {
+            this.heat += this.energy;
+            this.energy = 0;
+            this.finishProductionPhase();
+        }
+    }
+    finishProductionPhase() {
         this.megaCredits += this.production.megacredits + this.terraformRating;
-        this.heat += this.energy;
-        this.heat += this.production.heat;
-        this.energy = this.production.energy;
-        this.titanium += this.production.titanium;
         this.steel += this.production.steel;
+        this.titanium += this.production.titanium;
         this.plants += this.production.plants;
+        this.energy += this.production.energy;
+        this.heat += this.production.heat;
         this.corporations.forEach((card) => { var _a; return (_a = card.onProductionPhase) === null || _a === void 0 ? void 0 : _a.call(card, this); });
         for (const card of this.playedCards) {
             if ((0, ICeoCard_1.isCeoCard)(card)) {
                 card.opgActionIsActive = false;
             }
+        }
+        const solBank = this.getCorporation(CardName_1.CardName.SOLBANK);
+        if (solBank !== undefined && solBank.resourceCount > 0) {
+            this.megaCredits += solBank.resourceCount;
+            solBank.resourceCount = 0;
         }
     }
     doneWorldGovernmentTerraforming() {
@@ -683,7 +683,7 @@ class Player {
             floaters: card.tags.includes(Tag_1.Tag.VENUS),
             microbes: card.tags.includes(Tag_1.Tag.PLANT),
             science: card.tags.includes(Tag_1.Tag.MOON),
-            data: card.type === CardType_1.CardType.STANDARD_PROJECT,
+            auroraiData: card.type === CardType_1.CardType.STANDARD_PROJECT,
         };
     }
     payMegacreditsDeferred(cost, title, afterPay) {
@@ -739,15 +739,17 @@ class Player {
         if (payment.heat > 0) {
             this.defer(this.spendHeat(payment.heat));
         }
-        for (const playedCard of this.playedCards) {
-            if (playedCard.name === CardName_1.CardName.PSYCHROPHILES) {
-                this.removeResourceFrom(playedCard, payment.microbes);
-            }
-            if (playedCard.name === CardName_1.CardName.DIRIGIBLES) {
-                this.removeResourceFrom(playedCard, payment.floaters);
-            }
-            if (playedCard.name === CardName_1.CardName.LUNA_ARCHIVES) {
-                this.removeResourceFrom(playedCard, payment.science);
+        if (payment.microbes > 0 || payment.floaters > 0 || payment.science > 0) {
+            for (const playedCard of this.playedCards) {
+                if (playedCard.name === CardName_1.CardName.PSYCHROPHILES) {
+                    this.removeResourceFrom(playedCard, payment.microbes);
+                }
+                if (playedCard.name === CardName_1.CardName.DIRIGIBLES) {
+                    this.removeResourceFrom(playedCard, payment.floaters);
+                }
+                if (playedCard.name === CardName_1.CardName.LUNA_ARCHIVES) {
+                    this.removeResourceFrom(playedCard, payment.science);
+                }
             }
         }
         if (payment.seeds > 0) {
@@ -756,11 +758,17 @@ class Player {
                 throw new Error('Cannot pay with seeds without ' + CardName_1.CardName.SOYLENT_SEEDLING_SYSTEMS);
             this.removeResourceFrom(soylent, payment.seeds);
         }
-        if (payment.data > 0) {
+        if (payment.auroraiData > 0) {
             const aurorai = this.getCorporation(CardName_1.CardName.AURORAI);
             if (aurorai === undefined)
                 throw new Error('Cannot pay with data without ' + CardName_1.CardName.AURORAI);
-            this.removeResourceFrom(aurorai, payment.data);
+            this.removeResourceFrom(aurorai, payment.auroraiData);
+        }
+        if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
+            const solBank = this.getCorporation(CardName_1.CardName.SOLBANK);
+            if (solBank !== undefined) {
+                this.addResourceTo(solBank, { qty: 1, log: true });
+            }
         }
     }
     playCard(selectedCard, payment, cardAction = 'add') {
@@ -1029,7 +1037,17 @@ class Player {
                 candidateCards.push(targetCard.card);
             }
         }
-        return candidateCards.filter((card) => this.canPlay(card));
+        const playableCards = [];
+        for (const card of candidateCards) {
+            const canPlay = this.canPlay(card);
+            if (canPlay !== false) {
+                playableCards.push({
+                    card,
+                    details: canPlay,
+                });
+            }
+        }
+        return playableCards;
     }
     canAffordCard(card) {
         const trSource = card.tr || (card.behavior !== undefined ? (0, BehaviorExecutor_1.getBehaviorExecutor)().toTRSource(card.behavior) : undefined);
@@ -1039,10 +1057,18 @@ class Player {
         return this.canAffordCard(card) && this.simpleCanPlay(card);
     }
     simpleCanPlay(card) {
-        if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
+        let satisfies = true;
+        if (card.requirements !== undefined) {
+            satisfies = card.requirements.satisfies(this);
+            if (satisfies === false) {
+                return false;
+            }
+        }
+        const canPlay = card.canPlay(this);
+        if (canPlay === false) {
             return false;
         }
-        return card.canPlay(this);
+        return typeof (canPlay) === 'object' ? canPlay : satisfies;
     }
     maxSpendable(reserveUnits = Units_1.Units.EMPTY) {
         return {
@@ -1054,7 +1080,7 @@ class Player {
             microbes: this.getSpendableMicrobes(),
             science: this.getSpendableScienceResources(),
             seeds: this.getSpendableSeedResources(),
-            data: this.getSpendableData(),
+            auroraiData: this.getSpendableData(),
         };
     }
     canSpend(payment, reserveUnits) {
@@ -1072,7 +1098,7 @@ class Player {
             floaters: constants_1.DEFAULT_FLOATERS_VALUE,
             science: 1,
             seeds: constants.SEED_VALUE,
-            data: constants.DATA_VALUE,
+            auroraiData: constants.DATA_VALUE,
         };
         const usable = {
             megaCredits: true,
@@ -1083,7 +1109,7 @@ class Player {
             floaters: (_d = options === null || options === void 0 ? void 0 : options.floaters) !== null && _d !== void 0 ? _d : false,
             science: (_e = options === null || options === void 0 ? void 0 : options.science) !== null && _e !== void 0 ? _e : false,
             seeds: (_f = options === null || options === void 0 ? void 0 : options.seeds) !== null && _f !== void 0 ? _f : false,
-            data: (_g = options === null || options === void 0 ? void 0 : options.data) !== null && _g !== void 0 ? _g : false,
+            auroraiData: (_g = options === null || options === void 0 ? void 0 : options.auroraiData) !== null && _g !== void 0 ? _g : false,
         };
         if (usable.titanium === false && payment.titanium > 0 && this.isCorporation(CardName_1.CardName.LUNA_TRADE_FEDERATION)) {
             usable.titanium = true;
@@ -1141,6 +1167,14 @@ class Player {
         const standardProjects = this.getStandardProjects();
         return new SelectCard_1.SelectCard('Standard projects', 'Confirm', standardProjects, (card) => card[0].action(this), { enabled: standardProjects.map((card) => card.canAct(this)) });
     }
+    headStartIsInEffect() {
+        if (this.game.phase === Phase_1.Phase.PRELUDES && this.cardIsInEffect(CardName_1.CardName.HEAD_START)) {
+            if (this.actionsTakenThisRound < 2) {
+                return true;
+            }
+        }
+        return false;
+    }
     takeAction(saveBeforeTakingAction = true) {
         const game = this.game;
         if (game.deferredActions.length > 0) {
@@ -1149,43 +1183,45 @@ class Player {
         }
         if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption)
             game.save();
-        if (this.preludeCardsInHand.length > 0) {
-            game.phase = Phase_1.Phase.PRELUDES;
-            if (this.getPlayablePreludeCards().length === 0) {
-                LogHelper_1.LogHelper.logDiscardedCards(game, this.preludeCardsInHand);
-                this.preludeCardsInHand = [];
+        const headStartIsInEffect = this.headStartIsInEffect();
+        if (!headStartIsInEffect) {
+            if (this.preludeCardsInHand.length > 0) {
+                game.phase = Phase_1.Phase.PRELUDES;
+                if (this.getPlayablePreludeCards().length === 0) {
+                    LogHelper_1.LogHelper.logDiscardedCards(game, this.preludeCardsInHand);
+                    this.preludeCardsInHand = [];
+                    game.playerIsFinishedTakingActions();
+                    return;
+                }
+                this.setWaitingFor(this.playPreludeCard(), () => {
+                    if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
+                        game.playerIsFinishedTakingActions();
+                        return;
+                    }
+                    this.takeAction();
+                });
+                return;
+            }
+            if (this.ceoCardsInHand.length > 0) {
+                game.phase = Phase_1.Phase.CEOS;
+                const playableCeoCards = this.getPlayableCeoCards();
+                for (let i = playableCeoCards.length - 1; i >= 0; i--) {
+                    const card = this.ceoCardsInHand[i];
+                    this.playCard(card);
+                }
+                this.ceoCardsInHand = [];
+                this.takeAction();
+            }
+            else {
+                game.phase = Phase_1.Phase.ACTION;
+            }
+            if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
+                this.actionsTakenThisRound = 0;
+                this.availableActionsThisRound = 2;
+                game.resettable = true;
                 game.playerIsFinishedTakingActions();
                 return;
             }
-            this.setWaitingFor(this.playPreludeCard(), () => {
-                if (this.preludeCardsInHand.length === 1) {
-                    this.takeAction();
-                }
-                else {
-                    game.playerIsFinishedTakingActions();
-                }
-            });
-            return;
-        }
-        else if (this.ceoCardsInHand.length > 0) {
-            game.phase = Phase_1.Phase.CEOS;
-            const playableCeoCards = this.getPlayableCeoCards();
-            for (let i = playableCeoCards.length - 1; i >= 0; i--) {
-                const card = this.ceoCardsInHand[i];
-                this.playCard(card);
-            }
-            this.ceoCardsInHand = [];
-            this.takeAction();
-        }
-        else {
-            game.phase = Phase_1.Phase.ACTION;
-        }
-        if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= this.availableActionsThisRound)) {
-            this.actionsTakenThisRound = 0;
-            this.availableActionsThisRound = 2;
-            game.resettable = true;
-            game.playerIsFinishedTakingActions();
-            return;
         }
         const vitor = this.getCorporation(CardName_1.CardName.VITOR);
         if (vitor !== undefined && this.game.allAwardsFunded()) {
@@ -1201,7 +1237,9 @@ class Player {
                 });
                 orOptions.options.push(option);
             });
-            orOptions.options.push(this.passOption());
+            if (!headStartIsInEffect) {
+                orOptions.options.push(this.passOption());
+            }
             this.setWaitingFor(orOptions, () => {
                 this.actionsTakenThisRound++;
                 this.actionsTakenThisGame++;
@@ -1270,23 +1308,9 @@ class Player {
             action.options.push(coloniesTradeAction);
         }
         Turmoil_1.Turmoil.ifTurmoil(this.game, (turmoil) => {
-            if (turmoil.hasDelegatesInReserve(this.id)) {
-                let sendDelegate;
-                if (!turmoil.usedFreeDelegateAction.has(this.id)) {
-                    sendDelegate = new SendDelegateToArea_1.SendDelegateToArea(this, 'Send a delegate in an area (from lobby)', { freeStandardAction: true });
-                }
-                else if (this.isCorporation(CardName_1.CardName.INCITE) && this.canAfford(3)) {
-                    sendDelegate = new SendDelegateToArea_1.SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', { cost: 3 });
-                }
-                else if (this.canAfford(5)) {
-                    sendDelegate = new SendDelegateToArea_1.SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', { cost: 5 });
-                }
-                if (sendDelegate) {
-                    const input = sendDelegate.execute();
-                    if (input !== undefined) {
-                        action.options.push(input);
-                    }
-                }
+            const input = turmoil.getSendDelegateInput(this);
+            if (input !== undefined) {
+                action.options.push(input);
             }
         });
         if (this.game.getPlayers().length > 1 &&
@@ -1452,7 +1476,7 @@ class Player {
         return result;
     }
     static deserialize(d) {
-        var _a, _b, _c, _d;
+        var _a, _b;
         const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
         const cardFinder = new CardFinder_1.CardFinder();
         player.actionsTakenThisGame = d.actionsTakenThisGame;
@@ -1492,7 +1516,7 @@ class Player {
         player.titanium = d.titanium;
         player.titaniumValue = d.titaniumValue;
         player.totalDelegatesPlaced = d.totalDelegatesPlaced;
-        player.colonies.tradesThisGeneration = (_b = (_a = d.tradesThisTurn) !== null && _a !== void 0 ? _a : d.tradesThisGeneration) !== null && _b !== void 0 ? _b : 0;
+        player.colonies.tradesThisGeneration = d.tradesThisGeneration;
         player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
         player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
         player.lastCardPlayed = d.lastCardPlayed;
@@ -1511,11 +1535,11 @@ class Player {
                 if (corporation.resourceCount !== undefined) {
                     card.resourceCount = corporation.resourceCount;
                 }
-                (_c = card.deserialize) === null || _c === void 0 ? void 0 : _c.call(card, corporation);
+                (_a = card.deserialize) === null || _a === void 0 ? void 0 : _a.call(card, corporation);
                 player.corporations.push(card);
             }
         }
-        player.pendingInitialActions = cardFinder.corporationCardsFromJSON((_d = d.pendingInitialActions) !== null && _d !== void 0 ? _d : []);
+        player.pendingInitialActions = cardFinder.corporationCardsFromJSON((_b = d.pendingInitialActions) !== null && _b !== void 0 ? _b : []);
         player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
         player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
         player.dealtCeoCards = cardFinder.ceosFromJSON(d.dealtCeoCards);
@@ -1533,6 +1557,10 @@ class Player {
             return;
         const action = new DeferredAction_1.SimpleDeferredAction(this, () => input, priority);
         this.game.defer(action);
+    }
+    fizzle(card) {
+        this.game.log('${0} fizzled. ${1} gains 15 M€.', (b) => b.card(card).player(this));
+        this.addResource(Resource_1.Resource.MEGACREDITS, 15);
     }
 }
 exports.Player = Player;

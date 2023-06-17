@@ -10,6 +10,7 @@ const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const LogHelper_1 = require("../../LogHelper");
 const constants_1 = require("../../../common/constants");
+const PreludesExpansion_1 = require("../../preludes/PreludesExpansion");
 class Merger extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
@@ -27,12 +28,14 @@ class Merger extends PreludeCard_1.PreludeCard {
     bespokePlay(player) {
         const game = player.game;
         const dealtCorps = Merger.dealCorporations(player, game.corporationDeck);
+        LogHelper_1.LogHelper.logDrawnCards(player, dealtCorps, true);
         const enabled = dealtCorps.map((corp) => {
             return player.canAfford(Merger.mergerCost - this.spendableMegacredits(player, corp));
         });
         if (enabled.some((v) => v === true) === false) {
-            game.log('None of the four drawn corporation cards are affordable.');
+            PreludesExpansion_1.PreludesExpansion.fizzle(player, this);
             dealtCorps.forEach((corp) => game.corporationDeck.discard(corp));
+            return undefined;
         }
         game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
             return new SelectCard_1.SelectCard('Choose corporation card to play', 'Play', dealtCorps, ([card]) => {

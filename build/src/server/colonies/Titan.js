@@ -8,6 +8,11 @@ const CardResource_1 = require("../../common/CardResource");
 class Titan extends Colony_1.Colony {
     constructor() {
         super({
+            description: [
+                'Add 3 floaters to ANY card',
+                'Add n floaters to ANY card',
+                'Add 1 floater to ANY card',
+            ],
             name: ColonyName_1.ColonyName.TITAN,
             cardResource: CardResource_1.CardResource.FLOATER,
             buildType: ColonyBenefit_1.ColonyBenefit.ADD_RESOURCES_TO_CARD,

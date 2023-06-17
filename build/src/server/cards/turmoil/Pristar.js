@@ -34,7 +34,7 @@ class Pristar extends Card_1.Card {
         this.hasReceivedInfluenceBonus = false;
     }
     bespokePlay(player) {
-        player.decreaseTerraformRatingSteps(2);
+        player.decreaseTerraformRating(2);
         return undefined;
     }
     onProductionPhase(player) {

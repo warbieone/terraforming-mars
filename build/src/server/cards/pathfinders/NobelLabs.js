@@ -15,7 +15,7 @@ class NobelLabs extends Card_1.Card {
         super({
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.NOBEL_LABS,
-            cost: 9,
+            cost: 8,
             tags: [Tag_1.Tag.PLANT, Tag_1.Tag.ANIMAL, Tag_1.Tag.MARS],
             requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 4)),
             metadata: {

@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ValleyTrust = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
-const SelectCard_1 = require("../../inputs/SelectCard");
 const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
+const PreludesExpansion_1 = require("../../preludes/PreludesExpansion");
 class ValleyTrust extends Card_1.Card {
     constructor() {
         super({
@@ -37,19 +37,13 @@ class ValleyTrust extends Card_1.Card {
     }
     initialAction(player) {
         const game = player.game;
-        const cardsDrawn = [
+        const cards = [
             game.preludeDeck.draw(game),
             game.preludeDeck.draw(game),
             game.preludeDeck.draw(game),
         ];
-        return new SelectCard_1.SelectCard('Choose prelude card to play', 'Play', cardsDrawn, ([card]) => {
-            if (card.canPlay === undefined || card.canPlay(player)) {
-                return player.playCard(card);
-            }
-            else {
-                throw new Error('You cannot pay for this card');
-            }
-        });
+        PreludesExpansion_1.PreludesExpansion.chooseAndPlayPrelude(player, cards);
+        return undefined;
     }
 }
 exports.ValleyTrust = ValleyTrust;

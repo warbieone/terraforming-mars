@@ -4,11 +4,9 @@ exports.Server = void 0;
 const Color_1 = require("../../common/Color");
 const IProjectCard_1 = require("../cards/IProjectCard");
 const ICloneTagCard_1 = require("../cards/pathfinders/ICloneTagCard");
-const PlayerInputType_1 = require("../../common/input/PlayerInputType");
 const TileType_1 = require("../../common/TileType");
 const Phase_1 = require("../../common/Phase");
 const TurmoilModel_1 = require("../models/TurmoilModel");
-const Units_1 = require("../../common/Units");
 const Turmoil_1 = require("../turmoil/Turmoil");
 const PathfindersModel_1 = require("./PathfindersModel");
 const MoonExpansion_1 = require("../moon/MoonExpansion");
@@ -55,7 +53,7 @@ class Server {
             passedPlayers: game.getPassedPlayers(),
             pathfinders: (0, PathfindersModel_1.createPathfindersModel)(game),
             phase: game.phase,
-            spaces: this.getSpaces(game.board),
+            spaces: this.getSpaces(game.board, game.gagarinBase),
             spectatorId: game.spectatorId,
             temperature: game.getTemperature(),
             isTerraformed: game.marsIsTerraformed(),
@@ -103,8 +101,6 @@ class Server {
                 resources: targetCard.resourceCount,
                 name: targetCard.card.name,
                 calculatedCost: player.getCardCost(targetCard.card),
-                isDisabled: false,
-                reserveUnits: Units_1.Units.EMPTY,
                 isSelfReplicatingRobotsCard: true,
             };
             return model;
@@ -181,7 +177,7 @@ class Server {
             floaters: undefined,
             science: undefined,
             seeds: undefined,
-            data: undefined,
+            auroraiData: undefined,
             coloniesModel: undefined,
             payProduction: undefined,
             aresData: undefined,
@@ -191,9 +187,9 @@ class Server {
             showReset: player.game.inputsThisRound > 0 && player.game.resettable === true && player.game.phase === Phase_1.Phase.ACTION,
         };
         switch (waitingFor.inputType) {
-            case PlayerInputType_1.PlayerInputType.AND_OPTIONS:
-            case PlayerInputType_1.PlayerInputType.OR_OPTIONS:
-            case PlayerInputType_1.PlayerInputType.SELECT_INITIAL_CARDS:
+            case 'and':
+            case 'or':
+            case 'initialCards':
                 playerInputModel.options = [];
                 if (waitingFor.options !== undefined) {
                     for (const option of waitingFor.options) {
@@ -207,9 +203,9 @@ class Server {
                     throw new Error('required options not defined');
                 }
                 break;
-            case PlayerInputType_1.PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY:
+            case 'projectCard':
                 const spctp = waitingFor;
-                playerInputModel.cards = this.getCards(player, spctp.cards, { showCalculatedCost: true, reserveUnits: spctp.reserveUnits });
+                playerInputModel.cards = this.getCards(player, spctp.cards, { showCalculatedCost: true, extras: spctp.extras });
                 playerInputModel.microbes = player.getSpendableMicrobes();
                 playerInputModel.floaters = player.getSpendableFloaters();
                 playerInputModel.canUseHeat = player.canUseHeatAsMegaCredits;
@@ -217,7 +213,7 @@ class Server {
                 playerInputModel.science = player.getSpendableScienceResources();
                 playerInputModel.seeds = player.getSpendableSeedResources();
                 break;
-            case PlayerInputType_1.PlayerInputType.SELECT_CARD:
+            case 'card':
                 const selectCard = waitingFor;
                 playerInputModel.cards = this.getCards(player, selectCard.cards, {
                     showCalculatedCost: selectCard.config.played === false || selectCard.config.played === CardName_1.CardName.SELF_REPLICATING_ROBOTS,
@@ -230,11 +226,11 @@ class Server {
                 playerInputModel.selectBlueCardAction = selectCard.config.selectBlueCardAction;
                 playerInputModel.showOwner = selectCard.config.showOwner === true;
                 break;
-            case PlayerInputType_1.PlayerInputType.SELECT_COLONY:
+            case 'colony':
                 const selectColony = waitingFor;
                 playerInputModel.coloniesModel = this.getColonyModel(player.game, selectColony.colonies, selectColony.showTileOnly);
                 break;
-            case PlayerInputType_1.PlayerInputType.SELECT_PAYMENT:
+            case 'payment':
                 const sp = waitingFor;
                 playerInputModel.amount = sp.amount;
                 playerInputModel.canUseSteel = sp.canUseSteel;
@@ -244,20 +240,20 @@ class Server {
                 playerInputModel.canUseSeeds = sp.canUseSeeds;
                 playerInputModel.seeds = player.getSpendableSeedResources();
                 playerInputModel.canUseData = sp.canUseData;
-                playerInputModel.data = player.getSpendableData();
+                playerInputModel.auroraiData = player.getSpendableData();
                 break;
-            case PlayerInputType_1.PlayerInputType.SELECT_PLAYER:
+            case 'player':
                 playerInputModel.players = waitingFor.players.map((player) => player.color);
                 break;
-            case PlayerInputType_1.PlayerInputType.SELECT_SPACE:
+            case 'space':
                 playerInputModel.availableSpaces = waitingFor.availableSpaces.map((space) => space.id);
                 break;
-            case PlayerInputType_1.PlayerInputType.SELECT_AMOUNT:
+            case 'amount':
                 playerInputModel.min = waitingFor.min;
                 playerInputModel.max = waitingFor.max;
                 playerInputModel.maxByDefault = waitingFor.maxByDefault;
                 break;
-            case PlayerInputType_1.PlayerInputType.SELECT_DELEGATE:
+            case 'delegate':
                 playerInputModel.players = waitingFor.players.map((player) => {
                     if (player === 'NEUTRAL') {
                         return 'NEUTRAL';
@@ -267,13 +263,13 @@ class Server {
                     }
                 });
                 break;
-            case PlayerInputType_1.PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE:
+            case 'party':
                 playerInputModel.availableParties = waitingFor.availableParties;
                 if (player.game !== undefined) {
                     playerInputModel.turmoil = (0, TurmoilModel_1.getTurmoilModel)(player.game);
                 }
                 break;
-            case PlayerInputType_1.PlayerInputType.SELECT_PRODUCTION_TO_LOSE:
+            case 'productionToLose':
                 const _player = waitingFor.player;
                 playerInputModel.payProduction = {
                     cost: waitingFor.unitsToLose,
@@ -287,7 +283,7 @@ class Server {
                     },
                 };
                 break;
-            case PlayerInputType_1.PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS:
+            case 'aresGlobalParameters':
                 AresHandler_1.AresHandler.ifAres(waitingFor.player.game, (aresData) => {
                     playerInputModel.aresData = aresData;
                 });
@@ -297,7 +293,7 @@ class Server {
     }
     static getCards(player, cards, options = {}) {
         return cards.map((card, index) => {
-            var _a;
+            var _a, _b;
             let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
             if (card.name === CardName_1.CardName.CRESCENT_RESEARCH_ASSOCIATION) {
                 discount = [{ tag: Tag_1.Tag.MOON, amount: player.tags.count(Tag_1.Tag.MOON) }];
@@ -305,18 +301,31 @@ class Server {
             if (card.name === CardName_1.CardName.MARS_DIRECT) {
                 discount = [{ tag: Tag_1.Tag.MARS, amount: player.tags.count(Tag_1.Tag.MARS) }];
             }
-            const isDisabled = (0, ICorporationCard_1.isICorporationCard)(card) ? (card.isDisabled || false) : (((_a = options.enabled) === null || _a === void 0 ? void 0 : _a[index]) === false);
+            let warning = card.warning;
+            const playCardMetadata = (_a = options === null || options === void 0 ? void 0 : options.extras) === null || _a === void 0 ? void 0 : _a.get(card.name);
+            if (typeof (playCardMetadata === null || playCardMetadata === void 0 ? void 0 : playCardMetadata.details) === 'object') {
+                const thinkTankResources = playCardMetadata === null || playCardMetadata === void 0 ? void 0 : playCardMetadata.details.thinkTankResources;
+                if ((thinkTankResources !== null && thinkTankResources !== void 0 ? thinkTankResources : 0) > 0) {
+                    warning = `Playing ${card.name} Consumes ${thinkTankResources} data from Think Tank`;
+                }
+            }
             const model = {
                 resources: options.showResources ? card.resourceCount : undefined,
                 name: card.name,
                 calculatedCost: options.showCalculatedCost ? ((0, IProjectCard_1.isIProjectCard)(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
-                isDisabled: isDisabled,
-                warning: card.warning,
-                reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units_1.Units.EMPTY,
+                warning: warning,
                 bonusResource: (0, IProjectCard_1.isIProjectCard)(card) ? card.bonusResource : undefined,
                 discount: discount,
                 cloneTag: (0, ICloneTagCard_1.isICloneTagCard)(card) ? card.cloneTag : undefined,
             };
+            const isDisabled = (0, ICorporationCard_1.isICorporationCard)(card) ? (card.isDisabled || false) : (((_b = options.enabled) === null || _b === void 0 ? void 0 : _b[index]) === false);
+            if (isDisabled === true) {
+                model.isDisabled = true;
+            }
+            const reserveUnits = playCardMetadata === null || playCardMetadata === void 0 ? void 0 : playCardMetadata.reserveUnits;
+            if (reserveUnits !== undefined) {
+                model.reserveUnits = reserveUnits;
+            }
             return model;
         });
     }
@@ -347,7 +356,7 @@ class Server {
             name: player.name,
             needsToDraft: player.needsToDraft,
             needsToResearch: !game.hasResearched(player),
-            noTagsCount: player.getNoTagsCount(),
+            noTagsCount: player.tags.numberOfCardsWithNoTags(),
             plants: player.plants,
             plantProduction: player.production.plants,
             protectedResources: Server.getResourceProtections(player),
@@ -357,7 +366,7 @@ class Server {
             steel: player.steel,
             steelProduction: player.production.steel,
             steelValue: player.getSteelValue(),
-            tags: player.tags.getAllTags(),
+            tags: player.tags.countAllTags(),
             terraformRating: player.getTerraformRating(),
             timer: player.timer.serialize(),
             titanium: player.titanium,
@@ -427,7 +436,7 @@ class Server {
         }
         return undefined;
     }
-    static getSpaces(board) {
+    static getSpaces(board, gagarin) {
         const volcanicSpaceIds = board.getVolcanicSpaceIds();
         const noctisCitySpaceIds = board.getNoctisCitySpaceId();
         return board.spaces.map((space) => {
@@ -453,6 +462,10 @@ class Server {
             }
             if (((_b = space.tile) === null || _b === void 0 ? void 0 : _b.rotated) === true) {
                 model.rotated = true;
+            }
+            const gagarinIndex = gagarin.indexOf(space.id);
+            if (gagarinIndex > -1) {
+                model.gagarin = gagarinIndex;
             }
             return model;
         });
@@ -515,7 +528,7 @@ class Server {
                 logisticsRate: moonData.logisticRate,
                 miningRate: moonData.miningRate,
                 colonyRate: moonData.colonyRate,
-                spaces: this.getSpaces(moonData.moon),
+                spaces: this.getSpaces(moonData.moon, []),
             };
         }, () => undefined);
     }

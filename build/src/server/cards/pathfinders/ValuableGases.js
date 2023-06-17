@@ -41,6 +41,11 @@ class ValuableGases extends PreludeCard_1.PreludeCard {
             return card.resourceType === CardResource_1.CardResource.FLOATER &&
                 card.type === CardType_1.CardType.ACTIVE &&
                 player.canAffordCard(card);
+        }).map((card) => {
+            return {
+                card: card,
+                details: true,
+            };
         });
         if (playableCards.length !== 0) {
             player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {

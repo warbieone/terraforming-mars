@@ -130,12 +130,8 @@ class SQLite {
         return __awaiter(this, void 0, void 0, function* () {
             const promise1 = this.asyncRun('INSERT into completed_game (game_id) values (?)', [gameId]);
             const promise2 = this.asyncRun('UPDATE games SET status = \'finished\' WHERE game_id = ?', [gameId]);
-            const promise3 = this.maintenance();
-            yield Promise.all([promise1, promise2, promise3]);
+            yield Promise.all([promise1, promise2]);
         });
-    }
-    maintenance() {
-        return Promise.all([this.purgeUnfinishedGames(), this.compressCompletedGames()]);
     }
     purgeUnfinishedGames(maxGameDays = process.env.MAX_GAME_DAYS) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -151,9 +147,10 @@ class SQLite {
                     const deleteParticipantsResult = yield this.asyncRun(`DELETE FROM participants WHERE game_id in ( ${placeholders} )`, [...gameIds]);
                     console.log(`Purged ${deleteParticipantsResult.changes} rows from participants`);
                 }
+                return gameIds;
             }
             else {
-                return Promise.resolve();
+                return Promise.resolve([]);
             }
         });
     }

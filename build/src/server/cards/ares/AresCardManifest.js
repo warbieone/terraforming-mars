@@ -69,6 +69,8 @@ exports.ARES_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         CardName_1.CardName.GREAT_DAM_PROMO,
         CardName_1.CardName.INDUSTRIAL_CENTER,
         CardName_1.CardName.LAVA_FLOWS,
+        CardName_1.CardName.MAGNETIC_FIELD_GENERATORS,
+        CardName_1.CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
         CardName_1.CardName.MINING_AREA,
         CardName_1.CardName.MINING_RIGHTS,
         CardName_1.CardName.MOHOLE_AREA,

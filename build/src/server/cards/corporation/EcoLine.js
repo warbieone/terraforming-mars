@@ -36,7 +36,7 @@ class EcoLine extends Card_1.Card {
             },
         });
     }
-    play(player) {
+    bespokePlay(player) {
         this.gainBonus(player, 1);
         return undefined;
     }

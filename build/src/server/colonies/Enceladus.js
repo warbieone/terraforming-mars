@@ -9,6 +9,11 @@ class Enceladus extends Colony_1.Colony {
     constructor() {
         super({
             name: ColonyName_1.ColonyName.ENCELADUS,
+            description: [
+                'Add 3 microbes to ANY card',
+                'Add n microbes to ANY card',
+                'Add 1 microbe to ANY card',
+            ],
             cardResource: CardResource_1.CardResource.MICROBE,
             buildType: ColonyBenefit_1.ColonyBenefit.ADD_RESOURCES_TO_CARD,
             buildQuantity: [3, 3, 3],

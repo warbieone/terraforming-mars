@@ -4,10 +4,12 @@ exports.AntidesertificationTechniques = void 0;
 const PreludeCard_1 = require("../prelude/PreludeCard");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
+const Tag_1 = require("../../../common/cards/Tag");
 class AntidesertificationTechniques extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
             name: CardName_1.CardName.ANTI_DESERTIFICATION_TECHNIQUES,
+            tags: [Tag_1.Tag.MICROBE, Tag_1.Tag.PLANT],
             behavior: {
                 production: { plants: 1, steel: 1 },
                 stock: { megacredits: 5 },

@@ -128,9 +128,6 @@ class LocalFilesystem {
         });
         return Promise.resolve(gameIds);
     }
-    restoreReferenceGame(_gameId) {
-        throw new Error('Does not work');
-    }
     saveGameResults(gameId, players, generations, gameOptions, scores) {
         const obj = { gameId, players, generations, gameOptions, scores };
         const text = JSON.stringify(obj, null, 2);
@@ -139,11 +136,8 @@ class LocalFilesystem {
     markFinished(_gameId) {
         return Promise.resolve();
     }
-    maintenance() {
-        return this.purgeUnfinishedGames();
-    }
     purgeUnfinishedGames() {
-        return Promise.resolve();
+        return Promise.resolve([]);
     }
     compressCompletedGames() {
         return Promise.resolve();

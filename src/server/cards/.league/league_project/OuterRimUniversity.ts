@@ -5,10 +5,11 @@ import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Priority, SimpleDeferredAction} from '../../../deferredActions/DeferredAction';
-import {Player} from '../../../Player';
 import { OrOptions } from '../../../../server/inputs/OrOptions';
 import { SelectOption } from '../../../../server/inputs/SelectOption';
 import {SelectCard} from '../../../inputs/SelectCard';
+import {IPlayer} from '../../../IPlayer';
+
 
 export class OuterRimUniversity extends Card implements IProjectCard {
   constructor() {
@@ -31,7 +32,7 @@ export class OuterRimUniversity extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
     const jovianTags = player.tags.cardTagCount(card, Tag.JOVIAN);
     for (let i = 0; i < jovianTags; i++) {
       player.game.defer(new SimpleDeferredAction(

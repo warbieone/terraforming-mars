@@ -98,6 +98,7 @@ class ColoniesProcessor {
         const clientMetadata = {
             module: (0, ColonyManifest_1.getColonyModule)(metadata.name),
             name: metadata.name,
+            description: metadata.description,
             buildType: metadata.buildType,
             buildQuantity: metadata.buildQuantity,
             buildResource: metadata.buildResource,

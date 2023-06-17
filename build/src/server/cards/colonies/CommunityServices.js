@@ -25,7 +25,7 @@ class CommunityServices extends Card_1.Card {
         });
     }
     bespokePlay(player) {
-        player.production.add(Resource_1.Resource.MEGACREDITS, player.getNoTagsCount() + 1, { log: true });
+        player.production.add(Resource_1.Resource.MEGACREDITS, player.tags.numberOfCardsWithNoTags() + 1, { log: true });
         return undefined;
     }
 }

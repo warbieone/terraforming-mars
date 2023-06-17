@@ -97,7 +97,8 @@ class AnOfferYouCantRefuse extends Card_1.Card {
                 if (!this.isReplaceableDelegate(delegate, player, party)) {
                     continue;
                 }
-                const option = new SelectOption_1.SelectOption((0, MessageBuilder_1.newMessage)('${0} / ${1}', (b) => b.party(party).playerId(delegate)), 'Select', () => {
+                const color = game.getPlayerById(delegate).color;
+                const option = new SelectOption_1.SelectOption((0, MessageBuilder_1.newMessage)('${0} / ${1}', (b) => b.party(party).playerColor(color)), 'Select', () => {
                     turmoil.replaceDelegateFromParty(delegate, player.id, party.name, game);
                     turmoil.checkDominantParty();
                     return this.moveToAnotherParty(game, party.name, player.id);

@@ -17,7 +17,7 @@ import {MatingSeason} from './league_project/MatingSeason';
 import {OuterRimUniversity} from './league_project/OuterRimUniversity';
 import {RecycledProjects} from './league_project/RecycledProjects';
 import {SaveOurShip} from './league_project/SaveOurShip';
-import {Scavengers} from './league_corporation/Scavengers';
+// import {Scavengers} from './league_corporation/Scavengers';
 import {SoilEnhancers} from './league_project/SoilEnhancers';
 import {SpaceDebrisCollection} from './league_project/SpaceDebrisCollection';
 import {SteelCasting} from './league_project/SteelCasting';
@@ -52,9 +52,9 @@ export const LEAGUE_CARD_MANIFEST = new ModuleManifest({
     [CardName.TITANIUM_ISOTOPES]: {Factory: TitaniumIsotopes},
     [CardName.WORLD_GOVERNMENT_PARTNERSHIP]: {Factory: WorldGovernmentPartnership},
   },
-  corporationCards: {
+/*   corporationCards: {
     [CardName.SCAVENGERS]: {Factory: Scavengers},
-  },
+  }, */
 
   cardsToRemove: [
     // projects

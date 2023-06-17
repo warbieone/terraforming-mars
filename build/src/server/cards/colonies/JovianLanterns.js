@@ -8,6 +8,7 @@ const CardResource_1 = require("../../../common/CardResource");
 const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const CardRenderer_1 = require("../render/CardRenderer");
+const Payment_1 = require("../../../common/inputs/Payment");
 class JovianLanterns extends Card_1.Card {
     constructor() {
         super({
@@ -42,8 +43,8 @@ class JovianLanterns extends Card_1.Card {
         return player.titanium > 0;
     }
     action(player) {
-        player.titanium--;
-        player.addResourceTo(this, 2);
+        player.pay(Payment_1.Payment.of({ titanium: 1 }));
+        player.addResourceTo(this, { qty: 2, log: true });
         return undefined;
     }
 }

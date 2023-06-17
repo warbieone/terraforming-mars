@@ -20,6 +20,7 @@ const DarksideIncubationPlant_1 = require("./DarksideIncubationPlant");
 const DarksideMeteorBombardment_1 = require("./DarksideMeteorBombardment");
 const DarksideMiningSyndicate_1 = require("./DarksideMiningSyndicate");
 const DarksideObservatory_1 = require("./DarksideObservatory");
+const DarksideSmugglersUnion_1 = require("./DarksideSmugglersUnion");
 const DeepLunarMining_1 = require("./DeepLunarMining");
 const EarthEmbassy_1 = require("./EarthEmbassy");
 const FirstLunarSettlement_1 = require("./FirstLunarSettlement");
@@ -86,6 +87,7 @@ const OrbitalPowerGrid_1 = require("./OrbitalPowerGrid");
 const PrideoftheEarthArkship_1 = require("./PrideoftheEarthArkship");
 const ProcessorFactory_1 = require("./ProcessorFactory");
 const RevoltingColonists_1 = require("./RevoltingColonists");
+const RoadPiracy_1 = require("./RoadPiracy");
 const RoverDriversUnion_1 = require("./RoverDriversUnion");
 const RustEatingBacteria_1 = require("./RustEatingBacteria");
 const SinusIridiumRoadNetwork_1 = require("./SinusIridiumRoadNetwork");
@@ -165,6 +167,7 @@ exports.MOON_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.REVOLTING_COLONISTS]: { Factory: RevoltingColonists_1.RevoltingColonists },
         [CardName_1.CardName.COSMIC_RADIATION]: { Factory: CosmicRadiation_1.CosmicRadiation },
         [CardName_1.CardName.OFF_WORLD_CITY_LIVING]: { Factory: OffWorldCityLiving_1.OffWorldCityLiving },
+        [CardName_1.CardName.ROAD_PIRACY]: { Factory: RoadPiracy_1.RoadPiracy },
         [CardName_1.CardName.LUNAR_MINE_URBANIZATION]: { Factory: LunarMineUrbanization_1.LunarMineUrbanization },
         [CardName_1.CardName.THORIUM_RUSH]: { Factory: ThoriumRush_1.ThoriumRush },
         [CardName_1.CardName.HE3_PRODUCTION_QUOTAS]: { Factory: HE3ProductionQuotas_1.HE3ProductionQuotas, compatibility: 'turmoil' },
@@ -187,6 +190,7 @@ exports.MOON_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.EARTH_EMBASSY]: { Factory: EarthEmbassy_1.EarthEmbassy },
         [CardName_1.CardName.ROVER_DRIVERS_UNION]: { Factory: RoverDriversUnion_1.RoverDriversUnion },
         [CardName_1.CardName.LTF_HEADQUARTERS]: { Factory: LTFHeadquarters_1.LTFHeadquarters, compatibility: 'colonies' },
+        [CardName_1.CardName.DARKSIDE_SMUGGLERS_UNION]: { Factory: DarksideSmugglersUnion_1.DarksideSmugglersUnion, compatibility: 'colonies' },
         [CardName_1.CardName.UNDERMOON_DRUG_LORDS_NETWORK]: { Factory: UndermoonDrugLordsNetwork_1.UndermoonDrugLordsNetwork },
         [CardName_1.CardName.LTF_PRIVILEGES]: { Factory: LTFPrivileges_1.LTFPrivileges },
         [CardName_1.CardName.GRAND_LUNA_ACADEMY]: { Factory: GrandLunaAcademy_1.GrandLunaAcademy },

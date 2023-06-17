@@ -4,8 +4,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
+import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
+
 
 export class Polyphemos extends Card implements ICorporationCard {
   constructor() {
@@ -39,8 +40,8 @@ export class Polyphemos extends Card implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
-    if (player.isCorporation(this.name) && card.cost >= 20) {
+  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+        if (player.isCorporation(this.name) && card.cost >= 20) {
       player.drawCard();
     }
   }

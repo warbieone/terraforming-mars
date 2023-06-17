@@ -37,7 +37,7 @@ class Faraday extends CeoCard_1.CeoCard {
     }
     countTags(player) {
         const record = {};
-        for (const entry of player.tags.getAllTags()) {
+        for (const entry of player.tags.countAllTags()) {
             record[entry.tag] = entry.count;
         }
         return record;

@@ -259,7 +259,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 4,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -1038,7 +1038,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 6,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -1122,7 +1122,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 13,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -1315,7 +1315,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 7,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -1709,7 +1709,7 @@
                     "isMax": true,
                     "isAny": false,
                     "amount": 5,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -1856,7 +1856,7 @@
                     "isMax": true,
                     "isAny": false,
                     "amount": 9,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -1965,7 +1965,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 3,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -2285,7 +2285,7 @@
                     "isMax": true,
                     "isAny": false,
                     "amount": 7,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -3607,7 +3607,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 4,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -4163,7 +4163,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 8,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -4935,7 +4935,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 6,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -5496,7 +5496,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 9,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -6127,7 +6127,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 2,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -6514,7 +6514,7 @@
                     "isMax": true,
                     "isAny": false,
                     "amount": 4,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -7195,7 +7195,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 12,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -7940,7 +7940,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 11,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -8483,7 +8483,7 @@
                     "isMax": true,
                     "isAny": false,
                     "amount": 6,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -8632,7 +8632,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 5,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -8768,7 +8768,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 6,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -10306,7 +10306,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 7,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -10364,7 +10364,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 4,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -10435,7 +10435,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 5,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -11352,7 +11352,7 @@
         "type": "corporation",
         "metadata": {
             "cardNumber": "R09",
-            "description": "You start with 8 titanium and 30 M€.",
+            "description": "You start with 8 titanium and 30 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a space tag. Take them into hand and discard the rest.",
             "renderData": {
                 "rows": [
                     [],
@@ -11378,7 +11378,7 @@
                         },
                         {
                             "type": "titanium",
-                            "amount": 10,
+                            "amount": 8,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -13938,7 +13938,7 @@
                     "isMax": true,
                     "isAny": false,
                     "amount": 8,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -17297,7 +17297,7 @@
         "tags": [
             "space"
         ],
-        "cost": 18,
+        "cost": 12,
         "type": "automated",
         "metadata": {
             "cardNumber": "099",
@@ -21552,7 +21552,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 4,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -21610,6 +21610,70 @@
                 "is": "root"
             },
             "description": "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "promo",
+        "name": "Supercapacitors",
+        "tags": [
+            "power",
+            "building"
+        ],
+        "cost": 4,
+        "type": "active",
+        "metadata": {
+            "cardNumber": "X46",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.",
+                            "size": "M",
+                            "isUppercase": false,
+                            "isBold": true
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Increase M€ production 1 step."
         },
         "productionBox": {
             "megacredits": 0,
@@ -23145,6 +23209,116 @@
         "compatibility": [
             "prelude"
         ]
+    },
+    {
+        "module": "promo",
+        "name": "Head Start",
+        "tags": [],
+        "cost": 0,
+        "type": "prelude",
+        "metadata": {
+            "cardNumber": "X43",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "steel",
+                            "amount": 2,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ],
+                    [
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "GAIN 2 STEEL.",
+                            "size": "XS",
+                            "isUppercase": false,
+                            "isBold": true
+                        }
+                    ],
+                    [
+                        {
+                            "type": "megacredits",
+                            "amount": 0,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": true,
+                            "showDigit": false,
+                            "size": "M",
+                            "amountInside": true
+                        }
+                    ],
+                    [
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "GAIN 2 MC PER PROJECT CARD YOU HAVE IN HAND.",
+                            "size": "XS",
+                            "isUppercase": true,
+                            "isBold": false
+                        }
+                    ],
+                    [
+                        {
+                            "type": "->",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "->",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        }
+                    ],
+                    [
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "IMMEDIATELY TAKE 2 ACTIONS.",
+                            "size": "XS",
+                            "isUppercase": true,
+                            "isBold": false
+                        }
+                    ],
+                    []
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "startingMegaCredits": 0,
+        "compatibility": []
     },
     {
         "module": "league",
@@ -25065,132 +25239,6 @@
             "energy": 0,
             "heat": 0
         },
-        "compatibility": []
-    },
-    {
-        "module": "league",
-        "name": "Scavengers",
-        "tags": [],
-        "cost": 0,
-        "type": "corporation",
-        "metadata": {
-            "cardNumber": "L421",
-            "description": "You start with 46 M€ and 1 of every other resource. As your first action, place the crashed space ship tile on mars.",
-            "renderData": {
-                "rows": [
-                    [
-                        {
-                            "type": "megacredits",
-                            "amount": 46,
-                            "is": "item",
-                            "multiplier": false,
-                            "clone": false,
-                            "cancelled": false,
-                            "questionMark": false,
-                            "showDigit": false,
-                            "amountInside": true,
-                            "size": "M"
-                        },
-                        {
-                            "type": "wild",
-                            "amount": 1,
-                            "is": "item",
-                            "multiplier": false,
-                            "clone": false,
-                            "cancelled": false,
-                            "questionMark": false
-                        },
-                        {
-                            "tile": 40,
-                            "hasSymbol": true,
-                            "isAres": false,
-                            "is": "tile"
-                        }
-                    ],
-                    [
-                        {
-                            "rows": [
-                                [
-                                    {
-                                        "rows": [
-                                            [
-                                                {
-                                                    "type": "text",
-                                                    "amount": -1,
-                                                    "is": "item",
-                                                    "multiplier": false,
-                                                    "clone": false,
-                                                    "cancelled": false,
-                                                    "questionMark": false,
-                                                    "text": "n",
-                                                    "size": "M",
-                                                    "isUppercase": false,
-                                                    "isBold": true
-                                                },
-                                                {
-                                                    "type": "wild",
-                                                    "amount": 1,
-                                                    "is": "item",
-                                                    "multiplier": false,
-                                                    "clone": false,
-                                                    "cancelled": false,
-                                                    "questionMark": false
-                                                }
-                                            ],
-                                            [
-                                                {
-                                                    "type": ":",
-                                                    "size": "M",
-                                                    "isIcon": false,
-                                                    "is": "symbol"
-                                                }
-                                            ],
-                                            [
-                                                {
-                                                    "type": "text",
-                                                    "amount": -1,
-                                                    "is": "item",
-                                                    "multiplier": false,
-                                                    "clone": false,
-                                                    "cancelled": false,
-                                                    "questionMark": false,
-                                                    "text": "(n+1)",
-                                                    "size": "M",
-                                                    "isUppercase": false,
-                                                    "isBold": true
-                                                },
-                                                {
-                                                    "type": "wild",
-                                                    "amount": 1,
-                                                    "is": "item",
-                                                    "multiplier": false,
-                                                    "clone": false,
-                                                    "cancelled": false,
-                                                    "questionMark": false
-                                                },
-                                                "Effect: When you place a standard (non ocean) tile on mars, gain an additional bonus of each type printed on the tile."
-                                            ]
-                                        ],
-                                        "is": "effect"
-                                    }
-                                ]
-                            ],
-                            "is": "corp-box-effect"
-                        }
-                    ]
-                ],
-                "is": "root"
-            }
-        },
-        "productionBox": {
-            "megacredits": 0,
-            "steel": 0,
-            "titanium": 0,
-            "plants": 0,
-            "energy": 0,
-            "heat": 0
-        },
-        "startingMegaCredits": 46,
         "compatibility": []
     },
     {
@@ -29600,7 +29648,31 @@
                                                     "amountInside": true,
                                                     "size": "M"
                                                 },
-                                                "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€."
+                                                {
+                                                    "type": "*",
+                                                    "size": "M",
+                                                    "isIcon": false,
+                                                    "is": "symbol"
+                                                },
+                                                {
+                                                    "type": "nbsp",
+                                                    "size": "M",
+                                                    "isIcon": true,
+                                                    "is": "symbol"
+                                                },
+                                                {
+                                                    "type": "megacredits",
+                                                    "amount": 3,
+                                                    "is": "item",
+                                                    "multiplier": false,
+                                                    "clone": false,
+                                                    "cancelled": false,
+                                                    "questionMark": false,
+                                                    "showDigit": false,
+                                                    "amountInside": true,
+                                                    "size": "M"
+                                                },
+                                                "Effect: Whenever Venus is terraformed 1 step, you gain 3 M€ and the player (not WGT) who raised it gain 2 M€."
                                             ]
                                         ],
                                         "is": "effect"
@@ -37671,7 +37743,7 @@
                     "isMax": true,
                     "isAny": false,
                     "amount": 4,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -45721,7 +45793,7 @@
                     "isMax": true,
                     "isAny": false,
                     "amount": 4,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -49273,7 +49345,9 @@
     {
         "module": "moon",
         "name": "New Colony Planning Initiaitives",
-        "tags": [],
+        "tags": [
+            "moon"
+        ],
         "cost": 6,
         "type": "automated",
         "requirements": {
@@ -49555,7 +49629,9 @@
     {
         "module": "moon",
         "name": "Subterranean Habitats",
-        "tags": [],
+        "tags": [
+            "moon"
+        ],
         "cost": 12,
         "type": "active",
         "metadata": {
@@ -49655,7 +49731,9 @@
     {
         "module": "moon",
         "name": "Improved Moon Concrete",
-        "tags": [],
+        "tags": [
+            "moon"
+        ],
         "cost": 12,
         "type": "active",
         "metadata": {
@@ -50033,7 +50111,9 @@
     {
         "module": "moon",
         "name": "Lunar Security Stations",
-        "tags": [],
+        "tags": [
+            "moon"
+        ],
         "cost": 9,
         "type": "active",
         "requirements": {
@@ -50434,7 +50514,9 @@
     {
         "module": "moon",
         "name": "Water Treatment Complex",
-        "tags": [],
+        "tags": [
+            "moon"
+        ],
         "cost": 12,
         "type": "automated",
         "requirements": {
@@ -51024,6 +51106,92 @@
                 "target": 3,
                 "targetOneOrMore": false,
                 "anyPlayer": false
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": []
+    },
+    {
+        "module": "moon",
+        "name": "Road Piracy",
+        "tags": [
+            "moon"
+        ],
+        "cost": 10,
+        "type": "event",
+        "requirements": {
+            "requirements": [
+                {
+                    "isMax": false,
+                    "isAny": false,
+                    "amount": 3,
+                    "scale": 1,
+                    "type": "Logistic rate",
+                    "parameter": 6
+                }
+            ]
+        },
+        "metadata": {
+            "description": "Requires 3 logistic rate. Steal up to 6 steel or 4 titanium from other players. (Resources may be stolen from more than 1 opponent.)",
+            "cardNumber": "M54",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "STEAL",
+                            "size": "M",
+                            "isUppercase": false,
+                            "isBold": true
+                        },
+                        {
+                            "type": "steel",
+                            "amount": 6,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "showDigit": true,
+                            "anyPlayer": true
+                        },
+                        {
+                            "type": "/",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "titanium",
+                            "amount": 4,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "showDigit": true,
+                            "anyPlayer": true
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        }
+                    ]
+                ],
+                "is": "root"
             }
         },
         "productionBox": {
@@ -53036,6 +53204,81 @@
                         {
                             "type": "trade_fleet",
                             "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": [
+            "colonies"
+        ]
+    },
+    {
+        "module": "moon",
+        "name": "Darkside Smugglers' Union",
+        "tags": [
+            "space"
+        ],
+        "cost": 17,
+        "type": "active",
+        "metadata": {
+            "description": "Raise the logistics rate 1 step.",
+            "cardNumber": "M80",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": " ",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "trade",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    "Action: Perform a trade action."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "type": "moon-logistics-rate",
+                            "amount": 1,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -56739,6 +56982,7 @@
             "plant",
             "mars"
         ],
+        "victoryPoints": 1,
         "cost": 20,
         "type": "automated",
         "requirements": {
@@ -56838,7 +57082,8 @@
                     ]
                 ],
                 "is": "root"
-            }
+            },
+            "victoryPoints": 1
         },
         "productionBox": {
             "megacredits": 0,
@@ -58010,7 +58255,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 3,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -58159,7 +58404,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 7,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -59456,7 +59701,7 @@
                     "isMax": false,
                     "isAny": false,
                     "amount": 6,
-                    "scale": 2,
+                    "scale": 1,
                     "type": "O2",
                     "parameter": 1
                 }
@@ -60199,7 +60444,6 @@
             "mars",
             "building"
         ],
-        "victoryPoints": 1,
         "cost": 15,
         "type": "automated",
         "metadata": {
@@ -60259,8 +60503,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.",
-            "victoryPoints": 1
+            "description": "Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR."
         },
         "productionBox": {
             "megacredits": 0,
@@ -60660,6 +60903,124 @@
         "compatibility": [
             "ares"
         ]
+    },
+    {
+        "module": "pathfinders",
+        "name": "Think Tank",
+        "tags": [
+            "mars",
+            "venus",
+            "science"
+        ],
+        "cost": 12,
+        "type": "active",
+        "metadata": {
+            "cardNumber": "Pf49",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 2,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "data resource",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    {
+                                        "type": "*",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    },
+                                    "Action: Spend 2 M€ to place 1 data on any card."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "data resource",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "+/-1 global parameter",
+                                        "size": "S",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    "Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "resourceType": "Data",
+        "compatibility": []
     },
     {
         "module": "pathfinders",
@@ -61621,7 +61982,7 @@
             "animal",
             "mars"
         ],
-        "cost": 9,
+        "cost": 8,
         "type": "active",
         "requirements": {
             "requirements": [
@@ -62366,6 +62727,12 @@
                             "rows": [
                                 [
                                     {
+                                        "type": "-",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    },
+                                    {
                                         "type": "floaters",
                                         "amount": 1,
                                         "is": "item",
@@ -62393,7 +62760,7 @@
                                         "cancelled": false,
                                         "questionMark": false
                                     },
-                                    "Action: Remove 1 floater from any card and add 1 Venusian habitat on this card."
+                                    "Action: Spend 1 floater from any card to add 1 Venusian habitat on this card."
                                 ]
                             ],
                             "is": "effect"
@@ -64349,6 +64716,171 @@
     },
     {
         "module": "pathfinders",
+        "name": "SolBank",
+        "tags": [],
+        "cost": 0,
+        "type": "corporation",
+        "metadata": {
+            "cardNumber": "PfC13",
+            "description": "You start with 40 M€",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "megacredits",
+                            "amount": 40,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "-",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    },
+                                    {
+                                        "type": "/",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "steel",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    {
+                                        "type": "/",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "titanium",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "data resource",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    "Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "data resource",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    {
+                                        "type": "*",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    },
+                                    "Effect: During the production phase convert each data from this card into 1M€ each."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "resourceType": "Data",
+        "startingMegaCredits": 40,
+        "compatibility": []
+    },
+    {
+        "module": "pathfinders",
         "name": "Bio-Sol",
         "tags": [
             "microbe"
@@ -65085,12 +65617,149 @@
     },
     {
         "module": "pathfinders",
+        "name": "Gagarin Mobile Base",
+        "tags": [
+            "science"
+        ],
+        "cost": 0,
+        "type": "corporation",
+        "metadata": {
+            "cardNumber": "PfC13",
+            "description": "You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "megacredits",
+                            "amount": 42,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": " ",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "move",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    {
+                                        "type": "*",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    },
+                                    "Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "empty_tile",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "size": "M"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "move",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    {
+                                        "type": "*",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    },
+                                    "Effect: When another player places a tile where the Base is, move the Base."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    []
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "startingMegaCredits": 42,
+        "compatibility": []
+    },
+    {
+        "module": "pathfinders",
         "name": "Mind Set Mars",
         "tags": [],
         "cost": 0,
         "type": "corporation",
         "metadata": {
-            "cardNumber": "PfC23",
+            "cardNumber": "PfC21",
             "description": "You start with 44 M€ and 1 agenda resource to this card.",
             "renderData": {
                 "rows": [
@@ -65759,7 +66428,10 @@
     {
         "module": "pathfinders",
         "name": "Hydrogen Bombardment",
-        "tags": [],
+        "tags": [
+            "space",
+            "venus"
+        ],
         "cost": 0,
         "type": "prelude",
         "metadata": {
@@ -66320,7 +66992,9 @@
     {
         "module": "pathfinders",
         "name": "Deep Space Operations",
-        "tags": [],
+        "tags": [
+            "space"
+        ],
         "cost": 0,
         "type": "prelude",
         "metadata": {
@@ -66403,7 +67077,10 @@
     {
         "module": "pathfinders",
         "name": "Anti-desertification Techniques",
-        "tags": [],
+        "tags": [
+            "microbe",
+            "plant"
+        ],
         "cost": 0,
         "type": "prelude",
         "metadata": {

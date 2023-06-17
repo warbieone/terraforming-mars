@@ -2,11 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShiftAresGlobalParameters = void 0;
 const PlayerInput_1 = require("../PlayerInput");
-const PlayerInputType_1 = require("../../common/input/PlayerInputType");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 class ShiftAresGlobalParameters extends PlayerInput_1.BasePlayerInput {
     constructor(player, cb) {
-        super(PlayerInputType_1.PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS, 'Adjust Ares global parameters up to 1 step.');
+        super('aresGlobalParameters', 'Adjust Ares global parameters up to 1 step.');
         this.player = player;
         this.cb = cb;
     }

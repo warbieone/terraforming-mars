@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, played} from '../Options';
-import {IPlayer} from '../../../../server/IPlayer';
+import {IPlayer} from '../../../server/IPlayer';
 import {Resource} from '../../../common/Resource';
 
 

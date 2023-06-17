@@ -12,6 +12,7 @@ const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const CardResource_1 = require("../../../common/CardResource");
+const utils_1 = require("../../../common/utils/utils");
 class Unity extends Party_1.Party {
     constructor() {
         super(...arguments);
@@ -30,7 +31,7 @@ class UnityBonus01 {
     }
     getScore(player) {
         const tags = [Tag_1.Tag.VENUS, Tag_1.Tag.EARTH, Tag_1.Tag.JOVIAN];
-        return tags.map((tag) => player.tags.count(tag, 'raw')).reduce((acc, count) => acc + count, 0);
+        return (0, utils_1.sum)(tags.map((tag) => player.tags.count(tag, 'raw')));
     }
     grant(game) {
         game.getPlayersInGenerationOrder().forEach((player) => {

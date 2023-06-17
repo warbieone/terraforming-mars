@@ -21,6 +21,7 @@ const Tag_1 = require("../../common/cards/Tag");
 const SendDelegateToArea_1 = require("../deferredActions/SendDelegateToArea");
 const Turmoil_1 = require("../turmoil/Turmoil");
 const IColonyMetadata_1 = require("../../common/colonies/IColonyMetadata");
+const utils_1 = require("../../common/utils/utils");
 class Colony {
     constructor(metadata) {
         this.isActive = true;
@@ -188,13 +189,13 @@ class Colony {
                 break;
             case ColonyBenefit_1.ColonyBenefit.GIVE_MC_PER_DELEGATE:
                 Turmoil_1.Turmoil.ifTurmoil(game, (turmoil) => {
-                    const partyDelegateCount = turmoil.parties.map((party) => party.delegates.get(player.id)).reduce((a, b) => a + b, 0);
+                    const partyDelegateCount = (0, utils_1.sum)(turmoil.parties.map((party) => party.delegates.get(player.id)));
                     player.addResource(Resource_1.Resource.MEGACREDITS, partyDelegateCount, { log: true });
                 });
                 break;
             case ColonyBenefit_1.ColonyBenefit.GAIN_TR:
                 if (quantity > 0) {
-                    player.increaseTerraformRatingSteps(quantity, { log: true });
+                    player.increaseTerraformRating(quantity, { log: true });
                 }
                 break;
             case ColonyBenefit_1.ColonyBenefit.GAIN_VP:

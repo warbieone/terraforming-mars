@@ -1298,13 +1298,13 @@ export class Game implements IGame, Logger {
   public grantSpaceBonuses(player: IPlayer, space: ISpace) {
     const bonuses = MultiSet.from(space.bonus);
     bonuses.forEachMultiplicity((count: number, bonus: SpaceBonus) => {
-      this.grantSpaceBonus(player, bonus, count, space);
+      this.grantSpaceBonus(player, bonus, count);
     });
   }
 
   public grantSpaceBonus(player: IPlayer, spaceBonus: SpaceBonus, count: number = 1) {
     // Scavengers league corp hook
-    if (player.isCorporation(CardName.SCAVENGERS) && space?.tile?.tileType !== TileType.OCEAN) count += 1;
+    //if (player.isCorporation(CardName.SCAVENGERS) && space?.tile?.tileType !== TileType.OCEAN) count += 1;
     switch (spaceBonus) {
     case SpaceBonus.DRAW_CARD:
       player.drawCard(count);
