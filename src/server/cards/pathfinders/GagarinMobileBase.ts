@@ -17,13 +17,13 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
     super({
       type: CardType.CORPORATION,
       name: CardName.GAGARIN_MOBILE_BASE,
-      tags: [Tag.SPACE],
+      tags: [Tag.SCIENCE],
       startingMegaCredits: 42,
       initialActionText: 'Place Gagarin Moble Base on ANY space ON MARS',
 
       metadata: {
         cardNumber: 'PfC13',
-        description: 'You start with 44 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.',
+        description: 'You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(42).br;
           b.action('Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.', (ab) =>
@@ -79,7 +79,7 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
   }
 
   public action(player: IPlayer) {
-    return new SelectSpace('title', this.availableSpaces(player), (space) => {
+    return new SelectSpace('Select new space for Gagarin Mobile Base', this.availableSpaces(player), (space) => {
       player.game.gagarinBase.unshift(space.id);
       player.game.grantSpaceBonuses(player, space);
 

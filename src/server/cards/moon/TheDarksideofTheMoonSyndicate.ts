@@ -4,7 +4,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
-import {Player} from '../../Player';
 import {IPlayer} from '../../IPlayer';
 import {ISpace} from '../../boards/ISpace';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -16,6 +15,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {Phase} from '../../../common/Phase';
 import {Card} from '../Card';
 import {all} from '../Options';
+import {Payment} from '../../../common/inputs/Payment';
 
 export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationCard {
   constructor() {
@@ -50,16 +50,16 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
     });
   }
 
-  public canAct(player: Player): boolean {
+  public canAct(player: IPlayer): boolean {
     return player.titanium > 0 || this.resourceCount > 0;
   }
 
-  public action(player: Player) {
+  public action(player: IPlayer) {
     const orOptions = new OrOptions();
     if (player.titanium > 0) {
       orOptions.options.push(new SelectOption('Spend 1 titanium to add 1 syndicate fleet on this card', 'Add syndicate fleet', () => {
-        player.titanium--;
-        player.addResourceTo(this);
+        player.pay(Payment.of({titanium: 1}));
+        player.addResourceTo(this, {qty: 1, log: true});
         return undefined;
       }));
     }

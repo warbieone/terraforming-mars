@@ -1,7 +1,7 @@
 import {CardModel} from '../../common/models/CardModel';
 import {ColonyModel} from '../../common/models/ColonyModel';
 import {Color} from '../../common/Color';
-import {Game} from '../Game';
+import {IGame} from '../IGame';
 import {GameOptions} from '../GameOptions';
 import {SimpleGameModel} from '../../common/models/SimpleGameModel';
 import {GameOptionsModel} from '../../common/models/GameOptionsModel';
@@ -35,7 +35,6 @@ import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {SpectatorModel} from '../../common/models/SpectatorModel';
-import {Units} from '../../common/Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from '../../common/models/GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
@@ -48,10 +47,10 @@ import {Tag} from '../../common/cards/Tag';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {AresHandler} from '../ares/AresHandler';
 import {AwardScorer} from '../awards/AwardScorer';
-import {SpaceId} from '@/common/Types';
+import {SpaceId} from '../../common/Types';
 
 export class Server {
-  public static getSimpleGameModel(game: Game): SimpleGameModel {
+  public static getSimpleGameModel(game: IGame): SimpleGameModel {
     return {
       activePlayer: game.getPlayerById(game.activePlayer).color,
       id: game.id,
@@ -68,7 +67,7 @@ export class Server {
     };
   }
 
-  public static getGameModel(game: Game): GameModel {
+  public static getGameModel(game: IGame): GameModel {
     const turmoil = getTurmoilModel(game);
 
     return {
@@ -127,7 +126,7 @@ export class Server {
     };
   }
 
-  public static getSpectatorModel(game: Game): SpectatorModel {
+  public static getSpectatorModel(game: IGame): SpectatorModel {
     return {
       color: Color.NEUTRAL,
       id: game.spectatorId,
@@ -143,15 +142,13 @@ export class Server {
         resources: targetCard.resourceCount,
         name: targetCard.card.name,
         calculatedCost: player.getCardCost(targetCard.card),
-        isDisabled: false,
-        reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
         isSelfReplicatingRobotsCard: true,
       };
       return model;
     });
   }
 
-  public static getMilestones(game: Game): Array<ClaimedMilestoneModel> {
+  public static getMilestones(game: IGame): Array<ClaimedMilestoneModel> {
     const allMilestones = game.milestones;
     const claimedMilestones = game.claimedMilestones;
     const milestoneModels: Array<ClaimedMilestoneModel> = [];
@@ -179,7 +176,7 @@ export class Server {
     return milestoneModels;
   }
 
-  public static getAwards(game: Game): Array<FundedAwardModel> {
+  public static getAwards(game: IGame): Array<FundedAwardModel> {
     const fundedAwards = game.fundedAwards;
     const awardModels: Array<FundedAwardModel> = [];
 
@@ -375,7 +372,6 @@ export class Server {
       }
 
 
-      const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);
       let warning = card.warning;
       const playCardMetadata = options?.extras?.get(card.name);
       if (typeof(playCardMetadata?.details) === 'object') {
@@ -389,13 +385,19 @@ export class Server {
         resources: options.showResources ? card.resourceCount : undefined,
         name: card.name,
         calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
-        isDisabled: isDisabled,
         warning: warning,
-        reserveUnits: playCardMetadata?.reserveUnits ?? Units.EMPTY,
         bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
         discount: discount,
         cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
       };
+      const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);
+      if (isDisabled === true) {
+        model.isDisabled = true;
+      }
+      const reserveUnits = playCardMetadata?.reserveUnits;
+      if (reserveUnits !== undefined) {
+        model.reserveUnits = reserveUnits;
+      }
       return model;
     });
   }
@@ -427,7 +429,7 @@ export class Server {
       name: player.name,
       needsToDraft: player.needsToDraft,
       needsToResearch: !game.hasResearched(player),
-      noTagsCount: player.getNoTagsCount(),
+      noTagsCount: player.tags.numberOfCardsWithNoTags(),
       plants: player.plants,
       plantProduction: player.production.plants,
       protectedResources: Server.getResourceProtections(player),
@@ -492,7 +494,7 @@ export class Server {
     return protection;
   }
 
-  public static getColonies(game: Game, colonies: Array<IColony>, isActive: boolean = true): Array<ColonyModel> {
+  public static getColonies(game: IGame, colonies: Array<IColony>, isActive: boolean = true): Array<ColonyModel> {
     return colonies.map(
       (colony): ColonyModel => ({
         colonies: colony.colonies.map(
@@ -603,7 +605,7 @@ export class Server {
     };
   }
 
-  private static getColonyModel(game: Game, colonies: Array<IColony>, showTileOnly: boolean) : Array<ColonyModel> {
+  private static getColonyModel(game: IGame, colonies: Array<IColony>, showTileOnly: boolean) : Array<ColonyModel> {
     return colonies.map(
       (colony): ColonyModel => ({
         colonies: colony.colonies.map(
@@ -620,7 +622,7 @@ export class Server {
     );
   }
 
-  private static getMoonModel(game: Game): MoonModel | undefined {
+  private static getMoonModel(game: IGame): MoonModel | undefined {
     return MoonExpansion.ifElseMoon(game, (moonData) => {
       return {
         logisticsRate: moonData.logisticRate,

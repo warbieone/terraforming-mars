@@ -11,6 +11,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CARD_COST} from '../../../common/constants';
 import {CorporationDeck} from '../Deck';
 import {Countable} from '../../behavior/Countable';
+import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 
 export class Merger extends PreludeCard {
   constructor() {
@@ -33,12 +34,14 @@ export class Merger extends PreludeCard {
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const dealtCorps = Merger.dealCorporations(player, game.corporationDeck);
+    LogHelper.logDrawnCards(player, dealtCorps, true);
     const enabled = dealtCorps.map((corp) => {
       return player.canAfford(Merger.mergerCost - this.spendableMegacredits(player, corp));
     });
     if (enabled.some((v) => v === true) === false) {
-      game.log('None of the four drawn corporation cards are affordable.');
+      PreludesExpansion.fizzle(player, this);
       dealtCorps.forEach((corp) => game.corporationDeck.discard(corp));
+      return undefined;
     }
     game.defer(new SimpleDeferredAction(player, () => {
       return new SelectCard('Choose corporation card to play', 'Play', dealtCorps, ([card]) => {
