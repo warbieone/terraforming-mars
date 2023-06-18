@@ -314,7 +314,7 @@ export class Game implements IGame, Logger {
         gameOptions.ceoExtension) {
 
         const specificCardsOwen = ['Teractor','Celestic','Stormcraft Incorporated','Interplanetary Cinematics','Mining Guild','Recyclon','Polyphemos','Terralabs Research','Septem Tribus','Valley Trust','Cheung Shing MARS','Thorgate','Helion'];
-        const specificCardsLaura = ['Saturn Systems','Inventrix','Phobolog','Viron','Morning Star Inc.','Factorum','Tharsis Republic','Vitor','Aridor','Aphrodite','Point Luna','Splice','Robinson Industries'];
+        const specificCardsLaura = ['Saturn Systems','Inventrix','PhoboLog','Viron','Morning Star Inc.','Factorum','Tharsis Republic','Vitor','Aridor','Aphrodite','Point Luna','Splice','Robinson Industries'];
         const specificCardsJoel = ['Mons Insurance','Arklight','Astrodrill','Lakefront Resorts','Pristar','Credicor','Poseidon','Manutech','Pharmacy Union','Philares','Arcadian Communities','Ecoline','United Nations Mars Initiative'];
         const dealtCardsOwen = corporationDeck.drawSpecific(specificCardsOwen);
         const dealtCardsLaura = corporationDeck.drawSpecific(specificCardsLaura);
