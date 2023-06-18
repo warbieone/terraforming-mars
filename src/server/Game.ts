@@ -313,34 +313,31 @@ export class Game implements IGame, Logger {
         gameOptions.initialDraftVariant ||
         gameOptions.ceoExtension) {
 
-        const specificCardsOwen = ['Teractor','Celestic','Stormcraft Incorporated','Interplanetary Cinematics','Mining Guild','Recyclon','Polyphemos','Terralabs Research','Septem Tribus','Valley Trust','Cheung Shing MARS','Thorgate','Helion'];
-        const specificCardsLaura = ['Saturn Systems','Inventrix','PhoboLog','Viron','Morning Star Inc.','Factorum','Tharsis Republic','Vitor','Aridor','Aphrodite','Point Luna','Splice','Robinson Industries'];
-        const specificCardsJoel = ['Mons Insurance','Arklight','Astrodrill','Lakefront Resorts','Pristar','CrediCor','Poseidon','Manutech','Pharmacy Union','Philares','Arcadian Communities','EcoLine','United Nations Mars Initiative'];
-        const dealtCardsOwen = corporationDeck.drawSpecific(specificCardsOwen);
-        const dealtCardsLaura = corporationDeck.drawSpecific(specificCardsLaura);
-        const dealtCardsJoel = corporationDeck.drawSpecific(specificCardsJoel);
-
-        for (let i = 0; i < gameOptions.startingCorporations; i++) {
-          player.dealtCorporationCards.push(corporationDeck.draw(game));
-        }
-
-        if (player.name === 'Owen T'){
-          for (let i = 0; i < dealtCardsOwen.length; i++) {
-            player.dealtCorporationCards.push(dealtCardsOwen[i]);
+          const specificCardsOwen = ['Teractor','Celestic','Stormcraft Incorporated','Interplanetary Cinematics','Mining Guild','Recyclon','Polyphemos','Terralabs Research','Septem Tribus','Valley Trust','Cheung Shing MARS','Thorgate','Helion'];
+          const specificCardsLaura = ['Saturn Systems','Inventrix','PhoboLog','Viron','Morning Star Inc.','Factorum','Tharsis Republic','Vitor','Aridor','Aphrodite','Point Luna','Splice','Robinson Industries'];
+          const specificCardsJoel = ['Mons Insurance','Arklight','Astrodrill','Lakefront Resorts','Pristar','CrediCor','Poseidon','Manutech','Pharmacy Union','Philares','Arcadian Communities','EcoLine','United Nations Mars Initiative'];
+          
+          const dealtCardsOwen = corporationDeck.drawSpecific(specificCardsOwen);
+          const dealtCardsLaura = corporationDeck.drawSpecific(specificCardsLaura);
+          const dealtCardsJoel = corporationDeck.drawSpecific(specificCardsJoel);
+          
+          if (player.name !== 'Owen T' && player.name !== 'Laura T' && player.name !== 'Joel T') {
+              for (let i = 0; i < gameOptions.startingCorporations; i++) {
+                  player.dealtCorporationCards.push(corporationDeck.draw(game));
+              }
           }
-        }
-
-        if (player.name === 'Laura T'){
-          for (let i = 0; i < dealtCardsLaura.length; i++) {
-            player.dealtCorporationCards.push(dealtCardsLaura[i]);
+          
+          if (player.name === 'Owen T'){
+              player.dealtCorporationCards = dealtCardsOwen;
           }
-        }
-
-        if (player.name === 'Joel T'){
-          for (let i = 0; i < dealtCardsJoel.length; i++) {
-            player.dealtCorporationCards.push(dealtCardsJoel[i]);
+          
+          if (player.name === 'Laura T'){
+              player.dealtCorporationCards = dealtCardsLaura;
           }
-        }
+          
+          if (player.name === 'Joel T'){
+              player.dealtCorporationCards = dealtCardsJoel;
+          }        
 
         if (gameOptions.initialDraftVariant === false) {
           for (let i = 0; i < 10; i++) {
