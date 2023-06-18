@@ -316,11 +316,7 @@ export class Game implements IGame, Logger {
           const specificCardsOwen = ['Teractor','Celestic','Stormcraft Incorporated','Interplanetary Cinematics','Mining Guild','Recyclon','Polyphemos','Terralabs Research','Septem Tribus','Valley Trust','Cheung Shing MARS','Thorgate','Helion'];
           const specificCardsLaura = ['Saturn Systems','Inventrix','PhoboLog','Viron','Morning Star Inc.','Factorum','Tharsis Republic','Vitor','Aridor','Aphrodite','Point Luna','Splice','Robinson Industries'];
           const specificCardsJoel = ['Mons Insurance','Arklight','Astrodrill','Lakefront Resorts','Pristar','CrediCor','Poseidon','Manutech','Pharmacy Union','Philares','Arcadian Communities','EcoLine','United Nations Mars Initiative'];
-          
-          const dealtCardsOwen = corporationDeck.drawSpecific(specificCardsOwen);
-          const dealtCardsLaura = corporationDeck.drawSpecific(specificCardsLaura);
-          const dealtCardsJoel = corporationDeck.drawSpecific(specificCardsJoel);
-          
+         
           if (player.name !== 'Owen T' && player.name !== 'Laura T' && player.name !== 'Joel T') {
               for (let i = 0; i < gameOptions.startingCorporations; i++) {
                   player.dealtCorporationCards.push(corporationDeck.draw(game));
@@ -328,14 +324,20 @@ export class Game implements IGame, Logger {
           }
           
           if (player.name === 'Owen T'){
+              let dealtCardsOwen;
+              dealtCardsOwen = corporationDeck.drawSpecific(specificCardsOwen);
               player.dealtCorporationCards = dealtCardsOwen;
           }
           
           if (player.name === 'Laura T'){
+              let dealtCardsLaura;
+              dealtCardsLaura = corporationDeck.drawSpecific(specificCardsLaura);
               player.dealtCorporationCards = dealtCardsLaura;
           }
           
           if (player.name === 'Joel T'){
+              let  dealtCardsJoel
+              dealtCardsJoel = corporationDeck.drawSpecific(specificCardsJoel);
               player.dealtCorporationCards = dealtCardsJoel;
           }        
 
