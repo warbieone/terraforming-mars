@@ -20,6 +20,7 @@ class Arklight extends Card_1.Card {
             victoryPoints: { resourcesHere: {}, per: 2 },
             behavior: {
                 addResources: 1,
+                production: { megacredits: 1 },
             },
             metadata: {
                 cardNumber: 'R04',

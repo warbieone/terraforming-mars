@@ -23,6 +23,7 @@ export class Arklight extends Card implements ICorporationCard {
 
       behavior: {
         addResources: 1,
+        production: {megacredits: 1},
       },
 
       metadata: {
