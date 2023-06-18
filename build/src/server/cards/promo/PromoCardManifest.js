@@ -36,7 +36,6 @@ const MagneticShield_1 = require("./MagneticShield");
 const MeatIndustry_1 = require("./MeatIndustry");
 const Meltworks_1 = require("./Meltworks");
 const MercurianAlloys_1 = require("./MercurianAlloys");
-const Merger_1 = require("./Merger");
 const MoholeLake_1 = require("./MoholeLake");
 const MonsInsurance_1 = require("./MonsInsurance");
 const NewPartner_1 = require("./NewPartner");
@@ -110,7 +109,6 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     },
     preludeCards: {
         [CardName_1.CardName.NEW_PARTNER]: { Factory: NewPartner_1.NewPartner },
-        [CardName_1.CardName.MERGER]: { Factory: Merger_1.Merger },
         [CardName_1.CardName.CORPORATE_ARCHIVES]: { Factory: CorporateArchives_1.CorporateArchives },
         [CardName_1.CardName.DOUBLE_DOWN]: { Factory: DoubleDown_1.DoubleDown, compatibility: 'prelude' },
         [CardName_1.CardName.HEAD_START]: { Factory: HeadStart_1.HeadStart },

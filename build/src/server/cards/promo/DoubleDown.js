@@ -5,8 +5,8 @@ const PreludeCard_1 = require("../prelude/PreludeCard");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
-const CardType_1 = require("../../../common/cards/CardType");
-const SelectCard_1 = require("../../inputs/SelectCard");
+const PreludesExpansion_1 = require("../../preludes/PreludesExpansion");
+const IPreludeCard_1 = require("../prelude/IPreludeCard");
 class DoubleDown extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
@@ -21,7 +21,7 @@ class DoubleDown extends PreludeCard_1.PreludeCard {
         });
     }
     cloneablePreludes(player) {
-        return player.playedCards.filter((card) => card.type === CardType_1.CardType.PRELUDE)
+        return player.playedCards.filter(IPreludeCard_1.isPreludeCard)
             .filter((card) => card.name !== this.name)
             .filter((card) => card.canPlay(player));
     }
@@ -30,13 +30,7 @@ class DoubleDown extends PreludeCard_1.PreludeCard {
     }
     bespokePlay(player) {
         const preludes = this.cloneablePreludes(player);
-        if (preludes.length === 0) {
-            return undefined;
-        }
-        return new SelectCard_1.SelectCard('Choose prelude card to play', undefined, preludes, ([card]) => {
-            player.playCard(card, undefined, 'action-only');
-            return undefined;
-        });
+        return PreludesExpansion_1.PreludesExpansion.playPrelude(player, preludes, 'action-only');
     }
 }
 exports.DoubleDown = DoubleDown;

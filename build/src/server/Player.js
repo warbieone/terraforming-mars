@@ -52,6 +52,7 @@ const calculateVictoryPoints_1 = require("./game/calculateVictoryPoints");
 const Supercapacitors_1 = require("./cards/promo/Supercapacitors");
 const IPlayer_1 = require("./IPlayer");
 const utils_1 = require("../common/utils/utils");
+const PreludesExpansion_1 = require("./preludes/PreludesExpansion");
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 class Player {
     constructor(name, color, beginner, handicap = 0, id) {
@@ -670,11 +671,6 @@ class Player {
         }
         return Math.max(cost, 0);
     }
-    playPreludeCard() {
-        return new SelectCard_1.SelectCard('Select prelude card to play', 'Play', this.getPlayablePreludeCards(), ([card]) => {
-            return this.playCard(card);
-        });
-    }
     paymentOptionsForCard(card) {
         return {
             steel: this.lastCardPlayed === CardName_1.CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag_1.Tag.BUILDING),
@@ -1023,9 +1019,6 @@ class Player {
             this.game.playerIsDoneWithGame(this);
         }
     }
-    getPlayablePreludeCards() {
-        return this.preludeCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this));
-    }
     getPlayableCeoCards() {
         return this.ceoCardsInHand.filter((card) => { var _a; return ((_a = card.canPlay) === null || _a === void 0 ? void 0 : _a.call(card, this)) === true; });
     }
@@ -1187,13 +1180,8 @@ class Player {
         if (!headStartIsInEffect) {
             if (this.preludeCardsInHand.length > 0) {
                 game.phase = Phase_1.Phase.PRELUDES;
-                if (this.getPlayablePreludeCards().length === 0) {
-                    LogHelper_1.LogHelper.logDiscardedCards(game, this.preludeCardsInHand);
-                    this.preludeCardsInHand = [];
-                    game.playerIsFinishedTakingActions();
-                    return;
-                }
-                this.setWaitingFor(this.playPreludeCard(), () => {
+                const selectPrelude = PreludesExpansion_1.PreludesExpansion.playPrelude(this, this.preludeCardsInHand);
+                this.setWaitingFor(selectPrelude, () => {
                     if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
                         game.playerIsFinishedTakingActions();
                         return;

@@ -26,8 +26,7 @@ class NewPartner extends PreludeCard_1.PreludeCard {
             player.game.preludeDeck.draw(player.game),
             player.game.preludeDeck.draw(player.game),
         ];
-        PreludesExpansion_1.PreludesExpansion.chooseAndPlayPrelude(player, cards);
-        return undefined;
+        return PreludesExpansion_1.PreludesExpansion.playPrelude(player, cards);
     }
 }
 exports.NewPartner = NewPartner;

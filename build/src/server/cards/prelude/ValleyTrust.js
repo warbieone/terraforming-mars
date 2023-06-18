@@ -42,8 +42,7 @@ class ValleyTrust extends Card_1.Card {
             game.preludeDeck.draw(game),
             game.preludeDeck.draw(game),
         ];
-        PreludesExpansion_1.PreludesExpansion.chooseAndPlayPrelude(player, cards);
-        return undefined;
+        return PreludesExpansion_1.PreludesExpansion.playPrelude(player, cards);
     }
 }
 exports.ValleyTrust = ValleyTrust;

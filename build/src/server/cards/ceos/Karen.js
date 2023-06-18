@@ -25,8 +25,7 @@ class Karen extends CeoCard_1.CeoCard {
         for (let i = 0; i < game.generation; i++) {
             cards.push(game.preludeDeck.draw(game));
         }
-        PreludesExpansion_1.PreludesExpansion.chooseAndPlayPrelude(player, cards);
-        return undefined;
+        return PreludesExpansion_1.PreludesExpansion.playPrelude(player, cards);
     }
 }
 exports.Karen = Karen;
