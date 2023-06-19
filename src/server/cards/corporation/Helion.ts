@@ -13,18 +13,18 @@ export class Helion extends Card implements ICorporationCard {
       type: CardType.CORPORATION,
       name: CardName.HELION,
       tags: [Tag.SPACE],
-      startingMegaCredits: 42,
+      startingMegaCredits: 40,
 
       behavior: {
-        production: {heat: 3},
+        production: {heat: 4},
       },
 
       metadata: {
         cardNumber: 'R18',
-        description: 'You start with 3 heat production and 42 M€.',
+        description: 'You start with 4 heat production and 40 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.production((pb) => pb.heat(3)).nbsp.megacredits(42);
+          b.production((pb) => pb.heat(4)).nbsp.megacredits(40);
           b.corpBox('effect', (ce) => {
             ce.effect('You may use heat as M€. You may not use M€ as heat.', (eb) => {
               eb.startEffect.text('x').heat(1).equals().megacredits(0, {multiplier});
@@ -36,6 +36,7 @@ export class Helion extends Card implements ICorporationCard {
   }
   public override bespokePlay(player: IPlayer) {
     player.canUseHeatAsMegaCredits = true;
+    // player.heatNeededForTemperature = 7;
     return undefined;
   }
 }

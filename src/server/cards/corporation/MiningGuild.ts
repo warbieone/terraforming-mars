@@ -31,7 +31,7 @@ export class MiningGuild extends Card implements ICorporationCard {
         description: 'You start with 36 M€, 2 steel and 1 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.megacredits(30).nbsp.steel(5, {digit}).nbsp.production((pb) => pb.steel(1));
+          b.megacredits(36).nbsp.steel(2, {digit}).nbsp.production((pb) => pb.steel(1));
           b.corpBox('effect', (ce) => {
             ce.effect('Each time you get any steel as a placement bonus on the map, increase your steel production 1 step. Same for titanium.', (eb) => {
               eb.steel(1).asterix().colon();

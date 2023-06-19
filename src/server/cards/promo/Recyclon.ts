@@ -31,7 +31,7 @@ export class Recyclon extends Card implements ICorporationCard {
         description: 'You start with 40 M€ and 2 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.megacredits(40).nbsp.production((pb) => pb.steel(1));
+          b.megacredits(40).nbsp.production((pb) => pb.steel(2));
           b.corpBox('effect', (ce) => {
             ce.effect('When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.', (eb) => {
               eb.building(1, {played}).colon().microbes(1).or();
