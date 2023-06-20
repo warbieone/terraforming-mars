@@ -313,9 +313,9 @@ export class Game implements IGame, Logger {
         gameOptions.initialDraftVariant ||
         gameOptions.ceoExtension) {
 
-          const specificCardsOwen = ['Teractor','Celestic','Stormcraft Incorporated','Interplanetary Cinematics','Mining Guild','Recyclon','Polyphemos','Terralabs Research','Septem Tribus','Valley Trust','Cheung Shing MARS','Thorgate','Helion'];
-          const specificCardsLaura = ['Saturn Systems','Inventrix','PhoboLog','Viron','Morning Star Inc.','Factorum','Tharsis Republic','Vitor','Aridor','Aphrodite','Point Luna','Splice','Robinson Industries'];
-          const specificCardsJoel = ['Mons Insurance','Arklight','Astrodrill','Lakefront Resorts','Pristar','CrediCor','Poseidon','Manutech','Pharmacy Union','Philares','Arcadian Communities','EcoLine','United Nations Mars Initiative'];
+          const specificCardsOwen = ['Teractor','Celestic','Stormcraft Incorporated','Interplanetary Cinematics','Mining Guild','Recyclon','Terralabs Research','Septem Tribus','Valley Trust','Cheung Shing MARS','Thorgate','Helion'];
+          const specificCardsLaura = ['Saturn Systems','Inventrix','PhoboLog','Viron','Morning Star Inc.','Factorum','Tharsis Republic','Vitor','Aridor','Aphrodite','Point Luna','Splice'];
+          const specificCardsJoel = ['Mons Insurance','Arklight','Astrodrill','Lakefront Resorts','Pristar','CrediCor','Poseidon','Manutech','Pharmacy Union','Philares','Arcadian Communities','EcoLine'];
          
           if (player.name !== 'Owen T' && player.name !== 'Laura T' && player.name !== 'Joel T') {
               for (let i = 0; i < gameOptions.startingCorporations; i++) {
