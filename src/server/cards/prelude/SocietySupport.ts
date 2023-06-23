@@ -12,9 +12,10 @@ export class SocietySupport extends PreludeCard {
       name: CardName.SOCIETY_SUPPORT,
       tags: [Tag.WILD],
 
+      startingMegacredits: -2,
+
       behavior: {
         production: {plants: 1, energy: 1, heat: 1},
-        stock: {megacredits: -3}
       },
 
       metadata: {
