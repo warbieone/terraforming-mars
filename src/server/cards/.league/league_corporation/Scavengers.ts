@@ -1,4 +1,4 @@
-import {Card} from '../../Card';
+/* import {Card} from '../../Card';
 import {IPlayer} from '../../../../server/IPlayer';
 import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
@@ -62,3 +62,4 @@ export class Scavengers extends Card implements ICorporationCard {
     return undefined;
   }
 }
+ */
