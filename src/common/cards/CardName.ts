@@ -822,7 +822,6 @@ export enum CardName {
     NOMON_NOCRY_INSURANCE = 'Nomon Nocry Insurance',
     OUTER_RIM_UNIVERSITY = 'Outer Rim University',
     RECYCLED_PROJECTS = 'Recycled Projects',
-    SAVE_OUR_SHIP = 'Save Our Ship',
     SOIL_ENHANCERS = 'Soil Enhancers',
     SPACE_DEBRIS_COLLECTION = 'Space Debri Collection',
     STEEL_CASTING = 'Steel Casting',
