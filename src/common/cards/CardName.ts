@@ -829,5 +829,5 @@ export enum CardName {
     TITANIUM_ISOTOPES = 'Titanium Isotopes',
     WORLD_GOVERNMENT_PARTNERSHIP = 'World Government Partnership',
     JOVIAN_OUTPOST = 'Jovian Outpost',
-    SCAVENGERS = 'Scavengers',
+    //SCAVENGERS = 'Scavengers',
 }

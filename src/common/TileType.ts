@@ -50,7 +50,7 @@ export enum TileType {
     CRASHLANDING, // 39
 
     //League
-    SCAVENGERS, // 40
+    //SCAVENGERS, // 40
 }
 
 const TO_STRING_MAP: Record<TileType, string> = {
@@ -95,7 +95,7 @@ const TO_STRING_MAP: Record<TileType, string> = {
   [TileType.RED_CITY]: 'Red City',
   [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders',
   [TileType.CRASHLANDING]: 'Crashlanding',
-  [TileType.SCAVENGERS]: 'Scavengers',
+  //[TileType.SCAVENGERS]: 'Scavengers',
 };
 
 export namespace TileType {
