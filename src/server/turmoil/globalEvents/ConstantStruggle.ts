@@ -29,7 +29,10 @@ export class ConstantStruggle extends GlobalEvent implements IGlobalEvent {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const influence = turmoil.getPlayerInfluence(player);
       const deducted = Math.max(10 - influence, 0);
-      player.deductResource(Resource.MEGACREDITS, deducted, {log: true, from: this.name});
+      player.stock.deduct(Resource.MEGACREDITS, deducted, {log: true, from: this.name});
+      if (deducted > 0) {
+        PathfindersExpansion.addToSolBank(player);
+      }
     });
     PathfindersExpansion.raiseTrackForGlobalEvent(Tag.VENUS, this.name, game, 2, false);
     PathfindersExpansion.raiseTrackForGlobalEvent(Tag.EARTH, this.name, game, 2, false);

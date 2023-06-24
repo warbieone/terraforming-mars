@@ -46,7 +46,7 @@ export class Pristar extends Card implements ICorporationCard {
 
   public onProductionPhase(player: IPlayer) {
     if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
-      player.addResource(Resource.MEGACREDITS, 6, {log: true, from: this});
+      player.stock.add(Resource.MEGACREDITS, 6, {log: true, from: this});
       player.addResourceTo(this, 1);
       // Check whether the player has already received the bonus
       if (!this.hasReceivedInfluenceBonus) {

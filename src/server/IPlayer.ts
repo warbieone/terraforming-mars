@@ -28,8 +28,8 @@ import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Color} from '../common/Color';
-import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {OrOptions} from './inputs/OrOptions';
+import {Stock} from './player/Stock';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -58,6 +58,7 @@ export interface IPlayer {
   tags: Tags;
   colonies: Colonies;
   readonly production: Production;
+  readonly stock: Stock;
 
   // Corporate identity
   corporations: Array<ICorporationCard>;
@@ -153,36 +154,8 @@ export interface IPlayer {
   increaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   decreaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   setTerraformRating(value: number): void;
-  getResource(resource: Resource): number;
   logUnitDelta(resource: Resource, amount: number, unitType: 'production' | 'amount', from: ResourceSource | undefined, stealing?: boolean): void;
-  deductResource(
-    resource: Resource,
-    amount: number,
-    options? :{
-      log?: boolean,
-      from? : ResourceSource,
-      stealing?: boolean
-    }): void;
-  addResource(
-    resource: Resource,
-    amount: number,
-    options? :{
-      log?: boolean,
-      from? : ResourceSource,
-      stealing?: boolean
-    }): void;
-  /**
-   * `from` steals up to `qty` units of `resource` from this player. Or, at least as
-   * much as possible.
-   */
-  stealResource(resource: Resource, qty: number, thief: IPlayer): void;
-  // Returns true when the player has the supplied units in its inventory.
-  hasUnits(units: Units): boolean;
-  addUnits(units: Partial<Units>, options? : {
-    log?: boolean,
-    from? : ResourceSource,
-  }): void;
-  deductUnits(units: Units): void;
+
   getActionsThisGeneration(): Set<CardName>;
   addActionThisGeneration(cardName: CardName): void;
   getVictoryPoints(): IVictoryPointsBreakdown;
@@ -229,17 +202,21 @@ export interface IPlayer {
   worldGovernmentTerraforming(): void;
   dealForDraft(quantity: number, cards: Array<IProjectCard>): void;
   askPlayerToDraft(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void;
-  spendableMegacredits(): number;
   runResearchPhase(draftVariant: boolean): void;
   getCardCost(card: IProjectCard): number;
-  payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void): void;
-  checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
+
+  spendableMegacredits(): number;
   getSpendableMicrobes(): number;
   getSpendableFloaters(): number;
   getSpendableScienceResources(): number;
   getSpendableSeedResources(): number;
   getSpendableData(): number;
+  payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void): void;
+  checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
   pay(payment: Payment): void;
+  availableHeat(): number;
+  spendHeat(amount: number, cb?: () => (undefined | PlayerInput)) : PlayerInput | undefined;
+
   playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): undefined;
   onCardPlayed(card: IProjectCard): void;
   playAdditionalCorporationCard(corporationCard: ICorporationCard): void;
@@ -247,8 +224,7 @@ export interface IPlayer {
   drawCard(count?: number, options?: DrawCards.DrawOptions): undefined;
   drawCardKeepSome(count: number, options: DrawCards.AllOptions): SelectCard<IProjectCard>;
   discardPlayedCard(card: IProjectCard): void;
-  availableHeat(): number;
-  spendHeat(amount: number, cb?: () => (undefined | PlayerInput)) : PlayerInput | undefined;
+
   pass(): void;
   takeActionForFinalGreenery(): void;
   getPlayableCards(): Array<PlayableCard>;
@@ -270,7 +246,6 @@ export interface IPlayer {
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
   serialize(): SerializedPlayer;
   defer(input: PlayerInput | undefined, priority?: Priority): void;
-  fizzle(card: IPreludeCard): void;
 }
 
 export function isIPlayer(object: any): object is IPlayer {

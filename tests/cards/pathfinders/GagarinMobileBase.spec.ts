@@ -7,6 +7,8 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 import {ISpace} from '../../../src/server/boards/ISpace';
 import {TileType} from '../../../src/common/TileType';
+import {AmazonisBoard} from '../../../src/server/boards/AmazonisBoard';
+import {UnseededRandom} from '../../../src/server/Random';
 
 describe('GagarinMobileBase', () => {
   let game: Game;
@@ -48,6 +50,20 @@ describe('GagarinMobileBase', () => {
     expect(game.gagarinBase).deep.eq(['07', '13']);
   });
 
+  it('action - cannot select restricted space', () => {
+    // Restricted space is 33.
+    game.gagarinBase = ['32', '24', '23', '31', '40', '41'];
+    const selectSpace = cast(card.action(player), SelectSpace);
+
+    expect(selectSpace.availableSpaces.map((s) => s.id)).to.have.members(['33']);
+
+    game.board = AmazonisBoard.newInstance(game.gameOptions, UnseededRandom.INSTANCE);
+
+    const selectSpace2 = cast(card.action(player), SelectSpace);
+    expect(selectSpace2.availableSpaces.map((s) => s.id)).to.have.members(
+      ['15', '16', '22', '17', '25', '34', '42', '49', '48', '47', '39', '30']);
+  });
+
   it('action - blocked in', () => {
     game.gagarinBase = ['13', '07', '19', '12', '20'];
     const selectSpace = cast(card.action(player), SelectSpace);
@@ -58,7 +74,7 @@ describe('GagarinMobileBase', () => {
     game.gagarinBase = ['13'];
     game.addCity(player, space13);
     runAllActions(game);
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
   });
 
   it('onTilePlaced, opponent', () => {
@@ -66,7 +82,7 @@ describe('GagarinMobileBase', () => {
     game.gagarinBase = ['13'];
     game.addCity(player2, space13);
     runAllActions(game);
-    expect(player2.popWaitingFor()).is.undefined;
+    cast(player2.getWaitingFor(), undefined);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     expect(selectSpace.availableSpaces.map((s) => s.id)).to.have.members(['12', '19', '20']);
   });

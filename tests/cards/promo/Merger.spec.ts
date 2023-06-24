@@ -95,7 +95,7 @@ describe('Merger', function() {
     merger.play(player);
     runAllActions(game);
 
-    expect(player.popWaitingFor()).is.undefined;
+    cast(player.popWaitingFor(), undefined);
     expect(player.megaCredits).eq(15);
   });
 
@@ -284,7 +284,7 @@ describe('Merger', function() {
         }
         game.corporationDeck.drawPile.push(candidate);
 
-        player.setResourcesForTest(Units.of({megacredits})); // Clear all resources but MC.
+        player.stock.override(Units.of({megacredits})); // Clear all resources but MC.
         merger.play(player);
         runAllActions(game);
 
