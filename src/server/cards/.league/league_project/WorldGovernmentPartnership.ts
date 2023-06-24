@@ -34,7 +34,7 @@ export class WorldGovernmentPartnership extends Card implements IProjectCard {
 
     const candidates = player.game.getPlayers().filter((p) => p.id !== player.id && !p.plantsAreProtected() && p.plants > 0);
     candidates.forEach((p) => {
-      p.deductResource(Resource.PLANTS, 3, {log: true, from: player});
+      p.stock.deduct(Resource.PLANTS, 3, {log: true, from: player});
       return undefined;
     });
     return undefined;

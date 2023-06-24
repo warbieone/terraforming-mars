@@ -9,7 +9,6 @@ import {SelectOption} from '../../../inputs/SelectOption';
 import {OrOptions} from '../../../inputs/OrOptions';
 import {Player} from '../../../Player';
 import { SelectAmount } from '../../../../server/inputs/SelectAmount';
-import { add } from 'mnemonist/set';
 
 
 export class MarsHeavyIndustry extends Card implements IProjectCard {
