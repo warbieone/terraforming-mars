@@ -32,7 +32,7 @@ export class FireSale extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.addResource(Resource.MEGACREDITS, player.heat, {log: true});
+    player.stock.add(Resource.MEGACREDITS, player.heat, {log: true});
     return player.spendHeat(player.heat);
   }
 }

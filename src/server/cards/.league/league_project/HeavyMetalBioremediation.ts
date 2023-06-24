@@ -72,8 +72,8 @@ export class HeavyMetalBioremediation extends Card implements IProjectCard {
       'Select amount of steel to spend',
       'Gain MC',
       (amount: number) => {
-        player.addResource(Resource.MEGACREDITS, player.getSteelValue() * amount);
-        player.deductResource(Resource.STEEL, (amount));
+        player.stock.add(Resource.MEGACREDITS, player.getSteelValue() * amount);
+        player.stock.deduct(Resource.STEEL, (amount));
 
         player.game.log('${0} gained ${1} MC', (b) => b.player(player).number(player.getSteelValue() * amount));
         return undefined;
@@ -88,8 +88,8 @@ export class HeavyMetalBioremediation extends Card implements IProjectCard {
       'Select amount of titanium to spend',
       'Gain MC',
       (amount: number) => {
-        player.addResource(Resource.MEGACREDITS, player.getTitaniumValue() * amount);
-        player.deductResource(Resource.TITANIUM, (amount));
+        player.stock.add(Resource.MEGACREDITS, player.getTitaniumValue() * amount);
+        player.stock.deduct(Resource.TITANIUM, (amount));
 
         player.game.log('${0} gained ${1} MC', (b) => b.player(player).number(player.getTitaniumValue() * amount));
         return undefined;

@@ -9,6 +9,7 @@ import {SelectOption} from '../../../inputs/SelectOption';
 import {OrOptions} from '../../../inputs/OrOptions';
 import {Player} from '../../../Player';
 import { SelectAmount } from '../../../../server/inputs/SelectAmount';
+import { add } from 'mnemonist/set';
 
 
 export class MarsHeavyIndustry extends Card implements IProjectCard {
@@ -62,8 +63,8 @@ export class MarsHeavyIndustry extends Card implements IProjectCard {
       'Select amount of steel to spend',
       'Gain energy',
       (amount: number) => {
-        player.addResource(Resource.ENERGY, amount);
-        player.deductResource(Resource.STEEL, (amount));
+        player.stock.add(Resource.ENERGY, amount);
+        player.stock.deduct(Resource.STEEL, (amount));
 
         player.game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));
         return undefined;
@@ -78,8 +79,8 @@ export class MarsHeavyIndustry extends Card implements IProjectCard {
       'Select amount of steel to spend',
       'Gain heat',
       (amount: number) => {
-        player.addResource(Resource.HEAT, (amount * 2));
-        player.deductResource(Resource.STEEL, (amount));
+        player.stock.add(Resource.HEAT, (amount * 2));
+        player.stock.deduct(Resource.STEEL, (amount));
 
         player.game.log('${0} gained ${1} heat', (b) => b.player(player).number(2 * amount));
         return undefined;
