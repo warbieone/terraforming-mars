@@ -9,7 +9,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {GainProduction} from '../../deferredActions/GainProduction';
-import {CardRequirements} from '../CardRequirements';
+import { CardRequirements } from '../requirements/CardRequirements';
 
 export class EnergyTapping extends Card implements IProjectCard {
   constructor() {

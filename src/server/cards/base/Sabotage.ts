@@ -9,7 +9,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all, digit} from '../Options';
-import {CardRequirements} from '../CardRequirements';
+import { CardRequirements } from '../requirements/CardRequirements';
 
 
 export class Sabotage extends Card implements IProjectCard {
