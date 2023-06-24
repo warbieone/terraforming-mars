@@ -4,7 +4,7 @@ import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import {CardRequirements} from '../../CardRequirements';
+import { CardRequirements } from '../../requirements/CardRequirements';
 import {played} from '../../Options';
 import {IPlayer} from '../../../IPlayer';
 
