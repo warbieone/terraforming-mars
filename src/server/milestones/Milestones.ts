@@ -22,7 +22,6 @@ import {Economizer} from './Economizer';
 import {Pioneer} from './Pioneer';
 import {LandSpecialist} from './LandSpecialist';
 import {Martian} from './Martian';
-import {Businessperson} from './Businessperson';
 import {Capitalist} from './Capitalist';
 import {Electrician} from './Electrician';
 import {Irrigator} from './Irrigator';
@@ -89,7 +88,6 @@ export const ARABIA_TERRA_MILESTONES = [
   new Pioneer(),
   new LandSpecialist(),
   new Martian(),
-  new Businessperson(),
 ];
 
 export const TERRA_CIMMERIA_MILESTONES = [
