@@ -313,9 +313,9 @@ export class Game implements IGame, Logger {
         gameOptions.initialDraftVariant ||
         gameOptions.ceoExtension) {
 
-          const specificCardsOwen = ['Teractor','Celestic','Terralabs Research','Septem Tribus','Valley Trust','Thorgate'];
-          const specificCardsLaura = ['Inventrix','Factorum','Aridor','Aphrodite','Point Luna','Splice'];
-          const specificCardsJoel = ['Mons Insurance','Astrodrill','Pristar','CrediCor','Poseidon','Manutech'];
+          const specificCardsOwen = ['Teractor','Celestic','Septem Tribus','Valley Trust','Thorgate'];
+          const specificCardsLaura = ['Inventrix','Factorum','Aphrodite','Point Luna','Splice'];
+          const specificCardsJoel = ['Mons Insurance','Astrodrill','Pristar','CrediCor','Manutech'];
          
           if (player.name !== 'Owen T' && player.name !== 'Laura T' && player.name !== 'Joel T') {
               for (let i = 0; i < gameOptions.startingCorporations; i++) {
