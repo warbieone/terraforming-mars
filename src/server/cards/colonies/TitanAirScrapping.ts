@@ -70,7 +70,7 @@ export class TitanAirScrapping extends Card implements IProjectCard {
 
   private addResource(player: IPlayer) {
     player.pay(Payment.of({titanium: 1}));
-    player.addResourceTo(this, {qty: 2, log: true});
+    player.addResourceTo(this, {qty: 4, log: true});
     return undefined;
   }
 
