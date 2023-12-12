@@ -1,10 +1,12 @@
-import * as http from 'http';
 import {Database} from '../database/Database';
 import {GameLoader} from '../database/GameLoader';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {LoadGameFormModel} from '../../common/models/LoadGameFormModel';
+import {Request} from '../Request';
+import {Response} from '../Response';
+import {isGameId} from '../../common/Types';
 
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();
@@ -12,7 +14,7 @@ export class LoadGame extends Handler {
     super();
   }
 
-  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
+  public override put(req: Request, res: Response, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', function(data) {
@@ -22,8 +24,10 @@ export class LoadGame extends Handler {
         try {
           const gameReq: LoadGameFormModel = JSON.parse(body);
 
-          // TODO(kberg): verify that the game ID is of the right type.
           const gameId = gameReq.gameId;
+          if (!isGameId(gameId)) {
+            throw new Error('Invalid game id');
+          }
           // This should probably be behind some kind of verification that prevents just
           // anyone from rolling back a large number of steps.
           const rollbackCount = gameReq.rollbackCount;

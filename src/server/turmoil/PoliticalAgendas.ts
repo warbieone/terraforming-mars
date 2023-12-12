@@ -22,7 +22,7 @@ export class PoliticalAgendas {
 
   public static newInstance(
     agendaStyle: AgendaStyle,
-    parties: Array<IParty>): PoliticalAgendasData {
+    parties: ReadonlyArray<IParty>): PoliticalAgendasData {
     const agendas: Map<PartyName, Agenda> = new Map();
 
     parties.forEach((p) => {
@@ -74,7 +74,7 @@ export class PoliticalAgendas {
     if (politicalAgendasData.agendaStyle === AgendaStyle.CHAIRMAN && chairman !== 'NEUTRAL') {
       const agenda = this.getAgenda(turmoil, rulingParty.name);
       game.defer(new ChoosePoliticalAgenda(
-        game.getPlayerById(chairman),
+        chairman,
         rulingParty,
         (bonusId) => {
           agenda.bonusId = bonusId;
@@ -104,7 +104,7 @@ export class PoliticalAgendas {
   }
 
   // Overridable for tests
-  public static defaultRandomElement<T>(list: Array<T>): T {
+  public static defaultRandomElement<T>(list: ReadonlyArray<T>): T {
     const rng = Math.floor(Math.random() * list.length);
     return list[rng];
   }

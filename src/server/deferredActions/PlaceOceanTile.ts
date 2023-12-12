@@ -1,16 +1,19 @@
 import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../boards/ISpace';
 import {DeferredAction, Priority} from './DeferredAction';
 import {PlacementType} from '../boards/PlacementType';
+import {Space} from '../boards/Space';
 
-export class PlaceOceanTile extends DeferredAction {
+type Options = {
+  title?: string,
+  on?: PlacementType,
+  spaces?: Array<Space>,
+};
+
+export class PlaceOceanTile extends DeferredAction<Space> {
   constructor(
     player: IPlayer,
-    private options?: {
-      on?: PlacementType,
-      title?: string,
-    }) {
+    private options: Options = {}) {
     super(player, Priority.PLACE_OCEAN_TILE);
   }
 
@@ -19,18 +22,22 @@ export class PlaceOceanTile extends DeferredAction {
       return undefined;
     }
 
-    const on = this.options?.on || 'ocean';
-    const availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, on);
-    const title = this.options?.title ?? this.getTitle(on);
+    let title = this.options.title ?? this.getTitle('ocean');
+    let availableSpaces: ReadonlyArray<Space> = [];
+    if (this.options.spaces !== undefined) {
+      availableSpaces = this.options.spaces;
+    } else {
+      const on = this.options?.on || 'ocean';
+      availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, on);
+      title = this.options?.title ?? this.getTitle(on);
+    }
 
-    return new SelectSpace(
-      title,
-      availableSpaces,
-      (space: ISpace) => {
+    return new SelectSpace(title, availableSpaces)
+      .andThen((space) => {
         this.player.game.addOcean(this.player, space);
+        this.cb(space);
         return undefined;
-      },
-    );
+      });
   }
 
   private getTitle(type: PlacementType) {

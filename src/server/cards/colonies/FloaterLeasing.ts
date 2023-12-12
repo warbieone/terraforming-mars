@@ -1,9 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
-import {CardResource} from '../../../common/CardResource';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
@@ -14,6 +11,10 @@ export class FloaterLeasing extends Card implements IProjectCard {
       cost: 3,
       name: CardName.FLOATER_LEASING,
       type: CardType.AUTOMATED,
+
+      behavior: {
+        production: {megacredits: {floaters: {}, per: 3}},
+      },
 
       metadata: {
         cardNumber: 'C10',

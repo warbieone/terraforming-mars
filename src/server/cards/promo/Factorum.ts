@@ -1,5 +1,4 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
@@ -7,14 +6,14 @@ import {Resource} from '../../../common/Resource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {TITLES} from '../../inputs/titles';
 
-export class Factorum extends Card implements IActionCard, ICorporationCard {
+export class Factorum extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.FACTORUM,
       tags: [Tag.POWER, Tag.BUILDING],
       startingMegaCredits: 37,
@@ -47,12 +46,11 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
   public action(player: IPlayer) {
     const increaseEnergy = new SelectOption(
       'Increase your energy production 1 step',
-      'Increase production',
-      () => {
+      'Increase production')
+      .andThen(() => {
         player.production.add(Resource.ENERGY, 1, {log: true});
         return undefined;
-      },
-    );
+      });
 
     const drawBuildingCard = new SelectOption('Spend 1 Energy to draw a building card', 'Draw card', () => {
       player.energy -= 1;

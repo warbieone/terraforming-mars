@@ -4,7 +4,7 @@ import {TRSource} from '../../common/cards/TRSource';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
-import {Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
 import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
@@ -14,9 +14,9 @@ import {PlaceMoonHabitatTile} from '../moon/PlaceMoonHabitatTile';
 import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
 import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
-import {IPlayer} from '../IPlayer';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Behavior} from './Behavior';
-import {Counter} from './Counter';
+import {Counter, ICounter} from './Counter';
 import {Turmoil} from '../turmoil/Turmoil';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {BehaviorExecutor} from './BehaviorExecutor';
@@ -26,17 +26,27 @@ import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {Payment} from '../../common/inputs/Payment';
+import {SelectResources} from '../inputs/SelectResources';
+import {TITLES} from '../inputs/titles';
+import {message} from '../logs/MessageBuilder';
+import {IdentifySpacesDeferred} from '../underworld/IdentifySpacesDeferred';
+import {ExcavateSpacesDeferred} from '../underworld/ExcavateSpacesDeferred';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {SelectResource} from '../inputs/SelectResource';
+import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCard';
+import {isIProjectCard} from '../cards/IProjectCard';
 
 export class Executor implements BehaviorExecutor {
-  public canExecute(behavior: Behavior, player: IPlayer, card: ICard) {
+  public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
     const ctx = new Counter(player, card);
+    const asTrSource = this.toTRSource(behavior, ctx);
 
     if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
       return false;
     }
 
     if (behavior.or) {
-      if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card))) {
+      if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card, canAffordOptions))) {
         return false;
       }
     }
@@ -57,6 +67,7 @@ export class Executor implements BehaviorExecutor {
       // }
     }
 
+    // TODO(kberg): Spend is not combined with PredictedCost.
     if (behavior.spend !== undefined) {
       const spend = behavior.spend;
       if (spend.megacredits && !player.canAfford(spend.megacredits)) {
@@ -74,11 +85,26 @@ export class Executor implements BehaviorExecutor {
       if (spend.energy && player.energy < spend.energy) {
         return false;
       }
+      if (spend.heat) {
+        if (player.availableHeat() < spend.heat) {
+          return false;
+        }
+        if (!player.canAfford({
+          cost: 0,
+          reserveUnits: Units.of({heat: spend.heat}),
+          tr: asTrSource,
+        })) {
+          return false;
+        }
+      }
       if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
         return false;
       }
-      if (spend.heat) {
-        throw new Error('spending heat not yet supported.');
+      if (spend.resourceFromAnyCard && player.getCardsWithResources(spend.resourceFromAnyCard.type).length === 0) {
+        return false;
+      }
+      if (spend.corruption && player.underworldData.corruption < spend.corruption) {
+        return false;
       }
     }
 
@@ -96,20 +122,20 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.city !== undefined) {
       if (behavior.city.space === undefined) {
-        if (player.game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city').length === 0) {
+        if (player.game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city', canAffordOptions).length === 0) {
           return false;
         }
       }
     }
 
     if (behavior.greenery !== undefined) {
-      if (player.game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery').length === 0) {
+      if (player.game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery', canAffordOptions).length === 0) {
         return false;
       }
     }
 
     if (behavior.tile !== undefined) {
-      if (player.game.board.getAvailableSpacesForType(player, behavior.tile.on).length === 0) {
+      if (player.game.board.getAvailableSpacesForType(player, behavior.tile.on, canAffordOptions).length === 0) {
         return false;
       }
     }
@@ -117,9 +143,25 @@ export class Executor implements BehaviorExecutor {
     if (behavior.addResourcesToAnyCard !== undefined) {
       const arctac = behavior.addResourcesToAnyCard;
       if (!Array.isArray(arctac) && arctac.mustHaveCard === true) {
-        const action = new AddResourcesToCard(player, arctac.type, {count: ctx.count(arctac.count), restrictedTag: arctac.tag});
-        if (action.getCards().length === 0) {
+        const action = new AddResourcesToCard(player, arctac.type, {
+          count: ctx.count(arctac.count),
+          restrictedTag: arctac.tag,
+          min: arctac.min,
+          robotCards: arctac.robotCards !== undefined,
+        });
+        const cards = action.getCards();
+        const count = cards[0].length + cards[1].length;
+        if (count === 0) {
           return false;
+        }
+        // Not playable if the behavior is based on spending a resource
+        // from itself to add to itself, like Applied Science.
+        if (count === 1 && (behavior.spend?.resourcesHere ?? 0 > 0)) {
+          // TODO(kberg): also check wither arctac.min + spend is enough.
+          // but that's just to make this future-proof.
+          if (cards[0][0]?.name === card.name) {
+            return false;
+          }
         }
       }
     }
@@ -136,7 +178,7 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.turmoil) {
       if (behavior.turmoil.sendDelegates) {
-        if (Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) < behavior.turmoil.sendDelegates.count) {
+        if (Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player) < behavior.turmoil.sendDelegates.count) {
           return false;
         }
       }
@@ -172,15 +214,16 @@ export class Executor implements BehaviorExecutor {
       const options = behavior.or.behaviors
         .filter((behavior) => this.canExecute(behavior, player, card))
         .map((behavior) => {
-          return new SelectOption(behavior.title, undefined, () => {
-            this.execute(behavior, player, card);
-            return undefined;
-          });
+          return new SelectOption(behavior.title)
+            .andThen(() => {
+              this.execute(behavior, player, card);
+              return undefined;
+            });
         });
 
       // TODO(kberg): move this behavior to OrOptions?
       if (options.length === 1 && behavior.or.autoSelect === true) {
-        options[0].cb();
+        options[0].cb(undefined);
       } else {
         player.defer(new OrOptions(...options));
       }
@@ -188,15 +231,13 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.spend !== undefined) {
       const spend = behavior.spend;
+      const remainder = {...behavior};
+      delete remainder['spend'];
+
       if (spend.megacredits) {
         player.game.defer(new SelectPaymentDeferred(player, spend.megacredits, {
-          title: 'Select how to pay for action',
-          afterPay: () => {
-            const copy = {...behavior};
-            delete copy['spend'];
-            this.execute(copy, player, card);
-          },
-        }));
+          title: TITLES.payForCardAction(card.name),
+        })).andThen(() => this.execute(remainder, player, card));
         // Exit early as the rest of handled by the deferred action.
         return;
       }
@@ -212,10 +253,24 @@ export class Executor implements BehaviorExecutor {
         player.stock.deduct(Resource.ENERGY, spend.energy);
       }
       if (spend.heat) {
-        throw new Error('Spending heat not supported yet.');
+        player.defer(player.spendHeat(spend.heat, () => {
+          this.execute(remainder, player, card);
+          return undefined;
+        }));
+        // Exit early as the rest of handled by the deferred action.
+        return;
       }
       if (spend.resourcesHere) {
         player.removeResourceFrom(card, spend.resourcesHere);
+      }
+      if (spend.resourceFromAnyCard) {
+        player.game.defer(new RemoveResourcesFromCard(player, spend.resourceFromAnyCard.type, 1, {ownCardsOnly: true, blockable: false}))
+          .andThen(() => this.execute(remainder, player, card));
+        // Exit early as the rest of handled by the deferred action.
+        return;
+      }
+      if (spend.corruption) {
+        UnderworldExpansion.loseCorruption(player, spend.corruption);
       }
     }
 
@@ -226,6 +281,27 @@ export class Executor implements BehaviorExecutor {
     if (behavior.stock) {
       const units = ctx.countUnits(behavior.stock);
       player.stock.addUnits(units, {log: true});
+    }
+    if (behavior.standardResource) {
+      const entry = behavior.standardResource;
+      const count = typeof(entry) === 'number' ? entry : entry.count;
+      const same = typeof(entry) === 'number' ? false : entry.same ?? false;
+      if (same === false) {
+        player.defer(
+          new SelectResources(
+            player,
+            count,
+            message('Gain ${0} standard resources', (b) => b.number(count))));
+      } else {
+        player.defer(
+          new SelectResource(
+            message('Gain ${0} units of a standard resource', (b) => b.number(count)),
+            Units.keys,
+            (unit) => {
+              player.stock.add(Units.ResourceMap[unit], count, {log: true});
+              return undefined;
+            }));
+      }
     }
     if (behavior.steelValue === 1) {
       player.increaseSteelValue();
@@ -246,16 +322,13 @@ export class Executor implements BehaviorExecutor {
         if (drawCard.keep === undefined && drawCard.pay === undefined) {
           player.drawCard(ctx.count(drawCard.count), {tag: drawCard.tag, resource: drawCard.resource, cardType: drawCard.type});
         } else {
-          const input = player.drawCardKeepSome(ctx.count(drawCard.count), {
+          player.drawCardKeepSome(ctx.count(drawCard.count), {
             tag: drawCard.tag,
             resource: drawCard.resource,
             cardType: drawCard.type,
             keepMax: drawCard.keep,
             paying: drawCard.pay,
           });
-          // By moving behavior to this object, Priority for this action is changing from DEFAULT.
-          // TODO(kberg): remove this comment block by 2023-10-01, or once bug reports on card drawing order subsides.
-          player.defer(input, Priority.DRAW_CARDS);
         }
       }
     }
@@ -268,23 +341,32 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.tr !== undefined) {
-      player.increaseTerraformRating(behavior.tr);
+      player.increaseTerraformRating(ctx.count(behavior.tr));
     }
     const addResources = behavior.addResources;
     if (addResources !== undefined) {
       const count = ctx.count(addResources);
       player.game.defer(new SimpleDeferredAction(player, () => {
-        player.addResourceTo(card, count);
+        player.addResourceTo(card, {qty: count, log: true});
         return undefined;
       }));
     }
 
     if (behavior.addResourcesToAnyCard) {
       const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
-      for (const entry of array) {
-        const count = ctx.count(entry.count);
+      for (const arctac of array) {
+        const count = ctx.count(arctac.count);
         if (count > 0) {
-          player.game.defer(new AddResourcesToCard(player, entry.type, {count, restrictedTag: entry.tag}));
+          player.game.defer(
+            new AddResourcesToCard(
+              player,
+              arctac.type,
+              {
+                count,
+                restrictedTag: arctac.tag,
+                min: arctac.min,
+                robotCards: arctac.robotCards !== undefined,
+              }));
         }
       }
     }
@@ -344,7 +426,7 @@ export class Executor implements BehaviorExecutor {
           card: card.name,
         },
         on: tile.on,
-        title: tile.title,
+        title: tile.title ?? message('Select space for ${0} tile', (b) => b.cardName(card.name)),
         adjacencyBonus: tile.adjacencyBonus,
       }));
     }
@@ -397,14 +479,35 @@ export class Executor implements BehaviorExecutor {
         if (moon.tile.space !== undefined) {
           MoonExpansion.addTile(player, moon.tile.space, {tileType: moon.tile.type, card: card?.name});
         } else {
-          player.game.defer(new PlaceSpecialMoonTile(
-            player, {tileType: moon.tile.type, card: card?.name},
-            moon.tile.title));
+          player.game.defer(new PlaceSpecialMoonTile(player, {tileType: moon.tile.type, card: card?.name}));
         }
       }
       if (moon.habitatRate !== undefined) MoonExpansion.raiseHabitatRate(player, moon.habitatRate);
       if (moon.miningRate !== undefined) MoonExpansion.raiseMiningRate(player, moon.miningRate);
       if (moon.logisticsRate !== undefined) MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
+    }
+
+    if (behavior.underworld !== undefined) {
+      const underworld = behavior.underworld;
+      if (underworld.identify !== undefined) {
+        player.game.defer(new IdentifySpacesDeferred(player, ctx.count(underworld.identify)));
+      }
+      if (underworld.excavate !== undefined) {
+        const excavate = underworld.excavate;
+        if (typeof(excavate) === 'number') {
+          player.game.defer(new ExcavateSpacesDeferred(player, excavate));
+        } else {
+          player.game.defer(new ExcavateSpacesDeferred(player, ctx.count(excavate.count), excavate.ignorePlacementRestrictions));
+        }
+      }
+      if (underworld.corruption !== undefined) {
+        UnderworldExpansion.gainCorruption(player, ctx.count(underworld.corruption), {log: true});
+      }
+      if (underworld.markThisGeneration !== undefined) {
+        if (isIProjectCard(card)) {
+          card.generationUsed = player.game.generation;
+        }
+      }
     }
   }
 
@@ -436,10 +539,17 @@ export class Executor implements BehaviorExecutor {
     }
   }
 
-  public toTRSource(behavior: Behavior): TRSource {
+  public toTRSource(behavior: Behavior, ctx: ICounter): TRSource {
+    let tr: number | undefined = undefined;
+    if (behavior.tr !== undefined) {
+      if (typeof(behavior.tr) === 'number') {
+        tr = behavior.tr;
+      } else {
+        tr = ctx.count(behavior.tr);
+      }
+    }
     const trSource: TRSource = {
-      tr: behavior.tr,
-
+      tr: tr,
       temperature: behavior.global?.temperature,
       oxygen: (behavior.global?.oxygen ?? 0) + (behavior.greenery !== undefined ? 1 : 0),
       venus: behavior.global?.venus,

@@ -7,8 +7,8 @@ import {ALL_TAGS, Tag} from '../../common/cards/Tag';
 import {ICorporationCard, isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
-import {CeoExtension} from '../CeoExtension';
 import {IPlayer} from '../IPlayer';
+import {OneOrArray} from '../../common/utils/types';
 
 export type CountingMode =
   'raw' | // Count face-up tags literally, including Leavitt Station.
@@ -20,7 +20,7 @@ export type CountingMode =
 export type DistinctCountMode =
   'default' | // Count all tags in played cards, and then add in all the wild tags.
   'milestone' | // Like default with special conditions for milestones (Chimera)
-  'globalEvent'; // Like default, but does not reduce the count size based on max tags in the game. Should be removed.
+  'globalEvent'; // Like default, but does not apply wild tags, which are used in the action phase.
 
 export type MultipleCountMode =
   'default' | // Count each tag individually, add wild tags, and (Moon) Earth Embassy.
@@ -72,11 +72,6 @@ export class Tags {
     // Leavitt Station hook
     if (tag === Tag.SCIENCE && this.player.scienceTagCount > 0) {
       tagCount += this.player.scienceTagCount;
-    }
-
-    if (tag === Tag.WILD || includeTagSubstitutions) {
-      // CEO Xavier hook
-      tagCount += CeoExtension.getBonusWildTags(this.player);
     }
 
     if (includeTagSubstitutions) {
@@ -132,7 +127,7 @@ export class Tags {
     return false;
   }
 
-  public cardTagCount(card: ICard, target: Tag | Array<Tag>): number {
+  public cardTagCount(card: ICard, target: OneOrArray<Tag>): number {
     let count = 0;
     for (const tag of card.tags) {
       if (tag === target) {
@@ -230,12 +225,10 @@ export class Tags {
       uniqueTags.add(extraTag);
     }
 
-    wildTagCount += CeoExtension.getBonusWildTags(this.player);
-
     // Leavitt Station hook
     if (this.player.scienceTagCount > 0) uniqueTags.add(Tag.SCIENCE);
 
-    // TODO(kberg): I think the global event case is unnecessary.
+    // Global events occur outside the action phase. Stop counting here, before wild tags apply.
     if (mode === 'globalEvent') return uniqueTags.size;
 
     if (mode === 'milestone' && this.player.isCorporation(CardName.CHIMERA)) wildTagCount--;
@@ -268,8 +261,8 @@ export class Tags {
     return false;
   }
 
-  public gainScienceTag() {
-    this.player.scienceTagCount++;
+  public gainScienceTag(count: number) {
+    this.player.scienceTagCount += count;
   }
 
   /**
@@ -281,6 +274,13 @@ export class Tags {
    * Does not include Odyssey behavior.
    */
   public numberOfCardsWithNoTags(): number {
-    return this.player.tableau.filter((card) => card.type !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
+    const filtered = this.player.tableau.filter((card) => {
+      // Special-case pharmacy union which is out of play once it's disabled.
+      if (card.name === CardName.PHARMACY_UNION && card.isDisabled === true) {
+        return false;
+      }
+      return card.type !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD);
+    });
+    return filtered.length;
   }
 }

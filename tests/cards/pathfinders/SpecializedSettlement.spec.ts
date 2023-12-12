@@ -12,6 +12,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
+import {OneOrArray} from '../../../src/common/utils/types';
 
 describe('SpecializedSettlement', function() {
   let card: SpecializedSettlement;
@@ -143,7 +144,7 @@ describe('SpecializedSettlement', function() {
     hazardSpace.tile = {tileType: TileType.DUST_STORM_MILD, protectedHazard: false};
 
     const selectSpace = cast(card.play(player), SelectSpace);
-    expect(selectSpace.availableSpaces).contains(hazardSpace);
+    expect(selectSpace.spaces).contains(hazardSpace);
     selectSpace.cb(hazardSpace);
 
     expect(hazardSpace.tile?.tileType).eq(TileType.CITY);
@@ -154,14 +155,14 @@ describe('SpecializedSettlement', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
   });
 
-  function singleResourceTest(spaceBonus: SpaceBonus | Array<SpaceBonus>, stock: Partial<Units>, production: Partial<Units>) {
+  function singleResourceTest(spaceBonus: OneOrArray<SpaceBonus>, stock: Partial<Units>, production: Partial<Units>) {
     player.production.override({energy: 1});
     const action = card.play(player);
 
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 3}));
 
     const selectSpace = cast(action, SelectSpace);
-    const space = selectSpace.availableSpaces[0];
+    const space = selectSpace.spaces[0];
     space.bonus = spaceBonus instanceof Array ? spaceBonus : [spaceBonus];
     selectSpace.cb(space);
 

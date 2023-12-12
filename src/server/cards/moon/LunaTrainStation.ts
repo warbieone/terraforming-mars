@@ -7,7 +7,6 @@ import {TileType} from '../../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {digit} from '../Options';
 
 export class LunaTrainStation extends Card {
@@ -16,19 +15,19 @@ export class LunaTrainStation extends Card {
       name: CardName.LUNA_TRAIN_STATION,
       type: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
-      cost: 20,
+      cost: 24,
       reserveUnits: {steel: 2},
       victoryPoints: 'special',
 
       behavior: {
         production: {megacredits: 4},
         moon: {
-          tile: {type: TileType.LUNA_TRAIN_STATION, title: 'Select a space for Luna Train Station.'},
+          tile: {type: TileType.LUNA_TRAIN_STATION},
           logisticsRate: 1,
         },
       },
 
-      requirements: CardRequirements.builder((b) => b.logisticRate(5)),
+      requirements: {logisticRate: 5},
 
       metadata: {
         description: 'Requires a logistic rate of 5 or higher. Spend 2 steel. ' +
@@ -42,6 +41,7 @@ export class LunaTrainStation extends Card {
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(2, true),
       },
+      tilesBuilt: [TileType.LUNA_TRAIN_STATION],
     });
   }
 

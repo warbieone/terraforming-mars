@@ -5,6 +5,16 @@ import {IPlayer} from '../IPlayer';
 import {Countable, CountableUnits} from './Countable';
 import {hasIntersection} from '../../common/utils/utils';
 import {MoonExpansion} from '../moon/MoonExpansion';
+import {CardResource} from '../../common/CardResource';
+import * as utils from '../../common/utils/utils'; // Since there's already a sum variable.
+
+/**
+ * Counts things in game state.
+ */
+export interface ICounter {
+  count(countable: Countable, context?: 'default' | 'vps'): number;
+  countUnits(countableUnits: Partial<CountableUnits>): Units;
+}
 
 /**
  * Counts things in game state.
@@ -35,7 +45,7 @@ export class Counter {
       return countable;
     }
 
-    let sum = 0;
+    let sum = countable.start ?? 0;
 
     const player = this.player;
     const card = this.card;
@@ -45,24 +55,28 @@ export class Counter {
       const p = (countable.all === false) ? player : undefined;
       switch (countable.cities.where) {
       case 'offmars':
-        sum = game.getCitiesOffMarsCount(p);
+        sum = game.board.getCitiesOffMars(p).length;
         break;
       case 'onmars':
-        sum += game.getCitiesOnMarsCount(p);
+        sum += game.board.getCitiesOnMars(p).length;
         break;
       case 'everywhere':
       default:
-        sum += game.getCitiesCount(p);
+        sum += game.board.getCities(p).length;
       }
     }
 
     if (countable.oceans !== undefined) {
-      sum += game.board.getOceanCount({wetlands: true});
+      sum += game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
+    }
+
+    if (countable.floaters !== undefined) {
+      sum += player.getResourceCount(CardResource.FLOATER);
     }
 
     if (countable.greeneries !== undefined) {
       const p = (countable.all === false) ? player : undefined;
-      sum += game.getGreeneriesCount(p);
+      sum += game.board.getGreeneries(p).length;
     }
     if (countable.tag !== undefined) {
       const tag = countable.tag;
@@ -100,11 +114,21 @@ export class Counter {
       sum += card.resourceCount;
     }
 
+    if (countable.colonies !== undefined) {
+      player.game.colonies.forEach((colony) => {
+        if (countable.all) {
+          sum += colony.colonies.length;
+        } else {
+          sum += colony.colonies.filter((colony) => colony === player.id).length;
+        }
+      });
+    }
+
     if (countable.moon !== undefined) {
       const moon = countable.moon;
       MoonExpansion.ifMoon(game, (moonData) => {
         if (moon.habitatRate) {
-          sum += moonData.colonyRate;
+          sum += moonData.habitatRate;
         }
         if (moon.miningRate) {
           sum += moonData.miningRate;
@@ -121,6 +145,24 @@ export class Counter {
       }
       if (moon.road) {
         sum += MoonExpansion.spaces(game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
+      }
+    }
+
+    if (countable.underworld !== undefined) {
+      const underworld = countable.underworld;
+      if (underworld.corruption !== undefined) {
+        if (countable.all === true) {
+          sum += utils.sum(game.getPlayers().map((p) => p.underworldData.corruption));
+        } else {
+          sum += player.underworldData.corruption;
+        }
+      }
+      if (underworld.excavationMarkers !== undefined) {
+        if (countable.all) {
+          sum += player.game.board.spaces.filter((space) => space.excavator !== undefined).length;
+        } else {
+          sum += player.game.board.spaces.filter((space) => space.excavator === player).length;
+        }
       }
     }
 

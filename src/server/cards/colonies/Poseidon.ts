@@ -1,10 +1,8 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Poseidon extends Card implements ICorporationCard {
+export class Poseidon extends CorporationCard {
   constructor() {
     super({
       name: CardName.POSEIDON,

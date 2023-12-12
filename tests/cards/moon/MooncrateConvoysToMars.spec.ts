@@ -1,10 +1,10 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MooncrateConvoysToMars} from '../../../src/server/cards/moon/MooncrateConvoysToMars';
-import {expect} from 'chai';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {MarsFirst} from '../../../src/server/turmoil/parties/MarsFirst';
@@ -15,7 +15,7 @@ describe('MooncrateConvoysToMars', () => {
   let player1: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: MooncrateConvoysToMars;
 
   beforeEach(() => {

@@ -5,7 +5,7 @@ import {cast} from '../../TestingUtils';
 describe('GreatAquifer', function() {
   it('Should play', function() {
     const card = new GreatAquifer();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
   });
 });

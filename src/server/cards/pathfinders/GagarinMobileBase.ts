@@ -1,26 +1,23 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Tag} from '../../../common/cards/Tag';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {IActionCard} from '../ICard';
 import {BoardType} from '../../boards/BoardType';
 import {Board} from '../../boards/Board';
+import {message} from '../../logs/MessageBuilder';
 
-export class GagarinMobileBase extends Card implements IActionCard, ICorporationCard {
+export class GagarinMobileBase extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.GAGARIN_MOBILE_BASE,
       tags: [Tag.SCIENCE],
       startingMegaCredits: 42,
-      initialActionText: 'Place Gagarin Moble Base on ANY space ON MARS',
+      initialActionText: 'Place Gagarin Mobile Base on ANY space ON MARS',
 
       metadata: {
         cardNumber: 'PfC13',
@@ -38,15 +35,20 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
     });
   }
 
-  private closestSpaces(board: Board, availableSpaces: Array<ISpace>, space: ISpace): Array<ISpace> {
-    const visitedSpaces = new Set<ISpace>();
+  private closestSpaces(board: Board, availableSpaces: Array<Space>, space: Space): Array<Space> {
+    const visitedSpaces = new Set<Space>();
 
-    function searchSet(spaces: Set<ISpace>): Array<ISpace> {
+    function searchSet(spaces: Set<Space>): Array<Space> {
       if (spaces.size === 0) {
         return [];
       }
       const adjacentSpaces = new Set(Array.from(spaces).map((s) => board.getAdjacentSpaces(s)).flat());
+      const sizeBefore = visitedSpaces.size;
       adjacentSpaces.forEach((s) => visitedSpaces.add(s));
+      const sizeAfter = visitedSpaces.size;
+      if (sizeBefore === sizeAfter) {
+        return [];
+      }
 
       const candidateSpaces = [...adjacentSpaces].filter((s) => availableSpaces.includes(s));
       if (candidateSpaces.length > 0) {
@@ -64,7 +66,7 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
     const visited = player.game.gagarinBase;
     const availableSpaces = board.spaces
       .filter((space) => space.spaceType !== SpaceType.COLONY)
-      .filter((space) => !space.bonus.includes(SpaceBonus.RESTRICTED))
+      .filter((space) => space.spaceType !== SpaceType.RESTRICTED)
       .filter((space) => space.tile === undefined)
       .filter((space) => !visited.includes(space.id));
 
@@ -75,25 +77,29 @@ export class GagarinMobileBase extends Card implements IActionCard, ICorporation
     return this.closestSpaces(board, availableSpaces, currentSpace);
   }
 
-  public canAct(_player: IPlayer): boolean {
-    return true;
-    // return this.visited.length < player.game.spaces.length;
+  public canAct(player: IPlayer): boolean {
+    return this.availableSpaces(player).length > 0;
   }
 
   public action(player: IPlayer) {
-    return new SelectSpace('Select new space for Gagarin Mobile Base', this.availableSpaces(player), (space) => {
-      player.game.gagarinBase.unshift(space.id);
-      player.game.grantSpaceBonuses(player, space);
-
-      return undefined;
-    });
+    const spaces = this.availableSpaces(player);
+    if (spaces.length > 0) {
+      return new SelectSpace(
+        message('Select new space for ${0}', (b) => b.card(this)), this.availableSpaces(player))
+        .andThen((space) => {
+          player.game.gagarinBase.unshift(space.id);
+          player.game.grantSpaceBonuses(player, space);
+          return undefined;
+        });
+    }
+    return undefined;
   }
 
   public initialAction(player: IPlayer) {
     return this.action(player);
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
     if (boardType === BoardType.MOON) {
       return;
     }

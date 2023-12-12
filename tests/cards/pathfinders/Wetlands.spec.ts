@@ -7,12 +7,11 @@ import {addCity, addGreenery, addOcean, cast, fakeCard, runAllActions, setOxygen
 import {TestPlayer} from '../../TestPlayer';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
-import {CardRequirements} from '../../../src/server/cards/requirements/CardRequirements';
 import {CardName} from '../../../src/common/cards/CardName';
 
-const toSpaceId = (space: ISpace): string => space.id;
+const toSpaceId = (space: Space): string => space.id;
 
 describe('Wetlands', function() {
   let card: Wetlands;
@@ -104,11 +103,11 @@ describe('Wetlands', function() {
     expect(player.plants).eq(3);
 
     const selectSpace = cast(action, SelectSpace);
-    expect(selectSpace.availableSpaces.map(toSpaceId)).deep.eq(['09', '23']);
+    expect(selectSpace.spaces.map(toSpaceId)).deep.eq(['09', '23']);
 
     expect(game.getOxygenLevel()).eq(0);
 
-    const space = selectSpace.availableSpaces[0];
+    const space = selectSpace.spaces[0];
     selectSpace.cb(space);
     expect(space.tile?.tileType).eq(TileType.WETLANDS);
     runAllActions(game);
@@ -130,7 +129,7 @@ describe('Wetlands', function() {
   });
 
   it('Wetlands counts toward ocean requirements', () => {
-    const fake = fakeCard({requirements: CardRequirements.builder((b) => b.oceans(3))});
+    const fake = fakeCard({requirements: [{oceans: 3}]});
     addOcean(player, '15');
     addOcean(player, '16');
     expect(player.canPlay(fake)).is.false;
@@ -172,11 +171,11 @@ describe('Wetlands', function() {
     expect(player.plants).eq(3);
 
     const selectSpace = cast(action, SelectSpace);
-    expect(selectSpace.availableSpaces.map(toSpaceId)).deep.eq(['09', '23']);
+    expect(selectSpace.spaces.map(toSpaceId)).deep.eq(['09', '23']);
 
     expect(game.getOxygenLevel()).eq(0);
 
-    const space = selectSpace.availableSpaces[0];
+    const space = selectSpace.spaces[0];
     expect(space.id).eq(claimedSpace.id);
     selectSpace.cb(space);
     expect(space.tile?.tileType).eq(TileType.WETLANDS);

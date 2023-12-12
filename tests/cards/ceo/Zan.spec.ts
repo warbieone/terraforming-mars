@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 
 import {Zan} from '../../../src/server/cards/ceos/Zan';
 import {ReleaseOfInertGases} from '../../../src/server/cards/base/ReleaseOfInertGases';
-import {forceGenerationEnd, setRulingPartyAndRulingPolicy, runAllActions} from '../../TestingUtils';
+import {forceGenerationEnd, setRulingParty, runAllActions} from '../../TestingUtils';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Politician} from '../../../src/server/awards/terraCimmeria/Politician';
 
@@ -22,9 +22,7 @@ describe('Zan', function() {
   });
 
   it('Not affected by Reds policy when raising TR', function() {
-    const turmoil = game.turmoil!;
-    const reds = turmoil.getPartyByName(PartyName.REDS)!;
-    setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[0].id);
+    setRulingParty(game, PartyName.REDS);
 
     player.megaCredits = 3;
     player.increaseTerraformRating();
@@ -41,17 +39,17 @@ describe('Zan', function() {
   it('Takes OPG action', function() {
     const turmoil = game.turmoil!;
     player.megaCredits = 0;
-    const expectedMegagredits = turmoil.getAvailableDelegateCount(player.id);
+    const expectedMegagredits = turmoil.getAvailableDelegateCount(player);
     card.action(player);
     while (game.deferredActions.length) {
       game.deferredActions.pop()!.execute();
     }
 
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(0);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(0);
     expect(player.megaCredits).eq(expectedMegagredits);
 
     expect(turmoil.dominantParty.name).eq(PartyName.REDS);
-    expect(turmoil.dominantParty.partyLeader).eq(player.id);
+    expect(turmoil.dominantParty.partyLeader).eq(player);
     expect(card.isDisabled).is.true;
   });
 

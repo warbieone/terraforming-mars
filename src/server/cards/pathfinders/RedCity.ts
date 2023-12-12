@@ -4,14 +4,16 @@ import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {AresHandler} from '../../ares/AresHandler';
 import {Board} from '../../boards/Board';
 import {IProjectCard} from '../IProjectCard';
+import {message} from '../../logs/MessageBuilder';
+import {Space} from '../../boards/Space';
+import {SpaceType} from '../../../common/boards/SpaceType';
+import {isHazardTileType} from '../../../common/AresTileType';
 
 export class RedCity extends Card implements IProjectCard {
   constructor() {
@@ -25,7 +27,7 @@ export class RedCity extends Card implements IProjectCard {
         production: {energy: -1, megacredits: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
+      requirements: {party: PartyName.REDS},
       victoryPoints: 'special',
 
       metadata: {
@@ -52,10 +54,13 @@ export class RedCity extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space for Red City', this.availableRedCitySpaces(player), (space) => {
-      player.game.addTile(player, space, {tileType: TileType.RED_CITY, card: this.name});
-      return undefined;
-    });
+    return new SelectSpace(
+      message('Select space for ${0}', (b) => b.card(this)),
+      this.availableRedCitySpaces(player))
+      .andThen((space) => {
+        player.game.addTile(player, space, {tileType: TileType.RED_CITY, card: this.name});
+        return undefined;
+      });
   }
 
   public override getVictoryPoints(player: IPlayer): number {
@@ -65,6 +70,10 @@ export class RedCity extends Card implements IProjectCard {
     }
 
     const neighbors = player.game.board.getAdjacentSpaces(space);
-    return neighbors.filter((neighbor) => neighbor.tile === undefined || AresHandler.hasHazardTile(neighbor)).length;
+    return neighbors.filter((neighbor) => this.isEmpty(neighbor)).length;
+  }
+
+  private isEmpty(space: Space): boolean {
+    return space.spaceType === SpaceType.RESTRICTED || space.tile === undefined || isHazardTileType(space.tile.tileType);
   }
 }

@@ -1,11 +1,11 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {RevoltingColonists} from '../../../src/server/cards/moon/RevoltingColonists';
-import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 import {testGame} from '../../TestGame';
 
@@ -15,7 +15,7 @@ describe('RevoltingColonists', () => {
   let player2: TestPlayer;
   let player3: TestPlayer;
   let card: RevoltingColonists;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
     [game, player1, player2, player3] = testGame(3, {moonExpansion: true});
@@ -27,10 +27,10 @@ describe('RevoltingColonists', () => {
     player1.cardsInHand = [card];
     player1.megaCredits = card.cost;
 
-    moonData.colonyRate = 4;
+    moonData.habitatRate = 4;
     expect(player1.getPlayableCardsForTest()).does.include(card);
 
-    moonData.colonyRate = 3;
+    moonData.habitatRate = 3;
     expect(player1.getPlayableCardsForTest()).does.not.include(card);
   });
 

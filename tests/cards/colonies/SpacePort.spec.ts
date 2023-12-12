@@ -13,7 +13,7 @@ describe('SpacePort', function() {
 
   beforeEach(function() {
     card = new SpacePort();
-    [, player] = testGame(2, {coloniesExtension: true, customColoniesList: [
+    [/* game */, player] = testGame(2, {coloniesExtension: true, customColoniesList: [
       ColonyName.CERES,
       ColonyName.CALLISTO,
       ColonyName.ENCELADUS,
@@ -41,7 +41,7 @@ describe('SpacePort', function() {
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(4);
   });

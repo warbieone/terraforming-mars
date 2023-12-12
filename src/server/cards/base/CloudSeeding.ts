@@ -3,7 +3,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
@@ -21,7 +20,7 @@ export class CloudSeeding extends Card implements IProjectCard {
         decreaseAnyProduction: {type: Resource.HEAT, count: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(3)),
+      requirements: {oceans: 3},
       metadata: {
         cardNumber: '004',
         description: 'Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.',

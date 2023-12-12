@@ -6,7 +6,6 @@ import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {GainProduction} from '../../deferredActions/GainProduction';
@@ -40,7 +39,7 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
       Resource.TITANIUM,
       {count: 1, stealing: true},
     ));
-    player.game.defer(new GainProduction(player, Resource.TITANIUM, {count: 1}));
+    player.game.defer(new GainProduction(player, Resource.TITANIUM, {count: 1, log: false}));
     return undefined;
   }
 }

@@ -1,6 +1,6 @@
 import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ISpace} from '../boards/ISpace';
+import {Space} from '../boards/Space';
 import {DeferredAction, Priority} from './DeferredAction';
 import {PlacementType} from '../boards/PlacementType';
 
@@ -10,7 +10,7 @@ export class PlaceCityTile extends DeferredAction {
     private options?: {
       on?: PlacementType,
       title?: string,
-      spaces?: ReadonlyArray<ISpace>,
+      spaces?: ReadonlyArray<Space>,
     }) {
     super(player, Priority.DEFAULT);
   }
@@ -23,14 +23,11 @@ export class PlaceCityTile extends DeferredAction {
     if (spaces.length === 0) {
       return undefined;
     }
-    return new SelectSpace(
-      title,
-      spaces,
-      (space: ISpace) => {
+    return new SelectSpace(title, spaces)
+      .andThen((space) => {
         this.player.game.addCity(this.player, space);
         return undefined;
-      },
-    );
+      });
   }
 
   private getTitle(type: PlacementType) {

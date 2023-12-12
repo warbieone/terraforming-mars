@@ -4,12 +4,12 @@ import {BoardBuilder} from './BoardBuilder';
 import {SpaceName} from '../SpaceName';
 import {IPlayer} from '../IPlayer';
 import {SerializedBoard} from './SerializedBoard';
-import {Random} from '../Random';
-import {ISpace} from './ISpace';
-import {GameOptions} from '../GameOptions';
+import {Random} from '../../common/utils/Random';
+import {GameOptions} from '../game/GameOptions';
 import {SpaceId} from '../../common/Types';
+import {MarsBoard} from './MarsBoard';
 
-export class AmazonisBoard extends Board {
+export class AmazonisBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): AmazonisBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 
@@ -20,7 +20,6 @@ export class AmazonisBoard extends Board {
     const MICROBE = SpaceBonus.MICROBE;
     const ANIMAL = SpaceBonus.ANIMAL;
     const HEAT = SpaceBonus.HEAT;
-    const RESTRICTED = SpaceBonus.RESTRICTED;
 
     // y=0
     builder.land().ocean(PLANT).land(PLANT, PLANT, PLANT).land(MICROBE).land(ANIMAL);
@@ -31,7 +30,7 @@ export class AmazonisBoard extends Board {
     // y=3
     builder.land().ocean(PLANT).land().land(PLANT).land(HEAT, PLANT).land(STEEL).land(PLANT).ocean(STEEL, PLANT);
     // y=4
-    builder.land(PLANT).land(PLANT).land().land(HEAT, HEAT).land(RESTRICTED).doNotShuffleLastSpace()
+    builder.land(PLANT).land(PLANT).land().land(HEAT, HEAT).restricted().doNotShuffleLastSpace()
       .land(HEAT, HEAT).land(PLANT, PLANT).land().land(TITANIUM, TITANIUM);
     // y=5
     builder.ocean(PLANT, PLANT).land(PLANT).land(STEEL).land(HEAT, PLANT).land(PLANT).land(DRAW_CARD).land().ocean(PLANT);
@@ -52,10 +51,6 @@ export class AmazonisBoard extends Board {
 
   public static deserialize(board: SerializedBoard, players: ReadonlyArray<IPlayer>): AmazonisBoard {
     return new AmazonisBoard(Board.deserializeSpaces(board.spaces, players));
-  }
-
-  public override getNonReservedLandSpaces(): ReadonlyArray<ISpace> {
-    return super.getNonReservedLandSpaces().filter((space) => space.bonus.includes(SpaceBonus.RESTRICTED) === false);
   }
 
   public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {

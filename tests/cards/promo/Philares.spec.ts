@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {TileType} from '../../../src/common/TileType';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
 import {expect} from 'chai';
 import {Phase} from '../../../src/common/Phase';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
@@ -20,9 +20,9 @@ describe('Philares', () => {
   let philaresPlayer : TestPlayer;
   let otherPlayer: TestPlayer;
   let game: Game;
-  let space: ISpace;
-  let adjacentSpace: ISpace;
-  let adjacentSpace2: ISpace;
+  let space: Space;
+  let adjacentSpace: Space;
+  let adjacentSpace2: Space;
 
   beforeEach(() => {
     card = new Philares();
@@ -91,7 +91,7 @@ describe('Philares', () => {
     // Options are ordered 0-5, MC to heat.
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
-    andOptions.cb();
+    andOptions.cb(undefined);
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1}));
   });
 
@@ -104,7 +104,7 @@ describe('Philares', () => {
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
     andOptions.options[1].cb(1);
-    expect(() => andOptions.cb()).to.throw('Need to select 1 resource(s)');
+    expect(() => andOptions.cb(undefined)).to.throw('Need to select 1 resource(s)');
   });
 
   it('Multiple bonuses when placing next to multiple tiles', () => {
@@ -119,7 +119,7 @@ describe('Philares', () => {
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
     andOptions.options[1].cb(1);
-    andOptions.cb();
+    andOptions.cb(undefined);
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
   });
 
@@ -135,7 +135,7 @@ describe('Philares', () => {
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
     andOptions.options[1].cb(1);
-    andOptions.cb();
+    andOptions.cb(undefined);
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
   });
 
@@ -150,15 +150,15 @@ describe('Philares', () => {
     options.options[0].cb(1);
     options.options[1].cb(1);
     options.options[2].cb(1);
-    expect(() => options.cb()).to.throw('Need to select 2 resource(s)');
+    expect(() => options.cb(undefined)).to.throw('Need to select 2 resource(s)');
   });
 
   it('Should take initial action', function() {
-    philaresPlayer.runInitialAction(card);
+    philaresPlayer.deferInitialAction(card);
     runAllActions(game);
 
     const action = cast(philaresPlayer.popWaitingFor(), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     expect(philaresPlayer.getTerraformRating()).to.eq(21);
   });
 
@@ -187,7 +187,7 @@ describe('Philares', () => {
     const philaresPlayerResourceSelection = cast(philaresPlayer.popWaitingFor(), AndOptions);
     // Option 3 is plants.
     philaresPlayerResourceSelection.options[3].cb(1);
-    philaresPlayerResourceSelection.cb();
+    philaresPlayerResourceSelection.cb(undefined);
     expect(philaresPlayer.plants).to.eq(8);
     expect(philaresPlayer.getWaitingFor()).is.undefined;
 

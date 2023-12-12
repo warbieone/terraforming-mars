@@ -11,6 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {all, digit} from '../Options';
 import { CardRequirements } from '../requirements/CardRequirements';
 
+import {message} from '../../logs/MessageBuilder';
 
 export class Sabotage extends Card implements IProjectCard {
   constructor() {
@@ -32,6 +33,11 @@ export class Sabotage extends Card implements IProjectCard {
       },
     });
   }
+
+  private title(amount: number, type: string, target: IPlayer) {
+    return message('Remove ${0} ${1} from ${2}', (b) => b.number(amount).string(type).player(target));
+  }
+
   public override bespokePlay(player: IPlayer) {
     if (player.game.isSoloMode()) return undefined;
 
@@ -41,9 +47,8 @@ export class Sabotage extends Card implements IProjectCard {
     availablePlayerTargets.forEach((target) => {
       if (target.titanium > 0 && !target.alloysAreProtected()) {
         const amountRemoved = Math.min(3, target.titanium);
-        const optionTitle = 'Remove ' + amountRemoved + ' titanium from ' + target.name;
-
-        availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
+        const optionTitle = this.title(amountRemoved, 'titanium', target);
+        availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           target.stock.deduct(Resource.TITANIUM, 3, {log: true, from: player});
           return undefined;
         }));
@@ -51,9 +56,8 @@ export class Sabotage extends Card implements IProjectCard {
 
       if (target.steel > 0 && !target.alloysAreProtected()) {
         const amountRemoved = Math.min(4, target.steel);
-        const optionTitle = 'Remove ' + amountRemoved + ' steel from ' + target.name;
-
-        availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
+        const optionTitle = this.title(amountRemoved, 'steel', target);
+        availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           target.stock.deduct(Resource.STEEL, 4, {log: true, from: player});
           return undefined;
         }));
@@ -61,9 +65,8 @@ export class Sabotage extends Card implements IProjectCard {
 
       if (target.megaCredits > 0) {
         const amountRemoved = Math.min(7, target.megaCredits);
-        const optionTitle = 'Remove ' + amountRemoved + ' M€ from ' + target.name;
-
-        availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
+        const optionTitle = this.title(amountRemoved, 'M€', target);
+        availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
           target.stock.deduct(Resource.MEGACREDITS, 7, {log: true, from: player});
           return undefined;
         }));
@@ -71,7 +74,7 @@ export class Sabotage extends Card implements IProjectCard {
     });
 
     if (availableActions.options.length > 0) {
-      availableActions.options.push(new SelectOption('Do not remove resource', 'Confirm', () => {
+      availableActions.options.push(new SelectOption('Do not remove resource').andThen(() => {
         return undefined;
       }));
       return availableActions;

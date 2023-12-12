@@ -5,7 +5,6 @@ import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class NewVenice extends Card implements IProjectCard {
@@ -21,11 +20,10 @@ export class NewVenice extends Card implements IProjectCard {
         tile: {
           type: TileType.OCEAN_CITY,
           on: 'upgradeable-ocean',
-          title: 'Select space for New Venice',
         },
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(3)),
+      requirements: {oceans: 3},
       metadata: {
         cardNumber: 'Pf3',
         renderData: CardRenderer.builder((b) => {

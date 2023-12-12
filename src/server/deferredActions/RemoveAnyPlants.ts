@@ -4,8 +4,9 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../../common/cards/CardName';
-import {MessageBuilder, newMessage} from '../logs/MessageBuilder';
+import {MessageBuilder, message} from '../logs/MessageBuilder';
 import {Message} from '../../common/logs/Message';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 export class RemoveAnyPlants extends DeferredAction {
   private title: string | Message;
@@ -14,7 +15,7 @@ export class RemoveAnyPlants extends DeferredAction {
   constructor(player: IPlayer, count: number = 1, title?: string | Message) {
     super(player, Priority.ATTACK_OPPONENT);
     this.count = count;
-    this.title = title ?? newMessage('Select player to remove up to ${0} plants', (b) => b.number(count));
+    this.title = title ?? message('Select player to remove up to ${0} plants', (b) => b.number(count));
   }
 
   public execute() {
@@ -31,29 +32,34 @@ export class RemoveAnyPlants extends DeferredAction {
       return undefined;
     }
 
-    const removalOptions = candidates.map((candidate) => {
-      let qtyToRemove = Math.min(candidate.plants, this.count);
+    const removalOptions = candidates.map((target) => {
+      let qtyToRemove = Math.min(target.plants, this.count);
 
       // Botanical Experience hook.
-      if (candidate.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+      if (target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToRemove = Math.ceil(qtyToRemove / 2);
       }
 
       const message =
         new MessageBuilder('Remove ${0} plants from ${1}')
           .number(qtyToRemove)
-          .rawString(candidate.name) // TODO(kberg): change to .player(candidate). But it won't work immediately.
+          .player(target)
           .getMessage();
 
-      return new SelectOption(message, 'Remove plants', () => {
-        candidate.stock.deduct(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
+      return new SelectOption(message, 'Remove plants').andThen(() => {
+        target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, (proceed) => {
+          if (proceed === true) {
+            target.stock.deduct(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
+          }
+          return undefined;
+        }));
         return undefined;
       });
     });
 
     const orOptions = new OrOptions(
       ...removalOptions,
-      new SelectOption('Skip removing plants', 'Confirm', () => {
+      new SelectOption('Skip removing plants').andThen(() => {
         return undefined;
       }),
     );

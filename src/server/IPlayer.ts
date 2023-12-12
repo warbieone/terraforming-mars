@@ -2,7 +2,8 @@ import {PlayerId, isPlayerId} from '../common/Types';
 import {CardName} from '../common/cards/CardName';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame, isIGame} from './IGame';
-import {Payment} from '../common/inputs/Payment';
+import {Payment, PaymentOptions} from '../common/inputs/Payment';
+import {SpendableCardResource} from '../common/inputs/Spendable';
 import {ICard, IActionCard, DynamicTRSource} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
 import {IProjectCard} from './cards/IProjectCard';
@@ -14,7 +15,7 @@ import {Priority} from './deferredActions/DeferredAction';
 import {RobotCard} from './cards/promo/SelfReplicatingRobots';
 import {SerializedPlayer} from './SerializedPlayer';
 import {Timer} from '../common/Timer';
-import {DrawCards} from './deferredActions/DrawCards';
+import {AllOptions, DrawOptions} from './deferredActions/DrawCards';
 import {Units} from '../common/Units';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {GlobalParameter} from '../common/GlobalParameter';
@@ -30,10 +31,12 @@ import {PlayableCard} from './cards/IProjectCard';
 import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
+import {UnderworldPlayerData} from './underworld/UnderworldData';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
-export interface CanAffordOptions extends Partial<Payment.Options> {
+export type CanAffordOptions = Partial<PaymentOptions> & {
+  cost: number,
   reserveUnits?: Units,
   tr?: TRSource | DynamicTRSource,
 }
@@ -66,10 +69,6 @@ export interface IPlayer {
   // Used only during set-up
   pickedCorporationCard?: ICorporationCard;
 
-  // Terraforming Rating
-  hasIncreasedTerraformRatingThisGeneration: boolean;
-  terraformRatingAtGenerationStart: number;
-
   // Resources
   megaCredits: number;
   steel: number;
@@ -82,6 +81,8 @@ export interface IPlayer {
   canUseHeatAsMegaCredits: boolean;
   // Luna Trade Federation
   canUseTitaniumAsMegacredits: boolean;
+  // Martian Lumber Corp
+  canUsePlantsAsMegacredits: boolean;
 
   // This generation / this round
   actionsTakenThisRound: number;
@@ -112,7 +113,6 @@ export interface IPlayer {
 
   // Custom cards
   // Community Leavitt Station and Pathfinders Leavitt Station
-  // TODO(kberg): move scienceTagCount to Tags?
   scienceTagCount: number;
   // PoliticalAgendas Scientists P41
   hasTurmoilScienceTagBonus: boolean;
@@ -136,12 +136,22 @@ export interface IPlayer {
   victoryPointsByGeneration: Array<number>;
   totalDelegatesPlaced: number;
 
+  underworldData: UnderworldPlayerData;
+
   tearDown(): void;
   tableau: Array<ICorporationCard | IProjectCard>;
 
+  /**
+   * Return `true` if this player has played the supplied corporation card.
+   */
   isCorporation(corporationName: CardName): boolean;
+  /**
+   * Return the corporation card this player has played by the given name, or `undefined`.
+   */
   getCorporation(corporationName: CardName): ICorporationCard | undefined;
-  getCeo(ceoName: CardName): ICeoCard | undefined;
+  /**
+   * Return the corporation card this player has played by the given name, or throw an Error.
+   */
   getCorporationOrThrow(corporationName: CardName): ICorporationCard;
   getTitaniumValue(): number;
   increaseTitaniumValue(): void;
@@ -165,13 +175,52 @@ export interface IPlayer {
   alloysAreProtected(): boolean;
   canReduceAnyProduction(resource: Resource, minQuantity?: number): boolean;
   canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): void;
+  /**
+   * Return true if this player cannot have their production reduced.
+   *
+   * It can if this player is attacking themselves, or if this player has played Private Security.
+   */
   productionIsProtected(attacker: IPlayer): boolean;
+  /**
+   * In the multiplayer game, after an attack, the attacked player makes a claim
+   * for insurance. If Mons Insurance is in the game, the claimant will receive
+   * as much as possible from the insurer.
+   *
+   * `this` is the attacked player.
+   */
   resolveInsurance(): void;
+  /**
+   * In the solo game, Mons Insurance is only held by the sole player, who will
+   * have to pay the penalty for hurting the neutral player.
+   *
+   * `this` is the potentialInsurer: the solo player in the game. It's not
+   * clear yet whether the player has Mons Insurance, but if they do, they will
+   * pay. Unlike `resolveInsurance`, there is no claimant Player so the money
+   * disappears.
+   */
   resolveInsuranceInSoloGame(): void;
+  /**
+   * Returns the number of colonies this player has on all the colony types.
+   *
+   * If Colonies is not in this game, this returns 0.
+   */
   getColoniesCount(): number;
+  /**
+   * Count the number of cards in the player's event pile.
+   */
   getPlayedEventsCount(): number;
-  getRequirementsBonus(parameter: GlobalParameter): number;
+  /**
+   * For the given global parameter, return a sum of all requirements bonuses this
+   * player has thanks to played cards, Turmoil policies, etcetera.
+   */
+  getGlobalParameterRequirementBonus(parameter: GlobalParameter): number;
+  /**
+   * Remove resources from this player's played card
+   */
   removeResourceFrom(card: ICard, count?: number, options?: {removingPlayer? : IPlayer, log?: boolean}): void;
+  /**
+   * Add resources to this player's played card
+   */
   addResourceTo(card: ICard, options?: number | {qty?: number, log: boolean, logZero?: boolean}): void;
 
   /**
@@ -192,7 +241,6 @@ export interface IPlayer {
    * Count all the resources of a given type in the tableau.
    */
   getResourceCount(resource: CardResource): number;
-  deferInputCb(result: PlayerInput | undefined): void;
   runInput(input: InputResponse, pi: PlayerInput): void;
   getAvailableBlueActionCount(): number;
   getPlayableActionCards(): Array<ICard & IActionCard>;
@@ -201,17 +249,24 @@ export interface IPlayer {
   finishProductionPhase(): void;
   worldGovernmentTerraforming(): void;
   dealForDraft(quantity: number, cards: Array<IProjectCard>): void;
-  askPlayerToDraft(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void;
+
+  /**
+   * Ask the player to draft from a set of cards.
+   *
+   * @param initialDraft when true, this is part of the first generation draft.
+   * @param passTo  The player _this_ player passes remaining cards to.
+   * @param passedCards The cards received from the draw, or from the prior player. If empty, it's the first
+   *   step in the draft, and this function will deal cards.
+   */
+  askPlayerToDraft(initialDraft: boolean, passTo: IPlayer, passedCards?: Array<IProjectCard>): void;
   runResearchPhase(draftVariant: boolean): void;
   getCardCost(card: IProjectCard): number;
 
+  /** The number of resources on this card for this player, or 0 if the player does not have this card. */
+  resourcesOnCard(name: CardName): number;
   spendableMegacredits(): number;
-  getSpendableMicrobes(): number;
-  getSpendableFloaters(): number;
-  getSpendableScienceResources(): number;
-  getSpendableSeedResources(): number;
-  getSpendableData(): number;
-  payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void): void;
+  /** Return then amount of spendable units of a given card resource */
+  getSpendable(resource: SpendableCardResource): number;
   checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction?: CardAction): void;
   pay(payment: Payment): void;
   availableHeat(): number;
@@ -221,30 +276,36 @@ export interface IPlayer {
   onCardPlayed(card: IProjectCard): void;
   playAdditionalCorporationCard(corporationCard: ICorporationCard): void;
   playCorporationCard(corporationCard: ICorporationCard): void;
-  drawCard(count?: number, options?: DrawCards.DrawOptions): undefined;
-  drawCardKeepSome(count: number, options: DrawCards.AllOptions): SelectCard<IProjectCard>;
+  drawCard(count?: number, options?: DrawOptions): void;
+  drawCardKeepSome(count: number, options: AllOptions): void;
   discardPlayedCard(card: IProjectCard): void;
+  discardCardFromHand(card: IProjectCard, options?: {log?: boolean}): void;
 
+  /** Player is done taking actions this generation. */
   pass(): void;
   takeActionForFinalGreenery(): void;
   getPlayableCards(): Array<PlayableCard>;
-  // TODO(kberg): After migration, see if this can become private again.
-  // Or perhaps moved into card?
-  canAffordCard(card: IProjectCard): boolean;
   canPlay(card: IProjectCard): boolean | YesAnd;
-  simpleCanPlay(card: IProjectCard): boolean | YesAnd;
+  simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd;
   canSpend(payment: Payment, reserveUnits?: Units): boolean;
-  payingAmount(payment: Payment, options?: Partial<Payment.Options>): number;
-  canAfford(cost: number, options?: CanAffordOptions): boolean;
+  payingAmount(payment: Payment, options?: Partial<PaymentOptions>): number;
+  /**
+   * Returns a summary of how much a player would have to spend to play a card,
+   * any associated costs, and ways the player can pay.
+   */
+  affordOptionsForCard(card: IProjectCard): CanAffordOptions;
+  canAfford(options: number | CanAffordOptions): boolean;
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;
-  runInitialAction(corp: ICorporationCard): void;
+  /** Add `corp`'s initial action to the deferred action queue, if it has one. */
+  deferInitialAction(corp: ICorporationCard): void;
   getActions(): OrOptions;
   process(input: InputResponse): void;
   getWaitingFor(): PlayerInput | undefined;
   setWaitingFor(input: PlayerInput, cb?: () => void): void;
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
   serialize(): SerializedPlayer;
+  /** Shorthand for deferring evaluating a PlayerInput */
   defer(input: PlayerInput | undefined, priority?: Priority): void;
 }
 

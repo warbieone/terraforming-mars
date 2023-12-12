@@ -1,7 +1,8 @@
 <template>
-        <div id="create-game">
+        <div id="create-game" class="create-game">
             <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Create New Game</span></h1>
-            <div class="create-game-discord-invite" v-if="playersCount===1">
+            <div class="changelog"><a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Changelog" class="tooltip" target="_blank"><u v-i18n>Read our changelog to get the latest updates.</u></a></div>
+            <div class="discord-invite" v-if="playersCount===1">
               (<span v-i18n>Looking for people to play with</span>? <a :href="constants.DISCORD_INVITE" class="tooltip" target="_blank"><u v-i18n>Join us on Discord</u></a>.)
             </div>
 
@@ -41,6 +42,12 @@
                                 <span v-i18n>Prelude</span>
                             </label>
 
+                            <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="prelude2Expansion">
+                            <label for="prelude2-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-prelude2"></div>
+                                <span v-i18n>Prelude 2(β)</span>
+                            </label>
+
                             <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext">
                             <label for="venusNext-checkbox" class="expansion-button">
                             <div class="create-game-expansion-icon expansion-icon-venus"></div>
@@ -62,7 +69,7 @@
                             <input type="checkbox" name="promo" id="promo-checkbox" v-model="promoCardsOption">
                             <label for="promo-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-promo"></div>
-                                <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Promos</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <input type="checkbox" name="league" id="league-checkbox" v-model="leagueCardsOption">
@@ -145,6 +152,18 @@
                                 <div class="create-game-expansion-icon expansion-icon-ceo"></div>
                                 <span v-i18n>CEOs</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <input type="checkbox" name="starwars" id="starwars-checkbox" v-model="starWarsExpansion">
+                            <label for="starwars-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-starwars"></div>
+                                <span v-i18n>Star Wars (β)</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <input type="checkbox" name="ceo" id="underworld-checkbox" v-model="underworldExpansion">
+                            <label for="underworld-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-underworld"></div>
+                                <span v-i18n>Underworld (α)</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Underworld" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
                         </div>
 
                         <div class="create-game-page-column">
@@ -218,6 +237,12 @@
                               <span v-i18n>After</span><span>&nbsp;</span>
                               <input type="number" class="create-game-corporations-count" value="30" step="5" min="0" :max="180" v-model="escapeVelocityThreshold" id="escapeThreshold-checkbox">
                               <span v-i18n>min</span>
+                            </label>
+
+                            <label for="escapeBonusSeconds-checkbox" v-show="escapeVelocityMode">
+                              <span v-i18n>Plus</span><span>&nbsp;</span>
+                              <input type="number" class="create-game-corporations-count" value="2" step="1" min="1" :max="10" v-model="escapeVelocityBonusSeconds" id="escapeBonusSeconds-checkbox">
+                              <span v-i18n>seconds per action</span>
                             </label>
 
                             <label for="escapePeriod-checkbox" v-show="escapeVelocityMode">
@@ -430,6 +455,7 @@
                   v-on:corporation-list-changed="updatecustomCorporations"
                   v-bind:corporateEra="corporateEra"
                   v-bind:prelude="prelude"
+                  v-bind:prelude2="prelude2Expansion"
                   v-bind:venusNext="venusNext"
                   v-bind:colonies="colonies"
                   v-bind:turmoil="turmoil"
@@ -541,6 +567,7 @@ export default (Vue as WithRefs<Refs>).extend({
       ],
       corporateEra: true,
       prelude: false,
+      prelude2Expansion: false,
       draftVariant: true,
       initialDraft: false,
       randomMA: RandomMAOptionType.NONE,
@@ -599,12 +626,15 @@ export default (Vue as WithRefs<Refs>).extend({
       altVenusBoard: false,
       escapeVelocityMode: false,
       escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD,
+      escapeVelocityBonusSeconds: constants.DEFAULT_ESCAPE_VELOCITY_BONUS_SECONDS,
       escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD,
       escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
       twoCorpsVariant: false,
       ceoExtension: false,
       customCeos: [],
       startingCeos: 3,
+      starWarsExpansion: false,
+      underworldExpansion: false,
     };
   },
   components: {
@@ -665,7 +695,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const refs: Refs = this.$refs;
       const file = refs.file.files !== null ? refs.file.files[0] : undefined;
       const reader = new FileReader();
-      const component = this.$data as CreateGameModel;
+      const component: CreateGameModel = this;
 
       reader.addEventListener('load', function() {
         const warnings: Array<string> = [];
@@ -873,12 +903,15 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'venus': return model.venusNext;
       case 'colonies': return model.colonies;
       case 'prelude': return model.prelude;
+      case 'prelude2': return model.prelude2Expansion;
       case 'turmoil': return model.turmoil;
       case 'community': return model.communityCardsOption;
       case 'ares': return model.aresExtension;
       case 'moon': return model.moonExpansion;
       case 'pathfinders': return model.pathfindersExpansion;
       case 'ceo': return model.ceoExtension;
+      case 'starwars': return model.starWarsExpansion;
+      case 'underworld': return model.underworldExpansion;
       default: throw new Error('Unknown module: ' + module);
       }
     },
@@ -946,6 +979,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       const corporateEra = this.corporateEra;
       const prelude = this.prelude;
+      const prelude2Expansion = this.prelude2Expansion;
       const draftVariant = this.draftVariant;
       const initialDraft = this.initialDraft;
       const randomMA = this.randomMA;
@@ -982,6 +1016,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const requiresVenusTrackCompletion = this.requiresVenusTrackCompletion;
       const escapeVelocityMode = this.escapeVelocityMode;
       const escapeVelocityThreshold = this.escapeVelocityMode ? this.escapeVelocityThreshold : undefined;
+      const escapeVelocityBonusSeconds = this.escapeVelocityBonusSeconds ? this.escapeVelocityBonusSeconds : undefined;
       const escapeVelocityPeriod = this.escapeVelocityMode ? this.escapeVelocityPeriod : undefined;
       const escapeVelocityPenalty = this.escapeVelocityMode ? this.escapeVelocityPenalty : undefined;
       const twoCorpsVariant = this.twoCorpsVariant;
@@ -1110,6 +1145,7 @@ export default (Vue as WithRefs<Refs>).extend({
         players,
         corporateEra,
         prelude,
+        prelude2Expansion,
         draftVariant,
         showOtherPlayersVP,
         venusNext,
@@ -1150,12 +1186,15 @@ export default (Vue as WithRefs<Refs>).extend({
         altVenusBoard: this.altVenusBoard,
         escapeVelocityMode,
         escapeVelocityThreshold,
+        escapeVelocityBonusSeconds,
         escapeVelocityPeriod,
         escapeVelocityPenalty,
         twoCorpsVariant,
         ceoExtension,
         customCeos,
         startingCeos,
+        starWarsExpansion: this.starWarsExpansion,
+        underworldExpansion: this.underworldExpansion,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

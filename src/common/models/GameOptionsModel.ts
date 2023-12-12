@@ -16,6 +16,7 @@ export type GameOptionsModel = {
   draftVariant: boolean,
   escapeVelocityMode: boolean,
   escapeVelocityThreshold?: number,
+  escapeVelocityBonusSeconds?: number,
   escapeVelocityPeriod?: number,
   escapeVelocityPenalty?: number,
   fastModeOption: boolean,
@@ -25,6 +26,7 @@ export type GameOptionsModel = {
   moonExpansion: boolean,
   pathfindersExpansion: boolean,
   preludeExtension: boolean,
+  prelude2Expansion: boolean,
   promoCardsOption: boolean,
   leagueCardsOption: boolean,
   politicalAgendasExtension: AgendaStyle,
@@ -41,4 +43,5 @@ export type GameOptionsModel = {
   twoCorpsVariant: boolean,
   venusNextExtension: boolean,
   undoOption: boolean,
+  underworldExpansion: boolean;
 }

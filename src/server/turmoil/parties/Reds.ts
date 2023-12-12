@@ -14,10 +14,10 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {GlobalParameter} from '../../../common/GlobalParameter';
+import {TITLES} from '../../inputs/titles';
 
 export class Reds extends Party implements IParty {
   readonly name = PartyName.REDS;
-  readonly description = 'Wishes to preserve the red planet.';
   readonly bonuses = [REDS_BONUS_1, REDS_BONUS_2];
   readonly policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
 }
@@ -25,7 +25,6 @@ export class Reds extends Party implements IParty {
 class RedsBonus01 implements Bonus {
   readonly id = 'rb01' as const;
   readonly description = 'The player(s) with the lowest TR gains 1 TR';
-  readonly isDefault = true;
 
   getScore(player: IPlayer) {
     const game = player.game;
@@ -53,7 +52,6 @@ class RedsBonus01 implements Bonus {
 class RedsBonus02 implements Bonus {
   readonly id = 'rb02' as const;
   readonly description = 'The player(s) with the highest TR loses 1 TR';
-  readonly isDefault = false;
 
   getScore(player: IPlayer) {
     const game = player.game;
@@ -80,14 +78,12 @@ class RedsBonus02 implements Bonus {
 
 class RedsPolicy01 implements Policy {
   readonly id = 'rp01' as const;
-  readonly isDefault = true;
   readonly description = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
 }
 
 class RedsPolicy02 implements Policy {
   readonly id = 'rp02' as const;
   readonly description = 'When you place a tile, pay 3 M€ or as much as possible';
-  readonly isDefault = false;
 
   onTilePlaced(player: IPlayer) {
     let amountPlayerHas = player.megaCredits;
@@ -103,7 +99,6 @@ class RedsPolicy02 implements Policy {
 class RedsPolicy03 implements Policy {
   readonly id = 'rp03' as const;
   readonly description = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
-  readonly isDefault = false;
 
   private canDecrease(game: IGame, parameter: GlobalParameter) {
     switch (parameter) {
@@ -120,7 +115,7 @@ class RedsPolicy03 implements Policy {
       return game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== MAX_VENUS_SCALE;
     case GlobalParameter.MOON_HABITAT_RATE:
       return MoonExpansion.ifElseMoon(game, (moonData) => {
-        const rate = moonData.colonyRate;
+        const rate = moonData.habitatRate;
         return rate > 0 && rate !== MAXIMUM_HABITAT_RATE;
       },
       () => false);
@@ -144,7 +139,7 @@ class RedsPolicy03 implements Policy {
     if (game.marsIsTerraformed()) return false;
 
     const temperature = game.getTemperature();
-    const oceansPlaced = game.board.getOceanCount();
+    const oceansPlaced = game.board.getOceanSpaces().length;
     const oxygenLevel = game.getOxygenLevel();
     const venusScaleLevel = game.getVenusScaleLevel();
 
@@ -156,7 +151,7 @@ class RedsPolicy03 implements Policy {
 
     const moonParametersAtMinimum= MoonExpansion.ifElseMoon(
       game,
-      (moonData) => moonData.colonyRate === 0 && moonData.logisticRate === 0 && moonData.miningRate === 0,
+      (moonData) => moonData.habitatRate === 0 && moonData.logisticRate === 0 && moonData.miningRate === 0,
       () => false);
 
     if (basicParametersAtMinimum && moonParametersAtMinimum) {
@@ -168,80 +163,74 @@ class RedsPolicy03 implements Policy {
 
   action(player: IPlayer) {
     const game = player.game;
-    game.log('${0} used Turmoil Reds action', (b) => b.player(player));
+    game.log('${0} used Turmoil ${1} action', (b) => b.player(player).partyName(PartyName.REDS));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectPaymentDeferred(
-      player,
-      4,
-      {
-        title: 'Select how to pay for Turmoil Reds action',
-        afterPay: () => {
-          const orOptions = new OrOptions();
+    game.defer(new SelectPaymentDeferred(player, 4, {title: TITLES.payForPartyAction(PartyName.REDS)}))
+      .andThen(() => {
+        const orOptions = new OrOptions();
 
-          // Decrease temperature option
-          if (this.canDecrease(game, GlobalParameter.TEMPERATURE)) {
-            orOptions.options.push(new SelectOption('Decrease temperature', 'Confirm', () => {
-              game.increaseTemperature(player, -1);
-              game.log('${0} decreased temperature 1 step', (b) => b.player(player));
-              return undefined;
-            }));
-          }
+        // Decrease temperature option
+        if (this.canDecrease(game, GlobalParameter.TEMPERATURE)) {
+          orOptions.options.push(new SelectOption('Decrease temperature').andThen(() => {
+            game.increaseTemperature(player, -1);
+            game.log('${0} decreased temperature 1 step', (b) => b.player(player));
+            return undefined;
+          }));
+        }
 
-          // Remove ocean option
-          if (this.canDecrease(game, GlobalParameter.OCEANS)) {
-            orOptions.options.push(new SelectOption('Remove an ocean tile', 'Confirm', () => {
-              game.defer(new RemoveOceanTile(player, 'Turmoil Reds action - Remove an Ocean tile from the board'));
-              return undefined;
-            }));
-          }
+        // Remove ocean option
+        if (this.canDecrease(game, GlobalParameter.OCEANS)) {
+          orOptions.options.push(new SelectOption('Remove an ocean tile').andThen(() => {
+            game.defer(new RemoveOceanTile(player, 'Turmoil Reds action - Remove an Ocean tile from the board'));
+            return undefined;
+          }));
+        }
 
-          // Decrease oxygen level option
-          if (this.canDecrease(game, GlobalParameter.OXYGEN)) {
-            orOptions.options.push(new SelectOption('Decrease oxygen level', 'Confirm', () => {
-              game.increaseOxygenLevel(player, -1);
-              game.log('${0} decreased oxygen level 1 step', (b) => b.player(player));
-              return undefined;
-            }));
-          }
+        // Decrease oxygen level option
+        if (this.canDecrease(game, GlobalParameter.OXYGEN)) {
+          orOptions.options.push(new SelectOption('Decrease oxygen level').andThen(() => {
+            game.increaseOxygenLevel(player, -1);
+            game.log('${0} decreased oxygen level 1 step', (b) => b.player(player));
+            return undefined;
+          }));
+        }
 
-          // Decrease Venus scale option
-          if (this.canDecrease(game, GlobalParameter.VENUS)) {
-            orOptions.options.push(new SelectOption('Decrease Venus scale', 'Confirm', () => {
-              game.increaseVenusScaleLevel(player, -1);
-              game.log('${0} decreased Venus scale level 1 step', (b) => b.player(player));
-              return undefined;
-            }));
-          }
+        // Decrease Venus scale option
+        if (this.canDecrease(game, GlobalParameter.VENUS)) {
+          orOptions.options.push(new SelectOption('Decrease Venus scale').andThen(() => {
+            game.increaseVenusScaleLevel(player, -1);
+            game.log('${0} decreased Venus scale level 1 step', (b) => b.player(player));
+            return undefined;
+          }));
+        }
 
-          if (this.canDecrease(game, GlobalParameter.MOON_HABITAT_RATE)) {
-            orOptions.options.push(new SelectOption('Decrease Moon habitat rate', 'Confirm', () => {
-              MoonExpansion.lowerHabitatRate(player, 1);
-              return undefined;
-            }));
-          }
+        if (this.canDecrease(game, GlobalParameter.MOON_HABITAT_RATE)) {
+          orOptions.options.push(new SelectOption('Decrease Moon habitat rate').andThen(() => {
+            MoonExpansion.lowerHabitatRate(player, 1);
+            return undefined;
+          }));
+        }
 
-          if (this.canDecrease(game, GlobalParameter.MOON_MINING_RATE)) {
-            orOptions.options.push(new SelectOption('Decrease Moon mining rate', 'Confirm', () => {
-              MoonExpansion.lowerMiningRate(player, 1);
-              return undefined;
-            }));
-          }
+        if (this.canDecrease(game, GlobalParameter.MOON_MINING_RATE)) {
+          orOptions.options.push(new SelectOption('Decrease Moon mining rate').andThen(() => {
+            MoonExpansion.lowerMiningRate(player, 1);
+            return undefined;
+          }));
+        }
 
-          if (this.canDecrease(game, GlobalParameter.MOON_LOGISTICS_RATE)) {
-            orOptions.options.push(new SelectOption('Decrease Moon Logistics Rate', 'Confirm', () => {
-              MoonExpansion.lowerLogisticRate(player, 1);
-              return undefined;
-            }));
-          }
+        if (this.canDecrease(game, GlobalParameter.MOON_LOGISTICS_RATE)) {
+          orOptions.options.push(new SelectOption('Decrease Moon Logistics Rate').andThen(() => {
+            MoonExpansion.lowerLogisticRate(player, 1);
+            return undefined;
+          }));
+        }
 
-          if (orOptions.options.length === 1) return orOptions.options[0].cb();
+        if (orOptions.options.length === 1) return orOptions.options[0].cb();
 
-          game.defer(new SimpleDeferredAction(player, () => orOptions));
-          return undefined;
-        },
-      },
-    ));
+        game.defer(new SimpleDeferredAction(player, () => orOptions));
+        return undefined;
+      });
 
     return undefined;
   }
@@ -250,7 +239,6 @@ class RedsPolicy03 implements Policy {
 class RedsPolicy04 implements Policy {
   readonly id = 'rp04' as const;
   readonly description = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
-  readonly isDefault = false;
 }
 
 export const REDS_BONUS_1 = new RedsBonus01();

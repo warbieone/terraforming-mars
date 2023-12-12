@@ -25,12 +25,12 @@ describe('SearchForLife', function() {
 
   it('Can not play if oxygen level too high', function() {
     setOxygenLevel(game, 7);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     setOxygenLevel(game, 6);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
     card.play(player);
 
@@ -45,7 +45,7 @@ describe('SearchForLife', function() {
 
     player.megaCredits = 1;
 
-    game.projectDeck.drawPile.push(fakeCard({}));
+    game.projectDeck.drawPile.push(fakeCard());
 
     card.action(player);
     runAllActions(game); // pays for card.

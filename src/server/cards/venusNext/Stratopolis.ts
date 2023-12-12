@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 

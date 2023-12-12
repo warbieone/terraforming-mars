@@ -8,6 +8,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {cast, maxOutOceans, runAllActions, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 
 describe('ArtificialLake', function() {
   let card: ArtificialLake;
@@ -26,15 +27,13 @@ describe('ArtificialLake', function() {
   it('Should play', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(game);
-    const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.availableSpaces.forEach((space) => {
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    selectSpace.spaces.forEach((space) => {
       expect(space.spaceType).to.eq(SpaceType.LAND);
     });
 
-    action.cb(action!.availableSpaces[0]);
-    const placedTile = action.availableSpaces[0].tile;
-    expect(placedTile!.tileType).to.eq(TileType.OCEAN);
+    UnderworldTestHelper.assertPlaceOcean(player, selectSpace);
 
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
@@ -45,7 +44,7 @@ describe('ArtificialLake', function() {
 
     // Set oceans count to the max value
     for (const space of game.board.getSpaces(SpaceType.OCEAN, player)) {
-      if (game.board.getOceanCount() < constants.MAX_OCEAN_TILES) {
+      if (game.board.getOceanSpaces().length < constants.MAX_OCEAN_TILES) {
         game.addOcean(player, space);
       }
     }

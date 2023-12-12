@@ -19,6 +19,9 @@ export enum Priority {
   BUILD_COLONY,
   INCREASE_COLONY_TRACK,
   PLACE_OCEAN_TILE,
+  IDENTIFY_UNDERGROUND_RESOURCE,
+  EXCAVATE_UNDERGROUND_RESOURCE,
+
   /** Anything that doesn't fit into another category. */
   DEFAULT,
   /** Effects that make your opponents lose resources or production. */
@@ -29,9 +32,15 @@ export enum Priority {
   LOSE_RESOURCE_OR_PRODUCTION,
   DECREASE_COLONY_TRACK_AFTER_TRADE,
   DISCARD_CARDS,
+  BACK_OF_THE_LINE,
 }
 
-export abstract class DeferredAction {
+export interface AndThen<T> {
+  andThen(cb: (param: T) => void): this;
+}
+
+export abstract class DeferredAction<T = undefined> implements AndThen<T> {
+  // The position in the queue. Do not set directly.
   public queueId: number = -1;
   constructor(
     public player: IPlayer,
@@ -43,9 +52,21 @@ export abstract class DeferredAction {
   }
 
   public abstract execute(): PlayerInput | undefined;
+  // TODO(kberg): Make protected again.
+  public cb: (param: T) => void = () => {};
+  private callbackSet = false;
+
+  public andThen(cb: (param: T) => void): this {
+    if (this.callbackSet) {
+      throw new Error('Cannot call andThen twice for the same object.');
+    }
+    this.cb = cb;
+    this.callbackSet = true;
+    return this;
+  }
 }
 
-export class SimpleDeferredAction extends DeferredAction {
+export class SimpleDeferredAction<T> extends DeferredAction<T> {
   constructor(
     player: IPlayer,
     public execute: () => PlayerInput | undefined,

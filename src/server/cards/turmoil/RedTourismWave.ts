@@ -5,10 +5,12 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resource} from '../../../common/Resource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
+import {isHazardTileType} from '../../../common/AresTileType';
+import {Space} from '../../..//server/boards/Space';
+import {SpaceType} from '../../../common/boards/SpaceType';
 
 export class RedTourismWave extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +20,7 @@ export class RedTourismWave extends Card implements IProjectCard {
       name: CardName.RED_TOURISM_WAVE,
       type: CardType.EVENT,
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
+      requirements: {party: PartyName.REDS},
       metadata: {
         cardNumber: 'T12',
         renderData: CardRenderer.builder((b) => {
@@ -31,15 +33,27 @@ export class RedTourismWave extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const amount = RedTourismWave.getAdjacentEmptySpacesCount(player);
-    player.stock.add(Resource.MEGACREDITS, amount);
+    player.stock.add(Resource.MEGACREDITS, amount, {log: true});
     return undefined;
   }
 
+  private static hasRealTile(space: Space) {
+    return space.tile !== undefined && !isHazardTileType(space.tile.tileType);
+  }
+
+  // This is static because it's shared with Tourist.
   public static getAdjacentEmptySpacesCount(player: IPlayer): number {
     const board = player.game.board;
-    return board.getEmptySpaces().filter((space) =>
-      board.getAdjacentSpaces(space).some((adj) =>
-        adj.tile !== undefined && adj.player === player,
-      )).length;
+    return board.spaces.filter((space) => {
+      if (space.spaceType === SpaceType.COLONY) {
+        return false;
+      }
+      if (this.hasRealTile(space)) {
+        return false;
+      }
+      return board.getAdjacentSpaces(space).some((adj) => {
+        return this.hasRealTile(adj) && adj.player === player;
+      });
+    }).length;
   }
 }

@@ -18,7 +18,7 @@ export class Rogers extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
           b.br;
-          b.venus(1).colon().projectRequirements();
+          b.venus(1, {played}).colon().projectRequirements();
           b.br;
           b.venus(1, {played}).colon().megacredits(-3);
         }),
@@ -35,7 +35,7 @@ export class Rogers extends CeoCard {
     return undefined;
   }
 
-  public getRequirementBonus(_player: IPlayer, parameter: GlobalParameter): number {
+  public override getGlobalParameterRequirementBonus(_player: IPlayer, parameter: GlobalParameter): number {
     if (this.opgActionIsActive === false || parameter !== GlobalParameter.VENUS) return 0;
     // Magic number high enough to always ignore requirements.
     return 50;

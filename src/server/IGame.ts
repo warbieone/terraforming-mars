@@ -1,4 +1,4 @@
-import {Board} from './boards/Board';
+import {MarsBoard} from './boards/MarsBoard';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {ClaimedMilestone} from './milestones/ClaimedMilestone';
@@ -8,29 +8,31 @@ import {FundedAward} from './awards/FundedAward';
 import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ISpace} from './boards/ISpace';
-import {LogBuilder} from './logs/LogBuilder';
+import {Space} from './boards/Space';
+import {LogMessageBuilder} from './logs/LogMessageBuilder';
 import {LogMessage} from '../common/logs/LogMessage';
 import {Phase} from '../common/Phase';
 import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId, SpaceId, isGameId} from '../common/Types';
 import {CardResource} from '../common/CardResource';
 import {Resource} from '../common/Resource';
-import {DeferredAction, Priority} from './deferredActions/DeferredAction';
+import {AndThen, DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {TileType} from '../common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {AresData} from '../common/ares/AresData';
-import {IMoonData} from './moon/IMoonData';
-import {SeededRandom} from './Random';
+import {MoonData} from './moon/MoonData';
+import {SeededRandom} from '../common/utils/Random';
 import {PathfindersData} from './pathfinders/PathfindersData';
-import {GameOptions} from './GameOptions';
+import {GameOptions} from './game/GameOptions';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Tag} from '../common/cards/Tag';
 import {Tile} from './Tile';
 import {Logger} from './logs/Logger';
+import {GlobalParameter} from '../common/GlobalParameter';
+import {UnderworldData} from './underworld/UnderworldData';
 
 export interface Score {
   corporation: String;
@@ -51,12 +53,13 @@ export interface IGame extends Logger {
   inputsThisRound: number;
   resettable: boolean;
   generation: number;
+  globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>>;
   phase: Phase;
   projectDeck: ProjectDeck;
   preludeDeck: PreludeDeck;
   ceoDeck: CeoDeck;
   corporationDeck: CorporationDeck;
-  board: Board;
+  board: MarsBoard;
   activePlayer: PlayerId;
   claimedMilestones: Array<ClaimedMilestone>;
   milestones: Array<IMilestone>;
@@ -67,8 +70,10 @@ export interface IGame extends Logger {
   discardedColonies: Array<IColony>; // Not serialized
   turmoil: Turmoil | undefined;
   aresData: AresData | undefined;
-  moonData: IMoonData | undefined;
+  moonData: MoonData | undefined;
   pathfindersData: PathfindersData | undefined;
+  underworldData: UnderworldData | undefined;
+
   // Card-specific data
   // Mons Insurance promo corp
   monsInsuranceOwner?: PlayerId; // Not serialized
@@ -78,6 +83,15 @@ export interface IGame extends Logger {
   syndicatePirateRaider?: PlayerId;
   // Gagarin Mobile Base
   gagarinBase: Array<SpaceId>;
+  // St. Joseph of Cupertino Mission
+  stJosephCathedrals: Array<SpaceId>;
+  // Mars Nomads
+  nomadSpace: SpaceId | undefined;
+  // Trade Embargo
+  tradeEmbargo: boolean;
+  // Behold The Emperor
+  beholdTheEmperor: boolean;
+
   // The set of tags available in this game.
   readonly tags: ReadonlyArray<Tag>;
   // Function use to properly start the game: with project draft or with research phase
@@ -86,11 +100,11 @@ export interface IGame extends Logger {
   toJSON(): string;
   serialize(): SerializedGame;
   isSoloMode() :boolean;
-  // Function to retrieve a player by it's id
+  // Retrieve a player by it's id
   getPlayerById(id: PlayerId): IPlayer;
-  // Function to return an array of players from an array of player ids
+  // Return an array of players from an array of player ids
   getPlayersById(ids: Array<PlayerId>): Array<IPlayer>;
-  defer(action: DeferredAction, priority?: Priority): void;
+  defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T>;
   milestoneClaimed(milestone: IMilestone): boolean;
   marsIsTerraformed(): boolean;
   lastSoloGeneration(): number;
@@ -103,8 +117,10 @@ export interface IGame extends Logger {
   hasPassedThisActionPhase(player: IPlayer): boolean;
   // Public for testing.
   incrementFirstPlayer(): void;
-  // Only used in the prelude The New Space Race.
+  // Only used in the prelude The New Space Race
   overrideFirstPlayer(newFirstPlayer: IPlayer): void;
+  // The first player this generation
+  readonly first: IPlayer;
   gameIsOver(): boolean;
   isDoneWithFinalProduction(): boolean;
   doneWorldGovernmentTerraforming(): void;
@@ -131,22 +147,17 @@ export interface IGame extends Logger {
   getTemperature(): number;
   getGeneration(): number;
   getPassedPlayers():Array<Color>;
-  getCitiesOffMarsCount(player?: IPlayer): number;
-  getCitiesOnMarsCount(player?: IPlayer): number;
-  getCitiesCount(player?: IPlayer, filter?: (space: ISpace) => boolean): number;
-  getGreeneriesCount(player?: IPlayer): number;
-  getSpaceCount(tileType: TileType, player: IPlayer): number;
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
   // a tile on The Moon.
-  addTile(player: IPlayer, space: ISpace, tile: Tile): void;
-  simpleAddTile(player: IPlayer, space: ISpace, tile: Tile): void;
-  grantSpaceBonuses(player: IPlayer, space: ISpace): void;
+  addTile(player: IPlayer, space: Space, tile: Tile): void;
+  simpleAddTile(player: IPlayer, space: Space, tile: Tile): void;
+  grantSpaceBonuses(player: IPlayer, space: Space): void;
   grantSpaceBonus(player: IPlayer, spaceBonus: SpaceBonus, count?: number): void;
-  addGreenery(player: IPlayer, space: ISpace, shouldRaiseOxygen?: boolean): void;
-  addCity(player: IPlayer, space: ISpace, cardName?: CardName | undefined): void;
+  addGreenery(player: IPlayer, space: Space, shouldRaiseOxygen?: boolean): void;
+  addCity(player: IPlayer, space: Space, cardName?: CardName | undefined): void;
   canAddOcean(): boolean;
   canRemoveOcean(): boolean;
-  addOcean(player: IPlayer, space: ISpace): void;
+  addOcean(player: IPlayer, space: Space): void;
   removeTile(spaceId: string): void;
   getPlayers(): ReadonlyArray<IPlayer>;
   // Players returned in play order starting with first player this generation.
@@ -156,17 +167,17 @@ export interface IGame extends Logger {
    */
   getCardPlayerOrThrow(name: CardName): IPlayer;
   /**
-   * Returns the Player holding this card, or throws.
+   * Returns the Player holding this card, or returns undefined.
    */
   getCardPlayerOrUndefined(name: CardName): IPlayer | undefined;
   // Returns the player holding a card in hand. Return undefined when nobody has that card in hand.
   getCardHolder(name: CardName): [IPlayer | undefined, IProjectCard | undefined];
   getCardsInHandByResource(player: IPlayer, resourceType: CardResource): void;
   getCardsInHandByType(player: IPlayer, cardType: CardType): void;
-  log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: IPlayer}): void;
+  log(message: string, f?: (builder: LogMessageBuilder) => void, options?: {reservedFor?: IPlayer}): void;
   someoneCanHaveProductionReduced(resource: Resource, minQuantity?: number): boolean;
   discardForCost(cardCount: 1 | 2, toPlace: TileType): number;
-  getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount?: 1 | 2): ISpace;
+  getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount?: 1 | 2): Space;
   expectedPurgeTimeMs(): number;
   logIllegalState(description: string, metadata: {}): void;
 }

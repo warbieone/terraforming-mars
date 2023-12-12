@@ -34,13 +34,9 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
 
   public override bespokePlay(player: IPlayer) {
     // player.production.adjust(this.productionBox); Why was this here? Remove it, I suppose.
-    player.game.defer(
-      new DeclareCloneTag(
-        player,
-        this,
-        // +2 instead of +3 because onCardPlayed covers applying one of the 3.
-        (tag) => PathfindersExpansion.raiseTrack(tag, player, 2),
-      ));
+    player.game.defer(new DeclareCloneTag(player, this))
+      // +2 instead of +3 because onCardPlayed covers applying one of the 3.
+      .andThen((tag) => PathfindersExpansion.raiseTrack(tag, player, 2));
     return undefined;
   }
 }

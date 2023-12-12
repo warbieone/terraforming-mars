@@ -26,7 +26,7 @@
             <Card :card="{name: cardName, resources: getResourcesOnCard(cardName)}"/>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames.elements" :key="globalEventName">
-            <global-event :globalEvent="getGlobalEventModel(globalEventName)" type="prior" :showIcons="false"></global-event>
+            <global-event :globalEventName="globalEventName" type="prior" :showIcons="false"></global-event>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="colonyName in colonyNames.elements" :key="colonyName">
             <colony :colony="getColony(colonyName)"></colony>
@@ -38,25 +38,23 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import * as paths from '@/common/app/paths';
+import {paths} from '@/common/app/paths';
 import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
-import {LogMessageData} from '@/common/logs/LogMessageData';
+import {LogMessageData, LogMessageDataAttrs} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/common/cards/CardName';
-import {TileType} from '@/common/TileType';
+import {TileType, tileTypeToString} from '@/common/TileType';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
-import {getGlobalEventModel} from '@/client/turmoil/ClientGlobalEventManifest';
-import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
@@ -64,6 +62,7 @@ import {ParticipantId} from '@/common/Types';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import Colony from '@/client/components/colonies/Colony.vue';
 import {ColonyModel} from '@/common/models/ColonyModel';
+import {ClientCard} from '@/common/cards/ClientCard';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -164,14 +163,23 @@ export default Vue.extend({
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
       }
     },
-    cardToHtml(cardType: CardType, cardName: string) {
-      const suffixFreeCardName = cardName.split(':')[0];
-      const className = cardTypeToCss[cardType];
+    cardToHtml(card: ClientCard, attrs: LogMessageDataAttrs | undefined) {
+      const suffixFreeCardName = card.name.split(':')[0];
+      const className = cardTypeToCss[card.type];
 
       if (className === undefined) {
         return suffixFreeCardName;
       }
-      return '<span class="log-card '+ className + '">' + this.$t(suffixFreeCardName) + '</span>';
+      let tagHTML = '';
+      if (attrs?.tags === true) {
+        tagHTML = '&nbsp;' + (card.tags.map((tag) => `<div class="log-tag tag-${tag}"></div>`).join(' '));
+      }
+
+      let costHTML = '';
+      if (attrs?.cost === true) {
+        costHTML = `<span>&nbsp;<div class="log-resource-megacredits">${card.cost}</div></span>`;
+      }
+      return '<span class="log-card '+ className + '">' + this.$t(suffixFreeCardName) + tagHTML + costHTML +'</span>';
     },
     messageDataToHTML(data: LogMessageData): string {
       if (data.type === undefined || data.value === undefined) {
@@ -191,7 +199,7 @@ export default Vue.extend({
         const cardName = data.value as CardName;
         const card = getCard(cardName);
         if (card !== undefined) {
-          return this.cardToHtml(card.type, cardName);
+          return this.cardToHtml(card, data.attrs);
         } else {
           console.log(`Cannot render ${cardName}`);
         }
@@ -202,8 +210,8 @@ export default Vue.extend({
         return '<span class="log-card background-color-global-event">' + this.$t(globalEventName) + '</span>';
 
       case LogMessageDataType.TILE_TYPE:
-        const tileType: TileType = +data.value;
-        return this.$t(TileType.toString(tileType));
+        const tileType: TileType = Number(data.value);
+        return this.$t(tileTypeToString[tileType]);
 
       case LogMessageDataType.COLONY:
         const colonyName = data.value as ColonyName;
@@ -250,6 +258,7 @@ export default Vue.extend({
           return logEntryBullet + Log.applyData(message, this.messageDataToHTML);
         }
       } catch (err) {
+        console.log(err);
         return this.safeMessage(message);
       }
       return '';
@@ -334,9 +343,6 @@ export default Vue.extend({
     },
     lastGenerationClass(): string {
       return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
-    },
-    getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
-      return getGlobalEventModel(globalEventName);
     },
     // TODO(kberg): getColony could have the actual game colony by changing this component's properties.
     getColony(colonyName: ColonyName): ColonyModel {

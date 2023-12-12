@@ -5,6 +5,7 @@ export const GAME_MODULES = [
   'venus',
   'colonies',
   'prelude',
+  'prelude2',
   'turmoil',
   'community',
   'ares',
@@ -12,5 +13,25 @@ export const GAME_MODULES = [
   'pathfinders',
   'ceo',
   'league',
+  'starwars',
+  'underworld',
 ] as const;
 export type GameModule = typeof GAME_MODULES[number];
+
+export const MODULE_NAMES: Readonly<Record<GameModule, string>> = {
+  base: 'Base',
+  corpera: 'Corporate Era',
+  promo: 'Promo',
+  venus: 'Venus Next',
+  colonies: 'Colonies',
+  prelude: 'Prelude',
+  prelude2: 'Prelude 2',
+  turmoil: 'Turmoil',
+  community: 'Community',
+  ares: 'Ares',
+  moon: 'The Moon',
+  pathfinders: 'Pathfinders',
+  ceo: 'CEOs',
+  starwars: 'Star Wars',
+  underworld: 'Underworld',
+};

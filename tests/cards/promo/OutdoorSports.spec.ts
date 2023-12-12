@@ -2,26 +2,29 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {OutdoorSports} from '../../../src/server/cards/promo/OutdoorSports';
 import {TestPlayer} from '../../TestPlayer';
-import {ISpace} from '../../../src/server/boards/ISpace';
+import {Space} from '../../../src/server/boards/Space';
+import {partition} from '../../../src/common/utils/utils';
 
 describe('OutdoorSports', function() {
   let card: OutdoorSports;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let oceanSpace: ISpace;
-  let spaceNextToOcean: ISpace;
-  let spaceNotNextToOcean: ISpace;
+  let oceanSpace: Space;
+  let spaceNextToOcean: Space;
+  let spaceNotNextToOcean: Space;
 
   beforeEach(function() {
     card = new OutdoorSports();
-    [, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
     const board = player.game.board;
     oceanSpace = board.getAvailableSpacesForOcean(player)[0];
 
     const spacesNextToOceanSpace = board.getAdjacentSpaces(oceanSpace);
     const citySpaces = board.getAvailableSpacesForCity(player);
-    spaceNextToOcean = citySpaces.filter((space) => spacesNextToOceanSpace.includes(space))[0];
-    spaceNotNextToOcean = citySpaces.filter((space) => !spacesNextToOceanSpace.includes(space))[0];
+    [[spaceNextToOcean], [spaceNotNextToOcean]] = partition(
+      citySpaces,
+      (space) => spacesNextToOceanSpace.includes(space),
+    );
   });
 
   it('cannotPlay', function() {

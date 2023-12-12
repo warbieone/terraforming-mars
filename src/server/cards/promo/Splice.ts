@@ -1,23 +1,21 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Resource} from '../../../common/Resource';
 import {all, played} from '../Options';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
-export class Splice extends Card implements ICorporationCard {
+export class Splice extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.SPLICE,
       tags: [Tag.MICROBE],
       startingMegaCredits: 52, // 48 + 4 as card resolution when played
@@ -65,15 +63,15 @@ export class Splice extends Card implements ICorporationCard {
     const microbeTagsCount = player.tags.cardTagCount(card, Tag.MICROBE);
     const megacreditsGain = microbeTagsCount * gainPerMicrobe;
 
-    const addResource = new SelectOption('Add a microbe resource to this card', 'Add microbe', () => {
+    const addResource = new SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
       player.addResourceTo(card);
       return undefined;
     });
 
     const getMegacredits = new SelectOption(
-      newMessage('Gain ${0} M€', (b)=>b.number(megacreditsGain)),
-      'Gain M€',
-      () => {
+      message('Gain ${0} M€', (b)=>b.number(megacreditsGain)),
+      'Gain M€')
+      .andThen(() => {
         player.stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
         return undefined;
       });

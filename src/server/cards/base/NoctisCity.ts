@@ -4,9 +4,9 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {message} from '../../logs/MessageBuilder';
 
 export class NoctisCity extends Card implements IProjectCard {
   constructor() {
@@ -34,7 +34,7 @@ export class NoctisCity extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    if (player.game.board.getNoctisCitySpaceId !== undefined) {
+    if (player.game.board.getNoctisCitySpaceId() !== undefined) {
       return true;
     } else {
       return player.game.board.getAvailableSpacesForCity(player).length > 0;
@@ -47,9 +47,10 @@ export class NoctisCity extends Card implements IProjectCard {
       player.game.addCity(player, space);
       return undefined;
     }
-    return new SelectSpace('Select space for Noctis city', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      player.game.addCity(player, space);
-      return undefined;
-    });
+    return new SelectSpace(message('Select space for ${0}', (b) => b.card(this)), player.game.board.getAvailableSpacesForCity(player))
+      .andThen((space) => {
+        player.game.addCity(player, space);
+        return undefined;
+      });
   }
 }

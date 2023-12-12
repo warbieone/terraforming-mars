@@ -31,17 +31,19 @@ import {CardType} from '@/common/cards/CardType';
 import CardContent from './CardContent.vue';
 import CardHelp from './CardHelp.vue';
 import {ICardMetadata} from '@/common/cards/ICardMetadata';
-import {ICardRequirements} from '@/common/cards/ICardRequirements';
 import {Tag} from '@/common/cards/Tag';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {CardResource} from '@/common/CardResource';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/common/cards/CardName';
+import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 
 const CARDS_WITH_EXTERNAL_DOCUMENTATION = [
   CardName.BOTANICAL_EXPERIENCE,
   CardName.LUNA_ECUMENOPOLIS,
   CardName.ROBOTIC_WORKFORCE,
+  CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,
+  CardName.SAGITTA_FRONTIER_SERVICES,
 ];
 
 export default Vue.extend({
@@ -126,7 +128,7 @@ export default Vue.extend({
     getCardMetadata(): ICardMetadata {
       return this.cardInstance.metadata;
     },
-    getCardRequirements(): ICardRequirements | undefined {
+    getCardRequirements(): Array<CardRequirementDescriptor> {
       return this.cardInstance.requirements;
     },
     getResourceAmount(): number {

@@ -9,14 +9,15 @@ import {CardResource} from '../../../common/CardResource';
 import {all, played} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 import {ICard} from '../ICard';
+import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 
 export class CommunicationCenter extends Card implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
       name: CardName.COMMUNICATION_CENTER,
-      cost: 13,
-      tags: [Tag.SPACE, Tag.MARS, Tag.BUILDING],
+      cost: 8,
+      tags: [Tag.SCIENCE, Tag.MARS, Tag.BUILDING],
       resourceType: CardResource.DATA,
 
       behavior: {
@@ -37,10 +38,6 @@ export class CommunicationCenter extends Card implements IProjectCard {
     });
   }
 
-
-  // Card behavior is in PathfindersExpansion.onCardPlayed. Card.onCardPlayed
-  // does not apply to _any card played_
-
   public onResourceAdded(player: IPlayer, playedCard: ICard) {
     if (playedCard.name !== this.name) return;
     while (this.resourceCount >= 3) {
@@ -50,5 +47,17 @@ export class CommunicationCenter extends Card implements IProjectCard {
         b.player(player).card(this);
       });
     }
+  }
+
+  public onCardPlayedFromAnyPlayer(thisCardOwner: IPlayer, _playedCardOwner: IPlayer, card: IProjectCard) {
+    if (card.type === CardType.EVENT) {
+      // Resolve CEO's Favorite Project before adding the resource.
+      const priority = (card.name === CardName.CEOS_FAVORITE_PROJECT) ? Priority.BACK_OF_THE_LINE : Priority.DEFAULT;
+      thisCardOwner.game.defer(new SimpleDeferredAction(thisCardOwner, () => {
+        thisCardOwner.addResourceTo(this, {qty: 1, log: true});
+        return undefined;
+      }), priority);
+    }
+    return undefined;
   }
 }

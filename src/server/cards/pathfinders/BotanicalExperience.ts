@@ -4,11 +4,10 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {all} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {Board} from '../../boards/Board';
 import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
@@ -21,13 +20,13 @@ export class BotanicalExperience extends Card implements IProjectCard {
       name: CardName.BOTANICAL_EXPERIENCE,
       cost: 14,
       tags: [Tag.PLANT, Tag.MARS, Tag.SCIENCE],
-      requirements: CardRequirements.builder((b) => b.greeneries(1, {all})),
+      requirements: {greeneries: 1, all},
       resourceType: CardResource.DATA,
 
       metadata: {
         cardNumber: 'Pf50',
         renderData: CardRenderer.builder((b) => {
-          b.greenery(Size.SMALL, /* withO2 */ false, /* anyPlayer */ true).colon().data({size: Size.SMALL});
+          b.greenery({size: Size.SMALL, withO2: false, any: true}).colon().data({size: Size.SMALL});
           b.nbsp;
           b.data({amount: 3, digit: true}).asterix().colon().production((pb) => pb.plants(1));
           b.br;
@@ -41,7 +40,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
   }
 
 
-  public onTilePlaced(cardOwner: IPlayer, _activePlayer: IPlayer, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, _activePlayer: IPlayer, space: Space) {
     if (Board.isGreenerySpace(space)) {
       cardOwner.addResourceTo(this, 1);
     }

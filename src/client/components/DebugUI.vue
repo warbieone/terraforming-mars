@@ -1,9 +1,6 @@
 <template>
   <div class="debug-ui-container" :class="getLanguageCssClass()">
       <h1 v-i18n>Cards List</h1>
-      <div class="legacy-anchor">
-        <a href="https://ssimeonoff.github.io/cards-list" target="_blank"><span v-i18n>legacy card UI</span></a>
-      </div>
 
       <!-- start filters -->
 
@@ -25,7 +22,7 @@
           <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
           <label :for="`${expansion}-checkbox`" class="expansion-button">
             <div class='create-game-expansion-icon' :class="expansionIconClass(expansion)"></div>
-            <span v-i18n>{{expansionName(expansion)}}</span>
+            <span v-i18n>{{MODULE_NAMES[expansion]}}</span>
           </label>
         </span>
       </div>
@@ -102,7 +99,7 @@
         <h2 v-i18n>Global Events</h2>
         <template v-if="types.globalEvents">
           <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
-            <global-event v-if="showGlobalEvent(globalEventName)" :globalEvent="getGlobalEventModel(globalEventName)" type="prior"></global-event>
+            <global-event v-if="showGlobalEvent(globalEventName)" :globalEventName="globalEventName" type="distant"></global-event>
           </div>
         </template>
       </section>
@@ -158,8 +155,7 @@ import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {GlobalEventModel} from '@/common/models/TurmoilModel';
-import {allGlobalEventNames, getGlobalEvent, getGlobalEventModel, getGlobalEventOrThrow} from '@/client/turmoil/ClientGlobalEventManifest';
+import {allGlobalEventNames, getGlobalEvent, getGlobalEventOrThrow} from '@/client/turmoil/ClientGlobalEventManifest';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
 import Colony from '@/client/components/colonies/Colony.vue';
@@ -167,7 +163,7 @@ import {COMMUNITY_COLONY_NAMES, OFFICIAL_COLONY_NAMES, PATHFINDERS_COLONY_NAMES}
 import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
-import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
+import {GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
 import {Tag} from '@/common/cards/Tag';
 import {allColonyNames, getColony} from '@/client/colonies/ClientColonyManifest';
 import {ClientCard} from '@/common/cards/ClientCard';
@@ -189,6 +185,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
   corpera: 'c',
   prelude: 'p',
+  prelude2: '2',
   venus: 'v',
   colonies: 'C',
   turmoil: 't',
@@ -199,10 +196,12 @@ const moduleAbbreviations: Record<GameModule, string> = {
   moon: 'm',
   pathfinders: 'P',
   ceo: 'l', // ceo abbreviation is 'l' for leader, since both 'C' are already taken
+  starwars: 'w',
+  underworld: 'u',
 };
 
 // TODO(kberg): make this use suffixModules.
-const ALL_MODULES = 'bcpvCt*ramPl';
+const ALL_MODULES = 'bcpvCt*ramPl2w';
 
 type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOption = Tag | 'none';
@@ -305,6 +304,7 @@ export default (Vue as WithRefs<Refs>).extend({
         base: true,
         corpera: true,
         prelude: true,
+        prelude2: true,
         venus: true,
         colonies: true,
         turmoil: true,
@@ -315,6 +315,8 @@ export default (Vue as WithRefs<Refs>).extend({
         league: true,
         pathfinders: true,
         ceo: true,
+        starwars: true,
+        underworld: true,
       },
       types: {
         event: true,
@@ -369,6 +371,9 @@ export default (Vue as WithRefs<Refs>).extend({
   computed: {
     allModules(): ReadonlyArray<GameModule> {
       return GAME_MODULES;
+    },
+    MODULE_NAMES(): typeof MODULE_NAMES {
+      return MODULE_NAMES;
     },
     allTypes(): Array<TypeOption> {
       return [
@@ -463,9 +468,6 @@ export default (Vue as WithRefs<Refs>).extend({
     getAllColonyNames() {
       return OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES).concat(PATHFINDERS_COLONY_NAMES);
     },
-    getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
-      return getGlobalEventModel(globalEventName);
-    },
     filter(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma') {
       const filterText = this.filterText.toLocaleUpperCase();
       if (filterText.length === 0) {
@@ -490,23 +492,6 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'colonies': return 'expansion-icon-colony';
       case 'moon': return 'expansion-icon-themoon';
       default: return `expansion-icon-${expansion}`;
-      }
-    },
-    expansionName(expansion: GameModule): string {
-      switch (expansion) {
-      case 'base': return 'Base';
-      case 'corpera': return 'Corporate Era';
-      case 'prelude': return 'Prelude';
-      case 'venus': return 'Venus Next';
-      case 'colonies': return 'Colonies';
-      case 'turmoil': return 'Turmoil';
-      case 'promo': return 'Promos';
-      case 'league': return 'League';
-      case 'ares': return 'Ares';
-      case 'community': return 'Community';
-      case 'moon': return 'The Moon';
-      case 'pathfinders': return 'Pathfinders';
-      case 'ceo': return 'CEOs';
       }
     },
     filterByTags(card: ClientCard): boolean {

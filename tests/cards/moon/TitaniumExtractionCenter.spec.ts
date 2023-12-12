@@ -1,19 +1,19 @@
-import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../../TestPlayer';
 import {TitaniumExtractionCenter} from '../../../src/server/cards/moon/TitaniumExtractionCenter';
 import {expect} from 'chai';
 
 describe('TitaniumExtractionCenter', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: TitaniumExtractionCenter;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new TitaniumExtractionCenter();
   });

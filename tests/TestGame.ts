@@ -1,6 +1,6 @@
 import {Game} from '../src/server/Game';
 import {IGame} from '../src/server/IGame';
-import {GameOptions} from '../src/server/GameOptions';
+import {GameOptions} from '../src/server/game/GameOptions';
 import {TestPlayer} from './TestPlayer';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 
@@ -34,6 +34,7 @@ function createPlayers(count: number, idSuffix: string): Array<TestPlayer> {
  *
  * Test game has a return type with a spread array operator.
  */
+// TODO(kberg): return IGame instead of Game
 export function testGame(count: number, customOptions?: Partial<TestGameOptions>, idSuffix = ''): [Game, ...Array<TestPlayer>] {
   const players = createPlayers(count, idSuffix);
 

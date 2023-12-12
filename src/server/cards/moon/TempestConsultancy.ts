@@ -1,18 +1,15 @@
 import {CardName} from '../../../common/cards/CardName';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class TempestConsultancy extends Card implements ICorporationCard {
+export class TempestConsultancy extends CorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.TEMPEST_CONSULTANCY,
       tags: [Tag.MOON],
       startingMegaCredits: 37,
@@ -46,13 +43,13 @@ export class TempestConsultancy extends Card implements ICorporationCard {
   }
 
   public canAct(player: IPlayer) {
-    return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) > 0;
+    return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player) > 0;
   }
 
   public action(player: IPlayer) {
     let count = Math.floor(player.tags.count(Tag.MOON) / 5);
     count = Math.min(count, 3);
-    count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id));
+    count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player));
     if (count > 0) {
       player.game.defer(new SendDelegateToArea(
         player,

@@ -1,29 +1,26 @@
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {IColony} from '../../colonies/IColony';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 function tradeCost(player: IPlayer) {
   return Math.max(0, 3 - player.colonies.tradeDiscount);
 }
-export class CollegiumCopernicus extends Card implements ICorporationCard, IActionCard {
+export class CollegiumCopernicus extends CorporationCard implements IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.COLLEGIUM_COPERNICUS,
       tags: [Tag.SCIENCE, Tag.EARTH],
       startingMegaCredits: 33,
@@ -72,13 +69,13 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
 
   public action(player: IPlayer) {
     const game = player.game;
-    game.defer(new SimpleDeferredAction(
-      player,
-      () => new SelectColony('Select colony tile to trade with', 'Select', ColoniesHandler.tradeableColonies(game), (colony) => {
-        tradeWithColony(this, player, colony);
-        return undefined;
-      }),
-    ));
+    player.defer(
+      new SelectColony('Select colony tile to trade with', 'Select', ColoniesHandler.tradeableColonies(game))
+        .andThen((colony) => {
+          tradeWithColony(this, player, colony);
+          return undefined;
+        }),
+    );
     return undefined;
   }
 }
@@ -102,7 +99,7 @@ export class TradeWithCollegiumCopernicus implements IColonyTrader {
   }
 
   public optionText() {
-    return newMessage('Pay ${0} data (use ${1} action)', (b) => b.number(tradeCost(this.player)).cardName(CardName.COLLEGIUM_COPERNICUS));
+    return message('Pay ${0} data (use ${1} action)', (b) => b.number(tradeCost(this.player)).cardName(CardName.COLLEGIUM_COPERNICUS));
   }
 
   public trade(colony: IColony) {

@@ -1,14 +1,13 @@
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {CardDiscount} from '../../common/cards/Types';
+import {CardDiscount, GlobalParameterRequirementBonus} from '../../common/cards/Types';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
 import {Tag} from '../../common/cards/Tag';
-import {IPlayer} from '../IPlayer';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
-import {CardRequirements} from './requirements/CardRequirements';
 import {DynamicTRSource} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
@@ -16,50 +15,66 @@ import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {IProjectCard} from './IProjectCard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
+import {OneOrArray} from '../../common/utils/types';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 import {Counter} from '../behavior/Counter';
-import {PartialField} from '../../common/utils/types';
+import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
+import {CardRequirements} from './requirements/CardRequirements';
+import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
+import {asArray} from '../../common/utils/utils';
+import {YesAnd} from './requirements/CardRequirement';
+import {GlobalParameter} from '../../common/GlobalParameter';
 
-const NO_COST_CARD_TYPES: ReadonlyArray<CardType> = [
+/**
+ * Cards that do not need a cost attribute.
+ */
+const CARD_TYPES_WITHOUT_COST: ReadonlyArray<CardType> = [
   CardType.CORPORATION,
   CardType.PRELUDE,
   CardType.CEO,
   CardType.STANDARD_ACTION,
 ] as const;
 
-type FirstActionBehavior = Behavior & {text: string};
-
-/*
- * Internal representation of card properties.
- */
-type Properties = {
+/* Properties that are the same internally and externally */
+type SharedProperties = {
   /** @deprecated use behavior */
   adjacencyBonus?: AdjacencyBonus;
+  action?: Behavior | undefined;
   behavior?: Behavior | undefined;
   cardCost?: number;
-  cardDiscount?: CardDiscount | Array<CardDiscount>;
+  cardDiscount?: OneOrArray<CardDiscount>;
   type: CardType;
   cost?: number;
   initialActionText?: string;
-  firstAction?: FirstActionBehavior;
+  firstAction?: Behavior & {text: string};
+  globalParameterRequirementBonus?: GlobalParameterRequirementBonus;
   metadata: ICardMetadata;
-  requirements?: CardRequirements;
+  requirements?: CardRequirementsDescriptor;
   name: CardName;
-  reserveUnits?: Units,
   resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
+  tilesBuilt?: Array<TileType>,
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
-/* External representation of card properties. */
-export type StaticCardProperties = PartialField<Properties, 'reserveUnits'>;
+/* Internal representation of card properties. */
+type InternalProperties = SharedProperties & {
+  reserveUnits?: Units,
+  requirements: Array<CardRequirementsDescriptor>
+  compiledRequirements: CardRequirements;
+}
 
-export const staticCardProperties = new Map<CardName, Properties>();
+/* External representation of card properties. */
+export type StaticCardProperties = SharedProperties & {
+  reserveUnits?: Partial<Units>,
+  requirements?: OneOrArray<CardRequirementDescriptor>,
+}
+
+const cardProperties = new Map<CardName, InternalProperties>();
 
 /**
  * Card is an implementation for most cards in the game, which provides one key features:
@@ -81,36 +96,49 @@ export const staticCardProperties = new Map<CardName, Properties>();
  * each card, either.
  */
 export abstract class Card {
-  private readonly properties: Properties;
-  constructor(properties: StaticCardProperties) {
-    let staticInstance = staticCardProperties.get(properties.name);
-    if (staticInstance === undefined) {
-      if (properties.type === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
-        throw new Error('must define startingMegaCredits for corporation cards');
-      }
-      if (properties.cost === undefined) {
-        if (NO_COST_CARD_TYPES.includes(properties.type) === false) {
-          throw new Error(`${properties.name} must have a cost property`);
-        }
-      }
-      try {
-        // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
-        Card.autopopulateMetadataVictoryPoints(properties);
+  protected readonly properties: InternalProperties;
 
-        validateBehavior(properties.behavior);
-        validateBehavior(properties.firstAction);
-      } catch (e) {
-        throw new Error(`Cannot validate ${properties.name}: ${e}`);
-      }
-
-      const p: Properties = {
-        ...properties,
-        reserveUnits: properties.reserveUnits === undefined ? undefined : Units.of(properties.reserveUnits),
-      };
-      staticCardProperties.set(properties.name, p);
-      staticInstance = p;
+  private internalize(external: StaticCardProperties): InternalProperties {
+    const name = external.name;
+    if (external.type === CardType.CORPORATION && external.startingMegaCredits === undefined) {
+      throw new Error(`${name}: corp cards must define startingMegaCredits`);
     }
-    this.properties = staticInstance;
+    if (external.cost === undefined) {
+      if (CARD_TYPES_WITHOUT_COST.includes(external.type) === false) {
+        throw new Error(`${name} must have a cost property`);
+      }
+    }
+    try {
+      // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
+      Card.autopopulateMetadataVictoryPoints(external);
+
+      validateBehavior(external.behavior);
+      validateBehavior(external.firstAction);
+      validateBehavior(external.action);
+    } catch (e) {
+      throw new Error(`Cannot validate ${name}: ${e}`);
+    }
+
+    const translatedRequirements = asArray(external.requirements ?? []).map((req) => populateCount(req));
+    const compiledRequirements = CardRequirements.compile(translatedRequirements);
+
+    const internal: InternalProperties = {
+      ...external,
+      reserveUnits: external.reserveUnits === undefined ? undefined : Units.of(external.reserveUnits),
+      requirements: translatedRequirements,
+      compiledRequirements: compiledRequirements,
+    };
+    return internal;
+  }
+
+  constructor(external: StaticCardProperties) {
+    const name = external.name;
+    let internal = cardProperties.get(name);
+    if (internal === undefined) {
+      internal = this.internalize(external);
+      cardProperties.set(name, internal);
+    }
+    this.properties = internal;
   }
   public resourceCount = 0;
   public get adjacencyBonus() {
@@ -167,23 +195,33 @@ export abstract class Card {
   public get tilesBuilt(): Array<TileType> {
     return this.properties.tilesBuilt || [];
   }
-  public canPlay(player: IPlayer): boolean {
-    //
-    // Is this block necessary?
-    const satisfied = this.requirements?.satisfies(player);
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
+    let yesAnd: YesAnd | undefined = undefined;
+    const satisfied = this.properties.compiledRequirements.satisfies(player);
     if (satisfied === false) {
       return false;
     }
-    // It's repeated at Player.simpleCanPlay.
-    //
+    if (satisfied !== true) {
+      yesAnd = satisfied;
+    }
 
-    if (this.behavior !== undefined && !getBehaviorExecutor().canExecute(this.behavior, player, this)) {
+    if (this.behavior !== undefined) {
+      if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) {
+        return false;
+      }
+    }
+    const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions);
+    if (bespokeCanPlay === false) {
       return false;
     }
-    return this.bespokeCanPlay(player);
+
+    if (yesAnd !== undefined) {
+      return yesAnd;
+    }
+    return true;
   }
 
-  public bespokeCanPlay(_player: IPlayer): boolean {
+  public bespokeCanPlay(_player: IPlayer, _canAffordOptions?: CanAffordOptions): boolean {
     return true;
   }
 
@@ -215,7 +253,7 @@ export abstract class Card {
       return vp;
     }
     if (typeof(vp) === 'object') {
-      return new Counter(player, this).count(vp as IVictoryPoints, 'vps');
+      return new Counter(player, this).count(vp, 'vps');
     }
     if (vp === 'special') {
       throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
@@ -329,6 +367,50 @@ export abstract class Card {
     }
     return sum;
   }
+
+  public getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number {
+    if (this.properties.globalParameterRequirementBonus !== undefined) {
+      const globalParameterRequirementBonus = this.properties.globalParameterRequirementBonus;
+      if (globalParameterRequirementBonus.nextCardOnly === true) {
+        if (player.lastCardPlayed !== this.name) {
+          return 0;
+        }
+      }
+      if (globalParameterRequirementBonus.parameter !== undefined) {
+        if (globalParameterRequirementBonus.parameter !== parameter) {
+          return 0;
+        }
+      }
+      return globalParameterRequirementBonus.steps;
+    }
+    return 0;
+  }
+}
+
+function populateCount(requirement: CardRequirementDescriptor): CardRequirementDescriptor {
+  requirement.count =
+    requirement.count ??
+    requirement.oceans ??
+    requirement.oxygen ??
+    requirement.temperature ??
+    requirement.venus ??
+    requirement.tr ??
+    requirement.resourceTypes ??
+    requirement.greeneries ??
+    requirement.cities ??
+    requirement.colonies ??
+    requirement.floaters ??
+    requirement.partyLeader ??
+    requirement.habitatRate ??
+    requirement.miningRate ??
+    requirement.logisticRate ??
+    requirement.habitatTiles ??
+    requirement.miningTiles ??
+    requirement.roadTiles ??
+    requirement.corruption ??
+    requirement.excavation;
+
+  return requirement;
 }
 
 export function validateBehavior(behavior: Behavior | undefined) : void {
@@ -341,12 +423,17 @@ export function validateBehavior(behavior: Behavior | undefined) : void {
     return;
   }
   if (behavior.spend) {
-    if (behavior.spend.megacredits ?? behavior.spend.heat) {
-      validate(behavior.tr === undefined, 'spend.megacredits and spend.heat are not yet compatible with tr');
-      validate(behavior.global === undefined, 'spend.megacredits and spend.heat are not yet compatible with global');
-      validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.habitatRate');
-      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.logisticsRate');
-      validate(behavior.moon?.miningRate === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.miningRate');
+    const spend = behavior.spend;
+    if (spend.megacredits) {
+      validate(behavior.tr === undefined, 'spend.megacredits is not yet compatible with tr');
+      validate(behavior.global === undefined, 'spend.megacredits is not yet compatible with global');
+      validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits is not yet compatible with moon.habitatRate');
+      validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits is not yet compatible with moon.logisticsRate');
+      validate(behavior.moon?.miningRate === undefined, 'spend.megacredits is not yet compatible with moon.miningRate');
+    }
+    // Don't spend heat with other types yet. It's probably not compatible. Check carefully.
+    if (spend.heat) {
+      validate(Object.keys(spend).length === 1, 'spend.heat cannot be used with another spend');
     }
   }
 }

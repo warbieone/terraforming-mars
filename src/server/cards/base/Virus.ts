@@ -37,7 +37,7 @@ export class Virus extends Card implements IProjectCard {
       return undefined;
     }
 
-    const orOptionsAnimals = new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2, false, false).execute() as OrOptions;
+    const orOptionsAnimals = new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2, {mandatory: false}).execute() as OrOptions;
     const removeAnimals = orOptionsAnimals !== undefined ?
       orOptionsAnimals.options[0] :
       undefined;
@@ -61,9 +61,7 @@ export class Virus extends Card implements IProjectCard {
     if (removePlants !== undefined) {
       orOptions.options.push(...removePlants);
     }
-    orOptions.options.push(new SelectOption('Skip removal', 'Confirm', () => {
-      return undefined;
-    }));
+    orOptions.options.push(new SelectOption('Skip removal'));
 
     return orOptions;
   }

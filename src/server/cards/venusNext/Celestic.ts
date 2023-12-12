@@ -1,10 +1,8 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {IActionCard} from '../ICard';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {LogHelper} from '../../LogHelper';
@@ -15,14 +13,13 @@ import {Player} from '../../Player';
 
 
 
-export class Celestic extends Card implements IActionCard, ICorporationCard {
+export class Celestic extends ActiveCorporationCard {
   constructor() {
     super({
       name: CardName.CELESTIC,
       tags: [Tag.VENUS],
       startingMegaCredits: 42,
       resourceType: CardResource.FLOATER,
-      type: CardType.CORPORATION,
       initialActionText: 'Draw 2 cards with a floater icon on it',
       victoryPoints: {resourcesHere: {}, per: 3},
 
@@ -108,6 +105,9 @@ export class Celestic extends Card implements IActionCard, ICorporationCard {
     CardName.NOBEL_LABS,
     CardName.SECRET_LABS,
     CardName.VENERA_BASE,
+
+    // Star Wars
+    CardName.CLOUD_CITY,
   ]);
 
   public initialAction(player: IPlayer) {

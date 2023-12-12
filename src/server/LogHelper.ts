@@ -1,8 +1,8 @@
 import {CardName} from '../common/cards/CardName';
 import {IPlayer} from './IPlayer';
 import {ICard} from './cards/ICard';
-import {ISpace} from './boards/ISpace';
-import {TileType} from '../common/TileType';
+import {Space} from './boards/Space';
+import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
 import {Logger} from './logs/Logger';
 
@@ -29,11 +29,11 @@ export class LogHelper {
       b.player(player).number(qty).string(resourceType).card(card).string(effect));
   }
 
-  static logTilePlacement(player: IPlayer, space: ISpace, tileType: TileType) {
-    this.logBoardTileAction(player, space, TileType.toString(tileType) + ' tile');
+  static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {
+    this.logBoardTileAction(player, space, tileTypeToString[tileType] + ' tile');
   }
 
-  static logBoardTileAction(player: IPlayer, space: ISpace, description: string, action: string = 'placed') {
+  static logBoardTileAction(player: IPlayer, space: Space, description: string, action: string = 'placed') {
     // Skip off-grid tiles
     if (space.x === -1 && space.y === -1) return;
     // Skip solo play random tiles
@@ -61,7 +61,7 @@ export class LogHelper {
     player.game.log('${0} raised the Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
-  static logDiscardedCards(logger: Logger, cards: Array<ICard> | Array<CardName>) {
+  static logDiscardedCards(logger: Logger, cards: ReadonlyArray<ICard> | ReadonlyArray<CardName>) {
     logger.log('${0} card(s) were discarded', (b) => {
       b.rawString(cards.length.toString());
       for (const card of cards) {
@@ -74,7 +74,7 @@ export class LogHelper {
     });
   }
 
-  static logDrawnCards(player: IPlayer, cards: Array<ICard> | Array<CardName>, privateMessage: boolean = false) {
+  static logDrawnCards(player: IPlayer, cards: ReadonlyArray<ICard> | ReadonlyArray<CardName>, privateMessage: boolean = false) {
     // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
     let message = '${0} drew ';
     if (cards.length === 0) {

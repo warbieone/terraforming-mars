@@ -1,7 +1,6 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -14,13 +13,12 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {all} from '../Options';
 import {SpecialDesignProxy} from './SpecialDesignProxy';
 
-export class Playwrights extends Card implements ICorporationCard {
+export class Playwrights extends CorporationCard {
   constructor() {
     super({
       name: CardName.PLAYWRIGHTS,
       tags: [Tag.POWER],
       startingMegaCredits: 38,
-      type: CardType.CORPORATION,
 
       behavior: {
         production: {energy: 1},
@@ -57,33 +55,30 @@ export class Playwrights extends Card implements ICorporationCard {
     const replayableEvents = this.getReplayableEvents(player);
 
     return new SelectCard<IProjectCard>(
-      'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents,
-      ([card]) => {
-        const selectedCard: IProjectCard = card;
+      'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents)
+      .andThen(
+        ([card]) => {
+          const selectedCard: IProjectCard = card;
 
-        players.forEach((p) => {
-          const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
-          if (cardIndex !== -1) {
-            p.playedCards.splice(cardIndex, 1);
-          }
-        });
+          players.forEach((p) => {
+            const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
+            if (cardIndex !== -1) {
+              p.playedCards.splice(cardIndex, 1);
+            }
+          });
 
-        const cost = player.getCardCost(selectedCard);
-        player.game.defer(new SelectPaymentDeferred(
-          player,
-          cost,
-          {
-            title: 'Select how to pay to replay the event',
-            afterPay: () => {
+          const cost = player.getCardCost(selectedCard);
+          player.game.defer(new SelectPaymentDeferred(player, cost, {title: 'Select how to pay to replay the event'}))
+            .andThen(() => {
               player.playCard(selectedCard, undefined, 'nothing'); // Play the card but don't add it to played cards
               player.removedFromPlayCards.push(selectedCard); // Remove card from the game
               if (selectedCard.name === CardName.SPECIAL_DESIGN) {
                 player.playedCards.push(new SpecialDesignProxy());
               } else if (selectedCard.name === CardName.LAW_SUIT) {
-                /*
-                 * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
-                 * Needs to be deferred to happen after Law Suit's `play()` method.
-                 */
+              /*
+               * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
+               * Needs to be deferred to happen after Law Suit's `play()` method.
+               */
                 player.game.defer(new SimpleDeferredAction(player, () => {
                   player.game.getPlayers().some((p) => {
                     const card = p.playedCards[p.playedCards.length - 1];
@@ -96,12 +91,10 @@ export class Playwrights extends Card implements ICorporationCard {
                   return undefined;
                 }));
               }
-            },
-          },
-        ));
-        return undefined;
-      },
-    );
+            });
+          return undefined;
+        },
+      );
   }
 
   public getCheckLoops(): number {
@@ -115,11 +108,13 @@ export class Playwrights extends Card implements ICorporationCard {
     try {
       player.game.getPlayers().forEach((p) => {
         playedEvents.push(...p.playedCards.filter((card) => {
+          const canAffordOptions = {
+            cost: player.getCardCost(card),
+            reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
+          };
           return card.type === CardType.EVENT &&
           // Can player.canPlay(card) replace this?
-          player.canAfford(player.getCardCost(card), {
-            reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
-          }) && player.simpleCanPlay(card);
+          player.canAfford(canAffordOptions) && player.simpleCanPlay(card, canAffordOptions);
         }));
       });
     } finally {

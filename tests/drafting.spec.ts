@@ -119,7 +119,7 @@ describe('drafting', () => {
     let otherPlayer: TestPlayer;
     try {
       Deck.shuffle = function() {};
-      [, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true});
+      [/* game */, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true});
     } finally {
       Deck.shuffle = shuffle;
     }
@@ -406,7 +406,7 @@ function unshiftCards(deck: Array<IProjectCard>, cards: Array<CardName>) {
   deck.unshift(...cardFinder.cardsFromJSON(cards));
 }
 
-function cardNames(cards: Array<ICard>): Array<CardName> {
+function cardNames(cards: ReadonlyArray<ICard>): Array<CardName> {
   return cards.map((card) => card.name);
 }
 

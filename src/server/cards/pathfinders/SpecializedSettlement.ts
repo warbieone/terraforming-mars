@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
+import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
@@ -41,7 +41,7 @@ export class SpecializedSettlement extends Card implements IProjectCard {
       player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
-  private bonusResources(space: ISpace) {
+  private bonusResources(space: Space) {
     const resources: Set<Resource> = new Set();
     space.bonus.forEach((bonus) => {
       switch (bonus) {
@@ -69,8 +69,8 @@ export class SpecializedSettlement extends Card implements IProjectCard {
     this.defaultProduce(player);
     return new SelectSpace(
       'Select space for city tile',
-      player.game.board.getAvailableSpacesForCity(player),
-      (space: ISpace) => {
+      player.game.board.getAvailableSpacesForCity(player))
+      .andThen((space) => {
         const coveringExistingTile = space.tile !== undefined;
 
         player.game.addCity(player, space);
@@ -81,15 +81,16 @@ export class SpecializedSettlement extends Card implements IProjectCard {
 
         player.game.defer(new SelectResourceTypeDeferred(
           player, bonusResources,
-          'Select a resource to gain 1 unit of production',
-          (resource) => {
-            player.production.add(resource, 1, {log: true});
-            this.bonusResource = [resource];
-          },
-        ));
+          'Select a resource to gain 1 unit of production'))
+          .andThen(
+            (resource) => {
+              player.production.add(resource, 1, {log: true});
+              this.bonusResource = [resource];
+            },
+          );
         return undefined;
       },
-    );
+      );
   }
 
   public produce(player: IPlayer) {
@@ -109,11 +110,12 @@ export class SpecializedSettlement extends Card implements IProjectCard {
 
     player.game.defer(new SelectResourceTypeDeferred(
       player, bonusResources,
-      'Select a resource to gain 1 unit of production',
-      (resource) => {
-        player.production.add(resource, 1, {log: true});
-        this.bonusResource = [resource];
-      },
-    ));
+      'Select a resource to gain 1 unit of production'))
+      .andThen(
+        (resource) => {
+          player.production.add(resource, 1, {log: true});
+          this.bonusResource = [resource];
+        },
+      );
   }
 }

@@ -11,6 +11,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {TITLES} from '../../inputs/titles';
 
 export class ForcedPrecipitation extends Card implements IActionCard {
   constructor() {
@@ -40,15 +41,15 @@ export class ForcedPrecipitation extends Card implements IActionCard {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const canSpendResource = this.resourceCount > 1 && !venusMaxed;
 
-    return player.canAfford(2) || (canSpendResource && player.canAfford(0, {tr: {venus: 1}}));
+    return player.canAfford(2) || (canSpendResource && player.canAfford({cost: 0, tr: {venus: 1}}));
   }
 
   public action(player: IPlayer) {
     const opts: Array<SelectOption> = [];
 
-    const addResource = new SelectOption('Pay 2 M€ to add 1 floater to this card', 'Pay', () => this.addResource(player));
-    const spendResource = new SelectOption('Remove 2 floaters to raise Venus 1 step', 'Remove floaters', () => this.spendResource(player));
-    if (this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE && player.canAfford(0, {tr: {venus: 1}})) {
+    const addResource = new SelectOption('Pay 2 M€ to add 1 floater to this card', 'Pay').andThen(() => this.addResource(player));
+    const spendResource = new SelectOption('Remove 2 floaters to raise Venus 1 step', 'Remove floaters').andThen(() => this.spendResource(player));
+    if (this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE && player.canAfford({cost: 0, tr: {venus: 1}})) {
       opts.push(spendResource);
     } else {
       return this.addResource(player);
@@ -64,9 +65,8 @@ export class ForcedPrecipitation extends Card implements IActionCard {
   }
 
   private addResource(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action', afterPay: () => {
-      player.addResourceTo(this, {log: true});
-    }}));
+    player.game.defer(new SelectPaymentDeferred(player, 2, {title: TITLES.payForCardAction(this.name)}))
+      .andThen(() => player.addResourceTo(this, {log: true}));
     return undefined;
   }
 

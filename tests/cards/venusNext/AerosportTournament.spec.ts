@@ -10,13 +10,13 @@ describe('AerosportTournament', function() {
   let card: AerosportTournament;
 
   beforeEach(function() {
-    [, player] = testGame(2);
+    [/* game */, player] = testGame(2);
     card = new AerosportTournament();
   });
 
   it('Can play', function() {
     const corp = new Celestic();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     player.setCorporationForTest(corp);
     corp.resourceCount = 4;
     expect(player.simpleCanPlay(card)).is.not.true;

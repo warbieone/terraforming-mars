@@ -1,5 +1,5 @@
 import {IGame, Score} from '../IGame';
-import {GameOptions} from '../GameOptions';
+import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 
@@ -85,11 +85,6 @@ export interface IDatabase {
      * @param scores an array of scores correlated to the player's corporation.
      */
     saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void;
-
-    /**
-     * Load a game at save point 0, and provide it in the callback.
-     */
-    loadCloneableGame(gameId: GameId): Promise<SerializedGame>;
 
     /**
      * Deletes the last `rollbackCount` saves of the specified game.

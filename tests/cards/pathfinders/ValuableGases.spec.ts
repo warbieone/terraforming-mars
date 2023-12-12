@@ -9,6 +9,7 @@ import {AirRaid} from '../../../src/server/cards/colonies/AirRaid';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {CardName} from '../../../src/common/cards/CardName';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('ValuableGases', function() {
   let card: ValuableGases;
@@ -21,7 +22,7 @@ describe('ValuableGases', function() {
 
   beforeEach(function() {
     card = new ValuableGases();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
 
     // Floating Habs is active, has floaters, requires 2 science, and costs 20
     floatingHabs = new FloatingHabs();
@@ -46,15 +47,8 @@ describe('ValuableGases', function() {
     expect(player.megaCredits).eq(10);
 
     selectProjectCardToPlay.payAndPlay(localShading, {
-      heat: 0,
+      ...Payment.EMPTY,
       megaCredits: localShading.cost,
-      steel: 0,
-      titanium: 0,
-      microbes: 0,
-      floaters: 0,
-      science: 0,
-      seeds: 0,
-      auroraiData: 0,
     });
 
     expect(localShading.resourceCount).eq(5);

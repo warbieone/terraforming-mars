@@ -1,14 +1,14 @@
+import type * as pg from 'pg';
 import {IDatabase} from './IDatabase';
 import {IGame, Score} from '../IGame';
-import {GameOptions} from '../GameOptions';
+import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
-import {Pool, ClientConfig, QueryResult} from 'pg';
 import {daysAgoToSeconds} from './utils';
 import {GameIdLedger} from './IDatabase';
+import {oneWayDifference} from '../../common/utils/utils';
 
 export class PostgreSQL implements IDatabase {
-  protected client: Pool;
   private databaseName: string | undefined = undefined; // Use this only for stats.
 
   protected statistics = {
@@ -17,9 +17,17 @@ export class PostgreSQL implements IDatabase {
     saveConflictUndoCount: 0,
     saveConflictNormalCount: 0,
   };
+  private _client: pg.Pool | undefined;
+
+  protected get client(): pg.Pool {
+    if (this._client === undefined) {
+      throw new Error('attempt to get client before intialized');
+    }
+    return this._client;
+  }
 
   constructor(
-    config: ClientConfig = {
+    private config: pg.ClientConfig = {
       connectionString: process.env.POSTGRES_HOST,
     }) {
     if (config.connectionString?.startsWith('postgres')) {
@@ -39,11 +47,11 @@ export class PostgreSQL implements IDatabase {
         console.log(e);
       }
     }
-    // Configuration stats saved for
-    this.client = new Pool(config);
   }
 
   public async initialize(): Promise<void> {
+    const {Pool} = await import('pg');
+    this._client = new Pool(this.config);
     await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))');
     await this.client.query('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participants varchar[], PRIMARY KEY (game_id))');
     await this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
@@ -79,10 +87,6 @@ export class PostgreSQL implements IDatabase {
     ORDER BY created_time DESC`;
     const res = await this.client.query(sql);
     return res.rows.map((row) => row.game_id);
-  }
-
-  public loadCloneableGame(gameId: GameId): Promise<SerializedGame> {
-    return this.getGameVersion(gameId, 0);
   }
 
   public async getGame(gameId: GameId): Promise<SerializedGame> {
@@ -156,17 +160,21 @@ export class PostgreSQL implements IDatabase {
   async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<Array<GameId>> {
     const dateToSeconds = daysAgoToSeconds(maxGameDays, 10);
     const selectResult = await this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < to_timestamp($1)', [dateToSeconds]);
-    const gameIds = selectResult.rows.slice(0, 1000).map((row) => row.game_id);
-    console.log(`${gameIds.length} games to be purged.`);
+    let gameIds = selectResult.rows.map((row) => row.game_id);
     if (gameIds.length > 1000) {
-      gameIds.length = 1000;
       console.log('Truncated purge to 1000 games.');
+      gameIds = gameIds.slice(0, 1000);
+    } else {
+      console.log(`${gameIds.length} games to be purged.`);
     }
-    // https://github.com/brianc/node-postgres/wiki/FAQ#11-how-do-i-build-a-where-foo-in--query-to-find-rows-matching-an-array-of-values
-    const deleteGamesResult = await this.client.query('DELETE FROM games WHERE game_id = ANY($1)', [gameIds]);
-    console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
-    const deleteParticipantsResult = await this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
-    console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
+
+    if (gameIds.length > 0) {
+      // https://github.com/brianc/node-postgres/wiki/FAQ#11-how-do-i-build-a-where-foo-in--query-to-find-rows-matching-an-array-of-values
+      const deleteGamesResult = await this.client.query('DELETE FROM games WHERE game_id = ANY($1)', [gameIds]);
+      console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
+      const deleteParticipantsResult = await this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
+      console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
+    }
     return gameIds;
   }
 
@@ -189,11 +197,11 @@ export class PostgreSQL implements IDatabase {
     }
   }
 
-  async compressCompletedGame(gameId: GameId): Promise<QueryResult<any>> {
+  async compressCompletedGame(gameId: GameId): Promise<pg.QueryResult<any>> {
     const maxSaveId = await this.getMaxSaveId(gameId);
     return this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId])
       .then(() => {
-        return this.client.query('DELETE FROM completed_games where game_id = $1', [gameId]);
+        return this.client.query('DELETE FROM completed_game where game_id = $1', [gameId]);
       });
   }
 
@@ -255,9 +263,8 @@ export class PostgreSQL implements IDatabase {
     const res = await this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [gameId, rollbackCount]);
     logForUndo(gameId, 'deleted', res?.rowCount, 'rows');
     const second = await this.getSaveIds(gameId);
-    const difference = first.filter((x) => !second.includes(x));
     logForUndo(gameId, 'second', second);
-    logForUndo(gameId, 'Rollback difference', difference);
+    logForUndo(gameId, 'Rollback difference', oneWayDifference(first, second));
   }
 
   public async storeParticipants(entry: GameIdLedger): Promise<void> {

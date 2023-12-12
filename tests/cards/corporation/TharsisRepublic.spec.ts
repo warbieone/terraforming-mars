@@ -22,13 +22,13 @@ describe('TharsisRepublic', function() {
   });
 
   it('Should take initial action', function() {
-    player.runInitialAction(card);
+    player.deferInitialAction(card);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     runAllActions(game);
 
-    expect(game.getCitiesOnMarsCount()).to.eq(1);
+    expect(game.board.getCitiesOnMars()).has.length(1);
     expect(player.production.megacredits).to.eq(1);
     expect(player.megaCredits).to.eq(3);
   });

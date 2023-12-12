@@ -10,7 +10,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {DeferredAction} from '../../../src/server//deferredActions/DeferredAction';
 import {SendDelegateToArea} from '../../../src/server//deferredActions/SendDelegateToArea';
-import {SelectPartyToSendDelegate} from '../../../src/server//inputs/SelectPartyToSendDelegate';
+import {SelectParty} from '../../../src/server//inputs/SelectParty';
 import {cast} from '../../TestingUtils';
 
 describe('LobbyHalls', function() {
@@ -38,7 +38,7 @@ describe('LobbyHalls', function() {
   });
 
   it('play, has a delegate', () => {
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(7);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(7);
     expect(card.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
 
     card.play(player);
@@ -61,13 +61,13 @@ describe('LobbyHalls', function() {
   function assertAddDelegateAction(action: SendDelegateToArea) {
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
 
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(7);
-    expect(marsFirst.delegates.get(player.id)).eq(0);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(7);
+    expect(marsFirst.delegates.get(player)).eq(0);
 
-    const options = cast(action.execute(), SelectPartyToSendDelegate);
+    const options = cast(action.execute(), SelectParty);
     options.cb(marsFirst.name);
 
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(6);
-    expect(marsFirst.delegates.get(player.id)).eq(1);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(6);
+    expect(marsFirst.delegates.get(player)).eq(1);
   }
 });
