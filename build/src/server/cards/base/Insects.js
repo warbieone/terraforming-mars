@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class Insects extends Card_1.Card {
@@ -18,7 +17,7 @@ class Insects extends Card_1.Card {
             behavior: {
                 production: { plants: { tag: Tag_1.Tag.PLANT } },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(6)),
+            requirements: { oxygen: 6 },
             metadata: {
                 cardNumber: '148',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

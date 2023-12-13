@@ -26,7 +26,7 @@ class JovianTaxRights extends GlobalEvent_1.GlobalEvent {
                 coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
             });
             player.production.add(Resource_1.Resource.MEGACREDITS, coloniesCount, { log: true, from: this.name });
-            player.addResource(Resource_1.Resource.TITANIUM, turmoil.getPlayerInfluence(player), { log: true, from: this.name });
+            player.stock.add(Resource_1.Resource.TITANIUM, turmoil.getPlayerInfluence(player), { log: true, from: this.name });
         });
     }
 }

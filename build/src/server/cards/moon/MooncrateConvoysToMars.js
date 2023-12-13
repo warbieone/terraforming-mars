@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const SellSteel_1 = require("../../moon/SellSteel");
 const Options_1 = require("../Options");
@@ -15,7 +14,7 @@ class MooncrateConvoysToMars extends Card_1.Card {
             name: CardName_1.CardName.MOONCRATE_CONVOYS_TO_MARS,
             type: CardType_1.CardType.EVENT,
             cost: 13,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.MARS)),
+            requirements: { party: PartyName_1.PartyName.MARS },
             behavior: {
                 moon: { logisticsRate: 1 },
             },

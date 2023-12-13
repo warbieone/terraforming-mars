@@ -57,7 +57,9 @@ class DeferredActionsQueue {
             return;
         }
         this.queue.splice(next, 1);
-        this.run(action, () => this.runAll(cb));
+        this.run(action, () => {
+            this.runAll(cb);
+        });
     }
     peek() {
         return this.queue[this.nextItemIndex()];
@@ -67,7 +69,7 @@ class DeferredActionsQueue {
     }
     run(action, cb) {
         if (action instanceof GiveColonyBonus_1.GiveColonyBonus) {
-            action.cb = cb;
+            action.andThen(cb);
             action.execute();
             return;
         }

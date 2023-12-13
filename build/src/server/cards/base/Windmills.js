@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class Windmills extends Card_1.Card {
     constructor() {
@@ -18,7 +17,7 @@ class Windmills extends Card_1.Card {
                 production: { energy: 1 },
             },
             victoryPoints: 1,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(7)),
+            requirements: { oxygen: 7 },
             metadata: {
                 cardNumber: '168',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

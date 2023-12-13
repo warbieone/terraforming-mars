@@ -1,19 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MorningStarInc = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const GlobalParameter_1 = require("../../../common/GlobalParameter");
-class MorningStarInc extends Card_1.Card {
+class MorningStarInc extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.MORNING_STAR_INC,
             tags: [Tag_1.Tag.VENUS],
             startingMegaCredits: 50,
-            type: CardType_1.CardType.CORPORATION,
+            globalParameterRequirementBonus: { steps: 3, parameter: GlobalParameter_1.GlobalParameter.VENUS },
             firstAction: {
                 text: 'Draw 3 cards with a Venus tag',
                 drawCard: { count: 3, tag: Tag_1.Tag.VENUS },
@@ -35,9 +34,6 @@ class MorningStarInc extends Card_1.Card {
                 }),
             },
         });
-    }
-    getRequirementBonus(_player, parameter) {
-        return parameter === GlobalParameter_1.GlobalParameter.VENUS ? 3 : 0;
     }
 }
 exports.MorningStarInc = MorningStarInc;

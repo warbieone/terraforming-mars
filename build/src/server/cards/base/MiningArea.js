@@ -18,8 +18,8 @@ class MiningArea extends MiningCard_1.MiningCard {
     }) {
         super(name, 4, metadata);
     }
-    getAvailableSpaces(player) {
-        return super.getAvailableSpaces(player)
+    getAvailableSpaces(player, canAffordOptions) {
+        return super.getAvailableSpaces(player, canAffordOptions)
             .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType !== TileType_1.TileType.OCEAN && adjacentSpace.player === player));
     }
 }

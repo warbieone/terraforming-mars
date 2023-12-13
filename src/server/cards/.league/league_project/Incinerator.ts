@@ -4,8 +4,9 @@ import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import { CardRequirements } from '../../requirements/CardRequirements';
 import {Player} from '../../../Player';
+import {max} from '../../Options';
+
 
 export class Incinerator extends Card implements IProjectCard {
   // author: ThreadPacifist
@@ -16,7 +17,7 @@ export class Incinerator extends Card implements IProjectCard {
       cost: 8,
       tags: [Tag.BUILDING],
 
-      requirements: CardRequirements.builder((b) => b.oxygen(5)),
+      requirements: {oxygen: 5, max},
       
       metadata: {
         cardNumber: 'L303',

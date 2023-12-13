@@ -26,7 +26,7 @@ class Duncan extends CeoCard_1.CeoCard {
     }
     action(player) {
         this.isDisabled = true;
-        player.addResource(Resource_1.Resource.MEGACREDITS, 4 * player.game.generation, { log: true });
+        player.stock.add(Resource_1.Resource.MEGACREDITS, 4 * player.game.generation, { log: true });
         this.generationUsed = player.game.generation;
         return undefined;
     }

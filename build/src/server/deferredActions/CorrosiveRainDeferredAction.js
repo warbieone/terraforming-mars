@@ -16,17 +16,18 @@ class CorrosiveRainDeferredAction extends DeferredAction_1.DeferredAction {
     execute() {
         const floaterCards = this.player.getCardsWithResources(CardResource_1.CardResource.FLOATER).filter((card) => { var _a; return ((_a = card.resourceCount) !== null && _a !== void 0 ? _a : 0) >= 2; });
         const selectAction = new OrOptions_1.OrOptions();
-        const payMC = new SelectOption_1.SelectOption('Lose up to 10 M€', 'Lose M€', () => {
-            this.player.deductResource(Resource_1.Resource.MEGACREDITS, 10, { log: true, from: GlobalEventName_1.GlobalEventName.CORROSIVE_RAIN });
+        const payMC = new SelectOption_1.SelectOption('Lose up to 10 M€', 'Lose M€').andThen(() => {
+            this.player.stock.deduct(Resource_1.Resource.MEGACREDITS, 10, { log: true, from: GlobalEventName_1.GlobalEventName.CORROSIVE_RAIN });
             return undefined;
         });
-        const removeFloaters = new SelectCard_1.SelectCard('Select card to remove 2 floaters from', 'Remove floaters', floaterCards, ([card]) => {
+        const removeFloaters = new SelectCard_1.SelectCard('Select card to remove 2 floaters from', 'Remove floaters', floaterCards)
+            .andThen(([card]) => {
             this.player.removeResourceFrom(card, 2);
             return undefined;
         });
         selectAction.options.push(payMC, removeFloaters);
         if (floaterCards.length === 0) {
-            payMC.cb();
+            payMC.cb(undefined);
             return undefined;
         }
         return selectAction;

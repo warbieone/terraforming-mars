@@ -6,7 +6,8 @@ const SpaceName_1 = require("../SpaceName");
 const SpaceType_1 = require("../../common/boards/SpaceType");
 const Board_1 = require("./Board");
 const BoardBuilder_1 = require("./BoardBuilder");
-class ArabiaTerraBoard extends Board_1.Board {
+const MarsBoard_1 = require("./MarsBoard");
+class ArabiaTerraBoard extends MarsBoard_1.MarsBoard {
     static newInstance(gameOptions, rng) {
         const builder = new BoardBuilder_1.BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
         const PLANT = SpaceBonus_1.SpaceBonus.PLANT;
@@ -48,6 +49,10 @@ class ArabiaTerraBoard extends Board_1.Board {
             default:
                 return this.spaces.filter((space) => space.spaceType === spaceType);
         }
+    }
+    getAvailableSpacesForOcean(player) {
+        return super.getAvailableSpacesForOcean(player)
+            .filter((space) => space.id !== player.game.nomadSpace);
     }
     static deserialize(board, players) {
         return new ArabiaTerraBoard(Board_1.Board.deserializeSpaces(board.spaces, players));

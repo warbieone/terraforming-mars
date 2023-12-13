@@ -6,7 +6,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const SpaceName_1 = require("../../SpaceName");
 const ActionCard_1 = require("../ActionCard");
@@ -17,7 +16,7 @@ class VeneraBase extends ActionCard_1.ActionCard {
             name: CardName_1.CardName.VENERA_BASE,
             cost: 21,
             tags: [Tag_1.Tag.VENUS, Tag_1.Tag.VENUS, Tag_1.Tag.CITY],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.UNITY)),
+            requirements: { party: PartyName_1.PartyName.UNITY },
             victoryPoints: { tag: Tag_1.Tag.VENUS, per: 2 },
             behavior: {
                 production: { megacredits: 3 },

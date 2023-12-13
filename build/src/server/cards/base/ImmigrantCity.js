@@ -44,7 +44,8 @@ class ImmigrantCity extends Card_1.Card {
         }
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space) => {
+        return new SelectSpace_1.SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player))
+            .andThen((space) => {
             player.game.addCity(player, space);
             player.game.defer(new LoseProduction_1.LoseProduction(player, Resource_1.Resource.ENERGY, { count: 1 }));
             player.game.defer(new LoseProduction_1.LoseProduction(player, Resource_1.Resource.MEGACREDITS, { count: 2 }));

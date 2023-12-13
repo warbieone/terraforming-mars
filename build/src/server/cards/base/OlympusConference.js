@@ -39,11 +39,11 @@ class OlympusConference extends Card_1.Card {
                     player.addResourceTo(this, 1);
                     return undefined;
                 }
-                const options = new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
+                const options = new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Remove a science resource from this card to draw a card', 'Remove resource').andThen(() => {
                     player.removeResourceFrom(this);
                     player.drawCard();
                     return undefined;
-                }), new SelectOption_1.SelectOption('Add a science resource to this card', 'Add resource', () => {
+                }), new SelectOption_1.SelectOption('Add a science resource to this card', 'Add resource').andThen(() => {
                     player.addResourceTo(this, 1);
                     return undefined;
                 }));

@@ -5,7 +5,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 class Curator {
     constructor() {
         this.name = 'Curator';
-        this.description = 'Have the most tags of any one type';
+        this.description = 'Have the most tags of any one type in play';
     }
     getScore(player) {
         let max = 0;

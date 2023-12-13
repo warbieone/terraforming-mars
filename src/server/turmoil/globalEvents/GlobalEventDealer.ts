@@ -58,6 +58,7 @@ export class GlobalEventDealer {
       corpera: gameOptions.corporateEra,
       prelude: gameOptions.preludeExtension,
       prelude2: gameOptions.prelude2Expansion,
+      league: gameOptions.leagueCardsOption,
       venus: gameOptions.venusNextExtension,
       colonies: gameOptions.coloniesExtension,
       turmoil: gameOptions.turmoilExtension,

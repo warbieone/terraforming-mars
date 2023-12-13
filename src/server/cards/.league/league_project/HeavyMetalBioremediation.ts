@@ -4,7 +4,6 @@ import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import { CardRequirements } from '../../requirements/CardRequirements';
 import {Resource} from '../../../../common/Resource';
 import {Player} from '../../../Player';
 import { OrOptions } from '../../../../server/inputs/OrOptions';
@@ -22,7 +21,7 @@ export class HeavyMetalBioremediation extends Card implements IProjectCard {
 
       victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(9)),
+      requirements: {oxygen: 9},
       metadata: {
         cardNumber: 'L309',
         renderData: CardRenderer.builder((b) => {
@@ -50,17 +49,15 @@ export class HeavyMetalBioremediation extends Card implements IProjectCard {
     const orOptions = new OrOptions();
 
     if (availableSteel >= 1) {
-      orOptions.options.push(new SelectOption('Convert up to 3 steel for it\'s monetary value (including bonuses).',
-        'Convert steel', () => {
+      orOptions.options.push(new SelectOption('Convert up to 3 steel for it\'s monetary value (including bonuses).','Convert steel').andThen(() => {
           return this.convSteelOption(player, availableSteel);
-        }));
+        }))
     }
 
     if (availableTitanium >= 1) {
-      orOptions.options.push(new SelectOption('Convert up to 3 titanium for it\'s monetary value (including bonuses).',
-        'Convert titanium', () => {
+      orOptions.options.push(new SelectOption('Convert up to 3 titanium for it\'s monetary value (including bonuses).','Convert titanium').andThen(() => {
           return this.convTitaniumOption(player, availableTitanium);
-        }));
+        }))
     }
 
     if (orOptions.options.length === 1) return orOptions.options[0].cb();
@@ -68,34 +65,25 @@ export class HeavyMetalBioremediation extends Card implements IProjectCard {
   }
 
   private convSteelOption(player: Player, availableSteel: number): SelectAmount {
-    return new SelectAmount(
-      'Select amount of steel to spend',
-      'Gain MC',
-      (amount: number) => {
+    return new SelectAmount('Select amount of steel to spend','Gain MC',1, availableSteel)
+      .andThen((amount) => {
         player.stock.add(Resource.MEGACREDITS, player.getSteelValue() * amount);
         player.stock.deduct(Resource.STEEL, (amount));
-
         player.game.log('${0} gained ${1} MC', (b) => b.player(player).number(player.getSteelValue() * amount));
         return undefined;
-      },
-      1,
-      availableSteel,
+      }
     );
   }
 
   private convTitaniumOption(player: Player, availableTitanium: number): SelectAmount {
-    return new SelectAmount(
-      'Select amount of titanium to spend',
-      'Gain MC',
-      (amount: number) => {
+    return new SelectAmount('Select amount of titanium to spend','Gain MC',1,availableTitanium)
+    .andThen((amount) => {
         player.stock.add(Resource.MEGACREDITS, player.getTitaniumValue() * amount);
         player.stock.deduct(Resource.TITANIUM, (amount));
 
         player.game.log('${0} gained ${1} MC', (b) => b.player(player).number(player.getTitaniumValue() * amount));
         return undefined;
       },
-      1,
-      availableTitanium,
     );
   }
 }

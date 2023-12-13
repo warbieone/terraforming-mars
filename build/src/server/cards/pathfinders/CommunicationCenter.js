@@ -9,13 +9,14 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardResource_1 = require("../../../common/CardResource");
 const Options_1 = require("../Options");
 const Size_1 = require("../../../common/cards/render/Size");
+const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 class CommunicationCenter extends Card_1.Card {
     constructor() {
         super({
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.COMMUNICATION_CENTER,
-            cost: 13,
-            tags: [Tag_1.Tag.SPACE, Tag_1.Tag.MARS, Tag_1.Tag.BUILDING],
+            cost: 8,
+            tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.MARS, Tag_1.Tag.BUILDING],
             resourceType: CardResource_1.CardResource.DATA,
             behavior: {
                 production: { energy: -1 },
@@ -43,6 +44,16 @@ class CommunicationCenter extends Card_1.Card {
                 b.player(player).card(this);
             });
         }
+    }
+    onCardPlayedFromAnyPlayer(thisCardOwner, _playedCardOwner, card) {
+        if (card.type === CardType_1.CardType.EVENT) {
+            const priority = (card.name === CardName_1.CardName.CEOS_FAVORITE_PROJECT) ? DeferredAction_1.Priority.BACK_OF_THE_LINE : DeferredAction_1.Priority.DEFAULT;
+            thisCardOwner.game.defer(new DeferredAction_1.SimpleDeferredAction(thisCardOwner, () => {
+                thisCardOwner.addResourceTo(this, { qty: 1, log: true });
+                return undefined;
+            }), priority);
+        }
+        return undefined;
     }
 }
 exports.CommunicationCenter = CommunicationCenter;

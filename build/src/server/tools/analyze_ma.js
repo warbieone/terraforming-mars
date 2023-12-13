@@ -4,7 +4,7 @@ require('dotenv').config();
 const http = require("http");
 const fs = require("fs");
 const MilestoneAwardSelector_1 = require("../ma/MilestoneAwardSelector");
-const GameOptions_1 = require("../GameOptions");
+const GameOptions_1 = require("../game/GameOptions");
 const BoardName_1 = require("../../common/boards/BoardName");
 const RandomMAOptionType_1 = require("../../common/ma/RandomMAOptionType");
 const mnemonist_1 = require("mnemonist");

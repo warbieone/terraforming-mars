@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 class MoonTether extends Card_1.Card {
     constructor() {
@@ -15,7 +14,7 @@ class MoonTether extends Card_1.Card {
             tags: [Tag_1.Tag.MOON, Tag_1.Tag.SPACE],
             cost: 18,
             victoryPoints: 1,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SPACE, 6)),
+            requirements: { tag: Tag_1.Tag.SPACE, count: 6 },
             cardDiscount: { amount: 2 },
             metadata: {
                 cardNumber: 'M90',

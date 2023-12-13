@@ -7,11 +7,11 @@ const Tag_1 = require("../../../common/cards/Tag");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const TileType_1 = require("../../../common/TileType");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class CosmicRadiation extends Card_1.Card {
     constructor() {
         super({
@@ -19,7 +19,7 @@ class CosmicRadiation extends Card_1.Card {
             type: CardType_1.CardType.EVENT,
             tags: [Tag_1.Tag.MOON],
             cost: 3,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.miningRate(4)),
+            requirements: { miningRate: 4 },
             metadata: {
                 description: 'Requires 4 mining rate. All players pay 4M€ for each mining tile they own.',
                 cardNumber: 'M52',
@@ -38,11 +38,9 @@ class CosmicRadiation extends Card_1.Card {
                 const bill = owned * 4;
                 const owes = Math.min(bill, mineTileOwner.spendableMegacredits());
                 game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(mineTileOwner, owes, {
-                    title: 'You must pay ' + owes + 'M€ for ' + owned + ' mining tiles',
-                    afterPay: () => {
-                        game.log('${0} spends ${1} M€ for the ${2} mining tiles they own.', (b) => b.player(mineTileOwner).number(owes).number(owned));
-                    }
-                }));
+                    title: (0, MessageBuilder_1.message)('You must spend ${0} M€ for ${1} mining tiles', (b) => b.number(owes).number(owned))
+                }))
+                    .andThen(() => game.log('${0} spends ${1} M€ for the ${2} mining tiles they own.', (b) => b.player(mineTileOwner).number(owes).number(owned)));
             }
         });
         return undefined;

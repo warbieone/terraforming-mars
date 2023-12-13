@@ -12,6 +12,7 @@ const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class BioPrintingFacility extends Card_1.Card {
     constructor() {
         super({
@@ -35,23 +36,24 @@ class BioPrintingFacility extends Card_1.Card {
     }
     action(player) {
         const availableAnimalCards = player.getResourceCards(CardResource_1.CardResource.ANIMAL);
-        player.deductResource(Resource_1.Resource.ENERGY, 2);
+        player.stock.deduct(Resource_1.Resource.ENERGY, 2);
         if (availableAnimalCards.length === 0) {
-            player.addResource(Resource_1.Resource.PLANTS, 2, { log: true });
+            player.stock.add(Resource_1.Resource.PLANTS, 2, { log: true });
             return undefined;
         }
-        const gainPlantOption = new SelectOption_1.SelectOption('Gain 2 plants', 'Gain plants', () => {
-            player.addResource(Resource_1.Resource.PLANTS, 2, { log: true });
+        const gainPlantOption = new SelectOption_1.SelectOption('Gain 2 plants', 'Gain plants').andThen(() => {
+            player.stock.add(Resource_1.Resource.PLANTS, 2, { log: true });
             return undefined;
         });
         if (availableAnimalCards.length === 1) {
             const targetCard = availableAnimalCards[0];
-            return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Add 1 animal to ' + targetCard.name, 'Add animal', () => {
+            return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Add ${0} animal to ${1}', (b) => b.number(1).card(targetCard)), 'Add animal').andThen(() => {
                 player.addResourceTo(targetCard, { log: true });
                 return undefined;
             }), gainPlantOption);
         }
-        return new OrOptions_1.OrOptions(new SelectCard_1.SelectCard('Select card to add 1 animal', 'Add animal', availableAnimalCards, ([card]) => {
+        return new OrOptions_1.OrOptions(new SelectCard_1.SelectCard('Select card to add 1 animal', 'Add animal', availableAnimalCards)
+            .andThen(([card]) => {
             player.addResourceTo(card, { log: true });
             return undefined;
         }), gainPlantOption);

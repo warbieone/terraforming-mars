@@ -1,17 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SaturnSystems = void 0;
-const Card_1 = require("../Card");
 const Tag_1 = require("../../../common/cards/Tag");
+const CorporationCard_1 = require("./CorporationCard");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
-class SaturnSystems extends Card_1.Card {
+class SaturnSystems extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.SATURN_SYSTEMS,
             tags: [Tag_1.Tag.JOVIAN],
             startingMegaCredits: 42,

@@ -37,7 +37,8 @@ class AirScrappingExpedition extends Card_1.Card {
             player.addResourceTo(floaterCards[0], { qty: 3, log: true });
             return;
         }
-        return new SelectCard_1.SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards, ([card]) => {
+        return new SelectCard_1.SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards)
+            .andThen(([card]) => {
             player.addResourceTo(card, { qty: 3, log: true });
             return undefined;
         });

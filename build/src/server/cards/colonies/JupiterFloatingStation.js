@@ -9,7 +9,6 @@ const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const Resource_1 = require("../../../common/Resource");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
@@ -21,7 +20,7 @@ class JupiterFloatingStation extends Card_1.Card {
             name: CardName_1.CardName.JUPITER_FLOATING_STATION,
             type: CardType_1.CardType.ACTIVE,
             resourceType: CardResource_1.CardResource.FLOATER,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 3)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 3 },
             victoryPoints: 1,
             metadata: {
                 cardNumber: 'C19',
@@ -46,13 +45,13 @@ class JupiterFloatingStation extends Card_1.Card {
         return true;
     }
     action(player) {
-        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
+        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Add 1 floater to a Jovian card', 'Add floater').andThen(() => {
             player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.FLOATER, {
                 restrictedTag: Tag_1.Tag.JOVIAN, title: 'Add 1 floater to a Jovian card',
             }));
             return undefined;
-        }), new SelectOption_1.SelectOption('Gain 1 M€ per floater here (max 4) ', 'Gain M€', () => {
-            player.addResource(Resource_1.Resource.MEGACREDITS, Math.min(this.resourceCount, 4), { log: true });
+        }), new SelectOption_1.SelectOption('Gain 1 M€ per floater here (max 4)', 'Gain M€').andThen(() => {
+            player.stock.add(Resource_1.Resource.MEGACREDITS, Math.min(this.resourceCount, 4), { log: true });
             return undefined;
         }));
     }

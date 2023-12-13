@@ -8,13 +8,12 @@ class GiveColonyBonus extends DeferredAction_1.DeferredAction {
         super(player, DeferredAction_1.Priority.DEFAULT);
         this.colony = colony;
         this.selfish = selfish;
-        this.cb = () => { };
         this.waitingFor = new mnemonist_1.MultiSet();
         this.playersWithBonuses = new Set();
     }
     execute() {
         if (this.colony.colonies.length === 0) {
-            this.cb();
+            this.cb(undefined);
             return undefined;
         }
         for (const playerId of this.colony.colonies) {
@@ -52,7 +51,7 @@ class GiveColonyBonus extends DeferredAction_1.DeferredAction {
     }
     doneGettingBonus() {
         if (this.playersWithBonuses.size === 0) {
-            this.cb();
+            this.cb(undefined);
         }
     }
 }

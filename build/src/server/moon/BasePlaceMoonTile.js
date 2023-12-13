@@ -15,7 +15,12 @@ class BasePlaceMoonTile extends DeferredAction_1.DeferredAction {
         if (spaces.length === 0) {
             return undefined;
         }
-        return new SelectSpace_1.SelectSpace(this.title, spaces, (space) => this.placeTile(space));
+        return new SelectSpace_1.SelectSpace(this.title, spaces)
+            .andThen((space) => {
+            this.placeTile(space);
+            this.cb(space);
+            return undefined;
+        });
     }
 }
 exports.BasePlaceMoonTile = BasePlaceMoonTile;

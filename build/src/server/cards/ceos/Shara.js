@@ -32,10 +32,11 @@ class Shara extends CeoCard_1.CeoCard {
         if (data === undefined) {
             return undefined;
         }
-        player.game.defer(new DeclareCloneTag_1.DeclareCloneTag(player, this, (tag) => {
+        player.game.defer(new DeclareCloneTag_1.DeclareCloneTag(player, this))
+            .andThen((tag) => {
             const value = data[tag];
-            player.addResource(Resource_1.Resource.MEGACREDITS, value, { log: true });
-        }));
+            player.stock.add(Resource_1.Resource.MEGACREDITS, value, { log: true });
+        });
         return undefined;
     }
 }

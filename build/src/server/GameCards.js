@@ -16,7 +16,11 @@ const CeoCardManifest_1 = require("./cards/ceos/CeoCardManifest");
 const LeagueCardManifest_1 = require("./cards/.league/LeagueCardManifest");
 const ModuleManifest_1 = require("./cards/ModuleManifest");
 const CardName_1 = require("../common/cards/CardName");
+const ICardFactory_1 = require("./cards/ICardFactory");
 const CardFinder_1 = require("./CardFinder");
+const Prelude2CardManifest_1 = require("./cards/prelude2/Prelude2CardManifest");
+const StarwarsCardManifest_1 = require("./cards/starwars/StarwarsCardManifest");
+const UnderworldCardManifest_1 = require("./cards/underworld/UnderworldCardManifest");
 class GameCards {
     constructor(gameOptions) {
         this.cardFinder = new CardFinder_1.CardFinder();
@@ -25,6 +29,8 @@ class GameCards {
             [true, StandardCardManifests_1.BASE_CARD_MANIFEST],
             [gameOptions.corporateEra, StandardCardManifests_1.CORP_ERA_CARD_MANIFEST],
             [gameOptions.preludeExtension, PreludeCardManifest_1.PRELUDE_CARD_MANIFEST],
+            [gameOptions.prelude2Expansion, Prelude2CardManifest_1.PRELUDE2_CARD_MANIFEST],
+            [gameOptions.leagueCardsOption, LeagueCardManifest_1.LEAGUE_CARD_MANIFEST],
             [gameOptions.venusNextExtension, VenusCardManifest_1.VENUS_CARD_MANIFEST],
             [gameOptions.coloniesExtension, ColoniesCardManifest_1.COLONIES_CARD_MANIFEST],
             [!gameOptions.coloniesExtension, NonColoniesCardManifest_1.NON_COLONIES_CARD_MANIFEST],
@@ -35,42 +41,17 @@ class GameCards {
             [gameOptions.moonExpansion, MoonCardManifest_1.MOON_CARD_MANIFEST],
             [gameOptions.pathfindersExpansion, PathfindersCardManifest_1.PATHFINDERS_CARD_MANIFEST],
             [gameOptions.ceoExtension, CeoCardManifest_1.CEO_CARD_MANIFEST],
-            [gameOptions.leagueCardsOption, LeagueCardManifest_1.LEAGUE_CARD_MANIFEST],
+            [gameOptions.starWarsExpansion, StarwarsCardManifest_1.STAR_WARS_CARD_MANIFEST],
+            [gameOptions.underworldExpansion, UnderworldCardManifest_1.UNDERWORLD_CARD_MANIFEST],
         ];
-        this.moduleManifests = manifests.filter((a) => a[0]).map((a) => a[1]);
-    }
-    static isCompatibleWith(cf, gameOptions) {
-        if (cf.compatibility === undefined) {
-            return true;
-        }
-        const expansions = Array.isArray(cf.compatibility) ? cf.compatibility : [cf.compatibility];
-        return expansions.every((expansion) => {
-            switch (expansion) {
-                case 'venus':
-                    return gameOptions.venusNextExtension;
-                case 'colonies':
-                    return gameOptions.coloniesExtension;
-                case 'turmoil':
-                    return gameOptions.turmoilExtension;
-                case 'prelude':
-                    return gameOptions.preludeExtension;
-                case 'moon':
-                    return gameOptions.moonExpansion;
-                case 'pathfinders':
-                    return gameOptions.pathfindersExpansion;
-                case 'ares':
-                    return gameOptions.aresExtension;
-                case 'ceo':
-                    return gameOptions.ceoExtension;
-                default:
-                    throw new Error(`Unhandled expansion type ${expansion}`);
-            }
-        });
+        this.moduleManifests = manifests
+            .filter(([option, _manifest]) => option === true)
+            .map(([_option, manifest]) => manifest);
     }
     instantiate(manifest) {
         return ModuleManifest_1.CardManifest.values(manifest)
             .filter((factory) => factory.instantiate !== false)
-            .filter((factory) => GameCards.isCompatibleWith(factory, this.gameOptions))
+            .filter((factory) => (0, ICardFactory_1.isCompatibleWith)(factory, this.gameOptions))
             .map((factory) => new factory.Factory());
     }
     getProjectCards() {

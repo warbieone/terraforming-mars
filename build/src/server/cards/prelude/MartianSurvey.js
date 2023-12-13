@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class MartianSurvey extends Card_1.Card {
@@ -19,7 +18,7 @@ class MartianSurvey extends Card_1.Card {
             behavior: {
                 drawCard: 2,
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(4, { max: Options_1.max })),
+            requirements: { oxygen: 4, max: Options_1.max },
             metadata: {
                 cardNumber: 'P38',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

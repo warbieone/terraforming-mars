@@ -10,7 +10,7 @@ const CardRenderer_1 = require("../../cards/render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../../cards/Options");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.text('lose all').heat(1).br.megacredits(-2).slash().building(1, { played: Options_1.played }).influence({ size: Size_1.Size.SMALL });
+    b.text('Lose all').heat(1).nbsp.megacredits(-2).slash().building(1, { played: Options_1.played }).influence({ size: Size_1.Size.SMALL });
 });
 class GlobalDustStorm extends GlobalEvent_1.GlobalEvent {
     constructor() {
@@ -25,10 +25,10 @@ class GlobalDustStorm extends GlobalEvent_1.GlobalEvent {
     resolve(game, turmoil) {
         game.getPlayersInGenerationOrder().forEach((player) => {
             if (player.heat > 0) {
-                player.deductResource(Resource_1.Resource.HEAT, player.heat, { log: true, from: this.name });
+                player.stock.deduct(Resource_1.Resource.HEAT, player.heat, { log: true, from: this.name });
             }
             const maxedSteelTags = Math.min(5, player.tags.count(Tag_1.Tag.BUILDING, 'raw'));
-            player.deductResource(Resource_1.Resource.MEGACREDITS, 2 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), { log: true, from: this.name });
+            player.stock.deduct(Resource_1.Resource.MEGACREDITS, 2 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), { log: true, from: this.name });
         });
     }
 }

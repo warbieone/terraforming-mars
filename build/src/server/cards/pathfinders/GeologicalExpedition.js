@@ -13,6 +13,7 @@ const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
+const Phase_1 = require("../../../common/Phase");
 const VALID_BONUSES = [
     SpaceBonus_1.SpaceBonus.TITANIUM,
     SpaceBonus_1.SpaceBonus.STEEL,
@@ -49,11 +50,13 @@ class GeologicalExpedition extends Card_1.Card {
             return;
         if (cardOwner !== activePlayer)
             return;
+        if (cardOwner.game.phase === Phase_1.Phase.SOLAR)
+            return;
         if (((_a = space.tile) === null || _a === void 0 ? void 0 : _a.covers) !== undefined)
             return;
         const bonuses = space.bonus;
         if (bonuses.length === 0) {
-            activePlayer.addResource(Resource_1.Resource.STEEL, 1, { log: true });
+            activePlayer.stock.add(Resource_1.Resource.STEEL, 1, { log: true });
             return;
         }
         const filtered = bonuses.filter((bonus) => VALID_BONUSES.includes(bonus));
@@ -61,7 +64,8 @@ class GeologicalExpedition extends Card_1.Card {
         const options = new OrOptions_1.OrOptions();
         options.title = 'Select an additional bonus from this space.';
         unique.forEach((bonus) => {
-            options.options.push(new SelectOption_1.SelectOption(SpaceBonus_1.SpaceBonus.toString(bonus), 'Select', () => {
+            options.options.push(new SelectOption_1.SelectOption(SpaceBonus_1.SpaceBonus.toString(bonus), 'Select')
+                .andThen(() => {
                 activePlayer.game.grantSpaceBonus(activePlayer, bonus, 1);
                 return undefined;
             }));

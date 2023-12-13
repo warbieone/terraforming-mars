@@ -13,6 +13,7 @@ class SpecialDesign extends Card_1.Card {
             name: CardName_1.CardName.SPECIAL_DESIGN,
             tags: [Tag_1.Tag.SCIENCE],
             cost: 4,
+            globalParameterRequirementBonus: { steps: 2, nextCardOnly: true },
             metadata: {
                 cardNumber: '206',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -21,12 +22,6 @@ class SpecialDesign extends Card_1.Card {
                 description: 'The next card you play this generation is +2 or -2 steps in global requirements, your choice.',
             },
         });
-    }
-    getRequirementBonus(player) {
-        if (player.lastCardPlayed === this.name) {
-            return 2;
-        }
-        return 0;
     }
 }
 exports.SpecialDesign = SpecialDesign;

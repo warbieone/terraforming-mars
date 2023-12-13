@@ -3,16 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TempestConsultancy = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const SendDelegateToArea_1 = require("../../deferredActions/SendDelegateToArea");
-const Card_1 = require("../Card");
-const CardType_1 = require("../../../common/cards/CardType");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Tag_1 = require("../../../common/cards/Tag");
 const Turmoil_1 = require("../../turmoil/Turmoil");
-class TempestConsultancy extends Card_1.Card {
+class TempestConsultancy extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.TEMPEST_CONSULTANCY,
             tags: [Tag_1.Tag.MOON],
             startingMegaCredits: 37,
@@ -41,12 +39,12 @@ class TempestConsultancy extends Card_1.Card {
         return undefined;
     }
     canAct(player) {
-        return player.tags.count(Tag_1.Tag.MOON) >= 5 && Turmoil_1.Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) > 0;
+        return player.tags.count(Tag_1.Tag.MOON) >= 5 && Turmoil_1.Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player) > 0;
     }
     action(player) {
         let count = Math.floor(player.tags.count(Tag_1.Tag.MOON) / 5);
         count = Math.min(count, 3);
-        count = Math.min(count, Turmoil_1.Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id));
+        count = Math.min(count, Turmoil_1.Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player));
         if (count > 0) {
             player.game.defer(new SendDelegateToArea_1.SendDelegateToArea(player, `Select a party to send ${count} delegate(s) to`, { count: count }));
         }

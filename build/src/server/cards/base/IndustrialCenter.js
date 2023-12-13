@@ -35,15 +35,16 @@ class IndustrialCenter extends ActionCard_1.ActionCard {
             metadata,
         });
     }
-    getAvailableSpaces(player) {
-        return player.game.board.getAvailableSpacesOnLand(player)
+    getAvailableSpaces(player, canAffordOptions) {
+        return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
             .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => Board_1.Board.isCitySpace(adjacentSpace)));
     }
-    bespokeCanPlay(player) {
-        return this.getAvailableSpaces(player).length > 0;
+    bespokeCanPlay(player, canAffordOptions) {
+        return this.getAvailableSpaces(player, canAffordOptions).length > 0;
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace('Select space adjacent to a city tile', this.getAvailableSpaces(player), (space) => {
+        return new SelectSpace_1.SelectSpace('Select space adjacent to a city tile', this.getAvailableSpaces(player))
+            .andThen((space) => {
             player.game.addTile(player, space, { tileType: TileType_1.TileType.INDUSTRIAL_CENTER });
             space.adjacency = this.adjacencyBonus;
             return undefined;

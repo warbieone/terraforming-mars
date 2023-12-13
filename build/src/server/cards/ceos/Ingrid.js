@@ -4,7 +4,6 @@ exports.Ingrid = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CeoCard_1 = require("./CeoCard");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const Phase_1 = require("../../../common/Phase");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
 const BoardType_1 = require("../../boards/BoardType");
@@ -39,7 +38,7 @@ class Ingrid extends CeoCard_1.CeoCard {
             return;
         if (cardOwner.game.phase === Phase_1.Phase.SOLAR)
             return;
-        cardOwner.game.defer(new DeferredAction_1.SimpleDeferredAction(cardOwner, () => cardOwner.drawCard()));
+        cardOwner.drawCard();
     }
 }
 exports.Ingrid = Ingrid;

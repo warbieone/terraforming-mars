@@ -36,7 +36,7 @@ class CometAiming extends Card_1.Card {
         });
     }
     canPlaceOcean(player) {
-        return player.game.canAddOcean() && player.canAfford(0, { tr: { oceans: 1 } });
+        return player.game.canAddOcean() && player.canAfford({ cost: 0, tr: { oceans: 1 } });
     }
     canAct(player) {
         if (player.titanium > 0) {
@@ -51,7 +51,8 @@ class CometAiming extends Card_1.Card {
             player.addResourceTo(asteroidCards[0], { log: true });
             return undefined;
         };
-        const addAsteroidToCard = new SelectCard_1.SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, ([card]) => {
+        const addAsteroidToCard = new SelectCard_1.SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards)
+            .andThen(([card]) => {
             player.pay(Payment_1.Payment.of({ titanium: 1 }));
             player.addResourceTo(card, { log: true });
             return undefined;
@@ -71,10 +72,10 @@ class CometAiming extends Card_1.Card {
             return spendAsteroidResource();
         const availableActions = [];
         if (this.canPlaceOcean(player)) {
-            availableActions.push(new SelectOption_1.SelectOption('Remove an asteroid resource to place an ocean', 'Remove asteroid', spendAsteroidResource));
+            availableActions.push(new SelectOption_1.SelectOption('Remove an asteroid resource to place an ocean', 'Remove asteroid').andThen(spendAsteroidResource));
         }
         if (asteroidCards.length === 1) {
-            availableActions.push(new SelectOption_1.SelectOption('Spend 1 titanium to gain 1 asteroid resource', 'Spend titanium', addAsteroidToSelf));
+            availableActions.push(new SelectOption_1.SelectOption('Spend 1 titanium to gain 1 asteroid resource', 'Spend titanium').andThen(addAsteroidToSelf));
         }
         else {
             availableActions.push(addAsteroidToCard);
@@ -82,7 +83,7 @@ class CometAiming extends Card_1.Card {
         if (availableActions.length === 1) {
             const action = availableActions[0];
             if (action instanceof SelectOption_1.SelectOption)
-                return action.cb();
+                return action.cb(undefined);
             return availableActions[0];
         }
         return new OrOptions_1.OrOptions(...availableActions);

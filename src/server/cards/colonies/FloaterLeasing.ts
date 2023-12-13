@@ -13,7 +13,7 @@ export class FloaterLeasing extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
 
       behavior: {
-        production: {megacredits: {floaters: {}, per: 3}},
+        production: {megacredits: {floaters: {}, per: 2}},
       },
 
       metadata: {
@@ -24,10 +24,5 @@ export class FloaterLeasing extends Card implements IProjectCard {
         description: 'Increase your M€ production 1 step PER 2 floaters you have.',
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    player.production.add(Resource.MEGACREDITS, Math.floor(player.getResourceCount(CardResource.FLOATER) / 2), {log: true});
-    return undefined;
   }
 }

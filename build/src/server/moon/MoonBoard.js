@@ -2,26 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MoonBoard = void 0;
 const Board_1 = require("../boards/Board");
+const Space_1 = require("../boards/Space");
 const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
 const SpaceType_1 = require("../../common/boards/SpaceType");
 const MoonSpaces_1 = require("../../common/moon/MoonSpaces");
-class Space {
-    constructor(id, spaceType, x, y, bonus) {
-        this.id = id;
-        this.spaceType = spaceType;
-        this.x = x;
-        this.y = y;
-        this.bonus = bonus;
-    }
-    static mine(id, x, y, bonus) {
-        return new Space(id, SpaceType_1.SpaceType.LUNAR_MINE, x, y, bonus);
-    }
-    static surface(id, x, y, bonus) {
-        return new Space(id, SpaceType_1.SpaceType.LAND, x, y, bonus);
-    }
-    static colony(id) {
-        return new Space(id, SpaceType_1.SpaceType.COLONY, -1, -1, []);
-    }
+function mineSpace(id, x, y, bonus) {
+    return (0, Space_1.newSpace)(id, SpaceType_1.SpaceType.LUNAR_MINE, x, y, bonus);
+}
+function surfaceSpace(id, x, y, bonus) {
+    return (0, Space_1.newSpace)(id, SpaceType_1.SpaceType.LAND, x, y, bonus);
+}
+function colonySpace(id) {
+    return (0, Space_1.newSpace)(id, SpaceType_1.SpaceType.COLONY, -1, -1, []);
 }
 class MoonBoard extends Board_1.Board {
     getAvailableSpacesForMine(player) {
@@ -72,7 +64,7 @@ class Builder {
         return new Row(this);
     }
     colony() {
-        this.spaces.push(Space.colony(this.nextId()));
+        this.spaces.push(colonySpace(this.nextId()));
     }
     nextId() {
         this.idx++;
@@ -85,12 +77,12 @@ class Row {
         this.builder = builder;
     }
     land(...bonuses) {
-        const space = Space.surface(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
+        const space = surfaceSpace(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
         this.builder.spaces.push(space);
         return this;
     }
     mine(...bonuses) {
-        const space = Space.mine(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
+        const space = mineSpace(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
         this.builder.spaces.push(space);
         return this;
     }

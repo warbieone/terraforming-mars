@@ -4,7 +4,6 @@ exports.Airliners = void 0;
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardResource_1 = require("../../../common/CardResource");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const CardRenderer_1 = require("../render/CardRenderer");
 class Airliners extends Card_1.Card {
@@ -13,7 +12,7 @@ class Airliners extends Card_1.Card {
             cost: 11,
             name: CardName_1.CardName.AIRLINERS,
             type: CardType_1.CardType.AUTOMATED,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.floaters(3)),
+            requirements: { floaters: 3 },
             victoryPoints: 1,
             behavior: {
                 production: { megacredits: 2 },

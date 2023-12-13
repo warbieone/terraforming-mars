@@ -14,6 +14,9 @@ const TurmoilCardManifest_1 = require("./turmoil/TurmoilCardManifest");
 const VenusCardManifest_1 = require("./venusNext/VenusCardManifest");
 const MoonCardManifest_1 = require("./moon/MoonCardManifest");
 const PathfindersCardManifest_1 = require("./pathfinders/PathfindersCardManifest");
+const Prelude2CardManifest_1 = require("./prelude2/Prelude2CardManifest");
+const StarwarsCardManifest_1 = require("./starwars/StarwarsCardManifest");
+const UnderworldCardManifest_1 = require("./underworld/UnderworldCardManifest");
 exports.ALL_MODULE_MANIFESTS = [
     StandardCardManifests_1.BASE_CARD_MANIFEST,
     StandardCardManifests_1.CORP_ERA_CARD_MANIFEST,
@@ -23,11 +26,14 @@ exports.ALL_MODULE_MANIFESTS = [
     ColoniesCardManifest_1.COLONIES_CARD_MANIFEST,
     NonColoniesCardManifest_1.NON_COLONIES_CARD_MANIFEST,
     PreludeCardManifest_1.PRELUDE_CARD_MANIFEST,
+    Prelude2CardManifest_1.PRELUDE2_CARD_MANIFEST,
     TurmoilCardManifest_1.TURMOIL_CARD_MANIFEST,
     CommunityCardManifest_1.COMMUNITY_CARD_MANIFEST,
     AresCardManifest_1.ARES_CARD_MANIFEST,
     MoonCardManifest_1.MOON_CARD_MANIFEST,
     PathfindersCardManifest_1.PATHFINDERS_CARD_MANIFEST,
     CeoCardManifest_1.CEO_CARD_MANIFEST,
+    StarwarsCardManifest_1.STAR_WARS_CARD_MANIFEST,
+    UnderworldCardManifest_1.UNDERWORLD_CARD_MANIFEST,
 ];
 //# sourceMappingURL=AllCards.js.map

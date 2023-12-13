@@ -1,25 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TradeWithCollegiumCopernicus = exports.tradeWithColony = exports.CollegiumCopernicus = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const CardResource_1 = require("../../../common/CardResource");
 const ColoniesHandler_1 = require("../../colonies/ColoniesHandler");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const SelectColony_1 = require("../../inputs/SelectColony");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
 const MessageBuilder_1 = require("../../logs/MessageBuilder");
 function tradeCost(player) {
     return Math.max(0, 3 - player.colonies.tradeDiscount);
 }
-class CollegiumCopernicus extends Card_1.Card {
+class CollegiumCopernicus extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.COLLEGIUM_COPERNICUS,
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.EARTH],
             startingMegaCredits: 33,
@@ -61,10 +58,11 @@ class CollegiumCopernicus extends Card_1.Card {
     }
     action(player) {
         const game = player.game;
-        game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => new SelectColony_1.SelectColony('Select colony tile to trade with', 'Select', ColoniesHandler_1.ColoniesHandler.tradeableColonies(game), (colony) => {
+        player.defer(new SelectColony_1.SelectColony('Select colony tile to trade with', 'Select', ColoniesHandler_1.ColoniesHandler.tradeableColonies(game))
+            .andThen((colony) => {
             tradeWithColony(this, player, colony);
             return undefined;
-        })));
+        }));
         return undefined;
     }
 }
@@ -87,7 +85,7 @@ class TradeWithCollegiumCopernicus {
             !this.player.getActionsThisGeneration().has(CardName_1.CardName.COLLEGIUM_COPERNICUS);
     }
     optionText() {
-        return (0, MessageBuilder_1.newMessage)('Pay ${0} data (use ${1} action)', (b) => b.number(tradeCost(this.player)).cardName(CardName_1.CardName.COLLEGIUM_COPERNICUS));
+        return (0, MessageBuilder_1.message)('Pay ${0} data (use ${1} action)', (b) => b.number(tradeCost(this.player)).cardName(CardName_1.CardName.COLLEGIUM_COPERNICUS));
     }
     trade(colony) {
         this.player.addActionThisGeneration(CardName_1.CardName.COLLEGIUM_COPERNICUS);

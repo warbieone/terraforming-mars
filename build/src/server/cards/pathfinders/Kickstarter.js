@@ -28,7 +28,8 @@ class Kickstarter extends Card_1.Card {
         return [this.cloneTag];
     }
     bespokePlay(player) {
-        player.game.defer(new DeclareCloneTag_1.DeclareCloneTag(player, this, (tag) => PathfindersExpansion_1.PathfindersExpansion.raiseTrack(tag, player, 2)));
+        player.game.defer(new DeclareCloneTag_1.DeclareCloneTag(player, this))
+            .andThen((tag) => PathfindersExpansion_1.PathfindersExpansion.raiseTrack(tag, player, 2));
         return undefined;
     }
 }

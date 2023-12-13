@@ -26,7 +26,7 @@ class StandardTechnology extends Card_1.Card {
     }
     onStandardProject(player, projectType) {
         if (projectType.name !== CardName_1.CardName.SELL_PATENTS_STANDARD_PROJECT) {
-            player.addResource(Resource_1.Resource.MEGACREDITS, 3, { log: true });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, 3, { log: true });
         }
     }
 }

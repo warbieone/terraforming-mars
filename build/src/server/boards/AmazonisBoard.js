@@ -5,7 +5,8 @@ const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
 const Board_1 = require("./Board");
 const BoardBuilder_1 = require("./BoardBuilder");
 const SpaceName_1 = require("../SpaceName");
-class AmazonisBoard extends Board_1.Board {
+const MarsBoard_1 = require("./MarsBoard");
+class AmazonisBoard extends MarsBoard_1.MarsBoard {
     static newInstance(gameOptions, rng) {
         const builder = new BoardBuilder_1.BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
         const PLANT = SpaceBonus_1.SpaceBonus.PLANT;
@@ -15,12 +16,11 @@ class AmazonisBoard extends Board_1.Board {
         const MICROBE = SpaceBonus_1.SpaceBonus.MICROBE;
         const ANIMAL = SpaceBonus_1.SpaceBonus.ANIMAL;
         const HEAT = SpaceBonus_1.SpaceBonus.HEAT;
-        const RESTRICTED = SpaceBonus_1.SpaceBonus.RESTRICTED;
         builder.land().ocean(PLANT).land(PLANT, PLANT, PLANT).land(MICROBE).land(ANIMAL);
         builder.ocean(TITANIUM).land(MICROBE, MICROBE).land().land().ocean(DRAW_CARD, DRAW_CARD).ocean();
         builder.land(PLANT, PLANT).land(STEEL, PLANT).land(STEEL, HEAT).land(HEAT, PLANT).land(ANIMAL).land().land(MICROBE);
         builder.land().ocean(PLANT).land().land(PLANT).land(HEAT, PLANT).land(STEEL).land(PLANT).ocean(STEEL, PLANT);
-        builder.land(PLANT).land(PLANT).land().land(HEAT, HEAT).land(RESTRICTED).doNotShuffleLastSpace()
+        builder.land(PLANT).land(PLANT).land().land(HEAT, HEAT).restricted().doNotShuffleLastSpace()
             .land(HEAT, HEAT).land(PLANT, PLANT).land().land(TITANIUM, TITANIUM);
         builder.ocean(PLANT, PLANT).land(PLANT).land(STEEL).land(HEAT, PLANT).land(PLANT).land(DRAW_CARD).land().ocean(PLANT);
         builder.ocean(PLANT).land().land(MICROBE).land(HEAT, PLANT).land().land(PLANT, PLANT).ocean(PLANT, PLANT);
@@ -34,9 +34,6 @@ class AmazonisBoard extends Board_1.Board {
     }
     static deserialize(board, players) {
         return new AmazonisBoard(Board_1.Board.deserializeSpaces(board.spaces, players));
-    }
-    getNonReservedLandSpaces() {
-        return super.getNonReservedLandSpaces().filter((space) => space.bonus.includes(SpaceBonus_1.SpaceBonus.RESTRICTED) === false);
     }
     getVolcanicSpaceIds() {
         return [

@@ -7,5 +7,7 @@ var SpecialTags;
     SpecialTags["INFLUENCE"] = "influence-count";
     SpecialTags["CITY_COUNT"] = "city-count";
     SpecialTags["COLONY_COUNT"] = "colony-count";
+    SpecialTags["EXCAVATIONS"] = "excavation-count";
+    SpecialTags["CORRUPTION"] = "corruption-count";
 })(SpecialTags = exports.SpecialTags || (exports.SpecialTags = {}));
 //# sourceMappingURL=SpecialTags.js.map

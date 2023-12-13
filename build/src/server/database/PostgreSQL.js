@@ -10,13 +10,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostgreSQL = void 0;
-const pg_1 = require("pg");
 const utils_1 = require("./utils");
+const utils_2 = require("../../common/utils/utils");
 class PostgreSQL {
+    get client() {
+        if (this._client === undefined) {
+            throw new Error('attempt to get client before intialized');
+        }
+        return this._client;
+    }
     constructor(config = {
         connectionString: process.env.POSTGRES_HOST,
     }) {
         var _a;
+        this.config = config;
         this.databaseName = undefined;
         this.statistics = {
             saveCount: 0,
@@ -40,10 +47,11 @@ class PostgreSQL {
                 console.log(e);
             }
         }
-        this.client = new pg_1.Pool(config);
     }
     initialize() {
         return __awaiter(this, void 0, void 0, function* () {
+            const { Pool } = yield Promise.resolve().then(() => require('pg'));
+            this._client = new Pool(this.config);
             yield this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))');
             yield this.client.query('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participants varchar[], PRIMARY KEY (game_id))');
             yield this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
@@ -77,9 +85,6 @@ class PostgreSQL {
             const res = yield this.client.query(sql);
             return res.rows.map((row) => row.game_id);
         });
-    }
-    loadCloneableGame(gameId) {
-        return this.getGameVersion(gameId, 0);
     }
     getGame(gameId) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -156,16 +161,20 @@ class PostgreSQL {
         return __awaiter(this, void 0, void 0, function* () {
             const dateToSeconds = (0, utils_1.daysAgoToSeconds)(maxGameDays, 10);
             const selectResult = yield this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < to_timestamp($1)', [dateToSeconds]);
-            const gameIds = selectResult.rows.slice(0, 1000).map((row) => row.game_id);
-            console.log(`${gameIds.length} games to be purged.`);
+            let gameIds = selectResult.rows.map((row) => row.game_id);
             if (gameIds.length > 1000) {
-                gameIds.length = 1000;
                 console.log('Truncated purge to 1000 games.');
+                gameIds = gameIds.slice(0, 1000);
             }
-            const deleteGamesResult = yield this.client.query('DELETE FROM games WHERE game_id = ANY($1)', [gameIds]);
-            console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
-            const deleteParticipantsResult = yield this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
-            console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
+            else {
+                console.log(`${gameIds.length} games to be purged.`);
+            }
+            if (gameIds.length > 0) {
+                const deleteGamesResult = yield this.client.query('DELETE FROM games WHERE game_id = ANY($1)', [gameIds]);
+                console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
+                const deleteParticipantsResult = yield this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
+                console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
+            }
             return gameIds;
         });
     }
@@ -192,7 +201,7 @@ class PostgreSQL {
             const maxSaveId = yield this.getMaxSaveId(gameId);
             return this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId])
                 .then(() => {
-                return this.client.query('DELETE FROM completed_games where game_id = $1', [gameId]);
+                return this.client.query('DELETE FROM completed_game where game_id = $1', [gameId]);
             });
         });
     }
@@ -250,9 +259,8 @@ class PostgreSQL {
             const res = yield this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [gameId, rollbackCount]);
             logForUndo(gameId, 'deleted', res === null || res === void 0 ? void 0 : res.rowCount, 'rows');
             const second = yield this.getSaveIds(gameId);
-            const difference = first.filter((x) => !second.includes(x));
             logForUndo(gameId, 'second', second);
-            logForUndo(gameId, 'Rollback difference', difference);
+            logForUndo(gameId, 'Rollback difference', (0, utils_2.oneWayDifference)(first, second));
         });
     }
     storeParticipants(entry) {

@@ -17,7 +17,7 @@ class GainResources extends DeferredAction_1.DeferredAction {
         if (this.options.count === 0) {
             return undefined;
         }
-        this.player.addResource(this.resource, (_a = this.options.count) !== null && _a !== void 0 ? _a : 1, { log: this.options.log });
+        this.player.stock.add(this.resource, (_a = this.options.count) !== null && _a !== void 0 ? _a : 1, { log: this.options.log });
         (_c = (_b = this.options).cb) === null || _c === void 0 ? void 0 : _c.call(_b);
         return undefined;
     }

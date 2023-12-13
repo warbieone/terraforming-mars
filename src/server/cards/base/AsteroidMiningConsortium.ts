@@ -18,8 +18,8 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
       tags: [Tag.JOVIAN],
       cost: 13,
       victoryPoints: 1,
+      requirements: {generation: 4},
 
-      requirements: CardRequirements.builder((b) => b.generation(4)),
       metadata: {
         description: 'Requires that it is Generation 4. Decrease any titanium production 1 step and increase your own 1 step.',
         cardNumber: '002',

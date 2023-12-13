@@ -4,7 +4,7 @@ exports.UndoActionOption = void 0;
 const SelectOption_1 = require("./SelectOption");
 class UndoActionOption extends SelectOption_1.SelectOption {
     constructor() {
-        super('Undo last action', 'Undo', () => undefined);
+        super('Undo last action', 'Undo');
     }
 }
 exports.UndoActionOption = UndoActionOption;

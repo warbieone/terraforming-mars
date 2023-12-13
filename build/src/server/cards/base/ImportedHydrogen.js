@@ -12,6 +12,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class ImportedHydrogen extends Card_1.Card {
     constructor() {
         super({
@@ -39,37 +40,39 @@ class ImportedHydrogen extends Card_1.Card {
         const availableMicrobeCards = player.getResourceCards(CardResource_1.CardResource.MICROBE);
         const availableAnimalCards = player.getResourceCards(CardResource_1.CardResource.ANIMAL);
         const gainPlants = function () {
-            player.addResource(Resource_1.Resource.PLANTS, 3, { log: true });
+            player.stock.add(Resource_1.Resource.PLANTS, 3, { log: true });
             return undefined;
         };
         if (availableMicrobeCards.length === 0 && availableAnimalCards.length === 0) {
             return gainPlants();
         }
         const availableActions = [];
-        const gainPlantsOption = new SelectOption_1.SelectOption('Gain 3 plants', 'Gain plants', gainPlants);
+        const gainPlantsOption = new SelectOption_1.SelectOption('Gain 3 plants', 'Gain plants').andThen(gainPlants);
         availableActions.push(gainPlantsOption);
         if (availableMicrobeCards.length === 1) {
             const targetMicrobeCard = availableMicrobeCards[0];
-            availableActions.push(new SelectOption_1.SelectOption('Add 3 microbes to ' + targetMicrobeCard.name, 'Add microbes', () => {
+            availableActions.push(new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Add ${0} microbes to ${1}', (b) => b.number(3).card(targetMicrobeCard)), 'Add microbes').andThen(() => {
                 player.addResourceTo(targetMicrobeCard, { qty: 3, log: true });
                 return undefined;
             }));
         }
         else if (availableMicrobeCards.length > 1) {
-            availableActions.push(new SelectCard_1.SelectCard('Add 3 microbes to a card', 'Add microbes', availableMicrobeCards, ([card]) => {
+            availableActions.push(new SelectCard_1.SelectCard('Add 3 microbes to a card', 'Add microbes', availableMicrobeCards)
+                .andThen(([card]) => {
                 player.addResourceTo(card, { qty: 3, log: true });
                 return undefined;
             }));
         }
         if (availableAnimalCards.length === 1) {
             const targetAnimalCard = availableAnimalCards[0];
-            availableActions.push(new SelectOption_1.SelectOption('Add 2 animals to ' + targetAnimalCard.name, 'Add animals', () => {
+            availableActions.push(new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Add ${0} animals to ${1}', (b) => b.number(2).card(targetAnimalCard)), 'Add animals').andThen(() => {
                 player.addResourceTo(targetAnimalCard, { qty: 2, log: true });
                 return undefined;
             }));
         }
         else if (availableAnimalCards.length > 1) {
-            availableActions.push(new SelectCard_1.SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards, ([card]) => {
+            availableActions.push(new SelectCard_1.SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards)
+                .andThen(([card]) => {
                 player.addResourceTo(card, { qty: 2, log: true });
                 return undefined;
             }));

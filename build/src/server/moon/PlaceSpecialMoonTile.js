@@ -4,8 +4,9 @@ exports.PlaceSpecialMoonTile = void 0;
 const DeferredAction_1 = require("../deferredActions/DeferredAction");
 const SelectSpace_1 = require("../inputs/SelectSpace");
 const MoonExpansion_1 = require("./MoonExpansion");
+const MessageBuilder_1 = require("../logs/MessageBuilder");
 class PlaceSpecialMoonTile extends DeferredAction_1.DeferredAction {
-    constructor(player, tile, title = 'Select a space on The Moon for this tile.') {
+    constructor(player, tile, title = (0, MessageBuilder_1.message)('Select a space on The Moon for ${0}', (b) => b.tileType(tile.tileType))) {
         super(player, DeferredAction_1.Priority.DEFAULT);
         this.tile = tile;
         this.title = title;
@@ -16,7 +17,8 @@ class PlaceSpecialMoonTile extends DeferredAction_1.DeferredAction {
         if (spaces.length === 0) {
             return undefined;
         }
-        return new SelectSpace_1.SelectSpace(this.title, spaces, (space) => {
+        return new SelectSpace_1.SelectSpace(this.title, spaces)
+            .andThen((space) => {
             MoonExpansion_1.MoonExpansion.addTile(this.player, space.id, this.tile);
             return undefined;
         });

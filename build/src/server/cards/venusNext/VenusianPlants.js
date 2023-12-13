@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardResource_1 = require("../../../common/CardResource");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 class VenusianPlants extends Card_1.Card {
@@ -16,7 +15,7 @@ class VenusianPlants extends Card_1.Card {
             name: CardName_1.CardName.VENUSIAN_PLANTS,
             cost: 13,
             tags: [Tag_1.Tag.VENUS, Tag_1.Tag.PLANT],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.venus(16)),
+            requirements: { venus: 16 },
             victoryPoints: 1,
             behavior: {
                 global: { venus: 1 },
@@ -43,7 +42,8 @@ class VenusianPlants extends Card_1.Card {
             player.addResourceTo(cards[0], { log: true });
             return undefined;
         }
-        return new SelectCard_1.SelectCard('Select card to add 1 resource', 'Add resource', cards, ([card]) => {
+        return new SelectCard_1.SelectCard('Select card to add 1 resource', 'Add resource', cards)
+            .andThen(([card]) => {
             player.addResourceTo(card, { log: true });
             return undefined;
         });

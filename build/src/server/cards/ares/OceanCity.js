@@ -6,7 +6,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const TileType_1 = require("../../../common/TileType");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class OceanCity extends Card_1.Card {
     constructor() {
@@ -20,10 +19,9 @@ class OceanCity extends Card_1.Card {
                 tile: {
                     type: TileType_1.TileType.OCEAN_CITY,
                     on: 'upgradeable-ocean',
-                    title: 'Select space for Ocean City',
                 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(6)),
+            requirements: { oceans: 6 },
             metadata: {
                 cardNumber: 'A20',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

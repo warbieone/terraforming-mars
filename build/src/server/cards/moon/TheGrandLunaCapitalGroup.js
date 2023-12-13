@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TheGrandLunaCapitalGroup = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardRenderer_1 = require("../render/CardRenderer");
 const TileType_1 = require("../../../common/TileType");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
@@ -11,12 +11,10 @@ const Resource_1 = require("../../../common/Resource");
 const CardRenderDynamicVictoryPoints_1 = require("../render/CardRenderDynamicVictoryPoints");
 const Size_1 = require("../../../common/cards/render/Size");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
-const Card_1 = require("../Card");
 const Options_1 = require("../Options");
-class TheGrandLunaCapitalGroup extends Card_1.Card {
+class TheGrandLunaCapitalGroup extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.THE_GRAND_LUNA_CAPITAL_GROUP,
             tags: [Tag_1.Tag.CITY, Tag_1.Tag.MOON],
             startingMegaCredits: 32,
@@ -36,7 +34,7 @@ class TheGrandLunaCapitalGroup extends Card_1.Card {
                 cardNumber: 'MC7',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.megacredits(32).titanium(1).moonHabitat({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_HABITAT_RATE }).br;
-                    b.effect('When you place a colony tile, gain 2 M€ for each adjacent colony tile.', (eb) => {
+                    b.effect('When you place a habitat tile, gain 2 M€ for each adjacent habitat tile.', (eb) => {
                         eb.moonHabitat({ size: Size_1.Size.SMALL, all: Options_1.all }).moonHabitat({ size: Size_1.Size.SMALL }).asterix()
                             .startEffect
                             .megacredits(2).slash().moonHabitat({ size: Size_1.Size.SMALL, all: Options_1.all });
@@ -56,7 +54,7 @@ class TheGrandLunaCapitalGroup extends Card_1.Card {
         }
         const adjacentSpaces = MoonExpansion_1.MoonExpansion.moonData(cardOwner.game).moon.getAdjacentSpaces(space);
         const filtered = adjacentSpaces.filter((space) => MoonExpansion_1.MoonExpansion.spaceHasType(space, TileType_1.TileType.MOON_HABITAT));
-        cardOwner.addResource(Resource_1.Resource.MEGACREDITS, filtered.length * 2, { log: true });
+        cardOwner.stock.add(Resource_1.Resource.MEGACREDITS, filtered.length * 2, { log: true });
     }
     getVictoryPoints(player) {
         const moon = MoonExpansion_1.MoonExpansion.moonData(player.game).moon;

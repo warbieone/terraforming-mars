@@ -15,6 +15,8 @@ const Handler_1 = require("./Handler");
 const OrOptions_1 = require("../inputs/OrOptions");
 const UndoActionOption_1 = require("../inputs/UndoActionOption");
 const Types_1 = require("../../common/Types");
+const server_ids_1 = require("../utils/server-ids");
+const AppError_1 = require("../server/AppError");
 class PlayerInput extends Handler_1.Handler {
     constructor() {
         super();
@@ -30,6 +32,7 @@ class PlayerInput extends Handler_1.Handler {
                 ctx.route.badRequest(req, res, 'invalid player id');
                 return;
             }
+            ctx.ipTracker.addParticipant(playerId, ctx.ip);
             const game = yield ctx.gameLoader.getGame(playerId);
             if (game === undefined) {
                 ctx.route.notFound(req, res);
@@ -84,6 +87,7 @@ class PlayerInput extends Handler_1.Handler {
             req.once('end', () => __awaiter(this, void 0, void 0, function* () {
                 try {
                     const entity = JSON.parse(body);
+                    validateRunId(entity);
                     if (this.isWaitingForUndo(player, entity)) {
                         yield this.performUndo(req, res, ctx, player);
                     }
@@ -94,12 +98,15 @@ class PlayerInput extends Handler_1.Handler {
                     resolve();
                 }
                 catch (e) {
+                    if (!(e instanceof AppError_1.AppError)) {
+                        console.warn('Error processing input from player', e);
+                    }
                     res.writeHead(400, {
                         'Content-Type': 'application/json',
                     });
-                    console.warn('Error processing input from player', e);
+                    const id = e instanceof AppError_1.AppError ? e.id : undefined;
                     const message = e instanceof Error ? e.message : String(e);
-                    res.write(JSON.stringify({ message }));
+                    res.write(JSON.stringify({ id: id, message: message }));
                     res.end();
                     resolve();
                 }
@@ -109,4 +116,12 @@ class PlayerInput extends Handler_1.Handler {
 }
 exports.PlayerInput = PlayerInput;
 PlayerInput.INSTANCE = new PlayerInput();
+function validateRunId(entity) {
+    if (entity.runId !== undefined && server_ids_1.runId !== undefined) {
+        if (entity.runId !== server_ids_1.runId) {
+            throw new AppError_1.AppError('#invalid-run-id', 'The server has restarted. Click OK to refresh this page.');
+        }
+    }
+    delete entity.runId;
+}
 //# sourceMappingURL=PlayerInput.js.map

@@ -20,7 +20,7 @@ const Game_1 = require("../Game");
 const Player_1 = require("../Player");
 const ServerModel_1 = require("../models/ServerModel");
 const ServeAsset_1 = require("./ServeAsset");
-const server_ids_1 = require("../server-ids");
+const server_ids_1 = require("../utils/server-ids");
 class GameHandler extends Handler_1.Handler {
     constructor() {
         super();
@@ -76,6 +76,7 @@ class GameHandler extends Handler_1.Handler {
                         venusNextExtension: gameReq.venusNext,
                         coloniesExtension: gameReq.colonies,
                         preludeExtension: gameReq.prelude,
+                        prelude2Expansion: gameReq.prelude2Expansion,
                         turmoilExtension: gameReq.turmoil,
                         aresExtension: gameReq.aresExtension,
                         aresHazards: true,
@@ -106,16 +107,19 @@ class GameHandler extends Handler_1.Handler {
                         altVenusBoard: gameReq.altVenusBoard,
                         escapeVelocityMode: gameReq.escapeVelocityMode,
                         escapeVelocityThreshold: gameReq.escapeVelocityThreshold,
+                        escapeVelocityBonusSeconds: gameReq.escapeVelocityBonusSeconds,
                         escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
                         escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
                         twoCorpsVariant: gameReq.twoCorpsVariant,
                         ceoExtension: gameReq.ceoExtension,
                         customCeos: gameReq.customCeos,
                         startingCeos: gameReq.startingCeos,
+                        starWarsExpansion: gameReq.starWarsExpansion,
+                        underworldExpansion: gameReq.underworldExpansion,
                     };
                     let game;
                     if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
-                        const serialized = yield Database_1.Database.getInstance().loadCloneableGame(gameOptions.clonedGamedId);
+                        const serialized = yield Database_1.Database.getInstance().getGameVersion(gameOptions.clonedGamedId, 0);
                         game = Cloner_1.Cloner.clone(gameId, players, firstPlayerIdx, serialized);
                     }
                     else {

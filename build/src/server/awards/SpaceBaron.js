@@ -5,7 +5,7 @@ const Tag_1 = require("../../common/cards/Tag");
 class SpaceBaron {
     constructor() {
         this.name = 'Space Baron';
-        this.description = 'Have the most space tags';
+        this.description = 'Have the most space tags in play';
     }
     getScore(player) {
         return player.tags.count(Tag_1.Tag.SPACE, 'award');

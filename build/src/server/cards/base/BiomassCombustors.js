@@ -7,7 +7,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 class BiomassCombustors extends Card_1.Card {
     constructor() {
@@ -21,7 +20,7 @@ class BiomassCombustors extends Card_1.Card {
                 decreaseAnyProduction: { type: Resource_1.Resource.PLANTS, count: 1 },
                 production: { energy: 2 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(6)),
+            requirements: { oxygen: 6 },
             metadata: {
                 description: 'Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.',
                 cardNumber: '183',

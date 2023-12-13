@@ -10,7 +10,7 @@ const LunarMagnate_1 = require("../moon/LunarMagnate");
 const OneGiantStep_1 = require("../moon/OneGiantStep");
 const RandomMAOptionType_1 = require("../../common/ma/RandomMAOptionType");
 const shuffle_1 = require("../utils/shuffle");
-const Random_1 = require("../Random");
+const Random_1 = require("../../common/utils/Random");
 const utils_1 = require("../../common/utils/utils");
 const MilestoneAwardSynergies_1 = require("./MilestoneAwardSynergies");
 function maximumSynergy(names) {
@@ -120,6 +120,10 @@ function getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraint
     if (gameOptions.moonExpansion) {
         candidateMilestones.push(...Milestones_1.MOON_MILESTONES.map(toName));
         candidateAwards.push(...Awards_1.MOON_AWARDS.map(toName));
+    }
+    if (gameOptions.underworldExpansion) {
+        candidateMilestones.push(...Milestones_1.UNDERWORLD_MILESTONES.map(toName));
+        candidateAwards.push(...Awards_1.UNDERWORLD_AWARDS.map(toName));
     }
     if (gameOptions.includeFanMA) {
         candidateMilestones.push(...Milestones_1.ARABIA_TERRA_MILESTONES.map(toName), ...Milestones_1.AMAZONIS_PLANITIA_MILESTONES.map(toName), ...Milestones_1.TERRA_CIMMERIA_MILESTONES.map(toName), ...Milestones_1.VASTITAS_BOREALIS_MILESTONES.map(toName));

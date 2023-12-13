@@ -9,10 +9,10 @@ const SelectOption_1 = require("../../inputs/SelectOption");
 const constants_1 = require("../../../common/constants");
 const CardName_1 = require("../../../common/cards/CardName");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const Options_1 = require("../Options");
+const titles_1 = require("../../inputs/titles");
 class RotatorImpacts extends Card_1.Card {
     constructor() {
         super({
@@ -21,7 +21,7 @@ class RotatorImpacts extends Card_1.Card {
             tags: [Tag_1.Tag.SPACE],
             cost: 6,
             resourceType: CardResource_1.CardResource.ASTEROID,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.venus(14, { max: Options_1.max })),
+            requirements: { venus: 14, max: Options_1.max },
             metadata: {
                 cardNumber: '243',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -39,19 +39,19 @@ class RotatorImpacts extends Card_1.Card {
     canAct(player) {
         const venusMaxed = player.game.getVenusScaleLevel() === constants_1.MAX_VENUS_SCALE;
         const canSpendResource = this.resourceCount > 0 && !venusMaxed;
-        return player.canAfford(6, { titanium: true }) || (canSpendResource && player.canAfford(0, { tr: { venus: 1 } }));
+        return player.canAfford({ cost: 6, titanium: true }) || (canSpendResource && player.canAfford({ cost: 0, tr: { venus: 1 } }));
     }
     action(player) {
         const opts = [];
-        const addResource = new SelectOption_1.SelectOption('Pay 6 M€ to add 1 asteroid to this card', 'Pay', () => this.addResource(player));
-        const spendResource = new SelectOption_1.SelectOption('Remove 1 asteroid to raise Venus 1 step', 'Remove asteroid', () => this.spendResource(player));
+        const addResource = new SelectOption_1.SelectOption('Pay 6 M€ to add 1 asteroid to this card', 'Pay').andThen(() => this.addResource(player));
+        const spendResource = new SelectOption_1.SelectOption('Remove 1 asteroid to raise Venus 1 step', 'Remove asteroid').andThen(() => this.spendResource(player));
         if (this.resourceCount > 0 && player.game.getVenusScaleLevel() < constants_1.MAX_VENUS_SCALE) {
             opts.push(spendResource);
         }
         else {
             return this.addResource(player);
         }
-        if (player.canAfford(6, { titanium: true })) {
+        if (player.canAfford({ cost: 6, titanium: true })) {
             opts.push(addResource);
         }
         else {
@@ -60,7 +60,7 @@ class RotatorImpacts extends Card_1.Card {
         return new OrOptions_1.OrOptions(...opts);
     }
     addResource(player) {
-        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 6, { canUseTitanium: true, title: 'Select how to pay for action' }));
+        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 6, { canUseTitanium: true, title: titles_1.TITLES.payForCardAction(this.name) }));
         player.addResourceTo(this, { log: true });
         return undefined;
     }

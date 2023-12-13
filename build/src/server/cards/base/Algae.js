@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class Algae extends Card_1.Card {
     constructor() {
@@ -18,7 +17,7 @@ class Algae extends Card_1.Card {
                 production: { plants: 2 },
                 stock: { plants: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(5)),
+            requirements: { oceans: 5 },
             metadata: {
                 description: 'Requires 5 ocean tiles. Gain 1 plant and increase your plant production 2 steps.',
                 cardNumber: '047',

@@ -3,24 +3,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PATHFINDERS_CARD_MANIFEST = void 0;
 const ModuleManifest_1 = require("../ModuleManifest");
 const CardName_1 = require("../../../common/cards/CardName");
+const GlobalEventName_1 = require("../../../common/turmoil/globalEvents/GlobalEventName");
 const AdhaiHighOrbitConstructions_1 = require("./AdhaiHighOrbitConstructions");
 const AdvancedPowerGrid_1 = require("./AdvancedPowerGrid");
 const AgroDrones_1 = require("./AgroDrones");
 const Ambient_1 = require("./Ambient");
 const Anthozoa_1 = require("./Anthozoa");
-const AntidesertificationTechniques_1 = require("./AntidesertificationTechniques");
 const AsteroidResources_1 = require("./AsteroidResources");
 const Aurorai_1 = require("./Aurorai");
+const BalancedDevelopment_1 = require("./BalancedDevelopment");
+const BioSol_1 = require("./BioSol");
 const BotanicalExperience_1 = require("./BotanicalExperience");
 const BreedingFarms_1 = require("./BreedingFarms");
-const BioSol_1 = require("./BioSol");
 const CassiniStation_1 = require("./CassiniStation");
 const CeresSpaceport_1 = require("./CeresSpaceport");
 const CharityDonation_1 = require("./CharityDonation");
 const Chimera_1 = require("./Chimera");
 const CO2Reducers_1 = require("./CO2Reducers");
 const CollegiumCopernicus_1 = require("./CollegiumCopernicus");
+const CommunicationBoom_1 = require("./CommunicationBoom");
 const CommunicationCenter_1 = require("./CommunicationCenter");
+const ConstantStruggle_1 = require("./ConstantStruggle");
 const ControlledBloom_1 = require("./ControlledBloom");
 const CoordinatedRaid_1 = require("./CoordinatedRaid");
 const Crashlanding_1 = require("./Crashlanding");
@@ -55,6 +58,7 @@ const LastResortIngenuity_1 = require("./LastResortIngenuity");
 const LobbyHalls_1 = require("./LobbyHalls");
 const LunarEmbassy_1 = require("./LunarEmbassy");
 const LuxuryEstate_1 = require("./LuxuryEstate");
+const MagneticFieldStimulationDelays_1 = require("./MagneticFieldStimulationDelays");
 const MarsDirect_1 = require("./MarsDirect");
 const MarsMaths_1 = require("./MarsMaths");
 const MartianCulture_1 = require("./MartianCulture");
@@ -81,14 +85,14 @@ const PrivateSecurity_1 = require("./PrivateSecurity");
 const PublicSponsoredGrant_1 = require("./PublicSponsoredGrant");
 const RareEarthElements_1 = require("./RareEarthElements");
 const RedCity_1 = require("./RedCity");
-const Ringcom_1 = require("./Ringcom");
 const ResearchGrant_1 = require("./ResearchGrant");
 const ReturntoAbandonedTechnology_1 = require("./ReturntoAbandonedTechnology");
 const RichDeposits_1 = require("./RichDeposits");
+const Ringcom_1 = require("./Ringcom");
 const RobinHaulings_1 = require("./RobinHaulings");
 const SecretLabs_1 = require("./SecretLabs");
-const SmallOpenPitMine_1 = require("./SmallOpenPitMine");
 const SmallComet_1 = require("./SmallComet");
+const SmallOpenPitMine_1 = require("./SmallOpenPitMine");
 const SocialEvents_1 = require("./SocialEvents");
 const SoilDetoxification_1 = require("./SoilDetoxification");
 const Solarpedia_1 = require("./Solarpedia");
@@ -96,15 +100,17 @@ const SolarStorm_1 = require("./SolarStorm");
 const SolBank_1 = require("./SolBank");
 const SoylentSeedlingSystems_1 = require("./SoylentSeedlingSystems");
 const SpaceDebrisCleaningOperation_1 = require("./SpaceDebrisCleaningOperation");
+const SpaceRaceToMars_1 = require("./SpaceRaceToMars");
 const SpaceRelay_1 = require("./SpaceRelay");
 const SpecializedSettlement_1 = require("./SpecializedSettlement");
-const StrategicBasePlanning_1 = require("./StrategicBasePlanning");
 const Steelaris_1 = require("./Steelaris");
+const StrategicBasePlanning_1 = require("./StrategicBasePlanning");
 const SurveyMission_1 = require("./SurveyMission");
 const TerraformingControlStation_1 = require("./TerraformingControlStation");
 const TerraformingRobots_1 = require("./TerraformingRobots");
 const TheNewSpaceRace_1 = require("./TheNewSpaceRace");
 const ThinkTank_1 = require("./ThinkTank");
+const TiredEarth_1 = require("./TiredEarth");
 const ValuableGases_1 = require("./ValuableGases");
 const VeneraBase_1 = require("./VeneraBase");
 const VenusFirst_1 = require("./VenusFirst");
@@ -221,9 +227,16 @@ exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.VITAL_COLONY]: { Factory: VitalColony_1.VitalColony, compatibility: 'colonies' },
         [CardName_1.CardName.STRATEGIC_BASE_PLANNING]: { Factory: StrategicBasePlanning_1.StrategicBasePlanning, compatibility: 'colonies' },
         [CardName_1.CardName.DEEP_SPACE_OPERATIONS]: { Factory: DeepSpaceOperations_1.DeepSpaceOperations },
-        [CardName_1.CardName.ANTI_DESERTIFICATION_TECHNIQUES]: { Factory: AntidesertificationTechniques_1.AntidesertificationTechniques },
         [CardName_1.CardName.EXPERIENCED_MARTIANS]: { Factory: ExperiencedMartians_1.ExperiencedMartians, compatibility: ['turmoil', 'pathfinders'] },
         [CardName_1.CardName.THE_NEW_SPACE_RACE]: { Factory: TheNewSpaceRace_1.TheNewSpaceRace, compatibility: 'turmoil' },
+    },
+    globalEvents: {
+        [GlobalEventName_1.GlobalEventName.BALANCED_DEVELOPMENT]: { Factory: BalancedDevelopment_1.BalancedDevelopment },
+        [GlobalEventName_1.GlobalEventName.SPACE_RACE_TO_MARS]: { Factory: SpaceRaceToMars_1.SpaceRaceToMars },
+        [GlobalEventName_1.GlobalEventName.CONSTANT_STRUGGLE]: { Factory: ConstantStruggle_1.ConstantStruggle, negative: true },
+        [GlobalEventName_1.GlobalEventName.TIRED_EARTH]: { Factory: TiredEarth_1.TiredEarth, negative: true },
+        [GlobalEventName_1.GlobalEventName.MAGNETIC_FIELD_STIMULATION_DELAYS]: { Factory: MagneticFieldStimulationDelays_1.MagneticFieldStimulationDelays, negative: true },
+        [GlobalEventName_1.GlobalEventName.COMMUNICATION_BOOM]: { Factory: CommunicationBoom_1.CommunicationBoom, negative: true },
     },
     cardsToRemove: [
         CardName_1.CardName.VENUS_FIRST,

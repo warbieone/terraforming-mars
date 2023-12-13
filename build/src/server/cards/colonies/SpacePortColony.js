@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const Options_1 = require("../Options");
 class SpacePortColony extends Card_1.Card {
@@ -15,7 +14,7 @@ class SpacePortColony extends Card_1.Card {
             tags: [Tag_1.Tag.SPACE],
             name: CardName_1.CardName.SPACE_PORT_COLONY,
             type: CardType_1.CardType.AUTOMATED,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.colonies()),
+            requirements: { colonies: 1 },
             victoryPoints: { colonies: { colonies: {} }, all: Options_1.all, per: 2 },
             behavior: {
                 colonies: {

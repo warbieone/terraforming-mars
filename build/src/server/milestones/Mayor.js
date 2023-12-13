@@ -7,7 +7,7 @@ class Mayor extends IMilestone_1.BaseMilestone {
         super('Mayor', 'Own 3 city tiles', 3);
     }
     getScore(player) {
-        return player.game.getCitiesCount(player);
+        return player.game.board.getCities(player).length;
     }
 }
 exports.Mayor = Mayor;

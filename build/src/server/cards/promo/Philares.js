@@ -1,22 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Philares = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const SelectAmount_1 = require("../../inputs/SelectAmount");
 const AndOptions_1 = require("../../inputs/AndOptions");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const BoardType_1 = require("../../boards/BoardType");
 const Resource_1 = require("../../../common/Resource");
 const Options_1 = require("../Options");
-class Philares extends Card_1.Card {
+class Philares extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.PHILARES,
             tags: [Tag_1.Tag.BUILDING],
             startingMegaCredits: 47,
@@ -46,31 +44,38 @@ class Philares extends Card_1.Card {
         let plantsAmount = 0;
         let energyAmount = 0;
         let heatAmount = 0;
-        const selectMegacredit = new SelectAmount_1.SelectAmount('Megacredits', 'Select', (amount) => {
+        const selectMegacredit = new SelectAmount_1.SelectAmount('Megacredits', 'Select', 0, resourceCount)
+            .andThen((amount) => {
             megacreditsAmount = amount;
             return undefined;
-        }, 0, resourceCount);
-        const selectSteel = new SelectAmount_1.SelectAmount('Steel', 'Select', (amount) => {
+        });
+        const selectSteel = new SelectAmount_1.SelectAmount('Steel', 'Select', 0, resourceCount)
+            .andThen((amount) => {
             steelAmount = amount;
             return undefined;
-        }, 0, resourceCount);
-        const selectTitanium = new SelectAmount_1.SelectAmount('Titanium', 'Select', (amount) => {
+        });
+        const selectTitanium = new SelectAmount_1.SelectAmount('Titanium', 'Select', 0, resourceCount)
+            .andThen((amount) => {
             titaniumAmount = amount;
             return undefined;
-        }, 0, resourceCount);
-        const selectPlants = new SelectAmount_1.SelectAmount('Plants', 'Select', (amount) => {
+        });
+        const selectPlants = new SelectAmount_1.SelectAmount('Plants', 'Select', 0, resourceCount)
+            .andThen((amount) => {
             plantsAmount = amount;
             return undefined;
-        }, 0, resourceCount);
-        const selectEnergy = new SelectAmount_1.SelectAmount('Energy', 'Select', (amount) => {
+        });
+        const selectEnergy = new SelectAmount_1.SelectAmount('Energy', 'Select', 0, resourceCount)
+            .andThen((amount) => {
             energyAmount = amount;
             return undefined;
-        }, 0, resourceCount);
-        const selectHeat = new SelectAmount_1.SelectAmount('Heat', 'Select', (amount) => {
+        });
+        const selectHeat = new SelectAmount_1.SelectAmount('Heat', 'Select', 0, resourceCount)
+            .andThen((amount) => {
             heatAmount = amount;
             return undefined;
-        }, 0, resourceCount);
-        const selectResources = new AndOptions_1.AndOptions(() => {
+        });
+        const selectResources = new AndOptions_1.AndOptions(selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat)
+            .andThen(() => {
             if (megacreditsAmount +
                 steelAmount +
                 titaniumAmount +
@@ -79,14 +84,14 @@ class Philares extends Card_1.Card {
                 heatAmount > resourceCount) {
                 throw new Error('Need to select ' + resourceCount + ' resource(s)');
             }
-            philaresPlayer.addResource(Resource_1.Resource.MEGACREDITS, megacreditsAmount, { log: true });
-            philaresPlayer.addResource(Resource_1.Resource.STEEL, steelAmount, { log: true });
-            philaresPlayer.addResource(Resource_1.Resource.TITANIUM, titaniumAmount, { log: true });
-            philaresPlayer.addResource(Resource_1.Resource.PLANTS, plantsAmount, { log: true });
-            philaresPlayer.addResource(Resource_1.Resource.ENERGY, energyAmount, { log: true });
-            philaresPlayer.addResource(Resource_1.Resource.HEAT, heatAmount, { log: true });
+            philaresPlayer.stock.add(Resource_1.Resource.MEGACREDITS, megacreditsAmount, { log: true });
+            philaresPlayer.stock.add(Resource_1.Resource.STEEL, steelAmount, { log: true });
+            philaresPlayer.stock.add(Resource_1.Resource.TITANIUM, titaniumAmount, { log: true });
+            philaresPlayer.stock.add(Resource_1.Resource.PLANTS, plantsAmount, { log: true });
+            philaresPlayer.stock.add(Resource_1.Resource.ENERGY, energyAmount, { log: true });
+            philaresPlayer.stock.add(Resource_1.Resource.HEAT, heatAmount, { log: true });
             return undefined;
-        }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
+        });
         selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';
         return selectResources;
     }

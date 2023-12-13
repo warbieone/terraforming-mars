@@ -2,17 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IntragenSanctuaryHeadquarters = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
-const Card_1 = require("../Card");
 const Options_1 = require("../Options");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
-class IntragenSanctuaryHeadquarters extends Card_1.Card {
+class IntragenSanctuaryHeadquarters extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.INTRAGEN_SANCTUARY_HEADQUARTERS,
             tags: [Tag_1.Tag.ANIMAL, Tag_1.Tag.MOON],
             startingMegaCredits: 38,

@@ -4,7 +4,6 @@ exports.VenusMagnetizer = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
 class VenusMagnetizer extends ActionCard_1.ActionCard {
@@ -18,7 +17,7 @@ class VenusMagnetizer extends ActionCard_1.ActionCard {
                 production: { energy: -1 },
                 global: { venus: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.venus(10)),
+            requirements: { venus: 10 },
             metadata: {
                 cardNumber: '256',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

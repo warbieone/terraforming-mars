@@ -37,25 +37,25 @@ class EnergyMarket extends Card_1.Card {
         return player.canAfford(2) || player.production.energy >= 1;
     }
     getEnergyOption(player, availableMC) {
-        return new SelectAmount_1.SelectAmount('Select amount of energy to gain', 'Gain energy', (amount) => {
-            player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, amount * 2, {
-                afterPay: () => player.addResource(Resource_1.Resource.ENERGY, amount, { log: true }),
-            }));
+        return new SelectAmount_1.SelectAmount('Select amount of energy to gain', 'Gain energy', 1, Math.floor(availableMC / 2))
+            .andThen((amount) => {
+            player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, amount * 2))
+                .andThen(() => player.stock.add(Resource_1.Resource.ENERGY, amount, { log: true }));
             return undefined;
-        }, 1, Math.floor(availableMC / 2));
+        });
     }
     getMegacreditsOption(player) {
         player.production.add(Resource_1.Resource.ENERGY, -1);
-        player.addResource(Resource_1.Resource.MEGACREDITS, 8);
+        player.stock.add(Resource_1.Resource.MEGACREDITS, 8);
         player.game.log('${0} decreased energy production 1 step to gain 8 M€', (b) => b.player(player));
         return undefined;
     }
     action(player) {
         const availableMC = player.spendableMegacredits();
         if (availableMC >= 2 && player.production.energy >= 1) {
-            return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Spend 2X M€ to gain X energy', 'Spend M€', () => {
+            return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Spend 2X M€ to gain X energy', 'Spend M€').andThen(() => {
                 return this.getEnergyOption(player, availableMC);
-            }), new SelectOption_1.SelectOption('Decrease energy production 1 step to gain 8 M€', 'Decrease energy', () => {
+            }), new SelectOption_1.SelectOption('Decrease energy production 1 step to gain 8 M€', 'Decrease energy').andThen(() => {
                 return this.getMegacreditsOption(player);
             }));
         }

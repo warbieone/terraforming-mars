@@ -2,19 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SeptumTribus = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Resource_1 = require("../../../common/Resource");
 const Turmoil_1 = require("../../turmoil/Turmoil");
-class SeptumTribus extends Card_1.Card {
+class SeptumTribus extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.SEPTUM_TRIBUS,
             tags: [Tag_1.Tag.WILD],
             startingMegaCredits: 36,
-            type: CardType_1.CardType.CORPORATION,
             metadata: {
                 cardNumber: 'R15',
                 description: 'You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.',
@@ -35,8 +33,8 @@ class SeptumTribus extends Card_1.Card {
     }
     action(player) {
         const turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);
-        const partiesWithPresence = turmoil.parties.filter((party) => party.delegates.has(player.id));
-        player.addResource(Resource_1.Resource.MEGACREDITS, partiesWithPresence.length * 2, { log: true });
+        const partiesWithPresence = turmoil.parties.filter((party) => party.delegates.has(player));
+        player.stock.add(Resource_1.Resource.MEGACREDITS, partiesWithPresence.length * 2, { log: true });
         return undefined;
     }
 }

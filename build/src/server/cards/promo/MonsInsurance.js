@@ -1,17 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MonsInsurance = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Resource_1 = require("../../../common/Resource");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
-class MonsInsurance extends Card_1.Card {
+class MonsInsurance extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.MONS_INSURANCE,
             startingMegaCredits: 48,
             behavior: {
@@ -49,7 +47,7 @@ class MonsInsurance extends Card_1.Card {
             const retribution = Math.min(player.megaCredits, 2);
             if (claimant)
                 claimant.megaCredits += retribution;
-            player.deductResource(Resource_1.Resource.MEGACREDITS, retribution);
+            player.stock.deduct(Resource_1.Resource.MEGACREDITS, retribution);
             if (retribution > 0) {
                 if (claimant !== undefined) {
                     player.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) => b.player(claimant)

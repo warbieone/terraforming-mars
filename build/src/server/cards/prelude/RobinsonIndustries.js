@@ -1,18 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RobinsonIndustries = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const Resource_1 = require("../../../common/Resource");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-class RobinsonIndustries extends Card_1.Card {
+const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
+const titles_1 = require("../../inputs/titles");
+class RobinsonIndustries extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.ROBINSON_INDUSTRIES,
             tags: [Tag_1.Tag.WILD],
             startingMegaCredits: 40,
@@ -41,10 +41,9 @@ class RobinsonIndustries extends Card_1.Card {
         let minimum = player.production.megacredits;
         let lowest = [];
         Resource_1.ALL_RESOURCES.forEach((resource) => {
-            const option = new SelectOption_1.SelectOption('Increase ' + resource + ' production 1 step', 'Select', () => {
-                player.payMegacreditsDeferred(4, 'Select how to pay for Robinson Industries action.', () => {
-                    player.production.add(resource, 1, { log: true });
-                });
+            const option = new SelectOption_1.SelectOption('Increase ' + resource + ' production 1 step').andThen(() => {
+                player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 4, { title: titles_1.TITLES.payForCardAction(this.name) }))
+                    .andThen(() => player.production.add(resource, 1, { log: true }));
                 return undefined;
             });
             if (player.production[resource] < minimum) {

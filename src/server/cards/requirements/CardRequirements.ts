@@ -89,6 +89,8 @@ export class CardRequirements {
       return new ResourceTypeRequirement({...descriptor, count: descriptor.resourceTypes});
     } else if (descriptor.greeneries !== undefined) {
       return new GreeneriesRequirement({...descriptor, count: descriptor.greeneries});
+    } else if (descriptor.generation !== undefined) {
+      return new GenerationRequirement({...descriptor, count: descriptor.generation});
     } else if (descriptor.cities !== undefined) {
       return new CitiesRequirement({...descriptor, count: descriptor.cities});
     } else if (descriptor.colonies !== undefined) {

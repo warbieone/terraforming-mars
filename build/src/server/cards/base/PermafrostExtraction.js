@@ -4,7 +4,6 @@ exports.PermafrostExtraction = void 0;
 const CardType_1 = require("../../../common/cards/CardType");
 const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class PermafrostExtraction extends Card_1.Card {
     constructor() {
@@ -15,7 +14,7 @@ class PermafrostExtraction extends Card_1.Card {
             behavior: {
                 ocean: {},
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(-8)),
+            requirements: { temperature: -8 },
             metadata: {
                 cardNumber: '191',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

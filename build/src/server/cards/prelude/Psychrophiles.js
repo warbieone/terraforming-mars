@@ -6,7 +6,6 @@ const ActionCard_1 = require("../ActionCard");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class Psychrophiles extends ActionCard_1.ActionCard {
@@ -20,7 +19,7 @@ class Psychrophiles extends ActionCard_1.ActionCard {
             action: {
                 addResources: 1,
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(-20, { max: Options_1.max })),
+            requirements: { temperature: -20, max: Options_1.max },
             metadata: {
                 cardNumber: 'P39',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

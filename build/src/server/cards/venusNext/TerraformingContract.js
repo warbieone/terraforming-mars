@@ -4,7 +4,6 @@ exports.TerraformingContract = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 class TerraformingContract extends Card_1.Card {
@@ -17,7 +16,7 @@ class TerraformingContract extends Card_1.Card {
             behavior: {
                 production: { megacredits: 4 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tr(25)),
+            requirements: { tr: 25 },
             metadata: {
                 cardNumber: '252',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

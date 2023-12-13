@@ -5,7 +5,7 @@ const IMilestone_1 = require("./IMilestone");
 const CardType_1 = require("../../common/cards/CardType");
 class Tycoon extends IMilestone_1.BaseMilestone {
     constructor() {
-        super('Tycoon', 'Have 15 project cards (blue and green cards)', 15);
+        super('Tycoon', 'Have 15 project cards in play (not events.)', 15);
     }
     getScore(player) {
         return player.playedCards

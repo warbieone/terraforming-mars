@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class GeneRepair extends Card_1.Card {
     constructor() {
@@ -18,7 +17,7 @@ class GeneRepair extends Card_1.Card {
             behavior: {
                 production: { megacredits: 2 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 3)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 3 },
             metadata: {
                 cardNumber: '091',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => b.production((pb) => pb.megacredits(2))),

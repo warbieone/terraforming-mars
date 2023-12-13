@@ -30,11 +30,12 @@ class PowerInfrastructure extends Card_1.Card {
         return player.energy > 0;
     }
     action(player) {
-        return new SelectAmount_1.SelectAmount('Select amount of energy to spend', 'Spend energy', (amount) => {
-            player.deductResource(Resource_1.Resource.ENERGY, amount);
-            player.addResource(Resource_1.Resource.MEGACREDITS, amount, { log: true });
+        return new SelectAmount_1.SelectAmount('Select amount of energy to spend', 'Spend energy', 1, player.energy)
+            .andThen((amount) => {
+            player.stock.deduct(Resource_1.Resource.ENERGY, amount);
+            player.stock.add(Resource_1.Resource.MEGACREDITS, amount, { log: true });
             return undefined;
-        }, 1, player.energy);
+        });
     }
 }
 exports.PowerInfrastructure = PowerInfrastructure;

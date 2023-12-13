@@ -7,7 +7,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
 const CardResource_1 = require("../../../common/CardResource");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Size_1 = require("../../../common/cards/render/Size");
 const ActionCard_1 = require("../ActionCard");
 class CopernicusTower extends ActionCard_1.ActionCard {
@@ -18,7 +17,7 @@ class CopernicusTower extends ActionCard_1.ActionCard {
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.MOON],
             cost: 36,
             resourceType: CardResource_1.CardResource.SCIENCE,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.production(Resource_1.Resource.TITANIUM, 2)),
+            requirements: { production: Resource_1.Resource.TITANIUM, count: 2 },
             victoryPoints: { tag: Tag_1.Tag.MOON },
             action: {
                 or: {

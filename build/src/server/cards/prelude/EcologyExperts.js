@@ -24,7 +24,7 @@ class EcologyExperts extends PreludeCard_1.PreludeCard {
             },
         });
     }
-    getRequirementBonus(player) {
+    getGlobalParameterRequirementBonus(player) {
         if (player.lastCardPlayed === this.name) {
             return 50;
         }

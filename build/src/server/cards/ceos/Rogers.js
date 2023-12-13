@@ -16,7 +16,7 @@ class Rogers extends CeoCard_1.CeoCard {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
                     b.br;
-                    b.venus(1).colon().projectRequirements();
+                    b.venus(1, { played: Options_1.played }).colon().projectRequirements();
                     b.br;
                     b.venus(1, { played: Options_1.played }).colon().megacredits(-3);
                 }),
@@ -30,7 +30,7 @@ class Rogers extends CeoCard_1.CeoCard {
         this.opgActionIsActive = true;
         return undefined;
     }
-    getRequirementBonus(_player, parameter) {
+    getGlobalParameterRequirementBonus(_player, parameter) {
         if (this.opgActionIsActive === false || parameter !== GlobalParameter_1.GlobalParameter.VENUS)
             return 0;
         return 50;

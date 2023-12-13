@@ -7,6 +7,7 @@ const CeoCard_1 = require("./CeoCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
+const titles_1 = require("../../inputs/titles");
 class Lowell extends CeoCard_1.CeoCard {
     constructor() {
         super({
@@ -45,14 +46,15 @@ class Lowell extends CeoCard_1.CeoCard {
             }
             return true;
         });
-        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 8, { title: 'Select how to pay for action' }));
-        return new SelectCard_1.SelectCard('Choose CEO card to play', 'Play', ceosDrawn, (([chosenCeo]) => {
+        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 8, { title: titles_1.TITLES.payForCardAction(this.name) }));
+        return new SelectCard_1.SelectCard('Choose CEO card to play', 'Play', ceosDrawn)
+            .andThen(([chosenCeo]) => {
             ceosDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
             const lowellIndex = player.playedCards.findIndex((c) => c.name === this.name);
             player.playedCards.splice(lowellIndex, 1);
             game.ceoDeck.discard(this);
             return player.playCard(chosenCeo);
-        }));
+        });
     }
 }
 exports.Lowell = Lowell;

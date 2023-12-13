@@ -13,6 +13,7 @@ const constants_1 = require("../../../common/constants");
 const LogHelper_1 = require("../../LogHelper");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const CardRenderer_1 = require("../render/CardRenderer");
+const titles_1 = require("../../inputs/titles");
 class DirectedImpactors extends Card_1.Card {
     constructor() {
         super({
@@ -37,28 +38,28 @@ class DirectedImpactors extends Card_1.Card {
     }
     canAct(player) {
         const cardHasResources = this.resourceCount > 0;
-        const canPayForAsteroid = player.canAfford(6, { titanium: true });
+        const canPayForAsteroid = player.canAfford({ cost: 6, titanium: true });
         if (player.game.getTemperature() === constants_1.MAX_TEMPERATURE && cardHasResources)
             return true;
         if (canPayForAsteroid)
             return true;
-        return player.canAfford(0, { tr: { temperature: 1 } }) && cardHasResources;
+        return player.canAfford({ cost: 0, tr: { temperature: 1 } }) && cardHasResources;
     }
     action(player) {
         const asteroidCards = player.getResourceCards(CardResource_1.CardResource.ASTEROID);
         const opts = [];
-        const addResource = new SelectOption_1.SelectOption('Pay 6 M€ to add 1 asteroid to a card', 'Pay', () => this.addResource(player, asteroidCards));
-        const spendResource = new SelectOption_1.SelectOption('Remove 1 asteroid to raise temperature 1 step', 'Remove asteroid', () => this.spendResource(player));
+        const addResource = new SelectOption_1.SelectOption('Pay 6 M€ to add 1 asteroid to a card', 'Pay').andThen(() => this.addResource(player, asteroidCards));
+        const spendResource = new SelectOption_1.SelectOption('Remove 1 asteroid to raise temperature 1 step', 'Remove asteroid').andThen(() => this.spendResource(player));
         const temperatureIsMaxed = player.game.getTemperature() === constants_1.MAX_TEMPERATURE;
         if (this.resourceCount > 0) {
-            if (!temperatureIsMaxed && player.canAfford(0, { tr: { temperature: 1 } })) {
+            if (!temperatureIsMaxed && player.canAfford({ cost: 0, tr: { temperature: 1 } })) {
                 opts.push(spendResource);
             }
         }
         else {
             return this.addResource(player, asteroidCards);
         }
-        if (player.canAfford(6, { titanium: true })) {
+        if (player.canAfford({ cost: 6, titanium: true })) {
             opts.push(addResource);
         }
         else {
@@ -67,12 +68,13 @@ class DirectedImpactors extends Card_1.Card {
         return new OrOptions_1.OrOptions(...opts);
     }
     addResource(player, asteroidCards) {
-        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 6, { canUseTitanium: true, title: 'Select how to pay for Directed Impactors action' }));
+        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 6, { canUseTitanium: true, title: titles_1.TITLES.payForCardAction(this.name) }));
         if (asteroidCards.length === 1) {
             player.addResourceTo(this, { log: true });
             return undefined;
         }
-        return new SelectCard_1.SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, ([card]) => {
+        return new SelectCard_1.SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards)
+            .andThen(([card]) => {
             player.addResourceTo(card, { log: true });
             return undefined;
         });

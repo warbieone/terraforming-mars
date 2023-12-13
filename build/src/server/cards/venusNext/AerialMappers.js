@@ -31,7 +31,7 @@ class AerialMappers extends ActionCard_1.ActionCard {
                                 type: CardResource_1.CardResource.FLOATER,
                                 count: 1,
                             },
-                            title: 'Add 1 floater to this card',
+                            title: 'Add 1 floater to ANY card',
                         },
                     ],
                 },

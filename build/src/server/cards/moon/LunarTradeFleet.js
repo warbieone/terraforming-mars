@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 class LunarTradeFleet extends Card_1.Card {
     constructor() {
@@ -19,7 +18,7 @@ class LunarTradeFleet extends Card_1.Card {
                 production: { megacredits: 1 },
                 moon: { logisticsRate: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.production(Resource_1.Resource.TITANIUM, 2)),
+            requirements: { production: Resource_1.Resource.TITANIUM, count: 2 },
             metadata: {
                 description: 'Requires that you have 2 titanium production. ' +
                     'Increase your M€ production 1 step. Raise the logistic rate 1 step.',

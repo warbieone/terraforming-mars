@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Milestones = exports.ALL_MILESTONES = exports.VASTITAS_BOREALIS_MILESTONES = exports.TERRA_CIMMERIA_MILESTONES = exports.ARABIA_TERRA_MILESTONES = exports.AMAZONIS_PLANITIA_MILESTONES = exports.MOON_MILESTONES = exports.ARES_MILESTONES = exports.HELLAS_MILESTONES = exports.ELYSIUM_MILESTONES = exports.VENUS_MILESTONES = exports.THARSIS_MILESTONES = void 0;
+exports.Milestones = exports.ALL_MILESTONES = exports.UNDERWORLD_MILESTONES = exports.VASTITAS_BOREALIS_MILESTONES = exports.TERRA_CIMMERIA_MILESTONES = exports.ARABIA_TERRA_MILESTONES = exports.AMAZONIS_PLANITIA_MILESTONES = exports.MOON_MILESTONES = exports.ARES_MILESTONES = exports.HELLAS_MILESTONES = exports.ELYSIUM_MILESTONES = exports.VENUS_MILESTONES = exports.THARSIS_MILESTONES = void 0;
 const Terraformer_1 = require("./Terraformer");
 const Mayor_1 = require("./Mayor");
 const Gardener_1 = require("./Gardener");
@@ -24,7 +24,6 @@ const Economizer_1 = require("./Economizer");
 const Pioneer_1 = require("./Pioneer");
 const LandSpecialist_1 = require("./LandSpecialist");
 const Martian_1 = require("./Martian");
-const Businessperson_1 = require("./Businessperson");
 const Capitalist_1 = require("./Capitalist");
 const Electrician_1 = require("./Electrician");
 const Irrigator_1 = require("./Irrigator");
@@ -40,6 +39,8 @@ const Firestarter_1 = require("./terraCimmeria/Firestarter");
 const Gambler_1 = require("./terraCimmeria/Gambler");
 const Spacefarer_1 = require("./terraCimmeria/Spacefarer");
 const TerraPioneer_1 = require("./terraCimmeria/TerraPioneer");
+const Risktaker_1 = require("./underworld/Risktaker");
+const Tunneler_1 = require("./underworld/Tunneler");
 exports.THARSIS_MILESTONES = [
     new Terraformer_1.Terraformer(),
     new Mayor_1.Mayor(),
@@ -83,7 +84,6 @@ exports.ARABIA_TERRA_MILESTONES = [
     new Pioneer_1.Pioneer(),
     new LandSpecialist_1.LandSpecialist(),
     new Martian_1.Martian(),
-    new Businessperson_1.Businessperson(),
 ];
 exports.TERRA_CIMMERIA_MILESTONES = [
     new Collector_1.Collector(),
@@ -99,6 +99,10 @@ exports.VASTITAS_BOREALIS_MILESTONES = [
     new Irrigator_1.Irrigator(),
     new Capitalist_1.Capitalist(),
 ];
+exports.UNDERWORLD_MILESTONES = [
+    new Risktaker_1.Risktaker(),
+    new Tunneler_1.Tunneler(),
+];
 exports.ALL_MILESTONES = [
     ...exports.THARSIS_MILESTONES,
     ...exports.ELYSIUM_MILESTONES,
@@ -110,6 +114,7 @@ exports.ALL_MILESTONES = [
     ...exports.ARABIA_TERRA_MILESTONES,
     ...exports.TERRA_CIMMERIA_MILESTONES,
     ...exports.VASTITAS_BOREALIS_MILESTONES,
+    ...exports.UNDERWORLD_MILESTONES,
 ];
 var Milestones;
 (function (Milestones) {

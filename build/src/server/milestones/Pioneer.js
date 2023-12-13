@@ -4,7 +4,7 @@ exports.Pioneer = void 0;
 const IMilestone_1 = require("./IMilestone");
 class Pioneer extends IMilestone_1.BaseMilestone {
     constructor() {
-        super('Pioneer', 'Have built 3 colonies', 3);
+        super('Pioneer', 'Have 3 colonies', 3);
     }
     getScore(player) {
         return player.getColoniesCount();

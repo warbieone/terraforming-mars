@@ -1,18 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Aurorai = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
-class Aurorai extends Card_1.Card {
+class Aurorai extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.AURORAI,
             tags: [Tag_1.Tag.MARS],
             startingMegaCredits: 33,

@@ -48,7 +48,8 @@ class ProjectInspection extends Card_1.Card {
         if (actionCards.length === 0) {
             return undefined;
         }
-        return new SelectCard_1.SelectCard('Perform an action from a played card again', 'Take action', actionCards, ([card]) => {
+        return new SelectCard_1.SelectCard('Perform an action from a played card again', 'Take action', actionCards)
+            .andThen(([card]) => {
             const foundCard = card;
             player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
             return foundCard.action(player);

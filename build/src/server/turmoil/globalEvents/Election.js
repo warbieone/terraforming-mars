@@ -10,8 +10,8 @@ const CardRenderer_1 = require("../../cards/render/CardRenderer");
 const Options_1 = require("../../cards/Options");
 const Size_1 = require("../../../common/cards/render/Size");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.influence({ size: Size_1.Size.SMALL }).plus().building(1, { played: Options_1.played, size: Size_1.Size.SMALL }).plus().city({ size: Size_1.Size.SMALL }).colon();
-    b.text('1st:', Size_1.Size.SMALL).tr(2, { size: Size_1.Size.TINY, digit: true }).text('2nd:', Size_1.Size.SMALL).tr(1, { size: Size_1.Size.TINY });
+    b.influence().plus().building(1, { played: Options_1.played, size: Size_1.Size.SMALL }).plus().city({ size: Size_1.Size.MEDIUM }).colon().br;
+    b.text('1st:', Size_1.Size.SMALL).tr(2, { size: Size_1.Size.TINY }).nbsp.text('2nd:', Size_1.Size.SMALL).tr(1, { size: Size_1.Size.TINY });
 });
 class Election extends GlobalEvent_1.GlobalEvent {
     constructor() {

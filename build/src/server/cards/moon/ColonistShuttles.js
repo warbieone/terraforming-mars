@@ -4,7 +4,6 @@ exports.ColonistShuttles = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
-const TileType_1 = require("../../../common/TileType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const Size_1 = require("../../../common/cards/render/Size");
@@ -29,7 +28,6 @@ class ColonistShuttles extends Card_1.Card {
                     b.megacredits(2).slash().moonHabitat({ size: Size_1.Size.SMALL, all: Options_1.all });
                 }),
             },
-            tilesBuilt: [TileType_1.TileType.MOON_HABITAT],
         });
     }
 }

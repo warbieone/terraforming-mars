@@ -24,7 +24,7 @@ class AsteroidMining extends GlobalEvent_1.GlobalEvent {
     }
     resolve(game, turmoil) {
         game.getPlayersInGenerationOrder().forEach((player) => {
-            player.addResource(Resource_1.Resource.TITANIUM, Math.min(5, player.tags.count(Tag_1.Tag.JOVIAN, 'raw')) + turmoil.getPlayerInfluence(player), { log: true, from: this.name });
+            player.stock.add(Resource_1.Resource.TITANIUM, Math.min(5, player.tags.count(Tag_1.Tag.JOVIAN, 'raw')) + turmoil.getPlayerInfluence(player), { log: true, from: this.name });
         });
     }
 }

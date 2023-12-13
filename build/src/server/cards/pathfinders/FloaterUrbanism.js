@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const SelectCard_1 = require("../../inputs/SelectCard");
 class FloaterUrbanism extends Card_1.Card {
     constructor() {
@@ -17,7 +16,7 @@ class FloaterUrbanism extends Card_1.Card {
             cost: 7,
             tags: [Tag_1.Tag.VENUS],
             resourceType: CardResource_1.CardResource.VENUSIAN_HABITAT,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.VENUS, 4)),
+            requirements: { tag: Tag_1.Tag.VENUS, count: 4 },
             victoryPoints: { resourcesHere: {} },
             metadata: {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -35,8 +34,9 @@ class FloaterUrbanism extends Card_1.Card {
     }
     action(player) {
         const cards = player.getCardsWithResources(CardResource_1.CardResource.FLOATER);
-        const input = new SelectCard_1.SelectCard('Choose a card to move a floater to a Venusian habitat.', 'Choose', cards, (selected) => {
-            player.removeResourceFrom(selected[0], 1);
+        const input = new SelectCard_1.SelectCard('Choose a card to move a floater to a Venusian habitat.', 'Choose', cards)
+            .andThen(([card]) => {
+            player.removeResourceFrom(card, 1);
             player.addResourceTo(this, { log: true });
             return undefined;
         });

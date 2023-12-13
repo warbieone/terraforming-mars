@@ -18,7 +18,7 @@ class MagneticFieldGeneratorsPromo extends Card_1.Card {
             }).br;
             b.tr(3, { digit: Options_1.digit }).tile(TileType_1.TileType.MAGNETIC_FIELD_GENERATORS, true).asterix();
         }),
-        description: 'Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.',
+        description: 'Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.',
     }) {
         super({
             type: CardType_1.CardType.AUTOMATED,

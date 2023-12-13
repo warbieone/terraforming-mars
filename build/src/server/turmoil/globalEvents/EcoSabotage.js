@@ -25,7 +25,7 @@ class EcoSabotage extends GlobalEvent_1.GlobalEvent {
             const plants = player.plants;
             const maxPlants = 3 + turmoil.getPlayerInfluence(player);
             const plantDecrease = Math.max(0, plants - maxPlants);
-            player.deductResource(Resource_1.Resource.PLANTS, plantDecrease, { log: true, from: this.name });
+            player.stock.deduct(Resource_1.Resource.PLANTS, plantDecrease, { log: true, from: this.name });
         });
     }
 }

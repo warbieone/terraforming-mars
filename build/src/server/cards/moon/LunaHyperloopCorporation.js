@@ -2,15 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LunaHyperloopCorporation = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const Options_1 = require("../Options");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const ActionCard_1 = require("../ActionCard");
-class LunaHyperloopCorporation extends ActionCard_1.ActionCard {
+const CorporationCard_1 = require("../corporation/CorporationCard");
+class LunaHyperloopCorporation extends CorporationCard_1.ActiveCorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.LUNA_HYPERLOOP_CORPORATION,
             tags: [Tag_1.Tag.MOON, Tag_1.Tag.BUILDING],
             startingMegaCredits: 38,

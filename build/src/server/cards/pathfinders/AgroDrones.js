@@ -6,8 +6,9 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Resource_1 = require("../../../common/Resource");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Tag_1 = require("../../../common/cards/Tag");
+const Units_1 = require("../../../common/Units");
+const PathfindersExpansion_1 = require("../../pathfinders/PathfindersExpansion");
 class AgroDrones extends Card_1.Card {
     constructor() {
         super({
@@ -15,7 +16,7 @@ class AgroDrones extends Card_1.Card {
             name: CardName_1.CardName.AGRO_DRONES,
             cost: 14,
             tags: [Tag_1.Tag.PLANT, Tag_1.Tag.MARS],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(-18)),
+            requirements: { temperature: -18 },
             metadata: {
                 cardNumber: 'Pf04',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -31,10 +32,10 @@ class AgroDrones extends Card_1.Card {
         return player.steel > 0 && player.energy > 0;
     }
     action(player) {
-        player.deductResource(Resource_1.Resource.STEEL, 1);
-        player.deductResource(Resource_1.Resource.ENERGY, 1);
-        player.addResource(Resource_1.Resource.PLANTS, 3);
+        player.stock.deductUnits(Units_1.Units.of({ steel: 1, energy: 1 }));
+        player.stock.add(Resource_1.Resource.PLANTS, 3);
         player.game.log('${0} spent 1 steel and 1 energy to gain 3 plants.', (b) => b.player(player));
+        PathfindersExpansion_1.PathfindersExpansion.addToSolBank(player);
         return undefined;
     }
 }

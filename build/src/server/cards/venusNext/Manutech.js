@@ -1,18 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Manutech = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
-class Manutech extends Card_1.Card {
+class Manutech extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.MANUTECH,
             tags: [Tag_1.Tag.BUILDING],
             startingMegaCredits: 35,
-            type: CardType_1.CardType.CORPORATION,
             behavior: {
                 production: { steel: 1 },
             },
@@ -33,7 +31,7 @@ class Manutech extends Card_1.Card {
     }
     static onProductionGain(player, resource, amount) {
         if (amount > 0) {
-            player.addResource(resource, amount);
+            player.stock.add(resource, amount);
         }
     }
 }

@@ -1,21 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pristar = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const Card_1 = require("../Card");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Turmoil_1 = require("../../../server/turmoil/Turmoil");
 const Resource_1 = require("../../../common/Resource");
-class Pristar extends Card_1.Card {
+class Pristar extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.PRISTAR,
             startingMegaCredits: 53,
             resourceType: CardResource_1.CardResource.PRESERVATION,
-            type: CardType_1.CardType.CORPORATION,
             victoryPoints: { resourcesHere: {} },
             metadata: {
                 cardNumber: 'R07',
@@ -32,14 +30,22 @@ class Pristar extends Card_1.Card {
             },
         });
         this.hasReceivedInfluenceBonus = false;
+        this.data = {
+            lastGenerationIncreasedTR: -1,
+        };
     }
     bespokePlay(player) {
         player.decreaseTerraformRating(2);
         return undefined;
     }
+    onIncreaseTerraformRating(player, cardOwner) {
+        if (player === cardOwner) {
+            this.data.lastGenerationIncreasedTR = player.game.generation;
+        }
+    }
     onProductionPhase(player) {
-        if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
-            player.addResource(Resource_1.Resource.MEGACREDITS, 6, { log: true, from: this });
+        if (this.data.lastGenerationIncreasedTR !== player.game.generation) {
+            player.stock.add(Resource_1.Resource.MEGACREDITS, 6, { log: true, from: this });
             player.addResourceTo(this, 1);
             if (!this.hasReceivedInfluenceBonus) {
                 Turmoil_1.Turmoil.ifTurmoil(player.game, (turmoil) => {

@@ -2,17 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Vitor = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Resource_1 = require("../../../common/Resource");
-class Vitor extends Card_1.Card {
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
+class Vitor extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.VITOR,
             tags: [Tag_1.Tag.EARTH],
             startingMegaCredits: 54,
@@ -33,7 +32,7 @@ class Vitor extends Card_1.Card {
         });
     }
     selectAwardToFund(player, award) {
-        return new SelectOption_1.SelectOption('Fund ' + award.name + ' award', 'Confirm', () => {
+        return new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Fund ${0} award', (b) => b.award(award))).andThen(() => {
             player.game.fundAward(player, award);
             return undefined;
         });
@@ -64,7 +63,7 @@ class Vitor extends Card_1.Card {
             if (victoryPoints.points <= 0)
                 return;
         }
-        player.addResource(Resource_1.Resource.MEGACREDITS, 2, { log: true, from: this });
+        player.stock.add(Resource_1.Resource.MEGACREDITS, 2, { log: true, from: this });
     }
 }
 exports.Vitor = Vitor;

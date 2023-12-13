@@ -51,10 +51,8 @@ class MinorityRefuge extends Card_1.Card {
         player.game.defer(new BuildColony_1.BuildColony(player, {
             title: 'Select colony for Minority Refuge',
             colonies: openColonies,
-            cb: () => {
-                player.production.add(Resource_1.Resource.MEGACREDITS, -2);
-            },
-        }));
+        }))
+            .andThen(() => player.production.add(Resource_1.Resource.MEGACREDITS, -2));
         return undefined;
     }
 }

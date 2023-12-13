@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardResource_1 = require("../../../common/CardResource");
 const Options_1 = require("../Options");
 class EarlyExpedition extends Card_1.Card {
@@ -16,7 +15,7 @@ class EarlyExpedition extends Card_1.Card {
             name: CardName_1.CardName.EARLY_EXPEDITION,
             cost: 15,
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.SPACE, Tag_1.Tag.CITY],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(-18, { max: Options_1.max })),
+            requirements: { temperature: -18, max: Options_1.max },
             behavior: {
                 production: { energy: -1, megacredits: 3 },
                 addResourcesToAnyCard: { type: CardResource_1.CardResource.DATA, count: 1 },

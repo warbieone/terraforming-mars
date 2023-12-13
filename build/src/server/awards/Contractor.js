@@ -5,7 +5,7 @@ const Tag_1 = require("../../common/cards/Tag");
 class Contractor {
     constructor() {
         this.name = 'Contractor';
-        this.description = 'Have the most building tags';
+        this.description = 'Have the most building tags in play';
     }
     getScore(player) {
         return player.tags.count(Tag_1.Tag.BUILDING, 'award');

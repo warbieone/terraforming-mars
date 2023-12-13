@@ -38,7 +38,7 @@ class SmallDutyRovers extends Card_1.Card {
     bespokePlay(player) {
         const moonData = MoonExpansion_1.MoonExpansion.moonData(player.game);
         const gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType_1.SpaceType.COLONY).length;
-        player.addResource(Resource_1.Resource.MEGACREDITS, gain, { log: true });
+        player.stock.add(Resource_1.Resource.MEGACREDITS, gain, { log: true });
         return undefined;
     }
 }

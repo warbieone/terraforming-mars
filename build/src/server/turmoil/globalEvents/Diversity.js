@@ -8,7 +8,7 @@ const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../../cards/render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.vSpace(Size_1.Size.MEDIUM).br.text('9').diverseTag(1).influence({ size: Size_1.Size.SMALL }).colon().megacredits(10);
+    b.text('9').diverseTag(1).influence({ size: Size_1.Size.SMALL }).colon().megacredits(10);
 });
 class Diversity extends GlobalEvent_1.GlobalEvent {
     constructor() {
@@ -23,7 +23,7 @@ class Diversity extends GlobalEvent_1.GlobalEvent {
     resolve(game, turmoil) {
         game.getPlayersInGenerationOrder().forEach((player) => {
             if (player.tags.distinctCount('globalEvent') + turmoil.getPlayerInfluence(player) >= 9) {
-                player.addResource(Resource_1.Resource.MEGACREDITS, 10, { log: true, from: this.name });
+                player.stock.add(Resource_1.Resource.MEGACREDITS, 10, { log: true, from: this.name });
             }
         });
     }

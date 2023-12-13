@@ -11,13 +11,14 @@ const CardName_1 = require("../../../common/cards/CardName");
 const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class LocalHeatTrapping extends Card_1.Card {
     constructor() {
         super({
             type: CardType_1.CardType.EVENT,
             name: CardName_1.CardName.LOCAL_HEAT_TRAPPING,
             cost: 1,
-            reserveUnits: { heat: 5, deduct: false },
+            reserveUnits: { heat: 5 },
             metadata: {
                 cardNumber: '190',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -29,25 +30,45 @@ class LocalHeatTrapping extends Card_1.Card {
             },
         });
     }
-    bespokePlay(player) {
-        const animalCards = player.getResourceCards(CardResource_1.CardResource.ANIMAL);
+    canPlay(player) {
+        var _a, _b;
+        const cardCost = player.getCardCost(this);
+        let heat = player.heat;
+        let floaters = (_b = (_a = player.getCorporation(CardName_1.CardName.STORMCRAFT_INCORPORATED)) === null || _a === void 0 ? void 0 : _a.resourceCount) !== null && _b !== void 0 ? _b : 0;
+        if (cardCost === 1 && player.megaCredits === 0) {
+            if (heat > 0) {
+                heat--;
+            }
+            else if (floaters > 0) {
+                floaters--;
+            }
+            else {
+                return false;
+            }
+        }
+        const availableHeat = heat + (floaters * 2);
+        return availableHeat >= 5;
+    }
+    play(player) {
         const availableActions = new OrOptions_1.OrOptions();
-        const gain4Plants = function () {
-            player.addResource(Resource_1.Resource.PLANTS, 4, { log: true });
+        const animalCards = player.getResourceCards(CardResource_1.CardResource.ANIMAL);
+        const gainPlantsOption = new SelectOption_1.SelectOption('Gain 4 plants', 'Gain plants').andThen(() => {
+            player.stock.add(Resource_1.Resource.PLANTS, 4, { log: true });
             return undefined;
-        };
+        });
         if (animalCards.length === 0) {
-            availableActions.options.push(new SelectOption_1.SelectOption('Gain 4 plants', 'Gain plants', gain4Plants));
+            availableActions.options.push(gainPlantsOption);
         }
         else if (animalCards.length === 1) {
             const targetCard = animalCards[0];
-            availableActions.options.push(new SelectOption_1.SelectOption('Gain 4 plants', 'Gain plants', gain4Plants), new SelectOption_1.SelectOption('Add 2 animals to ' + targetCard.name, 'Add animals', () => {
+            availableActions.options.push(gainPlantsOption, new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Add ${0} animals to ${1}', (b) => b.number(2).card(targetCard)), 'Add animals').andThen(() => {
                 player.addResourceTo(targetCard, { qty: 2, log: true });
                 return undefined;
             }));
         }
         else {
-            availableActions.options.push(new SelectOption_1.SelectOption('Gain 4 plants', 'Gain plants', gain4Plants), new SelectCard_1.SelectCard('Select card to add 2 animals', 'Add animals', animalCards, ([card]) => {
+            availableActions.options.push(gainPlantsOption, new SelectCard_1.SelectCard('Select card to add 2 animals', 'Add animals', animalCards)
+                .andThen(([card]) => {
                 player.addResourceTo(card, { qty: 2, log: true });
                 return undefined;
             }));

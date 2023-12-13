@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardResource_1 = require("../../../common/CardResource");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 class UrbanDecomposers extends Card_1.Card {
@@ -19,7 +18,7 @@ class UrbanDecomposers extends Card_1.Card {
                 production: { plants: 1 },
                 addResourcesToAnyCard: { count: 2, type: CardResource_1.CardResource.MICROBE },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.colonies().cities()),
+            requirements: [{ colonies: 1 }, { cities: 1 }],
             metadata: {
                 cardNumber: 'C48',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -34,7 +33,7 @@ class UrbanDecomposers extends Card_1.Card {
         player.game.colonies.forEach((colony) => {
             coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
         });
-        return coloniesCount > 0 && player.game.getCitiesCount(player) > 0;
+        return coloniesCount > 0 && player.game.board.getCities(player).length > 0;
     }
 }
 exports.UrbanDecomposers = UrbanDecomposers;

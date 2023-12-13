@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
@@ -16,7 +15,7 @@ class QuantumCommunications extends Card_1.Card {
             cost: 8,
             name: CardName_1.CardName.QUANTUM_COMMUNICATIONS,
             type: CardType_1.CardType.AUTOMATED,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 4)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 4 },
             victoryPoints: 1,
             metadata: {
                 cardNumber: '079',

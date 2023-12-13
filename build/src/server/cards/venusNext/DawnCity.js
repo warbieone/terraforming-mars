@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const SpaceName_1 = require("../../SpaceName");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 class DawnCity extends Card_1.Card {
@@ -15,7 +14,7 @@ class DawnCity extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             tags: [Tag_1.Tag.CITY, Tag_1.Tag.SPACE],
             cost: 15,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 4)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 4 },
             victoryPoints: 3,
             behavior: {
                 production: { energy: -1, titanium: 1 },

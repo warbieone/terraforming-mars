@@ -6,7 +6,6 @@ const ActionCard_1 = require("../ActionCard");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class Livestock extends ActionCard_1.ActionCard {
     constructor() {
@@ -17,7 +16,7 @@ class Livestock extends ActionCard_1.ActionCard {
             cost: 13,
             resourceType: CardResource_1.CardResource.ANIMAL,
             victoryPoints: { resourcesHere: {} },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(9)),
+            requirements: { oxygen: 9 },
             behavior: {
                 production: { plants: -1, megacredits: 2 },
             },

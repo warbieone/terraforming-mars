@@ -18,15 +18,16 @@ class SellSteel extends DeferredAction_1.DeferredAction {
             this.logSale(0);
             return undefined;
         }
-        return new SelectAmount_1.SelectAmount('Select a number of units of steel to sell', 'Sell steel', (unitsSold) => {
+        return new SelectAmount_1.SelectAmount('Select a number of units of steel to sell', 'Sell steel', 0, unitsAvailable)
+            .andThen((unitsSold) => {
             if (unitsSold > 0) {
                 const cashEarned = unitsSold * 3;
-                this.player.addResource(Resource_1.Resource.MEGACREDITS, cashEarned);
-                this.player.deductResource(Resource_1.Resource.STEEL, unitsSold);
+                this.player.stock.add(Resource_1.Resource.MEGACREDITS, cashEarned);
+                this.player.stock.deduct(Resource_1.Resource.STEEL, unitsSold);
             }
             this.logSale(unitsSold);
             return undefined;
-        }, 0, unitsAvailable);
+        });
     }
 }
 exports.SellSteel = SellSteel;

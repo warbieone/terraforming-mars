@@ -1,8 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BoardBuilder = void 0;
+const Space_1 = require("./Space");
 const SpaceName_1 = require("../SpaceName");
 const SpaceType_1 = require("../../common/boards/SpaceType");
+function colonySpace(id) {
+    return (0, Space_1.newSpace)(id, SpaceType_1.SpaceType.COLONY, -1, -1, []);
+}
 class BoardBuilder {
     constructor(includeVenus, includePathfinders) {
         this.includeVenus = includeVenus;
@@ -11,8 +15,8 @@ class BoardBuilder {
         this.bonuses = [];
         this.spaces = [];
         this.unshufflableSpaces = [];
-        this.spaces.push(Space.colony(SpaceName_1.SpaceName.GANYMEDE_COLONY));
-        this.spaces.push(Space.colony(SpaceName_1.SpaceName.PHOBOS_SPACE_HAVEN));
+        this.spaces.push(colonySpace(SpaceName_1.SpaceName.GANYMEDE_COLONY));
+        this.spaces.push(colonySpace(SpaceName_1.SpaceName.PHOBOS_SPACE_HAVEN));
     }
     ocean(...bonus) {
         this.spaceTypes.push(SpaceType_1.SpaceType.OCEAN);
@@ -29,6 +33,11 @@ class BoardBuilder {
         this.bonuses.push(bonus);
         return this;
     }
+    restricted() {
+        this.spaceTypes.push(SpaceType_1.SpaceType.RESTRICTED);
+        this.bonuses.push([]);
+        return this;
+    }
     doNotShuffleLastSpace() {
         this.unshufflableSpaces.push(this.spaceTypes.length - 1);
         return this;
@@ -43,17 +52,17 @@ class BoardBuilder {
             for (let i = 0; i < tilesInThisRow; i++) {
                 const spaceId = idx + idOffset;
                 const xCoordinate = xOffset + i;
-                const space = new Space(BoardBuilder.spaceId(spaceId), this.spaceTypes[idx], this.bonuses[idx], xCoordinate, row);
+                const space = (0, Space_1.newSpace)(BoardBuilder.spaceId(spaceId), this.spaceTypes[idx], xCoordinate, row, this.bonuses[idx]);
                 this.spaces.push(space);
                 idx++;
             }
         }
-        this.spaces.push(Space.colony(SpaceName_1.SpaceName.STANFORD_TORUS));
+        this.spaces.push(colonySpace(SpaceName_1.SpaceName.STANFORD_TORUS));
         if (this.includeVenus) {
-            this.spaces.push(Space.colony(SpaceName_1.SpaceName.DAWN_CITY), Space.colony(SpaceName_1.SpaceName.LUNA_METROPOLIS), Space.colony(SpaceName_1.SpaceName.MAXWELL_BASE), Space.colony(SpaceName_1.SpaceName.STRATOPOLIS));
+            this.spaces.push(colonySpace(SpaceName_1.SpaceName.DAWN_CITY), colonySpace(SpaceName_1.SpaceName.LUNA_METROPOLIS), colonySpace(SpaceName_1.SpaceName.MAXWELL_BASE), colonySpace(SpaceName_1.SpaceName.STRATOPOLIS));
         }
         if (this.includePathfinders) {
-            this.spaces.push(Space.colony(SpaceName_1.SpaceName.CERES_SPACEPORT), Space.colony(SpaceName_1.SpaceName.DYSON_SCREENS), Space.colony(SpaceName_1.SpaceName.LUNAR_EMBASSY), Space.colony(SpaceName_1.SpaceName.VENERA_BASE));
+            this.spaces.push(colonySpace(SpaceName_1.SpaceName.CERES_SPACEPORT), colonySpace(SpaceName_1.SpaceName.DYSON_SCREENS), colonySpace(SpaceName_1.SpaceName.LUNAR_EMBASSY), colonySpace(SpaceName_1.SpaceName.VENERA_BASE));
         }
         return this.spaces;
     }
@@ -97,22 +106,4 @@ class BoardBuilder {
     }
 }
 exports.BoardBuilder = BoardBuilder;
-class Space {
-    constructor(id, spaceType, bonus, x, y) {
-        this.id = id;
-        this.spaceType = spaceType;
-        this.bonus = bonus;
-        this.x = x;
-        this.y = y;
-    }
-    static colony(id) {
-        return new Space(id, SpaceType_1.SpaceType.COLONY, [], -1, -1);
-    }
-    static land(id, x, y, bonus = []) {
-        return new Space(id, SpaceType_1.SpaceType.LAND, bonus, x, y);
-    }
-    static ocean(id, x, y, bonus = []) {
-        return new Space(id, SpaceType_1.SpaceType.OCEAN, bonus, x, y);
-    }
-}
 //# sourceMappingURL=BoardBuilder.js.map

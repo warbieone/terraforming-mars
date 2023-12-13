@@ -17,13 +17,15 @@ const fs = require("fs");
 const raw_settings = require("../genfiles/settings.json");
 const prometheus = require("prom-client");
 const Database_1 = require("./database/Database");
-const server_ids_1 = require("./server-ids");
+const server_ids_1 = require("./utils/server-ids");
 const Route_1 = require("./routes/Route");
-const requestProcessor_1 = require("./requestProcessor");
+const requestProcessor_1 = require("./server/requestProcessor");
 const timer_1 = require("./utils/timer");
 const BehaviorExecutor_1 = require("./behavior/BehaviorExecutor");
 const Executor_1 = require("./behavior/Executor");
 const GameLoader_1 = require("./database/GameLoader");
+const AllCards_1 = require("./cards/AllCards");
+const GlobalEventDealer_1 = require("./turmoil/globalEvents/GlobalEventDealer");
 process.on('uncaughtException', (err) => {
     console.error('UNCAUGHT EXCEPTION', err);
 });
@@ -75,6 +77,7 @@ function start() {
             app: 'terraforming-mars-app',
         });
         prometheus.collectDefaultMetrics();
+        (0, GlobalEventDealer_1.initializeGlobalEventDealer)(AllCards_1.ALL_MODULE_MANIFESTS);
         (0, BehaviorExecutor_1.registerBehaviorExecutor)(new Executor_1.Executor());
         const server = createServer();
         yield (0, timer_1.timeAsync)(Database_1.Database.getInstance().initialize())
@@ -97,6 +100,7 @@ function start() {
             console.log(`The secret serverId for this server is \x1b[1m${server_ids_1.serverId}\x1b[0m.`);
             console.log(`Administrative routes can be found at admin?serverId=${server_ids_1.serverId}`);
         }
+        console.log(`The public run ID is ${server_ids_1.runId}`);
         console.log('Server is ready.');
     });
 }

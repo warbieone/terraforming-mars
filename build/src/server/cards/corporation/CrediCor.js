@@ -1,15 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CrediCor = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("./CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Resource_1 = require("../../../common/Resource");
-class CrediCor extends Card_1.Card {
+class CrediCor extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.CREDICOR,
             startingMegaCredits: 57,
             metadata: {
@@ -29,7 +27,7 @@ class CrediCor extends Card_1.Card {
     }
     effect(player, card) {
         if (player.isCorporation(this.name) && card.cost >= 20) {
-            player.addResource(Resource_1.Resource.MEGACREDITS, 4, { log: true });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, 4, { log: true });
         }
     }
     onCardPlayed(player, card) {

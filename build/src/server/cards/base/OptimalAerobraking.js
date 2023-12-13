@@ -25,8 +25,8 @@ class OptimalAerobraking extends Card_1.Card {
     }
     onCardPlayed(player, card) {
         if (card.type === CardType_1.CardType.EVENT && card.tags.includes(Tag_1.Tag.SPACE)) {
-            player.addResource(Resource_1.Resource.MEGACREDITS, 3, { log: true, from: this });
-            player.addResource(Resource_1.Resource.HEAT, 3, { log: true, from: this });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, 3, { log: true, from: this });
+            player.stock.add(Resource_1.Resource.HEAT, 3, { log: true, from: this });
         }
     }
 }

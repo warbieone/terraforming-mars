@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const SpaceBonus_1 = require("../../../common/boards/SpaceBonus");
 const Resource_1 = require("../../../common/Resource");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const SurveyCard_1 = require("./SurveyCard");
 const Options_1 = require("../Options");
@@ -17,7 +16,7 @@ class GeologicalSurvey extends SurveyCard_1.SurveyCard {
             name: CardName_1.CardName.GEOLOGICAL_SURVEY,
             tags: [Tag_1.Tag.SCIENCE],
             cost: 8,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.greeneries(5, { all: Options_1.all, max: Options_1.max })),
+            requirements: { greeneries: 5, all: Options_1.all, max: Options_1.max },
             metadata: {
                 cardNumber: 'A09',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

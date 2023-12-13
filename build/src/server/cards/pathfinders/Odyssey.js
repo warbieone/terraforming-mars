@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Odyssey = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
@@ -9,10 +9,9 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const Size_1 = require("../../../common/cards/render/Size");
 const SelectProjectCardToPlay_1 = require("../../inputs/SelectProjectCardToPlay");
-class Odyssey extends Card_1.Card {
+class Odyssey extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.ODYSSEY,
             startingMegaCredits: 33,
             metadata: {
@@ -56,9 +55,10 @@ class Odyssey extends Card_1.Card {
     }
     action(player) {
         const eventCards = this.availableEventCards(player);
-        return new SelectProjectCardToPlay_1.SelectProjectCardToPlay(player, eventCards, {
-            action: 'discard',
-            cb: (card) => player.removedFromPlayCards.push(card),
+        return new SelectProjectCardToPlay_1.SelectProjectCardToPlay(player, eventCards, { action: 'discard' })
+            .andThen((card) => {
+            player.removedFromPlayCards.push(card);
+            return undefined;
         });
     }
 }

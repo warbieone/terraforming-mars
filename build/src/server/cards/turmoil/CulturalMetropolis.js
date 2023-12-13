@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const SendDelegateToArea_1 = require("../../deferredActions/SendDelegateToArea");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Turmoil_1 = require("../../turmoil/Turmoil");
 class CulturalMetropolis extends Card_1.Card {
@@ -21,7 +20,7 @@ class CulturalMetropolis extends Card_1.Card {
                 production: { energy: -1, megacredits: 3 },
                 city: {},
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.UNITY)),
+            requirements: { party: PartyName_1.PartyName.UNITY },
             metadata: {
                 cardNumber: 'T03',
                 description: 'Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.',
@@ -36,7 +35,7 @@ class CulturalMetropolis extends Card_1.Card {
     }
     bespokeCanPlay(player) {
         const turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);
-        return turmoil.getAvailableDelegateCount(player.id) >= 2 && player.game.board.getAvailableSpacesForCity(player).length > 0;
+        return turmoil.getAvailableDelegateCount(player) >= 2 && player.game.board.getAvailableSpacesForCity(player).length > 0;
     }
     bespokePlay(player) {
         player.game.defer(new SendDelegateToArea_1.SendDelegateToArea(player, 'Select where to send two delegates', { count: 2 }));

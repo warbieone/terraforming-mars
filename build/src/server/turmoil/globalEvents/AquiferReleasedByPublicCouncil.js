@@ -23,8 +23,8 @@ class AquiferReleasedByPublicCouncil extends GlobalEvent_1.GlobalEvent {
     resolve(game, turmoil) {
         game.defer(new PlaceOceanTile_1.PlaceOceanTile(game.getPlayersInGenerationOrder()[0], { title: 'Select space for ocean tile for Global Event' }));
         game.getPlayersInGenerationOrder().forEach((player) => {
-            player.addResource(Resource_1.Resource.PLANTS, turmoil.getPlayerInfluence(player), { log: true, from: GlobalEventName_1.GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL });
-            player.addResource(Resource_1.Resource.STEEL, turmoil.getPlayerInfluence(player), { log: true, from: GlobalEventName_1.GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL });
+            player.stock.add(Resource_1.Resource.PLANTS, turmoil.getPlayerInfluence(player), { log: true, from: GlobalEventName_1.GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL });
+            player.stock.add(Resource_1.Resource.STEEL, turmoil.getPlayerInfluence(player), { log: true, from: GlobalEventName_1.GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL });
         });
     }
 }

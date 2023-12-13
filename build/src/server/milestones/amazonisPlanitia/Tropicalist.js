@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Tropicalist = void 0;
-const TileType_1 = require("../../../common/TileType");
+const AresTileType_1 = require("../../../common/AresTileType");
 const IMilestone_1 = require("../IMilestone");
 class Tropicalist extends IMilestone_1.BaseMilestone {
     constructor() {
@@ -12,7 +12,7 @@ class Tropicalist extends IMilestone_1.BaseMilestone {
             .filter((space) => space.player !== undefined &&
             space.player === player &&
             space.tile !== undefined &&
-            (0, TileType_1.isHazardTileType)(space.tile.tileType) === false &&
+            (0, AresTileType_1.isHazardTileType)(space.tile.tileType) === false &&
             space.y >= 3 && space.y <= 5).length;
     }
 }

@@ -7,7 +7,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Resource_1 = require("../../../common/Resource");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class Birds extends ActionCard_1.ActionCard {
@@ -18,7 +17,7 @@ class Birds extends ActionCard_1.ActionCard {
             tags: [Tag_1.Tag.ANIMAL],
             cost: 10,
             resourceType: CardResource_1.CardResource.ANIMAL,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(13)),
+            requirements: { oxygen: 13 },
             victoryPoints: { resourcesHere: {} },
             behavior: {
                 decreaseAnyProduction: { type: Resource_1.Resource.PLANTS, count: 2 },

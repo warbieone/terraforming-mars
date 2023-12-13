@@ -58,7 +58,8 @@ class Route {
     }
     writeJson(res, json, space) {
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(json, undefined, space));
+        const s = JSON.stringify(json, undefined, space);
+        res.end(s);
     }
 }
 exports.Route = Route;

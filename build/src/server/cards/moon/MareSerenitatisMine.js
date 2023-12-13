@@ -31,7 +31,7 @@ class MareSerenitatisMine extends Card_1.Card {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.minus().titanium(2).minus().steel(1).br;
                     b.production((pb) => pb.steel(1).titanium(1)).br;
-                    b.moonMine({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_MINING_RATE }).asterix().nbsp.moonRoad({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_MINING_RATE }).asterix();
+                    b.moonMine({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_MINING_RATE }).asterix().nbsp.moonRoad({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_LOGISTICS_RATE }).asterix();
                 }),
             },
             tilesBuilt: [TileType_1.TileType.MOON_MINE, TileType_1.TileType.MOON_ROAD],

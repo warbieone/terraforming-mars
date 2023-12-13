@@ -115,9 +115,6 @@ class LocalFilesystem {
             return serializedGame.players.length;
         });
     }
-    loadCloneableGame(gameId) {
-        return this.getGameVersion(gameId, 0);
-    }
     getGameIds() {
         const gameIds = [];
         (0, fs_1.readdirSync)(this.dbFolder, { withFileTypes: true }).forEach((dirent) => {

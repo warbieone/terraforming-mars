@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 class AIControlledMineNetwork extends Card_1.Card {
     constructor() {
@@ -17,7 +16,7 @@ class AIControlledMineNetwork extends Card_1.Card {
             behavior: {
                 moon: { logisticsRate: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.logisticRate(2)),
+            requirements: { logisticRate: 2 },
             metadata: {
                 description: 'Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step',
                 cardNumber: 'M32',

@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const SpaceName_1 = require("../../SpaceName");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
 class Stratopolis extends ActionCard_1.ActionCard {
@@ -18,7 +17,7 @@ class Stratopolis extends ActionCard_1.ActionCard {
             cost: 20,
             resourceType: CardResource_1.CardResource.FLOATER,
             victoryPoints: { resourcesHere: {}, per: 2 },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 2)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 2 },
             behavior: {
                 production: { megacredits: 2 },
                 city: { space: SpaceName_1.SpaceName.STRATOPOLIS },

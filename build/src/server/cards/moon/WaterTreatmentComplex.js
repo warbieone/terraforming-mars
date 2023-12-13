@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 const Tag_1 = require("../../../common/cards/Tag");
 class WaterTreatmentComplex extends Card_1.Card {
@@ -15,7 +14,7 @@ class WaterTreatmentComplex extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             tags: [Tag_1.Tag.MOON],
             cost: 12,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.habitatTiles(1, { all: Options_1.all })),
+            requirements: { habitatTiles: 1, all: Options_1.all },
             reserveUnits: { titanium: 1 },
             behavior: {
                 moon: { habitatRate: 2 },

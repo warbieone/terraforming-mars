@@ -5,7 +5,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class OpenCity extends Card_1.Card {
     constructor() {
@@ -14,7 +13,7 @@ class OpenCity extends Card_1.Card {
             name: CardName_1.CardName.OPEN_CITY,
             tags: [Tag_1.Tag.CITY, Tag_1.Tag.BUILDING],
             cost: 23,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(12)),
+            requirements: { oxygen: 12 },
             victoryPoints: 1,
             behavior: {
                 production: { energy: -1, megacredits: 4 },

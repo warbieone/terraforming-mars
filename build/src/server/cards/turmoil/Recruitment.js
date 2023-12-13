@@ -25,7 +25,7 @@ class Recruitment extends Card_1.Card {
     }
     bespokeCanPlay(player) {
         const turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);
-        if (turmoil.hasDelegatesInReserve(player.id) === false) {
+        if (turmoil.hasDelegatesInReserve(player) === false) {
             return false;
         }
         return turmoil.parties.some((party) => {

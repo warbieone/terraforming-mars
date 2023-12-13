@@ -9,7 +9,6 @@ const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Resource_1 = require("../../../common/Resource");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 class GMOContract extends Card_1.Card {
     constructor() {
@@ -18,7 +17,7 @@ class GMOContract extends Card_1.Card {
             name: CardName_1.CardName.GMO_CONTRACT,
             tags: [Tag_1.Tag.MICROBE, Tag_1.Tag.SCIENCE],
             cost: 8,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.GREENS)),
+            requirements: { party: PartyName_1.PartyName.GREENS },
             metadata: {
                 description: 'Requires that Greens are ruling or that you have 2 delegates there.',
                 cardNumber: 'T06',
@@ -35,7 +34,7 @@ class GMOContract extends Card_1.Card {
         const amount = player.tags.cardTagCount(card, [Tag_1.Tag.ANIMAL, Tag_1.Tag.PLANT, Tag_1.Tag.MICROBE]);
         if (amount > 0) {
             player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
-                player.addResource(Resource_1.Resource.MEGACREDITS, amount * 2, { log: true });
+                player.stock.add(Resource_1.Resource.MEGACREDITS, amount * 2, { log: true });
                 return undefined;
             }));
         }

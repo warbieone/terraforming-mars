@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 class SpacePort extends Card_1.Card {
     constructor() {
@@ -19,7 +18,7 @@ class SpacePort extends Card_1.Card {
                 colonies: { addTradeFleet: 1 },
                 city: {},
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.colonies()),
+            requirements: { colonies: 1 },
             metadata: {
                 cardNumber: 'C39',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

@@ -18,7 +18,7 @@ class LogHelper {
         player.game.log('${0} removed ${1} ${2} from ${3} to ${4}', (b) => b.player(player).number(qty).string(resourceType).card(card).string(effect));
     }
     static logTilePlacement(player, space, tileType) {
-        this.logBoardTileAction(player, space, TileType_1.TileType.toString(tileType) + ' tile');
+        this.logBoardTileAction(player, space, TileType_1.tileTypeToString[tileType] + ' tile');
     }
     static logBoardTileAction(player, space, description, action = 'placed') {
         if (space.x === -1 && space.y === -1)

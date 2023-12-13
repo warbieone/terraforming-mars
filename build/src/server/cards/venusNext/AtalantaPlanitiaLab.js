@@ -4,7 +4,6 @@ exports.AtalantaPlanitiaLab = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 class AtalantaPlanitiaLab extends Card_1.Card {
@@ -14,7 +13,7 @@ class AtalantaPlanitiaLab extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             tags: [Tag_1.Tag.VENUS, Tag_1.Tag.SCIENCE],
             cost: 10,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 3)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 3 },
             victoryPoints: 2,
             behavior: {
                 drawCard: 2,

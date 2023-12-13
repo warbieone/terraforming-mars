@@ -27,7 +27,7 @@ class AerospaceMission extends PreludeCard_1.PreludeCard {
         return player.canAfford(14);
     }
     bespokePlay(player) {
-        player.deductResource(Resource_1.Resource.MEGACREDITS, 14);
+        player.stock.deduct(Resource_1.Resource.MEGACREDITS, 14);
         player.game.defer(new BuildColony_1.BuildColony(player, { title: 'Select where to build the first colony' }));
         player.game.defer(new BuildColony_1.BuildColony(player, { title: 'Select where to build the second colony' }));
         return undefined;

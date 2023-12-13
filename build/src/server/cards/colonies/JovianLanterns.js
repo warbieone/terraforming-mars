@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardResource_1 = require("../../../common/CardResource");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Payment_1 = require("../../../common/inputs/Payment");
@@ -18,7 +17,7 @@ class JovianLanterns extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             resourceType: CardResource_1.CardResource.FLOATER,
             victoryPoints: { resourcesHere: {}, per: 2 },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.JOVIAN)),
+            requirements: { tag: Tag_1.Tag.JOVIAN },
             behavior: {
                 tr: 1,
                 addResourcesToAnyCard: { type: CardResource_1.CardResource.FLOATER, count: 2 },

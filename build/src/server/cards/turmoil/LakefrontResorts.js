@@ -1,21 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LakefrontResorts = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const GainProduction_1 = require("../../deferredActions/GainProduction");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
 const Board_1 = require("../../boards/Board");
-class LakefrontResorts extends Card_1.Card {
+class LakefrontResorts extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.LAKEFRONT_RESORTS,
             tags: [Tag_1.Tag.BUILDING],
             startingMegaCredits: 54,

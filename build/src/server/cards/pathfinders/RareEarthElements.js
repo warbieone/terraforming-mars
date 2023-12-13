@@ -27,7 +27,7 @@ class RareEarthElements extends Card_1.Card {
     bespokePlay(player) {
         const spaces = player.game.board.spaces
             .filter((0, Board_1.playerTileFn)(player))
-            .filter(Board_1.isSpecialTile);
+            .filter(Board_1.isSpecialTileSpace);
         player.production.add(Resource_1.Resource.MEGACREDITS, spaces.length, { log: true });
         return undefined;
     }

@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Steelaris = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const TileType_1 = require("../../../common/TileType");
@@ -15,10 +14,9 @@ const Size_1 = require("../../../common/cards/render/Size");
 const BoardType_1 = require("../../boards/BoardType");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
 const Units_1 = require("../../../common/Units");
-class Steelaris extends Card_1.Card {
+class Steelaris extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.STEELARIS,
             tags: [Tag_1.Tag.BUILDING, Tag_1.Tag.CITY],
             startingMegaCredits: 42,

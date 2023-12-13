@@ -6,7 +6,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectDelegate_1 = require("../../inputs/SelectDelegate");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Turmoil_1 = require("../../turmoil/Turmoil");
 const Options_1 = require("../Options");
@@ -17,7 +16,7 @@ class BannedDelegate extends Card_1.Card {
             type: CardType_1.CardType.EVENT,
             name: CardName_1.CardName.BANNED_DELEGATE,
             cost: 0,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.chairman()),
+            requirements: { chairman: true },
             metadata: {
                 cardNumber: 'T02',
                 description: 'Requires that you are Chairman. Remove any NON-LEADER delegate.',
@@ -30,7 +29,7 @@ class BannedDelegate extends Card_1.Card {
     bespokePlay(player) {
         const turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);
         const orOptions = [];
-        turmoil.parties.forEach((party) => {
+        for (const party of turmoil.parties) {
             if (party.delegates.size > 1) {
                 const copy = mnemonist_1.MultiSet.from(party.delegates);
                 if (party.partyLeader !== undefined) {
@@ -40,24 +39,18 @@ class BannedDelegate extends Card_1.Card {
                     throw new Error(`partyLeader not defined for ${player.game.id}`);
                 }
                 const players = [];
-                for (const playerId of copy) {
-                    if (playerId === 'NEUTRAL') {
+                for (const entry of copy.multiplicities()) {
+                    if (entry[0] === 'NEUTRAL') {
                         players.push('NEUTRAL');
                     }
                     else {
-                        players.push(player.game.getPlayerById(playerId));
+                        players.push(entry[0]);
                     }
                 }
                 if (players.length > 0) {
-                    const selectDelegate = new SelectDelegate_1.SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer) => {
-                        let playerToRemove;
-                        if (selectedPlayer === 'NEUTRAL') {
-                            playerToRemove = 'NEUTRAL';
-                        }
-                        else {
-                            playerToRemove = selectedPlayer.id;
-                        }
-                        turmoil.removeDelegateFromParty(playerToRemove, party.name, player.game);
+                    const selectDelegate = new SelectDelegate_1.SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party')
+                        .andThen((selectedPlayer) => {
+                        turmoil.removeDelegateFromParty(selectedPlayer, party.name, player.game);
                         this.log(player, party, selectedPlayer);
                         return undefined;
                     });
@@ -65,7 +58,7 @@ class BannedDelegate extends Card_1.Card {
                     orOptions.push(selectDelegate);
                 }
             }
-        });
+        }
         if (orOptions.length === 0) {
             return undefined;
         }

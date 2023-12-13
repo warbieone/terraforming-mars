@@ -1,19 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StormCraftIncorporated = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
-const ActionCard_1 = require("../ActionCard");
-class StormCraftIncorporated extends ActionCard_1.ActionCard {
+class StormCraftIncorporated extends CorporationCard_1.ActiveCorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.STORMCRAFT_INCORPORATED,
             tags: [Tag_1.Tag.JOVIAN],
             startingMegaCredits: 48,
-            type: CardType_1.CardType.CORPORATION,
             victoryPoints: { tag: Tag_1.Tag.JOVIAN, per: 2 },
             action: {
                 addResourcesToAnyCard: { type: CardResource_1.CardResource.FLOATER, count: 1, autoSelect: true },

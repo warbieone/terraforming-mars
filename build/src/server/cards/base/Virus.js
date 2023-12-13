@@ -34,7 +34,7 @@ class Virus extends Card_1.Card {
             player.game.someoneHasRemovedOtherPlayersPlants = true;
             return undefined;
         }
-        const orOptionsAnimals = new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.ANIMAL, 2, false, false).execute();
+        const orOptionsAnimals = new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.ANIMAL, 2, { mandatory: false }).execute();
         const removeAnimals = orOptionsAnimals !== undefined ?
             orOptionsAnimals.options[0] :
             undefined;
@@ -53,9 +53,7 @@ class Virus extends Card_1.Card {
         if (removePlants !== undefined) {
             orOptions.options.push(...removePlants);
         }
-        orOptions.options.push(new SelectOption_1.SelectOption('Skip removal', 'Confirm', () => {
-            return undefined;
-        }));
+        orOptions.options.push(new SelectOption_1.SelectOption('Skip removal'));
         return orOptions;
     }
 }

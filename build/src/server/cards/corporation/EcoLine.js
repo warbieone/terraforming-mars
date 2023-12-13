@@ -1,19 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EcoLine = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("./CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
-class EcoLine extends Card_1.Card {
+class EcoLine extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.ECOLINE,
             tags: [Tag_1.Tag.PLANT],
             startingMegaCredits: 37,
@@ -42,10 +40,12 @@ class EcoLine extends Card_1.Card {
     }
     gainBonus(player, amount) {
         for (let i = 0; i < amount; i++) {
-            const options = new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Gain 2 MC', 'Gain MC', () => {
+            const options = new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Gain 2 MC', 'Gain MC')
+                .andThen(() => {
                 player.megaCredits += 2, { log: true };
                 return undefined;
-            }), new SelectOption_1.SelectOption('Gain 1 plant', 'Gain plant', () => {
+            }), new SelectOption_1.SelectOption('Gain 1 plant', 'Gain plant')
+                .andThen(() => {
                 player.plants += 1, { log: true };
                 return undefined;
             }));

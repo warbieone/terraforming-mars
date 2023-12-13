@@ -5,7 +5,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 class Biologist {
     constructor() {
         this.name = 'Biologist';
-        this.description = 'Have the most bio tags (animal, plant, and microbe tags count as bio tags.)';
+        this.description = 'Have the most animal, plant, and microbe tags in play';
     }
     getScore(player) {
         return player.tags.multipleCount([Tag_1.Tag.MICROBE, Tag_1.Tag.PLANT, Tag_1.Tag.ANIMAL], 'award');

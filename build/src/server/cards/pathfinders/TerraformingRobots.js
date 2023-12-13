@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 class TerraformingRobots extends Card_1.Card {
     constructor() {
@@ -17,7 +16,7 @@ class TerraformingRobots extends Card_1.Card {
             cost: 7,
             tags: [Tag_1.Tag.SCIENCE],
             resourceType: CardResource_1.CardResource.SPECIALIZED_ROBOT,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 4)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 4 },
             victoryPoints: { resourcesHere: {} },
             metadata: {
                 cardNumber: 'PfTMP',

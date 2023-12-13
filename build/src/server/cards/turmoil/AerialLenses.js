@@ -5,7 +5,6 @@ const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class AerialLenses extends Card_1.Card {
@@ -19,7 +18,7 @@ class AerialLenses extends Card_1.Card {
                 production: { heat: 2 },
                 removeAnyPlants: 2,
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.KELVINISTS)),
+            requirements: { party: PartyName_1.PartyName.KELVINISTS },
             metadata: {
                 description: 'Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.',
                 cardNumber: 'T01',

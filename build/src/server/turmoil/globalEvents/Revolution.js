@@ -9,10 +9,9 @@ const CardRenderer_1 = require("../../cards/render/CardRenderer");
 const Options_1 = require("../../cards/Options");
 const Size_1 = require("../../../common/cards/render/Size");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.br.br;
-    b.earth(1, { played: Options_1.played, size: Size_1.Size.SMALL }).plus().influence({ size: Size_1.Size.SMALL }).colon();
-    b.text('1st:', Size_1.Size.SMALL).minus().tr(2, { size: Size_1.Size.TINY, digit: true });
-    b.text('2nd:', Size_1.Size.SMALL).minus().tr(1, { size: Size_1.Size.TINY, digit: true });
+    b.earth(1, { played: Options_1.played, size: Size_1.Size.SMALL }).plus().influence().colon().br;
+    b.text('1st:', Size_1.Size.SMALL).minus().tr(2, { size: Size_1.Size.TINY }).nbsp;
+    b.text('2nd:', Size_1.Size.SMALL).minus().tr(1, { size: Size_1.Size.TINY });
 });
 class Revolution extends GlobalEvent_1.GlobalEvent {
     constructor() {

@@ -7,9 +7,7 @@ const SendDelegateToArea_1 = require("../../deferredActions/SendDelegateToArea")
 const CardRenderer_1 = require("../render/CardRenderer");
 const Resource_1 = require("../../../common/Resource");
 const Turmoil_1 = require("../../turmoil/Turmoil");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
-const OrOptions_1 = require("../../inputs/OrOptions");
-const SelectOption_1 = require("../../inputs/SelectOption");
+const SelectGlobalEvent_1 = require("../../inputs/SelectGlobalEvent");
 class ExecutiveOrder extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
@@ -26,7 +24,7 @@ class ExecutiveOrder extends PreludeCard_1.PreludeCard {
         });
     }
     bespokePlay(player) {
-        player.addResource(Resource_1.Resource.MEGACREDITS, 10, { log: true });
+        player.stock.add(Resource_1.Resource.MEGACREDITS, 10, { log: true });
         const turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);
         const globalEvents = [];
         for (let i = 0; i < 4; i++) {
@@ -35,23 +33,20 @@ class ExecutiveOrder extends PreludeCard_1.PreludeCard {
                 globalEvents.push(event);
             }
         }
-        player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
-            return new OrOptions_1.OrOptions(...globalEvents.map((event) => {
-                const description = event.name + ': ' + event.description + ' Neutral delegate added: ' + event.currentDelegate;
-                return new SelectOption_1.SelectOption(description, 'Select', () => {
-                    turmoil.currentGlobalEvent = event;
-                    turmoil.sendDelegateToParty('NEUTRAL', event.currentDelegate, player.game);
-                    globalEvents.forEach((ge) => {
-                        if (ge.name !== event.name) {
-                            turmoil.globalEventDealer.discardedGlobalEvents.push(ge);
-                        }
-                    });
-                    return undefined;
-                });
-            }));
-        }));
-        player.game.defer(new SendDelegateToArea_1.SendDelegateToArea(player, 'Select where to send 2 delegates', { count: 2 }));
-        return undefined;
+        return new SelectGlobalEvent_1.SelectGlobalEvent(globalEvents)
+            .andThen((event) => {
+            player.game.log('${0} selected Global Event ${1} for the current gflobal event', (b) => b.player(player).globalEvent(event));
+            turmoil.currentGlobalEvent = event;
+            turmoil.sendDelegateToParty('NEUTRAL', event.currentDelegate, player.game);
+            player.game.log('Neutral delegate added to ${0}', (b) => b.partyName(event.currentDelegate));
+            globalEvents.forEach((ge) => {
+                if (ge.name !== event.name) {
+                    turmoil.globalEventDealer.discard(ge);
+                }
+            });
+            player.game.defer(new SendDelegateToArea_1.SendDelegateToArea(player, 'Select where to send 2 delegates', { count: 2 }));
+            return undefined;
+        });
     }
 }
 exports.ExecutiveOrder = ExecutiveOrder;

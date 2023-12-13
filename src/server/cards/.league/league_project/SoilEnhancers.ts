@@ -10,7 +10,7 @@ import { Resource } from '../../../../common/Resource';
 import {Priority} from '../../../deferredActions/DeferredAction';
 import {GainResources} from '../../../deferredActions/GainResources';
 import { SpaceType } from '../../../../common/boards/SpaceType';
-import {ISpace} from '../../../boards/ISpace';
+import {Space} from '../../../boards/Space';
 
 export class SoilEnhancers extends Card implements IProjectCard {
   // hodgepodge
@@ -31,7 +31,7 @@ export class SoilEnhancers extends Card implements IProjectCard {
     });
   }
 
-  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: ISpace) {
+  public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (cardOwner.id === activePlayer.id && space.tile?.tileType !== TileType.OCEAN && space.spaceType !== SpaceType.COLONY) {
       cardOwner.game.defer(
         new GainResources(cardOwner, Resource.PLANTS, {

@@ -1,17 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InterplanetaryCinematics = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("./CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const Resource_1 = require("../../../common/Resource");
-class InterplanetaryCinematics extends Card_1.Card {
+class InterplanetaryCinematics extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.INTERPLANETARY_CINEMATICS,
             tags: [Tag_1.Tag.BUILDING],
             startingMegaCredits: 40,
@@ -35,7 +34,7 @@ class InterplanetaryCinematics extends Card_1.Card {
     }
     onCardPlayed(player, card) {
         if (player.isCorporation(this.name) && card.type === CardType_1.CardType.EVENT) {
-            player.addResource(Resource_1.Resource.MEGACREDITS, 3, { log: true, from: this });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, 3, { log: true, from: this });
         }
     }
 }

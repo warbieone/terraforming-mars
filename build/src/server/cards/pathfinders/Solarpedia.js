@@ -7,7 +7,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const ActionCard_1 = require("../ActionCard");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 class Solarpedia extends ActionCard_1.ActionCard {
     constructor() {
         super({
@@ -15,7 +14,7 @@ class Solarpedia extends ActionCard_1.ActionCard {
             type: CardType_1.CardType.ACTIVE,
             tags: [Tag_1.Tag.SPACE],
             cost: 12,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.VENUS).tag(Tag_1.Tag.EARTH).tag(Tag_1.Tag.MARS).tag(Tag_1.Tag.JOVIAN)),
+            requirements: [{ tag: Tag_1.Tag.VENUS }, { tag: Tag_1.Tag.EARTH }, { tag: Tag_1.Tag.MARS }, { tag: Tag_1.Tag.JOVIAN }],
             resourceType: CardResource_1.CardResource.DATA,
             victoryPoints: { resourcesHere: {}, per: 6 },
             behavior: {

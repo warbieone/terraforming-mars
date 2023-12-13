@@ -50,6 +50,9 @@ class Timer {
         }
         this.sumElapsed += Timer.lastStoppedAt - this.startedAt;
     }
+    rebate(millis) {
+        this.sumElapsed = Math.max(this.sumElapsed - millis, 0);
+    }
     getElapsed() {
         return this.sumElapsed + (this.running ? this.clock.now() - this.startedAt : 0);
     }

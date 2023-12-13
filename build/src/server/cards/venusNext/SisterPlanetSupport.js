@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 class SisterPlanetSupport extends Card_1.Card {
     constructor() {
@@ -17,7 +16,7 @@ class SisterPlanetSupport extends Card_1.Card {
             behavior: {
                 production: { megacredits: 3 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.VENUS).tag(Tag_1.Tag.EARTH)),
+            requirements: [{ tag: Tag_1.Tag.VENUS }, { tag: Tag_1.Tag.EARTH }],
             metadata: {
                 cardNumber: '244',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

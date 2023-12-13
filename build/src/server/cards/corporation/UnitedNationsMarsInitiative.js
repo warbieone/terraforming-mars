@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UnitedNationsMarsInitiative = exports.ACTION_COST = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("./CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
+const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
+const titles_1 = require("../../inputs/titles");
 exports.ACTION_COST = 1;
-class UnitedNationsMarsInitiative extends Card_1.Card {
+class UnitedNationsMarsInitiative extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.UNITED_NATIONS_MARS_INITIATIVE,
             tags: [Tag_1.Tag.EARTH],
             startingMegaCredits: 50,
@@ -28,12 +28,21 @@ class UnitedNationsMarsInitiative extends Card_1.Card {
                 }),
             },
         });
+        this.data = {
+            lastGenerationIncreasedTR: -1,
+        };
+    }
+    onIncreaseTerraformRating(player, cardOwner) {
+        if (player === cardOwner) {
+            this.data.lastGenerationIncreasedTR = player.game.generation;
+        }
     }
     canAct(player) {
-        return player.hasIncreasedTerraformRatingThisGeneration && player.canAfford(exports.ACTION_COST, { tr: { tr: 1 } });
+        return this.data.lastGenerationIncreasedTR === player.game.generation && player.canAfford({ cost: exports.ACTION_COST, tr: { tr: 1 } });
     }
     action(player) {
-        player.payMegacreditsDeferred(1, 'Select how to pay for UNMI action.', () => player.increaseTerraformRating());
+        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 1, { title: titles_1.TITLES.payForCardAction(this.name) }))
+            .andThen(() => player.increaseTerraformRating());
         return undefined;
     }
 }

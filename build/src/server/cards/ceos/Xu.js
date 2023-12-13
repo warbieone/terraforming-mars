@@ -19,7 +19,7 @@ class Xu extends CeoCard_1.CeoCard {
                     b.opgArrow().venus(1, { played: Options_1.played, all: Options_1.all }).colon().megacredits(2).megacredits(8).asterix();
                     b.br.br;
                 }),
-                description: 'Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you have the most Venus tags in play.',
+                description: 'Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you Have the most Venus tags in play.',
             },
         });
     }
@@ -28,10 +28,10 @@ class Xu extends CeoCard_1.CeoCard {
         const players = player.game.getPlayers();
         const counts = players.map((p) => p.tags.count(Tag_1.Tag.VENUS, player.id === p.id ? 'default' : 'raw'));
         const total = (0, utils_1.sum)(counts);
-        player.addResource(Resource_1.Resource.MEGACREDITS, total * 2, { log: true });
+        player.stock.add(Resource_1.Resource.MEGACREDITS, total * 2, { log: true });
         const maxPlayerVenusTagCount = Math.max(...counts);
         if (maxPlayerVenusTagCount === player.tags.count(Tag_1.Tag.VENUS)) {
-            player.addResource(Resource_1.Resource.MEGACREDITS, 8, { log: true });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, 8, { log: true });
         }
         return undefined;
     }

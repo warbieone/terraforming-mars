@@ -15,10 +15,11 @@ class BuildColony extends DeferredAction_1.DeferredAction {
             return undefined;
         }
         const title = (_d = (_c = this.options) === null || _c === void 0 ? void 0 : _c.title) !== null && _d !== void 0 ? _d : 'Select where to build a colony';
-        return new SelectColony_1.SelectColony(title, 'Build', colonies, (colony) => {
-            var _a, _b, _c, _d;
+        return new SelectColony_1.SelectColony(title, 'Build', colonies)
+            .andThen((colony) => {
+            var _a, _b;
             colony.addColony(this.player, { giveBonusTwice: (_b = (_a = this.options) === null || _a === void 0 ? void 0 : _a.giveBonusTwice) !== null && _b !== void 0 ? _b : false });
-            (_d = (_c = this.options) === null || _c === void 0 ? void 0 : _c.cb) === null || _d === void 0 ? void 0 : _d.call(_c, colony);
+            this.cb(colony);
             return undefined;
         });
     }

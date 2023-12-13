@@ -1,17 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Polyphemos = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
-class Polyphemos extends Card_1.Card {
+class Polyphemos extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.POLYPHEMOS,
             startingMegaCredits: 55,
-            type: CardType_1.CardType.CORPORATION,
             cardCost: 5,
             behavior: {
                 production: { megacredits: 5 },

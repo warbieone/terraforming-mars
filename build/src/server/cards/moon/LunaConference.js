@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
@@ -17,7 +16,7 @@ class LunaConference extends Card_1.Card {
             type: CardType_1.CardType.EVENT,
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.MOON],
             cost: 5,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.SCIENTISTS)),
+            requirements: { party: PartyName_1.PartyName.SCIENTISTS },
             behavior: {
                 stock: { megacredits: { moon: { road: {}, habitat: {} }, each: 2 } },
             },

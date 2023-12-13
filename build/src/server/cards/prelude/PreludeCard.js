@@ -11,11 +11,15 @@ class PreludeCard extends Card_1.Card {
             throw new Error('Cannot have a Countable for a Prelude stock MC: ' + properties.name);
         }
         const obj = {
+            action: properties.action,
             behavior: properties.behavior,
             type: CardType_1.CardType.PRELUDE,
             name: properties.name,
             tags: properties.tags,
+            globalParameterRequirementBonus: properties.globalParameterRequirementBonus,
             metadata: properties.metadata,
+            resourceType: properties.resourceType,
+            victoryPoints: properties.victoryPoints,
         };
         if (startingMegaCredits !== undefined) {
             obj.startingMegaCredits = startingMegaCredits;

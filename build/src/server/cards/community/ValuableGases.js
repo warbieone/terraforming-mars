@@ -31,12 +31,12 @@ class ValuableGases extends PreludeCard_1.PreludeCard {
     bespokePlay(player) {
         const playableCards = player.getPlayableCards().filter((card) => card.card.tags.includes(Tag_1.Tag.VENUS));
         if (playableCards.length > 0) {
-            return new SelectProjectCardToPlay_1.SelectProjectCardToPlay(player, playableCards, {
-                cb: (card) => {
-                    if (card.resourceType === CardResource_1.CardResource.FLOATER) {
-                        player.addResourceTo(card, 4);
-                    }
-                },
+            return new SelectProjectCardToPlay_1.SelectProjectCardToPlay(player, playableCards)
+                .andThen((card) => {
+                if (card.resourceType === CardResource_1.CardResource.FLOATER) {
+                    player.addResourceTo(card, 4);
+                }
+                return undefined;
             });
         }
         return undefined;

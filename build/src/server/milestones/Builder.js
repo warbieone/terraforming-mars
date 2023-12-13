@@ -5,7 +5,7 @@ const IMilestone_1 = require("./IMilestone");
 const Tag_1 = require("../../common/cards/Tag");
 class Builder extends IMilestone_1.BaseMilestone {
     constructor() {
-        super('Builder', 'Have 8 building tags', 8);
+        super('Builder', 'Have 8 building tags in play', 8);
     }
     getScore(player) {
         return player.tags.count(Tag_1.Tag.BUILDING, 'milestone');

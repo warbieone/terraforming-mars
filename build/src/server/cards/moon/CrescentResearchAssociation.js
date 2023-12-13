@@ -2,14 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CrescentResearchAssociation = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
-const Card_1 = require("../Card");
-const CardType_1 = require("../../../common/cards/CardType");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-class CrescentResearchAssociation extends Card_1.Card {
+class CrescentResearchAssociation extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.CRESCENT_RESEARCH_ASSOCIATION,
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.MOON],
             startingMegaCredits: 50,

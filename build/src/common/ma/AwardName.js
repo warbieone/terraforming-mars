@@ -41,5 +41,7 @@ exports.awardNames = [
     'Hoarder',
     'Naturalist',
     'Voyager',
+    'Kingpin',
+    'EdgeLord',
 ];
 //# sourceMappingURL=AwardName.js.map

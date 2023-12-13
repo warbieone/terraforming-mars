@@ -5,9 +5,6 @@ import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
 import {CardResource} from '../../../../common/CardResource';
-import {SelectOption} from '../../../inputs/SelectOption';
-import {OrOptions} from '../../../inputs/OrOptions';
-import {Player} from '../../../Player';
 
 export class DNAExtractionFromSoil extends Card implements IProjectCard {
 
@@ -18,6 +15,23 @@ export class DNAExtractionFromSoil extends Card implements IProjectCard {
       name: CardName.DNA_EXTRACTION_FROM_SOIL,
       type: CardType.ACTIVE,
       resourceType: CardResource.MICROBE,
+      
+      action: {
+        or: {
+          behaviors: [
+            {
+              title: 'Add microbe',
+              addResources: 1,
+            },
+            {
+              title: 'Remove microbe',
+              spend: {resourcesHere: 1},
+              drawCard: 1,
+            },
+          ],
+          autoSelect: true,
+        },
+      },
 
       metadata: {
         cardNumber: 'L415',
@@ -31,35 +45,4 @@ export class DNAExtractionFromSoil extends Card implements IProjectCard {
     });
   }
 
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    if (this.resourceCount < 1) {
-      player.addResourceTo(this, 1);
-      return undefined;
-    }
-
-    const opts: Array<SelectOption> = [];
-
-    const addResource = new SelectOption('Add 1 floater on this card', 'Add microbe', () => this.addResource(player));
-    const spendResource = new SelectOption('Remove 1 floater on this card to draw a card', 'Remove microbe', () => this.spendResource(player));
-
-    opts.push(spendResource);
-    opts.push(addResource);
-
-    return new OrOptions(...opts);
-  }
-
-  private addResource(player: Player) {
-    player.addResourceTo(this, 1);
-    return undefined;
-  }
-
-  private spendResource(player: Player) {
-    this.resourceCount--;
-    player.drawCard();
-    return undefined;
-  }
 }

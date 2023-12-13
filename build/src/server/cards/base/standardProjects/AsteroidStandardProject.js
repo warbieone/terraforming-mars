@@ -19,6 +19,14 @@ class AsteroidStandardProject extends StandardProjectCard_1.StandardProjectCard 
             },
         });
     }
+    canPayWith(player) {
+        if (player.isCorporation(CardName_1.CardName.KUIPER_COOPERATIVE)) {
+            return { kuiperAsteroids: true };
+        }
+        else {
+            return {};
+        }
+    }
     canAct(player) {
         if (player.game.getTemperature() === constants.MAX_TEMPERATURE) {
             return false;

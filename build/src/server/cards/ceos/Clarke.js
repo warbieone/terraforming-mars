@@ -24,8 +24,8 @@ class Clarke extends CeoCard_1.CeoCard {
         this.isDisabled = true;
         player.production.add(Resource_1.Resource.PLANTS, 1, { log: true });
         player.production.add(Resource_1.Resource.HEAT, 1, { log: true });
-        player.addResource(Resource_1.Resource.PLANTS, player.production.plants + 4, { log: true });
-        player.addResource(Resource_1.Resource.HEAT, player.production.heat + 4, { log: true });
+        player.stock.add(Resource_1.Resource.PLANTS, player.production.plants + 4, { log: true });
+        player.stock.add(Resource_1.Resource.HEAT, player.production.heat + 4, { log: true });
         return undefined;
     }
 }

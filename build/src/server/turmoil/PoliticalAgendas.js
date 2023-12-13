@@ -43,7 +43,7 @@ class PoliticalAgendas {
         }
         if (politicalAgendasData.agendaStyle === Types_1.AgendaStyle.CHAIRMAN && chairman !== 'NEUTRAL') {
             const agenda = this.getAgenda(turmoil, rulingParty.name);
-            game.defer(new ChoosePoliticalAgenda_1.ChoosePoliticalAgenda(game.getPlayerById(chairman), rulingParty, (bonusId) => {
+            game.defer(new ChoosePoliticalAgenda_1.ChoosePoliticalAgenda(chairman, rulingParty, (bonusId) => {
                 agenda.bonusId = bonusId;
                 turmoil.onAgendaSelected(game);
             }, (policyId) => {

@@ -35,9 +35,9 @@ class LunaEcumenopolis extends Card_1.Card {
     }
     canAffordTRBump(player) {
         const moonData = MoonExpansion_1.MoonExpansion.moonData(player.game);
-        const expectedColonyRate = Math.min(moonData.colonyRate + 2, 8);
-        const expectedTRBump = Math.floor(expectedColonyRate / 2);
-        return player.canAfford(0, { tr: { moonHabitat: 2, tr: expectedTRBump } });
+        const expectedHabitatRate = Math.min(moonData.habitatRate + 2, 8);
+        const expectedTRBump = Math.floor(expectedHabitatRate / 2);
+        return player.canAfford({ cost: 0, tr: { moonHabitat: 2, tr: expectedTRBump } });
     }
     bespokeCanPlay(player) {
         if (!this.canAffordTRBump(player)) {
@@ -73,8 +73,8 @@ class LunaEcumenopolis extends Card_1.Card {
         player.game.defer(new CustomPlaceMoonTile(player));
         player.game.defer(new CustomPlaceMoonTile(player));
         player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
-            const colonyRate = MoonExpansion_1.MoonExpansion.moonData(player.game).colonyRate;
-            player.increaseTerraformRating(Math.floor(colonyRate / 2));
+            const habitatRate = MoonExpansion_1.MoonExpansion.moonData(player.game).habitatRate;
+            player.increaseTerraformRating(Math.floor(habitatRate / 2));
             return undefined;
         }));
         return undefined;

@@ -8,7 +8,6 @@ const CardResource_1 = require("../../../common/CardResource");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 class RedSpotObservatory extends Card_1.Card {
     constructor() {
@@ -22,7 +21,7 @@ class RedSpotObservatory extends Card_1.Card {
             behavior: {
                 drawCard: 2,
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 3)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 3 },
             metadata: {
                 cardNumber: 'C32',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -48,8 +47,8 @@ class RedSpotObservatory extends Card_1.Card {
             return undefined;
         }
         const opts = [];
-        const addResource = new SelectOption_1.SelectOption('Add 1 floater on this card', 'Add floater', () => this.addResource(player));
-        const spendResource = new SelectOption_1.SelectOption('Remove 1 floater on this card to draw a card', 'Remove floater', () => this.spendResource(player));
+        const addResource = new SelectOption_1.SelectOption('Add 1 floater on this card', 'Add floater').andThen(() => this.addResource(player));
+        const spendResource = new SelectOption_1.SelectOption('Remove 1 floater on this card to draw a card', 'Remove floater').andThen(() => this.spendResource(player));
         opts.push(spendResource);
         opts.push(addResource);
         return new OrOptions_1.OrOptions(...opts);

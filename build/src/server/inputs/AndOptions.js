@@ -1,13 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AndOptions = void 0;
-const PlayerInput_1 = require("../PlayerInput");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
-class AndOptions extends PlayerInput_1.BasePlayerInput {
-    constructor(cb, ...options) {
-        super('and');
-        this.cb = cb;
-        this.options = options;
+const OptionsPlayerInput_1 = require("./OptionsPlayerInput");
+class AndOptions extends OptionsPlayerInput_1.OptionsInput {
+    constructor(...options) {
+        super('and', '', options);
+    }
+    toModel(player) {
+        return {
+            title: this.title,
+            buttonLabel: this.buttonLabel,
+            type: 'and',
+            options: this.options.map((option) => option.toModel(player)),
+        };
     }
     process(input, player) {
         if (!(0, InputResponse_1.isAndOptionsResponse)(input)) {
@@ -19,7 +25,7 @@ class AndOptions extends PlayerInput_1.BasePlayerInput {
         for (let i = 0; i < input.responses.length; i++) {
             player.runInput(input.responses[i], this.options[i]);
         }
-        return this.cb();
+        return this.cb(undefined);
     }
 }
 exports.AndOptions = AndOptions;

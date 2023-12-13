@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Options_1 = require("../Options");
 class HighTempSuperconductors extends Card_1.Card {
@@ -16,7 +15,7 @@ class HighTempSuperconductors extends Card_1.Card {
             name: CardName_1.CardName.HIGH_TEMP_SUPERCONDUCTORS,
             cost: 10,
             tags: [Tag_1.Tag.POWER, Tag_1.Tag.SCIENCE],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.KELVINISTS)),
+            requirements: { party: PartyName_1.PartyName.KELVINISTS },
             cardDiscount: { tag: Tag_1.Tag.POWER, amount: 3 },
             behavior: {
                 production: { energy: 2 },

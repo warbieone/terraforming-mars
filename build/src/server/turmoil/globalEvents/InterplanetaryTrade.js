@@ -24,7 +24,7 @@ class InterplanetaryTrade extends GlobalEvent_1.GlobalEvent {
     }
     resolve(game, turmoil) {
         game.getPlayersInGenerationOrder().forEach((player) => {
-            player.addResource(Resource_1.Resource.MEGACREDITS, 2 * (Math.min(5, player.tags.count(Tag_1.Tag.SPACE, 'raw')) + turmoil.getPlayerInfluence(player)), { log: true, from: this.name });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, 2 * (Math.min(5, player.tags.count(Tag_1.Tag.SPACE, 'raw')) + turmoil.getPlayerInfluence(player)), { log: true, from: this.name });
         });
     }
 }

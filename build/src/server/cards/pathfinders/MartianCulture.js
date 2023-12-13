@@ -5,7 +5,6 @@ const ActionCard_1 = require("../ActionCard");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardResource_1 = require("../../../common/CardResource");
 const Options_1 = require("../Options");
@@ -17,7 +16,7 @@ class MartianCulture extends ActionCard_1.ActionCard {
             cost: 11,
             tags: [Tag_1.Tag.MARS, Tag_1.Tag.MARS],
             resourceType: CardResource_1.CardResource.DATA,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.MARS, 2, { all: Options_1.all })),
+            requirements: { tag: Tag_1.Tag.MARS, count: 2, all: Options_1.all },
             victoryPoints: { resourcesHere: {}, per: 2 },
             action: {
                 addResourcesToAnyCard: { type: CardResource_1.CardResource.DATA, count: 1 },

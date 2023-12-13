@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const Options_1 = require("../Options");
 class WarpDrive extends Card_1.Card {
@@ -16,7 +15,7 @@ class WarpDrive extends Card_1.Card {
             name: CardName_1.CardName.WARP_DRIVE,
             type: CardType_1.CardType.ACTIVE,
             victoryPoints: 2,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 5)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 5 },
             cardDiscount: { tag: Tag_1.Tag.SPACE, amount: 4 },
             metadata: {
                 cardNumber: 'C49',

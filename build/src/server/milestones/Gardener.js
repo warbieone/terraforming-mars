@@ -7,7 +7,7 @@ class Gardener extends IMilestone_1.BaseMilestone {
         super('Gardener', 'Own 3 greenery tiles', 3);
     }
     getScore(player) {
-        return player.game.getGreeneriesCount(player);
+        return player.game.board.getGreeneries(player).length;
     }
 }
 exports.Gardener = Gardener;

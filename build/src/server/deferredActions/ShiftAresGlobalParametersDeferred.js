@@ -11,7 +11,8 @@ class ShiftAresGlobalParametersDeferred extends DeferredAction_1.DeferredAction 
     execute() {
         let pi = undefined;
         AresHandler_1.AresHandler.ifAres(this.player.game, (aresData) => {
-            pi = new ShiftAresGlobalParameters_1.ShiftAresGlobalParameters(this.player, (response) => {
+            pi = new ShiftAresGlobalParameters_1.ShiftAresGlobalParameters()
+                .andThen((response) => {
                 const hazardData = aresData.hazardData;
                 if (hazardData.erosionOceanCount.available) {
                     hazardData.erosionOceanCount.threshold += response.lowOceanDelta;

@@ -20,7 +20,7 @@ import {RecycledProjects} from './league_project/RecycledProjects';
 import {SoilEnhancers} from './league_project/SoilEnhancers';
 import {SpaceDebrisCollection} from './league_project/SpaceDebrisCollection';
 import {SteelCasting} from './league_project/SteelCasting';
-import {SulphuricImport} from './league_project/SulphuricImport';
+//import {SulphuricImport} from './league_project/SulphuricImport';
 import {TitaniumIsotopes} from './league_project/TitaniumIsotopes';
 import {WorldGovernmentPartnership} from './league_project/WorldGovernmentPartnership';
 
@@ -46,7 +46,7 @@ export const LEAGUE_CARD_MANIFEST = new ModuleManifest({
     [CardName.SOIL_ENHANCERS]: {Factory: SoilEnhancers},
     [CardName.SPACE_DEBRIS_COLLECTION]: {Factory: SpaceDebrisCollection},
     [CardName.STEEL_CASTING]: {Factory: SteelCasting},
-    [CardName.SULPHURIC_IMPORT]: {Factory: SulphuricImport},
+    //[CardName.SULPHURIC_IMPORT]: {Factory: SulphuricImport},
     [CardName.TITANIUM_ISOTOPES]: {Factory: TitaniumIsotopes},
     [CardName.WORLD_GOVERNMENT_PARTNERSHIP]: {Factory: WorldGovernmentPartnership},
   },

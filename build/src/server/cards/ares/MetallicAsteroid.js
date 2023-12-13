@@ -16,6 +16,7 @@ class MetallicAsteroid extends Card_1.Card {
             name: CardName_1.CardName.METALLIC_ASTEROID,
             tags: [Tag_1.Tag.SPACE],
             cost: 13,
+            tilesBuilt: [TileType_1.TileType.METALLIC_ASTEROID],
             behavior: {
                 stock: { titanium: 1 },
                 global: { temperature: 1 },
@@ -23,7 +24,6 @@ class MetallicAsteroid extends Card_1.Card {
                 tile: {
                     type: TileType_1.TileType.METALLIC_ASTEROID,
                     on: 'land',
-                    title: 'Select space for Metallic Asteroid tile',
                     adjacencyBonus: { bonus: [SpaceBonus_1.SpaceBonus.TITANIUM] },
                 },
             },

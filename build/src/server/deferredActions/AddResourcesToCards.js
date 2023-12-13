@@ -24,13 +24,13 @@ class AddResourcesToCards extends DeferredAction_1.DeferredAction {
         }
         const map = new Map();
         const options = cards.map((card) => {
-            const cb = (amount) => {
+            return new SelectAmount_1.SelectAmount(card.name, '', 0, this.count)
+                .andThen((amount) => {
                 map.set(card.name, amount);
                 return undefined;
-            };
-            return new SelectAmount_1.SelectAmount(card.name, '', cb, 0, this.count);
+            });
         });
-        return new AndOptions_1.AndOptions(() => {
+        return new AndOptions_1.AndOptions(...options).andThen(() => {
             let sum = 0;
             cards.forEach((card) => {
                 var _a;
@@ -47,7 +47,7 @@ class AddResourcesToCards extends DeferredAction_1.DeferredAction {
                 }
             });
             return undefined;
-        }, ...options);
+        });
     }
 }
 exports.AddResourcesToCards = AddResourcesToCards;

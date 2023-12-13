@@ -7,7 +7,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
 const DecreaseAnyProduction_1 = require("../../deferredActions/DecreaseAnyProduction");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const GainProduction_1 = require("../../deferredActions/GainProduction");
@@ -18,7 +17,7 @@ class PowerSupplyConsortium extends Card_1.Card {
             name: CardName_1.CardName.POWER_SUPPLY_CONSORTIUM,
             tags: [Tag_1.Tag.POWER],
             cost: 5,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.POWER, 2)),
+            requirements: { tag: Tag_1.Tag.POWER, count: 2 },
             metadata: {
                 cardNumber: '160',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -32,8 +31,14 @@ class PowerSupplyConsortium extends Card_1.Card {
         });
     }
     bespokePlay(player) {
-        player.game.defer(new DecreaseAnyProduction_1.DecreaseAnyProduction(player, Resource_1.Resource.ENERGY, { count: 1, stealing: true }));
-        player.game.defer(new GainProduction_1.GainProduction(player, Resource_1.Resource.ENERGY, { count: 1 }));
+        const gainProduction = new GainProduction_1.GainProduction(player, Resource_1.Resource.ENERGY, { count: 1, log: false });
+        const decreaseAnyProduction = new DecreaseAnyProduction_1.DecreaseAnyProduction(player, Resource_1.Resource.ENERGY, { count: 1, stealing: true });
+        if (player.game.getPlayers().filter((player) => player.production.energy > 0).length === 0) {
+            player.game.defer(gainProduction).andThen(() => player.game.defer(decreaseAnyProduction));
+        }
+        else {
+            player.game.defer(decreaseAnyProduction).andThen(() => player.game.defer(gainProduction));
+        }
         return undefined;
     }
 }

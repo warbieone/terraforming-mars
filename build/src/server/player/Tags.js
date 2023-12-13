@@ -5,7 +5,6 @@ const CardName_1 = require("../../common/cards/CardName");
 const CardType_1 = require("../../common/cards/CardType");
 const Tag_1 = require("../../common/cards/Tag");
 const ICorporationCard_1 = require("../cards/corporation/ICorporationCard");
-const CeoExtension_1 = require("../CeoExtension");
 class Tags {
     constructor(player) {
         this.player = player;
@@ -23,9 +22,6 @@ class Tags {
         let tagCount = this.rawCount(tag, includeEvents);
         if (tag === Tag_1.Tag.SCIENCE && this.player.scienceTagCount > 0) {
             tagCount += this.player.scienceTagCount;
-        }
-        if (tag === Tag_1.Tag.WILD || includeTagSubstitutions) {
-            tagCount += CeoExtension_1.CeoExtension.getBonusWildTags(this.player);
         }
         if (includeTagSubstitutions) {
             if (tag === Tag_1.Tag.EARTH && this.player.cardIsInEffect(CardName_1.CardName.EARTH_EMBASSY)) {
@@ -148,7 +144,6 @@ class Tags {
         if (extraTag !== undefined) {
             uniqueTags.add(extraTag);
         }
-        wildTagCount += CeoExtension_1.CeoExtension.getBonusWildTags(this.player);
         if (this.player.scienceTagCount > 0)
             uniqueTags.add(Tag_1.Tag.SCIENCE);
         if (mode === 'globalEvent')
@@ -180,11 +175,17 @@ class Tags {
         }
         return false;
     }
-    gainScienceTag() {
-        this.player.scienceTagCount++;
+    gainScienceTag(count) {
+        this.player.scienceTagCount += count;
     }
     numberOfCardsWithNoTags() {
-        return this.player.tableau.filter((card) => card.type !== CardType_1.CardType.EVENT && card.tags.every((tag) => tag === Tag_1.Tag.WILD)).length;
+        const filtered = this.player.tableau.filter((card) => {
+            if (card.name === CardName_1.CardName.PHARMACY_UNION && card.isDisabled === true) {
+                return false;
+            }
+            return card.type !== CardType_1.CardType.EVENT && card.tags.every((tag) => tag === Tag_1.Tag.WILD);
+        });
+        return filtered.length;
     }
 }
 exports.Tags = Tags;

@@ -1,20 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AgricolaInc = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const CardRenderDynamicVictoryPoints_1 = require("../render/CardRenderDynamicVictoryPoints");
-class AgricolaInc extends Card_1.Card {
+const utils_1 = require("../../../common/utils/utils");
+class AgricolaInc extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.AGRICOLA_INC,
             tags: [Tag_1.Tag.PLANT],
             startingMegaCredits: 40,
-            type: CardType_1.CardType.CORPORATION,
             victoryPoints: 'special',
             behavior: {
                 production: { megacredits: 1, plants: 1, heat: 1 },
@@ -34,9 +33,10 @@ class AgricolaInc extends Card_1.Card {
         });
     }
     getVictoryPoints(player) {
-        const scorableTags = [Tag_1.Tag.CITY, Tag_1.Tag.EARTH, Tag_1.Tag.POWER, Tag_1.Tag.JOVIAN, Tag_1.Tag.MICROBE, Tag_1.Tag.PLANT, Tag_1.Tag.SCIENCE, Tag_1.Tag.SPACE, Tag_1.Tag.BUILDING, Tag_1.Tag.ANIMAL];
-        if (player.game.gameOptions.venusNextExtension)
-            scorableTags.push(Tag_1.Tag.VENUS);
+        const scorableTags = [...player.game.tags];
+        (0, utils_1.inplaceRemove)(scorableTags, Tag_1.Tag.WILD);
+        (0, utils_1.inplaceRemove)(scorableTags, Tag_1.Tag.EVENT);
+        (0, utils_1.inplaceRemove)(scorableTags, Tag_1.Tag.CLONE);
         const playerTags = player.tags.countAllTags();
         let points = 0;
         scorableTags.forEach((tag) => {

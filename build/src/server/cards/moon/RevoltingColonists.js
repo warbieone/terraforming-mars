@@ -7,11 +7,11 @@ const Tag_1 = require("../../../common/cards/Tag");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const TileType_1 = require("../../../common/TileType");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class RevoltingColonists extends Card_1.Card {
     constructor() {
         super({
@@ -19,12 +19,12 @@ class RevoltingColonists extends Card_1.Card {
             type: CardType_1.CardType.EVENT,
             tags: [Tag_1.Tag.MOON],
             cost: 3,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.habitatRate(4)),
+            requirements: { habitatRate: 4 },
             metadata: {
                 description: 'Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.',
                 cardNumber: 'M51',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.megacredits(3, { all: Options_1.all }).slash().moonHabitat({ size: Size_1.Size.SMALL, all: Options_1.all });
+                    b.minus().megacredits(3, { all: Options_1.all }).slash().moonHabitat({ size: Size_1.Size.SMALL, all: Options_1.all });
                 }),
             },
         });
@@ -38,11 +38,9 @@ class RevoltingColonists extends Card_1.Card {
                 const bill = owned * 3;
                 const owes = Math.min(bill, habitatTileOwner.spendableMegacredits());
                 game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(habitatTileOwner, owes, {
-                    title: 'You must pay ' + owes + 'M€ for ' + owned + ' habitat tiles',
-                    afterPay: () => {
-                        game.log('${0} spends ${1} M€ for the ${2} habitat tiles they own.', (b) => b.player(habitatTileOwner).number(owes).number(owned));
-                    }
-                }));
+                    title: (0, MessageBuilder_1.message)('You must spend ${0} M€ for ${1} habitat tiles', (b) => b.number(owes).number(owned))
+                }))
+                    .andThen(() => game.log('${0} spends ${1} M€ for the ${2} habitat tiles they own.', (b) => b.player(habitatTileOwner).number(owes).number(owned)));
             }
         });
         return undefined;

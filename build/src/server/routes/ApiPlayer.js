@@ -34,6 +34,7 @@ class ApiPlayer extends Handler_1.Handler {
                 return;
             }
             try {
+                ctx.ipTracker.addParticipant(playerId, ctx.ip);
                 const player = game.getPlayerById(playerId);
                 ctx.route.writeJson(res, ServerModel_1.Server.getPlayerModel(player));
             }

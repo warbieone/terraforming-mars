@@ -46,5 +46,10 @@ var GlobalEventName;
     GlobalEventName["MAGNETIC_FIELD_STIMULATION_DELAYS"] = "Magnetic Field Stimulation Delays";
     GlobalEventName["COMMUNICATION_BOOM"] = "Communication Boom";
     GlobalEventName["SPACE_RACE_TO_MARS"] = "Space Race to Mars";
+    GlobalEventName["LAGGING_REGULATION"] = "Lagging Regulation";
+    GlobalEventName["FAIR_TRADE_COMPLAINT"] = "Fair Trade Complaint";
+    GlobalEventName["MIGRATION_UNDERGROUND"] = "Migration Underground";
+    GlobalEventName["SEISMIC_PREDICTIONS"] = "Seismic Predictions";
+    GlobalEventName["MEDIA_STIR"] = "Media Stir";
 })(GlobalEventName = exports.GlobalEventName || (exports.GlobalEventName = {}));
 //# sourceMappingURL=GlobalEventName.js.map

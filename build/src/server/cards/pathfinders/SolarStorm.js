@@ -36,14 +36,14 @@ class SolarStorm extends Card_1.Card {
         for (const p of player.game.getPlayers()) {
             if (!p.plantsAreProtected()) {
                 if (p.cardIsInEffect(CardName_1.CardName.BOTANICAL_EXPERIENCE)) {
-                    p.deductResource(Resource_1.Resource.PLANTS, 1, { log: true, from: player });
+                    p.stock.deduct(Resource_1.Resource.PLANTS, 1, { log: true, from: player });
                 }
                 else {
-                    p.deductResource(Resource_1.Resource.PLANTS, 2, { log: true, from: player });
+                    p.stock.deduct(Resource_1.Resource.PLANTS, 2, { log: true, from: player });
                 }
             }
         }
-        player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.DATA, 3, false, false));
+        player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.DATA, 3, { mandatory: false }));
         return undefined;
     }
 }

@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
 const RemoveResourcesFromCard_1 = require("../../deferredActions/RemoveResourcesFromCard");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
 class StratosphericBirds extends ActionCard_1.ActionCard {
@@ -18,7 +17,7 @@ class StratosphericBirds extends ActionCard_1.ActionCard {
             cost: 12,
             resourceType: CardResource_1.CardResource.ANIMAL,
             victoryPoints: { resourcesHere: {} },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.venus(12)),
+            requirements: { venus: 12 },
             action: {
                 addResources: 1,
             },
@@ -54,7 +53,7 @@ class StratosphericBirds extends ActionCard_1.ActionCard {
         }
     }
     bespokePlay(player) {
-        player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.FLOATER, 1, true));
+        player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.FLOATER, 1, { ownCardsOnly: true, blockable: false }));
         return undefined;
     }
 }

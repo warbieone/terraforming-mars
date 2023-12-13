@@ -41,7 +41,7 @@ class MoonMineStandardProject extends StandardProjectCard_1.StandardProjectCard 
     }
     actionEssence(player) {
         const adjustedReserveUnits = MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, this);
-        player.deductUnits(adjustedReserveUnits);
+        player.stock.deductUnits(adjustedReserveUnits);
         player.game.defer(new PlaceMoonMineTile_1.PlaceMoonMineTile(player));
         player.production.add(Resource_1.Resource.STEEL, 1, { log: true });
     }

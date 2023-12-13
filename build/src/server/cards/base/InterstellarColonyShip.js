@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 class InterstellarColonyShip extends Card_1.Card {
     constructor() {
         super({
@@ -14,7 +13,7 @@ class InterstellarColonyShip extends Card_1.Card {
             tags: [Tag_1.Tag.EARTH, Tag_1.Tag.SPACE],
             cost: 24,
             victoryPoints: 4,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 5)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 5 },
             metadata: {
                 description: 'Requires that you have 5 science tags.',
                 cardNumber: '027',

@@ -29,11 +29,12 @@ class Insulation extends Card_1.Card {
         return player.production.heat >= 1;
     }
     bespokePlay(player) {
-        return new SelectAmount_1.SelectAmount('Select amount of heat production to decrease', 'Decrease', (amount) => {
+        return new SelectAmount_1.SelectAmount('Select amount of heat production to decrease', 'Decrease', 1, player.production.heat)
+            .andThen((amount) => {
             player.production.add(Resource_1.Resource.HEAT, -amount, { log: true });
             player.production.add(Resource_1.Resource.MEGACREDITS, amount, { log: true });
             return undefined;
-        }, 1, player.production.heat);
+        });
     }
 }
 exports.Insulation = Insulation;

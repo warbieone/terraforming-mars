@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class ArchaeBacteria extends Card_1.Card {
@@ -18,7 +17,7 @@ class ArchaeBacteria extends Card_1.Card {
             behavior: {
                 production: { plants: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(-18, { max: Options_1.max })),
+            requirements: { temperature: -18, max: Options_1.max },
             metadata: {
                 description: 'It must be -18 C or colder. Increase your plant production 1 step.',
                 cardNumber: '042',

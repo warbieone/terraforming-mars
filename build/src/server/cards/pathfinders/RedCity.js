@@ -6,13 +6,14 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const CardRenderDynamicVictoryPoints_1 = require("../render/CardRenderDynamicVictoryPoints");
 const TileType_1 = require("../../../common/TileType");
 const SelectSpace_1 = require("../../inputs/SelectSpace");
-const AresHandler_1 = require("../../ares/AresHandler");
 const Board_1 = require("../../boards/Board");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
+const SpaceType_1 = require("../../../common/boards/SpaceType");
+const AresTileType_1 = require("../../../common/AresTileType");
 class RedCity extends Card_1.Card {
     constructor() {
         super({
@@ -23,7 +24,7 @@ class RedCity extends Card_1.Card {
             behavior: {
                 production: { energy: -1, megacredits: 2 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.REDS)),
+            requirements: { party: PartyName_1.PartyName.REDS },
             victoryPoints: 'special',
             metadata: {
                 cardNumber: 'PFT2',
@@ -47,7 +48,8 @@ class RedCity extends Card_1.Card {
         return this.availableRedCitySpaces(player).length > 0;
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace('Select space for Red City', this.availableRedCitySpaces(player), (space) => {
+        return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)), this.availableRedCitySpaces(player))
+            .andThen((space) => {
             player.game.addTile(player, space, { tileType: TileType_1.TileType.RED_CITY, card: this.name });
             return undefined;
         });
@@ -58,7 +60,10 @@ class RedCity extends Card_1.Card {
             return 0;
         }
         const neighbors = player.game.board.getAdjacentSpaces(space);
-        return neighbors.filter((neighbor) => neighbor.tile === undefined || AresHandler_1.AresHandler.hasHazardTile(neighbor)).length;
+        return neighbors.filter((neighbor) => this.isEmpty(neighbor)).length;
+    }
+    isEmpty(space) {
+        return space.spaceType === SpaceType_1.SpaceType.RESTRICTED || space.tile === undefined || (0, AresTileType_1.isHazardTileType)(space.tile.tileType);
     }
 }
 exports.RedCity = RedCity;

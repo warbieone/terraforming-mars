@@ -24,6 +24,12 @@ const defaults = {
     debug_view: false,
 };
 class PreferencesManager {
+    localStorageSupported() {
+        return typeof localStorage !== 'undefined';
+    }
+    static resetForTest() {
+        this.INSTANCE = new PreferencesManager();
+    }
     constructor() {
         this._values = Object.assign({}, defaults);
         for (const key of Object.keys(defaults)) {
@@ -31,12 +37,6 @@ class PreferencesManager {
             if (value)
                 this._set(key, value);
         }
-    }
-    localStorageSupported() {
-        return typeof localStorage !== 'undefined';
-    }
-    static resetForTest() {
-        this.INSTANCE = new PreferencesManager();
     }
     _set(key, val) {
         if (key === 'lang') {

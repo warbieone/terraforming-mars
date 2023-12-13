@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Colony = void 0;
+exports.Colony = exports.ShouldIncreaseTrack = void 0;
 const AddResourcesToCard_1 = require("../deferredActions/AddResourcesToCard");
 const CardName_1 = require("../../common/cards/CardName");
 const ColonyBenefit_1 = require("../../common/colonies/ColonyBenefit");
@@ -22,6 +22,13 @@ const SendDelegateToArea_1 = require("../deferredActions/SendDelegateToArea");
 const Turmoil_1 = require("../turmoil/Turmoil");
 const IColonyMetadata_1 = require("../../common/colonies/IColonyMetadata");
 const utils_1 = require("../../common/utils/utils");
+const MessageBuilder_1 = require("../logs/MessageBuilder");
+var ShouldIncreaseTrack;
+(function (ShouldIncreaseTrack) {
+    ShouldIncreaseTrack[ShouldIncreaseTrack["YES"] = 0] = "YES";
+    ShouldIncreaseTrack[ShouldIncreaseTrack["NO"] = 1] = "NO";
+    ShouldIncreaseTrack[ShouldIncreaseTrack["ASK"] = 2] = "ASK";
+})(ShouldIncreaseTrack = exports.ShouldIncreaseTrack || (exports.ShouldIncreaseTrack = {}));
 class Colony {
     constructor(metadata) {
         this.isActive = true;
@@ -70,8 +77,12 @@ class Colony {
             poseidon.production.add(Resource_1.Resource.MEGACREDITS, 2);
         }
         if (player.cardIsInEffect(CardName_1.CardName.NAOMI)) {
-            player.addResource(Resource_1.Resource.ENERGY, 2, { log: true });
-            player.addResource(Resource_1.Resource.MEGACREDITS, 3, { log: true });
+            player.stock.add(Resource_1.Resource.ENERGY, 2, { log: true });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, 3, { log: true });
+        }
+        const colonyTradeHub = player.game.getPlayers().find((player) => player.cardIsInEffect(CardName_1.CardName.COLONY_TRADE_HUB));
+        if (colonyTradeHub !== undefined) {
+            colonyTradeHub.stock.add(Resource_1.Resource.MEGACREDITS, 2, { log: true });
         }
     }
     trade(player, tradeOptions = {}, bonusTradeOffset = 0) {
@@ -90,7 +101,8 @@ class Colony {
             this.handleTrade(player, tradeOptions);
             return;
         }
-        player.game.defer(new IncreaseColonyTrack_1.IncreaseColonyTrack(player, this, steps, () => this.handleTrade(player, tradeOptions)));
+        player.game.defer(new IncreaseColonyTrack_1.IncreaseColonyTrack(player, this, steps))
+            .andThen(() => this.handleTrade(player, tradeOptions));
     }
     handleTrade(player, options) {
         const resource = Array.isArray(this.metadata.tradeResource) ? this.metadata.tradeResource[this.trackPosition] : this.metadata.tradeResource;
@@ -121,11 +133,16 @@ class Colony {
                 action = new AddResourcesToCard_1.AddResourcesToCard(player, cardResource, { count: quantity });
                 break;
             case ColonyBenefit_1.ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD:
-                action = new AddResourcesToCard_1.AddResourcesToCard(player, undefined, { count: quantity, restrictedTag: Tag_1.Tag.VENUS, title: 'Select Venus card to add ' + quantity + ' resource(s)' });
+                action = new AddResourcesToCard_1.AddResourcesToCard(player, undefined, {
+                    count: quantity,
+                    restrictedTag: Tag_1.Tag.VENUS,
+                    title: (0, MessageBuilder_1.message)('Select Venus card to add ${0} resource(s)', (b) => b.number(quantity)),
+                });
                 break;
             case ColonyBenefit_1.ColonyBenefit.COPY_TRADE:
                 const openColonies = game.colonies.filter((colony) => colony.isActive);
-                action = new DeferredAction_1.SimpleDeferredAction(player, () => new SelectColony_1.SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colony) => {
+                action = new DeferredAction_1.SimpleDeferredAction(player, () => new SelectColony_1.SelectColony('Select colony to gain trade income from', 'Select', openColonies)
+                    .andThen((colony) => {
                     game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
                     colony.handleTrade(player, {
                         usesTradeFleet: false,
@@ -143,7 +160,7 @@ class Colony {
                 break;
             case ColonyBenefit_1.ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
                 player.drawCard();
-                action = new DiscardCards_1.DiscardCards(player, 1, this.name + ' colony bonus. Select a card to discard');
+                action = new DiscardCards_1.DiscardCards(player, 1, 1, this.name + ' colony bonus. Select a card to discard');
                 break;
             case ColonyBenefit_1.ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
                 action = DrawCards_1.DrawCards.keepSome(player, quantity, { keepMax: 1 });
@@ -160,15 +177,15 @@ class Colony {
             case ColonyBenefit_1.ColonyBenefit.GAIN_RESOURCES:
                 if (resource === undefined)
                     throw new Error('Resource cannot be undefined');
-                player.addResource(resource, quantity, { log: true });
+                player.stock.add(resource, quantity, { log: true });
                 break;
             case ColonyBenefit_1.ColonyBenefit.GAIN_SCIENCE_TAG:
-                player.tags.gainScienceTag();
+                player.tags.gainScienceTag(1);
                 player.playCard(new ScienceTagCard_1.ScienceTagCard(), undefined, 'nothing');
                 game.log('${0} gained 1 Science tag', (b) => b.player(player));
                 break;
             case ColonyBenefit_1.ColonyBenefit.GAIN_SCIENCE_TAGS_AND_CLONE_TAG:
-                player.scienceTagCount += 2;
+                player.tags.gainScienceTag(2);
                 player.playCard(new ScienceTagCard_1.ScienceTagCard(), undefined, 'nothing');
                 game.log('${0} gained 2 Science tags', (b) => b.player(player));
                 break;
@@ -180,7 +197,7 @@ class Colony {
                 break;
             case ColonyBenefit_1.ColonyBenefit.PLACE_DELEGATES:
                 Turmoil_1.Turmoil.ifTurmoil(game, (turmoil) => {
-                    const availablePlayerDelegates = turmoil.getAvailableDelegateCount(player.id);
+                    const availablePlayerDelegates = turmoil.getAvailableDelegateCount(player);
                     const qty = Math.min(quantity, availablePlayerDelegates);
                     for (let i = 0; i < qty; i++) {
                         game.defer(new SendDelegateToArea_1.SendDelegateToArea(player));
@@ -189,8 +206,8 @@ class Colony {
                 break;
             case ColonyBenefit_1.ColonyBenefit.GIVE_MC_PER_DELEGATE:
                 Turmoil_1.Turmoil.ifTurmoil(game, (turmoil) => {
-                    const partyDelegateCount = (0, utils_1.sum)(turmoil.parties.map((party) => party.delegates.get(player.id)));
-                    player.addResource(Resource_1.Resource.MEGACREDITS, partyDelegateCount, { log: true });
+                    const partyDelegateCount = (0, utils_1.sum)(turmoil.parties.map((party) => party.delegates.get(player)));
+                    player.stock.add(Resource_1.Resource.MEGACREDITS, partyDelegateCount, { log: true });
                 });
                 break;
             case ColonyBenefit_1.ColonyBenefit.GAIN_TR:
@@ -211,7 +228,7 @@ class Colony {
             case ColonyBenefit_1.ColonyBenefit.LOSE_RESOURCES:
                 if (resource === undefined)
                     throw new Error('Resource cannot be undefined');
-                player.deductResource(resource, quantity);
+                player.stock.deduct(resource, quantity);
                 break;
             case ColonyBenefit_1.ColonyBenefit.OPPONENT_DISCARD:
                 if (game.isSoloMode())
@@ -220,8 +237,9 @@ class Colony {
                     const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
                     if (playersWithCards.length === 0)
                         return undefined;
-                    return new SelectPlayer_1.SelectPlayer(playersWithCards, 'Select player to discard a card', 'Select', (selectedPlayer) => {
-                        game.defer(new DiscardCards_1.DiscardCards(selectedPlayer, 1, this.name + ' colony effect. Select a card to discard'));
+                    return new SelectPlayer_1.SelectPlayer(playersWithCards, 'Select player to discard a card', 'Select')
+                        .andThen((selectedPlayer) => {
+                        game.defer(new DiscardCards_1.DiscardCards(selectedPlayer, 1, 1, this.name + ' colony effect. Select a card to discard'));
                         return undefined;
                     });
                 });

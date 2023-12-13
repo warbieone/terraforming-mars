@@ -18,7 +18,8 @@ export class MassConverter extends Card implements IProjectCard {
         production: {energy: 6},
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 6)),
+      requirements: {tag: Tag.SCIENCE, count: 6},
+      
       cardDiscount: {tag: Tag.SPACE, amount: 2, per: 'card'},
       metadata: {
         cardNumber: '094',

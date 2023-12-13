@@ -6,7 +6,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardResource_1 = require("../../../common/CardResource");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class EosChasmaNationalPark extends Card_1.Card {
     constructor() {
@@ -21,7 +20,7 @@ class EosChasmaNationalPark extends Card_1.Card {
                 stock: { plants: 3 },
                 addResourcesToAnyCard: { count: 1, type: CardResource_1.CardResource.ANIMAL },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(-12)),
+            requirements: { temperature: -12 },
             metadata: {
                 cardNumber: '026',
                 description: 'Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.',

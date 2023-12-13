@@ -24,15 +24,25 @@ const SelectPaymentDeferred_1 = require("../deferredActions/SelectPaymentDeferre
 const OrOptions_1 = require("../inputs/OrOptions");
 const SelectOption_1 = require("../inputs/SelectOption");
 const Payment_1 = require("../../common/inputs/Payment");
+const SelectResources_1 = require("../inputs/SelectResources");
+const titles_1 = require("../inputs/titles");
+const MessageBuilder_1 = require("../logs/MessageBuilder");
+const IdentifySpacesDeferred_1 = require("../underworld/IdentifySpacesDeferred");
+const ExcavateSpacesDeferred_1 = require("../underworld/ExcavateSpacesDeferred");
+const UnderworldExpansion_1 = require("../underworld/UnderworldExpansion");
+const SelectResource_1 = require("../inputs/SelectResource");
+const RemoveResourcesFromCard_1 = require("../deferredActions/RemoveResourcesFromCard");
+const IProjectCard_1 = require("../cards/IProjectCard");
 class Executor {
-    canExecute(behavior, player, card) {
-        var _a, _b, _c;
+    canExecute(behavior, player, card, canAffordOptions) {
+        var _a, _b, _c, _d, _e, _f;
         const ctx = new Counter_1.Counter(player, card);
+        const asTrSource = this.toTRSource(behavior, ctx);
         if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
             return false;
         }
         if (behavior.or) {
-            if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card))) {
+            if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card, canAffordOptions))) {
                 return false;
             }
         }
@@ -62,11 +72,26 @@ class Executor {
             if (spend.energy && player.energy < spend.energy) {
                 return false;
             }
+            if (spend.heat) {
+                if (player.availableHeat() < spend.heat) {
+                    return false;
+                }
+                if (!player.canAfford({
+                    cost: 0,
+                    reserveUnits: Units_1.Units.of({ heat: spend.heat }),
+                    tr: asTrSource,
+                })) {
+                    return false;
+                }
+            }
             if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
                 return false;
             }
-            if (spend.heat) {
-                throw new Error('spending heat not yet supported.');
+            if (spend.resourceFromAnyCard && player.getCardsWithResources(spend.resourceFromAnyCard.type).length === 0) {
+                return false;
+            }
+            if (spend.corruption && player.underworldData.corruption < spend.corruption) {
+                return false;
             }
         }
         if (behavior.decreaseAnyProduction !== undefined) {
@@ -81,33 +106,45 @@ class Executor {
         }
         if (behavior.city !== undefined) {
             if (behavior.city.space === undefined) {
-                if (player.game.board.getAvailableSpacesForType(player, (_b = behavior.city.on) !== null && _b !== void 0 ? _b : 'city').length === 0) {
+                if (player.game.board.getAvailableSpacesForType(player, (_b = behavior.city.on) !== null && _b !== void 0 ? _b : 'city', canAffordOptions).length === 0) {
                     return false;
                 }
             }
         }
         if (behavior.greenery !== undefined) {
-            if (player.game.board.getAvailableSpacesForType(player, (_c = behavior.greenery.on) !== null && _c !== void 0 ? _c : 'greenery').length === 0) {
+            if (player.game.board.getAvailableSpacesForType(player, (_c = behavior.greenery.on) !== null && _c !== void 0 ? _c : 'greenery', canAffordOptions).length === 0) {
                 return false;
             }
         }
         if (behavior.tile !== undefined) {
-            if (player.game.board.getAvailableSpacesForType(player, behavior.tile.on).length === 0) {
+            if (player.game.board.getAvailableSpacesForType(player, behavior.tile.on, canAffordOptions).length === 0) {
                 return false;
             }
         }
         if (behavior.addResourcesToAnyCard !== undefined) {
             const arctac = behavior.addResourcesToAnyCard;
             if (!Array.isArray(arctac) && arctac.mustHaveCard === true) {
-                const action = new AddResourcesToCard_1.AddResourcesToCard(player, arctac.type, { count: ctx.count(arctac.count), restrictedTag: arctac.tag });
-                if (action.getCards().length === 0) {
+                const action = new AddResourcesToCard_1.AddResourcesToCard(player, arctac.type, {
+                    count: ctx.count(arctac.count),
+                    restrictedTag: arctac.tag,
+                    min: arctac.min,
+                    robotCards: arctac.robotCards !== undefined,
+                });
+                const cards = action.getCards();
+                const count = cards[0].length + cards[1].length;
+                if (count === 0) {
                     return false;
+                }
+                if (count === 1 && ((_e = (_d = behavior.spend) === null || _d === void 0 ? void 0 : _d.resourcesHere) !== null && _e !== void 0 ? _e : 0 > 0)) {
+                    if (((_f = cards[0][0]) === null || _f === void 0 ? void 0 : _f.name) === card.name) {
+                        return false;
+                    }
                 }
             }
         }
         if (behavior.turmoil) {
             if (behavior.turmoil.sendDelegates) {
-                if (Turmoil_1.Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) < behavior.turmoil.sendDelegates.count) {
+                if (Turmoil_1.Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player) < behavior.turmoil.sendDelegates.count) {
                     return false;
                 }
             }
@@ -134,19 +171,20 @@ class Executor {
         return true;
     }
     execute(behavior, player, card) {
-        var _a, _b;
+        var _a, _b, _c, _d;
         const ctx = new Counter_1.Counter(player, card);
         if (behavior.or !== undefined) {
             const options = behavior.or.behaviors
                 .filter((behavior) => this.canExecute(behavior, player, card))
                 .map((behavior) => {
-                return new SelectOption_1.SelectOption(behavior.title, undefined, () => {
+                return new SelectOption_1.SelectOption(behavior.title)
+                    .andThen(() => {
                     this.execute(behavior, player, card);
                     return undefined;
                 });
             });
             if (options.length === 1 && behavior.or.autoSelect === true) {
-                options[0].cb();
+                options[0].cb(undefined);
             }
             else {
                 player.defer(new OrOptions_1.OrOptions(...options));
@@ -154,15 +192,12 @@ class Executor {
         }
         if (behavior.spend !== undefined) {
             const spend = behavior.spend;
+            const remainder = Object.assign({}, behavior);
+            delete remainder['spend'];
             if (spend.megacredits) {
                 player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, spend.megacredits, {
-                    title: 'Select how to pay for action',
-                    afterPay: () => {
-                        const copy = Object.assign({}, behavior);
-                        delete copy['spend'];
-                        this.execute(copy, player, card);
-                    },
-                }));
+                    title: titles_1.TITLES.payForCardAction(card.name),
+                })).andThen(() => this.execute(remainder, player, card));
                 return;
             }
             player.pay(Payment_1.Payment.of({
@@ -170,16 +205,28 @@ class Executor {
                 titanium: (_b = spend.titanium) !== null && _b !== void 0 ? _b : 0,
             }));
             if (spend.plants) {
-                player.deductResource(Resource_1.Resource.PLANTS, spend.plants);
+                player.stock.deduct(Resource_1.Resource.PLANTS, spend.plants);
             }
             if (spend.energy) {
-                player.deductResource(Resource_1.Resource.ENERGY, spend.energy);
+                player.stock.deduct(Resource_1.Resource.ENERGY, spend.energy);
             }
             if (spend.heat) {
-                throw new Error('Spending heat not supported yet.');
+                player.defer(player.spendHeat(spend.heat, () => {
+                    this.execute(remainder, player, card);
+                    return undefined;
+                }));
+                return;
             }
             if (spend.resourcesHere) {
                 player.removeResourceFrom(card, spend.resourcesHere);
+            }
+            if (spend.resourceFromAnyCard) {
+                player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, spend.resourceFromAnyCard.type, 1, { ownCardsOnly: true, blockable: false }))
+                    .andThen(() => this.execute(remainder, player, card));
+                return;
+            }
+            if (spend.corruption) {
+                UnderworldExpansion_1.UnderworldExpansion.loseCorruption(player, spend.corruption);
             }
         }
         if (behavior.production !== undefined) {
@@ -188,7 +235,21 @@ class Executor {
         }
         if (behavior.stock) {
             const units = ctx.countUnits(behavior.stock);
-            player.addUnits(units, { log: true });
+            player.stock.addUnits(units, { log: true });
+        }
+        if (behavior.standardResource) {
+            const entry = behavior.standardResource;
+            const count = typeof (entry) === 'number' ? entry : entry.count;
+            const same = typeof (entry) === 'number' ? false : (_c = entry.same) !== null && _c !== void 0 ? _c : false;
+            if (same === false) {
+                player.defer(new SelectResources_1.SelectResources(player, count, (0, MessageBuilder_1.message)('Gain ${0} standard resources', (b) => b.number(count))));
+            }
+            else {
+                player.defer(new SelectResource_1.SelectResource((0, MessageBuilder_1.message)('Gain ${0} units of a standard resource', (b) => b.number(count)), Units_1.Units.keys, (unit) => {
+                    player.stock.add(Units_1.Units.ResourceMap[unit], count, { log: true });
+                    return undefined;
+                }));
+            }
         }
         if (behavior.steelValue === 1) {
             player.increaseSteelValue();
@@ -209,14 +270,13 @@ class Executor {
                     player.drawCard(ctx.count(drawCard.count), { tag: drawCard.tag, resource: drawCard.resource, cardType: drawCard.type });
                 }
                 else {
-                    const input = player.drawCardKeepSome(ctx.count(drawCard.count), {
+                    player.drawCardKeepSome(ctx.count(drawCard.count), {
                         tag: drawCard.tag,
                         resource: drawCard.resource,
                         cardType: drawCard.type,
                         keepMax: drawCard.keep,
                         paying: drawCard.pay,
                     });
-                    player.defer(input, DeferredAction_1.Priority.DRAW_CARDS);
                 }
             }
         }
@@ -230,22 +290,27 @@ class Executor {
                 player.game.increaseVenusScaleLevel(player, g.venus);
         }
         if (behavior.tr !== undefined) {
-            player.increaseTerraformRating(behavior.tr);
+            player.increaseTerraformRating(ctx.count(behavior.tr));
         }
         const addResources = behavior.addResources;
         if (addResources !== undefined) {
             const count = ctx.count(addResources);
             player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
-                player.addResourceTo(card, count);
+                player.addResourceTo(card, { qty: count, log: true });
                 return undefined;
             }));
         }
         if (behavior.addResourcesToAnyCard) {
             const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
-            for (const entry of array) {
-                const count = ctx.count(entry.count);
+            for (const arctac of array) {
+                const count = ctx.count(arctac.count);
                 if (count > 0) {
-                    player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, entry.type, { count, restrictedTag: entry.tag }));
+                    player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, arctac.type, {
+                        count,
+                        restrictedTag: arctac.tag,
+                        min: arctac.min,
+                        robotCards: arctac.robotCards !== undefined,
+                    }));
                 }
             }
         }
@@ -301,7 +366,7 @@ class Executor {
                     card: card.name,
                 },
                 on: tile.on,
-                title: tile.title,
+                title: (_d = tile.title) !== null && _d !== void 0 ? _d : (0, MessageBuilder_1.message)('Select space for ${0} tile', (b) => b.cardName(card.name)),
                 adjacencyBonus: tile.adjacencyBonus,
             }));
         }
@@ -356,7 +421,7 @@ class Executor {
                     MoonExpansion_1.MoonExpansion.addTile(player, moon.tile.space, { tileType: moon.tile.type, card: card === null || card === void 0 ? void 0 : card.name });
                 }
                 else {
-                    player.game.defer(new PlaceSpecialMoonTile_1.PlaceSpecialMoonTile(player, { tileType: moon.tile.type, card: card === null || card === void 0 ? void 0 : card.name }, moon.tile.title));
+                    player.game.defer(new PlaceSpecialMoonTile_1.PlaceSpecialMoonTile(player, { tileType: moon.tile.type, card: card === null || card === void 0 ? void 0 : card.name }));
                 }
             }
             if (moon.habitatRate !== undefined)
@@ -365,6 +430,29 @@ class Executor {
                 MoonExpansion_1.MoonExpansion.raiseMiningRate(player, moon.miningRate);
             if (moon.logisticsRate !== undefined)
                 MoonExpansion_1.MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
+        }
+        if (behavior.underworld !== undefined) {
+            const underworld = behavior.underworld;
+            if (underworld.identify !== undefined) {
+                player.game.defer(new IdentifySpacesDeferred_1.IdentifySpacesDeferred(player, ctx.count(underworld.identify)));
+            }
+            if (underworld.excavate !== undefined) {
+                const excavate = underworld.excavate;
+                if (typeof (excavate) === 'number') {
+                    player.game.defer(new ExcavateSpacesDeferred_1.ExcavateSpacesDeferred(player, excavate));
+                }
+                else {
+                    player.game.defer(new ExcavateSpacesDeferred_1.ExcavateSpacesDeferred(player, ctx.count(excavate.count), excavate.ignorePlacementRestrictions));
+                }
+            }
+            if (underworld.corruption !== undefined) {
+                UnderworldExpansion_1.UnderworldExpansion.gainCorruption(player, ctx.count(underworld.corruption), { log: true });
+            }
+            if (underworld.markThisGeneration !== undefined) {
+                if ((0, IProjectCard_1.isIProjectCard)(card)) {
+                    card.generationUsed = player.game.generation;
+                }
+            }
         }
     }
     onDiscard(behavior, player, _card) {
@@ -392,10 +480,19 @@ class Executor {
             }
         }
     }
-    toTRSource(behavior) {
+    toTRSource(behavior, ctx) {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+        let tr = undefined;
+        if (behavior.tr !== undefined) {
+            if (typeof (behavior.tr) === 'number') {
+                tr = behavior.tr;
+            }
+            else {
+                tr = ctx.count(behavior.tr);
+            }
+        }
         const trSource = {
-            tr: behavior.tr,
+            tr: tr,
             temperature: (_a = behavior.global) === null || _a === void 0 ? void 0 : _a.temperature,
             oxygen: ((_c = (_b = behavior.global) === null || _b === void 0 ? void 0 : _b.oxygen) !== null && _c !== void 0 ? _c : 0) + (behavior.greenery !== undefined ? 1 : 0),
             venus: (_d = behavior.global) === null || _d === void 0 ? void 0 : _d.venus,

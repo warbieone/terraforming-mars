@@ -28,7 +28,8 @@ class Colonies {
     }
     canTrade() {
         return ColoniesHandler_1.ColoniesHandler.tradeableColonies(this.player.game).length > 0 &&
-            this.getFleetSize() > this.tradesThisGeneration;
+            this.getFleetSize() > this.tradesThisGeneration &&
+            this.player.game.tradeEmbargo !== true;
     }
     coloniesTradeAction() {
         const game = this.player.game;
@@ -53,7 +54,7 @@ class Colonies {
         howToPayForTrade.buttonLabel = 'Pay';
         handlers.forEach((handler) => {
             if (handler.canUse()) {
-                howToPayForTrade.options.push(new SelectOption_1.SelectOption(handler.optionText(), '', () => {
+                howToPayForTrade.options.push(new SelectOption_1.SelectOption(handler.optionText()).andThen(() => {
                     selected = handler;
                     return undefined;
                 }));
@@ -62,16 +63,15 @@ class Colonies {
         if (howToPayForTrade.options.length === 0) {
             return undefined;
         }
-        const selectColony = new SelectColony_1.SelectColony('Select colony tile for trade', 'trade', openColonies, (colony) => {
+        const selectColony = new SelectColony_1.SelectColony('Select colony tile for trade', 'trade', openColonies)
+            .andThen((colony) => {
             if (selected === undefined) {
                 throw new Error(`Unexpected condition: no trade funding source selected when trading with ${colony.name}.`);
             }
             selected.trade(colony);
             return undefined;
         });
-        const trade = new AndOptions_1.AndOptions(() => {
-            return undefined;
-        }, howToPayForTrade, selectColony);
+        const trade = new AndOptions_1.AndOptions(howToPayForTrade, selectColony);
         trade.title = 'Trade with a colony tile';
         trade.buttonLabel = 'Trade';
         return trade;
@@ -120,10 +120,10 @@ class TradeWithEnergy {
         return this.player.energy >= this.tradeCost;
     }
     optionText() {
-        return (0, MessageBuilder_1.newMessage)('Pay ${0} energy', (b) => b.number(this.tradeCost));
+        return (0, MessageBuilder_1.message)('Pay ${0} energy', (b) => b.number(this.tradeCost));
     }
     trade(colony) {
-        this.player.deductResource(Resource_1.Resource.ENERGY, this.tradeCost);
+        this.player.stock.deduct(Resource_1.Resource.ENERGY, this.tradeCost);
         this.player.game.log('${0} spent ${1} energy to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
         colony.trade(this.player);
     }
@@ -138,7 +138,7 @@ class TradeWithTitanium {
         return this.player.titanium >= this.tradeCost;
     }
     optionText() {
-        return (0, MessageBuilder_1.newMessage)('Pay ${0} titanium', (b) => b.number(this.tradeCost));
+        return (0, MessageBuilder_1.message)('Pay ${0} titanium', (b) => b.number(this.tradeCost));
     }
     trade(colony) {
         this.player.pay(Payment_1.Payment.of({ titanium: this.tradeCost }));
@@ -161,16 +161,14 @@ class TradeWithMegacredits {
         return this.player.canAfford(this.tradeCost);
     }
     optionText() {
-        return (0, MessageBuilder_1.newMessage)('Pay ${0} M€', (b) => b.number(this.tradeCost));
+        return (0, MessageBuilder_1.message)('Pay ${0} M€', (b) => b.number(this.tradeCost));
     }
     trade(colony) {
-        this.player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(this.player, this.tradeCost, {
-            title: (0, MessageBuilder_1.newMessage)('Select how to pay ${0} for colony trade', (b) => b.number(this.tradeCost)),
-            afterPay: () => {
-                this.player.game.log('${0} spent ${1} M€ to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
-                colony.trade(this.player);
-            },
-        }));
+        this.player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(this.player, this.tradeCost, { title: (0, MessageBuilder_1.message)('Select how to pay ${0} for colony trade', (b) => b.number(this.tradeCost)) }))
+            .andThen(() => {
+            this.player.game.log('${0} spent ${1} M€ to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
+            colony.trade(this.player);
+        });
     }
 }
 exports.TradeWithMegacredits = TradeWithMegacredits;

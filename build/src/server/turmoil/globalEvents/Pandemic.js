@@ -25,7 +25,7 @@ class Pandemic extends GlobalEvent_1.GlobalEvent {
     resolve(game, turmoil) {
         game.getPlayersInGenerationOrder().forEach((player) => {
             const maxedSteelTags = Math.min(5, player.tags.count(Tag_1.Tag.BUILDING, 'raw'));
-            player.deductResource(Resource_1.Resource.MEGACREDITS, 3 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), { log: true, from: this.name });
+            player.stock.deduct(Resource_1.Resource.MEGACREDITS, 3 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), { log: true, from: this.name });
         });
     }
 }

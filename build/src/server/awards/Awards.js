@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Awards = exports.ALL_AWARDS = exports.VASTITAS_BOREALIS_AWARDS = exports.TERRA_CIMMERIA_AWARDS = exports.ARABIA_TERRA_AWARDS = exports.AMAZONIS_PLANITIA_AWARDS = exports.MOON_AWARDS = exports.ARES_AWARDS = exports.HELLAS_AWARDS = exports.ELYSIUM_AWARDS = exports.VENUS_AWARDS = exports.THARSIS_AWARDS = void 0;
+exports.Awards = exports.ALL_AWARDS = exports.UNDERWORLD_AWARDS = exports.VASTITAS_BOREALIS_AWARDS = exports.TERRA_CIMMERIA_AWARDS = exports.ARABIA_TERRA_AWARDS = exports.AMAZONIS_PLANITIA_AWARDS = exports.MOON_AWARDS = exports.ARES_AWARDS = exports.HELLAS_AWARDS = exports.ELYSIUM_AWARDS = exports.VENUS_AWARDS = exports.THARSIS_AWARDS = void 0;
 const Landlord_1 = require("./Landlord");
 const Banker_1 = require("./Banker");
 const Scientist_1 = require("./Scientist");
@@ -40,6 +40,8 @@ const Politician_1 = require("./terraCimmeria/Politician");
 const Urbanist_1 = require("./terraCimmeria/Urbanist");
 const Warmonger_1 = require("./terraCimmeria/Warmonger");
 const Zoologist_2 = require("./amazonisPlanitia/Zoologist");
+const Kingpin_1 = require("./underworld/Kingpin");
+const EdgeLord_1 = require("./underworld/EdgeLord");
 exports.THARSIS_AWARDS = [
     new Landlord_1.Landlord(),
     new Scientist_1.Scientist(),
@@ -99,6 +101,10 @@ exports.VASTITAS_BOREALIS_AWARDS = [
     new Naturalist_1.Naturalist(),
     new Voyager_1.Voyager(),
 ];
+exports.UNDERWORLD_AWARDS = [
+    new Kingpin_1.Kingpin(),
+    new EdgeLord_1.EdgeLord(),
+];
 exports.ALL_AWARDS = [
     ...exports.THARSIS_AWARDS,
     ...exports.ELYSIUM_AWARDS,
@@ -110,6 +116,7 @@ exports.ALL_AWARDS = [
     ...exports.ARABIA_TERRA_AWARDS,
     ...exports.TERRA_CIMMERIA_AWARDS,
     ...exports.VASTITAS_BOREALIS_AWARDS,
+    ...exports.UNDERWORLD_AWARDS,
 ];
 var Awards;
 (function (Awards) {

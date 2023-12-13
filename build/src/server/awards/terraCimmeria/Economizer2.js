@@ -5,7 +5,7 @@ const CardType_1 = require("../../../common/cards/CardType");
 class Economizer2 {
     constructor() {
         this.name = 'T. Economizer';
-        this.description = 'Play the most cards with a base cost of 10 M€ or less (not events.)';
+        this.description = 'Have the most project cards in play with a base cost of 10 M€ or less (not events.)';
     }
     getScore(player) {
         const validCardTypes = [CardType_1.CardType.ACTIVE, CardType_1.CardType.AUTOMATED];

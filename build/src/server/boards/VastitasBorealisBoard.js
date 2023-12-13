@@ -6,7 +6,8 @@ const SpaceName_1 = require("../SpaceName");
 const Board_1 = require("./Board");
 const BoardBuilder_1 = require("./BoardBuilder");
 const constants_1 = require("../../common/constants");
-class VastitasBorealisBoard extends Board_1.Board {
+const MarsBoard_1 = require("./MarsBoard");
+class VastitasBorealisBoard extends MarsBoard_1.MarsBoard {
     static newInstance(gameOptions, rng) {
         const builder = new BoardBuilder_1.BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
         const PLANT = SpaceBonus_1.SpaceBonus.PLANT;
@@ -33,20 +34,13 @@ class VastitasBorealisBoard extends Board_1.Board {
     static deserialize(board, players) {
         return new VastitasBorealisBoard(Board_1.Board.deserializeSpaces(board.spaces, players));
     }
-    filterVastitasBorealis(player, spaces) {
-        return player.canAfford(constants_1.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, { tr: { temperature: 1 } }) ? spaces : spaces.filter((space) => space.id !== SpaceName_1.SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
-    }
-    getSpaces(spaceType, player) {
-        return this.filterVastitasBorealis(player, super.getSpaces(spaceType, player));
-    }
-    getAvailableSpacesForCity(player) {
-        return this.filterVastitasBorealis(player, super.getAvailableSpacesForCity(player));
-    }
-    getAvailableSpacesOnLand(player) {
-        return this.filterVastitasBorealis(player, super.getAvailableSpacesOnLand(player));
-    }
-    getAvailableSpacesForGreenery(player) {
-        return this.filterVastitasBorealis(player, super.getAvailableSpacesForGreenery(player));
+    spaceCosts(space) {
+        const costs = super.spaceCosts(space);
+        if (space.id === SpaceName_1.SpaceName.VASTITAS_BOREALIS_NORTH_POLE) {
+            costs.stock.megacredits = constants_1.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST;
+            costs.tr.oceans = 1;
+        }
+        return costs;
     }
     getVolcanicSpaceIds() {
         return [

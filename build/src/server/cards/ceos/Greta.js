@@ -33,7 +33,7 @@ class Greta extends CeoCard_1.CeoCard {
         const game = player.game;
         if (this.opgActionIsActive === true && this.effectTriggerCount < 10) {
             if (player === cardOwner && game.phase === Phase_1.Phase.ACTION) {
-                player.addResource(Resource_1.Resource.MEGACREDITS, 4, { log: true });
+                player.stock.add(Resource_1.Resource.MEGACREDITS, 4, { log: true });
                 this.effectTriggerCount++;
             }
         }

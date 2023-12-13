@@ -14,6 +14,7 @@ class AdaptationTechnology extends Card_1.Card {
             tags: [Tag_1.Tag.SCIENCE],
             cost: 12,
             victoryPoints: 1,
+            globalParameterRequirementBonus: { steps: 2 },
             metadata: {
                 cardNumber: '153',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -23,9 +24,6 @@ class AdaptationTechnology extends Card_1.Card {
                 }),
             },
         });
-    }
-    getRequirementBonus() {
-        return 2;
     }
 }
 exports.AdaptationTechnology = AdaptationTechnology;

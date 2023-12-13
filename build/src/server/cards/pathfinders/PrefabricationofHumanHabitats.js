@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Resource_1 = require("../../../common/Resource");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Tag_1 = require("../../../common/cards/Tag");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
@@ -17,7 +16,7 @@ class PrefabricationofHumanHabitats extends Card_1.Card {
             name: CardName_1.CardName.PREFABRICATION_OF_HUMAN_HABITATS,
             cost: 8,
             tags: [Tag_1.Tag.BUILDING, Tag_1.Tag.CITY],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.production(Resource_1.Resource.STEEL)),
+            requirements: { production: Resource_1.Resource.STEEL, count: 1 },
             cardDiscount: { tag: Tag_1.Tag.CITY, amount: 2 },
             metadata: {
                 cardNumber: 'Pf02',

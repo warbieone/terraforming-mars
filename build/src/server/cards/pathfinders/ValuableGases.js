@@ -11,13 +11,13 @@ const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag"
 const Resource_1 = require("../../../common/Resource");
 const Options_1 = require("../Options");
 const CardType_1 = require("../../../common/cards/CardType");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const SelectProjectCardToPlay_1 = require("../../inputs/SelectProjectCardToPlay");
 class ValuableGases extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
             name: CardName_1.CardName.VALUABLE_GASES_PATHFINDERS,
             tags: [Tag_1.Tag.JOVIAN, Tag_1.Tag.VENUS],
+            globalParameterRequirementBonus: { steps: 50, nextCardOnly: true },
             metadata: {
                 cardNumber: '',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -29,18 +29,12 @@ class ValuableGases extends PreludeCard_1.PreludeCard {
             },
         });
     }
-    getRequirementBonus(player) {
-        if (player.lastCardPlayed === this.name) {
-            return 50;
-        }
-        return 0;
-    }
     bespokePlay(player) {
-        player.addResource(Resource_1.Resource.MEGACREDITS, 10);
+        player.stock.add(Resource_1.Resource.MEGACREDITS, 10);
         const playableCards = player.cardsInHand.filter((card) => {
             return card.resourceType === CardResource_1.CardResource.FLOATER &&
                 card.type === CardType_1.CardType.ACTIVE &&
-                player.canAffordCard(card);
+                player.canAfford(player.affordOptionsForCard(card));
         }).map((card) => {
             return {
                 card: card,
@@ -48,10 +42,10 @@ class ValuableGases extends PreludeCard_1.PreludeCard {
             };
         });
         if (playableCards.length !== 0) {
-            player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
-                return new SelectProjectCardToPlay_1.SelectProjectCardToPlay(player, playableCards, {
-                    cb: (card) => player.addResourceTo(card, 5),
-                });
+            player.defer(new SelectProjectCardToPlay_1.SelectProjectCardToPlay(player, playableCards)
+                .andThen((card) => {
+                player.addResourceTo(card, 5);
+                return undefined;
             }));
         }
         return undefined;

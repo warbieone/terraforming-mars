@@ -4,6 +4,7 @@ exports.SurveyMission = void 0;
 const PreludeCard_1 = require("../prelude/PreludeCard");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
+const Tag_1 = require("../../../common/cards/Tag");
 const BoardType_1 = require("../../boards/BoardType");
 const SelectSpace_1 = require("../../inputs/SelectSpace");
 const LogHelper_1 = require("../../LogHelper");
@@ -12,6 +13,7 @@ class SurveyMission extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
             name: CardName_1.CardName.SURVEY_MISSION,
+            tags: [Tag_1.Tag.MARS],
             behavior: {
                 stock: { steel: 5 },
             },
@@ -67,7 +69,8 @@ class SurveyMission extends PreludeCard_1.PreludeCard {
         const spaceSet = new Set(triplets.flat());
         const spaces = Array.from(spaceSet).filter((space) => space.player === undefined);
         spaces.sort((s1, s2) => parseInt(s2.id) - parseInt(s1.id));
-        return new SelectSpace_1.SelectSpace(messages[iteration], spaces, (space) => {
+        return new SelectSpace_1.SelectSpace(messages[iteration], spaces)
+            .andThen((space) => {
             var _a, _b;
             space.player = player;
             player.game.grantSpaceBonuses(player, space);

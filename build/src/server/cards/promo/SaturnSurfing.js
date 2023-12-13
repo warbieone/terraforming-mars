@@ -38,7 +38,7 @@ class SaturnSurfing extends Card_1.Card {
         return this.resourceCount > 0;
     }
     action(player) {
-        player.addResource(Resource_1.Resource.MEGACREDITS, Math.min(5, this.resourceCount--));
+        player.stock.add(Resource_1.Resource.MEGACREDITS, Math.min(5, this.resourceCount--));
         return undefined;
     }
 }

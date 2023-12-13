@@ -14,6 +14,7 @@ const Database_1 = require("../database/Database");
 const GameLoader_1 = require("../database/GameLoader");
 const ServerModel_1 = require("../models/ServerModel");
 const Handler_1 = require("./Handler");
+const Types_1 = require("../../common/Types");
 class LoadGame extends Handler_1.Handler {
     constructor() {
         super();
@@ -28,6 +29,9 @@ class LoadGame extends Handler_1.Handler {
                 try {
                     const gameReq = JSON.parse(body);
                     const gameId = gameReq.gameId;
+                    if (!(0, Types_1.isGameId)(gameId)) {
+                        throw new Error('Invalid game id');
+                    }
                     const rollbackCount = gameReq.rollbackCount;
                     if (rollbackCount > 0) {
                         Database_1.Database.getInstance().deleteGameNbrSaves(gameId, rollbackCount);

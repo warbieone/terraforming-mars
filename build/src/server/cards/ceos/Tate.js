@@ -9,6 +9,7 @@ const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const Size_1 = require("../../../common/cards/render/Size");
 const utils_1 = require("../../../common/utils/utils");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class Tate extends CeoCard_1.CeoCard {
     constructor() {
         super({
@@ -31,9 +32,10 @@ class Tate extends CeoCard_1.CeoCard {
         (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.EVENT);
         (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.CLONE);
         const options = tags.map((tag) => {
-            return new SelectOption_1.SelectOption('Search for ' + tag + ' tags', 'Search', () => {
+            return new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Search for ${0} tags', (b) => b.string(tag)), 'Search').andThen(() => {
                 game.log('${0} searched for ${1} tags', (b) => b.player(player).string(tag));
-                return player.drawCardKeepSome(5, { keepMax: 2, tag: tag, paying: true, logDrawnCard: true });
+                player.drawCardKeepSome(5, { keepMax: 2, tag: tag, paying: true, logDrawnCard: true });
+                return undefined;
             });
         });
         return new OrOptions_1.OrOptions(...options);

@@ -5,7 +5,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 const Tag_1 = require("../../../common/cards/Tag");
 const Size_1 = require("../../../common/cards/render/Size");
@@ -19,12 +18,12 @@ class BotanicalExperience extends Card_1.Card {
             name: CardName_1.CardName.BOTANICAL_EXPERIENCE,
             cost: 14,
             tags: [Tag_1.Tag.PLANT, Tag_1.Tag.MARS, Tag_1.Tag.SCIENCE],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.greeneries(1, { all: Options_1.all })),
+            requirements: { greeneries: 1, all: Options_1.all },
             resourceType: CardResource_1.CardResource.DATA,
             metadata: {
                 cardNumber: 'Pf50',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.greenery(Size_1.Size.SMALL, false, true).colon().data({ size: Size_1.Size.SMALL });
+                    b.greenery({ size: Size_1.Size.SMALL, withO2: false, any: true }).colon().data({ size: Size_1.Size.SMALL });
                     b.nbsp;
                     b.data({ amount: 3, digit: true }).asterix().colon().production((pb) => pb.plants(1));
                     b.br;

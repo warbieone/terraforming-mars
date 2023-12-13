@@ -25,7 +25,7 @@ class CelebrityLeaders extends GlobalEvent_1.GlobalEvent {
     resolve(game, turmoil) {
         game.getPlayersInGenerationOrder().forEach((player) => {
             const eventsCards = player.playedCards.filter((card) => card.type === CardType_1.CardType.EVENT).length;
-            player.addResource(Resource_1.Resource.MEGACREDITS, 2 * (Math.min(5, eventsCards) + turmoil.getPlayerInfluence(player)), { log: true, from: this.name });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, 2 * (Math.min(5, eventsCards) + turmoil.getPlayerInfluence(player)), { log: true, from: this.name });
         });
     }
 }

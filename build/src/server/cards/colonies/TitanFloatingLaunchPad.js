@@ -8,7 +8,6 @@ const CardResource_1 = require("../../../common/CardResource");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const SelectColony_1 = require("../../inputs/SelectColony");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
@@ -53,15 +52,16 @@ class TitanFloatingLaunchPad extends Card_1.Card {
             player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.FLOATER, { restrictedTag: Tag_1.Tag.JOVIAN, title: 'Add 1 floater to a Jovian card' }));
             return undefined;
         }
-        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Remove 1 floater on this card to trade for free', 'Remove floater', () => {
-            player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => new SelectColony_1.SelectColony('Select colony tile to trade with for free', 'Select', tradeableColonies, (colony) => {
+        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Remove 1 floater on this card to trade for free', 'Remove floater').andThen(() => {
+            player.defer(new SelectColony_1.SelectColony('Select colony tile to trade with for free', 'Select', tradeableColonies)
+                .andThen((colony) => {
                 this.resourceCount--;
                 player.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(player).colony(colony));
                 colony.trade(player);
                 return undefined;
-            })));
+            }));
             return undefined;
-        }), new SelectOption_1.SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
+        }), new SelectOption_1.SelectOption('Add 1 floater to a Jovian card', 'Add floater').andThen(() => {
             player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.FLOATER, { restrictedTag: Tag_1.Tag.JOVIAN }));
             return undefined;
         }));
@@ -80,7 +80,7 @@ class TradeWithTitanFloatingLaunchPad {
             !this.player.getActionsThisGeneration().has(CardName_1.CardName.TITAN_FLOATING_LAUNCHPAD);
     }
     optionText() {
-        return (0, MessageBuilder_1.newMessage)('Pay 1 floater (use ${0} action)', (b) => b.cardName(CardName_1.CardName.TITAN_FLOATING_LAUNCHPAD));
+        return (0, MessageBuilder_1.message)('Pay 1 floater (use ${0} action)', (b) => b.cardName(CardName_1.CardName.TITAN_FLOATING_LAUNCHPAD));
     }
     trade(colony) {
         if (this.titanFloatingLaunchPad !== undefined) {

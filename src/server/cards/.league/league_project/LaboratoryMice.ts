@@ -4,7 +4,6 @@ import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {CardResource} from '../../../../common/CardResource';
-import { CardRequirements } from '../../requirements/CardRequirements';
 import {ActionCard} from '../../ActionCard';
 
 export class LaboratoryMice extends ActionCard implements IProjectCard {
@@ -18,7 +17,8 @@ export class LaboratoryMice extends ActionCard implements IProjectCard {
       tags: [Tag.SCIENCE, Tag.ANIMAL],
       resourceType: CardResource.ANIMAL,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(3)),
+      requirements: {oxygen: 3},
+
       victoryPoints: {resourcesHere: {}, per: 3},
 
       action: {

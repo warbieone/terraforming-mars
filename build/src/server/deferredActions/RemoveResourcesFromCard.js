@@ -7,17 +7,20 @@ const SelectCard_1 = require("../inputs/SelectCard");
 const SelectOption_1 = require("../inputs/SelectOption");
 const CardName_1 = require("../../common/cards/CardName");
 const DeferredAction_1 = require("./DeferredAction");
+const UnderworldExpansion_1 = require("../underworld/UnderworldExpansion");
 const animalsProtectedCards = [CardName_1.CardName.PETS, CardName_1.CardName.BIOENGINEERING_ENCLOSURE];
 class RemoveResourcesFromCard extends DeferredAction_1.DeferredAction {
-    constructor(player, resourceType, count = 1, ownCardsOnly = false, mandatory = true, title = 'Select card to remove ' + count + ' ' + resourceType + '(s)') {
+    constructor(player, resourceType, count = 1, options) {
+        var _a, _b, _c, _d;
         super(player, DeferredAction_1.Priority.ATTACK_OPPONENT);
+        this.priority = DeferredAction_1.Priority.ATTACK_OPPONENT;
         this.resourceType = resourceType;
         this.count = count;
-        this.ownCardsOnly = ownCardsOnly;
-        this.mandatory = mandatory;
-        this.title = title;
-        this.priority = DeferredAction_1.Priority.ATTACK_OPPONENT;
-        if (ownCardsOnly) {
+        this.ownCardsOnly = (_a = options === null || options === void 0 ? void 0 : options.ownCardsOnly) !== null && _a !== void 0 ? _a : false;
+        this.mandatory = (_b = options === null || options === void 0 ? void 0 : options.mandatory) !== null && _b !== void 0 ? _b : true;
+        this.blockable = (_c = options === null || options === void 0 ? void 0 : options.blockable) !== null && _c !== void 0 ? _c : true;
+        this.title = (_d = options === null || options === void 0 ? void 0 : options.title) !== null && _d !== void 0 ? _d : (`Select card to remove ${count} ${resourceType}(s)`);
+        if (this.ownCardsOnly === true) {
             this.priority = DeferredAction_1.Priority.LOSE_RESOURCE_OR_PRODUCTION;
         }
     }
@@ -26,27 +29,36 @@ class RemoveResourcesFromCard extends DeferredAction_1.DeferredAction {
             this.player.resolveInsuranceInSoloGame();
             return undefined;
         }
-        const resourceCards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.resourceType, this.ownCardsOnly);
-        if (resourceCards.length === 0) {
+        const cards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.resourceType, this.ownCardsOnly);
+        if (cards.length === 0) {
             return undefined;
         }
-        const selectCard = new SelectCard_1.SelectCard(this.title, 'Remove resource(s)', resourceCards, ([card]) => {
-            const owner = this.player.game.getCardPlayerOrThrow(card.name);
-            owner.removeResourceFrom(card, this.count, { removingPlayer: this.player });
+        const selectCard = new SelectCard_1.SelectCard(this.title, 'Remove resource(s)', cards, { showOwner: true })
+            .andThen(([card]) => {
+            this.attack(card);
             return undefined;
-        }, {
-            showOwner: true,
         });
         if (this.mandatory) {
-            if (resourceCards.length === 1) {
-                const card = resourceCards[0];
-                const owner = this.player.game.getCardPlayerOrThrow(card.name);
-                owner.removeResourceFrom(card, this.count, { removingPlayer: this.player });
+            if (cards.length === 1) {
+                this.attack(cards[0]);
                 return undefined;
             }
             return selectCard;
         }
-        return new OrOptions_1.OrOptions(selectCard, new SelectOption_1.SelectOption('Do not remove', 'Confirm', () => {
+        return new OrOptions_1.OrOptions(selectCard, new SelectOption_1.SelectOption('Do not remove'));
+    }
+    attack(card) {
+        const target = this.player.game.getCardPlayerOrThrow(card.name);
+        if (this.blockable === false) {
+            target.removeResourceFrom(card, this.count, { removingPlayer: this.player });
+            this.cb(true);
+            return;
+        }
+        return UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, this.player, ((proceed) => {
+            if (proceed) {
+                target.removeResourceFrom(card, this.count, { removingPlayer: this.player });
+            }
+            this.cb(proceed);
             return undefined;
         }));
     }

@@ -5,6 +5,8 @@ const Units_1 = require("../../common/Units");
 const TileType_1 = require("../../common/TileType");
 const utils_1 = require("../../common/utils/utils");
 const MoonExpansion_1 = require("../moon/MoonExpansion");
+const CardResource_1 = require("../../common/CardResource");
+const utils = require("../../common/utils/utils");
 class Counter {
     constructor(player, card) {
         this.player = player;
@@ -12,10 +14,11 @@ class Counter {
         this.cardIsUnplayed = !player.cardIsInEffect(card.name);
     }
     count(countable, context = 'default') {
+        var _a;
         if (typeof (countable) === 'number') {
             return countable;
         }
-        let sum = 0;
+        let sum = (_a = countable.start) !== null && _a !== void 0 ? _a : 0;
         const player = this.player;
         const card = this.card;
         const game = player.game;
@@ -23,22 +26,25 @@ class Counter {
             const p = (countable.all === false) ? player : undefined;
             switch (countable.cities.where) {
                 case 'offmars':
-                    sum = game.getCitiesOffMarsCount(p);
+                    sum = game.board.getCitiesOffMars(p).length;
                     break;
                 case 'onmars':
-                    sum += game.getCitiesOnMarsCount(p);
+                    sum += game.board.getCitiesOnMars(p).length;
                     break;
                 case 'everywhere':
                 default:
-                    sum += game.getCitiesCount(p);
+                    sum += game.board.getCities(p).length;
             }
         }
         if (countable.oceans !== undefined) {
-            sum += game.board.getOceanCount({ wetlands: true });
+            sum += game.board.getOceanSpaces({ upgradedOceans: true, wetlands: true }).length;
+        }
+        if (countable.floaters !== undefined) {
+            sum += player.getResourceCount(CardResource_1.CardResource.FLOATER);
         }
         if (countable.greeneries !== undefined) {
             const p = (countable.all === false) ? player : undefined;
-            sum += game.getGreeneriesCount(p);
+            sum += game.board.getGreeneries(p).length;
         }
         if (countable.tag !== undefined) {
             const tag = countable.tag;
@@ -68,11 +74,21 @@ class Counter {
         if (countable.resourcesHere !== undefined) {
             sum += card.resourceCount;
         }
+        if (countable.colonies !== undefined) {
+            player.game.colonies.forEach((colony) => {
+                if (countable.all) {
+                    sum += colony.colonies.length;
+                }
+                else {
+                    sum += colony.colonies.filter((colony) => colony === player.id).length;
+                }
+            });
+        }
         if (countable.moon !== undefined) {
             const moon = countable.moon;
             MoonExpansion_1.MoonExpansion.ifMoon(game, (moonData) => {
                 if (moon.habitatRate) {
-                    sum += moonData.colonyRate;
+                    sum += moonData.habitatRate;
                 }
                 if (moon.miningRate) {
                     sum += moonData.miningRate;
@@ -89,6 +105,25 @@ class Counter {
             }
             if (moon.road) {
                 sum += MoonExpansion_1.MoonExpansion.spaces(game, TileType_1.TileType.MOON_ROAD, { surfaceOnly: true }).length;
+            }
+        }
+        if (countable.underworld !== undefined) {
+            const underworld = countable.underworld;
+            if (underworld.corruption !== undefined) {
+                if (countable.all === true) {
+                    sum += utils.sum(game.getPlayers().map((p) => p.underworldData.corruption));
+                }
+                else {
+                    sum += player.underworldData.corruption;
+                }
+            }
+            if (underworld.excavationMarkers !== undefined) {
+                if (countable.all) {
+                    sum += player.game.board.spaces.filter((space) => space.excavator !== undefined).length;
+                }
+                else {
+                    sum += player.game.board.spaces.filter((space) => space.excavator === player).length;
+                }
             }
         }
         if (countable.each !== undefined) {

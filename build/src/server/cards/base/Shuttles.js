@@ -6,7 +6,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 class Shuttles extends Card_1.Card {
     constructor() {
@@ -19,7 +18,7 @@ class Shuttles extends Card_1.Card {
             behavior: {
                 production: { energy: -1, megacredits: 2 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(5)),
+            requirements: { oxygen: 5 },
             cardDiscount: { tag: Tag_1.Tag.SPACE, amount: 2 },
             metadata: {
                 cardNumber: '166',

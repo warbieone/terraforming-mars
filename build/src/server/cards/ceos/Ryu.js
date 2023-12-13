@@ -40,20 +40,20 @@ class Ryu extends CeoCard_1.CeoCard {
         this.isDisabled = true;
         const choices = new OrOptions_1.OrOptions();
         Resource_1.ALL_RESOURCES.filter((r) => this.productionIsDecreasable(player, r)).forEach((resourceToDecrease) => {
-            const selectOption = new SelectOption_1.SelectOption((0, MessageBuilder_1.newMessage)('Decrease ${0} production', (b) => b.string(resourceToDecrease)), 'Select', () => {
+            const selectOption = new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Decrease ${0} production', (b) => b.string(resourceToDecrease))).andThen(() => {
                 let decreasable = player.production.get(resourceToDecrease);
                 if (resourceToDecrease === Resource_1.Resource.MEGACREDITS)
                     decreasable += 5;
                 const maxDecreasableAmt = Math.min(player.game.generation + 2, decreasable);
-                return new SelectAmount_1.SelectAmount(`Select amount of ${resourceToDecrease} production to decrease`, 'Decrease', (amount) => {
+                return new SelectAmount_1.SelectAmount(`Select amount of ${resourceToDecrease} production to decrease`, 'Decrease', 1, maxDecreasableAmt, true).andThen((amount) => {
                     const productionToIncrease = Resource_1.ALL_RESOURCES.filter((res) => res !== resourceToDecrease)
-                        .map((res) => new SelectOption_1.SelectOption((0, MessageBuilder_1.newMessage)('Increase ${0} production', (b) => b.string(res)), 'Select', () => {
+                        .map((res) => new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Increase ${0} production', (b) => b.string(res))).andThen(() => {
                         player.production.add(resourceToDecrease, -amount, { log: true });
                         player.production.add(res, amount, { log: true });
                         return undefined;
                     }));
                     return new OrOptions_1.OrOptions(...productionToIncrease);
-                }, 1, maxDecreasableAmt, true);
+                });
             });
             choices.options.push(selectOption);
         });

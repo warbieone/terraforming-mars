@@ -6,14 +6,14 @@ const CardName_1 = require("../../common/cards/CardName");
 const LogHelper_1 = require("../LogHelper");
 const shuffle_1 = require("../utils/shuffle");
 class Deck {
+    static shuffle(array, random) {
+        (0, shuffle_1.inplaceShuffle)(array, random);
+    }
     constructor(type, drawPile, discards, random) {
         this.type = type;
         this.drawPile = drawPile;
         this.discardPile = discards;
         this.random = random;
-    }
-    static shuffle(array, random) {
-        (0, shuffle_1.inplaceShuffle)(array, random);
     }
     shuffle(cardsOnTop = []) {
         const copy = [...this.drawPile, ...this.discardPile];
@@ -88,8 +88,8 @@ class Deck {
         }
         return result;
     }
-    discard(card) {
-        this.discardPile.push(card);
+    discard(...cards) {
+        this.discardPile.push(...cards);
     }
     shuffleDiscardPile() {
         Deck.shuffle(this.discardPile, this.random);

@@ -2,17 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LunaFirstIncorporated = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardRenderer_1 = require("../render/CardRenderer");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const Size_1 = require("../../../common/cards/render/Size");
-const Card_1 = require("../Card");
 const Options_1 = require("../Options");
-class LunaFirstIncorporated extends Card_1.Card {
+class LunaFirstIncorporated extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.LUNA_FIRST_INCORPORATED,
             tags: [Tag_1.Tag.MOON],
             startingMegaCredits: 40,

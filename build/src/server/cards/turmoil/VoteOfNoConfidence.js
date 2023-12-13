@@ -4,7 +4,6 @@ exports.VoteOfNoConfidence = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Card_1 = require("../Card");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Turmoil_1 = require("../../turmoil/Turmoil");
 const Options_1 = require("../Options");
@@ -15,7 +14,7 @@ class VoteOfNoConfidence extends Card_1.Card {
             type: CardType_1.CardType.EVENT,
             cost: 5,
             tr: { tr: 1 },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.partyLeaders()),
+            requirements: { partyLeader: 1 },
             metadata: {
                 cardNumber: 'T16',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -30,14 +29,14 @@ class VoteOfNoConfidence extends Card_1.Card {
     }
     bespokeCanPlay(player) {
         const turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);
-        if (!turmoil.hasDelegatesInReserve(player.id))
+        if (!turmoil.hasDelegatesInReserve(player))
             return false;
         return turmoil.chairman === 'NEUTRAL';
     }
     bespokePlay(player) {
         const turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);
-        turmoil.delegateReserve.remove(player.id);
-        turmoil.setNewChairman(player.id, player.game, false);
+        turmoil.delegateReserve.remove(player);
+        turmoil.setNewChairman(player, player.game, false);
         return undefined;
     }
 }

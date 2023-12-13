@@ -41,7 +41,7 @@ class MoonHabitatStandardProject extends StandardProjectCard_1.StandardProjectCa
     }
     actionEssence(player) {
         const adjustedReserveUnits = MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, this);
-        player.deductUnits(adjustedReserveUnits);
+        player.stock.deductUnits(adjustedReserveUnits);
         player.game.defer(new PlaceMoonHabitatTile_1.PlaceMoonHabitatTile(player));
         player.production.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
     }

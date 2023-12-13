@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Units = void 0;
+const Resource_1 = require("./Resource");
 var Units;
 (function (Units) {
     Units.EMPTY = {
@@ -80,5 +81,13 @@ var Units;
         return Units.keys.map((k) => u[k]);
     }
     Units.values = values;
+    Units.ResourceMap = {
+        megacredits: Resource_1.Resource.MEGACREDITS,
+        steel: Resource_1.Resource.STEEL,
+        titanium: Resource_1.Resource.TITANIUM,
+        plants: Resource_1.Resource.PLANTS,
+        energy: Resource_1.Resource.ENERGY,
+        heat: Resource_1.Resource.HEAT,
+    };
 })(Units = exports.Units || (exports.Units = {}));
 //# sourceMappingURL=Units.js.map

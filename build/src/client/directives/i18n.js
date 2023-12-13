@@ -4,6 +4,7 @@ exports.$t = exports.translateTextNode = exports.translateTextWithParams = expor
 const LogMessageDataType_1 = require("@/common/logs/LogMessageDataType");
 const PreferencesManager_1 = require("@/client/utils/PreferencesManager");
 const Log_1 = require("@/common/logs/Log");
+const TileType_1 = require("@/common/TileType");
 const context = {
     playerView: undefined,
     players: new Map(),
@@ -28,8 +29,12 @@ function translateMessage(message) {
                 return datum.value;
             case LogMessageDataType_1.LogMessageDataType.PLAYER:
                 return (_a = context.players.get(datum.value)) !== null && _a !== void 0 ? _a : datum.value;
+            case LogMessageDataType_1.LogMessageDataType.TILE_TYPE:
+                return TileType_1.tileTypeToString[datum.value];
             case LogMessageDataType_1.LogMessageDataType.CARD:
             case LogMessageDataType_1.LogMessageDataType.GLOBAL_EVENT:
+            case LogMessageDataType_1.LogMessageDataType.STRING:
+            case LogMessageDataType_1.LogMessageDataType.PARTY:
                 return translateText(datum.value);
             default:
                 return translateText(datum.value);

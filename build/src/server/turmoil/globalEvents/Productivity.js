@@ -22,7 +22,7 @@ class Productivity extends GlobalEvent_1.GlobalEvent {
     }
     resolve(game, turmoil) {
         game.getPlayersInGenerationOrder().forEach((player) => {
-            player.addResource(Resource_1.Resource.STEEL, Math.min(5, player.production.steel) + turmoil.getPlayerInfluence(player), { log: true, from: this.name });
+            player.stock.add(Resource_1.Resource.STEEL, Math.min(5, player.production.steel) + turmoil.getPlayerInfluence(player), { log: true, from: this.name });
         });
     }
 }

@@ -30,7 +30,7 @@ exports.milestoneNames = [
     'Pioneer',
     'Land Specialist',
     'Martian',
-    'Businessperson',
+    'Terran',
     'Collector',
     'Firestarter',
     'Terra Pioneer',
@@ -41,5 +41,7 @@ exports.milestoneNames = [
     'Tradesman',
     'Irrigator',
     'Capitalist',
+    'Tunneler',
+    'Risktaker',
 ];
 //# sourceMappingURL=MilestoneName.js.map

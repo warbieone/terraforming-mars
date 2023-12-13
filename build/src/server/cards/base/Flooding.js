@@ -36,7 +36,8 @@ class Flooding extends Card_1.Card {
         }
         if (!player.game.canAddOcean())
             return undefined;
-        return new SelectSpace_1.SelectSpace('Select space for ocean tile', player.game.board.getAvailableSpacesForOcean(player), (space) => {
+        return new SelectSpace_1.SelectSpace('Select space for ocean tile', player.game.board.getAvailableSpacesForOcean(player))
+            .andThen((space) => {
             player.game.addOcean(player, space);
             const adjacentPlayers = new Set();
             player.game.board.getAdjacentSpaces(space).forEach((space) => {
@@ -45,12 +46,10 @@ class Flooding extends Card_1.Card {
                 }
             });
             if (adjacentPlayers.size > 0) {
-                return new OrOptions_1.OrOptions(new SelectPlayer_1.SelectPlayer(Array.from(adjacentPlayers), 'Select adjacent player to remove 4 M€ from', 'Remove credits', (selectedPlayer) => {
-                    selectedPlayer.deductResource(Resource_1.Resource.MEGACREDITS, 4, { log: true, from: player });
+                return new OrOptions_1.OrOptions(new SelectPlayer_1.SelectPlayer(Array.from(adjacentPlayers), 'Select adjacent player to remove 4 M€ from', 'Remove credits').andThen((selectedPlayer) => {
+                    selectedPlayer.stock.deduct(Resource_1.Resource.MEGACREDITS, 4, { log: true, from: player });
                     return undefined;
-                }), new SelectOption_1.SelectOption('Don\'t remove M€ from adjacent player', 'Confirm', () => {
-                    return undefined;
-                }));
+                }), new SelectOption_1.SelectOption('Don\'t remove M€ from adjacent player'));
             }
             return undefined;
         });

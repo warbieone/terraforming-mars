@@ -6,6 +6,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Resource_1 = require("../../../common/Resource");
 const Tag_1 = require("../../../common/cards/Tag");
+const PathfindersExpansion_1 = require("../../pathfinders/PathfindersExpansion");
 class StrategicBasePlanning extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
@@ -26,7 +27,8 @@ class StrategicBasePlanning extends PreludeCard_1.PreludeCard {
         });
     }
     bespokePlay(player) {
-        player.deductResource(Resource_1.Resource.MEGACREDITS, 8);
+        player.stock.deduct(Resource_1.Resource.MEGACREDITS, 8);
+        PathfindersExpansion_1.PathfindersExpansion.addToSolBank(player);
         return undefined;
     }
 }

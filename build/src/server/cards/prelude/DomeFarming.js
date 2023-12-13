@@ -21,7 +21,6 @@ class DomeFarming extends PreludeCard_1.PreludeCard {
                 description: 'Increase your M€ production 3 steps and plant production 1 step.',
             },
         });
-        this.migrated = true;
     }
 }
 exports.DomeFarming = DomeFarming;

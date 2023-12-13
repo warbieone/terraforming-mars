@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const Resource_1 = require("../../../common/Resource");
 const CardResource_1 = require("../../../common/CardResource");
 const Options_1 = require("../Options");
 const SelectCard_1 = require("../../inputs/SelectCard");
@@ -17,6 +16,9 @@ class CassiniStation extends Card_1.Card {
             name: CardName_1.CardName.CASSINI_STATION,
             cost: 23,
             tags: [Tag_1.Tag.POWER, Tag_1.Tag.SCIENCE, Tag_1.Tag.SPACE],
+            behavior: {
+                production: { energy: { colonies: { colonies: {} }, all: Options_1.all } },
+            },
             metadata: {
                 cardNumber: 'Pf62',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -30,11 +32,6 @@ class CassiniStation extends Card_1.Card {
         });
     }
     bespokePlay(player) {
-        let coloniesCount = 0;
-        player.game.colonies.forEach((colony) => {
-            coloniesCount += colony.colonies.length;
-        });
-        player.production.add(Resource_1.Resource.ENERGY, coloniesCount, { log: true });
         const cards = [
             ...player.getResourceCards(CardResource_1.CardResource.FLOATER),
             ...player.getResourceCards(CardResource_1.CardResource.DATA),
@@ -42,8 +39,8 @@ class CassiniStation extends Card_1.Card {
         if (cards.length === 0) {
             return undefined;
         }
-        const input = new SelectCard_1.SelectCard('Select card to gain 2 floaters or 3 data', 'Add resources', cards, (selected) => {
-            const card = selected[0];
+        const input = new SelectCard_1.SelectCard('Select card to gain 2 floaters or 3 data', 'Add resources', cards)
+            .andThen(([card]) => {
             if (card.resourceType === CardResource_1.CardResource.FLOATER) {
                 player.addResourceTo(card, { qty: 2, log: true });
             }

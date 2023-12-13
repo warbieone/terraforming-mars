@@ -8,6 +8,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const PlaceOceanTile_1 = require("../../deferredActions/PlaceOceanTile");
 const CardRenderer_1 = require("../render/CardRenderer");
+const titles_1 = require("../../inputs/titles");
 exports.OCEAN_COST = 8;
 class AquiferPumping extends Card_1.Card {
     constructor() {
@@ -25,12 +26,11 @@ class AquiferPumping extends Card_1.Card {
         });
     }
     canAct(player) {
-        return player.canAfford(exports.OCEAN_COST, { steel: true, tr: { oceans: 1 } });
+        return player.canAfford({ cost: exports.OCEAN_COST, steel: true, tr: { oceans: 1 } });
     }
     action(player) {
-        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 8, { canUseSteel: true, title: 'Select how to pay for action', afterPay: () => {
-                player.game.defer(new PlaceOceanTile_1.PlaceOceanTile(player));
-            } }));
+        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 8, { canUseSteel: true, title: titles_1.TITLES.payForCardAction(this.name) }))
+            .andThen(() => player.game.defer(new PlaceOceanTile_1.PlaceOceanTile(player)));
         return undefined;
     }
 }

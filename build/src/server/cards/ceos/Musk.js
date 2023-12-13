@@ -30,18 +30,18 @@ class Musk extends CeoCard_1.CeoCard {
         const eligibleCards = player.cardsInHand.filter((card) => card.tags.includes(Tag_1.Tag.EARTH));
         if (eligibleCards.length === 0) {
             game.log('${0} has no Earth cards', (b) => b.player(player), { reservedFor: player });
-            player.addResource(Resource_1.Resource.TITANIUM, 6, { log: true });
+            player.stock.add(Resource_1.Resource.TITANIUM, 6, { log: true });
             return undefined;
         }
-        return new SelectCard_1.SelectCard('Select Earth card(s) to discard', 'Discard', eligibleCards, (cards) => {
-            player.addResource(Resource_1.Resource.TITANIUM, cards.length + 6, { log: true });
+        return new SelectCard_1.SelectCard('Select Earth card(s) to discard', 'Discard', eligibleCards, { min: 0, max: eligibleCards.length })
+            .andThen((cards) => {
+            player.stock.add(Resource_1.Resource.TITANIUM, cards.length + 6, { log: true });
             for (const card of cards) {
-                player.cardsInHand.splice(player.cardsInHand.indexOf(card), 1);
-                game.projectDeck.discard(card);
+                player.discardCardFromHand(card);
             }
             player.game.defer(DrawCards_1.DrawCards.keepAll(player, cards.length, { tag: Tag_1.Tag.SPACE }));
             return undefined;
-        }, { min: 0, max: eligibleCards.length });
+        });
     }
 }
 exports.Musk = Musk;

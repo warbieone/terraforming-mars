@@ -36,6 +36,7 @@ export type GameOptions = {
   ceoExtension: boolean;
   starWarsExpansion: boolean;
   underworldExpansion: boolean;
+  leagueCardsOption: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -51,6 +52,7 @@ export type GameOptions = {
   customColoniesList: Array<ColonyName>;
   customPreludes: Array<CardName>;
   customCeos: Array<CardName>;
+  extraCards: Array<CardName>;
   startingCeos: number;
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
@@ -70,6 +72,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   aresHazards: true,
   boardName: BoardName.THARSIS,
   bannedCards: [],
+  extraCards: [],
   ceoExtension: false,
   clonedGamedId: undefined,
   coloniesExtension: false,
@@ -113,4 +116,5 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   undoOption: false,
   venusNextExtension: false,
   twoCorpsVariant: false,
+  leagueCardsOption: false,
 };

@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const Size_1 = require("../../../common/cards/render/Size");
-const Resource_1 = require("../../../common/Resource");
 const Options_1 = require("../Options");
 class MolecularPrinting extends Card_1.Card {
     constructor() {
@@ -17,6 +16,9 @@ class MolecularPrinting extends Card_1.Card {
             name: CardName_1.CardName.MOLECULAR_PRINTING,
             type: CardType_1.CardType.AUTOMATED,
             victoryPoints: 1,
+            behavior: {
+                stock: { megacredits: { cities: {}, colonies: { colonies: {} }, all: Options_1.all } },
+            },
             metadata: {
                 cardNumber: 'C27',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -26,14 +28,6 @@ class MolecularPrinting extends Card_1.Card {
                 description: 'Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.',
             },
         });
-    }
-    bespokePlay(player) {
-        let coloniesCount = 0;
-        player.game.colonies.forEach((colony) => {
-            coloniesCount += colony.colonies.length;
-        });
-        player.addResource(Resource_1.Resource.MEGACREDITS, player.game.getCitiesCount() + coloniesCount, { log: true });
-        return undefined;
     }
 }
 exports.MolecularPrinting = MolecularPrinting;

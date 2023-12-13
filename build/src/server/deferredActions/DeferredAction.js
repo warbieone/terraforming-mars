@@ -13,22 +13,35 @@ var Priority;
     Priority[Priority["BUILD_COLONY"] = 6] = "BUILD_COLONY";
     Priority[Priority["INCREASE_COLONY_TRACK"] = 7] = "INCREASE_COLONY_TRACK";
     Priority[Priority["PLACE_OCEAN_TILE"] = 8] = "PLACE_OCEAN_TILE";
-    Priority[Priority["DEFAULT"] = 9] = "DEFAULT";
-    Priority[Priority["ATTACK_OPPONENT"] = 10] = "ATTACK_OPPONENT";
-    Priority[Priority["LOSE_AS_MUCH_AS_POSSIBLE"] = 11] = "LOSE_AS_MUCH_AS_POSSIBLE";
-    Priority[Priority["GAIN_RESOURCE_OR_PRODUCTION"] = 12] = "GAIN_RESOURCE_OR_PRODUCTION";
-    Priority[Priority["LOSE_RESOURCE_OR_PRODUCTION"] = 13] = "LOSE_RESOURCE_OR_PRODUCTION";
-    Priority[Priority["DECREASE_COLONY_TRACK_AFTER_TRADE"] = 14] = "DECREASE_COLONY_TRACK_AFTER_TRADE";
-    Priority[Priority["DISCARD_CARDS"] = 15] = "DISCARD_CARDS";
+    Priority[Priority["IDENTIFY_UNDERGROUND_RESOURCE"] = 9] = "IDENTIFY_UNDERGROUND_RESOURCE";
+    Priority[Priority["EXCAVATE_UNDERGROUND_RESOURCE"] = 10] = "EXCAVATE_UNDERGROUND_RESOURCE";
+    Priority[Priority["DEFAULT"] = 11] = "DEFAULT";
+    Priority[Priority["ATTACK_OPPONENT"] = 12] = "ATTACK_OPPONENT";
+    Priority[Priority["LOSE_AS_MUCH_AS_POSSIBLE"] = 13] = "LOSE_AS_MUCH_AS_POSSIBLE";
+    Priority[Priority["GAIN_RESOURCE_OR_PRODUCTION"] = 14] = "GAIN_RESOURCE_OR_PRODUCTION";
+    Priority[Priority["LOSE_RESOURCE_OR_PRODUCTION"] = 15] = "LOSE_RESOURCE_OR_PRODUCTION";
+    Priority[Priority["DECREASE_COLONY_TRACK_AFTER_TRADE"] = 16] = "DECREASE_COLONY_TRACK_AFTER_TRADE";
+    Priority[Priority["DISCARD_CARDS"] = 17] = "DISCARD_CARDS";
+    Priority[Priority["BACK_OF_THE_LINE"] = 18] = "BACK_OF_THE_LINE";
 })(Priority = exports.Priority || (exports.Priority = {}));
 class DeferredAction {
     constructor(player, priority = Priority.DEFAULT) {
         this.player = player;
         this.priority = priority;
         this.queueId = -1;
+        this.cb = () => { };
+        this.callbackSet = false;
     }
     static create(player, priority, execute) {
         return new SimpleDeferredAction(player, execute, priority);
+    }
+    andThen(cb) {
+        if (this.callbackSet) {
+            throw new Error('Cannot call andThen twice for the same object.');
+        }
+        this.cb = cb;
+        this.callbackSet = true;
+        return this;
     }
 }
 exports.DeferredAction = DeferredAction;

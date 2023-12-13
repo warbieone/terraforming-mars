@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 class DeclarationOfIndependence extends Card_1.Card {
     constructor() {
         super({
@@ -14,7 +13,7 @@ class DeclarationOfIndependence extends Card_1.Card {
             name: CardName_1.CardName.DECLARATION_OF_INDEPENDENCE,
             cost: 20,
             tags: [Tag_1.Tag.MARS],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.MARS, 6)),
+            requirements: { tag: Tag_1.Tag.MARS, count: 6 },
             victoryPoints: 4,
             behavior: {
                 turmoil: { sendDelegates: { count: 2 } },

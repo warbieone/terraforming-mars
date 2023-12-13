@@ -6,6 +6,7 @@ const PreludeCard_1 = require("./PreludeCard");
 const PlayProjectCard_1 = require("../../deferredActions/PlayProjectCard");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
+const PreludesExpansion_1 = require("../../preludes/PreludesExpansion");
 class EccentricSponsor extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
@@ -25,7 +26,13 @@ class EccentricSponsor extends PreludeCard_1.PreludeCard {
         return 0;
     }
     bespokePlay(player) {
-        player.game.defer(new PlayProjectCard_1.PlayProjectCard(player));
+        player.game.defer(new PlayProjectCard_1.PlayProjectCard(player))
+            .andThen((card) => {
+            if (card === undefined) {
+                PreludesExpansion_1.PreludesExpansion.fizzle(player, this);
+                player.lastCardPlayed = undefined;
+            }
+        });
         return undefined;
     }
 }

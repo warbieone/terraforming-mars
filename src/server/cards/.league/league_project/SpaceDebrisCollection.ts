@@ -1,18 +1,13 @@
 import {IProjectCard} from '../../IProjectCard';
-import {IActionCard} from '../../ICard';
 import {Tag} from '../../../../common/cards/Tag';
 import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Player} from '../../../Player';
-import {CardRequirements} from '../../requirements/CardRequirements';
 import {max} from '../../Options';
-import {OrOptions} from '../../../inputs/OrOptions';
-import {SelectOption} from '../../../inputs/SelectOption';
 import {CardResource} from '../../../../common/CardResource';
 
-export class SpaceDebrisCollection extends Card implements IActionCard, IProjectCard {
+export class SpaceDebrisCollection extends Card implements IProjectCard {
   public override resourceCount = 0;
 
   constructor() {
@@ -23,7 +18,24 @@ export class SpaceDebrisCollection extends Card implements IActionCard, IProject
       cost: 10,
       resourceType: CardResource.ASTEROID,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3, {max})),
+      requirements: {tag: Tag.SCIENCE, count: 5, max},
+
+      action: {
+        or: {
+          behaviors: [
+            {
+              title: 'Add asteroid',
+              addResources: 1,
+            },
+            {
+              title: 'Remove asteroid',
+              spend: {resourcesHere: 1},
+              drawCard: 1,
+            },
+          ],
+          autoSelect: true,
+        },
+      },
       
       metadata: {
         cardNumber: 'L417',
@@ -41,34 +53,5 @@ export class SpaceDebrisCollection extends Card implements IActionCard, IProject
     });
   }
 
-  public override bespokePlay() {
-    this.resourceCount = 2;
-    return undefined;
-  }
 
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    const hasAsteroids = this.resourceCount > 0;
-
-    const drawCardOption = new SelectOption('Remove 1 asteroid on this card to draw a card', 'Remove asteroid', () => {
-      this.resourceCount--;
-      player.drawCard(1);
-      return undefined;
-    });
-
-    const addAsteroidToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid', () => {
-      player.addResourceTo(this, {log: true});
-      return undefined;
-    });
-
-    if (hasAsteroids) {
-      return new OrOptions(drawCardOption, addAsteroidToSelf);
-    } else {
-      player.addResourceTo(this, {log: true});
-      return undefined;
-    }
-  }
 }

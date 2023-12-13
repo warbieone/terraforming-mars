@@ -93,23 +93,18 @@ export const tileTypeToString: Record<TileType, string> = {
   [TileType.MOON_MINE]: 'Mine',
   [TileType.MOON_HABITAT]: 'Habitat',
   [TileType.MOON_ROAD]: 'Road',
-  [TileType.LUNA_TRADE_STATION]: 'Luna Trade Station',
-  [TileType.LUNA_MINING_HUB]: 'Luna Mining Hub',
-  [TileType.LUNA_TRAIN_STATION]: 'Luna Train Station',
-  [TileType.LUNAR_MINE_URBANIZATION]: 'Lunar Mine Urbanization',
-  [TileType.WETLANDS]: 'Wetlands',
-  [TileType.RED_CITY]: 'Red City',
-  [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders',
-  [TileType.CRASHLANDING]: 'Crashlanding',
-};
-
-export namespace TileType {
-  export function toString(tileType: TileType): string {
-    return TO_STRING_MAP[tileType];
-  }
-}
-
-// Ares Tiles handling
+  [TileType.LUNA_TRADE_STATION]: CardName.LUNA_TRADE_STATION,
+  [TileType.LUNA_MINING_HUB]: CardName.LUNA_MINING_HUB,
+  [TileType.LUNA_TRAIN_STATION]: CardName.LUNA_TRAIN_STATION,
+  [TileType.LUNAR_MINE_URBANIZATION]: CardName.LUNAR_MINE_URBANIZATION,
+  [TileType.WETLANDS]: CardName.WETLANDS,
+  [TileType.RED_CITY]: CardName.RED_CITY,
+  [TileType.MARTIAN_NATURE_WONDERS]: CardName.MARTIAN_NATURE_WONDERS,
+  [TileType.CRASHLANDING]: CardName.CRASHLANDING,
+  [TileType.MARS_NOMADS]: CardName.MARS_NOMADS,
+  [TileType.REY_SKYWALKER]: CardName.REY_SKYWALKER,
+  [TileType.MAN_MADE_VOLCANO]: CardName.MAN_MADE_VOLCANO,
+} as const;
 
 export const HAZARD_TILES = new Set([TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE]);
 export const OCEAN_UPGRADE_TILES = new Set([TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY]);

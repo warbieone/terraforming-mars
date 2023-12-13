@@ -8,6 +8,7 @@ var AltSecondaryTag;
     AltSecondaryTag["TURMOIL"] = "turmoil";
     AltSecondaryTag["FLOATER"] = "floater";
     AltSecondaryTag["BLUE"] = "blue";
+    AltSecondaryTag["NO_TAGS"] = "no_tags";
     AltSecondaryTag["MOON_MINING_RATE"] = "moon-mine";
     AltSecondaryTag["MOON_HABITAT_RATE"] = "moon-colony";
     AltSecondaryTag["MOON_LOGISTICS_RATE"] = "moon-road";

@@ -1,13 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isAresGlobalParametersResponse = exports.isShiftAresGlobalParametersResponse = exports.isSelectProductionToLoseResponse = exports.isSelectPaymentResponse = exports.isSelectColonyResponse = exports.isSelectAmountResponse = exports.isSelectDelegateResponse = exports.isSelectPartyResponse = exports.isSelectPlayerResponse = exports.isSelectSpaceResponse = exports.isSelectProjectCardToPlayResponse = exports.isSelectCardResponse = exports.isAndOptionsResponse = exports.isOrOptionsResponse = exports.isSelectOptionResponse = void 0;
-function difference(arr1, arr2) {
-    return arr1
-        .filter((x) => !arr2.includes(x))
-        .concat(arr2.filter((x) => !arr1.includes(x)));
-}
+exports.isSelectGlobalEventResponse = exports.isAresGlobalParametersResponse = exports.isShiftAresGlobalParametersResponse = exports.isSelectProductionToLoseResponse = exports.isSelectPaymentResponse = exports.isSelectColonyResponse = exports.isSelectAmountResponse = exports.isSelectDelegateResponse = exports.isSelectPartyResponse = exports.isSelectPlayerResponse = exports.isSelectSpaceResponse = exports.isSelectProjectCardToPlayResponse = exports.isSelectCardResponse = exports.isAndOptionsResponse = exports.isOrOptionsResponse = exports.isSelectOptionResponse = void 0;
+const utils_1 = require("../utils/utils");
 function matches(response, fields) {
-    return difference(Object.keys(response), fields).length === 0;
+    return (0, utils_1.twoWayDifference)(Object.keys(response), fields).length === 0;
 }
 function isSelectOptionResponse(response) {
     return response.type === 'option' && Object.keys(response).length === 1;
@@ -69,4 +65,8 @@ function isAresGlobalParametersResponse(obj) {
     return matches(obj, ['lowOceanDelta', 'highOceanDelta', 'temperatureDelta', 'oxygenDelta']);
 }
 exports.isAresGlobalParametersResponse = isAresGlobalParametersResponse;
+function isSelectGlobalEventResponse(response) {
+    return response.type === 'globalEvent' && matches(response, ['type', 'globalEventName']);
+}
+exports.isSelectGlobalEventResponse = isSelectGlobalEventResponse;
 //# sourceMappingURL=InputResponse.js.map

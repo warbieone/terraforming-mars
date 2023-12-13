@@ -4,7 +4,6 @@ exports.IshtarMining = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 class IshtarMining extends Card_1.Card {
@@ -17,7 +16,7 @@ class IshtarMining extends Card_1.Card {
             behavior: {
                 production: { titanium: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.venus(8)),
+            requirements: { venus: 8 },
             metadata: {
                 cardNumber: '233',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => b.production((pb) => pb.titanium(1))),

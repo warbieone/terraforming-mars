@@ -10,27 +10,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SQLite = exports.IN_MEMORY_SQLITE_PATH = void 0;
-const sqlite3 = require("sqlite3");
+const fs = require("fs");
+const path = require("path");
 const utils_1 = require("./utils");
 const mnemonist_1 = require("mnemonist");
-const path = require('path');
-const fs = require('fs');
-const dbFolder = path.resolve(process.cwd(), './db');
-const dbPath = path.resolve(dbFolder, 'game.db');
 exports.IN_MEMORY_SQLITE_PATH = ':memory:';
 class SQLite {
-    constructor(filename = dbPath, throwQuietFailures = false) {
+    get db() {
+        if (this._db === undefined) {
+            throw new Error('attempt to get db before initialize');
+        }
+        return this._db;
+    }
+    constructor(filename = undefined, throwQuietFailures = false) {
         this.filename = filename;
         this.throwQuietFailures = throwQuietFailures;
-        if (filename !== exports.IN_MEMORY_SQLITE_PATH) {
-            if (!fs.existsSync(dbFolder)) {
-                fs.mkdirSync(dbFolder);
-            }
-        }
-        this.db = new sqlite3.Database(filename);
     }
     initialize() {
         return __awaiter(this, void 0, void 0, function* () {
+            const { Database } = yield Promise.resolve().then(() => require('sqlite3'));
+            const dbFolder = path.resolve(process.cwd(), './db');
+            const dbPath = path.resolve(dbFolder, 'game.db');
+            if (this.filename === undefined) {
+                this.filename = dbPath;
+            }
+            if (this.filename !== exports.IN_MEMORY_SQLITE_PATH) {
+                if (!fs.existsSync(dbFolder)) {
+                    fs.mkdirSync(dbFolder);
+                }
+            }
+            this._db = new Database(String(this.filename));
             yield this.asyncRun('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))');
             yield this.asyncRun('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participant varchar, PRIMARY KEY (game_id, participant))');
             yield this.asyncRun('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
@@ -56,17 +65,6 @@ class SQLite {
             const sql = 'SELECT distinct game_id game_id FROM games';
             const rows = yield this.asyncAll(sql, []);
             return rows.map((row) => row.game_id);
-        });
-    }
-    loadCloneableGame(gameId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const sql = 'SELECT game_id, game FROM games WHERE game_id = ? AND save_id = 0';
-            const row = yield this.asyncGet(sql, [gameId]);
-            if (row === undefined || row.game_id === undefined || row.game === undefined) {
-                throw new Error(`Game ${gameId} not found`);
-            }
-            const json = JSON.parse(row.game);
-            return json;
         });
     }
     saveGameResults(gameId, players, generations, gameOptions, scores) {
@@ -110,9 +108,10 @@ class SQLite {
     }
     getGameVersion(gameId, saveId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const row = yield this.asyncGet('SELECT game FROM games WHERE game_id = ? and save_id = ?', [gameId, saveId]);
-            if (row === undefined) {
-                throw new Error(`bad game id ${gameId}`);
+            const sql = 'SELECT game_id, game FROM games WHERE game_id = ? and save_id = ?';
+            const row = yield this.asyncGet(sql, [gameId, saveId]);
+            if (row === undefined || row.game_id === undefined || row.game === undefined) {
+                throw new Error(`Game ${gameId} not found`);
             }
             return JSON.parse(row.game);
         });
@@ -138,7 +137,14 @@ class SQLite {
             if (maxGameDays !== undefined) {
                 const dateToSeconds = (0, utils_1.daysAgoToSeconds)(maxGameDays, 0);
                 const selectResult = yield this.asyncAll('SELECT DISTINCT game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
-                const gameIds = selectResult.map((row) => row.game_id);
+                let gameIds = selectResult.map((row) => row.game_id);
+                if (gameIds.length > 1000) {
+                    console.log('Truncated purge to 1000 games.');
+                    gameIds = gameIds.slice(0, 1000);
+                }
+                else {
+                    console.log(`${gameIds.length} games to be purged.`);
+                }
                 if (gameIds.length > 0) {
                     console.log(`About to purge ${gameIds.length} games`);
                     const placeholders = gameIds.map(() => '?').join(', ');
@@ -207,10 +213,10 @@ class SQLite {
         return this.runQuietly('DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)', [gameId, rollbackCount]);
     }
     stats() {
-        const size = this.filename === exports.IN_MEMORY_SQLITE_PATH ? -1 : fs.statSync(this.filename).size;
+        const size = this.filename === exports.IN_MEMORY_SQLITE_PATH ? -1 : fs.statSync(String(this.filename)).size;
         return Promise.resolve({
             type: 'SQLite',
-            path: this.filename,
+            path: String(this.filename),
             size_bytes: size,
         });
     }

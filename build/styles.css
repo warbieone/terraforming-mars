@@ -455,7 +455,8 @@ input[type="radio"]:checked + .filterDiv::after {
   background-position: bottom 4px right 3px;
   background-repeat: no-repeat;
 }
-.prelude-icon:after {
+.prelude-icon:after,
+.prelude2-icon:after {
   position: absolute;
   border: 1px solid black;
   background-color: #eb76ab;
@@ -618,6 +619,30 @@ input[type="radio"]:checked + .filterDiv::after {
   border-radius: 50%;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
   content: "💼";
+}
+.starwars-icon:after {
+  position: absolute;
+  color: #DDD;
+  border: 1px solid #222;
+  background: #999;
+  font-family: Prototype;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  content: "W";
+}
+.underworld-icon:after {
+  position: absolute;
+  background-image: url(./assets/expansion_icons/expansion_icon_underworld.png);
+  width: 26px;
+  height: 26px;
+  background-size: 26px;
+  content: "";
 }
 .button-icon:after {
   margin-top: -9px;
@@ -1020,9 +1045,9 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .special-tile {
   background-image: url(./assets/tiles/special.png);
-  width: 47px;
-  height: 51px;
-  background-size: 47px 51px;
+  width: 40px;
+  height: 47px;
+  background-size: 40px;
 }
 .special-tile--S {
   background-image: url(./assets/tiles/special.png);
@@ -1041,6 +1066,12 @@ input[type="radio"]:checked + .filterDiv::after {
   height: 40px;
   background-size: 60px 40px;
   color: #0000;
+}
+.city-or-special-tile {
+  background-image: url(./assets/promo/city-or-special-tile.png);
+  width: 40px;
+  height: 47px;
+  background-size: 40px;
 }
 .rating {
   background-image: url(./assets/resources/tr.png);
@@ -1119,7 +1150,9 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .money,
 .megacredits,
-.megacredits {
+.megacredits,
+.log-resource-megacredits,
+.log-resource-megacredits {
   font-family: Prototype;
   color: black;
   background-image: url(./assets/resources/megacredit.png);
@@ -2393,6 +2426,9 @@ input[type="radio"]:checked + .filterDiv::after {
 .expansion-icon-prelude {
   background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
 }
+.expansion-icon-prelude2 {
+  background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
+}
 .expansion-icon-colony {
   background-image: url(./assets/expansion_icons/expansion_icon_colonies.png);
 }
@@ -2422,6 +2458,12 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .expansion-icon-ceo {
   background-image: url(./assets/expansion_icons/expansion_icon_ceo.png);
+}
+.expansion-icon-starwars {
+  background-image: url(./assets/expansion_icons/expansion_icon_starwars.png);
+}
+.expansion-icon-underworld {
+  background-image: url(./assets/expansion_icons/expansion_icon_underworld.png);
 }
 /* refactored */
 .card-container .project-icon:after,
@@ -2924,7 +2966,7 @@ input[type="radio"]:checked + .filterDiv::after {
 .card-container .card-content-wrapper .card-corporation-logo .card-astrodril-logo {
   position: absolute;
   text-transform: none;
-  top: 10px;
+  top: 17px;
   left: 3px;
   color: #202020;
   font-family: Prototype;
@@ -3339,6 +3381,73 @@ input[type="radio"]:checked + .filterDiv::after {
   line-height: 18px;
   font-size: 7px;
 }
+.card-container .card-content-wrapper .card-corporation-logo .card-tycho-magnetics-logo {
+  position: absolute;
+  text-transform: none;
+  top: 11px;
+  left: 2px;
+  color: #202020;
+  font-family: monospace;
+  letter-spacing: 1px;
+  text-align: left;
+  text-shadow: yellow 0px 0px 1px, yellowgreen 0px 2px 2px;
+  font-size: 28px;
+}
+.card-container .card-content-wrapper .card-corporation-logo .card-sagitta-logo {
+  position: absolute;
+  text-transform: uppercase;
+  top: 15px;
+  left: 18px;
+  color: #87d119;
+  font-family: cursive;
+  letter-spacing: 5px;
+  font-size: 36px;
+  -webkit-text-stroke: 0.5px olivedrab;
+}
+.card-container .card-content-wrapper .card-corporation-logo .card-kuiper-logo {
+  position: absolute;
+  text-transform: uppercase;
+  top: 10px;
+  left: 3px;
+  color: black;
+  letter-spacing: 2px;
+  line-height: normal;
+  font-size: 18px;
+  -webkit-text-stroke: 0.5px darkblue;
+}
+.card-container .card-content-wrapper .card-corporation-logo .card-nirgal-enterprises-logo {
+  position: absolute;
+  text-transform: none;
+  top: 32px;
+  left: 3px;
+  color: #326432;
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: 2px;
+  text-align: left;
+  font-size: 27px;
+}
+.card-container .card-content-wrapper .card-corporation-logo .card-ecotec-logo {
+  background-image: url(./assets/prelude2/ecotec.png);
+  height: 40px;
+  width: 140px;
+  background-size: 140px 40px;
+  margin-top: 18px;
+  filter: drop-shadow(1px 2px 4px black);
+}
+.card-container .card-content-wrapper .card-corporation-logo .card-palladin-shipping-logo {
+  background-image: url(./assets/prelude2/palladin.png);
+  height: 40px;
+  width: 160px;
+  background-size: 160px 40px;
+  margin-top: 11px;
+}
+.card-container .card-content-wrapper .card-corporation-logo .card-spire-logo {
+  background-image: url(./assets/prelude2/spire.png);
+  height: 44px;
+  width: 136px;
+  background-size: 136px 44px;
+  margin-top: 9px;
+}
 .card-container .card-content-wrapper .card-corporation-logo .card-nanotech-industries-logo {
   background-image: url(./assets/moon/corp-logo-nanotech.png);
   height: 50px;
@@ -3542,6 +3651,7 @@ input[type="radio"]:checked + .filterDiv::after {
   text-align: center;
   /*requirements*/
   /*resources*/
+  /* Underworld Assets */
   /* CEO Assets */
   /*special*/
   /*colony special*/
@@ -3552,6 +3662,12 @@ input[type="radio"]:checked + .filterDiv::after {
   /*production*/
   /* tiles */
   /* symbols for tiles */
+  /*             .card-tile-symbol-scavengers {
+                background-image: url(./assets/tiles/special_tile_icons/nuclear_zone.png);
+                position: relative;
+                left: -2px;
+                top: 0px;
+            } */
 }
 .card-container .card-content-wrapper .card-content:not(.global-event-card-content) {
   overflow-x: hidden;
@@ -3631,6 +3747,12 @@ input[type="radio"]:checked + .filterDiv::after {
   align-items: center;
   margin: 0 4px;
 }
+.card-container .card-content-wrapper .card-content .nextto-leftside {
+  margin: 0 -2px 0 4px;
+}
+.card-container .card-content-wrapper .card-content .nextto-rightside {
+  margin: 0 4px 0 -2px;
+}
 .card-container .card-content-wrapper .card-content .card-global-requirement {
   position: relative;
   vertical-align: middle;
@@ -3690,7 +3812,8 @@ input[type="radio"]:checked + .filterDiv::after {
   background-size: 50px 34px;
   color: #0000;
 }
-.card-container .card-content-wrapper .card-content .card-resource {
+.card-container .card-content-wrapper .card-content .card-resource,
+.card-container .card-content-wrapper .card-content .card-resource--has-secondary-tag {
   font-family: Prototype;
   position: relative;
   display: inline-block;
@@ -3703,6 +3826,14 @@ input[type="radio"]:checked + .filterDiv::after {
   background-size: 30px;
   filter: drop-shadow(0px 0px 1px black);
   vertical-align: middle;
+}
+.card-container .card-content-wrapper .card-content .card-resource--has-secondary-tag {
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  margin-right: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 .card-container .card-content-wrapper .card-content .card-resource-trade-discount {
   background: white;
@@ -3807,13 +3938,88 @@ input[type="radio"]:checked + .filterDiv::after {
 .card-container .card-content-wrapper .card-content .card-resource-community {
   background: linear-gradient(orange, orangered);
 }
+.card-container .card-content-wrapper .card-content .card-resource-cathedral {
+  background-image: url(./assets/promo/cathedral.png);
+}
+.card-container .card-content-wrapper .card-content .card-resource-graphene {
+  background-image: url(./assets/resources/graphene.png);
+}
+.card-container .card-content-wrapper .card-content .card-resource-nomads {
+  background: linear-gradient(to bottom right, gold, goldenrod, gold);
+  border: 1px solid black;
+}
+.card-container .card-content-wrapper .card-content .card-resource-hydroelectric-resource {
+  background-image: url(./assets/resources/hydroelectric-resource.png);
+}
+.card-container .card-content-wrapper .card-content .card-resource-clone-trooper {
+  background-image: url(./assets/resources/clone-trooper.png);
+}
+.card-container .card-content-wrapper .card-content .card-identification {
+  background-image: url(./assets/underworld/identify.png);
+  width: 44px;
+  background-size: 44px 44px;
+  height: 44px;
+}
+.card-container .card-content-wrapper .card-content .card-excavation {
+  background-image: url(./assets/underworld/excavate.png);
+  width: 44px;
+  background-size: 44px 44px;
+  height: 44px;
+}
+.card-container .card-content-wrapper .card-content .card-resource-corruption {
+  background-image: url(./assets/underworld/corruption.png);
+}
+.card-container .card-content-wrapper .card-content .card-resource-tool {
+  background-image: url(./assets/underworld/card-resource-tool.png);
+}
+.card-container .card-content-wrapper .card-content .card-resource-ware {
+  background-image: url(./assets/underworld/card-resource-ware.png);
+}
+.card-container .card-content-wrapper .card-content .card-resource-scoop {
+  background-image: url(./assets/underworld/card-resource-scoop.png);
+}
+.card-container .card-content-wrapper .card-content .card-resource-journalism {
+  background-image: url(./assets/underworld/card-resource-journalism.png);
+}
+.card-container .card-content-wrapper .card-content .card-resource-activist {
+  background-image: url(./assets/underworld/card-resource-activist.png);
+}
+.card-container .card-content-wrapper .card-content .card-neutral-delegate {
+  display: inline-block;
+  background-image: url(./assets/misc/delegate.png);
+  width: 24px;
+  height: 30px;
+  background-size: 24px 30px;
+  vertical-align: middle;
+  filter: drop-shadow(0px 0px 1px black);
+  margin-left: 2px;
+  margin-right: 2px;
+  background-image: url(./assets/underworld/neutral-delegate.png) !important;
+}
+.card-container .card-content-wrapper .card-content .card-underground-resources {
+  width: 44px;
+  background-size: 44px 44px;
+  height: 44px;
+  background-image: url("assets/underworld/underground-token-background.png");
+}
+.card-container .card-content-wrapper .card-content .card-underground-resources .card-x {
+  color: black;
+  font-size: 69px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.card-container .card-content-wrapper .card-content .card-corruption-shield {
+  width: 44px;
+  background-size: 44px 44px;
+  height: 44px;
+  background-image: url("assets/underworld/corruption-block.png");
+}
 .card-container .card-content-wrapper .card-content .card-arrow-opg {
   display: inline-block;
   background-image: url(./assets/ceos/arrow-opg.png);
   width: 50px;
   height: 43px;
   background-size: 50px 43px;
-  padding-bottom: 22px;
   background-repeat: no-repeat;
 }
 .card-container .card-content-wrapper .card-content .card-reds-deactivated {
@@ -3962,7 +4168,7 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .card-container .card-content-wrapper .card-content .card-icon {
   position: absolute;
-  right: -4px;
+  right: -9px;
   top: -8px;
   margin: 0;
   width: 20px;
@@ -4038,12 +4244,11 @@ input[type="radio"]:checked + .filterDiv::after {
   vertical-align: middle;
 }
 .card-container .card-content-wrapper .card-content .card-influence--size-S {
-  height: 25px;
-  width: 25px;
-  background-size: 25px;
   position: relative;
   top: -10px;
-  left: -7px;
+  left: -10px;
+  transform: scale(0.7);
+  margin-right: -12px;
 }
 .card-container .card-content-wrapper .card-content .turmoil-global-event {
   display: inline-block;
@@ -4065,7 +4270,7 @@ input[type="radio"]:checked + .filterDiv::after {
   width: 30px;
   height: 30px;
   background-size: 34px 34px;
-  background-position: -2px -2px;
+  background-position: -2px;
   line-height: 28px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
   vertical-align: middle;
@@ -4132,6 +4337,9 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .card-container .card-content-wrapper .card-content .card-tag-mars {
   background-image: url("./assets/tags/mars.png");
+}
+.card-container .card-content-wrapper .card-content .card-tag-empty {
+  background-image: url("./assets/tags/empty.png");
 }
 .card-container .card-content-wrapper .card-content .card-tag-diverse {
   background: linear-gradient(to bottom right, green, yellow, red);
@@ -4216,7 +4424,7 @@ input[type="radio"]:checked + .filterDiv::after {
   width: 95%;
   padding: 0px 4px;
 }
-.card-container .card-content-wrapper .card-content .card-place-colony {
+.card-container .card-content-wrapper .card-content .card-colony-tile {
   text-transform: uppercase;
   background: #444;
   color: #eee;
@@ -4427,6 +4635,9 @@ input[type="radio"]:checked + .filterDiv::after {
   filter: drop-shadow(0px 0px 1px black);
   box-shadow: 2px 2px 1px;
 }
+.card-container .card-content-wrapper .card-content .card-plate--narrow {
+  width: 110px;
+}
 .card-container .card-content-wrapper .card-content .card-text-size--XS {
   font-size: 9px;
 }
@@ -4570,12 +4781,6 @@ input[type="radio"]:checked + .filterDiv::after {
   left: -2px;
   top: 0px;
 }
-.card-container .card-content-wrapper .card-content .card-tile-symbol-scavengers {
-  background-image: url(./assets/tiles/special_tile_icons/nuclear_zone.png);
-  position: relative;
-  left: -2px;
-  top: 0px;
-}
 .card-container .card-content-wrapper .card-content .city-tile--M {
   background-image: url(./assets/tiles/city.png);
   filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
@@ -4639,6 +4844,7 @@ input[type="radio"]:checked + .filterDiv::after {
   position: relative;
 }
 .card-container .card-content-wrapper .card-content .card-tr--S {
+  background-image: url(./assets/resources/tr.png);
   width: 42px !important;
   height: 32px !important;
   background-size: 42px 32px !important;
@@ -4654,6 +4860,7 @@ input[type="radio"]:checked + .filterDiv::after {
   top: 2px;
 }
 .card-container .card-content-wrapper .card-content .card-tr--XS {
+  background-image: url(./assets/resources/tr.png);
   width: 45px !important;
   height: 34px !important;
   background-size: 45px 34px !important;
@@ -4662,6 +4869,7 @@ input[type="radio"]:checked + .filterDiv::after {
   background-repeat: no-repeat;
 }
 .card-container .card-content-wrapper .card-content .card-tr--req {
+  background-image: url(./assets/resources/tr.png);
   width: 45px !important;
   height: 34px !important;
   background-size: 45px 34px !important;
@@ -4905,19 +5113,17 @@ input[type="radio"]:checked + .filterDiv::after {
   top: -16px;
 }
 .card-party {
-  display: inherit;
+  display: flex;
 }
 .card-party--revealed {
-  display: inherit;
+  margin: 147px 0 0 12px;
   position: absolute;
-  margin: -7px 0 0 -285px;
-  transform: scale(1.4);
+  transform: scale(1.35);
 }
 .card-party--current {
-  display: inherit;
+  margin: 147px 0 0 279px;
   position: absolute;
-  margin: 129px 0 0 280px;
-  transform: scale(1.4);
+  transform: scale(1.35);
 }
 .card-party--greens {
   background-image: url("./assets/parties/greens.png");
@@ -5054,6 +5260,18 @@ input[type="radio"]:checked + .filterDiv::after {
 .card-resources-counter .card-resource-agenda {
   background-image: url("./assets/resources/agenda.png");
 }
+.card-resources-counter .card-resource-graphene {
+  background-image: url("./assets/resources/graphene.png");
+}
+.card-resources-counter .card-resource-hydroelectric-resource {
+  background-image: url("./assets/resources/hydroelectric-resource.png");
+}
+.card-resources-counter .card-resource-clone-trooper {
+  background-image: url("./assets/resources/clone-trooper.png");
+}
+.card-resources-counter .card-resource-tool {
+  background-image: url(./assets/underworld/card-resource-tool.png);
+}
 .card-resources-counter .card-resource-cube {
   background-image: url("./assets/cube.png");
 }
@@ -5140,6 +5358,24 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .language-ru .filterDiv.Hygiea-background .colony-background-color {
   white-space: nowrap;
+}
+.language-ru .filterDiv.card-tycho-magnetics .card-text-size--M {
+  font-size: 12px;
+}
+.language-ru .ma-name--terra-pioneer span {
+  font-size: 10px !important;
+}
+.language-ru .ma-name--spacefarer span {
+  font-size: 10px !important;
+}
+.language-ru .ma-name--land-specialist span {
+  font-size: 10px !important;
+}
+.language-ru .ma-name--adapter span {
+  font-size: 10px !important;
+}
+.language-ru .ma-name--one-giant-step span {
+  font-size: 10px !important;
 }
 .language-ru .tag-none {
   background-image: url(./assets/tags/tag-none-ru.png) !important;
@@ -5369,9 +5605,6 @@ input[type="radio"]:checked + .filterDiv::after {
   font-weight: bold;
   fill: white;
   pointer-events: none;
-  color: white;
-  line-height: 12px;
-  text-align-last: center;
 }
 .board-line {
   stroke: white;
@@ -5492,9 +5725,9 @@ input[type="radio"]:checked + .filterDiv::after {
 .board-space-tile--lava_flows {
   background: url(./assets/board_icons.png) -246px -27px no-repeat;
 }
-.board-space-tile--scavengers {
-  background: url(./assets/board_icons.png) -246px -27px no-repeat;
-}
+/* .board-space-tile--scavengers {
+	background: url(./assets/board_icons.png) -246px -27px no-repeat;
+} */
 .board-space-tile--mining_area,
 .board-space-tile--mining_rights {
   background: url(./assets/board_icons.png) -294px -27px no-repeat;
@@ -5693,6 +5926,159 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .gagarin.visited {
   filter: brightness(0.7);
+}
+.board-cube--cathedral {
+  position: absolute;
+  margin: 3px 0 0 14px;
+  background: url(./assets/promo/cathedral.png);
+  background-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+.board-cube--nomad {
+  position: absolute;
+  background: linear-gradient(to bottom right, gold, goldenrod, gold);
+  width: 15px;
+  height: 15px;
+  z-index: 3;
+  margin: 8px 0 0 16px;
+  border: 1px solid black;
+}
+.underground-token-background {
+  position: absolute;
+  width: 20px;
+  height: 18px;
+  background-size: 20px 18px;
+  z-index: 3;
+  margin: 8px 0 0 20px;
+  filter: drop-shadow(2px 2px 3px black);
+  background-image: url("assets/underworld/underground-token-background.png");
+}
+.underground-token-resource {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background-size: 22px;
+  z-index: 3;
+  margin: 6px 0 0 19px;
+  filter: drop-shadow(2px 2px 3px black);
+}
+.underground-token--nothing {
+  background-image: url("assets/underworld/underground-resource--nothing.png");
+}
+.underground-token--card1 {
+  background-image: url("assets/underworld/underground-resource--card1.png");
+}
+.underground-token--card2 {
+  background-image: url("assets/underworld/underground-resource--card2.png");
+}
+.underground-token--corruption1 {
+  background-image: url("assets/underworld/underground-resource--corruption1.png");
+}
+.underground-token--corruption2 {
+  background-image: url("assets/underworld/underground-resource--corruption2.png");
+}
+.underground-token--data1 {
+  background-image: url("assets/underworld/underground-resource--data1.png");
+}
+.underground-token--data2 {
+  background-image: url("assets/underworld/underground-resource--data2.png");
+}
+.underground-token--data3 {
+  background-image: url("assets/underworld/underground-resource--data3.png");
+}
+.underground-token--steel2 {
+  background-image: url("assets/underworld/underground-resource--steel2.png");
+}
+.underground-token--steel1production {
+  background-image: url("assets/underworld/underground-resource--steel1production.png");
+}
+.underground-token--titanium2 {
+  background-image: url("assets/underworld/underground-resource--titanium2.png");
+}
+.underground-token--titanium1production {
+  background-image: url("assets/underworld/underground-resource--titanium1production.png");
+}
+.underground-token--plant1 {
+  background-image: url("assets/underworld/underground-resource--plant1.png");
+}
+.underground-token--plant2 {
+  background-image: url("assets/underworld/underground-resource--plant2.png");
+}
+.underground-token--plant3 {
+  background-image: url("assets/underworld/underground-resource--plant3.png");
+}
+.underground-token--plant1production {
+  background-image: url("assets/underworld/underground-resource--plant1production.png");
+}
+.underground-token--titaniumandplant {
+  background-image: url("assets/underworld/underground-resource--titaniumandplant.png");
+}
+.underground-token--energy1production {
+  background-image: url("assets/underworld/underground-resource--energy1production.png");
+}
+.underground-token--heat2production {
+  background-image: url("assets/underworld/underground-resource--heat2production.png");
+}
+.underground-token--microbe1 {
+  background-image: url("assets/underworld/underground-resource--microbe1.png");
+}
+.underground-token--microbe2 {
+  background-image: url("assets/underworld/underground-resource--microbe2.png");
+}
+.underground-token--tr {
+  background-image: url("assets/underworld/underground-resource--tr.png");
+}
+.underground-token--ocean {
+  background-image: url("assets/underworld/underground-resource--ocean.png");
+}
+.underground-token--data1pertemp {
+  background-image: url("assets/underworld/underground-resource--data1pertemp.png");
+}
+.underground-token--microbe1pertemp {
+  background-image: url("assets/underworld/underground-resource--microbe1pertemp.png");
+}
+.underground-token--plant2pertemp {
+  background-image: url("assets/underworld/underground-resource--plant2pertemp.png");
+}
+.underground-token--steel2pertemp {
+  background-image: url("assets/underworld/underground-resource--steel2pertemp.png");
+}
+.underground-token--titanium1pertemp {
+  background-image: url("assets/underworld/underground-resource--titanium1pertemp.png");
+}
+.underground-excavator {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  z-index: 3;
+  margin: 7px 0 0 21px;
+  filter: drop-shadow(2px 2px 3px black);
+  transform: rotate(0.14turn);
+}
+.underground-excavator--red {
+  background: url(./assets/board_icons.png) -24px -91px no-repeat;
+}
+.underground-excavator--blue {
+  background: url(./assets/board_icons.png) -94px -91px no-repeat;
+}
+.underground-excavator--black {
+  background: url(./assets/board_icons.png) -48px -91px no-repeat;
+}
+.underground-excavator--yellow {
+  background: url(./assets/board_icons.png) -72px -91px no-repeat;
+}
+.underground-excavator--green {
+  background: url(./assets/board_icons.png) -1px -91px no-repeat;
+}
+.underground-excavator--purple {
+  background: url(./assets/board_icons.png) -118px -91px no-repeat;
+}
+.underground-excavator--orange {
+  background: url(./assets/board_icons.png) -1px -117px no-repeat;
+}
+.underground-excavator--pink {
+  background: url(./assets/board_icons.png) -24px -117px no-repeat;
 }
 .board-space-01 {
   margin: 165px 0 0 -5px;
@@ -6769,12 +7155,6 @@ body {
   text-align: center;
   position: relative;
 }
-.resource_icon--microbe {
-  background-image: url("assets/resources/microbe.png");
-}
-.resource_icon--floater {
-  background-image: url("assets/resources/floater.png");
-}
 .resource_icon--titanium {
   background-image: url("assets/resources/titanium.png");
 }
@@ -6792,6 +7172,21 @@ body {
 }
 .resource_icon--seed {
   background-image: url("assets/resources/seed.png");
+}
+.resource_icon--graphene {
+  background-image: url("assets/resources/graphene.png");
+}
+.resource_icon--asteroid {
+  background-image: url("assets/resources/asteroid.png");
+}
+.resource_icon--hydroelectric-resource {
+  background-image: url("assets/resources/hydroelectric-resource.png");
+}
+.resource_icon--floaters {
+  background-image: url(./assets/resources/floater.png);
+}
+.resource_icon--microbes {
+  background-image: url(./assets/resources/microbe.png);
 }
 .resource_icon--plants {
   background-image: url(./assets/resources/plant.png);
@@ -7311,9 +7706,12 @@ body {
 .create-game-beginner-option-label {
   margin-top: 15px;
 }
-.create-game-discord-invite {
+.create-game .discord-invite {
   padding: 0px 15px;
   font-size: 20px;
+}
+.create-game .changelog {
+  padding: 0px 15px;
 }
 .corporations-filter-group {
   display: inline-block;
@@ -7626,6 +8024,30 @@ body {
 }
 .tag-influence-count {
   background-image: url(./assets/misc/influence.png);
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  background-size: 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+  filter: brightness(0.8);
+  border-radius: 0px !important;
+  background-position: 0px !important;
+}
+.tag-excavation-count {
+  background-image: url(./assets/underworld/excavate.png);
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  background-size: 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+  filter: brightness(0.8);
+  border-radius: 0px !important;
+  background-position: 0px !important;
+}
+.tag-corruption-count {
+  background-image: url(./assets/underworld/corruption.png);
   border: none !important;
   background-color: transparent !important;
   box-shadow: none !important;
@@ -8042,11 +8464,6 @@ body {
 .awards .ma-block .ma-name--martian,
 .tag-overview .ma-block .ma-name--martian {
   background-image: url(./assets/ma/martian.png);
-}
-.milestones .ma-block .ma-name--businessperson,
-.awards .ma-block .ma-name--businessperson,
-.tag-overview .ma-block .ma-name--businessperson {
-  background-image: url(./assets/ma/businessperson.png);
 }
 .milestones .ma-block .ma-name--cosmic-settler,
 .awards .ma-block .ma-name--cosmic-settler,
@@ -8799,7 +9216,7 @@ body {
   font-family: "Prototype";
   font-size: 15px;
 }
-.sidebar .moon_params_value .colony {
+.sidebar .moon_params_value .habitat {
   background-color: #0e7a99;
   padding: 2px;
   border-radius: 2px;
@@ -9554,6 +9971,21 @@ input[type="radio"]:checked + .colonies::after {
   font-size: 16px;
   text-transform: uppercase;
 }
+.log-tag {
+  display: inline-block;
+  background-size: 18px;
+  width: 18px;
+  height: 18px;
+  margin: 0 -6px -4px 0px;
+}
+.log-resource-megacredits {
+  display: inline-block;
+  background-size: 18px;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  margin-right: -5px;
+}
 .log-container .debugid {
   font-size: 9px;
   color: #888;
@@ -9645,41 +10077,55 @@ input[type="radio"]:checked + .colonies::after {
   display: inline-block;
   vertical-align: top;
   transform: scale(0.88);
-  margin: -50px 0 -45px -60px;
+  margin: -40px 0 -45px -60px;
 }
 .events-board {
   display: inline-block;
   vertical-align: top;
-  width: 1025px;
   box-sizing: initial;
   text-align: left;
-  margin: -10px 0 -10px 10px;
+  margin: 10px 0 -10px 0px;
+  width: 1010px;
 }
 .global-event {
   display: inline-block;
   vertical-align: top;
-  width: 350px;
+  width: 332px;
   height: 186px;
-  background: url(./assets/turmoil_ui.png);
-  background-position: -21px -172px;
-  margin: 20px 0 0 -13px;
+  margin: 0 1px;
+  background: url(./assets/parties/global_event.png);
   color: #000000;
   font-size: medium;
-}
-.global-event--current {
-  background-position: -727px -172px;
-}
-.global-event--coming {
-  background-position: -375px -172px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 .global-event-card-content {
-  width: 330px !important;
-  margin-left: 10px;
+  width: 300px !important;
+  height: 118px !important;
+  justify-content: center;
+  margin: 0 auto;
+  top: 3px;
+  box-sizing: inherit;
 }
-.global-event-name--narrow {
-  letter-spacing: -0.05em;
-  font-size: 14px;
-  margin-left: 10px;
+.global-event-title {
+  position: absolute;
+  text-transform: uppercase;
+  width: 200px;
+  margin-top: 135px;
+  margin-left: 70px;
+  font-weight: 600;
+  text-align: center;
+  height: 32px;
+  top: 11px;
+}
+.global-event-name {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  line-height: 15px;
 }
 .event-title {
   display: none;
@@ -10673,31 +11119,7 @@ input[type="radio"]:checked + .party-container::after {
 .debug-ui-container .create-game-page-column .expansion-button {
   justify-content: center;
 }
-.legacy-anchor {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 12px;
-}
-.moon-board {
-  width: 570px;
-  height: 335px;
-  margin: 85px 0 0 0;
-  background: url(./assets/moon/board.png) no-repeat;
-}
-.global-numbers-colony {
-  position: absolute;
-  margin: 60px 0px 0px 31px;
-}
-.global-numbers-logistics {
-  position: absolute;
-  margin: 60px 0px 0px 440px;
-}
-.global-numbers-mining {
-  position: absolute;
-  margin: 60px 0px 0px 513px;
-}
-.board-space-tile--colony {
+.board-space-tile--habitat {
   background: url(./assets/moon/colonytile.png) no-repeat;
 }
 .board-space-tile--road {
@@ -10718,123 +11140,147 @@ input[type="radio"]:checked + .party-container::after {
 .board-space-tile--lunar-mine-urbanization {
   background-image: url(./assets/moon/lunar-mine-urbanization.png);
 }
-.moon-space-m01 {
+.moon-board {
+  width: 570px;
+  height: 335px;
+  margin: 85px 0 0 0;
+  background: url(./assets/moon/board.png) no-repeat;
+}
+.moon-board .global-numbers-habitat {
+  position: absolute;
+  margin: 60px 0px 0px 31px;
+}
+.moon-board .global-numbers-logistics {
+  position: absolute;
+  margin: 60px 0px 0px 442px;
+}
+.moon-board .global-numbers-mining {
+  position: absolute;
+  margin: 60px 0px 0px 513px;
+}
+.moon-board .moon-space-m01 {
   margin: 15px 0 0 64px;
 }
-.moon-space-m02 {
+.moon-board .moon-space-m02 {
   margin: -57px 0 0 53px;
 }
-.moon-space-m03 {
+.moon-board .moon-space-m03 {
   margin: -57px 0 0 102px;
 }
-.moon-space-m04 {
+.moon-board .moon-space-m04 {
   margin: -57px 0 0 151px;
 }
-.moon-space-m05 {
+.moon-board .moon-space-m05 {
   margin: -57px 0 0 200px;
 }
-.moon-space-m06 {
+.moon-board .moon-space-m06 {
   margin: -18px 0 0 29px;
 }
-.moon-space-m07 {
+.moon-board .moon-space-m07 {
   margin: -18px 0 0 78px;
 }
-.moon-space-m08 {
+.moon-board .moon-space-m08 {
   margin: -18px 0 0 127px;
 }
-.moon-space-m09 {
+.moon-board .moon-space-m09 {
   margin: -18px 0 0 176px;
 }
-.moon-space-m10 {
+.moon-board .moon-space-m10 {
   margin: -18px 0 0 225px;
 }
-.moon-space-m11 {
+.moon-board .moon-space-m11 {
   margin: 21px 0 0 4px;
 }
-.moon-space-m12 {
+.moon-board .moon-space-m12 {
   margin: 21px 0 0 53px;
 }
-.moon-space-m13 {
+.moon-board .moon-space-m13 {
   margin: 21px 0 0 102px;
 }
-.moon-space-m14 {
+.moon-board .moon-space-m14 {
   margin: 21px 0 0 151px;
 }
-.moon-space-m15 {
+.moon-board .moon-space-m15 {
   margin: 21px 0 0 200px;
 }
-.moon-space-m16 {
+.moon-board .moon-space-m16 {
   margin: 21px 0 0 250px;
 }
-.moon-space-m17 {
+.moon-board .moon-space-m17 {
   margin: 60px 0 0 29px;
 }
-.moon-space-m18 {
+.moon-board .moon-space-m18 {
   margin: 60px 0 0 78px;
 }
-.moon-space-m19 {
+.moon-board .moon-space-m19 {
   margin: 60px 0 0 127px;
 }
-.moon-space-m20 {
+.moon-board .moon-space-m20 {
   margin: 60px 0 0 176px;
 }
-.moon-space-m21 {
+.moon-board .moon-space-m21 {
   margin: 60px 0 0 225px;
 }
-.moon-space-m22 {
+.moon-board .moon-space-m22 {
   margin: 99px 0 0 4px;
 }
-.moon-space-m23 {
+.moon-board .moon-space-m23 {
   margin: 99px 0 0 53px;
 }
-.moon-space-m24 {
+.moon-board .moon-space-m24 {
   margin: 99px 0 0 102px;
 }
-.moon-space-m25 {
+.moon-board .moon-space-m25 {
   margin: 99px 0 0 151px;
 }
-.moon-space-m26 {
+.moon-board .moon-space-m26 {
   margin: 99px 0 0 200px;
 }
-.moon-space-m27 {
+.moon-board .moon-space-m27 {
   margin: 99px 0 0 250px;
 }
-.moon-space-m28 {
+.moon-board .moon-space-m28 {
   margin: 138px 0 0 29px;
 }
-.moon-space-m29 {
+.moon-board .moon-space-m29 {
   margin: 138px 0 0 78px;
 }
-.moon-space-m30 {
+.moon-board .moon-space-m30 {
   margin: 138px 0 0 127px;
 }
-.moon-space-m31 {
+.moon-board .moon-space-m31 {
   margin: 138px 0 0 176px;
 }
-.moon-space-m32 {
+.moon-board .moon-space-m32 {
   margin: 138px 0 0 225px;
 }
-.moon-space-m33 {
+.moon-board .moon-space-m33 {
   margin: 177px 0 0 53px;
 }
-.moon-space-m34 {
+.moon-board .moon-space-m34 {
   margin: 177px 0 0 102px;
 }
-.moon-space-m35 {
+.moon-board .moon-space-m35 {
   margin: 177px 0 0 151px;
 }
-.moon-space-m36 {
+.moon-board .moon-space-m36 {
   margin: 177px 0 0 200px;
 }
-.moon-space-m37 {
+.moon-board .moon-space-m37 {
   margin: 13px 0 0 370px;
 }
-.moon-space-type-mine {
+.moon-board .moon-space-type-mine {
   background: url(./assets/moon/hex_brown.png);
   background-color: #8303;
 }
-.moon-space-type-other {
+.moon-board .val-0 {
+  margin-top: 6px;
+}
+.moon-board .moon-space-type-other {
   background: url(./assets/moon/hex_yellow.png);
+}
+.moon-board .global-numbers-value {
+  color: #292323;
 }
 .card-tile-lunar-mine {
   background-image: url(./assets/moon/minetile.png);
@@ -11021,8 +11467,7 @@ input[type="radio"]:checked + .party-container::after {
   margin: 20px;
   display: inline-block;
 }
-.pathfinders_cont .table {
-  border-collapse: collapse;
+.pathfinders_cont table {
   border-spacing: 0px;
 }
 .pathfinders_cont .track {
@@ -11032,6 +11477,12 @@ input[type="radio"]:checked + .party-container::after {
   position: relative;
   background: #ccc;
   margin-bottom: 10px;
+  border-radius: 2px;
+}
+.pathfinders_cont .track-icon {
+  position: absolute;
+  margin: 12px 0 0 -20px;
+  text-shadow: 0 1px 1px #000;
 }
 .pathfinders_cont .track-numbers {
   margin-left: 50px;
@@ -11041,14 +11492,14 @@ input[type="radio"]:checked + .party-container::after {
   font-size: 22px;
 }
 .pathfinders_cont .track-tag {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background-size: 70px;
+  background-size: 60px;
   border: 2px solid #000;
   position: absolute;
-  top: -25px;
-  left: -25px;
+  top: 24px;
+  left: -30px;
   background-position: -2px;
 }
 .pathfinders_cont .track-tag-venus {
@@ -11083,88 +11534,18 @@ input[type="radio"]:checked + .party-container::after {
 }
 .pathfinders_cont .highlight {
   font-weight: bold;
-  background: linear-gradient(transparent, #fff8);
+  background: #fff6;
+  border-left: 2px solid #222;
 }
 .pathfinders_cont td {
-  padding: 0;
+  padding: 5px 14px;
   text-align: center;
   background: linear-gradient(transparent, #0008);
+  border-left: 2px solid #0008;
 }
 .pathfinders_cont tr {
   height: 50px;
   border: none;
-}
-.pathfinders_cont table td:nth-child(1) {
-  min-width: 20px;
-}
-.pathfinders_cont table td:nth-child(2) {
-  min-width: 20px;
-}
-.pathfinders_cont table td:nth-child(3) {
-  min-width: 20px;
-}
-.pathfinders_cont table td:nth-child(4) {
-  min-width: 45px;
-}
-.pathfinders_cont table td:nth-child(5) {
-  min-width: 80px;
-}
-.pathfinders_cont table td:nth-child(6) {
-  min-width: 20px;
-}
-.pathfinders_cont table td:nth-child(7) {
-  min-width: 100px;
-}
-.pathfinders_cont table td:nth-child(8) {
-  min-width: 45px;
-}
-.pathfinders_cont table td:nth-child(9) {
-  min-width: 20px;
-}
-.pathfinders_cont table td:nth-child(10) {
-  min-width: 80px;
-}
-.pathfinders_cont table td:nth-child(11) {
-  min-width: 45px;
-}
-.pathfinders_cont table td:nth-child(12) {
-  min-width: 20px;
-}
-.pathfinders_cont table td:nth-child(13) {
-  min-width: 80px;
-}
-.pathfinders_cont table td:nth-child(14) {
-  min-width: 45px;
-}
-.pathfinders_cont table td:nth-child(15) {
-  min-width: 20px;
-}
-.pathfinders_cont table td:nth-child(16) {
-  min-width: 80px;
-}
-.pathfinders_cont table td:nth-child(17) {
-  min-width: 20px;
-}
-.pathfinders_cont table td:nth-child(18) {
-  min-width: 60px;
-}
-.pathfinders_cont table td:nth-child(19) {
-  min-width: 45px;
-}
-.pathfinders_cont table td:nth-child(20) {
-  min-width: 20px;
-}
-.pathfinders_cont table td:nth-child(21) {
-  min-width: 80px;
-}
-.pathfinders_cont table td:nth-child(22) {
-  min-width: 45px;
-}
-.pathfinders_cont table td:nth-child(23) {
-  min-width: 20px;
-}
-.pathfinders_cont table td:nth-child(24) {
-  min-width: 45px;
 }
 .pathfinders_cont .rewards_cont {
   display: flex;
@@ -11485,6 +11866,41 @@ input[type="radio"]:checked + .party-container::after {
 .language-icon--nl {
   background-position: 0 -4740px;
 }
+.language-icon--hu {
+  background-position: 0 -2850px;
+}
+.language-icon--jp {
+  background-position: 0 -3210px;
+}
 .language-text {
   cursor: pointer;
+}
+.ma-name--kingpin {
+  background-image: url(./assets/ma/underworld/kingpin.png);
+  padding-top: 61px;
+}
+.ma-name--edgelord {
+  background-image: url(./assets/ma/underworld/edgelord.png);
+  padding-top: 61px;
+}
+.ma-name--tunneler {
+  background-image: url(./assets/ma/underworld/tunneler.png);
+  padding-top: 61px;
+}
+.ma-name--risktaker {
+  background-image: url(./assets/ma/underworld/risktaker.png);
+  padding-top: 61px;
+}
+.card-tile-man-made-volcano {
+  background: url("./assets/underworld/volcanic-tile.png");
+  width: 40px;
+  height: 47px;
+  background-size: 40px;
+  background-repeat: no-repeat;
+}
+.board-space-tile--man-made-volcano {
+  background: url("./assets/underworld/volcanic-tile.png");
+  width: 44px;
+  height: 50px;
+  background-size: 44px, 50px;
 }

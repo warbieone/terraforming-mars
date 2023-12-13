@@ -4,7 +4,7 @@ exports.Industrialist = void 0;
 class Industrialist {
     constructor() {
         this.name = 'Industrialist';
-        this.description = 'Have most steel and energy (after final production round)';
+        this.description = 'Have most steel and energy';
     }
     getScore(player) {
         if (player.game.isDoneWithFinalProduction()) {

@@ -6,12 +6,22 @@ const Units_1 = require("../../common/Units");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 const utils_1 = require("../../common/utils/utils");
 class SelectProductionToLose extends PlayerInput_1.BasePlayerInput {
-    constructor(title, unitsToLose, player, cb, buttonLabel = 'Save') {
+    constructor(title, unitsToLose, player, buttonLabel = 'Save') {
         super('productionToLose', title);
         this.unitsToLose = unitsToLose;
         this.player = player;
-        this.cb = cb;
         this.buttonLabel = buttonLabel;
+    }
+    toModel() {
+        return {
+            title: this.title,
+            buttonLabel: this.buttonLabel,
+            type: 'productionToLose',
+            payProduction: {
+                cost: this.unitsToLose,
+                units: this.player.production.asUnits(),
+            },
+        };
     }
     process(input, player) {
         if (!(0, InputResponse_1.isSelectProductionToLoseResponse)(input)) {

@@ -38,28 +38,28 @@ class TitanAirScrapping extends Card_1.Card {
             return true;
         }
         if (this.resourceCount >= 2) {
-            return player.canAfford(0, { tr: { tr: 1 } });
+            return player.canAfford({ cost: 0, tr: { tr: 1 } });
         }
         return false;
     }
     action(player) {
         const opts = [];
-        const addResource = new SelectOption_1.SelectOption('Spend 1 titanium to add 4 floaters on this card', 'Spend titanium', () => this.addResource(player));
-        const spendResource = new SelectOption_1.SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters', () => this.spendResource(player));
-        if (this.resourceCount >= 2 && player.canAfford(0, { tr: { tr: 1 } })) {
+        const addResource = new SelectOption_1.SelectOption('Spend 1 titanium to add 4 floaters on this card', 'Spend titanium').andThen(() => this.addResource(player));
+        const spendResource = new SelectOption_1.SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters').andThen(() => this.spendResource(player));
+        if (this.resourceCount >= 2 && player.canAfford({ cost: 0, tr: { tr: 1 } })) {
             opts.push(spendResource);
         }
         if (player.titanium > 0) {
             opts.push(addResource);
         }
         if (opts.length === 1) {
-            return opts[0].cb();
+            return opts[0].cb(undefined);
         }
         return new OrOptions_1.OrOptions(...opts);
     }
     addResource(player) {
         player.pay(Payment_1.Payment.of({ titanium: 1 }));
-        player.addResourceTo(this, { qty: 2, log: true });
+        player.addResourceTo(this, { qty: 4, log: true });
         return undefined;
     }
     spendResource(player) {

@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
 class GHGProducingBacteria extends ActionCard_1.ActionCard {
@@ -16,7 +15,7 @@ class GHGProducingBacteria extends ActionCard_1.ActionCard {
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.MICROBE],
             cost: 8,
             resourceType: CardResource_1.CardResource.MICROBE,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(4)),
+            requirements: { oxygen: 4 },
             action: {
                 or: {
                     autoSelect: true,

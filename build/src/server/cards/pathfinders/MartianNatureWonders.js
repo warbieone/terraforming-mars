@@ -9,6 +9,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const SelectSpace_1 = require("../../inputs/SelectSpace");
 const CardResource_1 = require("../../../common/CardResource");
 const TileType_1 = require("../../../common/TileType");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class MartianNatureWonders extends Card_1.Card {
     constructor() {
         super({
@@ -31,11 +32,12 @@ class MartianNatureWonders extends Card_1.Card {
             },
         });
     }
-    bespokeCanPlay(player) {
-        return player.game.board.getAvailableSpacesOnLand(player).length > 0;
+    bespokeCanPlay(player, canAffordOptions) {
+        return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions).length > 0;
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace('Select a Martian Natural Wonder space', player.game.board.getAvailableSpacesOnLand(player), (space) => {
+        return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)), player.game.board.getAvailableSpacesOnLand(player))
+            .andThen((space) => {
             player.game.simpleAddTile(player, space, { tileType: TileType_1.TileType.MARTIAN_NATURE_WONDERS });
             player.game.grantSpaceBonuses(player, space);
             return undefined;

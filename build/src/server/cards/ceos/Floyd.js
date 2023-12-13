@@ -32,10 +32,8 @@ class Floyd extends CeoCard_1.CeoCard {
     action(player) {
         this.isDisabled = true;
         this.opgActionIsActive = true;
-        player.game.defer(new PlayProjectCard_1.PlayProjectCard(player, () => {
-            this.opgActionIsActive = false;
-            return undefined;
-        }));
+        player.game.defer(new PlayProjectCard_1.PlayProjectCard(player))
+            .andThen(() => this.opgActionIsActive = false);
         return undefined;
     }
     getCardDiscount(player) {

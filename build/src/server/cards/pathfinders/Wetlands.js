@@ -7,10 +7,10 @@ const SelectSpace_1 = require("../../inputs/SelectSpace");
 const TileType_1 = require("../../../common/TileType");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Board_1 = require("../../boards/Board");
 const Size_1 = require("../../../common/cards/render/Size");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class Wetlands extends Card_1.Card {
     constructor() {
         super({
@@ -19,7 +19,7 @@ class Wetlands extends Card_1.Card {
             tags: [Tag_1.Tag.PLANT, Tag_1.Tag.MARS],
             cost: 20,
             tr: { oxygen: 1, tr: 1 },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(2)),
+            requirements: { oceans: 2 },
             reserveUnits: { plants: 4 },
             victoryPoints: 1,
             metadata: {
@@ -37,7 +37,7 @@ class Wetlands extends Card_1.Card {
             },
         });
     }
-    availableSpaces(player) {
+    availableSpaces(player, canAffordOptions) {
         const board = player.game.board;
         const adjacentOceans = (space) => {
             const adjacentSpaces = board.getAdjacentSpaces(space);
@@ -47,19 +47,20 @@ class Wetlands extends Card_1.Card {
         const spacesNextToRedCity = redCity ?
             board.getAdjacentSpaces(redCity) :
             [];
-        return board.getAvailableSpacesOnLand(player)
+        return board.getAvailableSpacesOnLand(player, canAffordOptions)
             .filter((space) => adjacentOceans(space) >= 2)
             .filter((space) => !spacesNextToRedCity.includes(space));
     }
-    bespokeCanPlay(player) {
-        if (!player.hasUnits(this.reserveUnits)) {
+    bespokeCanPlay(player, canAffordOptions) {
+        if (!player.stock.has(this.reserveUnits)) {
             return false;
         }
-        return this.availableSpaces(player).length > 0;
+        return this.availableSpaces(player, canAffordOptions).length > 0;
     }
     bespokePlay(player) {
-        player.deductUnits(this.reserveUnits);
-        return new SelectSpace_1.SelectSpace('Select space for Wetlands', this.availableSpaces(player), (space) => {
+        player.stock.deductUnits(this.reserveUnits);
+        return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)), this.availableSpaces(player))
+            .andThen((space) => {
             const tile = {
                 tileType: TileType_1.TileType.WETLANDS,
                 card: this.name,

@@ -8,7 +8,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Size_1 = require("../../../common/cards/render/Size");
 class SelfReplicatingRobots extends Card_1.Card {
     constructor() {
@@ -16,7 +15,7 @@ class SelfReplicatingRobots extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.SELF_REPLICATING_ROBOTS,
             cost: 7,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 2)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 2 },
             metadata: {
                 cardNumber: '210',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -48,7 +47,8 @@ class SelfReplicatingRobots extends Card_1.Card {
         const selectableCards = player.cardsInHand.filter((card) => card.tags.some((tag) => tag === Tag_1.Tag.SPACE || tag === Tag_1.Tag.BUILDING));
         if (this.targetCards.length > 0) {
             const robotCards = this.targetCards.map((targetCard) => targetCard.card);
-            orOptions.options.push(new SelectCard_1.SelectCard('Select card to double robots resource', 'Double resource', robotCards, ([card]) => {
+            orOptions.options.push(new SelectCard_1.SelectCard('Select card to double robots resource', 'Double resource', robotCards, { played: CardName_1.CardName.SELF_REPLICATING_ROBOTS })
+                .andThen(([card]) => {
                 let resourceCount = 0;
                 for (const targetCard of this.targetCards) {
                     if (targetCard.card.name === card.name) {
@@ -60,10 +60,10 @@ class SelfReplicatingRobots extends Card_1.Card {
                     b.player(player).card(card).number(resourceCount).number(resourceCount * 2);
                 });
                 return undefined;
-            }, { played: CardName_1.CardName.SELF_REPLICATING_ROBOTS }));
+            }));
         }
         if (selectableCards.length > 0) {
-            orOptions.options.push(new SelectCard_1.SelectCard('Select card to link with Self-Replicating Robots', 'Link card', selectableCards, ([card]) => {
+            orOptions.options.push(new SelectCard_1.SelectCard('Select card to link with Self-Replicating Robots', 'Link card', selectableCards, { played: CardName_1.CardName.SELF_REPLICATING_ROBOTS }).andThen(([card]) => {
                 const projectCardIndex = player.cardsInHand.findIndex((c) => c.name === card.name);
                 player.cardsInHand.splice(projectCardIndex, 1);
                 this.targetCards.push({
@@ -72,7 +72,7 @@ class SelfReplicatingRobots extends Card_1.Card {
                 });
                 player.game.log('${0} linked ${1} with ${2}', (b) => b.player(player).card(card).card(this));
                 return undefined;
-            }, { played: CardName_1.CardName.SELF_REPLICATING_ROBOTS }));
+            }));
         }
         return orOptions;
     }

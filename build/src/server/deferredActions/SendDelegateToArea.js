@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SendDelegateToArea = void 0;
-const SelectPartyToSendDelegate_1 = require("../inputs/SelectPartyToSendDelegate");
+const SelectParty_1 = require("../inputs/SelectParty");
 const DeferredAction_1 = require("./DeferredAction");
 const SelectPaymentDeferred_1 = require("./SelectPaymentDeferred");
 const Turmoil_1 = require("../turmoil/Turmoil");
@@ -37,21 +37,22 @@ class SendDelegateToArea extends DeferredAction_1.DeferredAction {
             return undefined;
         }
         const numDelegateToSend = (_a = this.options.count) !== null && _a !== void 0 ? _a : 1;
-        const sendDelegate = new SelectPartyToSendDelegate_1.SelectPartyToSendDelegate(this.title, 'Send delegate', availableParties, (partyName) => {
+        const sendDelegate = new SelectParty_1.SelectParty(this.title, 'Send delegate', availableParties)
+            .andThen((partyName) => {
             var _a;
             if (this.options.cost) {
                 this.player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(this.player, this.options.cost, { title: 'Select how to pay for send delegate action' }));
             }
             for (let i = 0; i < numDelegateToSend; i++) {
                 if (this.options.replace) {
-                    this.turmoil.replaceDelegateFromParty(this.options.replace, this.player.id, partyName, this.player.game);
+                    this.turmoil.replaceDelegateFromParty(this.options.replace, this.player, partyName, this.player.game);
                 }
                 else {
-                    this.turmoil.sendDelegateToParty(this.player.id, partyName, this.player.game);
+                    this.turmoil.sendDelegateToParty(this.player, partyName, this.player.game);
                 }
             }
             if (((_a = this.options) === null || _a === void 0 ? void 0 : _a.freeStandardAction) === true) {
-                this.turmoil.usedFreeDelegateAction.add(this.player.id);
+                this.turmoil.usedFreeDelegateAction.add(this.player);
             }
             this.player.totalDelegatesPlaced += numDelegateToSend;
             this.player.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(numDelegateToSend).partyName(partyName));

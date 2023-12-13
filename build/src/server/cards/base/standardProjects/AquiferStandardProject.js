@@ -19,6 +19,14 @@ class AquiferStandardProject extends StandardProjectCard_1.StandardProjectCard {
             },
         });
     }
+    canPayWith(player) {
+        if (player.isCorporation(CardName_1.CardName.KUIPER_COOPERATIVE)) {
+            return { kuiperAsteroids: true };
+        }
+        else {
+            return {};
+        }
+    }
     canAct(player) {
         if (!player.game.canAddOcean())
             return false;

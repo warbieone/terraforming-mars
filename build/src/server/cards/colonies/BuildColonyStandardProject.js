@@ -29,7 +29,7 @@ class BuildColonyStandardProject extends StandardProjectCard_1.StandardProjectCa
         let openColonies = player.game.colonies.filter((colony) => !colony.isFull() &&
             colony.colonies.includes(player.id) === false &&
             colony.isActive);
-        const canAffordVenus = player.canAfford(this.cost, { tr: { venus: 1 } });
+        const canAffordVenus = player.canAfford({ cost: this.cost, tr: { venus: 1 } });
         if (!canAffordVenus) {
             openColonies = openColonies.filter((colony) => colony.name !== ColonyName_1.ColonyName.VENUS);
         }

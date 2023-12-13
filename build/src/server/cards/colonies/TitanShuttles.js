@@ -42,15 +42,15 @@ class TitanShuttles extends Card_1.Card {
             player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.FLOATER, { count: 2, restrictedTag: Tag_1.Tag.JOVIAN, title: 'Add 2 floaters to a Jovian card' }));
             return undefined;
         }
-        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Add 2 floaters to a Jovian card', 'Add floaters', () => {
+        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Add 2 floaters to a Jovian card', 'Add floaters').andThen(() => {
             player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.FLOATER, { count: 2, restrictedTag: Tag_1.Tag.JOVIAN }));
             return undefined;
-        }), new SelectAmount_1.SelectAmount('Remove X floaters on this card to gain X titanium', 'Remove floaters', (amount) => {
+        }), new SelectAmount_1.SelectAmount('Remove X floaters on this card to gain X titanium', 'Remove floaters', 1, this.resourceCount, true).andThen((amount) => {
             player.removeResourceFrom(this, amount);
             player.titanium += amount;
             player.game.log('${0} removed ${1} floaters to gain ${2} titanium', (b) => b.player(player).number(amount).number(amount));
             return undefined;
-        }, 1, this.resourceCount, true));
+        }));
     }
 }
 exports.TitanShuttles = TitanShuttles;

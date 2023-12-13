@@ -6,7 +6,6 @@ const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class PROffice extends Card_1.Card {
@@ -20,7 +19,7 @@ class PROffice extends Card_1.Card {
                 tr: 1,
                 stock: { megacredits: { tag: Tag_1.Tag.EARTH } },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.UNITY)),
+            requirements: { party: PartyName_1.PartyName.UNITY },
             metadata: {
                 cardNumber: 'T09',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

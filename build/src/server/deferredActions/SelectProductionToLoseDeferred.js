@@ -11,7 +11,8 @@ class SelectProductionToLoseDeferred extends DeferredAction_1.DeferredAction {
         this.title = title;
     }
     execute() {
-        return new SelectProductionToLose_1.SelectProductionToLose(this.title, this.unitsToLose, this.player, (production) => {
+        return new SelectProductionToLose_1.SelectProductionToLose(this.title, this.unitsToLose, this.player)
+            .andThen((production) => {
             this.player.production.adjust(Units_1.Units.negative(production), { log: true });
             return undefined;
         });

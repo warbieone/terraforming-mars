@@ -6,7 +6,8 @@ const SpaceName_1 = require("../SpaceName");
 const Board_1 = require("./Board");
 const constants_1 = require("../../common/constants");
 const BoardBuilder_1 = require("./BoardBuilder");
-class HellasBoard extends Board_1.Board {
+const MarsBoard_1 = require("./MarsBoard");
+class HellasBoard extends MarsBoard_1.MarsBoard {
     static newInstance(gameOptions, rng) {
         const builder = new BoardBuilder_1.BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
         const PLANT = SpaceBonus_1.SpaceBonus.PLANT;
@@ -16,7 +17,7 @@ class HellasBoard extends Board_1.Board {
         const TITANIUM = SpaceBonus_1.SpaceBonus.TITANIUM;
         const TWO_PLANTS = [PLANT, PLANT];
         builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT);
-        builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT).land(PLANT).land(PLANT);
+        builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT).land(PLANT, STEEL).land(PLANT).land(PLANT);
         builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL).land().land(...TWO_PLANTS).land(PLANT, DRAW_CARD);
         builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL, STEEL).land(STEEL).ocean(PLANT).ocean(PLANT).land(PLANT);
         builder.land(DRAW_CARD).land().land().land(STEEL, STEEL).land().ocean(DRAW_CARD).ocean(HEAT, HEAT, HEAT).ocean().land(PLANT);
@@ -33,20 +34,13 @@ class HellasBoard extends Board_1.Board {
     static deserialize(board, players) {
         return new HellasBoard(Board_1.Board.deserializeSpaces(board.spaces, players));
     }
-    filterHellas(player, spaces) {
-        return player.canAfford(constants_1.HELLAS_BONUS_OCEAN_COST, { tr: { oceans: 1 } }) ? spaces : spaces.filter((space) => space.id !== SpaceName_1.SpaceName.HELLAS_OCEAN_TILE);
-    }
-    getSpaces(spaceType, player) {
-        return this.filterHellas(player, super.getSpaces(spaceType, player));
-    }
-    getAvailableSpacesForCity(player) {
-        return this.filterHellas(player, super.getAvailableSpacesForCity(player));
-    }
-    getAvailableSpacesOnLand(player) {
-        return this.filterHellas(player, super.getAvailableSpacesOnLand(player));
-    }
-    getAvailableSpacesForGreenery(player) {
-        return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
+    spaceCosts(space) {
+        const costs = super.spaceCosts(space);
+        if (space.id === SpaceName_1.SpaceName.HELLAS_OCEAN_TILE) {
+            costs.stock.megacredits = constants_1.HELLAS_BONUS_OCEAN_COST;
+            costs.tr.oceans = 1;
+        }
+        return costs;
     }
 }
 exports.HellasBoard = HellasBoard;

@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class NitrophilicMoss extends Card_1.Card {
     constructor() {
@@ -17,7 +16,7 @@ class NitrophilicMoss extends Card_1.Card {
             behavior: {
                 production: { plants: 2 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(3)),
+            requirements: { oceans: 3 },
             metadata: {
                 cardNumber: '146',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

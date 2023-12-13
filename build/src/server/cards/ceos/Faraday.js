@@ -13,6 +13,7 @@ const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const MessageBuilder_1 = require("../../logs/MessageBuilder");
+const titles_1 = require("../../inputs/titles");
 const INVALID_TAGS = [
     Tag_1.Tag.EVENT,
     Tag_1.Tag.WILD,
@@ -62,17 +63,11 @@ class Faraday extends CeoCard_1.CeoCard {
     effectOptions(player, tag) {
         if (!player.canAfford(3))
             return;
-        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption((0, MessageBuilder_1.newMessage)('Pay 3 MC to draw a ${1} card', (b) => b.string(tag)), 'Confirm', () => {
-            player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 3, {
-                title: 'Select how to pay for action',
-                afterPay: () => {
-                    player.drawCard(1, { tag: tag });
-                },
-            }));
+        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Pay 3 M€ to draw a ${1} card', (b) => b.string(tag))).andThen(() => {
+            player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 3, { title: titles_1.TITLES.payForCardAction(this.name) }))
+                .andThen(() => player.drawCard(1, { tag: tag }));
             return undefined;
-        }), new SelectOption_1.SelectOption('Do nothing', 'Confirm', () => {
-            return undefined;
-        }));
+        }), new SelectOption_1.SelectOption('Do nothing'));
     }
 }
 exports.Faraday = Faraday;

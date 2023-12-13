@@ -32,7 +32,8 @@ class DesperateMeasures extends Card_1.Card {
         return this.getHazardTiles(player.game).length > 0;
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game), (space) => {
+        return new SelectSpace_1.SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game))
+            .andThen((space) => {
             if (space.tile === undefined) {
                 throw new Error(`selected space ${space.id} without tile for DesperateMeasures`);
             }

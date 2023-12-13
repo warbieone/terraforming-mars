@@ -26,7 +26,7 @@ class SolarnetShutdown extends GlobalEvent_1.GlobalEvent {
         game.getPlayersInGenerationOrder().forEach((player) => {
             const amount = Math.min(5, player.playedCards.filter((card) => card.type === CardType_1.CardType.ACTIVE).length) - turmoil.getPlayerInfluence(player);
             if (amount > 0) {
-                player.deductResource(Resource_1.Resource.MEGACREDITS, amount * 3, { log: true, from: this.name });
+                player.stock.deduct(Resource_1.Resource.MEGACREDITS, amount * 3, { log: true, from: this.name });
             }
         });
     }

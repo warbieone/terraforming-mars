@@ -22,9 +22,9 @@ class StrongSociety extends GlobalEvent_1.GlobalEvent {
     }
     resolve(game, turmoil) {
         game.getPlayersInGenerationOrder().forEach((player) => {
-            const amount = Math.min(5, player.game.getCitiesCount(player)) + turmoil.getPlayerInfluence(player);
+            const amount = Math.min(5, player.game.board.getCities(player).length) + turmoil.getPlayerInfluence(player);
             if (amount > 0) {
-                player.addResource(Resource_1.Resource.MEGACREDITS, amount * 2, { log: true, from: this.name });
+                player.stock.add(Resource_1.Resource.MEGACREDITS, amount * 2, { log: true, from: this.name });
             }
         });
     }

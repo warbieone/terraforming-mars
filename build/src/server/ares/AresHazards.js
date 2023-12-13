@@ -21,7 +21,7 @@ class _AresHazardPlacement {
                 s.tile.tileType = to;
             }
         });
-        game.log('${0} have upgraded to ${1}', (b) => b.string(TileType_1.TileType.toString(from)).string(TileType_1.TileType.toString(to)));
+        game.log('${0} have upgraded to ${1}', (b) => b.tileType(from).tileType(to));
     }
     static onTemperatureChange(game, aresData) {
         this.testConstraint(aresData.hazardData.severeErosionTemperature, game.getTemperature(), () => {
@@ -41,7 +41,7 @@ class _AresHazardPlacement {
         if (player.game.gameOptions.aresHazards === false) {
             return;
         }
-        this.testConstraint(aresData.hazardData.erosionOceanCount, player.game.board.getOceanCount(), () => {
+        this.testConstraint(aresData.hazardData.erosionOceanCount, player.game.board.getOceanSpaces().length, () => {
             let type = TileType_1.TileType.EROSION_MILD;
             if (aresData.hazardData.severeErosionTemperature.available !== true) {
                 type = TileType_1.TileType.EROSION_SEVERE;
@@ -54,7 +54,7 @@ class _AresHazardPlacement {
         });
     }
     static testToRemoveDustStorms(aresData, player) {
-        this.testConstraint(aresData.hazardData.removeDustStormsOceanCount, player.game.board.getOceanCount(), () => {
+        this.testConstraint(aresData.hazardData.removeDustStormsOceanCount, player.game.board.getOceanSpaces().length, () => {
             player.game.board.spaces.forEach((space) => {
                 var _a, _b;
                 if (((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType) === TileType_1.TileType.DUST_STORM_MILD || ((_b = space.tile) === null || _b === void 0 ? void 0 : _b.tileType) === TileType_1.TileType.DUST_STORM_SEVERE) {

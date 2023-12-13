@@ -8,7 +8,6 @@ const CardResource_1 = require("../../../common/CardResource");
 const TileType_1 = require("../../../common/TileType");
 const SelectSpace_1 = require("../../inputs/SelectSpace");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Phase_1 = require("../../../common/Phase");
 const Options_1 = require("../Options");
@@ -35,16 +34,16 @@ class EcologicalZone extends Card_1.Card {
             resourceType: CardResource_1.CardResource.ANIMAL,
             adjacencyBonus,
             victoryPoints: { resourcesHere: {}, per: 2 },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.greeneries()),
+            requirements: { greeneries: 1 },
             metadata,
         });
     }
-    getAvailableSpaces(player) {
-        return player.game.board.getAvailableSpacesOnLand(player)
+    getAvailableSpaces(player, canAffordOptions) {
+        return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
             .filter((space) => player.game.board.getAdjacentSpaces(space).filter(Board_1.Board.isGreenerySpace).length > 0);
     }
-    bespokeCanPlay(player) {
-        return this.getAvailableSpaces(player).length > 0;
+    bespokeCanPlay(player, canAffordOptions) {
+        return this.getAvailableSpaces(player, canAffordOptions).length > 0;
     }
     onCardPlayed(player, card) {
         const qty = player.tags.cardTagCount(card, [Tag_1.Tag.ANIMAL, Tag_1.Tag.PLANT]);
@@ -54,11 +53,12 @@ class EcologicalZone extends Card_1.Card {
         if (player.game.phase === Phase_1.Phase.PRELUDES && player.playedCards.length > 0 && player.playedCards[player.playedCards.length - 1].name === CardName_1.CardName.ECOLOGY_EXPERTS) {
             player.addResourceTo(this, { qty: 1, log: true });
         }
-        return new SelectSpace_1.SelectSpace('Select space next to greenery for special tile', this.getAvailableSpaces(player), (requestedSpace) => {
-            player.game.addTile(player, requestedSpace, {
+        return new SelectSpace_1.SelectSpace('Select space next to greenery for special tile', this.getAvailableSpaces(player))
+            .andThen((space) => {
+            player.game.addTile(player, space, {
                 tileType: TileType_1.TileType.ECOLOGICAL_ZONE,
             });
-            requestedSpace.adjacency = this.adjacencyBonus;
+            space.adjacency = this.adjacencyBonus;
             return undefined;
         });
     }

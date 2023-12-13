@@ -13,6 +13,7 @@ const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class LargeConvoy extends Card_1.Card {
     constructor() {
         super({
@@ -38,23 +39,24 @@ class LargeConvoy extends Card_1.Card {
     bespokePlay(player) {
         const animalCards = player.getResourceCards(CardResource_1.CardResource.ANIMAL);
         const gainPlants = function () {
-            player.addResource(Resource_1.Resource.PLANTS, 5, { log: true });
+            player.stock.add(Resource_1.Resource.PLANTS, 5, { log: true });
             return undefined;
         };
         if (animalCards.length === 0)
             return gainPlants();
         const availableActions = [];
-        const gainPlantsOption = new SelectOption_1.SelectOption('Gain 5 plants', 'Gain plants', gainPlants);
+        const gainPlantsOption = new SelectOption_1.SelectOption('Gain 5 plants', 'Gain plants').andThen(gainPlants);
         availableActions.push(gainPlantsOption);
         if (animalCards.length === 1) {
             const targetAnimalCard = animalCards[0];
-            availableActions.push(new SelectOption_1.SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals', () => {
+            availableActions.push(new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Add ${0} animals to ${1}', (b) => b.number(4).card(targetAnimalCard)), 'Add animals').andThen(() => {
                 player.addResourceTo(targetAnimalCard, { qty: 4, log: true });
                 return undefined;
             }));
         }
         else {
-            availableActions.push(new SelectCard_1.SelectCard('Select card to add 4 animals', 'Add animals', animalCards, ([card]) => {
+            availableActions.push(new SelectCard_1.SelectCard('Select card to add 4 animals', 'Add animals', animalCards)
+                .andThen(([card]) => {
                 player.addResourceTo(card, { qty: 4, log: true });
                 return undefined;
             }));

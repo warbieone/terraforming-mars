@@ -8,7 +8,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class BioengineeringEnclosure extends Card_1.Card {
     constructor() {
@@ -21,7 +20,7 @@ class BioengineeringEnclosure extends Card_1.Card {
             behavior: {
                 addResources: 2,
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE)),
+            requirements: { tag: Tag_1.Tag.SCIENCE },
             metadata: {
                 description: 'Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.',
                 cardNumber: 'A01',
@@ -49,7 +48,8 @@ class BioengineeringEnclosure extends Card_1.Card {
                 player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(resourceCards[0]));
                 return undefined;
             }
-            return new SelectCard_1.SelectCard('Select card to add 1 animal', 'Add animal', resourceCards, ([card]) => {
+            return new SelectCard_1.SelectCard('Select card to add 1 animal', 'Add animal', resourceCards)
+                .andThen(([card]) => {
                 this.resourceCount--;
                 player.addResourceTo(card, 1);
                 player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(card));

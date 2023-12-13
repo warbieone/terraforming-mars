@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const Options_1 = require("../Options");
 class LunaSenate extends Card_1.Card {
@@ -19,7 +18,7 @@ class LunaSenate extends Card_1.Card {
             behavior: {
                 production: { megacredits: { tag: Tag_1.Tag.MOON, all: true } },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.MOON, 3)),
+            requirements: { tag: Tag_1.Tag.MOON, count: 3 },
             metadata: {
                 description: 'Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)',
                 cardNumber: 'M70',

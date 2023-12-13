@@ -1,18 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UnitedNationsMissionOne = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const Phase_1 = require("../../../common/Phase");
 const Resource_1 = require("../../../common/Resource");
-class UnitedNationsMissionOne extends Card_1.Card {
+class UnitedNationsMissionOne extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.UNITED_NATIONS_MISSION_ONE,
             tags: [Tag_1.Tag.EARTH],
             startingMegaCredits: 40,
@@ -39,7 +37,7 @@ class UnitedNationsMissionOne extends Card_1.Card {
     onIncreaseTerraformRating(player, cardOwner, steps) {
         const game = player.game;
         if (game.phase === Phase_1.Phase.ACTION || game.phase === Phase_1.Phase.PRELUDES) {
-            cardOwner.addResource(Resource_1.Resource.MEGACREDITS, steps, { log: true });
+            cardOwner.stock.add(Resource_1.Resource.MEGACREDITS, steps, { log: true });
         }
     }
 }

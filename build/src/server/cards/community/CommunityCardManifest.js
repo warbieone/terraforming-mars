@@ -3,23 +3,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.COMMUNITY_CARD_MANIFEST = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const ModuleManifest_1 = require("../ModuleManifest");
-const AgricolaInc_1 = require("./AgricolaInc");
-const Incite_1 = require("./Incite");
-const Playwrights_1 = require("./Playwrights");
-const ProjectWorkshop_1 = require("./ProjectWorkshop");
-const ResearchGrant_1 = require("./ResearchGrant");
-const ValuableGases_1 = require("./ValuableGases");
-const VenusFirst_1 = require("./VenusFirst");
+const GlobalEventName_1 = require("../../../common/turmoil/globalEvents/GlobalEventName");
 const AerospaceMission_1 = require("./AerospaceMission");
-const TradeAdvance_1 = require("./TradeAdvance");
-const PoliticalUprising_1 = require("./PoliticalUprising");
+const AgricolaInc_1 = require("./AgricolaInc");
 const ByElection_1 = require("./ByElection");
-const Midas_1 = require("./Midas");
 const CuriosityII_1 = require("./CuriosityII");
 const ExecutiveOrder_1 = require("./ExecutiveOrder");
-const UnitedNationsMissionOne_1 = require("./UnitedNationsMissionOne");
+const Incite_1 = require("./Incite");
 const JunkVentures_1 = require("./JunkVentures");
+const LeadershipSummit_1 = require("./LeadershipSummit");
+const Midas_1 = require("./Midas");
+const Playwrights_1 = require("./Playwrights");
+const PoliticalUprising_1 = require("./PoliticalUprising");
+const ProjectWorkshop_1 = require("./ProjectWorkshop");
+const ResearchGrant_1 = require("./ResearchGrant");
 const SpecialDesignProxy_1 = require("./SpecialDesignProxy");
+const TradeAdvance_1 = require("./TradeAdvance");
+const UnitedNationsMissionOne_1 = require("./UnitedNationsMissionOne");
+const ValuableGases_1 = require("./ValuableGases");
+const VenusFirst_1 = require("./VenusFirst");
 exports.COMMUNITY_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     module: 'community',
     corporationCards: {
@@ -44,6 +46,9 @@ exports.COMMUNITY_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     },
     projectCards: {
         [CardName_1.CardName.SPECIAL_DESIGN_PROXY]: { Factory: SpecialDesignProxy_1.SpecialDesignProxy, instantiate: false },
+    },
+    globalEvents: {
+        [GlobalEventName_1.GlobalEventName.LEADERSHIP_SUMMIT]: { Factory: LeadershipSummit_1.LeadershipSummit },
     },
 });
 //# sourceMappingURL=CommunityCardManifest.js.map

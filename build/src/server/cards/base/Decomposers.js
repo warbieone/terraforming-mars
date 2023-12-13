@@ -6,7 +6,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Phase_1 = require("../../../common/Phase");
 const Options_1 = require("../Options");
@@ -19,7 +18,7 @@ class Decomposers extends Card_1.Card {
             cost: 5,
             resourceType: CardResource_1.CardResource.MICROBE,
             victoryPoints: { resourcesHere: {}, per: 3 },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(3)),
+            requirements: { oxygen: 3 },
             metadata: {
                 cardNumber: '131',
                 description: 'Requires 3% oxygen.',

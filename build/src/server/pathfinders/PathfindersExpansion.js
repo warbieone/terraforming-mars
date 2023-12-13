@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PathfindersExpansion = exports.TRACKS = void 0;
 const AddResourcesToCard_1 = require("../deferredActions/AddResourcesToCard");
 const CardName_1 = require("../../common/cards/CardName");
-const CardType_1 = require("../../common/cards/CardType");
 const GrantResourceDeferred_1 = require("./GrantResourceDeferred");
 const PathfindersData_1 = require("./PathfindersData");
 const PlaceCityTile_1 = require("../deferredActions/PlaceCityTile");
@@ -17,6 +16,7 @@ const CardResource_1 = require("../../common/CardResource");
 const SelectResourcesDeferred_1 = require("../deferredActions/SelectResourcesDeferred");
 const SendDelegateToArea_1 = require("../deferredActions/SendDelegateToArea");
 const Turmoil_1 = require("../turmoil/Turmoil");
+const DeferredAction_1 = require("../deferredActions/DeferredAction");
 exports.TRACKS = PlanetaryTracks_1.PlanetaryTracks.initialize();
 class PathfindersExpansion {
     constructor() {
@@ -41,16 +41,6 @@ class PathfindersExpansion {
                 PathfindersExpansion.raiseTrack(tag, player);
             }
         });
-        if (card.type === CardType_1.CardType.EVENT) {
-            for (const p of player.game.getPlayers()) {
-                for (const c of p.playedCards) {
-                    if (c.name === CardName_1.CardName.COMMUNICATION_CENTER) {
-                        p.addResourceTo(c, { qty: 1, log: true });
-                        return;
-                    }
-                }
-            }
-        }
     }
     static raiseTrack(tag, player, steps = 1) {
         PathfindersExpansion.raiseTrackEssense(tag, player, player.game, steps, true);
@@ -124,10 +114,10 @@ class PathfindersExpansion {
                 game.log('${0} has the most ${1} tags and earns 2VP', (b) => b.player(player).string(tag));
                 break;
             case '3mc':
-                player.addResource(Resource_1.Resource.MEGACREDITS, 3, { log: true });
+                player.stock.add(Resource_1.Resource.MEGACREDITS, 3, { log: true });
                 break;
             case '6mc':
-                player.addResource(Resource_1.Resource.MEGACREDITS, 6, { log: true });
+                player.stock.add(Resource_1.Resource.MEGACREDITS, 6, { log: true });
                 break;
             case 'any_resource':
                 game.defer(new GrantResourceDeferred_1.GrantResourceDeferred(player, false));
@@ -140,13 +130,13 @@ class PathfindersExpansion {
                 break;
             case 'delegate':
                 Turmoil_1.Turmoil.ifTurmoilElse(game, (turmoil) => {
-                    if (turmoil.hasDelegatesInReserve(player.id)) {
+                    if (turmoil.hasDelegatesInReserve(player)) {
                         game.defer(new SendDelegateToArea_1.SendDelegateToArea(player));
                     }
-                }, () => player.addResource(Resource_1.Resource.MEGACREDITS, 3, { log: true }));
+                }, () => player.stock.add(Resource_1.Resource.MEGACREDITS, 3, { log: true }));
                 break;
             case 'energy':
-                player.addResource(Resource_1.Resource.ENERGY, 1, { log: true });
+                player.stock.add(Resource_1.Resource.ENERGY, 1, { log: true });
                 break;
             case 'energy_production':
                 player.production.add(Resource_1.Resource.ENERGY, 1, { log: true });
@@ -158,7 +148,7 @@ class PathfindersExpansion {
                 game.defer(new PlaceGreeneryTile_1.PlaceGreeneryTile(player));
                 break;
             case 'heat':
-                player.addResource(Resource_1.Resource.HEAT, 1, { log: true });
+                player.stock.add(Resource_1.Resource.HEAT, 1, { log: true });
                 break;
             case 'heat_production':
                 player.production.add(Resource_1.Resource.HEAT, 1, { log: true });
@@ -173,7 +163,7 @@ class PathfindersExpansion {
                 game.defer(new PlaceOceanTile_1.PlaceOceanTile(player));
                 break;
             case 'plant':
-                player.addResource(Resource_1.Resource.PLANTS, 1, { log: true });
+                player.stock.add(Resource_1.Resource.PLANTS, 1, { log: true });
                 break;
             case 'plant_production':
                 player.production.add(Resource_1.Resource.PLANTS, 1, { log: true });
@@ -182,13 +172,13 @@ class PathfindersExpansion {
                 game.defer(new SelectResourcesDeferred_1.SelectResourcesDeferred(player, 1, 'Gain 1 resource for your Planetary track bonus.'));
                 break;
             case 'steel':
-                player.addResource(Resource_1.Resource.STEEL, 1, { log: true });
+                player.stock.add(Resource_1.Resource.STEEL, 1, { log: true });
                 break;
             case 'steel_production':
                 player.production.add(Resource_1.Resource.STEEL, 1, { log: true });
                 break;
             case 'titanium':
-                player.addResource(Resource_1.Resource.TITANIUM, 1, { log: true });
+                player.stock.add(Resource_1.Resource.TITANIUM, 1, { log: true });
                 break;
             case 'titanium_production':
                 player.production.add(Resource_1.Resource.TITANIUM, 1, { log: true });
@@ -227,6 +217,15 @@ class PathfindersExpansion {
         data.vps
             .filter((vp) => vp.id === player.id)
             .forEach((vp) => victoryPointsBreakdown.setVictoryPoints('planetary tracks', vp.points, vp.tag));
+    }
+    static addToSolBank(player) {
+        const solBank = player.getCorporation(CardName_1.CardName.SOLBANK);
+        if (solBank !== undefined) {
+            player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+                player.addResourceTo(solBank, { qty: 1, log: true });
+                return undefined;
+            }), DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
+        }
     }
 }
 exports.PathfindersExpansion = PathfindersExpansion;

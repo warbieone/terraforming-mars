@@ -5,7 +5,6 @@ const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 class MercurianAlloys extends Card_1.Card {
@@ -18,7 +17,7 @@ class MercurianAlloys extends Card_1.Card {
             behavior: {
                 titanumValue: 1,
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 2)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 2 },
             metadata: {
                 cardNumber: 'X07',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

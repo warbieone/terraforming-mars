@@ -6,7 +6,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardResource_1 = require("../../../common/CardResource");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class Penguins extends ActionCard_1.ActionCard {
     constructor() {
@@ -20,7 +19,7 @@ class Penguins extends ActionCard_1.ActionCard {
             action: {
                 addResources: 1,
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(8)),
+            requirements: { oceans: 8 },
             metadata: {
                 cardNumber: '212',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

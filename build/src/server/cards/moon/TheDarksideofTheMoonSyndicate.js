@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TheDarksideofTheMoonSyndicate = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
@@ -13,13 +13,12 @@ const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const Size_1 = require("../../../common/cards/render/Size");
 const Phase_1 = require("../../../common/Phase");
-const Card_1 = require("../Card");
 const Options_1 = require("../Options");
 const Payment_1 = require("../../../common/inputs/Payment");
-class TheDarksideofTheMoonSyndicate extends Card_1.Card {
+const UnderworldExpansion_1 = require("../../underworld/UnderworldExpansion");
+class TheDarksideofTheMoonSyndicate extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE,
             tags: [Tag_1.Tag.MOON],
             startingMegaCredits: 40,
@@ -52,20 +51,25 @@ class TheDarksideofTheMoonSyndicate extends Card_1.Card {
     action(player) {
         const orOptions = new OrOptions_1.OrOptions();
         if (player.titanium > 0) {
-            orOptions.options.push(new SelectOption_1.SelectOption('Spend 1 titanium to add 1 syndicate fleet on this card', 'Add syndicate fleet', () => {
+            orOptions.options.push(new SelectOption_1.SelectOption('Spend 1 titanium to add 1 syndicate fleet on this card', 'Add syndicate fleet').andThen(() => {
                 player.pay(Payment_1.Payment.of({ titanium: 1 }));
                 player.addResourceTo(this, { qty: 1, log: true });
                 return undefined;
             }));
         }
         if (this.resourceCount > 0) {
-            orOptions.options.push(new SelectOption_1.SelectOption('Remove 1 syndicate fleet from this card to steal 2M€ from every opponent.', 'Remove syndicate fleet', () => {
+            orOptions.options.push(new SelectOption_1.SelectOption('Remove 1 syndicate fleet from this card to steal 2M€ from every opponent.', 'Remove syndicate fleet').andThen(() => {
                 player.removeResourceFrom(this);
                 const game = player.game;
-                for (const p of game.getPlayers()) {
-                    if (p === player)
+                for (const target of game.getPlayers()) {
+                    if (target === player)
                         continue;
-                    p.stealResource(Resource_1.Resource.MEGACREDITS, 2, player);
+                    target.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+                        if (proceed) {
+                            target.stock.steal(Resource_1.Resource.MEGACREDITS, 2, player);
+                        }
+                        return undefined;
+                    }));
                 }
                 return undefined;
             }));
@@ -95,8 +99,8 @@ class TheDarksideofTheMoonSyndicate extends Card_1.Card {
             });
             costs.forEachMultiplicity((qty, target) => {
                 const adjustedQuantity = Math.min(qty, target.megaCredits);
-                activePlayer.addResource(Resource_1.Resource.MEGACREDITS, adjustedQuantity, { log: true });
-                target.deductResource(Resource_1.Resource.MEGACREDITS, adjustedQuantity, { log: true, from: activePlayer });
+                activePlayer.stock.add(Resource_1.Resource.MEGACREDITS, adjustedQuantity, { log: true });
+                target.stock.deduct(Resource_1.Resource.MEGACREDITS, adjustedQuantity, { log: true, from: activePlayer });
             });
         }
         return undefined;

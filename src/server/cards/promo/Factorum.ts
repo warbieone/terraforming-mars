@@ -8,8 +8,6 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {TITLES} from '../../inputs/titles';
 
 export class Factorum extends CorporationCard implements IActionCard {
   constructor() {
@@ -52,11 +50,12 @@ export class Factorum extends CorporationCard implements IActionCard {
         return undefined;
       });
 
-    const drawBuildingCard = new SelectOption('Spend 1 Energy to draw a building card', 'Draw card', () => {
-      player.energy -= 1;
-      player.drawCard(1, {tag: Tag.BUILDING});
-      return undefined;
-    });
+      const drawBuildingCard = new SelectOption('Spend 1 energy to draw a building card', 'Draw card')
+      .andThen(() => {
+        player.energy -= 1;
+        player.drawCard(1, {tag: Tag.BUILDING});
+        return undefined;
+      });
 
     if (player.energy > 0) return drawBuildingCard;
     if (!player.canAfford(3)) return increaseEnergy;

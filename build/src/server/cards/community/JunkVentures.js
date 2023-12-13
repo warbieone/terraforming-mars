@@ -2,16 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JunkVentures = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const Size_1 = require("../../../common/cards/render/Size");
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardRenderer_1 = require("../render/CardRenderer");
-const DrawCards_1 = require("../../deferredActions/DrawCards");
+const ChooseCards_1 = require("../../deferredActions/ChooseCards");
 const LogHelper_1 = require("../../LogHelper");
-class JunkVentures extends Card_1.Card {
+class JunkVentures extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.JUNK_VENTURES,
             initialActionText: 'Discard the top 3 cards of the deck',
             startingMegaCredits: 43,
@@ -47,11 +45,13 @@ class JunkVentures extends Card_1.Card {
         const cards = [];
         for (let idx = 0; idx < 3; idx++) {
             const card = player.game.projectDeck.discardPile.pop();
-            if (card === undefined)
+            if (card === undefined) {
                 break;
+            }
             cards.push(card);
         }
-        return DrawCards_1.DrawCards.choose(player, cards, { keepMax: 1 });
+        player.game.defer(new ChooseCards_1.ChooseCards(player, cards, { keepMax: 1 }));
+        return undefined;
     }
 }
 exports.JunkVentures = JunkVentures;

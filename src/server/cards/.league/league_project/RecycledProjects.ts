@@ -4,7 +4,6 @@ import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import { CardRequirements } from '../../requirements/CardRequirements';
 import {played} from '../../Options';
 import {IPlayer} from '../../../IPlayer';
 
@@ -20,7 +19,8 @@ export class RecycledProjects extends Card implements IProjectCard {
 
       victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 4)),
+       requirements: {tag: Tag.SCIENCE, count: 4},
+
       metadata: {
         cardNumber: 'L304',
         renderData: CardRenderer.builder((b) => {

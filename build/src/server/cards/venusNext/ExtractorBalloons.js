@@ -42,17 +42,17 @@ class ExtractorBalloons extends Card_1.Card {
     }
     action(player) {
         const venusMaxed = player.game.getVenusScaleLevel() === constants_1.MAX_VENUS_SCALE;
-        const canAffordReds = player.canAfford(0, { tr: { venus: 1 } });
+        const canAffordReds = player.canAfford({ cost: 0, tr: { venus: 1 } });
         if (this.resourceCount < 2 || venusMaxed || !canAffordReds) {
             player.addResourceTo(this, { log: true });
             return undefined;
         }
-        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Remove 2 floaters to raise Venus scale 1 step', 'Remove floaters', () => {
+        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Remove 2 floaters to raise Venus scale 1 step', 'Remove floaters').andThen(() => {
             player.removeResourceFrom(this, 2);
             const actual = player.game.increaseVenusScaleLevel(player, 1);
             LogHelper_1.LogHelper.logVenusIncrease(player, actual);
             return undefined;
-        }), new SelectOption_1.SelectOption('Add 1 floater to this card', 'Add floater', () => {
+        }), new SelectOption_1.SelectOption('Add 1 floater to this card', 'Add floater').andThen(() => {
             player.addResourceTo(this, { log: true });
             return undefined;
         }));

@@ -30,7 +30,7 @@ class HAL9000 extends CeoCard_1.CeoCard {
             if (player.production.canAdjust(adjustment)) {
                 player.production.adjust(adjustment, { log: true });
                 adjustment[type] = 4;
-                player.addUnits(adjustment, { log: true });
+                player.stock.addUnits(adjustment, { log: true });
             }
         }
         return undefined;

@@ -4,7 +4,6 @@ exports.HeavyTaxation = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const CardRenderer_1 = require("../render/CardRenderer");
 class HeavyTaxation extends Card_1.Card {
@@ -19,7 +18,7 @@ class HeavyTaxation extends Card_1.Card {
                 production: { megacredits: 2 },
                 stock: { megacredits: 4 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.EARTH, 2)),
+            requirements: { tag: Tag_1.Tag.EARTH, count: 2 },
             metadata: {
                 cardNumber: 'C14',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

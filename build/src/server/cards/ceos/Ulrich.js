@@ -23,9 +23,9 @@ class Ulrich extends CeoCard_1.CeoCard {
     action(player) {
         this.isDisabled = true;
         const game = player.game;
-        const oceansPlaced = game.board.getOceanCount();
+        const oceansPlaced = game.board.getOceanSpaces().length;
         const bonusCredits = oceansPlaced < constants_1.MAX_OCEAN_TILES ? (oceansPlaced * 4) : 15;
-        player.addResource(Resource_1.Resource.MEGACREDITS, bonusCredits, { log: true });
+        player.stock.add(Resource_1.Resource.MEGACREDITS, bonusCredits, { log: true });
         return undefined;
     }
 }

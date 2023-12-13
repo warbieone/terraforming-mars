@@ -60,7 +60,8 @@ class SpecializedSettlement extends Card_1.Card {
     }
     bespokePlay(player) {
         this.defaultProduce(player);
-        return new SelectSpace_1.SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space) => {
+        return new SelectSpace_1.SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player))
+            .andThen((space) => {
             const coveringExistingTile = space.tile !== undefined;
             player.game.addCity(player, space);
             if (coveringExistingTile)
@@ -68,10 +69,11 @@ class SpecializedSettlement extends Card_1.Card {
             const bonusResources = this.bonusResources(space);
             if (bonusResources.length === 0)
                 return;
-            player.game.defer(new SelectResourceTypeDeferred_1.SelectResourceTypeDeferred(player, bonusResources, 'Select a resource to gain 1 unit of production', (resource) => {
+            player.game.defer(new SelectResourceTypeDeferred_1.SelectResourceTypeDeferred(player, bonusResources, 'Select a resource to gain 1 unit of production'))
+                .andThen((resource) => {
                 player.production.add(resource, 1, { log: true });
                 this.bonusResource = [resource];
-            }));
+            });
             return undefined;
         });
     }
@@ -88,10 +90,11 @@ class SpecializedSettlement extends Card_1.Card {
     produceForTile(player, bonusResources) {
         if (bonusResources.length === 0)
             return;
-        player.game.defer(new SelectResourceTypeDeferred_1.SelectResourceTypeDeferred(player, bonusResources, 'Select a resource to gain 1 unit of production', (resource) => {
+        player.game.defer(new SelectResourceTypeDeferred_1.SelectResourceTypeDeferred(player, bonusResources, 'Select a resource to gain 1 unit of production'))
+            .andThen((resource) => {
             player.production.add(resource, 1, { log: true });
             this.bonusResource = [resource];
-        }));
+        });
     }
 }
 exports.SpecializedSettlement = SpecializedSettlement;

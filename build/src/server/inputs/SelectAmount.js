@@ -4,13 +4,23 @@ exports.SelectAmount = void 0;
 const PlayerInput_1 = require("../PlayerInput");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 class SelectAmount extends PlayerInput_1.BasePlayerInput {
-    constructor(title, buttonLabel = 'Save', cb, min, max, maxByDefault) {
+    constructor(title, buttonLabel = 'Save', min, max, maxByDefault) {
         super('amount', title);
-        this.cb = cb;
         this.min = min;
         this.max = max;
         this.maxByDefault = maxByDefault;
         this.buttonLabel = buttonLabel;
+    }
+    toModel() {
+        var _a;
+        return {
+            title: this.title,
+            buttonLabel: this.buttonLabel,
+            type: 'amount',
+            max: this.max,
+            min: this.min,
+            maxByDefault: (_a = this.maxByDefault) !== null && _a !== void 0 ? _a : false,
+        };
     }
     process(input) {
         if (!(0, InputResponse_1.isSelectAmountResponse)(input)) {

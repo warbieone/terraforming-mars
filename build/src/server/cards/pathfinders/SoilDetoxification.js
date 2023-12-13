@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 class SoilDetoxification extends Card_1.Card {
     constructor() {
@@ -15,7 +14,7 @@ class SoilDetoxification extends Card_1.Card {
             name: CardName_1.CardName.SOIL_DETOXIFICATION,
             cost: 10,
             tags: [Tag_1.Tag.PLANT, Tag_1.Tag.SCIENCE],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.GREENS)),
+            requirements: { party: PartyName_1.PartyName.GREENS },
             behavior: {
                 production: { plants: 1 },
                 greeneryDiscount: 1,

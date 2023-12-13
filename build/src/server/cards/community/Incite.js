@@ -1,19 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Incite = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
-class Incite extends Card_1.Card {
+class Incite extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.INCITE,
             tags: [Tag_1.Tag.SCIENCE],
             startingMegaCredits: 32,
-            type: CardType_1.CardType.CORPORATION,
             behavior: {
                 turmoil: { influenceBonus: 1 },
             },

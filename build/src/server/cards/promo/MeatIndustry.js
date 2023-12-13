@@ -27,7 +27,7 @@ class MeatIndustry extends Card_1.Card {
     }
     onResourceAdded(player, card, count) {
         if (card.resourceType === CardResource_1.CardResource.ANIMAL) {
-            player.addResource(Resource_1.Resource.MEGACREDITS, count * 2, { log: true });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, count * 2, { log: true });
         }
     }
 }

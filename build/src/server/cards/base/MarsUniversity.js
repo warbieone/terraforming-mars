@@ -35,16 +35,13 @@ class MarsUniversity extends Card_1.Card {
                 if (player.cardsInHand.length === 0) {
                     return undefined;
                 }
-                return new OrOptions_1.OrOptions(new SelectCard_1.SelectCard('Select a card to discard', 'Discard', player.cardsInHand, ([card]) => {
-                    player.cardsInHand.splice(player.cardsInHand.indexOf(card), 1);
-                    player.game.projectDeck.discard(card);
+                return new OrOptions_1.OrOptions(new SelectCard_1.SelectCard('Select a card to discard', 'Discard', player.cardsInHand)
+                    .andThen(([card]) => {
                     player.game.log('${0} is using their ${1} effect to draw a card by discarding a card.', (b) => b.player(player).card(this));
-                    player.game.log('You discarded ${0}', (b) => b.card(card), { reservedFor: player });
+                    player.discardCardFromHand(card, { log: true });
                     player.drawCard();
                     return undefined;
-                }), new SelectOption_1.SelectOption('Do nothing', 'Confirm', () => {
-                    return undefined;
-                }));
+                }), new SelectOption_1.SelectOption('Do nothing'));
             }), DeferredAction_1.Priority.DISCARD_AND_DRAW);
         }
         return undefined;

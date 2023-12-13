@@ -1,17 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Midas = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
-class Midas extends Card_1.Card {
+class Midas extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.MIDAS,
             startingMegaCredits: 120,
-            type: CardType_1.CardType.CORPORATION,
             metadata: {
                 cardNumber: 'R41',
                 description: 'You start with 120 M€. Lower your TR 7 steps.',

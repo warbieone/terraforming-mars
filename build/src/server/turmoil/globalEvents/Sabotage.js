@@ -8,8 +8,8 @@ const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../../cards/render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.br.production((pb) => pb.minus().energy(1).steel(1)).nbsp.nbsp;
-    b.steel(1).slash().nbsp.influence({ size: Size_1.Size.SMALL });
+    b.production((pb) => pb.minus().energy(1).steel(1)).nbsp.nbsp;
+    b.steel(1).slash().influence({ size: Size_1.Size.MEDIUM });
 });
 class Sabotage extends GlobalEvent_1.GlobalEvent {
     constructor() {
@@ -29,7 +29,7 @@ class Sabotage extends GlobalEvent_1.GlobalEvent {
             if (player.production.steel >= 1) {
                 player.production.add(Resource_1.Resource.STEEL, -1, { log: true, from: this.name });
             }
-            player.addResource(Resource_1.Resource.STEEL, turmoil.getPlayerInfluence(player), { log: true, from: this.name });
+            player.stock.add(Resource_1.Resource.STEEL, turmoil.getPlayerInfluence(player), { log: true, from: this.name });
         });
     }
 }

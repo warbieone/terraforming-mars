@@ -26,7 +26,7 @@ class MicrogravityHealthProblems extends GlobalEvent_1.GlobalEvent {
             game.colonies.forEach((colony) => {
                 coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
             });
-            player.deductResource(Resource_1.Resource.MEGACREDITS, 3 * Math.max(0, Math.min(5, coloniesCount) - turmoil.getPlayerInfluence(player)), { log: true, from: this.name });
+            player.stock.deduct(Resource_1.Resource.MEGACREDITS, 3 * Math.max(0, Math.min(5, coloniesCount) - turmoil.getPlayerInfluence(player)), { log: true, from: this.name });
         });
     }
 }

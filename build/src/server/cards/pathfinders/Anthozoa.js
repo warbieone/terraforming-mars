@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Resource_1 = require("../../../common/Resource");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardResource_1 = require("../../../common/CardResource");
 class Anthozoa extends Card_1.Card {
     constructor() {
@@ -16,7 +15,7 @@ class Anthozoa extends Card_1.Card {
             name: CardName_1.CardName.ANTHOZOA,
             cost: 9,
             tags: [Tag_1.Tag.PLANT, Tag_1.Tag.ANIMAL, Tag_1.Tag.MARS],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(3)),
+            requirements: { oceans: 3 },
             resourceType: CardResource_1.CardResource.ANIMAL,
             victoryPoints: { resourcesHere: {}, per: 2 },
             metadata: {
@@ -34,7 +33,7 @@ class Anthozoa extends Card_1.Card {
         return player.plants > 0;
     }
     action(player) {
-        player.deductResource(Resource_1.Resource.PLANTS, 1);
+        player.stock.deduct(Resource_1.Resource.PLANTS, 1);
         player.addResourceTo(this);
         player.game.log('${0} spent 1 plant to place an animal on ${1}.', (b) => b.player(player).card(this));
         return undefined;

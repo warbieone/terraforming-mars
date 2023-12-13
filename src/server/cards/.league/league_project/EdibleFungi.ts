@@ -4,7 +4,6 @@ import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import { CardRequirements } from '../../requirements/CardRequirements';
 
 
 export class EdibleFungi extends Card implements IProjectCard {
@@ -18,8 +17,8 @@ export class EdibleFungi extends Card implements IProjectCard {
       behavior: {
         production: {plants: 2},
       },
+      requirements: {tag: Tag.MICROBE, count: 1},
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.MICROBE, 1)),
       metadata: {
         cardNumber: 'L403',
         renderData: CardRenderer.builder((b) => {

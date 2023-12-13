@@ -8,7 +8,6 @@ const SpaceBonus_1 = require("../../../common/boards/SpaceBonus");
 const TileType_1 = require("../../../common/TileType");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class OceanSanctuary extends Card_1.Card {
     constructor() {
@@ -19,13 +18,12 @@ class OceanSanctuary extends Card_1.Card {
             cost: 9,
             resourceType: CardResource_1.CardResource.ANIMAL,
             victoryPoints: { resourcesHere: {} },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(5)),
+            requirements: { oceans: 5 },
             behavior: {
                 addResources: 1,
                 tile: {
                     type: TileType_1.TileType.OCEAN_SANCTUARY,
                     on: 'upgradeable-ocean',
-                    title: 'Select space for Ocean Sanctuary',
                     adjacencyBonus: { bonus: [SpaceBonus_1.SpaceBonus.ANIMAL] },
                 },
             },

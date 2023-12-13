@@ -4,7 +4,6 @@ exports.LakeMarineris = void 0;
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class LakeMarineris extends Card_1.Card {
     constructor() {
@@ -13,7 +12,7 @@ class LakeMarineris extends Card_1.Card {
             name: CardName_1.CardName.LAKE_MARINERIS,
             cost: 18,
             tr: { oceans: 2 },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(0)),
+            requirements: { temperature: 0 },
             victoryPoints: 2,
             behavior: {
                 ocean: { count: 2 },

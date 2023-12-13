@@ -10,7 +10,7 @@ export class MorningStarInc extends CorporationCard {
       name: CardName.MORNING_STAR_INC,
       tags: [Tag.VENUS],
       startingMegaCredits: 50,
-      globalParameterRequirementBonus: {steps: 2, parameter: GlobalParameter.VENUS},
+      globalParameterRequirementBonus: {steps: 3, parameter: GlobalParameter.VENUS},
 
       firstAction: {
         text: 'Draw 3 cards with a Venus tag',
@@ -35,9 +35,5 @@ export class MorningStarInc extends CorporationCard {
         }),
       },
     });
-  }
-
-  public getRequirementBonus(_player: IPlayer, parameter: GlobalParameter): number {
-    return parameter === GlobalParameter.VENUS ? 3 : 0;
   }
 }

@@ -2,21 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Splice = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Resource_1 = require("../../../common/Resource");
 const Options_1 = require("../Options");
 const MessageBuilder_1 = require("../../logs/MessageBuilder");
-class Splice extends Card_1.Card {
+class Splice extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.SPLICE,
             tags: [Tag_1.Tag.MICROBE],
             startingMegaCredits: 52,
@@ -58,20 +56,21 @@ class Splice extends Card_1.Card {
         const gainPerMicrobe = 2;
         const microbeTagsCount = player.tags.cardTagCount(card, Tag_1.Tag.MICROBE);
         const megacreditsGain = microbeTagsCount * gainPerMicrobe;
-        const addResource = new SelectOption_1.SelectOption('Add a microbe resource to this card', 'Add microbe', () => {
+        const addResource = new SelectOption_1.SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
             player.addResourceTo(card);
             return undefined;
         });
-        const getMegacredits = new SelectOption_1.SelectOption((0, MessageBuilder_1.newMessage)('Gain ${0} M€', (b) => b.number(megacreditsGain)), 'Gain M€', () => {
-            player.addResource(Resource_1.Resource.MEGACREDITS, megacreditsGain, { log: true });
+        const getMegacredits = new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Gain ${0} M€', (b) => b.number(megacreditsGain)), 'Gain M€')
+            .andThen(() => {
+            player.stock.add(Resource_1.Resource.MEGACREDITS, megacreditsGain, { log: true });
             return undefined;
         });
-        player.game.getCardPlayerOrThrow(this.name).addResource(Resource_1.Resource.MEGACREDITS, megacreditsGain, { log: true });
+        player.game.getCardPlayerOrThrow(this.name).stock.add(Resource_1.Resource.MEGACREDITS, megacreditsGain, { log: true });
         if (card.resourceType === CardResource_1.CardResource.MICROBE) {
             return new OrOptions_1.OrOptions(addResource, getMegacredits);
         }
         else {
-            player.addResource(Resource_1.Resource.MEGACREDITS, megacreditsGain, { log: true });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, megacreditsGain, { log: true });
             return undefined;
         }
     }

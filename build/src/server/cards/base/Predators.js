@@ -8,7 +8,6 @@ const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
 const RemoveResourcesFromCard_1 = require("../../deferredActions/RemoveResourcesFromCard");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class Predators extends Card_1.Card {
@@ -20,7 +19,7 @@ class Predators extends Card_1.Card {
             cost: 14,
             resourceType: CardResource_1.CardResource.ANIMAL,
             victoryPoints: { resourcesHere: {} },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(11)),
+            requirements: { oxygen: 11 },
             metadata: {
                 cardNumber: '024',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

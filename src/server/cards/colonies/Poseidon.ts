@@ -7,7 +7,6 @@ export class Poseidon extends CorporationCard {
     super({
       name: CardName.POSEIDON,
       startingMegaCredits: 40,
-      type: CardType.CORPORATION,
 
       firstAction: {
         text: 'Place a colony',

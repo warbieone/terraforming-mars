@@ -206,7 +206,6 @@ const synergiesData = [
     ['Terran', 'Tycoon', 1],
     ['Land Specialist', 'Tycoon', 1],
     ['Martian', 'Tycoon', 1],
-    ['Businessperson', 'Tycoon', 1],
     ['Collector', 'Tycoon', 3],
     ['Spacefarer', 'Tycoon', 2],
     ['Gambler', 'Tycoon', 0.5],
@@ -356,7 +355,6 @@ const synergiesData = [
     ['Terran', 'Magnate', 1],
     ['Land Specialist', 'Magnate', 1],
     ['Martian', 'Magnate', 1],
-    ['Businessperson', 'Magnate', 1],
     ['Collector', 'Magnate', 3],
     ['Spacefarer', 'Magnate', 2],
     ['Electrician', 'Magnate', 1],
@@ -436,7 +434,6 @@ const synergiesData = [
     ['Naturalist', 'Farmer', 6],
     ['Pioneer', 'Minimalist', 2],
     ['Gambler', 'Minimalist', 0.5],
-    ['Businessperson', 'Terran', 9],
     ['Gambler', 'Terran', 0.5],
     ['Curator', 'Terran', 1],
     ['Engineer', 'Terran', 1],
@@ -466,10 +463,6 @@ const synergiesData = [
     ['Gambler', 'Martian', 0.5],
     ['Curator', 'Martian', 1],
     ['Manufacturer', 'Martian', 1],
-    ['Gambler', 'Businessperson', 0.5],
-    ['Curator', 'Businessperson', 1],
-    ['Engineer', 'Businessperson', 1],
-    ['Manufacturer', 'Businessperson', 1],
     ['Spacefarer', 'Collector', 1],
     ['Gambler', 'Collector', 0.5],
     ['Electrician', 'Collector', 1],
@@ -545,6 +538,7 @@ const synergiesData = [
     ['Zoologist', 'Manufacturer', 1],
     ['Biologist', 'Zoologist', 6],
     ['Naturalist', 'Zoologist', 2],
+    ['EdgeLord', 'Edgedancer', 9],
 ];
 class SynergyMap {
     constructor() {

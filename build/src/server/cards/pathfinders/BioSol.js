@@ -1,16 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BioSol = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
-const ActionCard_1 = require("../ActionCard");
-class BioSol extends ActionCard_1.ActionCard {
+class BioSol extends CorporationCard_1.ActiveCorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.BIO_SOL,
             tags: [Tag_1.Tag.MICROBE],
             startingMegaCredits: 42,

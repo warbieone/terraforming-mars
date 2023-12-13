@@ -1,19 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Factorum = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
-class Factorum extends Card_1.Card {
+class Factorum extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.FACTORUM,
             tags: [Tag_1.Tag.POWER, Tag_1.Tag.BUILDING],
             startingMegaCredits: 37,
@@ -40,11 +38,13 @@ class Factorum extends Card_1.Card {
         return player.energy === 0 || player.canAfford(3);
     }
     action(player) {
-        const increaseEnergy = new SelectOption_1.SelectOption('Increase your energy production 1 step', 'Increase production', () => {
+        const increaseEnergy = new SelectOption_1.SelectOption('Increase your energy production 1 step', 'Increase production')
+            .andThen(() => {
             player.production.add(Resource_1.Resource.ENERGY, 1, { log: true });
             return undefined;
         });
-        const drawBuildingCard = new SelectOption_1.SelectOption('Spend 1 Energy to draw a building card', 'Draw card', () => {
+        const drawBuildingCard = new SelectOption_1.SelectOption('Spend 1 energy to draw a building card', 'Draw card')
+            .andThen(() => {
             player.energy -= 1;
             player.drawCard(1, { tag: Tag_1.Tag.BUILDING });
             return undefined;

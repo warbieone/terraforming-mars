@@ -4,7 +4,6 @@ import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import { CardRequirements } from '../../requirements/CardRequirements';
 import {max} from '../../Options';
 
 export class AmphibianFarming extends Card implements IProjectCard {
@@ -19,8 +18,7 @@ export class AmphibianFarming extends Card implements IProjectCard {
         production: {plants: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(2, {max})),
-
+      requirements: {oceans: 2, max},
       metadata: {
         cardNumber: 'L406',
         renderData: CardRenderer.builder((b) => {

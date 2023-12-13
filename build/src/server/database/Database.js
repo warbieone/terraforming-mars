@@ -4,6 +4,7 @@ exports.Database = void 0;
 const PostgreSQL_1 = require("./PostgreSQL");
 const SQLite_1 = require("./SQLite");
 const LocalFilesystem_1 = require("./LocalFilesystem");
+const LocalStorage_1 = require("./LocalStorage");
 class Database {
     constructor() { }
     static getInstance() {
@@ -15,6 +16,10 @@ class Database {
             else if (process.env.LOCAL_FS_DB !== undefined) {
                 console.log('Connecting to local filesystem database.');
                 Database.instance = new LocalFilesystem_1.LocalFilesystem();
+            }
+            else if (process.env.LOCAL_STORAGE_DB !== undefined) {
+                console.log('Connecting to local storage database.');
+                Database.instance = new LocalStorage_1.LocalStorage();
             }
             else {
                 console.log('Connecting to SQLite database.');

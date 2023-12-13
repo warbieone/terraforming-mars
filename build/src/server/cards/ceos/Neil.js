@@ -26,7 +26,7 @@ class Neil extends CeoCard_1.CeoCard {
     onCardPlayed(player, card) {
         for (const tag of card.tags) {
             if (tag === Tag_1.Tag.MOON) {
-                player.game.getCardPlayerOrThrow(this.name).addResource(Resource_1.Resource.MEGACREDITS, 1, { log: true });
+                player.game.getCardPlayerOrThrow(this.name).stock.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
             }
         }
     }
@@ -34,7 +34,7 @@ class Neil extends CeoCard_1.CeoCard {
         this.isDisabled = true;
         const game = player.game;
         MoonExpansion_1.MoonExpansion.ifMoon(game, (moonData) => {
-            const lowestRate = Math.min(moonData.colonyRate, moonData.logisticRate, moonData.miningRate);
+            const lowestRate = Math.min(moonData.habitatRate, moonData.logisticRate, moonData.miningRate);
             if (lowestRate > 0) {
                 player.production.add(Resource_1.Resource.MEGACREDITS, lowestRate, { log: true });
             }

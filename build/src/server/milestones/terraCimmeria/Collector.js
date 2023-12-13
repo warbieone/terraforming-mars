@@ -5,7 +5,7 @@ const CardType_1 = require("../../../common/cards/CardType");
 const IMilestone_1 = require("../IMilestone");
 class Collector extends IMilestone_1.BaseMilestone {
     constructor() {
-        super('Collector', 'Have 3 sets of automated, active and event cards', 3);
+        super('Collector', 'Have 3 sets of automated (green), active (blue) and event (red) project cards in play', 3);
     }
     getScore(player) {
         const numAutomatedCards = player.playedCards.filter((card) => card.type === CardType_1.CardType.AUTOMATED).length;

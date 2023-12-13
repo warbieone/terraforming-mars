@@ -1,20 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ambient = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const constants_1 = require("../../../common/constants");
 const Size_1 = require("../../../common/cards/render/Size");
-class Ambient extends Card_1.Card {
+class Ambient extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.AMBIENT,
             tags: [Tag_1.Tag.VENUS],
             startingMegaCredits: 38,
@@ -52,7 +50,7 @@ class Ambient extends Card_1.Card {
         }
     }
     canAct(player) {
-        return player.heat >= 8 && player.game.getTemperature() === constants_1.MAX_TEMPERATURE && player.canAfford(0, { tr: { tr: 1 } });
+        return player.heat >= 8 && player.game.getTemperature() === constants_1.MAX_TEMPERATURE && player.canAfford({ cost: 0, tr: { tr: 1 } });
     }
     action(player) {
         player.heat -= 8;

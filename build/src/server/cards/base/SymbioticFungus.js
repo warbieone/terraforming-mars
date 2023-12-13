@@ -6,7 +6,6 @@ const ActionCard_1 = require("../ActionCard");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class SymbioticFungus extends ActionCard_1.ActionCard {
     constructor() {
@@ -18,7 +17,7 @@ class SymbioticFungus extends ActionCard_1.ActionCard {
             action: {
                 addResourcesToAnyCard: { type: CardResource_1.CardResource.MICROBE, count: 1, autoSelect: true },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(-14)),
+            requirements: { temperature: -14 },
             metadata: {
                 cardNumber: '133',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

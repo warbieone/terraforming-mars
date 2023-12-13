@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 class Pollinators extends ActionCard_1.ActionCard {
     constructor() {
         super({
@@ -16,7 +15,7 @@ class Pollinators extends ActionCard_1.ActionCard {
             cost: 19,
             tags: [Tag_1.Tag.PLANT, Tag_1.Tag.ANIMAL],
             resourceType: CardResource_1.CardResource.ANIMAL,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.PLANT, 3)),
+            requirements: { tag: Tag_1.Tag.PLANT, count: 3 },
             victoryPoints: { resourcesHere: {} },
             behavior: {
                 production: { plants: 1, megacredits: 2 },

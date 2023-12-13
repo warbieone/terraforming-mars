@@ -1,20 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdhaiHighOrbitConstructions = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const PathfindersData_1 = require("../../pathfinders/PathfindersData");
 const Options_1 = require("../Options");
 const Size_1 = require("../../../common/cards/render/Size");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
-class AdhaiHighOrbitConstructions extends Card_1.Card {
+class AdhaiHighOrbitConstructions extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS,
             tags: [Tag_1.Tag.SPACE],
             startingMegaCredits: 43,

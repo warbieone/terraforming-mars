@@ -14,7 +14,8 @@ class RemoveOceanTile extends DeferredAction_1.DeferredAction {
         if (removableOceanTiles.length === 0) {
             return undefined;
         }
-        return new SelectSpace_1.SelectSpace(this.title, removableOceanTiles, (space) => {
+        return new SelectSpace_1.SelectSpace(this.title, removableOceanTiles)
+            .andThen((space) => {
             this.player.game.removeTile(space.id);
             LogHelper_1.LogHelper.logBoardTileAction(this.player, space, 'ocean tile', 'removed');
             return undefined;

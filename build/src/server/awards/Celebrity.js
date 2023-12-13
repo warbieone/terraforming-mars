@@ -5,7 +5,7 @@ const CardType_1 = require("../../common/cards/CardType");
 class Celebrity {
     constructor() {
         this.name = 'Celebrity';
-        this.description = 'Play the most cards with a base cost of at least 20 M€ (not events.)';
+        this.description = 'Have the most project cards in play with a base cost of at least 20 M€ (not events.)';
     }
     getScore(player) {
         return player.playedCards

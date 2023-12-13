@@ -1,18 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Inventrix = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("./CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
-class Inventrix extends Card_1.Card {
+class Inventrix extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.INVENTRIX,
             tags: [Tag_1.Tag.SCIENCE],
             startingMegaCredits: 45,
+            globalParameterRequirementBonus: { steps: 2 },
             firstAction: {
                 text: 'Draw 3 cards',
                 drawCard: 3,

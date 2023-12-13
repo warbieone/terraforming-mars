@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const Resource_1 = require("../../../common/Resource");
 const CardResource_1 = require("../../../common/CardResource");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const ActionCard_1 = require("../ActionCard");
 const Options_1 = require("../Options");
 class SubZeroSaltFish extends ActionCard_1.ActionCard {
@@ -19,7 +18,7 @@ class SubZeroSaltFish extends ActionCard_1.ActionCard {
             type: CardType_1.CardType.ACTIVE,
             resourceType: CardResource_1.CardResource.ANIMAL,
             victoryPoints: { resourcesHere: {}, per: 2 },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(-6)),
+            requirements: { temperature: -6 },
             behavior: {
                 decreaseAnyProduction: { type: Resource_1.Resource.PLANTS, count: 1 },
             },

@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 class ControlledBloom extends Card_1.Card {
     constructor() {
         super({
@@ -16,7 +15,7 @@ class ControlledBloom extends Card_1.Card {
             cost: 13,
             tags: [Tag_1.Tag.MICROBE, Tag_1.Tag.PLANT],
             victoryPoints: 1,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(3)),
+            requirements: { oceans: 3 },
             behavior: {
                 stock: { plants: 3 },
                 addResourcesToAnyCard: { count: 3, type: CardResource_1.CardResource.MICROBE },

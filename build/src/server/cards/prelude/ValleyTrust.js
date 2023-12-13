@@ -2,16 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ValleyTrust = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const PreludesExpansion_1 = require("../../preludes/PreludesExpansion");
-class ValleyTrust extends Card_1.Card {
+class ValleyTrust extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.VALLEY_TRUST,
             tags: [Tag_1.Tag.EARTH],
             startingMegaCredits: 37,

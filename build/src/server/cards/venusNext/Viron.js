@@ -1,20 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Viron = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const ICard_1 = require("../ICard");
 const SelectCard_1 = require("../../inputs/SelectCard");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
-class Viron extends Card_1.Card {
+class Viron extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.VIRON,
             tags: [Tag_1.Tag.MICROBE],
             startingMegaCredits: 54,
-            type: CardType_1.CardType.CORPORATION,
             metadata: {
                 cardNumber: 'R12',
                 description: 'You start with 54 M€.',
@@ -55,10 +53,10 @@ class Viron extends Card_1.Card {
         if (this.getActionCards(player).length === 0) {
             return undefined;
         }
-        return new SelectCard_1.SelectCard('Perform again an action from a played card', 'Take action', this.getActionCards(player), ([card]) => {
-            const foundCard = card;
-            player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
-            return foundCard.action(player);
+        return new SelectCard_1.SelectCard('Perform again an action from a played card', 'Take action', this.getActionCards(player))
+            .andThen(([card]) => {
+            player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(card).card(this));
+            return card.action(player);
         });
     }
 }

@@ -26,7 +26,8 @@ class LandClaim extends Card_1.Card {
         return player.game.board.getNonReservedLandSpaces().length > 0;
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace('Select space for claim', player.game.board.getNonReservedLandSpaces(), (space) => {
+        return new SelectSpace_1.SelectSpace('Select space for claim', player.game.board.getNonReservedLandSpaces())
+            .andThen((space) => {
             space.player = player;
             LogHelper_1.LogHelper.logBoardTileAction(player, space, 'land claim');
             return undefined;

@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
 const DecreaseAnyProduction_1 = require("../../deferredActions/DecreaseAnyProduction");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const GainProduction_1 = require("../../deferredActions/GainProduction");
@@ -16,7 +15,7 @@ class GreatEscarpmentConsortium extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.GREAT_ESCARPMENT_CONSORTIUM,
             cost: 6,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.production(Resource_1.Resource.STEEL)),
+            requirements: { production: Resource_1.Resource.STEEL, count: 1 },
             metadata: {
                 cardNumber: '061',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -31,7 +30,7 @@ class GreatEscarpmentConsortium extends Card_1.Card {
     }
     bespokePlay(player) {
         player.game.defer(new DecreaseAnyProduction_1.DecreaseAnyProduction(player, Resource_1.Resource.STEEL, { count: 1, stealing: true }));
-        player.game.defer(new GainProduction_1.GainProduction(player, Resource_1.Resource.STEEL, { count: 1 }));
+        player.game.defer(new GainProduction_1.GainProduction(player, Resource_1.Resource.STEEL, { count: 1, log: true }));
         return undefined;
     }
 }

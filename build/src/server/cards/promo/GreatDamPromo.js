@@ -5,11 +5,11 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const TileType_1 = require("../../../common/TileType");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const Board_1 = require("../../boards/Board");
 const SelectSpace_1 = require("../../inputs/SelectSpace");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class GreatDamPromo extends Card_1.Card {
     constructor(name = CardName_1.CardName.GREAT_DAM_PROMO, adjacencyBonus = undefined, metadata = {
         cardNumber: 'X32',
@@ -28,25 +28,26 @@ class GreatDamPromo extends Card_1.Card {
             behavior: {
                 production: { energy: 2 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(4)),
+            requirements: { oceans: 4 },
             victoryPoints: 1,
         });
     }
-    bespokeCanPlay(player) {
-        return this.getAvailableSpaces(player).length > 0;
+    bespokeCanPlay(player, canAffordOptions) {
+        return this.getAvailableSpaces(player, canAffordOptions).length > 0;
     }
     bespokePlay(player) {
         const availableSpaces = this.getAvailableSpaces(player);
         if (availableSpaces.length < 1)
             return undefined;
-        return new SelectSpace_1.SelectSpace('Select space for tile', availableSpaces, (space) => {
+        return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)), availableSpaces)
+            .andThen((space) => {
             player.game.addTile(player, space, { tileType: TileType_1.TileType.GREAT_DAM });
             space.adjacency = this.adjacencyBonus;
             return undefined;
         });
     }
-    getAvailableSpaces(player) {
-        return player.game.board.getAvailableSpacesOnLand(player)
+    getAvailableSpaces(player, canAffordOptions) {
+        return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
             .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board_1.Board.isOceanSpace(adjacentSpace)).length > 0);
     }
 }

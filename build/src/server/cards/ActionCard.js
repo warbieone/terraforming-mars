@@ -6,17 +6,21 @@ const BehaviorExecutor_1 = require("../behavior/BehaviorExecutor");
 class ActionCard extends Card_1.Card {
     constructor(properties) {
         super(properties);
-        this.actionBehavior = properties.action;
-        (0, Card_1.validateBehavior)(properties.action);
     }
     canAct(player) {
-        if (!(0, BehaviorExecutor_1.getBehaviorExecutor)().canExecute(this.actionBehavior, player, this)) {
+        if (this.properties.action === undefined) {
+            throw new Error('action not defined');
+        }
+        if (!(0, BehaviorExecutor_1.getBehaviorExecutor)().canExecute(this.properties.action, player, this)) {
             return false;
         }
         return this.bespokeCanAct(player);
     }
     action(player) {
-        (0, BehaviorExecutor_1.getBehaviorExecutor)().execute(this.actionBehavior, player, this);
+        if (this.properties.action === undefined) {
+            throw new Error('action not defined');
+        }
+        (0, BehaviorExecutor_1.getBehaviorExecutor)().execute(this.properties.action, player, this);
         return this.bespokeAction(player);
     }
     bespokeCanAct(_player) {

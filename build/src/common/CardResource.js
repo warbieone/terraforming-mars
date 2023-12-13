@@ -20,5 +20,13 @@ var CardResource;
     CardResource["SEED"] = "Seed";
     CardResource["AGENDA"] = "Agenda";
     CardResource["ORBITAL"] = "Orbital";
+    CardResource["GRAPHENE"] = "Graphene";
+    CardResource["HYDROELECTRIC_RESOURCE"] = "Hydroelectric resource";
+    CardResource["CLONE_TROOPER"] = "Clone Trooper";
+    CardResource["TOOL"] = "Tool";
+    CardResource["WARE"] = "Ware";
+    CardResource["SCOOP"] = "Scoop";
+    CardResource["JOURNALISM"] = "Journalism";
+    CardResource["ACTIVIST"] = "Activist";
 })(CardResource = exports.CardResource || (exports.CardResource = {}));
 //# sourceMappingURL=CardResource.js.map

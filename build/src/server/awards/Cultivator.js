@@ -7,7 +7,7 @@ class Cultivator {
         this.description = 'Own the most greenery tiles';
     }
     getScore(player) {
-        return player.game.getGreeneriesCount(player);
+        return player.game.board.getGreeneries(player).length;
     }
 }
 exports.Cultivator = Cultivator;

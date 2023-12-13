@@ -49,7 +49,8 @@ class DarksideObservatory extends Card_1.Card {
             ...player.playedCards.filter((c) => this.include(c)),
             ...player.corporations.filter((c) => this.include(c)),
         ];
-        return new SelectCard_1.SelectCard('Select card to add EITHER 1 science resource OR 2 Data resources', 'Add', playableCards, ([card]) => {
+        return new SelectCard_1.SelectCard('Select card to add EITHER 1 science resource OR 2 Data resources', 'Add', playableCards)
+            .andThen(([card]) => {
             this.addResource(card, player);
             return undefined;
         });

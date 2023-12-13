@@ -4,11 +4,18 @@ exports.SelectPlayer = void 0;
 const PlayerInput_1 = require("../PlayerInput");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 class SelectPlayer extends PlayerInput_1.BasePlayerInput {
-    constructor(players, title, buttonLabel = 'Save', cb) {
+    constructor(players, title, buttonLabel = 'Save') {
         super('player', title);
         this.players = players;
-        this.cb = cb;
         this.buttonLabel = buttonLabel;
+    }
+    toModel() {
+        return {
+            title: this.title,
+            buttonLabel: this.buttonLabel,
+            type: 'player',
+            players: this.players.map((player) => player.color),
+        };
     }
     process(input) {
         if (!(0, InputResponse_1.isSelectPlayerResponse)(input)) {

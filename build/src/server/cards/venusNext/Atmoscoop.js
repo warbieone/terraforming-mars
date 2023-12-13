@@ -10,7 +10,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const constants = require("../../../common/constants");
 const PartyHooks_1 = require("../../turmoil/parties/PartyHooks");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Card_1 = require("../Card");
@@ -21,7 +20,7 @@ class Atmoscoop extends Card_1.Card {
             name: CardName_1.CardName.ATMOSCOOP,
             cost: 22,
             tags: [Tag_1.Tag.JOVIAN, Tag_1.Tag.SPACE],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 3)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 3 },
             victoryPoints: 1,
             behavior: {
                 addResourcesToAnyCard: { count: 2, type: CardResource_1.CardResource.FLOATER },
@@ -40,8 +39,11 @@ class Atmoscoop extends Card_1.Card {
         const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2;
         const remainingVenusSteps = (constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
         const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
-        if (PartyHooks_1.PartyHooks.shouldApplyPolicy(player, PartyName_1.PartyName.REDS)) {
-            return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, { titanium: true });
+        if (PartyHooks_1.PartyHooks.shouldApplyPolicy(player, PartyName_1.PartyName.REDS, 'rp01')) {
+            return player.canAfford({
+                cost: this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised,
+                titanium: true,
+            });
         }
         return true;
     }
@@ -50,11 +52,11 @@ class Atmoscoop extends Card_1.Card {
         if (this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
             return undefined;
         }
-        const increaseTemp = new SelectOption_1.SelectOption('Raise temperature 2 steps', 'Raise temperature', () => {
+        const increaseTemp = new SelectOption_1.SelectOption('Raise temperature 2 steps', 'Raise temperature').andThen(() => {
             game.increaseTemperature(player, 2);
             return undefined;
         });
-        const increaseVenus = new SelectOption_1.SelectOption('Raise Venus 2 steps', 'Raise Venus', () => {
+        const increaseVenus = new SelectOption_1.SelectOption('Raise Venus 2 steps', 'Raise Venus').andThen(() => {
             game.increaseVenusScaleLevel(player, 2);
             return undefined;
         });

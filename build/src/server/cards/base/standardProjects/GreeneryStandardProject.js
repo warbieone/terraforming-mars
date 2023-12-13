@@ -28,8 +28,9 @@ class GreeneryStandardProject extends StandardProjectCard_1.StandardProjectCard 
         }
     }
     canAct(player) {
-        if (player.game.board.getAvailableSpacesForGreenery(player).length === 0)
+        if (player.game.board.getAvailableSpacesForGreenery(player, this.canPlayOptions(player)).length === 0) {
             return false;
+        }
         return super.canAct(player);
     }
     actionEssence(player) {

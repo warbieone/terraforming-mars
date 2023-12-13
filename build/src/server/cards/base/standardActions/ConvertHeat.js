@@ -25,7 +25,8 @@ class ConvertHeat extends StandardActionCard_1.StandardActionCard {
         if (player.availableHeat() < constants_1.HEAT_FOR_TEMPERATURE) {
             return false;
         }
-        return player.canAfford(0, {
+        return player.canAfford({
+            cost: 0,
             tr: { temperature: 1 },
             reserveUnits: Units_1.Units.of({ heat: 8 }),
         });

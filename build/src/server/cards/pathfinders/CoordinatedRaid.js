@@ -5,7 +5,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const Card_1 = require("../Card");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const SelectColony_1 = require("../../inputs/SelectColony");
 class CoordinatedRaid extends Card_1.Card {
     constructor() {
@@ -13,7 +12,7 @@ class CoordinatedRaid extends Card_1.Card {
             cost: 5,
             name: CardName_1.CardName.COORDINATED_RAID,
             type: CardType_1.CardType.EVENT,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.colonies(1)),
+            requirements: { colonies: 1 },
             metadata: {
                 cardNumber: 'Pf64',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => b.trade().asterix()),
@@ -27,7 +26,8 @@ class CoordinatedRaid extends Card_1.Card {
     }
     bespokePlay(player) {
         const activeColonies = player.game.colonies.filter((colony) => colony.isActive);
-        return new SelectColony_1.SelectColony('Select colony tile for trade', 'trade', activeColonies, (colony) => {
+        return new SelectColony_1.SelectColony('Select colony tile for trade', 'trade', activeColonies)
+            .andThen((colony) => {
             colony.trade(player, { selfishTrade: true });
             return undefined;
         });

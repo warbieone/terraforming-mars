@@ -5,9 +5,11 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Resource_1 = require("../../../common/Resource");
 const Tag_1 = require("../../../common/cards/Tag");
 const Options_1 = require("../Options");
+const RemoveResources_1 = require("../../deferredActions/RemoveResources");
+const Resource_1 = require("../../../common/Resource");
+const DeferredAction_1 = require("../../../server/deferredActions/DeferredAction");
 class SmallComet extends Card_1.Card {
     constructor() {
         super({
@@ -38,9 +40,7 @@ class SmallComet extends Card_1.Card {
     bespokePlay(player) {
         const game = player.game;
         game.getPlayers().forEach((p) => {
-            if (!p.plantsAreProtected()) {
-                p.deductResource(Resource_1.Resource.PLANTS, 2, { log: true, from: player });
-            }
+            player.game.defer(new RemoveResources_1.RemoveResources(player, p, Resource_1.Resource.PLANTS, 2), DeferredAction_1.Priority.ATTACK_OPPONENT);
         });
         return undefined;
     }

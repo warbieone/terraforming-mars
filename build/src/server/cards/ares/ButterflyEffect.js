@@ -7,7 +7,7 @@ const ShiftAresGlobalParametersDeferred_1 = require("../../deferredActions/Shift
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
-const AresHandler_1 = require("../../../server/ares/AresHandler");
+const AresHandler_1 = require("../../ares/AresHandler");
 const AresData_1 = require("../../../common/ares/AresData");
 class ButterflyEffect extends Card_1.Card {
     constructor() {

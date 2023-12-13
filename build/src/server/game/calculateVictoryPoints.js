@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.calculateVictoryPoints = void 0;
-const constants = require("../../common/constants");
 const Phase_1 = require("../../common/Phase");
 const Board_1 = require("../boards/Board");
 const MoonExpansion_1 = require("../moon/MoonExpansion");
@@ -12,9 +11,14 @@ const AwardScorer_1 = require("../awards/AwardScorer");
 function calculateVictoryPoints(player) {
     var _a;
     const victoryPointsBreakdown = new VictoryPointsBreakdown_1.VictoryPointsBreakdown();
+    let negativeVP = 0;
     for (const playedCard of player.tableau) {
         if (playedCard.victoryPoints !== undefined) {
-            victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(player), playedCard.name);
+            const vp = playedCard.getVictoryPoints(player);
+            victoryPointsBreakdown.setVictoryPoints('victoryPoints', vp, playedCard.name);
+            if (vp < 0) {
+                negativeVP += vp;
+            }
         }
     }
     victoryPointsBreakdown.setVictoryPoints('terraformRating', player.getTerraformRating());
@@ -46,13 +50,18 @@ function calculateVictoryPoints(player) {
     player.colonies.calculateVictoryPoints(victoryPointsBreakdown);
     MoonExpansion_1.MoonExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
     PathfindersExpansion_1.PathfindersExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
+    if (player.game.gameOptions.underworldExpansion === true) {
+        const bribe = Math.min(Math.abs(negativeVP), player.underworldData.corruption);
+        victoryPointsBreakdown.setVictoryPoints('victoryPoints', bribe, 'Underworld Corruption Bribe');
+    }
     if (player.game.gameOptions.escapeVelocityMode) {
         const threshold = player.game.gameOptions.escapeVelocityThreshold;
+        const bonusSecondsPerAction = player.game.gameOptions.escapeVelocityBonusSeconds;
         const period = player.game.gameOptions.escapeVelocityPeriod;
         const penaltyPerMin = (_a = player.game.gameOptions.escapeVelocityPenalty) !== null && _a !== void 0 ? _a : 1;
         const elapsedTimeInMinutes = player.timer.getElapsedTimeInMinutes();
-        if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
-            const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (player.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION / 60)), 0);
+        if (threshold !== undefined && bonusSecondsPerAction !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
+            const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (player.actionsTakenThisGame * (bonusSecondsPerAction / 60)), 0);
             victoryPointsBreakdown.updateTotal();
             const totalBeforeEscapeVelocity = victoryPointsBreakdown.points.total;
             const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);

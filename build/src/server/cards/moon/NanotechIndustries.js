@@ -2,17 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NanotechIndustries = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
 const MoonCards_1 = require("../../moon/MoonCards");
-const Card_1 = require("../Card");
-class NanotechIndustries extends Card_1.Card {
+class NanotechIndustries extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.NANOTECH_INDUSTRIES,
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.MOON],
             startingMegaCredits: 42,

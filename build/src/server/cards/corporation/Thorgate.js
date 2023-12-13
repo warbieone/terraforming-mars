@@ -1,17 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Thorgate = void 0;
-const Card_1 = require("../Card");
 const Tag_1 = require("../../../common/cards/Tag");
+const CorporationCard_1 = require("./CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Resource_1 = require("../../../common/Resource");
-class Thorgate extends Card_1.Card {
+class Thorgate extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.THORGATE,
             tags: [Tag_1.Tag.POWER, Tag_1.Tag.SCIENCE],
             startingMegaCredits: 40,

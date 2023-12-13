@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const PlaceOceanTile_1 = require("../../deferredActions/PlaceOceanTile");
@@ -14,6 +13,7 @@ const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard")
 const Resource_1 = require("../../../common/Resource");
 const CardResource_1 = require("../../../common/CardResource");
 const Options_1 = require("../Options");
+const constants_1 = require("../../../common/constants");
 class SecretLabs extends Card_1.Card {
     constructor() {
         super({
@@ -21,7 +21,7 @@ class SecretLabs extends Card_1.Card {
             name: CardName_1.CardName.SECRET_LABS,
             cost: 21,
             tags: [Tag_1.Tag.JOVIAN, Tag_1.Tag.BUILDING, Tag_1.Tag.SPACE],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE).tag(Tag_1.Tag.JOVIAN)),
+            requirements: [{ tag: Tag_1.Tag.SCIENCE }, { tag: Tag_1.Tag.JOVIAN }],
             victoryPoints: 1,
             metadata: {
                 cardNumber: 'Pf26',
@@ -36,30 +36,40 @@ class SecretLabs extends Card_1.Card {
             },
         });
     }
-    canAfford(player, tr, megacrdits = this.cost) {
-        return player.canAfford(megacrdits, { steel: true, titanium: true, tr });
+    adjustedOptions(options, trSource, cost) {
+        const newOptions = Object.assign({}, options);
+        newOptions.tr = trSource;
+        if (cost !== undefined) {
+            newOptions.cost = cost;
+        }
+        return newOptions;
     }
-    bespokeCanPlay(player) {
-        return this.canAfford(player, { oceans: 1 }) || this.canAfford(player, { temperature: 1 }) || this.canAfford(player, { oxygen: 1 });
+    bespokeCanPlay(player, canAffordOptions) {
+        return (player.canAfford(this.adjustedOptions(canAffordOptions, { oceans: 1 })) ||
+            player.canAfford(this.adjustedOptions(canAffordOptions, { temperature: 1 })) ||
+            player.canAfford(this.adjustedOptions(canAffordOptions, { oxygen: 1 })));
     }
     bespokePlay(player) {
         const options = new OrOptions_1.OrOptions();
-        if (this.canAfford(player, { oceans: 1 }, 0)) {
-            options.options.push(new SelectOption_1.SelectOption('Place an ocean tile. Add 2 microbes to ANY card.', 'select', () => {
-                player.game.defer(new PlaceOceanTile_1.PlaceOceanTile(player));
+        if (player.canAfford({ cost: 0, tr: { oceans: 1 } })) {
+            const oceanPlacementAvailable = player.game.board.getOceanSpaces().length < constants_1.MAX_OCEAN_TILES;
+            const optionTitle = oceanPlacementAvailable ? 'Place an ocean tile. Add 2 microbes to ANY card.' : 'Add 2 microbes to ANY card.';
+            options.options.push(new SelectOption_1.SelectOption(optionTitle).andThen(() => {
+                if (oceanPlacementAvailable)
+                    player.game.defer(new PlaceOceanTile_1.PlaceOceanTile(player));
                 player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.MICROBE, { count: 2 }));
                 return undefined;
             }));
         }
-        if (this.canAfford(player, { temperature: 1 }, 0)) {
-            options.options.push(new SelectOption_1.SelectOption('Raise temperature 1 step. Gain 3 plants.', 'select', () => {
+        if (player.canAfford({ cost: 0, tr: { temperature: 1 } })) {
+            options.options.push(new SelectOption_1.SelectOption('Raise temperature 1 step. Gain 3 plants.').andThen(() => {
                 player.game.increaseTemperature(player, 1);
-                player.addResource(Resource_1.Resource.PLANTS, 3, { log: true });
+                player.stock.add(Resource_1.Resource.PLANTS, 3, { log: true });
                 return undefined;
             }));
         }
-        if (this.canAfford(player, { oxygen: 1 }, 0)) {
-            options.options.push(new SelectOption_1.SelectOption('Raise oxygen level 1 step. Add 2 floaters to ANY card.', 'select', () => {
+        if (player.canAfford({ cost: 0, tr: { oxygen: 1 } })) {
+            options.options.push(new SelectOption_1.SelectOption('Raise oxygen level 1 step. Add 2 floaters to ANY card.').andThen(() => {
                 player.game.increaseOxygenLevel(player, 1);
                 player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.FLOATER, { count: 2 }));
                 return undefined;

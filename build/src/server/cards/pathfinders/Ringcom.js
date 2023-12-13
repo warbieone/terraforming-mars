@@ -1,17 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ringcom = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
-class Ringcom extends Card_1.Card {
+class Ringcom extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.RINGCOM,
             tags: [Tag_1.Tag.JOVIAN],
             startingMegaCredits: 39,
@@ -50,7 +48,7 @@ class Ringcom extends Card_1.Card {
         if (card.tags.includes(Tag_1.Tag.JOVIAN)) {
             player.game.getPlayers().forEach((p) => {
                 if (p.isCorporation(this.name)) {
-                    p.addResource(Resource_1.Resource.TITANIUM, 1, { log: true });
+                    p.stock.add(Resource_1.Resource.TITANIUM, 1, { log: true });
                 }
             });
         }

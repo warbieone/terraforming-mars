@@ -32,7 +32,7 @@ class TopsoilContract extends Card_1.Card {
     }
     onResourceAdded(player, card, count) {
         if (card.resourceType === CardResource_1.CardResource.MICROBE) {
-            player.addResource(Resource_1.Resource.MEGACREDITS, count, { log: true });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, count, { log: true });
         }
     }
 }

@@ -8,7 +8,6 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const Resource_1 = require("../../../common/Resource");
 const Card_1 = require("../Card");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 class RoverDriversUnion extends Card_1.Card {
     constructor() {
         super({
@@ -16,7 +15,7 @@ class RoverDriversUnion extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             tags: [Tag_1.Tag.MOON],
             cost: 16,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.logisticRate(2)),
+            requirements: { logisticRate: 2 },
             tr: { moonLogistics: 1 },
             metadata: {
                 description: 'Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.',

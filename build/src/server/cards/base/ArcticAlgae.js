@@ -8,7 +8,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const Resource_1 = require("../../../common/Resource");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const GainResources_1 = require("../../deferredActions/GainResources");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const Board_1 = require("../../boards/Board");
@@ -22,7 +21,7 @@ class ArcticAlgae extends Card_1.Card {
             behavior: {
                 stock: { plants: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(-12, { max: Options_1.max })),
+            requirements: { temperature: -12, max: Options_1.max },
             metadata: {
                 description: 'It must be -12 C or colder to play. Gain 1 plant.',
                 cardNumber: '023',

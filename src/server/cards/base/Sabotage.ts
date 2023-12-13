@@ -9,7 +9,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all, digit} from '../Options';
-import { CardRequirements } from '../requirements/CardRequirements';
 
 import {message} from '../../logs/MessageBuilder';
 
@@ -20,7 +19,7 @@ export class Sabotage extends Card implements IProjectCard {
       name: CardName.SABOTAGE,
       cost: 1,
 
-      requirements: CardRequirements.builder((b) => b.generation(4)),
+      requirements: {generation: 4},
 
       metadata: {
         cardNumber: '121',

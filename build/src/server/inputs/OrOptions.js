@@ -1,15 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrOptions = void 0;
-const PlayerInput_1 = require("../PlayerInput");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
-class OrOptions extends PlayerInput_1.BasePlayerInput {
+const OptionsPlayerInput_1 = require("./OptionsPlayerInput");
+class OrOptions extends OptionsPlayerInput_1.OptionsInput {
     constructor(...options) {
-        super('or', 'Select one option');
-        this.options = options;
+        super('or', 'Select one option', options);
     }
-    cb() {
-        return undefined;
+    toModel(player) {
+        return {
+            title: this.title,
+            buttonLabel: this.buttonLabel,
+            type: 'or',
+            options: this.options.map((option) => option.toModel(player)),
+        };
     }
     process(input, player) {
         if (!(0, InputResponse_1.isOrOptionsResponse)(input)) {
@@ -19,7 +23,7 @@ class OrOptions extends PlayerInput_1.BasePlayerInput {
             throw new Error('Invalid index');
         }
         player.runInput(input.response, this.options[input.index]);
-        return this.cb();
+        return this.cb(undefined);
     }
 }
 exports.OrOptions = OrOptions;

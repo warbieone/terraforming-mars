@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.newMessage = exports.MessageBuilder = void 0;
+exports.message = exports.MessageBuilder = void 0;
 const LogMessageDataType_1 = require("../../common/logs/LogMessageDataType");
 class MessageBuilder {
     constructor(message) {
@@ -28,11 +28,15 @@ class MessageBuilder {
         this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.PLAYER, value });
         return this;
     }
-    card(value) {
-        return this.cardName(value.name);
+    card(value, attrs) {
+        return this.cardName(value.name, attrs);
     }
-    cardName(value) {
-        this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.CARD, value });
+    cardName(value, attrs) {
+        const data = { type: LogMessageDataType_1.LogMessageDataType.CARD, value };
+        if (attrs !== undefined) {
+            data.attrs = attrs;
+        }
+        this.message.data.push(data);
         return this;
     }
     award(value) {
@@ -79,10 +83,10 @@ class MessageBuilder {
     }
 }
 exports.MessageBuilder = MessageBuilder;
-function newMessage(message, f) {
+function message(message, f) {
     const builder = new MessageBuilder(message);
     f === null || f === void 0 ? void 0 : f(builder);
     return builder.getMessage();
 }
-exports.newMessage = newMessage;
+exports.message = message;
 //# sourceMappingURL=MessageBuilder.js.map

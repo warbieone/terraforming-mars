@@ -29,7 +29,7 @@ class MudSlides extends GlobalEvent_1.GlobalEvent {
                     .filter((space) => Board_1.Board.isOceanSpace(space)).length > 0).length;
             const amount = Math.min(5, tiles) - turmoil.getPlayerInfluence(player);
             if (amount > 0) {
-                player.deductResource(Resource_1.Resource.MEGACREDITS, 4 * amount, { log: true, from: this.name });
+                player.stock.deduct(Resource_1.Resource.MEGACREDITS, 4 * amount, { log: true, from: this.name });
             }
         });
     }

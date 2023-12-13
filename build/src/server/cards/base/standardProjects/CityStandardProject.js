@@ -36,7 +36,10 @@ class CityStandardProject extends StandardProjectCard_1.StandardProjectCard {
         }
     }
     canAct(player) {
-        return super.canAct(player) && player.game.board.getAvailableSpacesForCity(player).length > 0;
+        if (player.game.board.getAvailableSpacesForCity(player, this.canPlayOptions(player)).length === 0) {
+            return false;
+        }
+        return super.canAct(player);
     }
     actionEssence(player) {
         player.game.defer(new PlaceCityTile_1.PlaceCityTile(player));

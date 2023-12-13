@@ -11,6 +11,7 @@ const CardResource_1 = require("../../../common/CardResource");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class ViralEnhancers extends Card_1.Card {
     constructor() {
         super({
@@ -40,10 +41,10 @@ class ViralEnhancers extends Card_1.Card {
             return undefined;
         }
         for (let i = 0; i < resourceCount; i++) {
-            player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Add resource to card ' + card.name, 'Add resource', () => {
+            player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => new OrOptions_1.OrOptions(new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Add resource to card ${0}', (b) => b.card(card)), 'Add resource').andThen(() => {
                 player.addResourceTo(card);
                 return undefined;
-            }), new SelectOption_1.SelectOption('Gain plant', 'Save', () => {
+            }), new SelectOption_1.SelectOption('Gain plant').andThen(() => {
                 player.plants++;
                 return undefined;
             }))));

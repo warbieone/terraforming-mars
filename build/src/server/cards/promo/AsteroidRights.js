@@ -49,24 +49,25 @@ class AsteroidRights extends Card_1.Card {
         const canAddAsteroid = player.canAfford(1);
         const hasAsteroids = this.resourceCount > 0;
         const asteroidCards = player.getResourceCards(CardResource_1.CardResource.ASTEROID);
-        const gainTitaniumOption = new SelectOption_1.SelectOption('Remove 1 asteroid on this card to gain 2 titanium', 'Remove asteroid', () => {
+        const gainTitaniumOption = new SelectOption_1.SelectOption('Remove 1 asteroid on this card to gain 2 titanium', 'Remove asteroid').andThen(() => {
             this.resourceCount--;
             player.titanium += 2;
             LogHelper_1.LogHelper.logRemoveResource(player, this, 1, 'gain 2 titanium');
             return undefined;
         });
-        const increaseMcProdOption = new SelectOption_1.SelectOption('Remove 1 asteroid on this card to increase M€ production 1 step', 'Remove asteroid', () => {
+        const increaseMcProdOption = new SelectOption_1.SelectOption('Remove 1 asteroid on this card to increase M€ production 1 step', 'Remove asteroid').andThen(() => {
             this.resourceCount--;
             player.production.add(Resource_1.Resource.MEGACREDITS, 1);
             LogHelper_1.LogHelper.logRemoveResource(player, this, 1, 'increase M€ production 1 step');
             return undefined;
         });
-        const addAsteroidToSelf = new SelectOption_1.SelectOption('Add 1 asteroid to this card', 'Add asteroid', () => {
+        const addAsteroidToSelf = new SelectOption_1.SelectOption('Add 1 asteroid to this card', 'Add asteroid').andThen(() => {
             player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 1, { title: 'Select how to pay for asteroid' }));
             player.addResourceTo(this, { log: true });
             return undefined;
         });
-        const addAsteroidOption = new SelectCard_1.SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, ([card]) => {
+        const addAsteroidOption = new SelectCard_1.SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards)
+            .andThen(([card]) => {
             player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 1, { title: 'Select how to pay for asteroid' }));
             player.addResourceTo(card, { log: true });
             return undefined;
@@ -75,7 +76,7 @@ class AsteroidRights extends Card_1.Card {
             return new OrOptions_1.OrOptions(gainTitaniumOption, increaseMcProdOption);
         if (!hasAsteroids) {
             if (asteroidCards.length === 1)
-                return addAsteroidToSelf.cb();
+                return addAsteroidToSelf.cb(undefined);
             return addAsteroidOption;
         }
         const opts = [];

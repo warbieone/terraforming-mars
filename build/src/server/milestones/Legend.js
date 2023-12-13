@@ -4,7 +4,7 @@ exports.Legend = void 0;
 const IMilestone_1 = require("./IMilestone");
 class Legend extends IMilestone_1.BaseMilestone {
     constructor() {
-        super('Legend', 'Have played 5 events', 5);
+        super('Legend', 'Have 5 cards in your event pile', 5);
     }
     getScore(player) {
         return player.getPlayedEventsCount();

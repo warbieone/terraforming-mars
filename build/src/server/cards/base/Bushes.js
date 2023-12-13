@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class Bushes extends Card_1.Card {
     constructor() {
@@ -18,7 +17,7 @@ class Bushes extends Card_1.Card {
                 production: { plants: 2 },
                 stock: { plants: 2 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(-10)),
+            requirements: { temperature: -10 },
             metadata: {
                 cardNumber: '093',
                 description: 'Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.',

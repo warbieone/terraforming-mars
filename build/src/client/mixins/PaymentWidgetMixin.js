@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaymentWidgetMixin = void 0;
 const CardName_1 = require("@/common/cards/CardName");
-const constants_1 = require("@/common/constants");
 const CardResource_1 = require("@/common/CardResource");
-const ClientCardManifest_1 = require("../cards/ClientCardManifest");
+const ClientCardManifest_1 = require("@/client/cards/ClientCardManifest");
 const Payment_1 = require("@/common/inputs/Payment");
+const Spendable_1 = require("@/common/inputs/Spendable");
 exports.PaymentWidgetMixin = {
     name: 'PaymentWidgetMixin',
     methods: {
@@ -14,121 +14,128 @@ exports.PaymentWidgetMixin = {
         },
         getMegaCreditsMax() {
             const model = this.asModel();
-            return Math.min(model.playerView.thisPlayer.megaCredits, model.cost);
+            return Math.min(this.getAvailableUnits('megaCredits'), model.cost);
         },
-        canUseTitanium() {
-            throw new Error('Should be overridden');
-        },
-        canUseLunaTradeFederationTitanium() {
-            throw new Error('Should be overridden');
-        },
-        canUseLunaTradeFederationTitaniumOnly() {
-            return this.canUseTitanium() !== true && this.canUseLunaTradeFederationTitanium();
-        },
-        getResourceRate(resourceName) {
-            switch (resourceName) {
-                case 'titanium':
-                    const v = this.asModel().playerView.thisPlayer.titaniumValue;
-                    return this.canUseLunaTradeFederationTitaniumOnly() === true ? v - 1 : v;
+        getResourceRate(unit) {
+            switch (unit) {
                 case 'steel':
                     return this.asModel().playerView.thisPlayer.steelValue;
-                case 'microbes':
-                    return 2;
-                case 'floaters':
-                    return 3;
-                case 'seeds':
-                    return constants_1.SEED_VALUE;
-                case 'auroraiData':
-                    return constants_1.DATA_VALUE;
+                case 'titanium':
+                    return this.getTitaniumResourceRate();
                 default:
-                    return 1;
+                    return Payment_1.DEFAULT_PAYMENT_VALUES[unit];
             }
         },
-        reduceValue(target, delta) {
-            const currentValue = this.asModel()[target];
-            if (currentValue === undefined) {
-                throw new Error(`can not reduceValue for ${target} on this`);
+        getTitaniumResourceRate() {
+            const paymentOptions = this.asModel().playerinput.paymentOptions;
+            const titaniumValue = this.asModel().playerView.thisPlayer.titaniumValue;
+            if ((paymentOptions === null || paymentOptions === void 0 ? void 0 : paymentOptions.titanium) !== true &&
+                (paymentOptions === null || paymentOptions === void 0 ? void 0 : paymentOptions.lunaTradeFederationTitanium) === true) {
+                return titaniumValue - 1;
             }
-            const adjustedDelta = Math.min(delta, currentValue);
+            return titaniumValue;
+        },
+        reduceValue(unit) {
+            const currentValue = this.asModel().payment[unit];
+            if (currentValue === undefined) {
+                throw new Error(`can not reduceValue for ${unit} on this`);
+            }
+            const adjustedDelta = Math.min(1, currentValue);
             if (adjustedDelta === 0)
                 return;
-            this.asModel()[target] -= adjustedDelta;
-            if (target !== 'megaCredits')
+            this.asModel().payment[unit] -= adjustedDelta;
+            if (unit !== 'megaCredits')
                 this.setRemainingMCValue();
         },
-        addValue(target, delta, max) {
-            const currentValue = this.asModel()[target];
+        addValue(unit) {
+            const currentValue = this.asModel().payment[unit];
             if (currentValue === undefined) {
-                throw new Error(`can not addValue for ${target} on this`);
+                throw new Error(`can not addValue for ${unit} on this`);
             }
-            let maxValue = max !== undefined ? max : this.getAmount(target);
-            if (target === 'megaCredits') {
-                maxValue = this.getMegaCreditsMax();
-            }
-            if (currentValue === maxValue)
+            const maxValue = unit === 'megaCredits' ?
+                this.getMegaCreditsMax() :
+                this.getAvailableUnits(unit);
+            if (currentValue === maxValue) {
                 return;
-            if (maxValue === undefined) {
-                throw new Error(`unable to determine maxValue for ${target}`);
             }
-            const adjustedDelta = Math.min(delta, maxValue - currentValue);
-            if (adjustedDelta === 0)
+            const delta = Math.min(1, maxValue - currentValue);
+            if (delta === 0) {
                 return;
-            this.asModel()[target] += adjustedDelta;
-            if (target !== 'megaCredits')
+            }
+            this.asModel().payment[unit] += delta;
+            if (unit !== 'megaCredits') {
                 this.setRemainingMCValue();
+            }
         },
         setRemainingMCValue() {
             var _a;
             const ta = this.asModel();
-            let remainingMC = ta.$data.cost;
-            for (const resource of Payment_1.PAYMENT_KEYS) {
-                if (resource === 'megaCredits')
+            let remainingMC = ta.cost;
+            for (const resource of Spendable_1.SPENDABLE_RESOURCES) {
+                if (resource === 'megaCredits') {
                     continue;
-                const value = ((_a = ta[resource]) !== null && _a !== void 0 ? _a : 0) * this.getResourceRate(resource);
+                }
+                const value = ((_a = ta.payment[resource]) !== null && _a !== void 0 ? _a : 0) * this.getResourceRate(resource);
                 remainingMC -= value;
             }
-            ta['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
+            ta.payment.megaCredits = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
         },
-        setMaxValue(target, max) {
-            let currentValue = this.asModel()[target];
+        setMaxValue(unit) {
+            let currentValue = this.asModel().payment[unit];
             if (currentValue === undefined) {
-                throw new Error(`can not setMaxValue for ${target} on this`);
+                throw new Error(`can not setMaxValue for ${unit} on this`);
             }
-            const cost = this.asModel().$data.cost;
-            const resourceRate = this.getResourceRate(target);
+            const cost = this.asModel().cost;
+            const resourceRate = this.getResourceRate(unit);
             const amountNeed = Math.floor(cost / resourceRate);
-            const amountHave = this.getAmount(target);
+            const amountHave = this.getAvailableUnits(unit);
             while (currentValue < amountHave && currentValue < amountNeed) {
-                this.addValue(target, 1, max);
+                this.addValue(unit);
                 currentValue++;
             }
         },
-        getAmount(target) {
-            var _a;
+        hasUnits(unit) {
+            return this.getAvailableUnits(unit) > 0;
+        },
+        getAvailableUnits(unit) {
+            var _a, _b, _c, _d, _e;
             let amount = undefined;
             const model = this.asModel();
             const thisPlayer = model.playerView.thisPlayer;
-            switch (target) {
+            switch (unit) {
                 case 'heat':
-                    amount = this.availableHeat();
+                    if (model.hasOwnProperty('available')) {
+                        amount = (_b = (_a = model.available) === null || _a === void 0 ? void 0 : _a[unit]) !== null && _b !== void 0 ? _b : -1;
+                    }
+                    else {
+                        amount = this.availableHeat();
+                    }
                     break;
                 case 'steel':
                 case 'titanium':
+                case 'plants':
+                    if (model.hasOwnProperty('available')) {
+                        amount = (_d = (_c = model.available) === null || _c === void 0 ? void 0 : _c[unit]) !== null && _d !== void 0 ? _d : -1;
+                        break;
+                    }
                 case 'megaCredits':
-                    amount = thisPlayer[target];
+                    amount = thisPlayer[unit];
                     break;
                 case 'floaters':
                 case 'microbes':
-                case 'science':
+                case 'lunaArchivesScience':
+                case 'spireScience':
                 case 'seeds':
                 case 'auroraiData':
-                    amount = model.playerinput[target];
+                case 'graphene':
+                case 'kuiperAsteroids':
+                    amount = model.playerinput[unit];
                     break;
             }
             if (amount === undefined) {
                 return 0;
             }
-            if (target === 'floaters' && ((_a = this.asModel().$data.card) === null || _a === void 0 ? void 0 : _a.name) === CardName_1.CardName.STRATOSPHERIC_BIRDS) {
+            if (unit === 'floaters' && ((_e = this.asModel().card) === null || _e === void 0 ? void 0 : _e.name) === CardName_1.CardName.STRATOSPHERIC_BIRDS) {
                 if (!thisPlayer.tableau.some((card) => {
                     var _a, _b;
                     return card.name !== CardName_1.CardName.DIRIGIBLES && ((_a = (0, ClientCardManifest_1.getCard)(card.name)) === null || _a === void 0 ? void 0 : _a.resourceType) === CardResource_1.CardResource.FLOATER && ((_b = card.resources) !== null && _b !== void 0 ? _b : 0) > 0;
@@ -142,10 +149,29 @@ exports.PaymentWidgetMixin = {
             const model = this.asModel();
             const thisPlayer = model.playerView.thisPlayer;
             const stormcraft = thisPlayer.tableau.find((card) => card.name === CardName_1.CardName.STORMCRAFT_INCORPORATED);
-            if (stormcraft !== undefined && stormcraft.resources !== undefined) {
+            if ((stormcraft === null || stormcraft === void 0 ? void 0 : stormcraft.resources) !== undefined) {
                 return thisPlayer.heat + (stormcraft.resources * 2);
             }
             return thisPlayer.heat;
+        },
+    },
+    computed: {
+        descriptions() {
+            return {
+                steel: 'Steel',
+                titanium: 'Titanium',
+                heat: 'Heat',
+                seeds: 'Seeds',
+                auroraiData: 'Data',
+                kuiperAsteroids: 'Asteroids',
+                spireScience: 'Science',
+                megaCredits: 'M€',
+                floaters: 'Floaters',
+                graphene: 'Graphene',
+                lunaArchivesScience: 'Science',
+                microbes: 'Microbes',
+                plants: 'Plants',
+            };
         },
     },
 };

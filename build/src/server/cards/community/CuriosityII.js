@@ -1,10 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CuriosityII = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
@@ -15,10 +14,10 @@ const DrawCards_1 = require("../../deferredActions/DrawCards");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
 const SpaceBonus_1 = require("../../../common/boards/SpaceBonus");
 const Phase_1 = require("../../../common/Phase");
-class CuriosityII extends Card_1.Card {
+const titles_1 = require("../../inputs/titles");
+class CuriosityII extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.CURIOSITY_II,
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.BUILDING],
             startingMegaCredits: 40,
@@ -58,13 +57,11 @@ class CuriosityII extends Card_1.Card {
     corpAction(player) {
         if (!player.canAfford(2))
             return undefined;
-        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Pay 2 M€ to draw a card', 'Confirm', () => {
-            player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 2, { title: 'Select how to pay for action' }));
-            player.game.defer(DrawCards_1.DrawCards.keepAll(player));
+        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Pay 2 M€ to draw a card').andThen(() => {
+            player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 2, { title: titles_1.TITLES.payForCardAction(this.name) }))
+                .andThen(() => player.game.defer(DrawCards_1.DrawCards.keepAll(player)));
             return undefined;
-        }), new SelectOption_1.SelectOption('Do nothing', 'Confirm', () => {
-            return undefined;
-        }));
+        }), new SelectOption_1.SelectOption('Do nothing'));
     }
 }
 exports.CuriosityII = CuriosityII;

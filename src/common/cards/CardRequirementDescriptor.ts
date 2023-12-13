@@ -31,6 +31,7 @@ export type CardRequirementDescriptor = {
   oxygen?: number,
   temperature?: number,
   greeneries?: number,
+  generation?: number,
   cities?: number,
   oceans?: number,
   production?: Resource,

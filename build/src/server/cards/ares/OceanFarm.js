@@ -7,7 +7,6 @@ const SpaceBonus_1 = require("../../../common/boards/SpaceBonus");
 const TileType_1 = require("../../../common/TileType");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class OceanFarm extends Card_1.Card {
     constructor() {
@@ -21,11 +20,10 @@ class OceanFarm extends Card_1.Card {
                 tile: {
                     type: TileType_1.TileType.OCEAN_FARM,
                     on: 'upgradeable-ocean',
-                    title: 'Select space for Ocean Farm',
                     adjacencyBonus: { bonus: [SpaceBonus_1.SpaceBonus.PLANT] },
                 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(4)),
+            requirements: { oceans: 4 },
             metadata: {
                 cardNumber: 'A21',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

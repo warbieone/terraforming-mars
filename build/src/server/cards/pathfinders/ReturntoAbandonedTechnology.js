@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReturntoAbandonedTechnology = void 0;
 const Card_1 = require("../Card");
-const DrawCards_1 = require("../../deferredActions/DrawCards");
+const ChooseCards_1 = require("../../deferredActions/ChooseCards");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
@@ -35,7 +35,8 @@ class ReturntoAbandonedTechnology extends Card_1.Card {
             cards.push(card);
         }
         const cardsToKeep = Math.min(2, cards.length);
-        return DrawCards_1.DrawCards.choose(player, cards, { keepMax: cardsToKeep });
+        player.game.defer(new ChooseCards_1.ChooseCards(player, cards, { keepMax: cardsToKeep }));
+        return undefined;
     }
 }
 exports.ReturntoAbandonedTechnology = ReturntoAbandonedTechnology;

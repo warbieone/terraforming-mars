@@ -33,6 +33,7 @@ export class SulphuricImport extends Card implements IProjectCard {
     });
   }
 
+
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const availableMicrobeCards = RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource.MICROBE);
@@ -43,38 +44,38 @@ export class SulphuricImport extends Card implements IProjectCard {
     const totalSteps = temperatureSteps + venusSteps;
 
     // Step 2: Get Plant / Microbe / Animal removal option
-    const removePlants = function() {
-      player.game.defer(new RemoveAnyPlants(player, 3));
-      return undefined;
-    };
-
     const availableRemovalActions: Array<SelectOption | SelectCard<ICard>> = [];
 
-    const removePlantsOption = new SelectOption('Remove 3 plants', 'Remove plants', removePlants);
+    const removePlantsOption = new SelectOption('Remove 3 plants', 'Remove plants')
     availableRemovalActions.push(removePlantsOption);
+    player.game.defer(new RemoveAnyPlants(player, 3))
 
     if (availableMicrobeCards.length > 0) {
-      availableRemovalActions.push(new SelectOption('Remove 3 microbes from a card', 'Remove microbes', () => {
+      availableRemovalActions.push(new SelectOption('Remove 3 microbes from a card', 'Remove microbes')
+      .andThen(() => {
         player.game.defer(new RemoveResourcesFromCard(player, CardResource.MICROBE, 3));
         return undefined;
       }));
     }
 
     if (availableAnimalCards.length > 0) {
-      availableRemovalActions.push(new SelectOption('Remove 2 animals from a card', 'Remove animals', () => {
+      availableRemovalActions.push(new SelectOption('Remove 2 animals from a card', 'Remove animals')
+            .andThen(() => {
         player.game.defer(new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2));
         return undefined;
       }));
     }
 
     // Step 1: Choose Temp or Venus bump
-    const increaseTemp = new SelectOption('Raise temperature 1 step', 'Raise temperature', () => {
+    const increaseTemp = new SelectOption('Raise temperature 1 step', 'Raise temperature')
+    .andThen(() => {
       game.increaseTemperature(player, 1);
       player.game.log('${0} increased Temperature 1 step', (b) => b.player(player));
       return new OrOptions(...availableRemovalActions);
     });
 
-    const increaseVenus = new SelectOption('Raise Venus 1 step', 'Raise venus', () => {
+    const increaseVenus = new SelectOption('Raise Venus 1 step', 'Raise venus')
+    .andThen(() => {
       game.increaseVenusScaleLevel(player, 1);
       player.game.log('${0} increased Venus 1 step', (b) => b.player(player));
       return new OrOptions(...availableRemovalActions);

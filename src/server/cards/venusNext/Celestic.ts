@@ -5,13 +5,6 @@ import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {LogHelper} from '../../LogHelper';
-import {SelectCard} from '../../inputs/SelectCard';
-import {ICard} from '../ICard';
-import {Card} from '../Card';
-import {Player} from '../../Player';
-
-
 
 export class Celestic extends ActiveCorporationCard {
   constructor() {
@@ -23,13 +16,13 @@ export class Celestic extends ActiveCorporationCard {
       initialActionText: 'Draw 2 cards with a floater icon on it',
       victoryPoints: {resourcesHere: {}, per: 3},
 
-/*       action: {
+      action: {
         addResourcesToAnyCard: {
           type: CardResource.FLOATER,
           count: 1,
           autoSelect: true,
         },
-      }, */
+      },
 
       metadata: {
         cardNumber: 'R05',
@@ -37,48 +30,14 @@ export class Celestic extends ActiveCorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(42).nbsp.cards(2, {secondaryTag: AltSecondaryTag.FLOATER});
           b.corpBox('action', (ce) => {
-            ce.action('Action: Add a floater each to 1 or 2 different cards. 1 VP per 3 floaters on this card.', (eb) => {
-              eb.empty().startAction.floaters(1).asterix().floaters(1).asterix();
+            ce.action('Add a floater to ANY card. 1 VP per 3 floaters on this card.', (eb) => {
+              eb.empty().startAction.floaters(1).asterix();
             });
             ce.vSpace(); // to offset the description to the top a bit so it can be readable
           });
         }),
       },
     });
-  }
-
-  public canAct(): boolean {
-    return true;
-  }
-
-  public action(player: Player) {
-    const floaterCards = player.getResourceCards(CardResource.FLOATER);
-    if (floaterCards.length === 1) {
-      player.addResourceTo(this, 1);
-      LogHelper.logAddResource(player, floaterCards[0]);
-      return undefined;
-    }
-
-    if (floaterCards.length === 2) {
-      player.addResourceTo(floaterCards[0], 1);
-      LogHelper.logAddResource(player, floaterCards[0]);
-      player.addResourceTo(floaterCards[1], 1);
-      LogHelper.logAddResource(player, floaterCards[1]);
-      return undefined;
-    }
-
-    return new SelectCard(
-      'Select 2 different cards to add 1 floater each',
-      'Add floaters',
-      floaterCards,
-      (foundCards: Array<ICard>) => {
-        foundCards.forEach((floaterCard) => {
-          player.addResourceTo(floaterCard, {qty: 1, log: true});
-        });
-        return undefined;
-      },
-      { max: 2, min: 2 },
-    );
   }
 
 

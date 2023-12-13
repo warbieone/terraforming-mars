@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const ActionCard_1 = require("../ActionCard");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class ElectroCatapult extends ActionCard_1.ActionCard {
@@ -34,7 +33,7 @@ class ElectroCatapult extends ActionCard_1.ActionCard {
                 },
             },
             victoryPoints: 1,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(8, { max: Options_1.max })),
+            requirements: { oxygen: 8, max: Options_1.max },
             metadata: {
                 cardNumber: '069',
                 description: {

@@ -16,7 +16,7 @@ export class Stratopolis extends ActionCard {
 
       resourceType: CardResource.FLOATER,
       victoryPoints: {resourcesHere: {}, per: 2},
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
+      requirements: {tag: Tag.SCIENCE, count: 2},
 
       behavior: {
         production: {megacredits: 2},

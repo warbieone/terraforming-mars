@@ -11,9 +11,9 @@ class SocietySupport extends PreludeCard_1.PreludeCard {
         super({
             name: CardName_1.CardName.SOCIETY_SUPPORT,
             tags: [Tag_1.Tag.WILD],
+            startingMegacredits: -2,
             behavior: {
                 production: { plants: 1, energy: 1, heat: 1 },
-                stock: { megacredits: -3 }
             },
             metadata: {
                 cardNumber: 'P31',

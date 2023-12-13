@@ -36,10 +36,11 @@ class LawSuit extends Card_1.Card {
         return this.targets(player).length > 0;
     }
     bespokePlay(player) {
-        return new SelectPlayer_1.SelectPlayer(this.targets(player), 'Select player to sue (steal 3 M€ from)', 'Steal M€', (suedPlayer) => {
+        return new SelectPlayer_1.SelectPlayer(this.targets(player), 'Select player to sue (steal 3 M€ from)', 'Steal M€')
+            .andThen((suedPlayer) => {
             const amount = Math.min(3, suedPlayer.megaCredits);
-            player.addResource(Resource_1.Resource.MEGACREDITS, amount);
-            suedPlayer.deductResource(Resource_1.Resource.MEGACREDITS, amount, { log: true, from: player, stealing: true });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, amount);
+            suedPlayer.stock.deduct(Resource_1.Resource.MEGACREDITS, amount, { log: true, from: player, stealing: true });
             suedPlayer.playedCards.push(this);
             return undefined;
         });

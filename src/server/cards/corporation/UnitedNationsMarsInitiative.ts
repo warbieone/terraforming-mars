@@ -7,7 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {TITLES} from '../../inputs/titles';
-export const ACTION_COST = 3;
+export const ACTION_COST = 1;
 export class UnitedNationsMarsInitiative extends CorporationCard implements IActionCard, ICorporationCard {
   constructor() {
     super({
@@ -47,7 +47,7 @@ export class UnitedNationsMarsInitiative extends CorporationCard implements IAct
   }
 
   public action(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 3, {title: TITLES.payForCardAction(this.name)}))
+    player.game.defer(new SelectPaymentDeferred(player, 1, {title: TITLES.payForCardAction(this.name)}))
       .andThen(() => player.increaseTerraformRating());
     return undefined;
   }

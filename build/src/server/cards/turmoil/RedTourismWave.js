@@ -6,10 +6,11 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Resource_1 = require("../../../common/Resource");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Card_1 = require("../Card");
+const AresTileType_1 = require("../../../common/AresTileType");
+const SpaceType_1 = require("../../../common/boards/SpaceType");
 class RedTourismWave extends Card_1.Card {
     constructor() {
         super({
@@ -17,7 +18,7 @@ class RedTourismWave extends Card_1.Card {
             tags: [Tag_1.Tag.EARTH],
             name: CardName_1.CardName.RED_TOURISM_WAVE,
             type: CardType_1.CardType.EVENT,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.REDS)),
+            requirements: { party: PartyName_1.PartyName.REDS },
             metadata: {
                 cardNumber: 'T12',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -29,12 +30,25 @@ class RedTourismWave extends Card_1.Card {
     }
     bespokePlay(player) {
         const amount = RedTourismWave.getAdjacentEmptySpacesCount(player);
-        player.addResource(Resource_1.Resource.MEGACREDITS, amount);
+        player.stock.add(Resource_1.Resource.MEGACREDITS, amount, { log: true });
         return undefined;
+    }
+    static hasRealTile(space) {
+        return space.tile !== undefined && !(0, AresTileType_1.isHazardTileType)(space.tile.tileType);
     }
     static getAdjacentEmptySpacesCount(player) {
         const board = player.game.board;
-        return board.getEmptySpaces().filter((space) => board.getAdjacentSpaces(space).some((adj) => adj.tile !== undefined && adj.player === player)).length;
+        return board.spaces.filter((space) => {
+            if (space.spaceType === SpaceType_1.SpaceType.COLONY) {
+                return false;
+            }
+            if (this.hasRealTile(space)) {
+                return false;
+            }
+            return board.getAdjacentSpaces(space).some((adj) => {
+                return this.hasRealTile(adj) && adj.player === player;
+            });
+        }).length;
     }
 }
 exports.RedTourismWave = RedTourismWave;

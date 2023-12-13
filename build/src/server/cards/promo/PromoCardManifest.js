@@ -4,18 +4,24 @@ exports.PROMO_CARD_MANIFEST = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const ModuleManifest_1 = require("../ModuleManifest");
 const Advertising_1 = require("./Advertising");
+const AntidesertificationTechniques_1 = require("./AntidesertificationTechniques");
+const AqueductSystems_1 = require("./AqueductSystems");
 const ArcadianCommunities_1 = require("./ArcadianCommunities");
 const AsteroidDeflectionSystem_1 = require("./AsteroidDeflectionSystem");
 const AsteroidHollowing_1 = require("./AsteroidHollowing");
 const AsteroidRights_1 = require("./AsteroidRights");
+const AstraMechanica_1 = require("./AstraMechanica");
 const Astrodrill_1 = require("./Astrodrill");
 const BactoviralResearch_1 = require("./BactoviralResearch");
 const BioPrintingFacility_1 = require("./BioPrintingFacility");
+const CarbonNanosystems_1 = require("./CarbonNanosystems");
 const CometAiming_1 = require("./CometAiming");
 const CorporateArchives_1 = require("./CorporateArchives");
 const CrashSiteCleanup_1 = require("./CrashSiteCleanup");
 const CuttingEdgeTechnology_1 = require("./CuttingEdgeTechnology");
+const CyberiaSystems_1 = require("./CyberiaSystems");
 const DeimosDownPromo_1 = require("./DeimosDownPromo");
+const DirectedHeatUsage_1 = require("./DirectedHeatUsage");
 const DirectedImpactors_1 = require("./DirectedImpactors");
 const DiversitySupport_1 = require("./DiversitySupport");
 const DoubleDown_1 = require("./DoubleDown");
@@ -23,21 +29,30 @@ const DuskLaserMining_1 = require("./DuskLaserMining");
 const EnergyMarket_1 = require("./EnergyMarket");
 const Factorum_1 = require("./Factorum");
 const FieldCappedCity_1 = require("./FieldCappedCity");
+const FloydContinuum_1 = require("./FloydContinuum");
+const GiantSolarCollector_1 = require("./GiantSolarCollector");
 const GreatDamPromo_1 = require("./GreatDamPromo");
 const Harvest_1 = require("./Harvest");
-const HeadStart_1 = require("./HeadStart");
+const HermeticOrderofMars_1 = require("./HermeticOrderofMars");
 const HiTechLab_1 = require("./HiTechLab");
+const HomeostasisBureau_1 = require("./HomeostasisBureau");
+const IcyImpactors_1 = require("./IcyImpactors");
 const ImportedNutrients_1 = require("./ImportedNutrients");
 const InterplanetaryTrade_1 = require("./InterplanetaryTrade");
 const JovianEmbassy_1 = require("./JovianEmbassy");
+const KaguyaTech_1 = require("./KaguyaTech");
+const KuiperCooperative_1 = require("./KuiperCooperative");
 const LawSuit_1 = require("./LawSuit");
 const MagneticFieldGeneratorsPromo_1 = require("./MagneticFieldGeneratorsPromo");
 const MagneticShield_1 = require("./MagneticShield");
+const MarsNomads_1 = require("./MarsNomads");
+const MartianLumberCorp_1 = require("./MartianLumberCorp");
 const MeatIndustry_1 = require("./MeatIndustry");
 const Meltworks_1 = require("./Meltworks");
 const MercurianAlloys_1 = require("./MercurianAlloys");
 const MoholeLake_1 = require("./MoholeLake");
 const MonsInsurance_1 = require("./MonsInsurance");
+const NeptunianPowerConsultants_1 = require("./NeptunianPowerConsultants");
 const NewPartner_1 = require("./NewPartner");
 const OrbitalCleanup_1 = require("./OrbitalCleanup");
 const OutdoorSports_1 = require("./OutdoorSports");
@@ -48,17 +63,22 @@ const Potatoes_1 = require("./Potatoes");
 const ProjectInspection_1 = require("./ProjectInspection");
 const _16Psyche_1 = require("./16Psyche");
 const Recyclon_1 = require("./Recyclon");
+const RedShips_1 = require("./RedShips");
 const RegoPlastics_1 = require("./RegoPlastics");
 const RobotPollinators_1 = require("./RobotPollinators");
 const SaturnSurfing_1 = require("./SaturnSurfing");
 const SelfReplicatingRobots_1 = require("./SelfReplicatingRobots");
 const SmallAsteroid_1 = require("./SmallAsteroid");
 const SnowAlgae_1 = require("./SnowAlgae");
+const SolarLogistics_1 = require("./SolarLogistics");
 const Splice_1 = require("./Splice");
 const StanfordTorus_1 = require("./StanfordTorus");
+const StJosephOfCupertinoMission_1 = require("./StJosephOfCupertinoMission");
 const SubCrustMeasurements_1 = require("./SubCrustMeasurements");
 const Supercapacitors_1 = require("./Supercapacitors");
+const Teslaract_1 = require("./Teslaract");
 const TopsoilContract_1 = require("./TopsoilContract");
+const TychoMagnetics_1 = require("./TychoMagnetics");
 exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     module: 'promo',
     projectCards: {
@@ -106,12 +126,30 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.PSYCHE]: { Factory: _16Psyche_1.Psyche },
         [CardName_1.CardName.ROBOT_POLLINATORS]: { Factory: RobotPollinators_1.RobotPollinators },
         [CardName_1.CardName.SUPERCAPACITORS]: { Factory: Supercapacitors_1.Supercapacitors },
+        [CardName_1.CardName.FLOYD_CONTINUUM]: { Factory: FloydContinuum_1.FloydContinuum },
+        [CardName_1.CardName.AQUEDUCT_SYSTEMS]: { Factory: AqueductSystems_1.AqueductSystems },
+        [CardName_1.CardName.ASTRA_MECHANICA]: { Factory: AstraMechanica_1.AstraMechanica },
+        [CardName_1.CardName.ST_JOSEPH_OF_CUPERTINO_MISSION]: { Factory: StJosephOfCupertinoMission_1.StJosephOfCupertinoMission },
+        [CardName_1.CardName.CARBON_NANOSYSTEMS]: { Factory: CarbonNanosystems_1.CarbonNanosystems },
+        [CardName_1.CardName.CYBERIA_SYSTEMS]: { Factory: CyberiaSystems_1.CyberiaSystems },
+        [CardName_1.CardName.HERMETIC_ORDER_OF_MARS]: { Factory: HermeticOrderofMars_1.HermeticOrderofMars },
+        [CardName_1.CardName.HOMEOSTASIS_BUREAU]: { Factory: HomeostasisBureau_1.HomeostasisBureau },
+        [CardName_1.CardName.KAGUYA_TECH]: { Factory: KaguyaTech_1.KaguyaTech },
+        [CardName_1.CardName.MARS_NOMADS]: { Factory: MarsNomads_1.MarsNomads },
+        [CardName_1.CardName.NEPTUNIAN_POWER_CONSULTANTS]: { Factory: NeptunianPowerConsultants_1.NeptunianPowerConsultants },
+        [CardName_1.CardName.MARTIAN_LUMBER_CORP]: { Factory: MartianLumberCorp_1.MartianLumberCorp },
+        [CardName_1.CardName.RED_SHIPS]: { Factory: RedShips_1.RedShips },
+        [CardName_1.CardName.SOLAR_LOGISTICS]: { Factory: SolarLogistics_1.SolarLogistics },
+        [CardName_1.CardName.TESLARACT]: { Factory: Teslaract_1.Teslaract },
+        [CardName_1.CardName.DIRECTED_HEAT_USAGE]: { Factory: DirectedHeatUsage_1.DirectedHeatUsage },
+        [CardName_1.CardName.ICY_IMPACTORS]: { Factory: IcyImpactors_1.IcyImpactors },
     },
     preludeCards: {
         [CardName_1.CardName.NEW_PARTNER]: { Factory: NewPartner_1.NewPartner },
         [CardName_1.CardName.CORPORATE_ARCHIVES]: { Factory: CorporateArchives_1.CorporateArchives },
         [CardName_1.CardName.DOUBLE_DOWN]: { Factory: DoubleDown_1.DoubleDown, compatibility: 'prelude' },
-        [CardName_1.CardName.HEAD_START]: { Factory: HeadStart_1.HeadStart },
+        [CardName_1.CardName.ANTI_DESERTIFICATION_TECHNIQUES]: { Factory: AntidesertificationTechniques_1.AntidesertificationTechniques },
+        [CardName_1.CardName.GIANT_SOLAR_COLLECTOR]: { Factory: GiantSolarCollector_1.GiantSolarCollector, compatibility: 'venus' },
     },
     cardsToRemove: [
         CardName_1.CardName.DEIMOS_DOWN,
@@ -127,6 +165,8 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.MONS_INSURANCE]: { Factory: MonsInsurance_1.MonsInsurance },
         [CardName_1.CardName.RECYCLON]: { Factory: Recyclon_1.Recyclon },
         [CardName_1.CardName.SPLICE]: { Factory: Splice_1.Splice },
+        [CardName_1.CardName.TYCHO_MAGNETICS]: { Factory: TychoMagnetics_1.TychoMagnetics },
+        [CardName_1.CardName.KUIPER_COOPERATIVE]: { Factory: KuiperCooperative_1.KuiperCooperative },
     },
 });
 //# sourceMappingURL=PromoCardManifest.js.map

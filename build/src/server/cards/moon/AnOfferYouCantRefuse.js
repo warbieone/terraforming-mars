@@ -26,17 +26,17 @@ class AnOfferYouCantRefuse extends Card_1.Card {
         });
     }
     isReplaceableDelegate(delegate, player, party) {
-        if (delegate === player.id || delegate === 'NEUTRAL') {
+        if (delegate === player || delegate === 'NEUTRAL') {
             return false;
         }
         if (party.partyLeader === undefined) {
             return false;
         }
-        if (party.partyLeader === player.id) {
+        if (party.partyLeader === player) {
             return true;
         }
         const partyLeaderDelegateCount = party.delegates.get(party.partyLeader);
-        const yourDelegateCount = party.delegates.get(player.id);
+        const yourDelegateCount = party.delegates.get(player);
         if (delegate !== party.partyLeader) {
             return yourDelegateCount < partyLeaderDelegateCount;
         }
@@ -45,7 +45,7 @@ class AnOfferYouCantRefuse extends Card_1.Card {
                 return false;
             }
             for (const m of party.delegates.multiplicities()) {
-                if (m[0] === party.partyLeader || m[0] === player.id) {
+                if (m[0] === party.partyLeader || m[0] === player) {
                     continue;
                 }
                 if (m[1] === partyLeaderDelegateCount) {
@@ -57,7 +57,7 @@ class AnOfferYouCantRefuse extends Card_1.Card {
     }
     bespokeCanPlay(player) {
         const turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);
-        if (!turmoil.hasDelegatesInReserve(player.id)) {
+        if (!turmoil.hasDelegatesInReserve(player)) {
             return false;
         }
         for (const party of turmoil.parties) {
@@ -74,12 +74,10 @@ class AnOfferYouCantRefuse extends Card_1.Card {
         const turmoil = Turmoil_1.Turmoil.getTurmoil(game);
         turmoil.parties.forEach((party) => {
             if (party.name === from) {
-                orOptions.options.push(new SelectOption_1.SelectOption('Do not move', '', () => {
-                    return undefined;
-                }));
+                orOptions.options.push(new SelectOption_1.SelectOption('Do not move'));
             }
             else {
-                orOptions.options.push(new SelectOption_1.SelectOption(party.name, 'Select', () => {
+                orOptions.options.push(new SelectOption_1.SelectOption(party.name).andThen(() => {
                     turmoil.removeDelegateFromParty(delegate, from, game);
                     turmoil.sendDelegateToParty(delegate, party.name, game);
                     return undefined;
@@ -97,11 +95,11 @@ class AnOfferYouCantRefuse extends Card_1.Card {
                 if (!this.isReplaceableDelegate(delegate, player, party)) {
                     continue;
                 }
-                const color = game.getPlayerById(delegate).color;
-                const option = new SelectOption_1.SelectOption((0, MessageBuilder_1.newMessage)('${0} / ${1}', (b) => b.party(party).playerColor(color)), 'Select', () => {
-                    turmoil.replaceDelegateFromParty(delegate, player.id, party.name, game);
+                const color = delegate.color;
+                const option = new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('${0} / ${1}', (b) => b.party(party).playerColor(color))).andThen(() => {
+                    turmoil.replaceDelegateFromParty(delegate, player, party.name, game);
                     turmoil.checkDominantParty();
-                    return this.moveToAnotherParty(game, party.name, player.id);
+                    return this.moveToAnotherParty(game, party.name, player);
                 });
                 orOptions.options.push(option);
             }

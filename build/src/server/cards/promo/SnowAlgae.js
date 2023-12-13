@@ -4,7 +4,6 @@ exports.SnowAlgae = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 class SnowAlgae extends Card_1.Card {
@@ -17,7 +16,7 @@ class SnowAlgae extends Card_1.Card {
             behavior: {
                 production: { plants: 1, heat: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(2)),
+            requirements: { oceans: 2 },
             metadata: {
                 cardNumber: '211',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

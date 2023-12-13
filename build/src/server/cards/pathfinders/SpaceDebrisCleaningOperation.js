@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
 const CardResource_1 = require("../../../common/CardResource");
 class SpaceDebrisCleaningOperation extends Card_1.Card {
@@ -16,7 +15,7 @@ class SpaceDebrisCleaningOperation extends Card_1.Card {
             name: CardName_1.CardName.SPACE_DEBRIS_CLEANING_OPERATION,
             cost: 7,
             tags: [Tag_1.Tag.MARS, Tag_1.Tag.SPACE],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SPACE, 4)),
+            requirements: { tag: Tag_1.Tag.SPACE, count: 4 },
             behavior: {
                 stock: { titanium: 3 },
                 addResourcesToAnyCard: { count: 1, type: CardResource_1.CardResource.DATA },

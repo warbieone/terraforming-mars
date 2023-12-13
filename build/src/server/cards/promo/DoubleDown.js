@@ -30,6 +30,10 @@ class DoubleDown extends PreludeCard_1.PreludeCard {
     }
     bespokePlay(player) {
         const preludes = this.cloneablePreludes(player);
+        if (preludes.length === 0) {
+            PreludesExpansion_1.PreludesExpansion.fizzle(player, this);
+            return undefined;
+        }
         return PreludesExpansion_1.PreludesExpansion.playPrelude(player, preludes, 'action-only');
     }
 }

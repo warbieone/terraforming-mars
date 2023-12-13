@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Playwrights = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const SelectCard_1 = require("../../inputs/SelectCard");
@@ -13,13 +13,12 @@ const Size_1 = require("../../../common/cards/render/Size");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const Options_1 = require("../Options");
 const SpecialDesignProxy_1 = require("./SpecialDesignProxy");
-class Playwrights extends Card_1.Card {
+class Playwrights extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.PLAYWRIGHTS,
             tags: [Tag_1.Tag.POWER],
             startingMegaCredits: 38,
-            type: CardType_1.CardType.CORPORATION,
             behavior: {
                 production: { energy: 1 },
             },
@@ -48,7 +47,8 @@ class Playwrights extends Card_1.Card {
     action(player) {
         const players = player.game.getPlayers();
         const replayableEvents = this.getReplayableEvents(player);
-        return new SelectCard_1.SelectCard('Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents, ([card]) => {
+        return new SelectCard_1.SelectCard('Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents)
+            .andThen(([card]) => {
             const selectedCard = card;
             players.forEach((p) => {
                 const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
@@ -57,29 +57,27 @@ class Playwrights extends Card_1.Card {
                 }
             });
             const cost = player.getCardCost(selectedCard);
-            player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, cost, {
-                title: 'Select how to pay to replay the event',
-                afterPay: () => {
-                    player.playCard(selectedCard, undefined, 'nothing');
-                    player.removedFromPlayCards.push(selectedCard);
-                    if (selectedCard.name === CardName_1.CardName.SPECIAL_DESIGN) {
-                        player.playedCards.push(new SpecialDesignProxy_1.SpecialDesignProxy());
-                    }
-                    else if (selectedCard.name === CardName_1.CardName.LAW_SUIT) {
-                        player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
-                            player.game.getPlayers().some((p) => {
-                                const card = p.playedCards[p.playedCards.length - 1];
-                                if ((card === null || card === void 0 ? void 0 : card.name) === selectedCard.name) {
-                                    p.playedCards.pop();
-                                    return true;
-                                }
-                                return false;
-                            });
-                            return undefined;
-                        }));
-                    }
-                },
-            }));
+            player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, cost, { title: 'Select how to pay to replay the event' }))
+                .andThen(() => {
+                player.playCard(selectedCard, undefined, 'nothing');
+                player.removedFromPlayCards.push(selectedCard);
+                if (selectedCard.name === CardName_1.CardName.SPECIAL_DESIGN) {
+                    player.playedCards.push(new SpecialDesignProxy_1.SpecialDesignProxy());
+                }
+                else if (selectedCard.name === CardName_1.CardName.LAW_SUIT) {
+                    player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+                        player.game.getPlayers().some((p) => {
+                            const card = p.playedCards[p.playedCards.length - 1];
+                            if ((card === null || card === void 0 ? void 0 : card.name) === selectedCard.name) {
+                                p.playedCards.pop();
+                                return true;
+                            }
+                            return false;
+                        });
+                        return undefined;
+                    }));
+                }
+            });
             return undefined;
         });
     }
@@ -92,10 +90,12 @@ class Playwrights extends Card_1.Card {
         try {
             player.game.getPlayers().forEach((p) => {
                 playedEvents.push(...p.playedCards.filter((card) => {
+                    const canAffordOptions = {
+                        cost: player.getCardCost(card),
+                        reserveUnits: MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, card),
+                    };
                     return card.type === CardType_1.CardType.EVENT &&
-                        player.canAfford(player.getCardCost(card), {
-                            reserveUnits: MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, card),
-                        }) && player.simpleCanPlay(card);
+                        player.canAfford(canAffordOptions) && player.simpleCanPlay(card, canAffordOptions);
                 }));
             });
         }

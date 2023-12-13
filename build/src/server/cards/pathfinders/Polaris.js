@@ -1,21 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Polaris = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const GainResources_1 = require("../../deferredActions/GainResources");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const Size_1 = require("../../../common/cards/render/Size");
 const Board_1 = require("../../boards/Board");
-class Polaris extends Card_1.Card {
+const Phase_1 = require("../../../common/Phase");
+class Polaris extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.POLARIS,
             tags: [Tag_1.Tag.SPACE],
             startingMegaCredits: 32,
@@ -44,7 +43,7 @@ class Polaris extends Card_1.Card {
         if (Board_1.Board.isUncoveredOceanSpace(space)) {
             cardOwner.production.add(Resource_1.Resource.MEGACREDITS, 1);
             activePlayer.game.log('${0} gained 1 ${1} production from ${2}', (b) => b.player(cardOwner).string(Resource_1.Resource.MEGACREDITS).cardName(this.name));
-            if (activePlayer.id === cardOwner.id) {
+            if (activePlayer.id === cardOwner.id && cardOwner.game.phase !== Phase_1.Phase.SOLAR) {
                 cardOwner.game.defer(new GainResources_1.GainResources(cardOwner, Resource_1.Resource.MEGACREDITS, {
                     count: 4,
                     cb: () => activePlayer.game.log('${0} gained ${1} from ${2}', (b) => b.player(cardOwner).string(Resource_1.Resource.MEGACREDITS).cardName(this.name)),

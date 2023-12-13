@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardResource_1 = require("../../../common/CardResource");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
 const Options_1 = require("../Options");
@@ -16,8 +15,8 @@ class NobelLabs extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.NOBEL_LABS,
             cost: 8,
-            tags: [Tag_1.Tag.PLANT, Tag_1.Tag.ANIMAL, Tag_1.Tag.MARS],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 4)),
+            tags: [Tag_1.Tag.SCIENCE],
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 4 },
             metadata: {
                 cardNumber: 'Pf55',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -38,6 +37,6 @@ class NobelLabs extends Card_1.Card {
     }
 }
 exports.NobelLabs = NobelLabs;
-NobelLabs.RESOURCE_TYPES = [CardResource_1.CardResource.MICROBE, CardResource_1.CardResource.DATA, CardResource_1.CardResource.FLOATER];
+NobelLabs.RESOURCE_TYPES = [CardResource_1.CardResource.MICROBE, CardResource_1.CardResource.DATA, CardResource_1.CardResource.FLOATER, CardResource_1.CardResource.WARE];
 NobelLabs.PREDICATE = (card) => card.resourceType !== undefined && NobelLabs.RESOURCE_TYPES.includes(card.resourceType);
 //# sourceMappingURL=NobelLabs.js.map

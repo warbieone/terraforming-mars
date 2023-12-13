@@ -4,7 +4,6 @@ import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import { CardRequirements } from '../../requirements/CardRequirements';
 import {max} from '../../Options';
 import {Resource} from '../../../../common/Resource';
 import {IPlayer} from '../../../../server/IPlayer';
@@ -18,7 +17,7 @@ export class FireSale extends Card implements IProjectCard {
       tags: [Tag.EARTH],
       cost: 3,
 
-      requirements: CardRequirements.builder((b) => b.temperature(6,{max})),
+      requirements: {temperature: 6, max},
       
       metadata: {
         cardNumber: 'L301',

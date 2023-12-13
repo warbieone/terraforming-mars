@@ -9,6 +9,7 @@ import {SelectOption} from '../../../inputs/SelectOption';
 import {OrOptions} from '../../../inputs/OrOptions';
 import {Player} from '../../../Player';
 import { SelectAmount } from '../../../../server/inputs/SelectAmount';
+import {IPlayer} from '../../../IPlayer';
 
 
 export class MarsHeavyIndustry extends Card implements IProjectCard {
@@ -46,46 +47,37 @@ export class MarsHeavyIndustry extends Card implements IProjectCard {
     const availableSteel = Math.min(5, player.steel);
     if (availableSteel >= 1) {
       return new OrOptions(
-        new SelectOption('Spend X (up to 5) steel to gain X energy', 'Get energy', () => {
-          return this.getEnergyOption(player, availableSteel);
+        new SelectOption('Spend X (up to 5) steel to gain X energy', 'Get energy')
+        .andThen(() => {
+          return this.getEnergyOption(player);
         }),
-        new SelectOption('Spend X (up to 5) steel to gain 2X heat', 'Get heat', () => {
-          return this.getHeatOption(player, availableSteel);
+        new SelectOption('Spend X (up to 5) steel to gain 2X heat', 'Get heat')
+        .andThen(() => {
+          return this.getHeatOption(player);
         }),
       );
     }
     return undefined;
   }
 
-  private getEnergyOption(player: Player, availableSteel: number): SelectAmount {
-    return new SelectAmount(
-      'Select amount of steel to spend',
-      'Gain energy',
-      (amount: number) => {
+
+  private getEnergyOption(player: IPlayer) {
+    return new SelectAmount('Select amount of steel to spend','OK', 1, player.steel)
+      .andThen((amount) => {
+        player.stock.deduct(Resource.STEEL, amount);
         player.stock.add(Resource.ENERGY, amount);
-        player.stock.deduct(Resource.STEEL, (amount));
-
-        player.game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));
+        player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
         return undefined;
-      },
-      1,
-      availableSteel,
-    );
+      });
   }
-
-  private getHeatOption(player: Player, availableSteel: number): SelectAmount {
-    return new SelectAmount(
-      'Select amount of steel to spend',
-      'Gain heat',
-      (amount: number) => {
+  
+  private getHeatOption(player: IPlayer) {
+    return new SelectAmount('Select amount of steel to spend','OK', 1, player.steel)
+      .andThen((amount) => {
         player.stock.add(Resource.HEAT, (amount * 2));
         player.stock.deduct(Resource.STEEL, (amount));
-
-        player.game.log('${0} gained ${1} heat', (b) => b.player(player).number(2 * amount));
+        player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
         return undefined;
-      },
-      1,
-      availableSteel,
-    );
+      });
   }
 }

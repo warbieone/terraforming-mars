@@ -7,6 +7,7 @@ const CardType_1 = require("../../../common/cards/CardType");
 const SelectSpace_1 = require("../../inputs/SelectSpace");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class NoctisCity extends Card_1.Card {
     constructor() {
         super({
@@ -30,7 +31,7 @@ class NoctisCity extends Card_1.Card {
         });
     }
     bespokeCanPlay(player) {
-        if (player.game.board.getNoctisCitySpaceId !== undefined) {
+        if (player.game.board.getNoctisCitySpaceId() !== undefined) {
             return true;
         }
         else {
@@ -44,7 +45,8 @@ class NoctisCity extends Card_1.Card {
             player.game.addCity(player, space);
             return undefined;
         }
-        return new SelectSpace_1.SelectSpace('Select space for Noctis city', player.game.board.getAvailableSpacesForCity(player), (space) => {
+        return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)), player.game.board.getAvailableSpacesForCity(player))
+            .andThen((space) => {
             player.game.addCity(player, space);
             return undefined;
         });

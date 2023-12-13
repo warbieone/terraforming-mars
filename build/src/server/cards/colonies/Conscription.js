@@ -4,7 +4,6 @@ exports.Conscription = void 0;
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
@@ -16,7 +15,7 @@ class Conscription extends Card_1.Card {
             tags: [Tag_1.Tag.EARTH],
             name: CardName_1.CardName.CONSCRIPTION,
             victoryPoints: -1,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.EARTH, 2)),
+            requirements: { tag: Tag_1.Tag.EARTH, count: 2 },
             metadata: {
                 cardNumber: 'C05',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

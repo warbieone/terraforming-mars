@@ -4,7 +4,6 @@ exports.Zeppelins = void 0;
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
@@ -18,7 +17,7 @@ class Zeppelins extends Card_1.Card {
             behavior: {
                 production: { megacredits: { cities: { where: 'onmars' } } },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(5)),
+            requirements: { oxygen: 5 },
             metadata: {
                 cardNumber: '129',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

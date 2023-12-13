@@ -38,11 +38,12 @@ class CoLeadership extends PreludeCard_1.PreludeCard {
             game.log('${0} drew no playable CEO cards', (b) => b.player(player));
             return undefined;
         }
-        return new SelectCard_1.SelectCard('Choose CEO card', 'Take', ceosDrawn, (([chosenCeo]) => {
+        return new SelectCard_1.SelectCard('Choose CEO card', 'Take', ceosDrawn)
+            .andThen(([chosenCeo]) => {
             ceosDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
             player.ceoCardsInHand.push(chosenCeo);
             return undefined;
-        }));
+        });
     }
 }
 exports.CoLeadership = CoLeadership;

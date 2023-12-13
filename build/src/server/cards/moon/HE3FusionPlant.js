@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const Options_1 = require("../Options");
 class HE3FusionPlant extends Card_1.Card {
@@ -18,7 +17,7 @@ class HE3FusionPlant extends Card_1.Card {
             behavior: {
                 production: { energy: { moon: { mine: {} } } },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.miningRate(2)),
+            requirements: { miningRate: 2 },
             metadata: {
                 description: 'Requires the mining rate of 2 or higher. ' +
                     'Increase your energy production 1 step for each mining tile on The Moon.',

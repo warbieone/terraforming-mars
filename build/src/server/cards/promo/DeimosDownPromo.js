@@ -23,6 +23,7 @@ class DeimosDownPromo extends Card_1.Card {
             name,
             tags: [Tag_1.Tag.SPACE],
             cost: 35,
+            tilesBuilt: [TileType_1.TileType.DEIMOS_DOWN],
             metadata,
             behavior: {
                 stock: { steel: 4 },

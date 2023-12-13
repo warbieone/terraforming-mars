@@ -1,24 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AresHandler = exports.HazardSeverity = void 0;
+exports.AresHandler = void 0;
 const CardName_1 = require("../../common/cards/CardName");
 const SelectCard_1 = require("../inputs/SelectCard");
 const CardResource_1 = require("../../common/CardResource");
 const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
+const AresTileType_1 = require("../../common/AresTileType");
 const TileType_1 = require("../../common/TileType");
 const mnemonist_1 = require("mnemonist");
 const Phase_1 = require("../../common/Phase");
-const DeferredAction_1 = require("../deferredActions/DeferredAction");
 const SelectPaymentDeferred_1 = require("../deferredActions/SelectPaymentDeferred");
 const SelectProductionToLoseDeferred_1 = require("../deferredActions/SelectProductionToLoseDeferred");
 const AresHazards_1 = require("./AresHazards");
 const CrashlandingBonus_1 = require("../pathfinders/CrashlandingBonus");
-var HazardSeverity;
-(function (HazardSeverity) {
-    HazardSeverity[HazardSeverity["NONE"] = 0] = "NONE";
-    HazardSeverity[HazardSeverity["MILD"] = 1] = "MILD";
-    HazardSeverity[HazardSeverity["SEVERE"] = 2] = "SEVERE";
-})(HazardSeverity = exports.HazardSeverity || (exports.HazardSeverity = {}));
 class AresHandler {
     constructor() { }
     static ifAres(game, cb) {
@@ -60,10 +54,11 @@ class AresHandler {
                 player.addResourceTo(availableCards[0], { log: true });
             }
             else if (availableCards.length > 1) {
-                player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => new SelectCard_1.SelectCard('Select a card to add an ' + resourceAsText, 'Add ' + resourceAsText + 's', availableCards, (selected) => {
+                player.defer(new SelectCard_1.SelectCard('Select a card to add an ' + resourceAsText, 'Add ' + resourceAsText + 's', availableCards)
+                    .andThen((selected) => {
                     player.addResourceTo(selected[0], { log: true });
                     return undefined;
-                })));
+                }));
             }
         };
         const bonuses = new mnemonist_1.MultiSet();
@@ -103,7 +98,7 @@ class AresHandler {
         const bonusText = Array.from(bonuses.multiplicities())
             .map(([bonus, count]) => `${count} ${SpaceBonus_1.SpaceBonus.toString(bonus)}`)
             .join(', ');
-        const tileText = adjacentSpace.tile !== undefined ? TileType_1.TileType.toString(adjacentSpace.tile.tileType) : 'no tile';
+        const tileText = adjacentSpace.tile !== undefined ? TileType_1.tileTypeToString[adjacentSpace.tile.tileType] : 'no tile';
         player.game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
         if (adjacentTileOwnerGainsBonus) {
             let ownerBonus = 1;
@@ -116,21 +111,8 @@ class AresHandler {
         return true;
     }
     static hasHazardTile(space) {
-        return AresHandler.hazardSeverity(space) !== HazardSeverity.NONE;
-    }
-    static hazardSeverity(space) {
         var _a;
-        const type = (_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType;
-        switch (type) {
-            case TileType_1.TileType.DUST_STORM_MILD:
-            case TileType_1.TileType.EROSION_MILD:
-                return HazardSeverity.MILD;
-            case TileType_1.TileType.DUST_STORM_SEVERE:
-            case TileType_1.TileType.EROSION_SEVERE:
-                return HazardSeverity.SEVERE;
-            default:
-                return HazardSeverity.NONE;
-        }
+        return (0, AresTileType_1.hazardSeverity)((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType) !== AresTileType_1.HazardSeverity.NONE;
     }
     static earnAdjacencyBonusesForGaia(player, space) {
         for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
@@ -138,29 +120,30 @@ class AresHandler {
         }
     }
     static computeAdjacencyCosts(game, space, subjectToHazardAdjacency) {
+        var _a;
         let megaCreditCost = 0;
         let productionCost = 0;
         game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-            var _a;
+            var _a, _b;
             megaCreditCost += ((_a = adjacentSpace.adjacency) === null || _a === void 0 ? void 0 : _a.cost) || 0;
             if (subjectToHazardAdjacency === true) {
-                const severity = this.hazardSeverity(adjacentSpace);
+                const severity = (0, AresTileType_1.hazardSeverity)((_b = adjacentSpace.tile) === null || _b === void 0 ? void 0 : _b.tileType);
                 switch (severity) {
-                    case HazardSeverity.MILD:
+                    case AresTileType_1.HazardSeverity.MILD:
                         productionCost += 1;
                         break;
-                    case HazardSeverity.SEVERE:
+                    case AresTileType_1.HazardSeverity.SEVERE:
                         productionCost += 2;
                         break;
                 }
             }
         });
-        const severity = this.hazardSeverity(space);
+        const severity = (0, AresTileType_1.hazardSeverity)((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType);
         switch (severity) {
-            case HazardSeverity.MILD:
+            case AresTileType_1.HazardSeverity.MILD:
                 megaCreditCost += 8;
                 break;
-            case HazardSeverity.SEVERE:
+            case AresTileType_1.HazardSeverity.SEVERE:
                 megaCreditCost += 16;
                 break;
         }
@@ -183,9 +166,10 @@ class AresHandler {
         if (cost.production > 0) {
             throw new Error(`Placing here costs ${cost.production} units of production and ${cost.megacredits} M€`);
         }
-        else {
+        if (cost.megacredits > 0) {
             throw new Error(`Placing here costs ${cost.megacredits} M€`);
         }
+        return cost;
     }
     static payAdjacencyAndHazardCosts(player, space, subjectToHazardAdjacency) {
         const cost = this.assertCanPay(player, space, subjectToHazardAdjacency);
@@ -236,7 +220,7 @@ class AresHandler {
                 return;
         }
         player.increaseTerraformRating(steps);
-        player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(TileType_1.TileType.toString(initialTileType)));
+        player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).tileType(initialTileType));
     }
 }
 exports.AresHandler = AresHandler;

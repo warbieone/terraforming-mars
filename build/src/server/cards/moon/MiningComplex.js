@@ -32,7 +32,7 @@ class MiningComplex extends PreludeCard_1.PreludeCard {
         return player.canAfford(7);
     }
     bespokePlay(player) {
-        player.game.defer(new PlaceMoonMineTile_1.PlaceMoonMineTile(player)
+        player.game.defer(new PlaceMoonMineTile_1.PlaceMoonMineTile(player))
             .andThen((space) => {
             const moon = MoonExpansion_1.MoonExpansion.moonData(player.game).moon;
             const spaces = moon.getAdjacentSpaces(space);
@@ -40,8 +40,8 @@ class MiningComplex extends PreludeCard_1.PreludeCard {
                 return space.player === undefined && space.spaceType === SpaceType_1.SpaceType.LAND;
             });
             player.game.defer(new PlaceMoonRoadTile_1.PlaceMoonRoadTile(player, availableRoadSpaces, 'Select a space next to the mine for a road'));
-        }));
-        player.deductResource(Resource_1.Resource.MEGACREDITS, 7);
+        });
+        player.stock.deduct(Resource_1.Resource.MEGACREDITS, 7);
         return undefined;
     }
 }

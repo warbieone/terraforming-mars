@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MindSetMars = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const CardResource_1 = require("../../../common/CardResource");
@@ -14,10 +13,9 @@ const SendDelegateToArea_1 = require("../../deferredActions/SendDelegateToArea")
 const Turmoil_1 = require("../../turmoil/Turmoil");
 const PlaceCityTile_1 = require("../../deferredActions/PlaceCityTile");
 const Size_1 = require("../../../common/cards/render/Size");
-class MindSetMars extends Card_1.Card {
+class MindSetMars extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.MIND_SET_MARS,
             startingMegaCredits: 44,
             resourceType: CardResource_1.CardResource.AGENDA,
@@ -48,7 +46,7 @@ class MindSetMars extends Card_1.Card {
     }
     canAddDelegate(player) {
         const turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);
-        return this.resourceCount >= 2 && turmoil.getAvailableDelegateCount(player.id) > 0;
+        return this.resourceCount >= 2 && turmoil.getAvailableDelegateCount(player) > 0;
     }
     canAddCity(player) {
         return this.resourceCount >= 5 && player.game.board.getAvailableSpacesForCity(player).length > 0;
@@ -59,14 +57,14 @@ class MindSetMars extends Card_1.Card {
     action(player) {
         const options = new OrOptions_1.OrOptions();
         if (this.canAddDelegate(player)) {
-            options.options.push(new SelectOption_1.SelectOption('Spend 2 agendas to add a delegate to any party', 'OK', () => {
+            options.options.push(new SelectOption_1.SelectOption('Spend 2 agendas to add a delegate to any party').andThen(() => {
                 player.removeResourceFrom(this, 2);
                 player.game.defer(new SendDelegateToArea_1.SendDelegateToArea(player));
                 return undefined;
             }));
         }
         if (this.canAddCity(player)) {
-            options.options.push(new SelectOption_1.SelectOption('Spend 5 agendas to place a city on Mars', 'OK', () => {
+            options.options.push(new SelectOption_1.SelectOption('Spend 5 agendas to place a city on Mars').andThen(() => {
                 player.removeResourceFrom(this, 5);
                 player.game.defer(new PlaceCityTile_1.PlaceCityTile(player));
                 return undefined;

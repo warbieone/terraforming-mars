@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const Options_1 = require("../Options");
 class LunaResort extends Card_1.Card {
@@ -20,7 +19,7 @@ class LunaResort extends Card_1.Card {
                 production: { energy: -1, megacredits: 3 },
                 moon: { habitatRate: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.habitatTiles(2, { all: Options_1.all })),
+            requirements: { habitatTiles: 2, all: Options_1.all },
             metadata: {
                 description: 'Requires 2 habitats on The Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the habitat rate 1 step.',
                 cardNumber: 'M21',

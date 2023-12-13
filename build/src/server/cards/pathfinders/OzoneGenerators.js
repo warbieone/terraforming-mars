@@ -5,7 +5,6 @@ const ActionCard_1 = require("../ActionCard");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Tag_1 = require("../../../common/cards/Tag");
 class OzoneGenerators extends ActionCard_1.ActionCard {
     constructor() {
@@ -14,7 +13,7 @@ class OzoneGenerators extends ActionCard_1.ActionCard {
             name: CardName_1.CardName.OZONE_GENERATORS,
             cost: 14,
             tags: [Tag_1.Tag.MARS, Tag_1.Tag.SPACE],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(6)),
+            requirements: { oxygen: 6 },
             action: {
                 spend: { energy: 3 },
                 tr: 1,

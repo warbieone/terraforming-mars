@@ -52,6 +52,7 @@ export class GameCards {
       [gameOptions.corporateEra, CORP_ERA_CARD_MANIFEST],
       [gameOptions.preludeExtension, PRELUDE_CARD_MANIFEST],
       [gameOptions.prelude2Expansion, PRELUDE2_CARD_MANIFEST],
+      [gameOptions.leagueCardsOption, LEAGUE_CARD_MANIFEST],
       [gameOptions.venusNextExtension, VENUS_CARD_MANIFEST],
       [gameOptions.coloniesExtension, COLONIES_CARD_MANIFEST],
       [!gameOptions.coloniesExtension, NON_COLONIES_CARD_MANIFEST],

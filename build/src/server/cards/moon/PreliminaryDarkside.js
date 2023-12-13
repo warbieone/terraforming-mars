@@ -31,11 +31,11 @@ class PreliminaryDarkside extends Card_1.Card {
         });
     }
     bespokePlay(player) {
-        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Gain 3 titanium', 'Gain titanium', () => {
-            player.addResource(Resource_1.Resource.TITANIUM, 3, { log: true });
+        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Gain 3 titanium', 'Gain titanium').andThen(() => {
+            player.stock.add(Resource_1.Resource.TITANIUM, 3, { log: true });
             return undefined;
-        }), new SelectOption_1.SelectOption('Gain 4 steel', 'Gain steel', () => {
-            player.addResource(Resource_1.Resource.STEEL, 4, { log: true });
+        }), new SelectOption_1.SelectOption('Gain 4 steel', 'Gain steel').andThen(() => {
+            player.stock.add(Resource_1.Resource.STEEL, 4, { log: true });
             return undefined;
         }));
     }

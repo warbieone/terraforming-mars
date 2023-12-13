@@ -5,27 +5,42 @@ const PlayerInput_1 = require("../PlayerInput");
 const Payment_1 = require("../../common/inputs/Payment");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 class SelectPayment extends PlayerInput_1.BasePlayerInput {
-    constructor(title, canUseSteel, canUseTitanium, canUseHeat, canUseSeeds, canUseData, canUseLunaTradeFederationTitanium, amount, cb) {
+    constructor(title, amount, paymentOptions) {
         super('payment', title);
-        this.canUseSteel = canUseSteel;
-        this.canUseTitanium = canUseTitanium;
-        this.canUseHeat = canUseHeat;
-        this.canUseSeeds = canUseSeeds;
-        this.canUseData = canUseData;
-        this.canUseLunaTradeFederationTitanium = canUseLunaTradeFederationTitanium;
         this.amount = amount;
-        this.cb = cb;
+        this.paymentOptions = paymentOptions;
         this.buttonLabel = 'Pay';
+    }
+    toModel(player) {
+        return {
+            title: this.title,
+            buttonLabel: this.buttonLabel,
+            type: 'payment',
+            amount: this.amount,
+            paymentOptions: Object.assign({ heat: player.canUseHeatAsMegaCredits, lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits }, this.paymentOptions),
+            seeds: player.getSpendable('seeds'),
+            auroraiData: player.getSpendable('auroraiData'),
+            kuiperAsteroids: player.getSpendable('kuiperAsteroids'),
+            spireScience: player.getSpendable('spireScience'),
+        };
     }
     process(input, player) {
         if (!(0, InputResponse_1.isSelectPaymentResponse)(input)) {
             throw new Error('Not a valid SelectPaymentResponse');
         }
-        if (!(0, Payment_1.isPayment)(input.payment)) {
+        const payment = input.payment;
+        if (!(0, Payment_1.isPayment)(payment)) {
             throw new Error('payment is not a valid type');
         }
-        if (!player.canSpend(input.payment)) {
+        if (!player.canSpend(payment)) {
             throw new Error('You do not have that many resources');
+        }
+        if (!player.canSpend(payment)) {
+            throw new Error('You do not have that many resources to spend');
+        }
+        const amountPaid = player.payingAmount(payment, this.paymentOptions);
+        if (amountPaid < this.amount) {
+            throw new Error('Did not spend enough');
         }
         return this.cb(input.payment);
     }

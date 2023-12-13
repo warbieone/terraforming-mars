@@ -40,7 +40,7 @@ class HeavyDutyRovers extends Card_1.Card {
                 return firstRoad !== undefined;
             });
             const count = minesNextToRoads.length;
-            player.addResource(Resource_1.Resource.MEGACREDITS, count * 4, { log: true });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, count * 4, { log: true });
         });
         return undefined;
     }

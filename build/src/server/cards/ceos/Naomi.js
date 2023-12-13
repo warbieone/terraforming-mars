@@ -33,10 +33,10 @@ class Naomi extends CeoCard_1.CeoCard {
         const game = player.game;
         const activeColonies = game.colonies.filter((colony) => colony.isActive);
         activeColonies.forEach((colony) => {
-            game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Move the ' + colony.name + ' tile track marker to its HIGHEST value', 'Select', () => {
+            game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Move the ' + colony.name + ' tile track marker to its HIGHEST value').andThen(() => {
                 colony.trackPosition = constants_1.MAX_COLONY_TRACK_POSITION;
                 return undefined;
-            }), new SelectOption_1.SelectOption('Move the ' + colony.name + ' tile track marker to its LOWEST value', 'Select', () => {
+            }), new SelectOption_1.SelectOption('Move the ' + colony.name + ' tile track marker to its LOWEST value').andThen(() => {
                 colony.trackPosition = colony.colonies.length;
                 return undefined;
             }))));

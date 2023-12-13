@@ -7,6 +7,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const TileType_1 = require("../../../common/TileType");
+const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
 class LunarIndustryComplex extends Card_1.Card {
     constructor() {
         super({
@@ -24,7 +25,7 @@ class LunarIndustryComplex extends Card_1.Card {
                     'Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.',
                 cardNumber: 'M74',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.minus().titanium(2).moonMine().br;
+                    b.minus().titanium(2).moonMine({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_MINING_RATE }).br;
                     b.production((pb) => pb.steel(1).titanium(1).heat(1).energy(2));
                 }),
             },

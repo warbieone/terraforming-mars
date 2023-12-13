@@ -45,11 +45,13 @@ export class EcoLine extends CorporationCard {
   private gainBonus(player: IPlayer, amount: number): void {
     for (let i = 0; i < amount; i++) {
           const options = new OrOptions(
-        new SelectOption('Gain 2 MC', 'Gain MC', () => {
+        new SelectOption('Gain 2 MC', 'Gain MC')
+        .andThen(() => {
           player.megaCredits += 2, {log:true}
           return undefined;
         }),
-        new SelectOption('Gain 1 plant', 'Gain plant', () => {
+        new SelectOption('Gain 1 plant', 'Gain plant')
+        .andThen(() => {
           player.plants += 1, {log:true}
           return undefined;
         }),

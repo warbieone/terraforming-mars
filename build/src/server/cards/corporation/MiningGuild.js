@@ -1,21 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MiningGuild = void 0;
-const Card_1 = require("../Card");
 const Tag_1 = require("../../../common/cards/Tag");
+const CorporationCard_1 = require("./CorporationCard");
 const Phase_1 = require("../../../common/Phase");
 const SpaceBonus_1 = require("../../../common/boards/SpaceBonus");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const GainProduction_1 = require("../../deferredActions/GainProduction");
 const CardRenderer_1 = require("../render/CardRenderer");
 const BoardType_1 = require("../../boards/BoardType");
 const Options_1 = require("../Options");
-class MiningGuild extends Card_1.Card {
+class MiningGuild extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.MINING_GUILD,
             tags: [Tag_1.Tag.BUILDING, Tag_1.Tag.BUILDING],
             startingMegaCredits: 36,
@@ -28,7 +26,7 @@ class MiningGuild extends Card_1.Card {
                 description: 'You start with 36 M€, 2 steel and 1 steel production.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br.br;
-                    b.megacredits(30).nbsp.steel(5, { digit: Options_1.digit }).nbsp.production((pb) => pb.steel(1));
+                    b.megacredits(36).nbsp.steel(2, { digit: Options_1.digit }).nbsp.production((pb) => pb.steel(1));
                     b.corpBox('effect', (ce) => {
                         ce.effect('Each time you get any steel as a placement bonus on the map, increase your steel production 1 step. Same for titanium.', (eb) => {
                             eb.steel(1).asterix().colon();

@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 class HypersensitiveSiliconChipFactory extends Card_1.Card {
     constructor() {
@@ -18,7 +17,7 @@ class HypersensitiveSiliconChipFactory extends Card_1.Card {
             behavior: {
                 production: { megacredits: 4 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.miningTiles(2, { all: Options_1.all })),
+            requirements: { miningTiles: 2, all: Options_1.all },
             reserveUnits: { titanium: 2 },
             metadata: {
                 description: 'Requires 2 mining tiles on The Moon. Spend 2 titanium. Increase your M€ production 4 steps.',

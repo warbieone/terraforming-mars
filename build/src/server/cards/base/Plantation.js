@@ -5,7 +5,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class Plantation extends Card_1.Card {
     constructor() {
@@ -18,7 +17,7 @@ class Plantation extends Card_1.Card {
             behavior: {
                 greenery: {},
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 2)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 2 },
             metadata: {
                 cardNumber: '193',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

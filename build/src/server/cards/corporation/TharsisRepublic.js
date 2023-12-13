@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TharsisRepublic = void 0;
-const Card_1 = require("../Card");
+const CorporationCard_1 = require("./CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
 const Resource_1 = require("../../../common/Resource");
@@ -10,14 +10,12 @@ const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const GainResources_1 = require("../../deferredActions/GainResources");
 const GainProduction_1 = require("../../deferredActions/GainProduction");
 const Board_1 = require("../../boards/Board");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
-class TharsisRepublic extends Card_1.Card {
+class TharsisRepublic extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.THARSIS_REPUBLIC,
             tags: [Tag_1.Tag.BUILDING, Tag_1.Tag.CITY],
             startingMegaCredits: 40,

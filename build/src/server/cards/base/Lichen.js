@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class Lichen extends Card_1.Card {
     constructor() {
@@ -17,7 +16,7 @@ class Lichen extends Card_1.Card {
             behavior: {
                 production: { plants: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.temperature(-24)),
+            requirements: { temperature: -24 },
             metadata: {
                 cardNumber: '159',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

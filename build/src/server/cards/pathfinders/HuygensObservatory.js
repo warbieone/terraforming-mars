@@ -33,7 +33,8 @@ class HuygensObservatory extends Card_1.Card {
         });
     }
     trade(player, colonies) {
-        return new SelectColony_1.SelectColony('Select colony tile to trade with for free', 'Select', colonies, (colony) => {
+        return new SelectColony_1.SelectColony('Select colony tile to trade with for free', 'Select', colonies)
+            .andThen((colony) => {
             colony.trade(player);
             return undefined;
         });
@@ -51,7 +52,8 @@ class HuygensObservatory extends Card_1.Card {
         const hasFreeTradeFleet = visitedColonies.length < player.colonies.getFleetSize();
         const tradeInput = this.trade(player, tradeableColonies);
         if (visitedColonies.length > 0) {
-            orOptions.options.push(new SelectColony_1.SelectColony('Select a colony tile to recall a trade fleet from', 'OK', visitedColonies, (colony) => {
+            orOptions.options.push(new SelectColony_1.SelectColony('Select a colony tile to recall a trade fleet from', 'OK', visitedColonies)
+                .andThen((colony) => {
                 game.log('${0} is reusing a trade fleet from ${1}', (b) => b.player(player).colony(colony));
                 colony.visitor = undefined;
                 player.colonies.tradesThisGeneration--;
@@ -61,7 +63,7 @@ class HuygensObservatory extends Card_1.Card {
         }
         if (hasFreeTradeFleet) {
             if (orOptions.options.length === 1) {
-                orOptions.options.push(new SelectOption_1.SelectOption('Use an available trade fleet', 'OK', () => {
+                orOptions.options.push(new SelectOption_1.SelectOption('Use an available trade fleet').andThen(() => {
                     game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => tradeInput));
                     return undefined;
                 }));
@@ -86,8 +88,7 @@ class HuygensObservatory extends Card_1.Card {
             game.defer(new BuildColony_1.BuildColony(player, {
                 allowDuplicate: true,
                 title: 'Select colony for Huygens Observatory',
-                cb: () => this.tryToTrade(player),
-            }));
+            })).andThen(() => this.tryToTrade(player));
         }
         else {
             game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {

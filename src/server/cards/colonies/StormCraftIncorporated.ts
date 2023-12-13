@@ -1,4 +1,4 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
 //import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 // import {Size} from '../../../common/cards/render/Size';
 // import {PlayerInput} from '../../PlayerInput';
 // import {Resource} from '../../../common/Resource';
-import {ActionCard} from '../ActionCard';
+// import {ActionCard} from '../ActionCard';
 
 export class StormCraftIncorporated extends ActiveCorporationCard {
   constructor() {
@@ -18,7 +18,6 @@ export class StormCraftIncorporated extends ActiveCorporationCard {
       tags: [Tag.JOVIAN],
       startingMegaCredits: 48,
       // resourceType: CardResource.FLOATER,
-      type: CardType.CORPORATION,
       victoryPoints: {tag: Tag.JOVIAN, per: 2},
 
       action: {

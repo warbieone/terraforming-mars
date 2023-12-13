@@ -2,10 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCardFromPlayerInput = exports.BasePlayerInput = void 0;
 class BasePlayerInput {
-    constructor(inputType, title = '') {
+    constructor(type, title = '') {
         this.buttonLabel = 'Save';
-        this.inputType = inputType;
+        this.cb = () => undefined;
+        this.type = type;
         this.title = title;
+    }
+    andThen(cb) {
+        this.cb = cb;
+        return this;
     }
 }
 exports.BasePlayerInput = BasePlayerInput;

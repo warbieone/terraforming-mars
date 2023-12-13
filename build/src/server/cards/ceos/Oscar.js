@@ -31,12 +31,12 @@ class Oscar extends CeoCard_1.CeoCard {
             return false;
         }
         const turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);
-        return turmoil.hasDelegatesInReserve(player.id) && turmoil.chairman !== player.id;
+        return turmoil.hasDelegatesInReserve(player) && turmoil.chairman !== player;
     }
     action(player) {
         const turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);
-        turmoil.setNewChairman(player.id, player.game, false, false);
-        turmoil.delegateReserve.remove(player.id);
+        turmoil.setNewChairman(player, player.game, false, false);
+        turmoil.delegateReserve.remove(player);
         player.totalDelegatesPlaced += 1;
         this.isDisabled = true;
         return undefined;

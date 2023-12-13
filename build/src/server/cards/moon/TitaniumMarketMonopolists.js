@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TitaniumMarketMonopolists = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Resource_1 = require("../../../common/Resource");
 const MarketCard_1 = require("./MarketCard");
@@ -14,7 +13,7 @@ class TitaniumMarketMonopolists extends MarketCard_1.MarketCard {
             name: CardName_1.CardName.TITANIUM_MARKET_MONOPOLISTS,
             type: CardType_1.CardType.ACTIVE,
             cost: 21,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.miningRate(3)),
+            requirements: { miningRate: 3 },
             metadata: {
                 description: 'Requires the mining rate to be 3 or higher.',
                 cardNumber: 'M29',

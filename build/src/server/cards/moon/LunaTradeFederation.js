@@ -2,19 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LunaTradeFederation = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardRenderer_1 = require("../render/CardRenderer");
 const TileType_1 = require("../../../common/TileType");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const Resource_1 = require("../../../common/Resource");
 const Size_1 = require("../../../common/cards/render/Size");
-const Card_1 = require("../Card");
 const Options_1 = require("../Options");
-class LunaTradeFederation extends Card_1.Card {
+class LunaTradeFederation extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.LUNA_TRADE_FEDERATION,
             tags: [Tag_1.Tag.MOON, Tag_1.Tag.SPACE],
             startingMegaCredits: 15,

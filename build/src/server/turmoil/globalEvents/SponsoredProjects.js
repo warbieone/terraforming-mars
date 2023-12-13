@@ -7,7 +7,7 @@ const PartyName_1 = require("../../../common/turmoil/PartyName");
 const CardRenderer_1 = require("../../cards/render/CardRenderer");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.br.cards(1, { secondaryTag: AltSecondaryTag_1.AltSecondaryTag.WILD_RESOURCE }).colon().wild(1).nbsp;
+    b.cards(1, { secondaryTag: AltSecondaryTag_1.AltSecondaryTag.WILD_RESOURCE }).colon().wild(1).nbsp;
     b.cards(1).slash().influence();
 });
 class SponsoredProjects extends GlobalEvent_1.GlobalEvent {

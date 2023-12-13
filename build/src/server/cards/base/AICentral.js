@@ -4,7 +4,6 @@ exports.AICentral = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
 class AICentral extends ActionCard_1.ActionCard {
@@ -21,7 +20,7 @@ class AICentral extends ActionCard_1.ActionCard {
                 drawCard: { count: 2 },
             },
             victoryPoints: 1,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 3)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 3 },
             metadata: {
                 description: {
                     text: 'Requires 3 science tags to play. Decrease your energy production 1 step.',

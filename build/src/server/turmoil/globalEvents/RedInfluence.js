@@ -8,7 +8,7 @@ const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../../cards/render/CardRenderer");
 const Options_1 = require("../../cards/Options");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.br.br.megacredits(-3).slash().tr(5, { digit: Options_1.digit, over: 10 }).nbsp.production((pb) => pb.megacredits(1)).slash().influence();
+    b.megacredits(-3).slash().tr(5, { digit: Options_1.digit, over: 10 }).nbsp.production((pb) => pb.megacredits(1)).slash().influence().br;
 });
 class RedInfluence extends GlobalEvent_1.GlobalEvent {
     constructor() {
@@ -25,7 +25,7 @@ class RedInfluence extends GlobalEvent_1.GlobalEvent {
             const sets = Math.floor((player.getTerraformRating() - 10) / 5);
             if (sets > 0) {
                 const amount = Math.min(sets, 5);
-                player.deductResource(Resource_1.Resource.MEGACREDITS, amount * 3, { log: true, from: this.name });
+                player.stock.deduct(Resource_1.Resource.MEGACREDITS, amount * 3, { log: true, from: this.name });
             }
             player.production.add(Resource_1.Resource.MEGACREDITS, turmoil.getPlayerInfluence(player), { log: true, from: this.name });
         });

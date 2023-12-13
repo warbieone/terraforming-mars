@@ -27,7 +27,7 @@ class MediaArchives extends Card_1.Card {
     }
     bespokePlay(player) {
         const allPlayedEvents = (0, utils_1.sum)(player.game.getPlayers().map((player) => player.getPlayedEventsCount()));
-        player.addResource(Resource_1.Resource.MEGACREDITS, allPlayedEvents, { log: true });
+        player.stock.add(Resource_1.Resource.MEGACREDITS, allPlayedEvents, { log: true });
         return undefined;
     }
 }

@@ -9,7 +9,6 @@ const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const TileType_1 = require("../../../common/TileType");
 const SelectSpace_1 = require("../../inputs/SelectSpace");
 const Card_1 = require("../Card");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 class LunarMineUrbanization extends Card_1.Card {
     constructor() {
         super({
@@ -20,7 +19,7 @@ class LunarMineUrbanization extends Card_1.Card {
             behavior: {
                 production: { megacredits: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.miningTiles(1)),
+            requirements: { miningTiles: 1 },
             tr: { moonHabitat: 1 },
             metadata: {
                 description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles ' +
@@ -32,6 +31,7 @@ class LunarMineUrbanization extends Card_1.Card {
                     b.tile(TileType_1.TileType.LUNAR_MINE_URBANIZATION, true).asterix();
                 }),
             },
+            tilesBuilt: [TileType_1.TileType.LUNAR_MINE_URBANIZATION],
         });
     }
     bespokeCanPlay(player) {
@@ -39,7 +39,8 @@ class LunarMineUrbanization extends Card_1.Card {
     }
     bespokePlay(player) {
         const spaces = MoonExpansion_1.MoonExpansion.spaces(player.game, TileType_1.TileType.MOON_MINE, { ownedBy: player, upgradedTiles: false });
-        return new SelectSpace_1.SelectSpace('Select one of your mines to upgrade', spaces, (space) => {
+        return new SelectSpace_1.SelectSpace('Select one of your mines to upgrade', spaces)
+            .andThen((space) => {
             if (space.tile === undefined) {
                 throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
             }

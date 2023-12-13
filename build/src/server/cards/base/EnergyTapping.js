@@ -10,7 +10,6 @@ const DecreaseAnyProduction_1 = require("../../deferredActions/DecreaseAnyProduc
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const GainProduction_1 = require("../../deferredActions/GainProduction");
-const CardRequirements_1 = require("../CardRequirements");
 class EnergyTapping extends Card_1.Card {
     constructor() {
         super({
@@ -19,7 +18,7 @@ class EnergyTapping extends Card_1.Card {
             tags: [Tag_1.Tag.POWER],
             cost: 3,
             victoryPoints: -1,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.generation(4)),
+            requirements: { generation: 4 },
             metadata: {
                 cardNumber: '201',
                 description: 'Requires that it is Generation 4. Decrease any energy production 1 step and increase your own 1 step.',
@@ -33,8 +32,14 @@ class EnergyTapping extends Card_1.Card {
         });
     }
     bespokePlay(player) {
-        player.game.defer(new DecreaseAnyProduction_1.DecreaseAnyProduction(player, Resource_1.Resource.ENERGY, { count: 1, stealing: true }));
-        player.game.defer(new GainProduction_1.GainProduction(player, Resource_1.Resource.ENERGY, { count: 1 }));
+        const gainProduction = new GainProduction_1.GainProduction(player, Resource_1.Resource.ENERGY, { count: 1, log: false });
+        const decreaseAnyProduction = new DecreaseAnyProduction_1.DecreaseAnyProduction(player, Resource_1.Resource.ENERGY, { count: 1, stealing: true });
+        if (player.game.getPlayers().filter((player) => player.production.energy > 0).length === 0) {
+            player.game.defer(gainProduction).andThen(() => player.game.defer(decreaseAnyProduction));
+        }
+        else {
+            player.game.defer(decreaseAnyProduction).andThen(() => player.game.defer(gainProduction));
+        }
         return undefined;
     }
 }

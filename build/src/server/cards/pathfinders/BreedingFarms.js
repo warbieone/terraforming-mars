@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Tag_1 = require("../../../common/cards/Tag");
 class BreedingFarms extends ActionCard_1.ActionCard {
     constructor() {
@@ -22,7 +21,7 @@ class BreedingFarms extends ActionCard_1.ActionCard {
                 spend: { plants: 1 },
                 addResourcesToAnyCard: { count: 1, type: CardResource_1.CardResource.ANIMAL, mustHaveCard: true },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE).tag(Tag_1.Tag.ANIMAL)),
+            requirements: [{ tag: Tag_1.Tag.SCIENCE }, { tag: Tag_1.Tag.ANIMAL }],
             metadata: {
                 cardNumber: 'Pf01',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

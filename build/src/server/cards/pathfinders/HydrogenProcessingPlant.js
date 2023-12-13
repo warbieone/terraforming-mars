@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 class HydrogenProcessingPlant extends Card_1.Card {
     constructor() {
         super({
@@ -14,7 +13,7 @@ class HydrogenProcessingPlant extends Card_1.Card {
             name: CardName_1.CardName.HYDROGEN_PROCESSING_PLANT,
             cost: 9,
             tags: [Tag_1.Tag.BUILDING, Tag_1.Tag.POWER],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(3)),
+            requirements: { oxygen: 3 },
             victoryPoints: -1,
             behavior: {
                 global: { oxygen: -1 },

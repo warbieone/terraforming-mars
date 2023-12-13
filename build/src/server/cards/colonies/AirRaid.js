@@ -32,7 +32,7 @@ class AirRaid extends Card_1.Card {
     }
     bespokePlay(player) {
         player.game.defer(new StealResources_1.StealResources(player, Resource_1.Resource.MEGACREDITS, 5));
-        player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.FLOATER, 1, true));
+        player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.FLOATER, 1, { ownCardsOnly: true, blockable: false }));
         return undefined;
     }
 }

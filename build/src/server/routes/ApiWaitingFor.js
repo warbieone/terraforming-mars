@@ -50,6 +50,7 @@ class ApiWaitingFor extends Handler_1.Handler {
             }
             try {
                 if ((0, Types_1.isPlayerId)(id)) {
+                    ctx.ipTracker.addParticipant(id, ctx.ip);
                     ctx.route.writeJson(res, this.getPlayerWaitingForModel(game.getPlayerById(id), game, gameAge, undoCount));
                 }
                 else if ((0, Types_1.isSpectatorId)(id)) {

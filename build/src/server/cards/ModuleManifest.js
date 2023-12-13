@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ModuleManifest = exports.CardManifest = void 0;
+exports.ModuleManifest = exports.GlobalEventManifest = exports.CardManifest = void 0;
 var CardManifest;
 (function (CardManifest) {
     function keys(manifest) {
@@ -22,6 +22,27 @@ var CardManifest;
     }
     CardManifest.entries = entries;
 })(CardManifest = exports.CardManifest || (exports.CardManifest = {}));
+var GlobalEventManifest;
+(function (GlobalEventManifest) {
+    function keys(manifest) {
+        return Object.keys(manifest);
+    }
+    GlobalEventManifest.keys = keys;
+    function values(manifest) {
+        return Object.values(manifest);
+    }
+    GlobalEventManifest.values = values;
+    function entries(manifest) {
+        return keys(manifest).map((key) => {
+            const value = manifest[key];
+            if (value === undefined) {
+                throw new Error(`Manifest has key ${key} but no entry.`);
+            }
+            return [key, value];
+        });
+    }
+    GlobalEventManifest.entries = entries;
+})(GlobalEventManifest = exports.GlobalEventManifest || (exports.GlobalEventManifest = {}));
 class ModuleManifest {
     constructor(arg) {
         this.module = arg.module;
@@ -32,6 +53,7 @@ class ModuleManifest {
         this.ceoCards = arg.ceoCards || {};
         this.standardProjects = arg.standardProjects || {};
         this.standardActions = arg.standardActions || {};
+        this.globalEvents = arg.globalEvents || {};
     }
 }
 exports.ModuleManifest = ModuleManifest;

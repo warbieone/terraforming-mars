@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class MassConverter extends Card_1.Card {
@@ -18,7 +17,7 @@ class MassConverter extends Card_1.Card {
             behavior: {
                 production: { energy: 6 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 6)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 6 },
             cardDiscount: { tag: Tag_1.Tag.SPACE, amount: 2, per: 'card' },
             metadata: {
                 cardNumber: '094',

@@ -4,7 +4,6 @@ exports.LunaMiningHub = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const TileType_1 = require("../../../common/TileType");
 const CardRenderDynamicVictoryPoints_1 = require("../render/CardRenderDynamicVictoryPoints");
@@ -17,17 +16,17 @@ class LunaMiningHub extends Card_1.Card {
             name: CardName_1.CardName.LUNA_MINING_HUB,
             type: CardType_1.CardType.AUTOMATED,
             tags: [Tag_1.Tag.BUILDING],
-            cost: 16,
+            cost: 23,
             reserveUnits: { steel: 1, titanium: 1 },
             behavior: {
                 production: { steel: 1, titanium: 1 },
                 moon: {
-                    tile: { type: TileType_1.TileType.LUNA_MINING_HUB, title: 'Select a space for Luna Mining Hub.' },
+                    tile: { type: TileType_1.TileType.LUNA_MINING_HUB },
                     miningRate: 1,
                 },
             },
             victoryPoints: 'special',
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.miningRate(5)),
+            requirements: { miningRate: 5 },
             metadata: {
                 cardNumber: 'M14',
                 description: {
@@ -43,6 +42,7 @@ class LunaMiningHub extends Card_1.Card {
                 }),
                 victoryPoints: CardRenderDynamicVictoryPoints_1.CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
             },
+            tilesBuilt: [TileType_1.TileType.LUNA_MINING_HUB],
         });
     }
     getVictoryPoints(player) {

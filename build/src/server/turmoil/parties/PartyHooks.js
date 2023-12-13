@@ -13,7 +13,7 @@ class PartyHooks {
     static applyMarsFirstRulingPolicy(player, spaceType) {
         if (this.shouldApplyPolicy(player, PartyName_1.PartyName.MARS, 'mfp01') &&
             spaceType !== SpaceType_1.SpaceType.COLONY) {
-            player.addResource(Resource_1.Resource.STEEL, 1);
+            player.stock.add(Resource_1.Resource.STEEL, 1);
         }
     }
     static applyGreensRulingPolicy(player, space) {
@@ -23,18 +23,15 @@ class PartyHooks {
         }
     }
     static shouldApplyPolicy(player, partyName, policyId) {
-        const game = player.game;
-        return Turmoil_1.Turmoil.ifTurmoilElse(game, (turmoil) => {
-            if (game.phase !== Phase_1.Phase.ACTION)
+        if (player.game.phase !== Phase_1.Phase.ACTION) {
+            return false;
+        }
+        return Turmoil_1.Turmoil.ifTurmoilElse(player.game, (turmoil) => {
+            if (partyName === PartyName_1.PartyName.REDS && player.cardIsInEffect(CardName_1.CardName.ZAN)) {
                 return false;
-            const rulingParty = turmoil.rulingParty;
-            if (policyId === undefined) {
-                policyId = rulingParty.policies[0].id;
             }
-            if (partyName === PartyName_1.PartyName.REDS && player.cardIsInEffect(CardName_1.CardName.ZAN))
-                return false;
             const currentPolicyId = PoliticalAgendas_1.PoliticalAgendas.currentAgenda(turmoil).policyId;
-            return rulingParty.name === partyName && currentPolicyId === policyId;
+            return turmoil.rulingParty.name === partyName && currentPolicyId === policyId;
         }, () => false);
     }
 }

@@ -13,7 +13,8 @@ class PlaceGreeneryTile extends DeferredAction_1.DeferredAction {
         if (availableSpaces.length === 0) {
             return undefined;
         }
-        return new SelectSpace_1.SelectSpace(this.getTitle(), availableSpaces, (space) => {
+        return new SelectSpace_1.SelectSpace(this.getTitle(), availableSpaces)
+            .andThen((space) => {
             this.player.game.addGreenery(this.player, space);
             return undefined;
         });

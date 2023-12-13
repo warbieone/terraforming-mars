@@ -14,6 +14,7 @@ const MODULE_TO_CSS: Omit<Record<GameModule, string>, 'base'> = {
   colonies: 'colonies-icon',
   prelude: 'prelude-icon',
   prelude2: 'prelude2-icon',
+  league: 'community-icon',
   turmoil: 'turmoil-icon',
   community: 'community-icon',
   ares: 'ares-icon',

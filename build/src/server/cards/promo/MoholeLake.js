@@ -45,7 +45,8 @@ class MoholeLake extends Card_1.Card {
             player.addResourceTo(availableCards[0], { log: true });
             return undefined;
         }
-        return new SelectCard_1.SelectCard('Select card to add microbe or animal', 'Add resource', availableCards, ([card]) => {
+        return new SelectCard_1.SelectCard('Select card to add microbe or animal', 'Add resource', availableCards)
+            .andThen(([card]) => {
             player.addResourceTo(card, { log: true });
             return undefined;
         });

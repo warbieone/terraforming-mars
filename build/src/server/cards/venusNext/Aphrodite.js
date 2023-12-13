@@ -1,19 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Aphrodite = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
-const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
-class Aphrodite extends Card_1.Card {
+class Aphrodite extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.APHRODITE,
             tags: [Tag_1.Tag.PLANT, Tag_1.Tag.VENUS],
             startingMegaCredits: 50,
-            type: CardType_1.CardType.CORPORATION,
             behavior: {
                 production: { plants: 2 },
             },

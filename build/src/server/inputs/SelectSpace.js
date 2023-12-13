@@ -1,22 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectSpace = void 0;
-const PlayerInput_1 = require("../PlayerInput");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
+const PlayerInput_1 = require("../PlayerInput");
 class SelectSpace extends PlayerInput_1.BasePlayerInput {
-    constructor(title, availableSpaces, cb) {
+    constructor(title, spaces) {
         super('space', title);
-        this.availableSpaces = availableSpaces;
-        this.cb = cb;
-        if (availableSpaces.length === 0) {
+        this.spaces = spaces;
+        if (spaces.length === 0) {
             throw new Error('No available spaces');
         }
+    }
+    toModel() {
+        return {
+            title: this.title,
+            buttonLabel: this.buttonLabel,
+            type: 'space',
+            spaces: this.spaces.map((space) => space.id),
+        };
     }
     process(input) {
         if (!(0, InputResponse_1.isSelectSpaceResponse)(input)) {
             throw new Error('Not a valid SelectSpaceResponse');
         }
-        const space = this.availableSpaces.find((space) => space.id === input.spaceId);
+        const space = this.spaces.find((space) => space.id === input.spaceId);
         if (space === undefined) {
             throw new Error('Space not available');
         }

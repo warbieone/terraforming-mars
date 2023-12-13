@@ -4,14 +4,17 @@ exports.TheNewSpaceRace = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const PreludeCard_1 = require("../prelude/PreludeCard");
-const Resource_1 = require("../../../common/Resource");
 const Tag_1 = require("../../../common/cards/Tag");
 const Turmoil_1 = require("../../turmoil/Turmoil");
+const ChooseRulingPartyDeferred_1 = require("../../turmoil/ChooseRulingPartyDeferred");
 class TheNewSpaceRace extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
             name: CardName_1.CardName.THE_NEW_SPACE_RACE,
             tags: [Tag_1.Tag.SCIENCE, Tag_1.Tag.EARTH],
+            behavior: {
+                stock: { megacredits: 12 },
+            },
             metadata: {
                 cardNumber: '',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -23,10 +26,9 @@ class TheNewSpaceRace extends PreludeCard_1.PreludeCard {
     }
     bespokePlay(player) {
         const game = player.game;
-        player.addResource(Resource_1.Resource.MEGACREDITS, 12);
         game.overrideFirstPlayer(player);
         Turmoil_1.Turmoil.ifTurmoil((player.game), (turmoil) => {
-            turmoil.chooseRulingParty(player);
+            player.game.defer(new ChooseRulingPartyDeferred_1.ChooseRulingPartyDeferred(player, turmoil));
         });
         return undefined;
     }

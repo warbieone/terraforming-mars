@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isSpecialTile = exports.playerTileFn = exports.nextToNoOtherTileFn = exports.Board = void 0;
+exports.isSpecialTileSpace = exports.isSpecialTile = exports.playerTileFn = exports.Board = void 0;
 const SpaceType_1 = require("../../common/boards/SpaceType");
 const TileType_1 = require("../../common/TileType");
 const AresHandler_1 = require("../ares/AresHandler");
-const CardName_1 = require("../../common/cards/CardName");
+const Units_1 = require("../../common/Units");
+const AresTileType_1 = require("../../common/AresTileType");
+const utils_1 = require("../../common/utils/utils");
 const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
 class Board {
     constructor(spaces) {
@@ -89,102 +91,75 @@ class Board {
     getSpaceByTileCard(cardName) {
         return this.spaces.find((space) => space.tile !== undefined && space.tile.card === cardName);
     }
-    getOceanCount(include) {
-        return this.getOceanSpaces(include).length;
-    }
-    getAvailableSpacesForType(player, type) {
-        switch (type) {
-            case 'land': return this.getAvailableSpacesOnLand(player);
-            case 'ocean': return this.getAvailableSpacesForOcean(player);
-            case 'greenery': return this.getAvailableSpacesForGreenery(player);
-            case 'city': return this.getAvailableSpacesForCity(player);
-            case 'isolated': return this.getAvailableIsolatedSpaces(player);
-            case 'volcanic': return this.getAvailableVolcanicSpaces(player);
-            case 'upgradeable-ocean': return this.getOceanSpaces({ upgradedOceans: false });
-            default: throw new Error('unknown type ' + type);
-        }
-    }
-    getOceanSpaces(include) {
-        const spaces = this.spaces.filter((space) => {
-            var _a, _b, _c;
-            if (!Board.isOceanSpace(space))
-                return false;
-            if (((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType) === undefined)
-                return false;
-            const tileType = space.tile.tileType;
-            if (TileType_1.OCEAN_UPGRADE_TILES.has(tileType)) {
-                return (_b = include === null || include === void 0 ? void 0 : include.upgradedOceans) !== null && _b !== void 0 ? _b : true;
-            }
-            if (tileType === TileType_1.TileType.WETLANDS) {
-                return (_c = include === null || include === void 0 ? void 0 : include.wetlands) !== null && _c !== void 0 ? _c : false;
-            }
-            return true;
-        });
-        return spaces;
-    }
     getSpaces(spaceType, _player) {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
-    getEmptySpaces() {
-        return this.spaces.filter((space) => space.tile === undefined);
+    spaceCosts(_space) {
+        return { stock: Object.assign({}, Units_1.Units.EMPTY), production: 0, tr: {} };
     }
-    getAvailableSpacesForCity(player) {
-        const spacesOnLand = this.getAvailableSpacesOnLand(player);
-        if (player.cardIsInEffect(CardName_1.CardName.GORDON))
-            return spacesOnLand;
-        return spacesOnLand.filter((space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false);
-    }
-    getAvailableSpacesForGreenery(player) {
-        let spacesOnLand = this.getAvailableSpacesOnLand(player);
-        if (player.cardIsInEffect(CardName_1.CardName.GORDON))
-            return spacesOnLand;
-        if (player.game.gameOptions.pathfindersExpansion === true) {
-            spacesOnLand = spacesOnLand.filter((space) => {
-                return !this.getAdjacentSpaces(space).some((neighbor) => { var _a; return ((_a = neighbor.tile) === null || _a === void 0 ? void 0 : _a.tileType) === TileType_1.TileType.RED_CITY; });
-            });
+    computeAdditionalCosts(space, aresExtension) {
+        var _a, _b, _c;
+        const costs = this.spaceCosts(space);
+        if (aresExtension === false) {
+            return costs;
         }
-        const spacesForGreenery = spacesOnLand
-            .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && adj.tile.tileType !== TileType_1.TileType.OCEAN) !== undefined);
-        if (spacesForGreenery.length > 0) {
-            return spacesForGreenery;
+        switch ((0, AresTileType_1.hazardSeverity)((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType)) {
+            case AresTileType_1.HazardSeverity.MILD:
+                costs.stock.megacredits += 8;
+                break;
+            case AresTileType_1.HazardSeverity.SEVERE:
+                costs.stock.megacredits += 16;
+                break;
         }
-        return spacesOnLand;
+        for (const adjacentSpace of this.getAdjacentSpaces(space)) {
+            switch ((0, AresTileType_1.hazardSeverity)((_b = adjacentSpace.tile) === null || _b === void 0 ? void 0 : _b.tileType)) {
+                case AresTileType_1.HazardSeverity.MILD:
+                    costs.production += 1;
+                    break;
+                case AresTileType_1.HazardSeverity.SEVERE:
+                    costs.production += 2;
+                    break;
+            }
+            if (adjacentSpace.adjacency !== undefined) {
+                const adjacency = adjacentSpace.adjacency;
+                costs.stock.megacredits += (_c = adjacency.cost) !== null && _c !== void 0 ? _c : 0;
+            }
+        }
+        return costs;
     }
-    getAvailableSpacesForOcean(player) {
-        return this.getSpaces(SpaceType_1.SpaceType.OCEAN, player)
-            .filter((space) => space.tile === undefined &&
-            (space.player === undefined || space.player === player));
+    canAfford(player, space, canAffordOptions) {
+        const additionalCosts = this.computeAdditionalCosts(space, player.game.gameOptions.aresExtension);
+        if (additionalCosts.stock.megacredits > 0) {
+            const plan = canAffordOptions !== undefined ? Object.assign({}, canAffordOptions) : { cost: 0, tr: {} };
+            plan.cost += additionalCosts.stock.megacredits;
+            plan.tr = additionalCosts.tr;
+            const afford = player.canAfford(plan);
+            if (afford === false) {
+                return false;
+            }
+        }
+        if (additionalCosts.production > 0) {
+            const availableProduction = (0, utils_1.sum)(Units_1.Units.values(player.production)) + 5;
+            return availableProduction > additionalCosts.production;
+        }
+        return true;
     }
-    getAvailableSpacesOnLand(player) {
+    getAvailableSpacesOnLand(player, canAffordOptions) {
         const landSpaces = this.getSpaces(SpaceType_1.SpaceType.LAND, player).filter((space) => {
             var _a;
-            const hasPlayerMarker = space.player !== undefined;
-            const safeForPlayer = !hasPlayerMarker || space.player === player;
-            const playableSpace = space.tile === undefined || AresHandler_1.AresHandler.hasHazardTile(space);
-            const blockedByDesperateMeasures = ((_a = space.tile) === null || _a === void 0 ? void 0 : _a.protectedHazard) === true;
-            const isRestricted = space.bonus.includes(SpaceBonus_1.SpaceBonus.RESTRICTED);
-            return !isRestricted && safeForPlayer && playableSpace && !blockedByDesperateMeasures;
+            if (space.player !== undefined && space.player !== player) {
+                return false;
+            }
+            const playableSpace = space.tile === undefined || (AresHandler_1.AresHandler.hasHazardTile(space) && ((_a = space.tile) === null || _a === void 0 ? void 0 : _a.protectedHazard) !== true);
+            if (!playableSpace) {
+                return false;
+            }
+            if (space.id === player.game.nomadSpace) {
+                return false;
+            }
+            return this.canAfford(player, space, canAffordOptions);
         });
         return landSpaces;
-    }
-    getAvailableIsolatedSpaces(player) {
-        return this.getAvailableSpacesOnLand(player)
-            .filter(nextToNoOtherTileFn(this));
-    }
-    getAvailableVolcanicSpaces(player) {
-        const volcanicSpaceIds = this.getVolcanicSpaceIds();
-        const spaces = this.getAvailableSpacesOnLand(player);
-        if (volcanicSpaceIds.length > 0) {
-            return spaces.filter((space) => volcanicSpaceIds.includes(space.id));
-        }
-        return spaces;
-    }
-    getNonReservedLandSpaces() {
-        return this.spaces.filter((space) => {
-            return (space.spaceType === SpaceType_1.SpaceType.LAND || space.spaceType === SpaceType_1.SpaceType.COVE) &&
-                (space.tile === undefined || AresHandler_1.AresHandler.hasHazardTile(space)) &&
-                space.player === undefined;
-        });
     }
     getNthAvailableLandSpace(distance, direction, player = undefined, predicate = (_x) => true) {
         const spaces = this.spaces.filter((space) => {
@@ -203,7 +178,7 @@ class Board {
         return spaces[idx];
     }
     canPlaceTile(space) {
-        return space.tile === undefined && space.spaceType === SpaceType_1.SpaceType.LAND && space.bonus.includes(SpaceBonus_1.SpaceBonus.RESTRICTED) === false;
+        return space.tile === undefined && space.spaceType === SpaceType_1.SpaceType.LAND;
     }
     static isCitySpace(space) {
         return space.tile !== undefined && TileType_1.CITY_TILES.has(space.tile.tileType);
@@ -227,7 +202,7 @@ class Board {
         return {
             spaces: this.spaces.map((space) => {
                 var _a;
-                return {
+                const serialized = {
                     id: space.id,
                     spaceType: space.spaceType,
                     tile: space.tile,
@@ -237,12 +212,20 @@ class Board {
                     x: space.x,
                     y: space.y,
                 };
+                if (space.undergroundResources !== undefined) {
+                    serialized.undergroundResources = space.undergroundResources;
+                }
+                if (space.excavator !== undefined) {
+                    serialized.excavator = space.excavator.id;
+                }
+                return serialized;
             }),
         };
     }
     static deserializeSpace(serialized, players) {
         const playerId = serialized.player;
         const player = players.find((p) => p.id === playerId);
+        const excavator = players.find((p) => p.id === serialized.excavator);
         const space = {
             id: serialized.id,
             spaceType: serialized.spaceType,
@@ -250,6 +233,10 @@ class Board {
             x: serialized.x,
             y: serialized.y,
         };
+        if (space.bonus.length > 0 && space.bonus[0] === SpaceBonus_1.SpaceBonus._RESTRICTED) {
+            space.bonus = [];
+            space.spaceType = SpaceType_1.SpaceType.RESTRICTED;
+        }
         if (serialized.tile !== undefined) {
             space.tile = serialized.tile;
         }
@@ -259,6 +246,12 @@ class Board {
         if (serialized.adjacency !== undefined) {
             space.adjacency = serialized.adjacency;
         }
+        if (serialized.undergroundResources !== undefined) {
+            space.undergroundResources = serialized.undergroundResources;
+        }
+        if (excavator !== undefined) {
+            space.excavator = excavator;
+        }
         return space;
     }
     static deserializeSpaces(spaces, players) {
@@ -266,17 +259,12 @@ class Board {
     }
 }
 exports.Board = Board;
-function nextToNoOtherTileFn(board) {
-    return (space) => board.getAdjacentSpaces(space).every((space) => space.tile === undefined);
-}
-exports.nextToNoOtherTileFn = nextToNoOtherTileFn;
 function playerTileFn(player) {
     return (space) => { var _a; return ((_a = space.player) === null || _a === void 0 ? void 0 : _a.id) === player.id; };
 }
 exports.playerTileFn = playerTileFn;
-function isSpecialTile(space) {
-    var _a;
-    switch ((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType) {
+function isSpecialTile(tileType) {
+    switch (tileType) {
         case TileType_1.TileType.GREENERY:
         case TileType_1.TileType.OCEAN:
         case TileType_1.TileType.CITY:
@@ -294,4 +282,9 @@ function isSpecialTile(space) {
     }
 }
 exports.isSpecialTile = isSpecialTile;
+function isSpecialTileSpace(space) {
+    var _a;
+    return isSpecialTile((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType);
+}
+exports.isSpecialTileSpace = isSpecialTileSpace;
 //# sourceMappingURL=Board.js.map

@@ -38,7 +38,8 @@ class Merger extends PreludeCard_1.PreludeCard {
             return undefined;
         }
         game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
-            return new SelectCard_1.SelectCard('Choose corporation card to play', 'Play', dealtCorps, ([card]) => {
+            return new SelectCard_1.SelectCard('Choose corporation card to play', 'Play', dealtCorps, { enabled: enabled })
+                .andThen(([card]) => {
                 player.playAdditionalCorporationCard(card);
                 dealtCorps.forEach((corp) => {
                     if (corp.name !== card.name) {
@@ -47,7 +48,7 @@ class Merger extends PreludeCard_1.PreludeCard {
                 });
                 game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, Merger.mergerCost, { title: 'Select how to pay for Merger' }));
                 return undefined;
-            }, { enabled: enabled });
+            });
         }));
         return undefined;
     }

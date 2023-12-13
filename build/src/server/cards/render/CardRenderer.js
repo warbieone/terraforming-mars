@@ -159,6 +159,12 @@ class Builder {
     asteroids(amount, options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.ASTEROIDS, amount, options));
     }
+    graphene(amount, options) {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.GRAPHENE, amount, options));
+    }
+    hydroelectricResource(amount, options) {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.HYDROELECTRIC_RESOURCE, amount, options));
+    }
     event(options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.EVENT, -1, options));
     }
@@ -194,8 +200,8 @@ class Builder {
         item.amountInside = true;
         return this._appendToRow(item);
     }
-    placeColony(options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.PLACE_COLONY, -1, options));
+    colonyTile(options) {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.COLONY_TILE, -1, options));
     }
     influence(options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.INFLUENCE, 1, options));
@@ -206,13 +212,14 @@ class Builder {
         item.size = (_a = options === null || options === void 0 ? void 0 : options.size) !== null && _a !== void 0 ? _a : Size_1.Size.MEDIUM;
         return this._appendToRow(item);
     }
-    greenery(size = Size_1.Size.MEDIUM, withO2 = true, any = false) {
+    greenery(options) {
+        var _a;
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.GREENERY);
-        item.size = size;
-        if (withO2) {
+        item.size = (_a = options === null || options === void 0 ? void 0 : options.size) !== null && _a !== void 0 ? _a : Size_1.Size.MEDIUM;
+        if ((options === null || options === void 0 ? void 0 : options.withO2) !== false) {
             item.secondaryTag = AltSecondaryTag_1.AltSecondaryTag.OXYGEN;
         }
-        if (any === true) {
+        if ((options === null || options === void 0 ? void 0 : options.any) === true) {
             item.anyPlayer = true;
         }
         return this._appendToRow(item);
@@ -232,6 +239,9 @@ class Builder {
     noTags() {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.NO_TAGS, -1));
     }
+    emptyTag(count = 1) {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.EMPTY_TAG, count));
+    }
     wild(amount, options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.WILD, amount, options));
     }
@@ -245,6 +255,9 @@ class Builder {
     }
     fighter(amount = 1) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.FIGHTER, amount));
+    }
+    cloneTrooper(amount = 1) {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CLONE_TROOPER, amount));
     }
     camps(amount = 1) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CAMPS, amount));
@@ -303,8 +316,8 @@ class Builder {
     moon(amount = -1, options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.MOON, amount, options));
     }
-    resourceCube(amount = 1) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.RESOURCE_CUBE, amount));
+    resourceCube(amount = 1, options) {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.RESOURCE_CUBE, amount, options));
     }
     moonHabitat(options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.MOON_HABITAT, 1, options));
@@ -343,9 +356,56 @@ class Builder {
         this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.ORBITAL, 1));
         return this;
     }
+    cathedral() {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CATHEDRAL, 1));
+    }
+    nomads() {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.NOMADS, 1));
+    }
     specialTile(options) {
         this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.EMPTY_TILE_SPECIAL, 1, options));
         return this;
+    }
+    cityorSpecialTile(options) {
+        var _a;
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CITY_OR_SPECIAL_TILE, -1, options);
+        item.size = (_a = options === null || options === void 0 ? void 0 : options.size) !== null && _a !== void 0 ? _a : Size_1.Size.MEDIUM;
+        return this._appendToRow(item);
+    }
+    neutralDelegate(amount, options) {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.NEUTRAL_DELEGATE, amount, options));
+    }
+    identify(count = 1, options) {
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.IDENTIFY, count, options);
+        return this._appendToRow(item);
+    }
+    excavate(count = 1, options) {
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.EXCAVATE, count, options);
+        return this._appendToRow(item);
+    }
+    corruption(count = 1, options) {
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CORRUPTION, count, options);
+        return this._appendToRow(item);
+    }
+    undergroundResources(count = 1, options) {
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.UNDERGROUND_RESOURCES, count, options);
+        return this._appendToRow(item);
+    }
+    corruptionShield() {
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CORRUPTION_SHIELD);
+        return this._appendToRow(item);
+    }
+    tool(count = 1, options) {
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.TOOL, count, options);
+        return this._appendToRow(item);
+    }
+    ware(count = 1, options) {
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.WARE, count, options);
+        return this._appendToRow(item);
+    }
+    activist(count = 1, options) {
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.ACTIVIST, count, options);
+        return this._appendToRow(item);
     }
     emptyTile(type = 'normal', options) {
         var _a, _b;
@@ -418,8 +478,8 @@ class Builder {
     empty() {
         return this._appendToRow(CardRenderSymbol_1.CardRenderSymbol.empty());
     }
-    plate(text) {
-        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.PLATE);
+    plate(text, options) {
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.PLATE, 1, options);
         item.text = text;
         item.isPlate = true;
         item.isBold = true;
@@ -441,6 +501,9 @@ class Builder {
         item.isBold = options.bold || true;
         item.anyPlayer = options.all;
         return this._appendToRow(item);
+    }
+    plainText(text) {
+        return this.text(text, Size_1.Size.SMALL, false, false);
     }
     vpText(text) {
         return this.text(text, Size_1.Size.TINY, true);

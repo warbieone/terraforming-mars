@@ -7,7 +7,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const Card_1 = require("../Card");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Size_1 = require("../../../common/cards/render/Size");
 class LunaProjectOffice extends Card_1.Card {
     constructor() {
@@ -16,7 +15,7 @@ class LunaProjectOffice extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             tags: [Tag_1.Tag.SCIENCE],
             cost: 4,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 2)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 2 },
             metadata: {
                 description: 'Requires 2 science tags.',
                 cardNumber: 'M20',

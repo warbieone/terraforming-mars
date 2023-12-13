@@ -5,7 +5,7 @@ const Tag_1 = require("../../common/cards/Tag");
 class Scientist {
     constructor() {
         this.name = 'Scientist';
-        this.description = 'Have the most science tags';
+        this.description = 'Have the most science tags in play';
     }
     getScore(player) {
         return player.tags.count(Tag_1.Tag.SCIENCE, 'award');

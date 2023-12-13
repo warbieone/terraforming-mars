@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class BeamFromAThoriumAsteroid extends Card_1.Card {
     constructor() {
@@ -18,7 +17,7 @@ class BeamFromAThoriumAsteroid extends Card_1.Card {
             behavior: {
                 production: { heat: 3, energy: 3 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.JOVIAN)),
+            requirements: { tag: Tag_1.Tag.JOVIAN },
             metadata: {
                 cardNumber: '058',
                 description: 'Requires a Jovian tag. Increase your heat production and energy production 3 steps each.',

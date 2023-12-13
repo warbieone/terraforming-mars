@@ -7,7 +7,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {Turmoil} from '../../../server/turmoil/Turmoil';
 import {Resource} from '../../../common/Resource';
 
-export class Pristar extends Card implements ICorporationCard {
+export class Pristar extends CorporationCard {
 
   private hasReceivedInfluenceBonus: boolean = false;
 

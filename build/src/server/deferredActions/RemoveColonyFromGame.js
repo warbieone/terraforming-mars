@@ -9,7 +9,8 @@ class RemoveColonyFromGame extends DeferredAction_1.DeferredAction {
     }
     execute() {
         const game = this.player.game;
-        const removeColony = new SelectColony_1.SelectColony('Select colony tile to remove', 'Remove colony', game.colonies, (colony) => {
+        const removeColony = new SelectColony_1.SelectColony('Select colony tile to remove', 'Remove colony', game.colonies)
+            .andThen((colony) => {
             game.colonies.splice(game.colonies.indexOf(colony), 1);
             game.discardedColonies.push(colony);
             game.log('You discarded ${0}', (b) => b.colony(colony));

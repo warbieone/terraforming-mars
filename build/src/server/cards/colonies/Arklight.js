@@ -1,22 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Arklight = void 0;
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardResource_1 = require("../../../common/CardResource");
-const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const Card_1 = require("../Card");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const Resource_1 = require("../../../common/Resource");
-class Arklight extends Card_1.Card {
+class Arklight extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
             name: CardName_1.CardName.ARKLIGHT,
             tags: [Tag_1.Tag.ANIMAL],
             startingMegaCredits: 50,
             resourceType: CardResource_1.CardResource.ANIMAL,
-            type: CardType_1.CardType.CORPORATION,
             victoryPoints: { resourcesHere: {}, per: 2 },
             behavior: {
                 addResources: 1,

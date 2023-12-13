@@ -7,6 +7,7 @@ const CardRenderer_1 = require("../../render/CardRenderer");
 const constants_1 = require("../../../../common/constants");
 const SelectSpace_1 = require("../../../inputs/SelectSpace");
 const Units_1 = require("../../../../common/Units");
+const MessageBuilder_1 = require("../../../logs/MessageBuilder");
 class ConvertPlants extends StandardActionCard_1.StandardActionCard {
     constructor() {
         super({
@@ -29,13 +30,15 @@ class ConvertPlants extends StandardActionCard_1.StandardActionCard {
         if (player.game.getOxygenLevel() === constants_1.MAX_OXYGEN_LEVEL) {
             return true;
         }
-        return player.canAfford(0, {
+        return player.canAfford({
+            cost: 0,
             tr: { oxygen: 1 },
             reserveUnits: Units_1.Units.of({ plants: player.plantsNeededForGreenery }),
         });
     }
     action(player) {
-        return new SelectSpace_1.SelectSpace(`Convert ${player.plantsNeededForGreenery} plants into greenery`, player.game.board.getAvailableSpacesForGreenery(player), (space) => {
+        return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Convert ${0} plants into greenery', (b) => b.number(player.plantsNeededForGreenery)), player.game.board.getAvailableSpacesForGreenery(player))
+            .andThen((space) => {
             this.actionUsed(player);
             player.game.addGreenery(player, space);
             player.plants -= player.plantsNeededForGreenery;

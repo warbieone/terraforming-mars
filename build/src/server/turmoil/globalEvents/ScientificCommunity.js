@@ -23,7 +23,7 @@ class ScientificCommunity extends GlobalEvent_1.GlobalEvent {
     resolve(game, turmoil) {
         game.getPlayersInGenerationOrder().forEach((player) => {
             const amount = player.cardsInHand.length + turmoil.getPlayerInfluence(player);
-            player.addResource(Resource_1.Resource.MEGACREDITS, amount, { log: true, from: this.name });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, amount, { log: true, from: this.name });
         });
     }
 }

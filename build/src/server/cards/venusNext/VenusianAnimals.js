@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const Options_1 = require("../Options");
@@ -18,7 +17,7 @@ class VenusianAnimals extends Card_1.Card {
             cost: 15,
             resourceType: CardResource_1.CardResource.ANIMAL,
             victoryPoints: { resourcesHere: {} },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.venus(18)),
+            requirements: { venus: 18 },
             metadata: {
                 cardNumber: '259',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -32,7 +31,8 @@ class VenusianAnimals extends Card_1.Card {
         });
     }
     onCardPlayed(player, card) {
-        player.addResourceTo(this, player.tags.cardTagCount(card, Tag_1.Tag.SCIENCE));
+        const qty = player.tags.cardTagCount(card, Tag_1.Tag.SCIENCE);
+        player.addResourceTo(this, { qty, log: true });
     }
 }
 exports.VenusianAnimals = VenusianAnimals;

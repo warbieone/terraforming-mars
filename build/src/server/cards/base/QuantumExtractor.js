@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class QuantumExtractor extends Card_1.Card {
@@ -18,7 +17,7 @@ class QuantumExtractor extends Card_1.Card {
             behavior: {
                 production: { energy: 4 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 4)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 4 },
             cardDiscount: { tag: Tag_1.Tag.SPACE, amount: 2 },
             metadata: {
                 cardNumber: '079',

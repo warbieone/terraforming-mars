@@ -4,7 +4,6 @@ exports.MiningQuota = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 class MiningQuota extends Card_1.Card {
@@ -17,7 +16,7 @@ class MiningQuota extends Card_1.Card {
             behavior: {
                 production: { steel: 2 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.VENUS).tag(Tag_1.Tag.EARTH).tag(Tag_1.Tag.JOVIAN)),
+            requirements: [{ tag: Tag_1.Tag.VENUS }, { tag: Tag_1.Tag.EARTH }, { tag: Tag_1.Tag.JOVIAN }],
             metadata: {
                 cardNumber: '239',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

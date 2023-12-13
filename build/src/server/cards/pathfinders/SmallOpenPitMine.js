@@ -28,10 +28,10 @@ class SmallOpenPitMine extends Card_1.Card {
     }
     produce(player) {
         player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
-            return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Increase your steel production 2 steps', 'Increase', () => {
+            return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Increase your steel production 2 steps').andThen(() => {
                 player.production.add(Resource_1.Resource.STEEL, 2, { log: true });
                 return undefined;
-            }), new SelectOption_1.SelectOption('Increase your titanium production 1 step', 'Increase', () => {
+            }), new SelectOption_1.SelectOption('Increase your titanium production 1 step').andThen(() => {
                 player.production.add(Resource_1.Resource.TITANIUM, 1, { log: true });
                 return undefined;
             }));

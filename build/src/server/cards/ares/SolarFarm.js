@@ -10,6 +10,7 @@ const TileType_1 = require("../../../common/TileType");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
+const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class SolarFarm extends Card_1.Card {
     constructor() {
         super({
@@ -28,8 +29,8 @@ class SolarFarm extends Card_1.Card {
             },
         });
     }
-    bespokeCanPlay(player) {
-        return player.game.board.getAvailableSpacesOnLand(player).length > 0;
+    bespokeCanPlay(player, canAffordOptions) {
+        return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions).length > 0;
     }
     produce(player) {
         const space = player.game.board.getSpaceByTileCard(this.name);
@@ -40,7 +41,8 @@ class SolarFarm extends Card_1.Card {
         player.production.add(Resource_1.Resource.ENERGY, plantsOnSpace, { log: true });
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace('Select space for Solar Farm tile', player.game.board.getAvailableSpacesOnLand(player), (space) => {
+        return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Select space for ${0} tile', (b) => b.card(this)), player.game.board.getAvailableSpacesOnLand(player))
+            .andThen((space) => {
             player.game.addTile(player, space, {
                 tileType: TileType_1.TileType.SOLAR_FARM,
                 card: this.name,

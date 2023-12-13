@@ -11,7 +11,6 @@ export class Polyphemos extends CorporationCard {
     super({
       name: CardName.POLYPHEMOS,
       startingMegaCredits: 55,
-      type: CardType.CORPORATION,
       cardCost: 5,
 
       behavior: {

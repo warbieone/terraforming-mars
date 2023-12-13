@@ -8,7 +8,6 @@ const Resource_1 = require("../../../common/Resource");
 const ColonyName_1 = require("../../../common/colonies/ColonyName");
 const BuildColony_1 = require("../../deferredActions/BuildColony");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Card_1 = require("../Card");
 const Options_1 = require("../Options");
 class PioneerSettlement extends Card_1.Card {
@@ -18,7 +17,7 @@ class PioneerSettlement extends Card_1.Card {
             tags: [Tag_1.Tag.SPACE],
             name: CardName_1.CardName.PIONEER_SETTLEMENT,
             type: CardType_1.CardType.AUTOMATED,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.colonies(1, { max: Options_1.max })),
+            requirements: { colonies: 1, max: Options_1.max },
             victoryPoints: 2,
             metadata: {
                 cardNumber: 'C29',

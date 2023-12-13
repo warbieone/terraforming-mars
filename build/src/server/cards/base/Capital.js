@@ -7,7 +7,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const TileType_1 = require("../../../common/TileType");
 const CardName_1 = require("../../../common/cards/CardName");
 const Board_1 = require("../../boards/Board");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardRenderDynamicVictoryPoints_1 = require("../render/CardRenderDynamicVictoryPoints");
 class Capital extends Card_1.Card {
@@ -40,7 +39,7 @@ class Capital extends Card_1.Card {
                     adjacencyBonus: adjacencyBonus,
                 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oceans(4)),
+            requirements: { oceans: 4 },
             victoryPoints: 'special',
             metadata,
         });

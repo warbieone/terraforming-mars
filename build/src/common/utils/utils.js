@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.zip = exports.partition = exports.sum = exports.inplaceRemove = exports.hasIntersection = exports.intersection = exports.range = exports.generateClassString = exports.playerColorClass = void 0;
+exports.asArray = exports.zip = exports.partition = exports.sum = exports.inplaceRemoveIf = exports.inplaceRemove = exports.twoWayDifference = exports.oneWayDifference = exports.hasIntersection = exports.intersection = exports.range = exports.playerColorClass = void 0;
 const playerColorClass = (color, type) => {
     const prefix = {
         shadow: 'player_shadow_color_',
@@ -10,8 +10,6 @@ const playerColorClass = (color, type) => {
     return `${prefix}${color}`;
 };
 exports.playerColorClass = playerColorClass;
-const generateClassString = (classes) => classes.join(' ').trimStart();
-exports.generateClassString = generateClassString;
 const range = (n) => Array.from(Array(n).keys());
 exports.range = range;
 function intersection(a, b) {
@@ -22,13 +20,30 @@ function hasIntersection(a, b) {
     return a.some((e) => b.includes(e));
 }
 exports.hasIntersection = hasIntersection;
+function oneWayDifference(a, b) {
+    return a.filter((e) => !b.includes(e));
+}
+exports.oneWayDifference = oneWayDifference;
+function twoWayDifference(a, b) {
+    return a
+        .filter((x) => !b.includes(x))
+        .concat(b.filter((x) => !a.includes(x)));
+}
+exports.twoWayDifference = twoWayDifference;
 function inplaceRemove(array, element) {
-    const idx = array.findIndex((e) => e === element);
-    if (idx > -1) {
-        array.splice(idx, 1);
-    }
+    return inplaceRemoveIf(array, (e) => e === element) !== undefined;
 }
 exports.inplaceRemove = inplaceRemove;
+function inplaceRemoveIf(array, predicate) {
+    const idx = array.findIndex(predicate);
+    if (idx === -1) {
+        return undefined;
+    }
+    const element = array[idx];
+    array.splice(idx, 1);
+    return element;
+}
+exports.inplaceRemoveIf = inplaceRemoveIf;
 function sum(array) {
     return array.reduce((a, b) => a + b, 0);
 }
@@ -44,4 +59,8 @@ function zip(first, second) {
     return first.map((e, i) => [e, second[i]]);
 }
 exports.zip = zip;
+function asArray(elem) {
+    return Array.isArray(elem) ? elem : [elem];
+}
+exports.asArray = asArray;
 //# sourceMappingURL=utils.js.map

@@ -2,15 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MarsDirect = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
-const Card_1 = require("../Card");
-const CardType_1 = require("../../../common/cards/CardType");
+const CorporationCard_1 = require("../corporation/CorporationCard");
 const Options_1 = require("../Options");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-class MarsDirect extends Card_1.Card {
+class MarsDirect extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
-            type: CardType_1.CardType.CORPORATION,
             name: CardName_1.CardName.MARS_DIRECT,
             tags: [Tag_1.Tag.MARS],
             startingMegaCredits: 52,

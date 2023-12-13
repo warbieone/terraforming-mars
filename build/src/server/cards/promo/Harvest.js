@@ -6,7 +6,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 class Harvest extends Card_1.Card {
     constructor() {
         super({
@@ -14,7 +13,7 @@ class Harvest extends Card_1.Card {
             name: CardName_1.CardName.HARVEST,
             tags: [Tag_1.Tag.PLANT],
             cost: 4,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.greeneries(3)),
+            requirements: { greeneries: 3 },
             behavior: {
                 stock: { megacredits: 12 },
             },

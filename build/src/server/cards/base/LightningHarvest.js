@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 class LightningHarvest extends Card_1.Card {
     constructor() {
@@ -18,7 +17,7 @@ class LightningHarvest extends Card_1.Card {
             behavior: {
                 production: { energy: 1, megacredits: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 3)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 3 },
             metadata: {
                 cardNumber: '046',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {

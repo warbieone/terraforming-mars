@@ -1,49 +1,58 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateBehavior = exports.Card = exports.staticCardProperties = void 0;
+exports.validateBehavior = exports.Card = void 0;
 const CardType_1 = require("../../common/cards/CardType");
 const Tag_1 = require("../../common/cards/Tag");
 const Units_1 = require("../../common/Units");
 const CardRenderDynamicVictoryPoints_1 = require("./render/CardRenderDynamicVictoryPoints");
 const CardRenderItemType_1 = require("../../common/cards/render/CardRenderItemType");
 const MoonExpansion_1 = require("../moon/MoonExpansion");
-const ICorporationCard_1 = require("./corporation/ICorporationCard");
 const BehaviorExecutor_1 = require("../behavior/BehaviorExecutor");
 const Counter_1 = require("../behavior/Counter");
-const NO_COST_CARD_TYPES = [
+const CardRequirements_1 = require("./requirements/CardRequirements");
+const utils_1 = require("../../common/utils/utils");
+const CARD_TYPES_WITHOUT_COST = [
     CardType_1.CardType.CORPORATION,
     CardType_1.CardType.PRELUDE,
     CardType_1.CardType.CEO,
     CardType_1.CardType.STANDARD_ACTION,
 ];
-exports.staticCardProperties = new Map();
+const cardProperties = new Map();
 class Card {
-    constructor(properties) {
+    internalize(external) {
         var _a;
-        this.resourceCount = 0;
-        let staticInstance = exports.staticCardProperties.get(properties.name);
-        if (staticInstance === undefined) {
-            if (properties.type === CardType_1.CardType.CORPORATION && properties.startingMegaCredits === undefined) {
-                throw new Error('must define startingMegaCredits for corporation cards');
-            }
-            if (properties.cost === undefined) {
-                if (NO_COST_CARD_TYPES.includes(properties.type) === false) {
-                    throw new Error(`${properties.name} must have a cost property`);
-                }
-            }
-            try {
-                Card.autopopulateMetadataVictoryPoints(properties);
-                validateBehavior(properties.behavior);
-                validateBehavior(properties.firstAction);
-            }
-            catch (e) {
-                throw new Error(`Cannot validate ${properties.name}: ${e}`);
-            }
-            const p = Object.assign(Object.assign({}, properties), { reserveUnits: properties.reserveUnits === undefined ? undefined : Object.assign(Object.assign({}, Units_1.Units.of(properties.reserveUnits)), { deduct: (_a = properties.reserveUnits.deduct) !== null && _a !== void 0 ? _a : true }) });
-            exports.staticCardProperties.set(properties.name, p);
-            staticInstance = p;
+        const name = external.name;
+        if (external.type === CardType_1.CardType.CORPORATION && external.startingMegaCredits === undefined) {
+            throw new Error(`${name}: corp cards must define startingMegaCredits`);
         }
-        this.properties = staticInstance;
+        if (external.cost === undefined) {
+            if (CARD_TYPES_WITHOUT_COST.includes(external.type) === false) {
+                throw new Error(`${name} must have a cost property`);
+            }
+        }
+        try {
+            Card.autopopulateMetadataVictoryPoints(external);
+            validateBehavior(external.behavior);
+            validateBehavior(external.firstAction);
+            validateBehavior(external.action);
+        }
+        catch (e) {
+            throw new Error(`Cannot validate ${name}: ${e}`);
+        }
+        const translatedRequirements = (0, utils_1.asArray)((_a = external.requirements) !== null && _a !== void 0 ? _a : []).map((req) => populateCount(req));
+        const compiledRequirements = CardRequirements_1.CardRequirements.compile(translatedRequirements);
+        const internal = Object.assign(Object.assign({}, external), { reserveUnits: external.reserveUnits === undefined ? undefined : Units_1.Units.of(external.reserveUnits), requirements: translatedRequirements, compiledRequirements: compiledRequirements });
+        return internal;
+    }
+    constructor(external) {
+        this.resourceCount = 0;
+        const name = external.name;
+        let internal = cardProperties.get(name);
+        if (internal === undefined) {
+            internal = this.internalize(external);
+            cardProperties.set(name, internal);
+        }
+        this.properties = internal;
     }
     get adjacencyBonus() {
         return this.properties.adjacencyBonus;
@@ -89,7 +98,7 @@ class Card {
         return this.properties.cardDiscount;
     }
     get reserveUnits() {
-        return this.properties.reserveUnits || Object.assign(Object.assign({}, Units_1.Units.EMPTY), { deduct: true });
+        return this.properties.reserveUnits || Units_1.Units.EMPTY;
     }
     get tr() {
         return this.properties.tr;
@@ -100,25 +109,34 @@ class Card {
     get tilesBuilt() {
         return this.properties.tilesBuilt || [];
     }
-    canPlay(player) {
-        var _a;
-        const satisfied = (_a = this.requirements) === null || _a === void 0 ? void 0 : _a.satisfies(player);
+    canPlay(player, canAffordOptions) {
+        let yesAnd = undefined;
+        const satisfied = this.properties.compiledRequirements.satisfies(player);
         if (satisfied === false) {
             return false;
         }
-        if (this.behavior !== undefined && !(0, BehaviorExecutor_1.getBehaviorExecutor)().canExecute(this.behavior, player, this)) {
+        if (satisfied !== true) {
+            yesAnd = satisfied;
+        }
+        if (this.behavior !== undefined) {
+            if ((0, BehaviorExecutor_1.getBehaviorExecutor)().canExecute(this.behavior, player, this, canAffordOptions) === false) {
+                return false;
+            }
+        }
+        const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions);
+        if (bespokeCanPlay === false) {
             return false;
         }
-        return this.bespokeCanPlay(player);
+        if (yesAnd !== undefined) {
+            return yesAnd;
+        }
+        return true;
     }
-    bespokeCanPlay(_player) {
+    bespokeCanPlay(_player, _canAffordOptions) {
         return true;
     }
     play(player) {
-        if (!(0, ICorporationCard_1.isICorporationCard)(this) && this.reserveUnits.deduct === true) {
-            const adjustedReserveUnits = MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, this);
-            player.deductUnits(adjustedReserveUnits);
-        }
+        player.stock.deductUnits(MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, this));
         if (this.behavior !== undefined) {
             (0, BehaviorExecutor_1.getBehaviorExecutor)().execute(this.behavior, player, this);
         }
@@ -256,10 +274,33 @@ class Card {
         }
         return sum;
     }
+    getGlobalParameterRequirementBonus(player, parameter) {
+        if (this.properties.globalParameterRequirementBonus !== undefined) {
+            const globalParameterRequirementBonus = this.properties.globalParameterRequirementBonus;
+            if (globalParameterRequirementBonus.nextCardOnly === true) {
+                if (player.lastCardPlayed !== this.name) {
+                    return 0;
+                }
+            }
+            if (globalParameterRequirementBonus.parameter !== undefined) {
+                if (globalParameterRequirementBonus.parameter !== parameter) {
+                    return 0;
+                }
+            }
+            return globalParameterRequirementBonus.steps;
+        }
+        return 0;
+    }
 }
 exports.Card = Card;
+function populateCount(requirement) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
+    requirement.count =
+        (_u = (_t = (_s = (_r = (_q = (_p = (_o = (_m = (_l = (_k = (_j = (_h = (_g = (_f = (_e = (_d = (_c = (_b = (_a = requirement.count) !== null && _a !== void 0 ? _a : requirement.oceans) !== null && _b !== void 0 ? _b : requirement.oxygen) !== null && _c !== void 0 ? _c : requirement.temperature) !== null && _d !== void 0 ? _d : requirement.venus) !== null && _e !== void 0 ? _e : requirement.tr) !== null && _f !== void 0 ? _f : requirement.resourceTypes) !== null && _g !== void 0 ? _g : requirement.greeneries) !== null && _h !== void 0 ? _h : requirement.cities) !== null && _j !== void 0 ? _j : requirement.colonies) !== null && _k !== void 0 ? _k : requirement.floaters) !== null && _l !== void 0 ? _l : requirement.partyLeader) !== null && _m !== void 0 ? _m : requirement.habitatRate) !== null && _o !== void 0 ? _o : requirement.miningRate) !== null && _p !== void 0 ? _p : requirement.logisticRate) !== null && _q !== void 0 ? _q : requirement.habitatTiles) !== null && _r !== void 0 ? _r : requirement.miningTiles) !== null && _s !== void 0 ? _s : requirement.roadTiles) !== null && _t !== void 0 ? _t : requirement.corruption) !== null && _u !== void 0 ? _u : requirement.excavation;
+    return requirement;
+}
 function validateBehavior(behavior) {
-    var _a, _b, _c, _d;
+    var _a, _b, _c;
     function validate(condition, error) {
         if (condition === false) {
             throw new Error(error);
@@ -269,12 +310,16 @@ function validateBehavior(behavior) {
         return;
     }
     if (behavior.spend) {
-        if ((_a = behavior.spend.megacredits) !== null && _a !== void 0 ? _a : behavior.spend.heat) {
-            validate(behavior.tr === undefined, 'spend.megacredits and spend.heat are not yet compatible with tr');
-            validate(behavior.global === undefined, 'spend.megacredits and spend.heat are not yet compatible with global');
-            validate(((_b = behavior.moon) === null || _b === void 0 ? void 0 : _b.habitatRate) === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.habitatRate');
-            validate(((_c = behavior.moon) === null || _c === void 0 ? void 0 : _c.logisticsRate) === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.logisticsRate');
-            validate(((_d = behavior.moon) === null || _d === void 0 ? void 0 : _d.miningRate) === undefined, 'spend.megacredits and spend.heat are not yet compatible with moon.miningRate');
+        const spend = behavior.spend;
+        if (spend.megacredits) {
+            validate(behavior.tr === undefined, 'spend.megacredits is not yet compatible with tr');
+            validate(behavior.global === undefined, 'spend.megacredits is not yet compatible with global');
+            validate(((_a = behavior.moon) === null || _a === void 0 ? void 0 : _a.habitatRate) === undefined, 'spend.megacredits is not yet compatible with moon.habitatRate');
+            validate(((_b = behavior.moon) === null || _b === void 0 ? void 0 : _b.logisticsRate) === undefined, 'spend.megacredits is not yet compatible with moon.logisticsRate');
+            validate(((_c = behavior.moon) === null || _c === void 0 ? void 0 : _c.miningRate) === undefined, 'spend.megacredits is not yet compatible with moon.miningRate');
+        }
+        if (spend.heat) {
+            validate(Object.keys(spend).length === 1, 'spend.heat cannot be used with another spend');
         }
     }
 }

@@ -26,9 +26,7 @@ class CuttingEdgeTechnology extends Card_1.Card {
         });
     }
     getCardDiscount(_player, card) {
-        if (card.requirements !== undefined)
-            return 2;
-        return 0;
+        return card.requirements.length > 0 ? 2 : 0;
     }
 }
 exports.CuttingEdgeTechnology = CuttingEdgeTechnology;

@@ -4,10 +4,19 @@ exports.ShiftAresGlobalParameters = void 0;
 const PlayerInput_1 = require("../PlayerInput");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 class ShiftAresGlobalParameters extends PlayerInput_1.BasePlayerInput {
-    constructor(player, cb) {
+    constructor() {
         super('aresGlobalParameters', 'Adjust Ares global parameters up to 1 step.');
-        this.player = player;
-        this.cb = cb;
+    }
+    toModel(player) {
+        if (player.game.aresData === undefined) {
+            throw new Error('Ares is not defined');
+        }
+        return {
+            title: this.title,
+            buttonLabel: this.buttonLabel,
+            type: 'aresGlobalParameters',
+            aresData: player.game.aresData,
+        };
     }
     process(input, _player) {
         if (!(0, InputResponse_1.isShiftAresGlobalParametersResponse)(input)) {

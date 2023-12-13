@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 class MooncrateBlockFactory extends Card_1.Card {
     constructor() {
         super({
@@ -14,7 +13,7 @@ class MooncrateBlockFactory extends Card_1.Card {
             type: CardType_1.CardType.ACTIVE,
             tags: [Tag_1.Tag.BUILDING],
             cost: 8,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.miningTiles(1)),
+            requirements: { miningTiles: 1 },
             metadata: {
                 description: 'Requires 1 mine on The Moon.',
                 cardNumber: 'M38',

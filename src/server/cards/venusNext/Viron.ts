@@ -12,7 +12,6 @@ export class Viron extends CorporationCard {
       name: CardName.VIRON,
       tags: [Tag.MICROBE],
       startingMegaCredits: 54,
-      type: CardType.CORPORATION,
 
       metadata: {
         cardNumber: 'R12',

@@ -5,7 +5,8 @@ const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
 const SpaceName_1 = require("../SpaceName");
 const Board_1 = require("./Board");
 const BoardBuilder_1 = require("./BoardBuilder");
-class TharsisBoard extends Board_1.Board {
+const MarsBoard_1 = require("./MarsBoard");
+class TharsisBoard extends MarsBoard_1.MarsBoard {
     static newInstance(gameOptions, rng) {
         const builder = new BoardBuilder_1.BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
         const PLANT = SpaceBonus_1.SpaceBonus.PLANT;
@@ -35,8 +36,8 @@ class TharsisBoard extends Board_1.Board {
     getNonReservedLandSpaces() {
         return super.getNonReservedLandSpaces().filter((space) => space.id !== SpaceName_1.SpaceName.NOCTIS_CITY);
     }
-    getAvailableSpacesOnLand(player) {
-        return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName_1.SpaceName.NOCTIS_CITY);
+    getAvailableSpacesOnLand(player, canAffordOptions) {
+        return super.getAvailableSpacesOnLand(player, canAffordOptions).filter((space) => space.id !== SpaceName_1.SpaceName.NOCTIS_CITY);
     }
     canPlaceTile(space) {
         return super.canPlaceTile(space) && space.id !== SpaceName_1.SpaceName.NOCTIS_CITY;

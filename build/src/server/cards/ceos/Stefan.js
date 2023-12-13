@@ -26,20 +26,15 @@ class Stefan extends CeoCard_1.CeoCard {
     }
     action(player) {
         this.isDisabled = true;
-        return new SelectCard_1.SelectCard('Sell patents', 'Sell', player.cardsInHand, (foundCards) => {
-            player.megaCredits += foundCards.length * 3;
-            foundCards.forEach((card) => {
-                for (let i = 0; i < player.cardsInHand.length; i++) {
-                    if (player.cardsInHand[i].name === card.name) {
-                        player.cardsInHand.splice(i, 1);
-                        break;
-                    }
-                }
-                player.game.projectDeck.discard(card);
+        return new SelectCard_1.SelectCard('Sell patents', 'Sell', player.cardsInHand, { min: 0, max: player.cardsInHand.length })
+            .andThen((cards) => {
+            player.megaCredits += cards.length * 3;
+            cards.forEach((card) => {
+                player.discardCardFromHand(card);
             });
-            player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(foundCards.length));
+            player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(cards.length));
             return undefined;
-        }, { min: 0, max: player.cardsInHand.length });
+        });
     }
 }
 exports.Stefan = Stefan;

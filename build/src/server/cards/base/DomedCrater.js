@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class DomedCrater extends Card_1.Card {
@@ -21,7 +20,7 @@ class DomedCrater extends Card_1.Card {
                 stock: { plants: 3 },
                 city: {},
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.oxygen(7, { max: Options_1.max })),
+            requirements: { oxygen: 7, max: Options_1.max },
             metadata: {
                 cardNumber: 'T03',
                 description: {

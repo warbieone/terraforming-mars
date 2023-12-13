@@ -6,7 +6,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 class AntiGravityTechnology extends Card_1.Card {
     constructor() {
         super({
@@ -15,7 +14,7 @@ class AntiGravityTechnology extends Card_1.Card {
             tags: [Tag_1.Tag.SCIENCE],
             cost: 14,
             victoryPoints: 3,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE, 7)),
+            requirements: { tag: Tag_1.Tag.SCIENCE, count: 7 },
             cardDiscount: { amount: 2 },
             metadata: {
                 description: 'Requires 7 science tags.',

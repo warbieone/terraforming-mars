@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const TileType_1 = require("../../../common/TileType");
@@ -22,7 +21,7 @@ class HE3ProductionQuotas extends Card_1.Card {
             behavior: {
                 moon: { miningRate: 1 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.KELVINISTS).miningTiles(1, { all: Options_1.all })),
+            requirements: [{ party: PartyName_1.PartyName.KELVINISTS }, { miningTiles: 1, all: Options_1.all }],
             metadata: {
                 description: 'Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. ' +
                     'Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.',

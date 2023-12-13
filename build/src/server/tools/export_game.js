@@ -22,24 +22,32 @@ if (process.env.LOCAL_FS_DB !== undefined) {
 }
 const db = Database_1.Database.getInstance();
 const localDb = new LocalFilesystem_1.LocalFilesystem();
-function main() {
+function getGameId(id) {
     return __awaiter(this, void 0, void 0, function* () {
+        if ((0, Types_1.isGameId)(id)) {
+            return id;
+        }
         if ((0, Types_1.isPlayerId)(id) || (0, Types_1.isSpectatorId)(id)) {
             console.log(`Finding game for player/spectator ${id}`);
-            const gameId = yield db.getGameId(id);
-            if (gameId === undefined) {
-                console.log('Game is undefined');
-                process.exit(1);
-            }
-            yield load(gameId);
+            return yield db.getGameId(id);
         }
+        return undefined;
     });
 }
-if ((0, Types_1.isGameId)(id)) {
-    load(id);
+function main() {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield db.initialize();
+        const gameId = yield getGameId(id);
+        if (gameId === undefined) {
+            console.log('Game is undefined');
+            process.exit(1);
+        }
+        yield load(gameId);
+    });
 }
 function load(gameId) {
     return __awaiter(this, void 0, void 0, function* () {
+        yield localDb.initialize();
         console.log(`Loading game ${gameId}`);
         const game = yield db.getGame(gameId);
         console.log(`Last version is ${game.lastSaveId}`);

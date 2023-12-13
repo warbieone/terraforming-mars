@@ -15,9 +15,9 @@ const Help_vue_1 = require("@/client/components/help/Help.vue");
 const AdminHome_vue_1 = require("@/client/components/admin/AdminHome.vue");
 const i18n_1 = require("@/client/directives/i18n");
 const constants = require("@/common/constants");
-const paths = require("@/common/app/paths");
 const HTTPResponseCode = require("@/client/utils/HTTPResponseCode");
 const raw_settings = require("@/genfiles/settings.json");
+const paths_1 = require("@/common/app/paths");
 const Types_1 = require("@/common/Types");
 const HTMLDialogElementCompatibility_1 = require("./HTMLDialogElementCompatibility");
 const dialogPolyfill = require('dialog-polyfill');
@@ -98,26 +98,26 @@ exports.mainAppSettings = {
                 try {
                     if (xhr.status === HTTPResponseCode.OK) {
                         const model = xhr.response;
-                        if (path === paths.PLAYER) {
+                        if (path === paths_1.paths.PLAYER) {
                             app.playerView = model;
                             (0, i18n_1.setTranslationContext)(app.playerView);
                         }
-                        else if (path === paths.SPECTATOR) {
+                        else if (path === paths_1.paths.SPECTATOR) {
                             app.spectator = model;
                         }
                         app.playerkey++;
                         if (model.game.phase === 'end' &&
                             window.location.search.includes('&noredirect') === false) {
                             app.screen = 'the-end';
-                            if (currentPathname !== paths.THE_END) {
-                                window.history.replaceState(xhr.response, `${constants.APP_NAME} - Player`, `${paths.THE_END}?id=${model.id}`);
+                            if (currentPathname !== paths_1.paths.THE_END) {
+                                window.history.replaceState(xhr.response, `${constants.APP_NAME} - Player`, `${paths_1.paths.THE_END}?id=${model.id}`);
                             }
                         }
                         else {
-                            if (path === paths.PLAYER) {
+                            if (path === paths_1.paths.PLAYER) {
                                 app.screen = 'player-home';
                             }
-                            else if (path === paths.SPECTATOR) {
+                            else if (path === paths_1.paths.SPECTATOR) {
                                 app.screen = 'spectator-home';
                             }
                             if (currentPathname !== path) {
@@ -137,10 +137,10 @@ exports.mainAppSettings = {
             xhr.send();
         },
         updatePlayer() {
-            this.update(paths.PLAYER);
+            this.update(paths_1.paths.PLAYER);
         },
         updateSpectator: function () {
-            this.update(paths.SPECTATOR);
+            this.update(paths_1.paths.SPECTATOR);
         },
     },
     mounted() {
@@ -149,10 +149,10 @@ exports.mainAppSettings = {
             dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
         const currentPathname = getLastPathSegment();
         const app = this;
-        if (currentPathname === paths.PLAYER) {
+        if (currentPathname === paths_1.paths.PLAYER) {
             app.updatePlayer();
         }
-        else if (currentPathname === paths.THE_END) {
+        else if (currentPathname === paths_1.paths.THE_END) {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id') || '';
             if ((0, Types_1.isPlayerId)(id)) {
@@ -165,16 +165,16 @@ exports.mainAppSettings = {
                 alert('Bad id URL parameter.');
             }
         }
-        else if (currentPathname === paths.GAME) {
+        else if (currentPathname === paths_1.paths.GAME) {
             app.screen = 'game-home';
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', paths.API_GAME + window.location.search);
+            xhr.open('GET', paths_1.paths.API_GAME + window.location.search);
             xhr.onerror = function () {
                 alert('Error getting game data');
             };
             xhr.onload = function () {
                 if (xhr.status === HTTPResponseCode.OK) {
-                    window.history.replaceState(xhr.response, `${constants.APP_NAME} - Game`, `${paths.GAME}?id=${xhr.response.id}`);
+                    window.history.replaceState(xhr.response, `${constants.APP_NAME} - Game`, `${paths_1.paths.GAME}?id=${xhr.response.id}`);
                     app.game = xhr.response;
                 }
                 else {
@@ -184,25 +184,25 @@ exports.mainAppSettings = {
             xhr.responseType = 'json';
             xhr.send();
         }
-        else if (currentPathname === paths.GAMES_OVERVIEW) {
+        else if (currentPathname === paths_1.paths.GAMES_OVERVIEW) {
             app.screen = 'games-overview';
         }
-        else if (currentPathname === paths.NEW_GAME) {
+        else if (currentPathname === paths_1.paths.NEW_GAME) {
             app.screen = 'create-game-form';
         }
-        else if (currentPathname === paths.LOAD) {
+        else if (currentPathname === paths_1.paths.LOAD) {
             app.screen = 'load';
         }
-        else if (currentPathname === paths.CARDS) {
+        else if (currentPathname === paths_1.paths.CARDS) {
             app.screen = 'cards';
         }
-        else if (currentPathname === paths.HELP) {
+        else if (currentPathname === paths_1.paths.HELP) {
             app.screen = 'help';
         }
-        else if (currentPathname === paths.SPECTATOR) {
+        else if (currentPathname === paths_1.paths.SPECTATOR) {
             app.updateSpectator();
         }
-        else if (currentPathname === paths.ADMIN) {
+        else if (currentPathname === paths_1.paths.ADMIN) {
             app.screen = 'admin';
         }
         else {

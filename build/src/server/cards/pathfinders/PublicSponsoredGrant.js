@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Resource_1 = require("../../../common/Resource");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
@@ -18,7 +17,7 @@ class PublicSponsoredGrant extends Card_1.Card {
             type: CardType_1.CardType.EVENT,
             name: CardName_1.CardName.PUBLIC_SPONSORED_GRANT,
             cost: 6,
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.party(PartyName_1.PartyName.SCIENTISTS)),
+            requirements: { party: PartyName_1.PartyName.SCIENTISTS },
             metadata: {
                 cardNumber: 'PfTVD',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -33,7 +32,7 @@ class PublicSponsoredGrant extends Card_1.Card {
         player.drawCard(2, { tag: tag });
     }
     bespokePlay(player) {
-        player.game.getPlayers().forEach((p) => p.deductResource(Resource_1.Resource.MEGACREDITS, Math.min(p.megaCredits, 2), { log: true, from: player }));
+        player.game.getPlayers().forEach((p) => p.stock.deduct(Resource_1.Resource.MEGACREDITS, Math.min(p.megaCredits, 2), { log: true, from: player }));
         const tags = [
             Tag_1.Tag.BUILDING,
             Tag_1.Tag.SPACE,
@@ -44,7 +43,7 @@ class PublicSponsoredGrant extends Card_1.Card {
             Tag_1.Tag.ANIMAL
         ];
         const options = tags.map((tag) => {
-            return new SelectOption_1.SelectOption(tag, undefined, () => {
+            return new SelectOption_1.SelectOption(tag).andThen(() => {
                 this.draw2Cards(player, tag);
                 return undefined;
             });

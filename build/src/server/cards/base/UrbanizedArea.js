@@ -30,15 +30,16 @@ class UrbanizedArea extends Card_1.Card {
             },
         });
     }
-    getAvailableSpaces(player) {
-        return player.game.board.getAvailableSpacesOnLand(player)
+    getAvailableSpaces(player, canAffordOptions) {
+        return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
             .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board_1.Board.isCitySpace(adjacentSpace)).length >= 2);
     }
-    bespokeCanPlay(player) {
-        return this.getAvailableSpaces(player).length > 0;
+    bespokeCanPlay(player, canAffordOptions) {
+        return this.getAvailableSpaces(player, canAffordOptions).length > 0;
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player), (space) => {
+        return new SelectSpace_1.SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player))
+            .andThen((space) => {
             player.game.addCity(player, space);
             return undefined;
         });

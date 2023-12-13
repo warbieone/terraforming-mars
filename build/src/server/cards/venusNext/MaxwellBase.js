@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const SpaceName_1 = require("../../SpaceName");
 const CardName_1 = require("../../../common/cards/CardName");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
 class MaxwellBase extends ActionCard_1.ActionCard {
@@ -23,7 +22,7 @@ class MaxwellBase extends ActionCard_1.ActionCard {
                     mustHaveCard: true,
                 },
             },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.venus(12)),
+            requirements: { venus: 12 },
             victoryPoints: 3,
             behavior: {
                 production: { energy: -1 },

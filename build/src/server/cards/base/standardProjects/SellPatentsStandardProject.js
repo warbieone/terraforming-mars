@@ -25,21 +25,14 @@ class SellPatentsStandardProject extends StandardProjectCard_1.StandardProjectCa
     actionEssence() {
     }
     action(player) {
-        return new SelectCard_1.SelectCard('Sell patents', 'Sell', player.cardsInHand, (cards) => {
+        return new SelectCard_1.SelectCard('Sell patents', 'Sell', player.cardsInHand, { max: player.cardsInHand.length, played: false })
+            .andThen((cards) => {
             player.megaCredits += cards.length;
-            cards.forEach((card) => {
-                for (let i = 0; i < player.cardsInHand.length; i++) {
-                    if (player.cardsInHand[i].name === card.name) {
-                        player.cardsInHand.splice(i, 1);
-                        break;
-                    }
-                }
-                player.game.projectDeck.discard(card);
-            });
+            cards.forEach((card) => player.discardCardFromHand(card));
             this.projectPlayed(player);
             player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(cards.length));
             return undefined;
-        }, { max: player.cardsInHand.length, played: false });
+        });
     }
 }
 exports.SellPatentsStandardProject = SellPatentsStandardProject;

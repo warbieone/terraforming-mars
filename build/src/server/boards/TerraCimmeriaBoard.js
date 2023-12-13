@@ -5,7 +5,8 @@ const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
 const Board_1 = require("./Board");
 const BoardBuilder_1 = require("./BoardBuilder");
 const SpaceName_1 = require("../SpaceName");
-class TerraCimmeriaBoard extends Board_1.Board {
+const MarsBoard_1 = require("./MarsBoard");
+class TerraCimmeriaBoard extends MarsBoard_1.MarsBoard {
     static newInstance(gameOptions, rng) {
         const builder = new BoardBuilder_1.BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
         const PLANT = SpaceBonus_1.SpaceBonus.PLANT;

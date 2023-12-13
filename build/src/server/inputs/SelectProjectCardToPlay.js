@@ -7,6 +7,7 @@ const Units_1 = require("../../common/Units");
 const MoonExpansion_1 = require("../moon/MoonExpansion");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 const CardName_1 = require("../../common/cards/CardName");
+const ModelUtils_1 = require("../models/ModelUtils");
 class SelectProjectCardToPlay extends PlayerInput_1.BasePlayerInput {
     constructor(player, cards = player.getPlayableCards(), config) {
         super('projectCard', 'Play project card');
@@ -26,6 +27,25 @@ class SelectProjectCardToPlay extends PlayerInput_1.BasePlayerInput {
                 },
             ];
         }));
+    }
+    toModel(player) {
+        return {
+            title: this.title,
+            buttonLabel: this.buttonLabel,
+            type: 'projectCard',
+            cards: (0, ModelUtils_1.cardsToModel)(player, this.cards, { showCalculatedCost: true, extras: this.extras }),
+            microbes: player.getSpendable('microbes'),
+            floaters: player.getSpendable('floaters'),
+            paymentOptions: {
+                heat: player.canUseHeatAsMegaCredits,
+                lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
+                plants: player.canUsePlantsAsMegacredits,
+            },
+            lunaArchivesScience: player.getSpendable('lunaArchivesScience'),
+            seeds: player.getSpendable('seeds'),
+            graphene: player.getSpendable('graphene'),
+            kuiperAsteroids: player.getSpendable('kuiperAsteroids'),
+        };
     }
     process(input) {
         if (!(0, InputResponse_1.isSelectProjectCardToPlayResponse)(input)) {
@@ -49,6 +69,9 @@ class SelectProjectCardToPlay extends PlayerInput_1.BasePlayerInput {
         if (reserveUnits.titanium + input.payment.titanium > this.player.titanium) {
             throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${input.card}`);
         }
+        if (reserveUnits.plants + input.payment.plants > this.player.plants) {
+            throw new Error(`${reserveUnits.titanium} units of plants must be reserved for ${input.card}`);
+        }
         const yesAnd = typeof (details.details) === 'boolean' ? undefined : details.details;
         this.payAndPlay(card, input.payment, yesAnd);
         return undefined;
@@ -63,11 +86,6 @@ class SelectProjectCardToPlay extends PlayerInput_1.BasePlayerInput {
             }
         }
         this.cb(card);
-    }
-    cb(card) {
-        var _a, _b;
-        (_b = (_a = this.config) === null || _a === void 0 ? void 0 : _a.cb) === null || _b === void 0 ? void 0 : _b.call(_a, card);
-        return undefined;
     }
 }
 exports.SelectProjectCardToPlay = SelectProjectCardToPlay;

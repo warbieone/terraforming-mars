@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 const Board_1 = require("../../boards/Board");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
@@ -17,7 +16,7 @@ class MartianMonuments extends Card_1.Card {
             name: CardName_1.CardName.MARTIAN_MONUMENTS,
             cost: 10,
             tags: [Tag_1.Tag.MARS, Tag_1.Tag.BUILDING],
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.cities(1, { text: 'ON MARS' })),
+            requirements: { cities: 1, text: 'ON MARS' },
             behavior: {
                 production: { megacredits: { tag: Tag_1.Tag.MARS } },
             },

@@ -9,7 +9,7 @@ const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard")
 const CardRenderer_1 = require("../../cards/render/CardRenderer");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.br.cards(1, { secondaryTag: AltSecondaryTag_1.AltSecondaryTag.FLOATER }).colon().floaters(1).nbsp;
+    b.cards(1, { secondaryTag: AltSecondaryTag_1.AltSecondaryTag.FLOATER }).colon().floaters(1).nbsp;
     b.floaters(1).slash().influence();
 });
 class CloudSocieties extends GlobalEvent_1.GlobalEvent {

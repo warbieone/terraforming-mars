@@ -7,7 +7,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardResource_1 = require("../../../common/CardResource");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
-const CardRequirements_1 = require("../requirements/CardRequirements");
 const Options_1 = require("../Options");
 class PrideoftheEarthArkship extends ActionCard_1.ActionCard {
     constructor() {
@@ -18,7 +17,7 @@ class PrideoftheEarthArkship extends ActionCard_1.ActionCard {
             cost: 22,
             resourceType: CardResource_1.CardResource.SCIENCE,
             victoryPoints: { resourcesHere: {} },
-            requirements: CardRequirements_1.CardRequirements.builder((b) => b.tag(Tag_1.Tag.SCIENCE).tag(Tag_1.Tag.SPACE, 2)),
+            requirements: [{ tag: Tag_1.Tag.SCIENCE }, { tag: Tag_1.Tag.SPACE, count: 2 }],
             reserveUnits: { titanium: 2 },
             action: {
                 addResources: { tag: Tag_1.Tag.SCIENCE, per: 5 },

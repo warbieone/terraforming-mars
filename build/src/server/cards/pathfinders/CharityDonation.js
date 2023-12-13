@@ -8,7 +8,7 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
 const LogHelper_1 = require("../../LogHelper");
 const SelectCard_1 = require("../../inputs/SelectCard");
-const DeferredAction_1 = require("../..//deferredActions/DeferredAction");
+const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 class CharityDonation extends Card_1.Card {
     constructor() {
         super({
@@ -45,7 +45,8 @@ class SelectCharityDonationCard extends DeferredAction_1.DeferredAction {
         this.cards = cards;
     }
     execute() {
-        return new SelectCard_1.SelectCard('Select a card to keep', 'Choose', this.cards, ([card]) => {
+        return new SelectCard_1.SelectCard('Select a card to keep', 'Choose', this.cards)
+            .andThen(([card]) => {
             const game = this.player.game;
             const cardIdx = this.cards.indexOf(card);
             if (cardIdx > -1) {

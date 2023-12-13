@@ -10,7 +10,6 @@ export class Aphrodite extends CorporationCard {
       name: CardName.APHRODITE,
       tags: [Tag.PLANT, Tag.VENUS],
       startingMegaCredits: 50,
-      type: CardType.CORPORATION,
 
       behavior: {
         production: {plants: 2},
