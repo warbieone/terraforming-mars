@@ -48,7 +48,7 @@ import {MartianLumberCorp} from './MartianLumberCorp';
 import {MeatIndustry} from './MeatIndustry';
 import {Meltworks} from './Meltworks';
 import {MercurianAlloys} from './MercurianAlloys';
-//import {Merger} from './Merger';
+import {Merger} from './Merger';
 import {MoholeLake} from './MoholeLake';
 import {MonsInsurance} from './MonsInsurance';
 import {NeptunianPowerConsultants} from './NeptunianPowerConsultants';
@@ -147,7 +147,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
 
   preludeCards: {
     [CardName.NEW_PARTNER]: {Factory: NewPartner},
-    //[CardName.MERGER]: {Factory: Merger},
+    [CardName.MERGER]: {Factory: Merger},
     [CardName.CORPORATE_ARCHIVES]: {Factory: CorporateArchives},
     [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
     // [CardName.HEAD_START]: {Factory: HeadStart}, // Head Start is disabled because it's not working well.
