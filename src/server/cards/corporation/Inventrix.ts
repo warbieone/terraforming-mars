@@ -9,7 +9,7 @@ export class Inventrix extends CorporationCard {
       name: CardName.INVENTRIX,
       tags: [Tag.SCIENCE],
       startingMegaCredits: 45,
-      globalParameterRequirementBonus: {steps: 2},
+      globalParameterRequirementBonus: {steps: 3},
 
       firstAction: {
         text: 'Draw 3 cards',
