@@ -1,15 +1,13 @@
-import {IProjectCard} from '../../IProjectCard';
+import {IActionCard} from '../../ICard';
 import {Tag} from '../../../../common/cards/Tag';
 import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
-import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
 import {max} from '../../Options';
 import {CardResource} from '../../../../common/CardResource';
+import {ActionCard} from '../../ActionCard';
 
-export class SpaceDebrisCollection extends Card implements IProjectCard {
-  public override resourceCount = 0;
-
+export class SpaceDebrisCollection extends ActionCard implements IActionCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -18,19 +16,24 @@ export class SpaceDebrisCollection extends Card implements IProjectCard {
       cost: 10,
       resourceType: CardResource.ASTEROID,
 
+      behavior: {
+        addResources: 2,
+      },
+
       requirements: {tag: Tag.SCIENCE, count: 5, max},
 
       action: {
         or: {
           behaviors: [
             {
-              title: 'Add asteroid',
               addResources: 1,
+              title: 'Add asteroid',
+
             },
             {
-              title: 'Remove asteroid',
               spend: {resourcesHere: 1},
               drawCard: 1,
+              title: 'Remove asteroid',
             },
           ],
           autoSelect: true,
