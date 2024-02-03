@@ -95,6 +95,7 @@ export class Player implements IPlayer {
 
   // Terraforming Rating
   private terraformRating: number = 20;
+  public hasIncreasedTerraformRatingThisGeneration: boolean = false;
 
   public get megaCredits(): number {
     return this.stock.megacredits;
@@ -303,6 +304,7 @@ export class Player implements IPlayer {
   public increaseTerraformRating(steps: number = 1, opts: {log?: boolean} = {}) {
     const raiseRating = () => {
       this.terraformRating += steps;
+      this.hasIncreasedTerraformRatingThisGeneration = true;
 
       if (opts.log === true) {
         this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
@@ -431,6 +433,11 @@ export class Player implements IPlayer {
     // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
     if (this.game.gameOptions.pathfindersExpansion && this.productionIsProtected(attacker)) return false;
     return true;
+  }
+
+
+  public maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void {
+    this.defer(UnderworldExpansion.maybeBlockAttack(this, perpetrator, cb));
   }
 
   public productionIsProtected(attacker: IPlayer): boolean {
@@ -711,7 +718,7 @@ export class Player implements IPlayer {
 
   public dealForDraft(quantity: number, cards: Array<IProjectCard>): void {
     for (let i = 0; i < quantity; i++) {
-      cards.push(this.game.projectDeck.draw(this.game, 'bottom'));
+      cards.push(this.game.projectDeck.drawLegacy(this.game, 'bottom'));
     }
   }
 
@@ -971,7 +978,7 @@ export class Player implements IPlayer {
     case 'discard':
       this.discardPlayedCard(selectedCard);
       break;
-    // Do nothing. Good for fake cards.
+    // Do nothing. Good for fake cards and replaying events.
     case 'nothing':
       break;
     // Do nothing, used for Double Down.
@@ -979,7 +986,7 @@ export class Player implements IPlayer {
       break;
     }
 
-    // See DeclareCloneTag for why.
+    // See DeclareCloneTag for why this skips cards with clone tags.
     if (!selectedCard.tags.includes(Tag.CLONE) && cardAction !== 'action-only') {
       this.onCardPlayed(selectedCard);
     }
@@ -997,10 +1004,7 @@ export class Player implements IPlayer {
         if (corporation.onCorpCardPlayed === undefined) {
           continue;
         }
-        this.game.defer(
-          new SimpleDeferredAction(
-            this,
-            () => corporation.onCorpCardPlayed?.(this, playedCorporationCard, somePlayer)));
+        this.defer(corporation.onCorpCardPlayed(this, playedCorporationCard, somePlayer));
       }
     }
   }
@@ -1629,14 +1633,14 @@ export class Player implements IPlayer {
 
   // TODO(kberg): perhaps move to Card
   public deferInitialAction(corp: ICorporationCard) {
-    this.game.defer(new SimpleDeferredAction(this, () => {
+    this.defer(() => {
       if (corp.initialAction) {
         return corp.initialAction(this);
       } else if (corp.firstAction !== undefined) {
         getBehaviorExecutor().execute(corp.firstAction, this, corp);
       }
       return undefined;
-    }));
+    });
   }
 
   private incrementActionsTaken(): void {
@@ -1822,6 +1826,7 @@ export class Player implements IPlayer {
       pickedCorporationCard: this.pickedCorporationCard?.name,
       // Terraforming Rating
       terraformRating: this.terraformRating,
+      hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,
       // Resources
       megaCredits: this.megaCredits,
       megaCreditProduction: this.production.megacredits,
@@ -1913,10 +1918,12 @@ export class Player implements IPlayer {
     player.colonies.cardDiscount = d.cardDiscount;
     player.colonies.tradeDiscount = d.colonyTradeDiscount;
     player.colonies.tradeOffset = d.colonyTradeOffset;
+    player.colonies.setFleetSize(d.fleetSize);
     player.colonies.victoryPoints = d.colonyVictoryPoints;
     player.victoryPointsByGeneration = d.victoryPointsByGeneration;
     player.energy = d.energy;
-    player.colonies.setFleetSize(d.fleetSize);
+    // TODO(kberg): remove ?? false by 2023-01-30
+    player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration ?? false;
     player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
     player.heat = d.heat;
     player.megaCredits = d.megaCredits;
@@ -1991,22 +1998,16 @@ export class Player implements IPlayer {
       player.underworldData = d.underworldData;
     }
 
-    if (d.hasIncreasedTerraformRatingThisGeneration === true) {
-      const card = player.playedCards.find((card) => card.name === CardName.UNITED_NATIONS_MARS_INITIATIVE);
-      card?.onIncreaseTerraformRating?.(player, player, 1);
-      const card2 = player.playedCards.find((card) => card.name === CardName.PRISTAR);
-      card2?.onIncreaseTerraformRating?.(player, player, 1);
-    }
-
     return player;
   }
 
   /* Shorthand for deferring things */
-  public defer(input: PlayerInput | undefined | void, priority: Priority = Priority.DEFAULT): void {
+  public defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined), priority: Priority = Priority.DEFAULT): void {
     if (input === undefined) {
       return;
     }
-    const action = new SimpleDeferredAction(this, () => input, priority);
+    const cb = typeof(input) === 'function' ? input : () => input;
+    const action = new SimpleDeferredAction(this, cb, priority);
     this.game.defer(action);
   }
 }

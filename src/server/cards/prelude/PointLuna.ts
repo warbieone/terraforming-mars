@@ -2,7 +2,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
@@ -35,7 +35,7 @@ export class PointLuna extends CorporationCard {
     return this.onCardPlayed(player, card);
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (player.isCorporation(this.name)) {
       const tagCount = player.tags.cardTagCount(card, Tag.EARTH);
       if (tagCount > 0) {
@@ -43,7 +43,6 @@ export class PointLuna extends CorporationCard {
         player.game.defer(new DiscardCards(player,1));
       }
     }
-    return undefined;
   }
 
   public override bespokePlay(player: IPlayer) {

@@ -57,35 +57,27 @@ export class Deck<T extends ICard> {
     }
   }
 
-
-
-
-  public drawSpecific(cardNames: string[]): T[] {
-    const cards: T[] = [];
-
-    for (const cardName of cardNames) {
-      const cardIndex = this.drawPile.findIndex(card => card.name === cardName);
-
-      if (cardIndex === -1) {
-        throw new Error(`Card ${cardName} not found in ${this.type} deck`);
-      }
-
-      const card = this.drawPile.splice(cardIndex, 1)[0];
-      cards.push(card);
-    }
-
+  public draw(logger: Logger, source: 'top' | 'bottom' = 'top'): T | undefined {
     if (this.drawPile.length === 0) {
+      logger.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
       this.shuffle();
     }
 
-    return cards;
+    const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
+
+    if (this.drawPile.length === 0) {
+      logger.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
+      this.shuffle();
+    }
+
+    return card;
   }
 
+  public drawLegacy(logger: Logger, source: 'top' | 'bottom' = 'top'): T {
+    return this.drawOrThrow(logger, source);
+  }
 
-
-
-
-  public draw(logger: Logger, source: 'top' | 'bottom' = 'top'): T {
+  public drawOrThrow(logger: Logger, source: 'top' | 'bottom' = 'top'): T {
     const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
 
     if (card === undefined) {
@@ -109,7 +101,7 @@ export class Deck<T extends ICard> {
         logger.log(`discarded every ${this.type} card without a match`);
         break;
       }
-      const projectCard = this.draw(logger);
+      const projectCard = this.drawLegacy(logger);
       if (include(projectCard)) {
         result.push(projectCard);
       } else {
