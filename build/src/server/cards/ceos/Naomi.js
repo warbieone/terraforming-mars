@@ -4,7 +4,6 @@ exports.Naomi = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CeoCard_1 = require("./CeoCard");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const constants_1 = require("../../../common/constants");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
@@ -33,13 +32,13 @@ class Naomi extends CeoCard_1.CeoCard {
         const game = player.game;
         const activeColonies = game.colonies.filter((colony) => colony.isActive);
         activeColonies.forEach((colony) => {
-            game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Move the ' + colony.name + ' tile track marker to its HIGHEST value').andThen(() => {
+            player.defer(() => new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Move the ' + colony.name + ' tile track marker to its HIGHEST value').andThen(() => {
                 colony.trackPosition = constants_1.MAX_COLONY_TRACK_POSITION;
                 return undefined;
             }), new SelectOption_1.SelectOption('Move the ' + colony.name + ' tile track marker to its LOWEST value').andThen(() => {
                 colony.trackPosition = colony.colonies.length;
                 return undefined;
-            }))));
+            })));
         });
         return undefined;
     }

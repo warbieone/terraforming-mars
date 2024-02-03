@@ -42,7 +42,6 @@ class Ringcom extends CorporationCard_1.CorporationCard {
     }
     onCorpCardPlayed(player, card) {
         this.onCardPlayed(player, card);
-        return undefined;
     }
     onCardPlayed(player, card) {
         if (card.tags.includes(Tag_1.Tag.JOVIAN)) {

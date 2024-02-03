@@ -56,6 +56,21 @@ class Deck {
         return cards;
     }
     draw(logger, source = 'top') {
+        if (this.drawPile.length === 0) {
+            logger.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
+            this.shuffle();
+        }
+        const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
+        if (this.drawPile.length === 0) {
+            logger.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
+            this.shuffle();
+        }
+        return card;
+    }
+    drawLegacy(logger, source = 'top') {
+        return this.drawOrThrow(logger, source);
+    }
+    drawOrThrow(logger, source = 'top') {
         const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
         if (card === undefined) {
             throw new Error(`Unexpected empty ${this.type} deck`);
@@ -74,7 +89,7 @@ class Deck {
                 logger.log(`discarded every ${this.type} card without a match`);
                 break;
             }
-            const projectCard = this.draw(logger);
+            const projectCard = this.drawLegacy(logger);
             if (include(projectCard)) {
                 result.push(projectCard);
             }

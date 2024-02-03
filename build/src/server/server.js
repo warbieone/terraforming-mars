@@ -24,7 +24,7 @@ const timer_1 = require("./utils/timer");
 const BehaviorExecutor_1 = require("./behavior/BehaviorExecutor");
 const Executor_1 = require("./behavior/Executor");
 const GameLoader_1 = require("./database/GameLoader");
-const AllCards_1 = require("./cards/AllCards");
+const AllManifests_1 = require("./cards/AllManifests");
 const GlobalEventDealer_1 = require("./turmoil/globalEvents/GlobalEventDealer");
 process.on('uncaughtException', (err) => {
     console.error('UNCAUGHT EXCEPTION', err);
@@ -77,7 +77,7 @@ function start() {
             app: 'terraforming-mars-app',
         });
         prometheus.collectDefaultMetrics();
-        (0, GlobalEventDealer_1.initializeGlobalEventDealer)(AllCards_1.ALL_MODULE_MANIFESTS);
+        (0, GlobalEventDealer_1.initializeGlobalEventDealer)(AllManifests_1.ALL_MODULE_MANIFESTS);
         (0, BehaviorExecutor_1.registerBehaviorExecutor)(new Executor_1.Executor());
         const server = createServer();
         yield (0, timer_1.timeAsync)(Database_1.Database.getInstance().initialize())

@@ -4,7 +4,6 @@ exports.TradeAdvance = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const PreludeCard_1 = require("../prelude/PreludeCard");
 const CardName_1 = require("../../../common/cards/CardName");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const CardRenderer_1 = require("../render/CardRenderer");
 class TradeAdvance extends PreludeCard_1.PreludeCard {
     constructor() {
@@ -26,13 +25,13 @@ class TradeAdvance extends PreludeCard_1.PreludeCard {
         });
     }
     bespokePlay(player) {
-        player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+        player.defer(() => {
             const activeColonies = player.game.colonies.filter((colony) => colony.isActive);
             activeColonies.forEach((colony) => {
                 colony.trade(player, { usesTradeFleet: false }, 1);
             });
             return undefined;
-        }));
+        });
         if (player.game.isSoloMode()) {
             player.megaCredits += 8;
         }

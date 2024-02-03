@@ -334,7 +334,7 @@ export class Game implements IGame, Logger {
          
           if (player.name !== 'Owen T' && player.name !== 'Laura T' && player.name !== 'Joel T') {
               for (let i = 0; i < gameOptions.startingCorporations; i++) {
-                  player.dealtCorporationCards.push(corporationDeck.draw(game));
+                  player.dealtCorporationCards.push(corporationDeck.drawLegacy(game));
               }
           }
           

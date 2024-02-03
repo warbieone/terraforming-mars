@@ -24,48 +24,57 @@ class ColoniesHandler {
         if (!game.gameOptions.coloniesExtension)
             return;
         game.colonies.forEach((colony) => {
-            ColoniesHandler.maybeActivateColony(colony, card);
+            if (colony.isActive === false && ColoniesHandler.cardActivatesColony(colony, card)) {
+                colony.isActive = true;
+            }
         });
     }
-    static maybeActivateColony(colony, card) {
-        if (colony.isActive !== true) {
-            if (colony.metadata.cardResource !== undefined && colony.metadata.cardResource === card.resourceType) {
-                colony.isActive = true;
-            }
-            if (colony.name === ColonyName_1.ColonyName.VENUS && card.tags.includes(Tag_1.Tag.VENUS) && card.resourceType !== undefined) {
-                colony.isActive = true;
-            }
+    static cardActivatesColony(colony, card) {
+        if (colony.isActive) {
+            return true;
         }
-        return colony.isActive;
+        if (colony.metadata.cardResource !== undefined && colony.metadata.cardResource === card.resourceType) {
+            return true;
+        }
+        if (colony.name === ColonyName_1.ColonyName.VENUS && card.tags.includes(Tag_1.Tag.VENUS) && card.resourceType !== undefined) {
+            return true;
+        }
+        return false;
     }
     static addColonyTile(player, options) {
         var _a, _b;
         const game = player.game;
-        const colonyTiles = (_a = options === null || options === void 0 ? void 0 : options.colonies) !== null && _a !== void 0 ? _a : game.discardedColonies;
+        let colonyTiles = (_a = options === null || options === void 0 ? void 0 : options.colonies) !== null && _a !== void 0 ? _a : game.discardedColonies;
+        if ((options === null || options === void 0 ? void 0 : options.activateableOnly) === true) {
+            colonyTiles = colonyTiles.filter((colonyTile) => colonyTileWillEnterActive(colonyTile, game));
+        }
         if (colonyTiles.length === 0) {
             game.log('No availble colony tiles for ${0} to choose from', (b) => b.player(player));
             return;
         }
         const title = (_b = options === null || options === void 0 ? void 0 : options.title) !== null && _b !== void 0 ? _b : 'Select colony tile to add';
-        function maybeActivateNewColonyTile(colony, game) {
-            if (colony.isActive)
-                return;
+        function colonyTileWillEnterActive(colony, game) {
+            if (colony.isActive) {
+                return true;
+            }
             for (const player of game.getPlayers()) {
                 for (const card of player.tableau) {
-                    const active = ColoniesHandler.maybeActivateColony(colony, card);
-                    if (active) {
-                        return;
+                    if (ColoniesHandler.cardActivatesColony(colony, card)) {
+                        return true;
                     }
                 }
             }
+            return false;
         }
-        const selectColonyTile = new SelectColony_1.SelectColony(title, 'Add colony tile', colonyTiles)
+        const selectColonyTile = new SelectColony_1.SelectColony(title, 'Add colony tile', [...colonyTiles])
             .andThen((colonyTile) => {
             var _a;
             game.colonies.push(colonyTile);
             game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
             game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colonyTile));
-            maybeActivateNewColonyTile(colonyTile, game);
+            if (!colonyTile.isActive && colonyTileWillEnterActive(colonyTile, game)) {
+                colonyTile.isActive = true;
+            }
             (0, utils_1.inplaceRemove)(game.discardedColonies, colonyTile);
             (_a = options === null || options === void 0 ? void 0 : options.cb) === null || _a === void 0 ? void 0 : _a.call(options, colonyTile);
             return undefined;

@@ -48,10 +48,9 @@ class CommunicationCenter extends Card_1.Card {
     onCardPlayedFromAnyPlayer(thisCardOwner, _playedCardOwner, card) {
         if (card.type === CardType_1.CardType.EVENT) {
             const priority = (card.name === CardName_1.CardName.CEOS_FAVORITE_PROJECT) ? DeferredAction_1.Priority.BACK_OF_THE_LINE : DeferredAction_1.Priority.DEFAULT;
-            thisCardOwner.game.defer(new DeferredAction_1.SimpleDeferredAction(thisCardOwner, () => {
+            thisCardOwner.defer(() => {
                 thisCardOwner.addResourceTo(this, { qty: 1, log: true });
-                return undefined;
-            }), priority);
+            }, priority);
         }
         return undefined;
     }

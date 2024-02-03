@@ -40,7 +40,6 @@ class PointLuna extends CorporationCard_1.CorporationCard {
                 player.game.defer(new DiscardCards_1.DiscardCards(player, 1));
             }
         }
-        return undefined;
     }
     bespokePlay(player) {
         player.production.add(Resource_1.Resource.TITANIUM, 1);

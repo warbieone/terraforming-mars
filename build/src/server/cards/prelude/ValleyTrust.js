@@ -36,9 +36,9 @@ class ValleyTrust extends CorporationCard_1.CorporationCard {
     initialAction(player) {
         const game = player.game;
         const cards = [
-            game.preludeDeck.draw(game),
-            game.preludeDeck.draw(game),
-            game.preludeDeck.draw(game),
+            game.preludeDeck.drawLegacy(game),
+            game.preludeDeck.drawLegacy(game),
+            game.preludeDeck.drawLegacy(game),
         ];
         return PreludesExpansion_1.PreludesExpansion.playPrelude(player, cards);
     }

@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const Resource_1 = require("../../../common/Resource");
@@ -27,7 +26,7 @@ class SmallOpenPitMine extends Card_1.Card {
         });
     }
     produce(player) {
-        player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+        player.defer(() => {
             return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Increase your steel production 2 steps').andThen(() => {
                 player.production.add(Resource_1.Resource.STEEL, 2, { log: true });
                 return undefined;
@@ -35,7 +34,7 @@ class SmallOpenPitMine extends Card_1.Card {
                 player.production.add(Resource_1.Resource.TITANIUM, 1, { log: true });
                 return undefined;
             }));
-        }));
+        });
     }
     bespokePlay(player) {
         this.produce(player);

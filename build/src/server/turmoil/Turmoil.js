@@ -13,7 +13,6 @@ const constants_1 = require("../../common/constants");
 const PoliticalAgendas_1 = require("./PoliticalAgendas");
 const Types_1 = require("../../common/turmoil/Types");
 const CardName_1 = require("../../common/cards/CardName");
-const DeferredAction_1 = require("../deferredActions/DeferredAction");
 const mnemonist_1 = require("mnemonist");
 const SendDelegateToArea_1 = require("../deferredActions/SendDelegateToArea");
 const Policy_1 = require("./Policy");
@@ -233,7 +232,7 @@ class Turmoil {
             let steps = gainTR ? 1 : 0;
             if (chairman.isCorporation(CardName_1.CardName.TEMPEST_CONSULTANCY))
                 steps += 1;
-            game.defer(new DeferredAction_1.SimpleDeferredAction(chairman, () => {
+            chairman.defer(() => {
                 if (steps > 0) {
                     chairman.increaseTerraformRating(steps);
                     game.log('${0} is the new chairman and gains ${1} TR', (b) => b.player(chairman).number(steps));
@@ -241,8 +240,7 @@ class Turmoil {
                 else {
                     game.log('${0} is the new chairman', (b) => b.player(chairman));
                 }
-                return undefined;
-            }));
+            });
         }
         else {
             game.log('A neutral delegate is the new chairman.');
@@ -309,13 +307,6 @@ class Turmoil {
         else {
             this.playersInfluenceBonus.set(player.id, bonus);
         }
-    }
-    canPlay(player, partyName) {
-        if (this.rulingParty.name === partyName) {
-            return true;
-        }
-        const party = this.getPartyByName(partyName);
-        return party.delegates.count(player) >= 2;
     }
     getAvailableDelegateCount(delegate) {
         return this.delegateReserve.get(delegate);

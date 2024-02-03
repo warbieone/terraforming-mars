@@ -6,7 +6,6 @@ const PartyName_1 = require("../../../common/turmoil/PartyName");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const CardName_1 = require("../../../common/cards/CardName");
 const constants_1 = require("../../../common/constants");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const RemoveOceanTile_1 = require("../../deferredActions/RemoveOceanTile");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
@@ -200,7 +199,7 @@ class RedsPolicy03 {
             }
             if (orOptions.options.length === 1)
                 return orOptions.options[0].cb();
-            game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => orOptions));
+            player.defer(orOptions);
             return undefined;
         });
         return undefined;

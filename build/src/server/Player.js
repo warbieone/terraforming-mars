@@ -101,6 +101,7 @@ class Player {
         this.handicap = handicap;
         this.corporations = [];
         this.terraformRating = 20;
+        this.hasIncreasedTerraformRatingThisGeneration = false;
         this.titaniumValue = 3;
         this.steelValue = 2;
         this.canUseHeatAsMegaCredits = false;
@@ -196,6 +197,7 @@ class Player {
     increaseTerraformRating(steps = 1, opts = {}) {
         const raiseRating = () => {
             this.terraformRating += steps;
+            this.hasIncreasedTerraformRatingThisGeneration = true;
             if (opts.log === true) {
                 this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
             }
@@ -303,6 +305,9 @@ class Player {
         if (this.game.gameOptions.pathfindersExpansion && this.productionIsProtected(attacker))
             return false;
         return true;
+    }
+    maybeBlockAttack(perpetrator, cb) {
+        this.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(this, perpetrator, cb));
     }
     productionIsProtected(attacker) {
         return attacker !== this && this.cardIsInEffect(CardName_1.CardName.PRIVATE_SECURITY);
@@ -519,7 +524,7 @@ class Player {
     }
     dealForDraft(quantity, cards) {
         for (let i = 0; i < quantity; i++) {
-            cards.push(this.game.projectDeck.draw(this.game, 'bottom'));
+            cards.push(this.game.projectDeck.drawLegacy(this.game, 'bottom'));
         }
     }
     askPlayerToDraft(initialDraft, passTo, passedCards) {
@@ -742,7 +747,7 @@ class Player {
                 if (corporation.onCorpCardPlayed === undefined) {
                     continue;
                 }
-                this.game.defer(new DeferredAction_1.SimpleDeferredAction(this, () => { var _a; return (_a = corporation.onCorpCardPlayed) === null || _a === void 0 ? void 0 : _a.call(corporation, this, playedCorporationCard, somePlayer); }));
+                this.defer(corporation.onCorpCardPlayed(this, playedCorporationCard, somePlayer));
             }
         }
     }
@@ -1216,7 +1221,7 @@ class Player {
         });
     }
     deferInitialAction(corp) {
-        this.game.defer(new DeferredAction_1.SimpleDeferredAction(this, () => {
+        this.defer(() => {
             if (corp.initialAction) {
                 return corp.initialAction(this);
             }
@@ -1224,7 +1229,7 @@ class Player {
                 (0, BehaviorExecutor_1.getBehaviorExecutor)().execute(corp.firstAction, this, corp);
             }
             return undefined;
-        }));
+        });
     }
     incrementActionsTaken() {
         this.actionsTakenThisRound++;
@@ -1381,6 +1386,7 @@ class Player {
             }),
             pickedCorporationCard: (_a = this.pickedCorporationCard) === null || _a === void 0 ? void 0 : _a.name,
             terraformRating: this.terraformRating,
+            hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,
             megaCredits: this.megaCredits,
             megaCreditProduction: this.production.megacredits,
             steel: this.steel,
@@ -1442,7 +1448,7 @@ class Player {
         return result;
     }
     static deserialize(d) {
-        var _a, _b, _c, _d;
+        var _a, _b, _c;
         const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
         const cardFinder = new CardFinder_1.CardFinder();
         player.actionsTakenThisGame = d.actionsTakenThisGame;
@@ -1454,10 +1460,11 @@ class Player {
         player.colonies.cardDiscount = d.cardDiscount;
         player.colonies.tradeDiscount = d.colonyTradeDiscount;
         player.colonies.tradeOffset = d.colonyTradeOffset;
+        player.colonies.setFleetSize(d.fleetSize);
         player.colonies.victoryPoints = d.colonyVictoryPoints;
         player.victoryPointsByGeneration = d.victoryPointsByGeneration;
         player.energy = d.energy;
-        player.colonies.setFleetSize(d.fleetSize);
+        player.hasIncreasedTerraformRatingThisGeneration = (_a = d.hasIncreasedTerraformRatingThisGeneration) !== null && _a !== void 0 ? _a : false;
         player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
         player.heat = d.heat;
         player.megaCredits = d.megaCredits;
@@ -1500,11 +1507,11 @@ class Player {
                 if (corporation.resourceCount !== undefined) {
                     card.resourceCount = corporation.resourceCount;
                 }
-                (_a = card.deserialize) === null || _a === void 0 ? void 0 : _a.call(card, corporation);
+                (_b = card.deserialize) === null || _b === void 0 ? void 0 : _b.call(card, corporation);
                 player.corporations.push(card);
             }
         }
-        player.pendingInitialActions = cardFinder.corporationCardsFromJSON((_b = d.pendingInitialActions) !== null && _b !== void 0 ? _b : []);
+        player.pendingInitialActions = cardFinder.corporationCardsFromJSON((_c = d.pendingInitialActions) !== null && _c !== void 0 ? _c : []);
         player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
         player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
         player.dealtCeoCards = cardFinder.ceosFromJSON(d.dealtCeoCards);
@@ -1518,19 +1525,14 @@ class Player {
         if (d.underworldData !== undefined) {
             player.underworldData = d.underworldData;
         }
-        if (d.hasIncreasedTerraformRatingThisGeneration === true) {
-            const card = player.playedCards.find((card) => card.name === CardName_1.CardName.UNITED_NATIONS_MARS_INITIATIVE);
-            (_c = card === null || card === void 0 ? void 0 : card.onIncreaseTerraformRating) === null || _c === void 0 ? void 0 : _c.call(card, player, player, 1);
-            const card2 = player.playedCards.find((card) => card.name === CardName_1.CardName.PRISTAR);
-            (_d = card2 === null || card2 === void 0 ? void 0 : card2.onIncreaseTerraformRating) === null || _d === void 0 ? void 0 : _d.call(card2, player, player, 1);
-        }
         return player;
     }
     defer(input, priority = DeferredAction_1.Priority.DEFAULT) {
         if (input === undefined) {
             return;
         }
-        const action = new DeferredAction_1.SimpleDeferredAction(this, () => input, priority);
+        const cb = typeof (input) === 'function' ? input : () => input;
+        const action = new DeferredAction_1.SimpleDeferredAction(this, cb, priority);
         this.game.defer(action);
     }
 }

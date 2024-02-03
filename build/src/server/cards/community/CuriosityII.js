@@ -6,7 +6,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
@@ -51,7 +50,7 @@ class CuriosityII extends CorporationCard_1.CorporationCard {
         if (space.spaceType === SpaceType_1.SpaceType.COLONY)
             return;
         if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus)) || ((_a = space.tile) === null || _a === void 0 ? void 0 : _a.covers) !== undefined) {
-            cardOwner.game.defer(new DeferredAction_1.SimpleDeferredAction(cardOwner, () => this.corpAction(cardOwner)));
+            cardOwner.defer(() => this.corpAction(cardOwner));
         }
     }
     corpAction(player) {

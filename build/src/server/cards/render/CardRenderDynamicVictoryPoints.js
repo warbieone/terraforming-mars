@@ -32,6 +32,7 @@ const RESOURCE_TO_ITEM_TYPE = {
     [CardResource_1.CardResource.WARE]: undefined,
     [CardResource_1.CardResource.SCOOP]: undefined,
     [CardResource_1.CardResource.ACTIVIST]: undefined,
+    [CardResource_1.CardResource.SUPPLY_CHAIN]: undefined,
 };
 const TAG_TO_ITEM_TYPE = new Map([
     [Tag_1.Tag.JOVIAN, CardRenderItemType_1.CardRenderItemType.JOVIAN],

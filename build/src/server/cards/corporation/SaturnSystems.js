@@ -32,18 +32,14 @@ class SaturnSystems extends CorporationCard_1.CorporationCard {
         });
     }
     onCardPlayed(player, card) {
-        this._onCardPlayed(player, card);
-    }
-    onCorpCardPlayed(player, card) {
-        this._onCardPlayed(player, card);
-        return undefined;
-    }
-    _onCardPlayed(player, card) {
         for (const tag of card.tags) {
             if (tag === Tag_1.Tag.JOVIAN) {
                 player.game.getCardPlayerOrThrow(this.name).production.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
             }
         }
+    }
+    onCorpCardPlayed(player, card) {
+        this.onCardPlayed(player, card);
     }
 }
 exports.SaturnSystems = SaturnSystems;

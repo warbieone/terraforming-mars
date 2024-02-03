@@ -10,7 +10,6 @@ const Card_1 = require("../Card");
 const CardRenderer_1 = require("../render/CardRenderer");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const SelectColony_1 = require("../../inputs/SelectColony");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const ColoniesHandler_1 = require("../../colonies/ColoniesHandler");
 class HuygensObservatory extends Card_1.Card {
     constructor() {
@@ -57,26 +56,26 @@ class HuygensObservatory extends Card_1.Card {
                 game.log('${0} is reusing a trade fleet from ${1}', (b) => b.player(player).colony(colony));
                 colony.visitor = undefined;
                 player.colonies.tradesThisGeneration--;
-                game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => tradeInput));
+                player.defer(() => tradeInput);
                 return undefined;
             }));
         }
         if (hasFreeTradeFleet) {
             if (orOptions.options.length === 1) {
                 orOptions.options.push(new SelectOption_1.SelectOption('Use an available trade fleet').andThen(() => {
-                    game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => tradeInput));
+                    player.defer(tradeInput);
                     return undefined;
                 }));
             }
             else {
-                game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => tradeInput));
+                player.defer(tradeInput);
             }
         }
         if (orOptions.options.length === 1) {
-            game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => orOptions.options[0]));
+            player.defer(orOptions.options[0]);
         }
         if (orOptions.options.length > 1) {
-            game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => orOptions));
+            player.defer(orOptions);
         }
     }
     bespokeCanPlay(player) {
@@ -91,10 +90,7 @@ class HuygensObservatory extends Card_1.Card {
             })).andThen(() => this.tryToTrade(player));
         }
         else {
-            game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
-                this.tryToTrade(player);
-                return undefined;
-            }));
+            player.defer(() => this.tryToTrade(player));
         }
         return undefined;
     }

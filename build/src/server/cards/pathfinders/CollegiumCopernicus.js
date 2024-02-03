@@ -46,7 +46,6 @@ class CollegiumCopernicus extends CorporationCard_1.CorporationCard {
     }
     onCorpCardPlayed(player, card) {
         this.onCardPlayed(player, card);
-        return undefined;
     }
     onCardPlayed(player, card) {
         if (player.tags.cardHasTag(card, Tag_1.Tag.SCIENCE) && player.isCorporation(this.name)) {

@@ -77,9 +77,7 @@ class GeologicalExpedition extends Card_1.Card {
         if (options.options.length === 0) {
             return;
         }
-        const action = new DeferredAction_1.SimpleDeferredAction(activePlayer, () => options);
-        action.priority = DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION;
-        activePlayer.game.defer(action);
+        activePlayer.defer(options, DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
     }
 }
 exports.GeologicalExpedition = GeologicalExpedition;

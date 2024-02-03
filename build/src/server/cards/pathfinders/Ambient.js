@@ -7,7 +7,6 @@ const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const constants_1 = require("../../../common/constants");
 const Size_1 = require("../../../common/cards/render/Size");
 class Ambient extends CorporationCard_1.CorporationCard {
@@ -42,7 +41,6 @@ class Ambient extends CorporationCard_1.CorporationCard {
     }
     onCorpCardPlayed(player, card) {
         this.onCardPlayed(player, card);
-        return undefined;
     }
     onCardPlayed(player, card) {
         if (player.isCorporation(this.name) && card.tags.includes(Tag_1.Tag.VENUS)) {
@@ -55,10 +53,9 @@ class Ambient extends CorporationCard_1.CorporationCard {
     action(player) {
         player.heat -= 8;
         player.increaseTerraformRating();
-        player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+        player.defer(() => {
             player.getActionsThisGeneration().delete(this.name);
-            return undefined;
-        }));
+        });
         return undefined;
     }
 }

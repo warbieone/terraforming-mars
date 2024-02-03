@@ -31,7 +31,7 @@ class MarsUniversity extends Card_1.Card {
     onCardPlayed(player, card) {
         const scienceTags = player.tags.cardTagCount(card, Tag_1.Tag.SCIENCE);
         for (let i = 0; i < scienceTags; i++) {
-            player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+            player.defer(() => {
                 if (player.cardsInHand.length === 0) {
                     return undefined;
                 }
@@ -42,7 +42,7 @@ class MarsUniversity extends Card_1.Card {
                     player.drawCard();
                     return undefined;
                 }), new SelectOption_1.SelectOption('Do nothing'));
-            }), DeferredAction_1.Priority.DISCARD_AND_DRAW);
+            }, DeferredAction_1.Priority.DISCARD_AND_DRAW);
         }
         return undefined;
     }

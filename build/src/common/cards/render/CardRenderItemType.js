@@ -101,5 +101,7 @@ var CardRenderItemType;
     CardRenderItemType["SCOOP"] = "scoop";
     CardRenderItemType["JOURNALISM"] = "journalism";
     CardRenderItemType["ACTIVIST"] = "activist";
+    CardRenderItemType["SUPPLY_CHAIN"] = "supply-chain";
+    CardRenderItemType["GEOSCAN_ICON"] = "geoscan-icon";
 })(CardRenderItemType = exports.CardRenderItemType || (exports.CardRenderItemType = {}));
 //# sourceMappingURL=CardRenderItemType.js.map

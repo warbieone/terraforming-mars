@@ -28,17 +28,9 @@ class UnitedNationsMarsInitiative extends CorporationCard_1.CorporationCard {
                 }),
             },
         });
-        this.data = {
-            lastGenerationIncreasedTR: -1,
-        };
-    }
-    onIncreaseTerraformRating(player, cardOwner) {
-        if (player === cardOwner) {
-            this.data.lastGenerationIncreasedTR = player.game.generation;
-        }
     }
     canAct(player) {
-        return this.data.lastGenerationIncreasedTR === player.game.generation && player.canAfford({ cost: exports.ACTION_COST, tr: { tr: 1 } });
+        return player.hasIncreasedTerraformRatingThisGeneration && player.canAfford({ cost: exports.ACTION_COST, tr: { tr: 1 } });
     }
     action(player) {
         player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 1, { title: titles_1.TITLES.payForCardAction(this.name) }))

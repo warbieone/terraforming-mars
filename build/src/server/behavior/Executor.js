@@ -5,7 +5,6 @@ const Units_1 = require("../../common/Units");
 const AddResourcesToCard_1 = require("../deferredActions/AddResourcesToCard");
 const BuildColony_1 = require("../deferredActions/BuildColony");
 const DecreaseAnyProduction_1 = require("../deferredActions/DecreaseAnyProduction");
-const DeferredAction_1 = require("../deferredActions/DeferredAction");
 const PlaceCityTile_1 = require("../deferredActions/PlaceCityTile");
 const PlaceGreeneryTile_1 = require("../deferredActions/PlaceGreeneryTile");
 const PlaceOceanTile_1 = require("../deferredActions/PlaceOceanTile");
@@ -295,10 +294,10 @@ class Executor {
         const addResources = behavior.addResources;
         if (addResources !== undefined) {
             const count = ctx.count(addResources);
-            player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+            player.defer(() => {
                 player.addResourceTo(card, { qty: count, log: true });
                 return undefined;
-            }));
+            });
         }
         if (behavior.addResourcesToAnyCard) {
             const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];

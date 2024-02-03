@@ -50,6 +50,7 @@ const MartianLumberCorp_1 = require("./MartianLumberCorp");
 const MeatIndustry_1 = require("./MeatIndustry");
 const Meltworks_1 = require("./Meltworks");
 const MercurianAlloys_1 = require("./MercurianAlloys");
+const Merger_1 = require("./Merger");
 const MoholeLake_1 = require("./MoholeLake");
 const MonsInsurance_1 = require("./MonsInsurance");
 const NeptunianPowerConsultants_1 = require("./NeptunianPowerConsultants");
@@ -132,7 +133,7 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.ST_JOSEPH_OF_CUPERTINO_MISSION]: { Factory: StJosephOfCupertinoMission_1.StJosephOfCupertinoMission },
         [CardName_1.CardName.CARBON_NANOSYSTEMS]: { Factory: CarbonNanosystems_1.CarbonNanosystems },
         [CardName_1.CardName.CYBERIA_SYSTEMS]: { Factory: CyberiaSystems_1.CyberiaSystems },
-        [CardName_1.CardName.HERMETIC_ORDER_OF_MARS]: { Factory: HermeticOrderofMars_1.HermeticOrderofMars },
+        [CardName_1.CardName.HERMETIC_ORDER_OF_MARS]: { Factory: HermeticOrderofMars_1.HermeticOrderOfMars },
         [CardName_1.CardName.HOMEOSTASIS_BUREAU]: { Factory: HomeostasisBureau_1.HomeostasisBureau },
         [CardName_1.CardName.KAGUYA_TECH]: { Factory: KaguyaTech_1.KaguyaTech },
         [CardName_1.CardName.MARS_NOMADS]: { Factory: MarsNomads_1.MarsNomads },
@@ -146,6 +147,7 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     },
     preludeCards: {
         [CardName_1.CardName.NEW_PARTNER]: { Factory: NewPartner_1.NewPartner },
+        [CardName_1.CardName.MERGER]: { Factory: Merger_1.Merger },
         [CardName_1.CardName.CORPORATE_ARCHIVES]: { Factory: CorporateArchives_1.CorporateArchives },
         [CardName_1.CardName.DOUBLE_DOWN]: { Factory: DoubleDown_1.DoubleDown, compatibility: 'prelude' },
         [CardName_1.CardName.ANTI_DESERTIFICATION_TECHNIQUES]: { Factory: AntidesertificationTechniques_1.AntidesertificationTechniques },

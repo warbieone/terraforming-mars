@@ -11,7 +11,6 @@ const SelectOption_1 = require("../../inputs/SelectOption");
 const CardResource_1 = require("../../../common/CardResource");
 const Phase_1 = require("../../../common/Phase");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const constants_1 = require("../../../common/constants");
 const Board_1 = require("../../boards/Board");
 const titles_1 = require("../../inputs/titles");
@@ -126,7 +125,7 @@ class GreensPolicy04 {
             }));
             if (orOptions.options.length === 1)
                 return orOptions.options[0].cb();
-            game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => orOptions));
+            player.defer(orOptions);
             return undefined;
         });
         return undefined;

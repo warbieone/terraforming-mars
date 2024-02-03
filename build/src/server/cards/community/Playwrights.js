@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
@@ -65,7 +64,7 @@ class Playwrights extends CorporationCard_1.CorporationCard {
                     player.playedCards.push(new SpecialDesignProxy_1.SpecialDesignProxy());
                 }
                 else if (selectedCard.name === CardName_1.CardName.LAW_SUIT) {
-                    player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+                    player.defer(() => {
                         player.game.getPlayers().some((p) => {
                             const card = p.playedCards[p.playedCards.length - 1];
                             if ((card === null || card === void 0 ? void 0 : card.name) === selectedCard.name) {
@@ -75,7 +74,7 @@ class Playwrights extends CorporationCard_1.CorporationCard {
                             return false;
                         });
                         return undefined;
-                    }));
+                    });
                 }
             });
             return undefined;

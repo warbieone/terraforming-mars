@@ -6,7 +6,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const Size_1 = require("../../../common/cards/render/Size");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const LogHelper_1 = require("../../LogHelper");
 const constants_1 = require("../../../common/constants");
@@ -28,7 +27,6 @@ class Merger extends PreludeCard_1.PreludeCard {
     bespokePlay(player) {
         const game = player.game;
         const dealtCorps = Merger.dealCorporations(player, game.corporationDeck);
-        LogHelper_1.LogHelper.logDrawnCards(player, dealtCorps, true);
         const enabled = dealtCorps.map((corp) => {
             return player.canAfford(Merger.mergerCost - this.spendableMegacredits(player, corp));
         });
@@ -37,7 +35,7 @@ class Merger extends PreludeCard_1.PreludeCard {
             dealtCorps.forEach((corp) => game.corporationDeck.discard(corp));
             return undefined;
         }
-        game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+        player.defer(() => {
             return new SelectCard_1.SelectCard('Choose corporation card to play', 'Play', dealtCorps, { enabled: enabled })
                 .andThen(([card]) => {
                 player.playAdditionalCorporationCard(card);
@@ -49,14 +47,14 @@ class Merger extends PreludeCard_1.PreludeCard {
                 game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, Merger.mergerCost, { title: 'Select how to pay for Merger' }));
                 return undefined;
             });
-        }));
+        });
         return undefined;
     }
     static dealCorporations(player, corporationDeck) {
         const cards = [];
         try {
             while (cards.length < 4) {
-                cards.push(corporationDeck.draw(player.game));
+                cards.push(corporationDeck.drawLegacy(player.game));
             }
         }
         catch (err) {

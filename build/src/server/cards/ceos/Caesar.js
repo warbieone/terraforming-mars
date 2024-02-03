@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CeoCard_1 = require("./CeoCard");
 const SelectProductionToLoseDeferred_1 = require("../../deferredActions/SelectProductionToLoseDeferred");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const PlaceHazardTile_1 = require("../../deferredActions/PlaceHazardTile");
 const TileType_1 = require("../../../common/TileType");
 const Size_1 = require("../../../common/cards/render/Size");
@@ -38,14 +37,14 @@ class Caesar extends CeoCard_1.CeoCard {
             game.defer(new PlaceHazardTile_1.PlaceHazardTile(player, TileType_1.TileType.EROSION_MILD));
         }
         const otherPlayers = game.getPlayers().filter((p) => p.id !== player.id);
-        game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+        player.defer(() => {
             const hazardTileCount = game.board.spaces.filter((space) => space.tile && TileType_1.HAZARD_TILES.has(space.tile.tileType)).length;
             otherPlayers.forEach((opponent) => {
                 const units = hazardTileCount < 6 ? 1 : 2;
                 game.defer(new SelectProductionToLoseDeferred_1.SelectProductionToLoseDeferred(opponent, units));
             });
             return undefined;
-        }));
+        });
         return undefined;
     }
 }

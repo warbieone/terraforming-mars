@@ -7,7 +7,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const constants_1 = require("../../../common/constants");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const SelectOption_1 = require("../../inputs/SelectOption");
@@ -107,7 +106,7 @@ class UnityPolicy02 {
             }));
             if (orOptions.options.length === 1)
                 return orOptions.options[0].cb();
-            game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => orOptions));
+            player.defer(orOptions);
             return undefined;
         });
         return undefined;

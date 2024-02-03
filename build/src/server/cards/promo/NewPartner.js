@@ -23,8 +23,8 @@ class NewPartner extends PreludeCard_1.PreludeCard {
     }
     bespokePlay(player) {
         const cards = [
-            player.game.preludeDeck.draw(player.game),
-            player.game.preludeDeck.draw(player.game),
+            player.game.preludeDeck.drawLegacy(player.game),
+            player.game.preludeDeck.drawLegacy(player.game),
         ];
         return PreludesExpansion_1.PreludesExpansion.playPrelude(player, cards);
     }

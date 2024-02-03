@@ -7,7 +7,6 @@ const SelectOption_1 = require("../inputs/SelectOption");
 const DeferredAction_1 = require("./DeferredAction");
 const CardName_1 = require("../../common/cards/CardName");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
-const UnderworldExpansion_1 = require("../underworld/UnderworldExpansion");
 class StealResources extends DeferredAction_1.DeferredAction {
     constructor(player, resource, count = 1, title = (0, MessageBuilder_1.message)('Select player to steal up to ${0} ${1} from', (b) => b.number(count).string(resource))) {
         super(player, DeferredAction_1.Priority.ATTACK_OPPONENT);
@@ -38,13 +37,13 @@ class StealResources extends DeferredAction_1.DeferredAction {
             }
             return new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Steal ${0} ${1} from ${2}', (b) => b.number(qtyToSteal).string(this.resource).player(target)), 'Steal')
                 .andThen(() => {
-                target.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, this.player, (proceed) => {
+                target.maybeBlockAttack(this.player, (proceed) => {
                     if (proceed) {
                         target.stock.deduct(this.resource, qtyToSteal, { log: true, from: this.player, stealing: true });
                         this.player.stock.add(this.resource, qtyToSteal);
                     }
                     return undefined;
-                }));
+                });
                 return undefined;
             });
         });

@@ -40,7 +40,7 @@ class AsteroidDeflectionSystem extends Card_1.Card {
         return true;
     }
     action(player) {
-        const topCard = player.game.projectDeck.draw(player.game);
+        const topCard = player.game.projectDeck.drawLegacy(player.game);
         player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard, { tags: true }));
         if (topCard.tags.includes(Tag_1.Tag.SPACE)) {
             player.addResourceTo(this, { qty: 1, log: true });

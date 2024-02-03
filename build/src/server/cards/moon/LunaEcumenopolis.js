@@ -10,7 +10,6 @@ const Card_1 = require("../Card");
 const TileType_1 = require("../../../common/TileType");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const PlaceMoonHabitatTile_1 = require("../../moon/PlaceMoonHabitatTile");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 class LunaEcumenopolis extends Card_1.Card {
     constructor() {
         super({
@@ -72,11 +71,10 @@ class LunaEcumenopolis extends Card_1.Card {
     bespokePlay(player) {
         player.game.defer(new CustomPlaceMoonTile(player));
         player.game.defer(new CustomPlaceMoonTile(player));
-        player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+        player.defer(() => {
             const habitatRate = MoonExpansion_1.MoonExpansion.moonData(player.game).habitatRate;
             player.increaseTerraformRating(Math.floor(habitatRate / 2));
-            return undefined;
-        }));
+        });
         return undefined;
     }
 }

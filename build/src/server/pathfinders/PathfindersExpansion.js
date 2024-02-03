@@ -221,10 +221,7 @@ class PathfindersExpansion {
     static addToSolBank(player) {
         const solBank = player.getCorporation(CardName_1.CardName.SOLBANK);
         if (solBank !== undefined) {
-            player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
-                player.addResourceTo(solBank, { qty: 1, log: true });
-                return undefined;
-            }), DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
+            player.defer(() => player.addResourceTo(solBank, { qty: 1, log: true }), DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
         }
     }
 }

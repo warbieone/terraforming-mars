@@ -11,7 +11,7 @@ class Inventrix extends CorporationCard_1.CorporationCard {
             name: CardName_1.CardName.INVENTRIX,
             tags: [Tag_1.Tag.SCIENCE],
             startingMegaCredits: 45,
-            globalParameterRequirementBonus: { steps: 2 },
+            globalParameterRequirementBonus: { steps: 3 },
             firstAction: {
                 text: 'Draw 3 cards',
                 drawCard: 3,

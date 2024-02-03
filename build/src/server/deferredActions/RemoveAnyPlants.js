@@ -7,7 +7,6 @@ const SelectOption_1 = require("../inputs/SelectOption");
 const DeferredAction_1 = require("./DeferredAction");
 const CardName_1 = require("../../common/cards/CardName");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
-const UnderworldExpansion_1 = require("../underworld/UnderworldExpansion");
 class RemoveAnyPlants extends DeferredAction_1.DeferredAction {
     constructor(player, count = 1, title) {
         super(player, DeferredAction_1.Priority.ATTACK_OPPONENT);
@@ -34,12 +33,12 @@ class RemoveAnyPlants extends DeferredAction_1.DeferredAction {
                 .player(target)
                 .getMessage();
             return new SelectOption_1.SelectOption(message, 'Remove plants').andThen(() => {
-                target.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, this.player, (proceed) => {
+                target.maybeBlockAttack(this.player, (proceed) => {
                     if (proceed === true) {
                         target.stock.deduct(Resource_1.Resource.PLANTS, qtyToRemove, { log: true, from: this.player });
                     }
                     return undefined;
-                }));
+                });
                 return undefined;
             });
         });

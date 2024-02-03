@@ -37,8 +37,13 @@ class CometForVenus extends Card_1.Card {
         }
         if (venusTagPlayers.length > 0) {
             return new OrOptions_1.OrOptions(new SelectPlayer_1.SelectPlayer(Array.from(venusTagPlayers), 'Select player to remove up to 4 M€ from', 'Remove M€')
-                .andThen((selectedPlayer) => {
-                selectedPlayer.stock.deduct(Resource_1.Resource.MEGACREDITS, 4, { log: true, from: player });
+                .andThen((target) => {
+                target.maybeBlockAttack(player, (proceed) => {
+                    if (proceed) {
+                        target.stock.deduct(Resource_1.Resource.MEGACREDITS, 4, { log: true, from: player });
+                    }
+                    return undefined;
+                });
                 return undefined;
             }), new SelectOption_1.SelectOption('Do not remove M€'));
         }

@@ -22,13 +22,13 @@ class AresHandler {
             cb(game.aresData);
         }
     }
-    static earnAdjacencyBonuses(aresData, player, space) {
+    static earnAdjacencyBonuses(aresData, player, space, options) {
         let incrementMilestone = false;
         for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
-            const grantedBonus = this.earnAdacencyBonus(space, adjacentSpace, player);
+            const grantedBonus = this.earnAdacencyBonus(space, adjacentSpace, player, options === null || options === void 0 ? void 0 : options.giveAresTileOwnerBonus);
             incrementMilestone || (incrementMilestone = grantedBonus);
         }
-        if (incrementMilestone) {
+        if (incrementMilestone && (options === null || options === void 0 ? void 0 : options.incrementMilestone) !== false) {
             const entry = aresData.milestoneResults.find((e) => e.id === player.id);
             if (entry === undefined) {
                 throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
@@ -36,7 +36,7 @@ class AresHandler {
             entry.count++;
         }
     }
-    static earnAdacencyBonus(newTileSpace, adjacentSpace, player, adjacentTileOwnerGainsBonus = true) {
+    static earnAdacencyBonus(newTileSpace, adjacentSpace, player, giveAresTileOwnerBonus = true) {
         var _a;
         if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
             return false;
@@ -100,7 +100,7 @@ class AresHandler {
             .join(', ');
         const tileText = adjacentSpace.tile !== undefined ? TileType_1.tileTypeToString[adjacentSpace.tile.tileType] : 'no tile';
         player.game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
-        if (adjacentTileOwnerGainsBonus) {
+        if (giveAresTileOwnerBonus) {
             let ownerBonus = 1;
             if (adjacentPlayer.cardIsInEffect(CardName_1.CardName.MARKETING_EXPERTS)) {
                 ownerBonus = 2;
@@ -113,11 +113,6 @@ class AresHandler {
     static hasHazardTile(space) {
         var _a;
         return (0, AresTileType_1.hazardSeverity)((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType) !== AresTileType_1.HazardSeverity.NONE;
-    }
-    static earnAdjacencyBonusesForGaia(player, space) {
-        for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
-            this.earnAdacencyBonus(space, adjacentSpace, player, false);
-        }
     }
     static computeAdjacencyCosts(game, space, subjectToHazardAdjacency) {
         var _a;

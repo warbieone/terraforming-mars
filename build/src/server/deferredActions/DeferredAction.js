@@ -32,9 +32,6 @@ class DeferredAction {
         this.cb = () => { };
         this.callbackSet = false;
     }
-    static create(player, priority, execute) {
-        return new SimpleDeferredAction(player, execute, priority);
-    }
     andThen(cb) {
         if (this.callbackSet) {
             throw new Error('Cannot call andThen twice for the same object.');

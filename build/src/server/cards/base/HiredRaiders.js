@@ -11,7 +11,6 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
 const MessageBuilder_1 = require("../../logs/MessageBuilder");
-const UnderworldExpansion_1 = require("../../underworld/UnderworldExpansion");
 class HiredRaiders extends Card_1.Card {
     constructor() {
         super({
@@ -46,13 +45,13 @@ class HiredRaiders extends Card_1.Card {
                 const amountStolen = Math.min(2, target.steel);
                 const optionTitle = (0, MessageBuilder_1.message)('Steal ${0} steel from ${1}', (b) => b.number(amountStolen).player(target).getMessage());
                 availableActions.options.push(new SelectOption_1.SelectOption(optionTitle).andThen(() => {
-                    target.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+                    target.maybeBlockAttack(player, (proceed) => {
                         if (proceed) {
                             target.stock.deduct(Resource_1.Resource.STEEL, 2, { log: true, from: player, stealing: true });
                             player.steel += amountStolen;
                         }
                         return undefined;
-                    }));
+                    });
                     return undefined;
                 }));
             }
@@ -60,13 +59,13 @@ class HiredRaiders extends Card_1.Card {
                 const amountStolen = Math.min(3, target.megaCredits);
                 const optionTitle = (0, MessageBuilder_1.message)('Steal ${0} M€ from ${1}', (b) => b.number(amountStolen).player(target));
                 availableActions.options.push(new SelectOption_1.SelectOption(optionTitle).andThen(() => {
-                    target.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+                    target.maybeBlockAttack(player, (proceed) => {
                         if (proceed) {
                             player.megaCredits += amountStolen;
                             target.stock.deduct(Resource_1.Resource.MEGACREDITS, 3, { log: true, from: player, stealing: true });
                         }
                         return undefined;
-                    }));
+                    });
                     return undefined;
                 }));
             }

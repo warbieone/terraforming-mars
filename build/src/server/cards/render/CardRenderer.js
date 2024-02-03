@@ -403,8 +403,20 @@ class Builder {
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.WARE, count, options);
         return this._appendToRow(item);
     }
+    journalism(count = 1, options) {
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.JOURNALISM, count, options);
+        return this._appendToRow(item);
+    }
+    supplyChain(options) {
+        this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.SUPPLY_CHAIN, 1, options));
+        return this;
+    }
     activist(count = 1, options) {
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.ACTIVIST, count, options);
+        return this._appendToRow(item);
+    }
+    geoscan() {
+        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.GEOSCAN_ICON, 1, {});
         return this._appendToRow(item);
     }
     emptyTile(type = 'normal', options) {

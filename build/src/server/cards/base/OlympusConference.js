@@ -34,7 +34,7 @@ class OlympusConference extends Card_1.Card {
     onCardPlayed(player, card) {
         const scienceTags = player.tags.cardTagCount(card, Tag_1.Tag.SCIENCE);
         for (let i = 0; i < scienceTags; i++) {
-            player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+            player.defer(() => {
                 if (this.resourceCount === 0) {
                     player.addResourceTo(this, 1);
                     return undefined;
@@ -49,7 +49,7 @@ class OlympusConference extends Card_1.Card {
                 }));
                 options.title = 'Select an option for Olympus Conference';
                 return options;
-            }), DeferredAction_1.Priority.SUPERPOWER);
+            }, DeferredAction_1.Priority.SUPERPOWER);
         }
         return undefined;
     }

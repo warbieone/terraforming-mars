@@ -476,6 +476,11 @@ input[type="radio"]:checked + .filterDiv::after {
   background-repeat: no-repeat;
   transform: rotate(-90deg);
 }
+.prelude2-icon:after {
+  background-image: url("./assets/prelude2/prelude2-triangle16.png");
+  transform: rotate(0deg);
+  background-position: bottom 4px right 3px;
+}
 .venus-icon:after {
   position: absolute;
   border: 1px solid black;
@@ -797,6 +802,9 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .tag-none {
   background-image: url("./assets/tags/tag-none.png");
+}
+.tag-asterisk {
+  background-image: url("./assets/underworld/asterisk-tag.png");
 }
 /************** Style the Content ************/
 .content {
@@ -2427,7 +2435,7 @@ input[type="radio"]:checked + .filterDiv::after {
   background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
 }
 .expansion-icon-prelude2 {
-  background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
+  background-image: url(./assets/expansion_icons/expansion_icon_prelude2.png);
 }
 .expansion-icon-colony {
   background-image: url(./assets/expansion_icons/expansion_icon_colonies.png);
@@ -3901,7 +3909,6 @@ input[type="radio"]:checked + .filterDiv::after {
   background-image: url(./assets/resources/preservation.png);
 }
 .card-container .card-content-wrapper .card-content .card-resource-data {
-  color: #0000 !important;
   background-image: url(./assets/resources/data.png);
 }
 .card-container .card-content-wrapper .card-content .card-resource-syndicate-fleet {
@@ -3984,6 +3991,9 @@ input[type="radio"]:checked + .filterDiv::after {
 .card-container .card-content-wrapper .card-content .card-resource-activist {
   background-image: url(./assets/underworld/card-resource-activist.png);
 }
+.card-container .card-content-wrapper .card-content .card-resource-supply-chain {
+  background-image: url(./assets/underworld/card-resource-supply-chain.png);
+}
 .card-container .card-content-wrapper .card-content .card-neutral-delegate {
   display: inline-block;
   background-image: url(./assets/misc/delegate.png);
@@ -4010,9 +4020,15 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .card-container .card-content-wrapper .card-content .card-corruption-shield {
   width: 44px;
-  background-size: 44px 44px;
   height: 44px;
+  background-size: 44px 44px;
   background-image: url("assets/underworld/corruption-block.png");
+}
+.card-container .card-content-wrapper .card-content .card-geoscan-icon {
+  width: 100px;
+  height: 87px;
+  background-size: 100px 87px;
+  background-image: url("assets/underworld/geoscan-icon.png");
 }
 .card-container .card-content-wrapper .card-content .card-arrow-opg {
   display: inline-block;
@@ -5270,7 +5286,22 @@ input[type="radio"]:checked + .filterDiv::after {
   background-image: url("./assets/resources/clone-trooper.png");
 }
 .card-resources-counter .card-resource-tool {
-  background-image: url(./assets/underworld/card-resource-tool.png);
+  background-image: url("./assets/underworld/card-resource-tool.png");
+}
+.card-resources-counter .card-resource-ware {
+  background-image: url("./assets/underworld/card-resource-ware.png");
+}
+.card-resources-counter .card-resource-scoop {
+  background-image: url("./assets/underworld/card-resource-scoop.png");
+}
+.card-resources-counter .card-resource-activist {
+  background-image: url("./assets/underworld/card-resource-activist.png");
+}
+.card-resources-counter .card-resource-journalism {
+  background-image: url("./assets/underworld/card-resource-journalism.png");
+}
+.card-resources-counter .card-resource-supply-chain {
+  background-image: url("./assets/underworld/card-resource-supply-chain.png");
 }
 .card-resources-counter .card-resource-cube {
   background-image: url("./assets/cube.png");
@@ -7999,10 +8030,9 @@ body {
 }
 .tag-escape {
   background-image: url(./assets/expansion_icons/expansion_icon_escapeVelocity.png);
-  background-color: black;
-  background-size: 40px;
-  background-position: -3px;
-  border-radius: 20px;
+  background-size: 56px;
+  background-position: -8px;
+  border-radius: 18px;
 }
 .tag-city-count {
   background-image: url(./assets/tiles/city.png);
@@ -8136,11 +8166,9 @@ body {
   margin-right: 15px;
 }
 .player_home_block .player_name {
-  color: #ccc;
   text-shadow: 1px 1px 1px #222, -1px -1px 2px #666;
-  padding: 1px 5px;
+  padding: 2px 5px;
   border-radius: 4px;
-  font-weight: bold;
 }
 .player_home_block .tags_cont {
   display: inline-block;
@@ -9533,18 +9561,23 @@ body {
 }
 .other_player_cont {
   display: inline-block;
-  padding: 10px;
-  background: #333;
+  width: 100%;
+  padding: 10px 0 0 25px;
+  background: #222;
   max-height: 1200px;
-  max-width: 1170px;
   margin-right: 20px;
   overflow-y: auto;
-  border-radius: 4px;
-  box-shadow: 6px 6px 4px #111;
-  margin-top: 8px;
+  border-radius: 0px 0px 8px 8px;
 }
 .other_player_cont .other_player_close {
   float: right;
+}
+.other_player_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 8px;
+  border-radius: 8px 8px 0px 0px;
+  margin-bottom: -4px;
 }
 .colony_cube {
   background: url(./assets/cube.png);
@@ -9957,8 +9990,8 @@ input[type="radio"]:checked + .colonies::after {
 }
 .log-player {
   text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
-  padding: 1px 5px;
-  border-radius: 4px;
+  padding: 2px 10px;
+  border-radius: 2px;
   font-weight: bold;
 }
 .log-card {
@@ -11871,6 +11904,9 @@ input[type="radio"]:checked + .party-container::after {
 }
 .language-icon--jp {
   background-position: 0 -3210px;
+}
+.language-icon--bg {
+  background-position: 0 -660px;
 }
 .language-text {
   cursor: pointer;

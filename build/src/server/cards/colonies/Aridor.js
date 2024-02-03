@@ -41,7 +41,7 @@ class Aridor extends CorporationCard_1.CorporationCard {
         if (card.type === CardType_1.CardType.EVENT ||
             card.tags.filter((tag) => tag !== Tag_1.Tag.WILD).length === 0 ||
             !player.isCorporation(this.name)) {
-            return undefined;
+            return;
         }
         for (const tag of card.tags.filter((tag) => tag !== Tag_1.Tag.WILD)) {
             const currentSize = this.allTags.size;
@@ -50,7 +50,6 @@ class Aridor extends CorporationCard_1.CorporationCard {
                 player.production.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
             }
         }
-        return undefined;
     }
     serialize(serialized) {
         serialized.allTags = Array.from(this.allTags);

@@ -46,7 +46,7 @@ class SearchForLife extends Card_1.Card {
     action(player) {
         player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 1, { title: titles_1.TITLES.payForCardAction(this.name) }))
             .andThen(() => {
-            const topCard = player.game.projectDeck.draw(player.game);
+            const topCard = player.game.projectDeck.drawLegacy(player.game);
             player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard, { tags: true }));
             if (topCard.tags.includes(Tag_1.Tag.MICROBE)) {
                 player.addResourceTo(this, 1);

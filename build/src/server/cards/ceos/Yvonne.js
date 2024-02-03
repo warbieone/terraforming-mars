@@ -4,7 +4,6 @@ exports.Yvonne = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CeoCard_1 = require("./CeoCard");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const Size_1 = require("../../../common/cards/render/Size");
 class Yvonne extends CeoCard_1.CeoCard {
     constructor() {
@@ -29,8 +28,8 @@ class Yvonne extends CeoCard_1.CeoCard {
         this.isDisabled = true;
         player.game.colonies.forEach((colony) => {
             colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
-                player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => colony.giveColonyBonus(player.game.getPlayerById(owner))));
-                player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => colony.giveColonyBonus(player.game.getPlayerById(owner))));
+                player.defer(() => colony.giveColonyBonus(player.game.getPlayerById(owner)));
+                player.defer(() => colony.giveColonyBonus(player.game.getPlayerById(owner)));
             });
         });
         return undefined;

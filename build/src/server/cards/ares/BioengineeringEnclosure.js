@@ -7,7 +7,6 @@ const CardResource_1 = require("../../../common/CardResource");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const SelectCard_1 = require("../../inputs/SelectCard");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const CardRenderer_1 = require("../render/CardRenderer");
 class BioengineeringEnclosure extends Card_1.Card {
     constructor() {
@@ -37,7 +36,7 @@ class BioengineeringEnclosure extends Card_1.Card {
         return this.resourceCount > 0 && player.getResourceCards(this.resourceType).length > 1;
     }
     action(player) {
-        player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+        player.defer(() => {
             const resourceCards = player.getResourceCards(this.resourceType).filter((card) => card.name !== CardName_1.CardName.BIOENGINEERING_ENCLOSURE);
             if (resourceCards.length === 0) {
                 return undefined;
@@ -55,7 +54,7 @@ class BioengineeringEnclosure extends Card_1.Card {
                 player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(card));
                 return undefined;
             });
-        }));
+        });
         return undefined;
     }
 }

@@ -115,10 +115,9 @@ class Colony {
             player.colonies.tradesThisGeneration++;
         }
         if (options.decreaseTrackAfterTrade !== false) {
-            player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+            player.defer(() => {
                 this.trackPosition = this.colonies.length;
-                return undefined;
-            }), DeferredAction_1.Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
+            }, DeferredAction_1.Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
         }
     }
     giveColonyBonus(player, isGiveColonyBonus = false) {

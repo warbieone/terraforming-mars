@@ -33,9 +33,9 @@ class Lowell extends CeoCard_1.CeoCard {
         this.isDisabled = true;
         const game = player.game;
         let ceosDrawn = [
-            game.ceoDeck.draw(game),
-            game.ceoDeck.draw(game),
-            game.ceoDeck.draw(game),
+            game.ceoDeck.drawLegacy(game),
+            game.ceoDeck.drawLegacy(game),
+            game.ceoDeck.drawLegacy(game),
         ];
         ceosDrawn = ceosDrawn.filter((ceo) => {
             var _a;

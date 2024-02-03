@@ -49,23 +49,20 @@ class PharmacyUnion extends CorporationCard_1.CorporationCard {
         }
         return [Tag_1.Tag.MICROBE, Tag_1.Tag.MICROBE];
     }
-    onCardPlayed(player, card) {
-        this._onCardPlayed(player, card);
-    }
     onCorpCardPlayed(player, card) {
-        this._onCardPlayed(player, card);
-        return undefined;
+        this.onCardPlayed(player, card);
     }
-    _onCardPlayed(player, card) {
-        if (this.isDisabled)
-            return undefined;
+    onCardPlayed(player, card) {
+        if (this.isDisabled) {
+            return;
+        }
         const game = player.game;
         const hasScienceTag = player.tags.cardHasTag(card, Tag_1.Tag.SCIENCE);
         const hasMicrobesTag = card.tags.includes(Tag_1.Tag.MICROBE);
         const isPharmacyUnion = player.isCorporation(CardName_1.CardName.PHARMACY_UNION);
         if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
             if (player.canAfford({ cost: 0, tr: { tr: 3 } })) {
-                game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+                player.defer(() => {
                     const orOptions = new OrOptions_1.OrOptions(new SelectOption_1.SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€').andThen(() => {
                         const megaCreditsLost = Math.min(player.megaCredits, 4);
                         this.isDisabled = true;
@@ -83,14 +80,14 @@ class PharmacyUnion extends CorporationCard_1.CorporationCard {
                     }));
                     orOptions.title = 'Choose the order of tag resolution for Pharmacy Union';
                     return orOptions;
-                }), -1);
+                }, -1);
                 return undefined;
             }
         }
         if (isPharmacyUnion && hasScienceTag) {
             const scienceTags = player.tags.cardTagCount(card, Tag_1.Tag.SCIENCE);
             for (let i = 0; i < scienceTags; i++) {
-                game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+                player.defer(() => {
                     if (this.isDisabled)
                         return undefined;
                     if (this.resourceCount > 0) {
@@ -114,11 +111,11 @@ class PharmacyUnion extends CorporationCard_1.CorporationCard {
                         game.log('${0} turned ${1} face down to gain 3 TR', (b) => b.player(player).card(this));
                         return undefined;
                     }), new SelectOption_1.SelectOption('Do nothing', 'Do nothing'));
-                }), -1);
+                }, -1);
             }
         }
         if (hasMicrobesTag) {
-            game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
+            player.defer(() => {
                 const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tag_1.Tag.MICROBE).length;
                 const player = game.getPlayers().find((p) => p.isCorporation(this.name));
                 if (player === undefined) {
@@ -129,9 +126,8 @@ class PharmacyUnion extends CorporationCard_1.CorporationCard {
                 player.megaCredits -= megaCreditsLost;
                 game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                 return undefined;
-            }), DeferredAction_1.Priority.SUPERPOWER);
+            }, DeferredAction_1.Priority.SUPERPOWER);
         }
-        return undefined;
     }
     serialize(serialized) {
         serialized.isDisabled = this.isDisabled;

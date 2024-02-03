@@ -15,7 +15,6 @@ const Size_1 = require("../../../common/cards/render/Size");
 const Phase_1 = require("../../../common/Phase");
 const Options_1 = require("../Options");
 const Payment_1 = require("../../../common/inputs/Payment");
-const UnderworldExpansion_1 = require("../../underworld/UnderworldExpansion");
 class TheDarksideofTheMoonSyndicate extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -64,12 +63,12 @@ class TheDarksideofTheMoonSyndicate extends CorporationCard_1.CorporationCard {
                 for (const target of game.getPlayers()) {
                     if (target === player)
                         continue;
-                    target.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+                    target.maybeBlockAttack(player, (proceed) => {
                         if (proceed) {
                             target.stock.steal(Resource_1.Resource.MEGACREDITS, 2, player);
                         }
                         return undefined;
-                    }));
+                    });
                 }
                 return undefined;
             }));

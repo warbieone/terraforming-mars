@@ -108,10 +108,10 @@ class Philares extends CorporationCard_1.CorporationCard {
             adjacentSpacesWithPlayerTiles.filter((space) => { var _a; return ((_a = space.player) === null || _a === void 0 ? void 0 : _a.id) !== cardOwner.id; }) :
             adjacentSpacesWithPlayerTiles.filter((space) => { var _a; return ((_a = space.player) === null || _a === void 0 ? void 0 : _a.id) === cardOwner.id; });
         if (eligibleTiles.length > 0) {
-            cardOwner.game.defer(new DeferredAction_1.SimpleDeferredAction(cardOwner, () => {
+            cardOwner.defer(() => {
                 cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(eligibleTiles.length).card(this));
                 return this.selectResources(cardOwner, eligibleTiles.length);
-            }), cardOwner.id !== activePlayer.id ? DeferredAction_1.Priority.OPPONENT_TRIGGER : DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
+            }, cardOwner.id !== activePlayer.id ? DeferredAction_1.Priority.OPPONENT_TRIGGER : DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
         }
     }
 }

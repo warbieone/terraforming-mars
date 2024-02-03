@@ -13,12 +13,10 @@ exports.Game = void 0;
 const constants = require("../common/constants");
 const BeginnerCorporation_1 = require("./cards/corporation/BeginnerCorporation");
 const Board_1 = require("./boards/Board");
-const BoardName_1 = require("../common/boards/BoardName");
 const CardFinder_1 = require("./CardFinder");
 const CardName_1 = require("../common/cards/CardName");
 const ClaimedMilestone_1 = require("./milestones/ClaimedMilestone");
 const ColonyDealer_1 = require("./colonies/ColonyDealer");
-const Color_1 = require("../common/Color");
 const Database_1 = require("./database/Database");
 const FundedAward_1 = require("./awards/FundedAward");
 const LogMessageBuilder_1 = require("./logs/LogMessageBuilder");
@@ -30,7 +28,6 @@ const Phase_1 = require("../common/Phase");
 const Player_1 = require("./Player");
 const CardResource_1 = require("../common/CardResource");
 const Resource_1 = require("../common/Resource");
-const DeferredAction_1 = require("./deferredActions/DeferredAction");
 const DeferredActionsQueue_1 = require("./deferredActions/DeferredActionsQueue");
 const SelectPaymentDeferred_1 = require("./deferredActions/SelectPaymentDeferred");
 const SelectInitialCards_1 = require("./inputs/SelectInitialCards");
@@ -38,7 +35,6 @@ const PlaceOceanTile_1 = require("./deferredActions/PlaceOceanTile");
 const RemoveColonyFromGame_1 = require("./deferredActions/RemoveColonyFromGame");
 const GainResources_1 = require("./deferredActions/GainResources");
 const SpaceBonus_1 = require("../common/boards/SpaceBonus");
-const SpaceName_1 = require("./SpaceName");
 const TileType_1 = require("../common/TileType");
 const Turmoil_1 = require("./turmoil/Turmoil");
 const RandomMAOptionType_1 = require("../common/ma/RandomMAOptionType");
@@ -230,7 +226,7 @@ class Game {
                 const specificCardsJoel = ['Mons Insurance', 'Astrodrill', 'Pristar', 'CrediCor', 'Manutech'];
                 if (player.name !== 'Owen T' && player.name !== 'Laura T' && player.name !== 'Joel T') {
                     for (let i = 0; i < gameOptions.startingCorporations; i++) {
-                        player.dealtCorporationCards.push(corporationDeck.draw(game));
+                        player.dealtCorporationCards.push(corporationDeck.drawLegacy(game));
                     }
                 }
                 if (player.name === 'Owen T') {
@@ -250,18 +246,18 @@ class Game {
                 }
                 if (gameOptions.initialDraftVariant === false) {
                     for (let i = 0; i < 10; i++) {
-                        player.dealtProjectCards.push(projectDeck.draw(game));
+                        player.dealtProjectCards.push(projectDeck.drawLegacy(game));
                     }
                 }
                 if (gameOptions.preludeExtension) {
                     for (let i = 0; i < constants.PRELUDE_CARDS_DEALT_PER_PLAYER; i++) {
-                        const prelude = preludeDeck.draw(game);
+                        const prelude = preludeDeck.drawLegacy(game);
                         player.dealtPreludeCards.push(prelude);
                     }
                 }
                 if (gameOptions.ceoExtension) {
                     for (let i = 0; i < gameOptions.startingCeos; i++) {
-                        const ceoCard = ceoDeck.draw(game);
+                        const ceoCard = ceoDeck.drawLegacy(game);
                         player.dealtCeoCards.push(ceoCard);
                     }
                 }
@@ -630,6 +626,9 @@ class Game {
         this.generation++;
         this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
         this.incrementFirstPlayer();
+        this.players.forEach((player) => {
+            player.hasIncreasedTerraformRatingThisGeneration = false;
+        });
         if (this.gameOptions.draftVariant) {
             this.gotoDraftPhase();
         }
@@ -973,14 +972,6 @@ class Game {
         AresHandler_1.AresHandler.ifAres(this, () => {
             AresHandler_1.AresHandler.payAdjacencyAndHazardCosts(player, space, subjectToHazardAdjacency);
         });
-        if (space.id === SpaceName_1.SpaceName.HELLAS_OCEAN_TILE &&
-            this.canAddOcean() &&
-            this.gameOptions.boardName === BoardName_1.BoardName.HELLAS) {
-            if (player.color !== Color_1.Color.NEUTRAL) {
-                this.defer(new PlaceOceanTile_1.PlaceOceanTile(player, { title: 'Select space for ocean from placement bonus' }));
-                this.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, { title: 'Select how to pay for placement bonus ocean' }));
-            }
-        }
         TurmoilHandler_1.TurmoilHandler.resolveTilePlacementCosts(player);
         const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName_1.CardName.ARCADIAN_COMMUNITIES);
         const initialTileTypeForAres = (_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType;
@@ -996,7 +987,8 @@ class Game {
                 }
             });
             AresHandler_1.AresHandler.ifAres(this, (aresData) => {
-                AresHandler_1.AresHandler.earnAdjacencyBonuses(aresData, player, space);
+                const incrementMilestone = (tile === null || tile === void 0 ? void 0 : tile.tileType) !== TileType_1.TileType.MARS_NOMADS;
+                AresHandler_1.AresHandler.earnAdjacencyBonuses(aresData, player, space, { incrementMilestone });
             });
             TurmoilHandler_1.TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
             if (arcadianCommunityBonus) {
@@ -1057,6 +1049,10 @@ class Game {
                 player.stock.add(Resource_1.Resource.HEAT, count, { log: true });
                 break;
             case SpaceBonus_1.SpaceBonus.OCEAN:
+                if (this.canAddOcean()) {
+                    this.defer(new PlaceOceanTile_1.PlaceOceanTile(player, { title: 'Select space for ocean from placement bonus' }));
+                    this.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, { title: 'Select how to pay for placement bonus ocean' }));
+                }
                 break;
             case SpaceBonus_1.SpaceBonus.MICROBE:
                 this.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.MICROBE, { count: count }));
@@ -1075,7 +1071,7 @@ class Game {
                 break;
             case SpaceBonus_1.SpaceBonus.TEMPERATURE:
                 if (this.getTemperature() < constants.MAX_TEMPERATURE) {
-                    this.defer(new DeferredAction_1.SimpleDeferredAction(player, () => this.increaseTemperature(player, 1)));
+                    player.defer(() => this.increaseTemperature(player, 1));
                     this.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, { title: 'Select how to pay for placement bonus temperature' }));
                 }
                 break;
@@ -1202,15 +1198,15 @@ class Game {
     }
     discardForCost(cardCount, toPlace) {
         if (cardCount === 1) {
-            const card = this.projectDeck.draw(this);
+            const card = this.projectDeck.drawLegacy(this);
             this.projectDeck.discard(card);
             this.log('Drew and discarded ${0} to place a ${1}', (b) => b.card(card, { cost: true }).tileType(toPlace));
             return card.cost;
         }
         else {
-            const card1 = this.projectDeck.draw(this);
+            const card1 = this.projectDeck.drawLegacy(this);
             this.projectDeck.discard(card1);
-            const card2 = this.projectDeck.draw(this);
+            const card2 = this.projectDeck.drawLegacy(this);
             this.projectDeck.discard(card2);
             this.log('Drew and discarded ${0} and ${1} to place a ${2}', (b) => b.card(card1, { cost: true }).card(card2, { cost: true }).tileType(toPlace));
             return card1.cost + card2.cost;

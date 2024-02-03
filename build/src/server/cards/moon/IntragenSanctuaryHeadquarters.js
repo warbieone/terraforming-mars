@@ -38,12 +38,10 @@ class IntragenSanctuaryHeadquarters extends CorporationCard_1.CorporationCard {
     }
     onCorpCardPlayed(player, card) {
         this.onCardPlayed(player, card);
-        return undefined;
     }
     onCardPlayed(player, card) {
         const count = player.tags.cardTagCount(card, Tag_1.Tag.ANIMAL);
         player.addResourceTo(this, count);
-        return undefined;
     }
 }
 exports.IntragenSanctuaryHeadquarters = IntragenSanctuaryHeadquarters;

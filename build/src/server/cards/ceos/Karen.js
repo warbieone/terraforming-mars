@@ -23,7 +23,7 @@ class Karen extends CeoCard_1.CeoCard {
         const game = player.game;
         const cards = [];
         for (let i = 0; i < game.generation; i++) {
-            cards.push(game.preludeDeck.draw(game));
+            cards.push(game.preludeDeck.drawLegacy(game));
         }
         return PreludesExpansion_1.PreludesExpansion.playPrelude(player, cards);
     }

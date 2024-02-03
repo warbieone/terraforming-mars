@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductiveOutpost = void 0;
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const Size_1 = require("../../../common/cards/render/Size");
@@ -24,7 +23,7 @@ class ProductiveOutpost extends Card_1.Card {
     bespokePlay(player) {
         player.game.colonies.forEach((colony) => {
             colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
-                player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => colony.giveColonyBonus(player.game.getPlayerById(owner))));
+                player.defer(() => colony.giveColonyBonus(player.game.getPlayerById(owner)));
             });
         });
         return undefined;

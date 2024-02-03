@@ -55,7 +55,7 @@ class OumuamuaTypeObjectSurvey extends Card_1.Card {
     bespokePlay(player) {
         const game = player.game;
         game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.DATA, { count: 2 }));
-        const cards = [game.projectDeck.draw(player.game), game.projectDeck.draw(player.game)];
+        const cards = [game.projectDeck.drawLegacy(player.game), game.projectDeck.drawLegacy(player.game)];
         player.game.log('${0} revealed ${1} and ${2}', (b) => b.player(player).card(cards[0], { tags: true }).card(cards[1], { tags: true }));
         if (this.processCard(player, cards[0])) {
             this.keep(player, cards[1]);

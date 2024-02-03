@@ -28,5 +28,6 @@ var CardResource;
     CardResource["SCOOP"] = "Scoop";
     CardResource["JOURNALISM"] = "Journalism";
     CardResource["ACTIVIST"] = "Activist";
+    CardResource["SUPPLY_CHAIN"] = "Supply Chain";
 })(CardResource = exports.CardResource || (exports.CardResource = {}));
 //# sourceMappingURL=CardResource.js.map

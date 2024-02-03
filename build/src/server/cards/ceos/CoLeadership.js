@@ -21,9 +21,9 @@ class CoLeadership extends PreludeCard_1.PreludeCard {
     bespokePlay(player) {
         const game = player.game;
         let ceosDrawn = [
-            game.ceoDeck.draw(game),
-            game.ceoDeck.draw(game),
-            game.ceoDeck.draw(game),
+            game.ceoDeck.drawLegacy(game),
+            game.ceoDeck.drawLegacy(game),
+            game.ceoDeck.drawLegacy(game),
         ];
         ceosDrawn = ceosDrawn.filter((ceo) => {
             var _a;

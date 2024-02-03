@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Resource_1 = require("../../../common/Resource");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class GMOContract extends Card_1.Card {
@@ -33,10 +32,7 @@ class GMOContract extends Card_1.Card {
     onCardPlayed(player, card) {
         const amount = player.tags.cardTagCount(card, [Tag_1.Tag.ANIMAL, Tag_1.Tag.PLANT, Tag_1.Tag.MICROBE]);
         if (amount > 0) {
-            player.game.defer(new DeferredAction_1.SimpleDeferredAction(player, () => {
-                player.stock.add(Resource_1.Resource.MEGACREDITS, amount * 2, { log: true });
-                return undefined;
-            }));
+            player.defer(() => player.stock.add(Resource_1.Resource.MEGACREDITS, amount * 2, { log: true }));
         }
     }
 }

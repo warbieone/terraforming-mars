@@ -4,7 +4,6 @@ exports.DecreaseAnyProduction = void 0;
 const SelectPlayer_1 = require("../inputs/SelectPlayer");
 const DeferredAction_1 = require("./DeferredAction");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
-const UnderworldExpansion_1 = require("../underworld/UnderworldExpansion");
 class DecreaseAnyProduction extends DeferredAction_1.DeferredAction {
     constructor(player, resource, options = {
         count: 1,
@@ -16,13 +15,13 @@ class DecreaseAnyProduction extends DeferredAction_1.DeferredAction {
         this.title = title;
     }
     attack(target) {
-        target.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, this.player, (proceed) => {
+        target.maybeBlockAttack(this.player, (proceed) => {
             if (proceed) {
                 target.production.add(this.resource, -this.options.count, { log: true, from: this.player, stealing: this.options.stealing });
             }
             this.cb(proceed);
             return undefined;
-        }));
+        });
     }
     execute() {
         if (this.player.game.isSoloMode()) {

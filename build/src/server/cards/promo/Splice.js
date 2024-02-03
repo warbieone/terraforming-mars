@@ -43,13 +43,10 @@ class Splice extends CorporationCard_1.CorporationCard {
             },
         });
     }
-    onCardPlayed(player, card) {
-        return this._onCardPlayed(player, card);
-    }
     onCorpCardPlayed(player, card) {
-        return this._onCardPlayed(player, card);
+        return this.onCardPlayed(player, card);
     }
-    _onCardPlayed(player, card) {
+    onCardPlayed(player, card) {
         if (card.tags.includes(Tag_1.Tag.MICROBE) === false) {
             return undefined;
         }

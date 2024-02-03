@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CardFinder = void 0;
-const AllCards_1 = require("./cards/AllCards");
+const AllManifests_1 = require("./cards/AllManifests");
 const CARD_RENAMES = new Map([]);
 class CardFinder {
     getCard(cardName, cardManifestNames) {
         const standardizedCardName = CARD_RENAMES.get(cardName) || cardName;
-        for (const moduleManifest of AllCards_1.ALL_MODULE_MANIFESTS) {
+        for (const moduleManifest of AllManifests_1.ALL_MODULE_MANIFESTS) {
             for (const manifestName of cardManifestNames) {
                 const cardManifest = moduleManifest[manifestName];
                 const factory = cardManifest[standardizedCardName];

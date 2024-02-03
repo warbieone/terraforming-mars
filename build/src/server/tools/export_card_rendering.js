@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 const fs = require("fs");
-const AllCards_1 = require("../cards/AllCards");
+const AllManifests_1 = require("../cards/AllManifests");
 const ModuleManifest_1 = require("../cards/ModuleManifest");
 const ICorporationCard_1 = require("../cards/corporation/ICorporationCard");
 const IPreludeCard_1 = require("../cards/prelude/IPreludeCard");
@@ -14,7 +14,7 @@ const CardType_1 = require("../../common/cards/CardType");
 const GlobalEventDealer_1 = require("../turmoil/globalEvents/GlobalEventDealer");
 class CardProcessor {
     static makeJson() {
-        AllCards_1.ALL_MODULE_MANIFESTS.forEach(this.processManifest);
+        AllManifests_1.ALL_MODULE_MANIFESTS.forEach(this.processManifest);
     }
     static processManifest(manifest) {
         CardProcessor.processDeck(manifest.module, manifest.projectCards);
@@ -72,7 +72,7 @@ class CardProcessor {
 CardProcessor.json = [];
 class GlobalEventProcessor {
     static makeJson() {
-        AllCards_1.ALL_MODULE_MANIFESTS.forEach(this.processManifest);
+        AllManifests_1.ALL_MODULE_MANIFESTS.forEach(this.processManifest);
     }
     static processManifest(manifest) {
         for (const cf of ModuleManifest_1.GlobalEventManifest.values(manifest.globalEvents)) {
@@ -140,7 +140,7 @@ MAProcessor.json = [];
 if (!fs.existsSync('src/genfiles')) {
     fs.mkdirSync('src/genfiles');
 }
-(0, GlobalEventDealer_1.initializeGlobalEventDealer)(AllCards_1.ALL_MODULE_MANIFESTS);
+(0, GlobalEventDealer_1.initializeGlobalEventDealer)(AllManifests_1.ALL_MODULE_MANIFESTS);
 CardProcessor.makeJson();
 GlobalEventProcessor.makeJson();
 ColoniesProcessor.makeJson();

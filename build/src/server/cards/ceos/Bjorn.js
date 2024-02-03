@@ -6,7 +6,6 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const CeoCard_1 = require("./CeoCard");
 const Resource_1 = require("../../../common/Resource");
 const Options_1 = require("../Options");
-const UnderworldExpansion_1 = require("../../underworld/UnderworldExpansion");
 class Bjorn extends CeoCard_1.CeoCard {
     constructor() {
         super({
@@ -26,12 +25,12 @@ class Bjorn extends CeoCard_1.CeoCard {
         const game = player.game;
         const targets = game.getPlayers().filter((p) => p.id !== player.id && p.megaCredits > player.megaCredits);
         targets.forEach((target) => {
-            target.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+            target.maybeBlockAttack(player, (proceed) => {
                 if (proceed) {
                     target.stock.steal(Resource_1.Resource.MEGACREDITS, game.generation + 2, player);
                 }
                 return undefined;
-            }));
+            });
         });
         return undefined;
     }

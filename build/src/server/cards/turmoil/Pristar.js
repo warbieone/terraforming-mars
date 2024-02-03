@@ -30,21 +30,13 @@ class Pristar extends CorporationCard_1.CorporationCard {
             },
         });
         this.hasReceivedInfluenceBonus = false;
-        this.data = {
-            lastGenerationIncreasedTR: -1,
-        };
     }
     bespokePlay(player) {
         player.decreaseTerraformRating(2);
         return undefined;
     }
-    onIncreaseTerraformRating(player, cardOwner) {
-        if (player === cardOwner) {
-            this.data.lastGenerationIncreasedTR = player.game.generation;
-        }
-    }
     onProductionPhase(player) {
-        if (this.data.lastGenerationIncreasedTR !== player.game.generation) {
+        if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
             player.stock.add(Resource_1.Resource.MEGACREDITS, 6, { log: true, from: this });
             player.addResourceTo(this, 1);
             if (!this.hasReceivedInfluenceBonus) {

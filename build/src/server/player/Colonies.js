@@ -16,6 +16,7 @@ const CollegiumCopernicus_1 = require("../cards/pathfinders/CollegiumCopernicus"
 const MessageBuilder_1 = require("../logs/MessageBuilder");
 const DarksideSmugglersUnion_1 = require("../cards/moon/DarksideSmugglersUnion");
 const Payment_1 = require("../../common/inputs/Payment");
+const HectateSpeditions_1 = require("../cards/underworld/HectateSpeditions");
 class Colonies {
     constructor(player) {
         this.fleetSize = 1;
@@ -44,6 +45,7 @@ class Colonies {
             new DarksideSmugglersUnion_1.TradeWithDarksideSmugglersUnion(player),
             new TitanFloatingLaunchPad_1.TradeWithTitanFloatingLaunchPad(player),
             new CollegiumCopernicus_1.TradeWithCollegiumCopernicus(player),
+            new HectateSpeditions_1.TradeWithHectateSpeditions(player),
             new TradeWithEnergy(player),
             new TradeWithTitanium(player),
             new TradeWithMegacredits(player),

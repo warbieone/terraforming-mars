@@ -9,7 +9,6 @@ const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const Options_1 = require("../Options");
-const UnderworldExpansion_1 = require("../../underworld/UnderworldExpansion");
 class AncientShipyards extends Card_1.Card {
     constructor() {
         super({
@@ -40,12 +39,12 @@ class AncientShipyards extends Card_1.Card {
         for (const target of game.getPlayers()) {
             if (target === player)
                 continue;
-            target.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+            target.maybeBlockAttack(player, (proceed) => {
                 if (proceed) {
                     target.stock.steal(Resource_1.Resource.MEGACREDITS, 2, player);
                 }
                 return undefined;
-            }));
+            });
         }
         if (game.isSoloMode()) {
             player.stock.add(Resource_1.Resource.MEGACREDITS, 2);
