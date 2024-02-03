@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiPlayer = void 0;
+const responses = require("./responses");
 const Types_1 = require("../../common/Types");
 const ServerModel_1 = require("../models/ServerModel");
 const Handler_1 = require("./Handler");
@@ -21,26 +22,26 @@ class ApiPlayer extends Handler_1.Handler {
         return __awaiter(this, void 0, void 0, function* () {
             const playerId = ctx.url.searchParams.get('id');
             if (playerId === null) {
-                ctx.route.badRequest(req, res, 'missing id parameter');
+                responses.badRequest(req, res, 'missing id parameter');
                 return;
             }
             if (!(0, Types_1.isPlayerId)(playerId)) {
-                ctx.route.badRequest(req, res, 'invalid player id');
+                responses.badRequest(req, res, 'invalid player id');
                 return;
             }
             const game = yield ctx.gameLoader.getGame(playerId);
             if (game === undefined) {
-                ctx.route.notFound(req, res);
+                responses.notFound(req, res);
                 return;
             }
             try {
                 ctx.ipTracker.addParticipant(playerId, ctx.ip);
                 const player = game.getPlayerById(playerId);
-                ctx.route.writeJson(res, ServerModel_1.Server.getPlayerModel(player));
+                responses.writeJson(res, ServerModel_1.Server.getPlayerModel(player));
             }
             catch (err) {
                 console.warn(`unable to find player ${playerId}`, err);
-                ctx.route.notFound(req, res);
+                responses.notFound(req, res);
                 return;
             }
         });

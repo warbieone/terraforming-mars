@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlayerInput = void 0;
+const responses = require("./responses");
 const ServerModel_1 = require("../models/ServerModel");
 const Handler_1 = require("./Handler");
 const OrOptions_1 = require("../inputs/OrOptions");
@@ -17,6 +18,7 @@ const UndoActionOption_1 = require("../inputs/UndoActionOption");
 const Types_1 = require("../../common/Types");
 const server_ids_1 = require("../utils/server-ids");
 const AppError_1 = require("../server/AppError");
+const statusCode_1 = require("../../common/http/statusCode");
 class PlayerInput extends Handler_1.Handler {
     constructor() {
         super();
@@ -25,17 +27,17 @@ class PlayerInput extends Handler_1.Handler {
         return __awaiter(this, void 0, void 0, function* () {
             const playerId = ctx.url.searchParams.get('id');
             if (playerId === null) {
-                ctx.route.badRequest(req, res, 'missing id parameter');
+                responses.badRequest(req, res, 'missing id parameter');
                 return;
             }
             if (!(0, Types_1.isPlayerId)(playerId)) {
-                ctx.route.badRequest(req, res, 'invalid player id');
+                responses.badRequest(req, res, 'invalid player id');
                 return;
             }
             ctx.ipTracker.addParticipant(playerId, ctx.ip);
             const game = yield ctx.gameLoader.getGame(playerId);
             if (game === undefined) {
-                ctx.route.notFound(req, res);
+                responses.notFound(req, res);
                 return;
             }
             let player;
@@ -46,7 +48,7 @@ class PlayerInput extends Handler_1.Handler {
                 console.warn(`unable to find player ${playerId}`, err);
             }
             if (player === undefined) {
-                ctx.route.notFound(req, res);
+                responses.notFound(req, res);
                 return;
             }
             return this.processInput(req, res, ctx, player);
@@ -75,7 +77,7 @@ class PlayerInput extends Handler_1.Handler {
             catch (err) {
                 console.error(err);
             }
-            ctx.route.writeJson(res, ServerModel_1.Server.getPlayerModel(player));
+            responses.writeJson(res, ServerModel_1.Server.getPlayerModel(player));
         });
     }
     processInput(req, res, ctx, player) {
@@ -93,7 +95,7 @@ class PlayerInput extends Handler_1.Handler {
                     }
                     else {
                         player.process(entity);
-                        ctx.route.writeJson(res, ServerModel_1.Server.getPlayerModel(player));
+                        responses.writeJson(res, ServerModel_1.Server.getPlayerModel(player));
                     }
                     resolve();
                 }
@@ -101,7 +103,7 @@ class PlayerInput extends Handler_1.Handler {
                     if (!(e instanceof AppError_1.AppError)) {
                         console.warn('Error processing input from player', e);
                     }
-                    res.writeHead(400, {
+                    res.writeHead(statusCode_1.statusCode.badRequest, {
                         'Content-Type': 'application/json',
                     });
                     const id = e instanceof AppError_1.AppError ? e.id : undefined;

@@ -10,13 +10,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiMetrics = void 0;
-const Handler_1 = require("./Handler");
 const prometheus = require("prom-client");
+const responses = require("./responses");
+const Handler_1 = require("./Handler");
 class ApiMetrics extends Handler_1.Handler {
     constructor() {
         super({ validateServerId: true });
     }
-    get(req, res, ctx) {
+    get(req, res, _ctx) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const register = prometheus.register;
@@ -25,7 +26,7 @@ class ApiMetrics extends Handler_1.Handler {
             }
             catch (err) {
                 console.error(err);
-                ctx.route.badRequest(req, res, 'could not load metrics');
+                responses.badRequest(req, res, 'could not load metrics');
             }
         });
     }

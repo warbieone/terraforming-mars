@@ -40,7 +40,7 @@ class MinorityRefuge extends Card_1.Card {
             if (lunaIsAvailable === false) {
                 return false;
             }
-            this.warning = 'You will only be able to build the colony on Luna.';
+            this.warnings.add('buildOnLuna');
         }
         return true;
     }

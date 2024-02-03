@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServeAsset = exports.FileAPI = void 0;
 const fs = require("fs");
 const path = require("path");
+const responses = require("./responses");
 const BufferCache_1 = require("./BufferCache");
 const ContentType_1 = require("./ContentType");
 const Handler_1 = require("./Handler");
@@ -53,23 +54,23 @@ class ServeAsset extends Handler_1.Handler {
         const brotli = fileApi.readFileSync('build/styles.css.br');
         this.cache.set('build/styles.css.br', brotli);
     }
-    get(req, res, ctx) {
+    get(req, res, _ctx) {
         return __awaiter(this, void 0, void 0, function* () {
             if (req.url === undefined) {
-                ctx.route.internalServerError(req, res, new Error('no url on request'));
+                responses.internalServerError(req, res, new Error('no url on request'));
                 return;
             }
             const path = req.url.substring(1);
             const supportedEncodings = this.supportedEncodings(req);
             const toFile = this.toFile(path, supportedEncodings);
             if (toFile.file === undefined) {
-                return ctx.route.notFound(req, res);
+                return responses.notFound(req, res);
             }
             const file = toFile.file;
             const buffer = this.cacheAssets ? this.cache.get(file) : undefined;
             if (buffer !== undefined) {
                 if (req.headers['if-none-match'] === buffer.hash) {
-                    ctx.route.notModified(res);
+                    responses.notModified(res);
                     return;
                 }
                 res.setHeader('Cache-Control', 'must-revalidate');
@@ -100,7 +101,7 @@ class ServeAsset extends Handler_1.Handler {
             }
             catch (err) {
                 console.log(err);
-                ctx.route.internalServerError(req, res, 'Cannot serve ' + path);
+                responses.internalServerError(req, res, 'Cannot serve ' + path);
             }
         });
     }

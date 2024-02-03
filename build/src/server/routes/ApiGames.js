@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiGames = void 0;
+const responses = require("./responses");
 const Handler_1 = require("./Handler");
 class ApiGames extends Handler_1.Handler {
     constructor() {
@@ -19,10 +20,10 @@ class ApiGames extends Handler_1.Handler {
         return __awaiter(this, void 0, void 0, function* () {
             const list = yield ctx.gameLoader.getIds();
             if (list === undefined) {
-                ctx.route.notFound(req, res, 'could not load game list');
+                responses.notFound(req, res, 'could not load game list');
                 return;
             }
-            ctx.route.writeJson(res, list);
+            responses.writeJson(res, list);
         });
     }
 }

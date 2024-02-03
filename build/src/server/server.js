@@ -16,9 +16,9 @@ const http = require("http");
 const fs = require("fs");
 const raw_settings = require("../genfiles/settings.json");
 const prometheus = require("prom-client");
+const responses = require("./routes/responses");
 const Database_1 = require("./database/Database");
 const server_ids_1 = require("./utils/server-ids");
-const Route_1 = require("./routes/Route");
 const requestProcessor_1 = require("./server/requestProcessor");
 const timer_1 = require("./utils/timer");
 const BehaviorExecutor_1 = require("./behavior/BehaviorExecutor");
@@ -29,13 +29,12 @@ const GlobalEventDealer_1 = require("./turmoil/globalEvents/GlobalEventDealer");
 process.on('uncaughtException', (err) => {
     console.error('UNCAUGHT EXCEPTION', err);
 });
-const route = new Route_1.Route();
 function requestHandler(req, res) {
     try {
-        (0, requestProcessor_1.processRequest)(req, res, route);
+        (0, requestProcessor_1.processRequest)(req, res);
     }
     catch (error) {
-        route.internalServerError(req, res, error);
+        responses.internalServerError(req, res, error);
     }
 }
 const metrics = {

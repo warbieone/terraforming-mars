@@ -15,11 +15,11 @@ const Help_vue_1 = require("@/client/components/help/Help.vue");
 const AdminHome_vue_1 = require("@/client/components/admin/AdminHome.vue");
 const i18n_1 = require("@/client/directives/i18n");
 const constants = require("@/common/constants");
-const HTTPResponseCode = require("@/client/utils/HTTPResponseCode");
 const raw_settings = require("@/genfiles/settings.json");
 const paths_1 = require("@/common/app/paths");
 const Types_1 = require("@/common/Types");
 const HTMLDialogElementCompatibility_1 = require("./HTMLDialogElementCompatibility");
+const statusCode_1 = require("@/common/http/statusCode");
 const dialogPolyfill = require('dialog-polyfill');
 exports.mainAppSettings = {
     'el': '#app',
@@ -96,7 +96,7 @@ exports.mainAppSettings = {
             };
             xhr.onload = function () {
                 try {
-                    if (xhr.status === HTTPResponseCode.OK) {
+                    if (xhr.status === statusCode_1.statusCode.ok) {
                         const model = xhr.response;
                         if (path === paths_1.paths.PLAYER) {
                             app.playerView = model;
@@ -173,7 +173,7 @@ exports.mainAppSettings = {
                 alert('Error getting game data');
             };
             xhr.onload = function () {
-                if (xhr.status === HTTPResponseCode.OK) {
+                if (xhr.status === statusCode_1.statusCode.ok) {
                     window.history.replaceState(xhr.response, `${constants.APP_NAME} - Game`, `${paths_1.paths.GAME}?id=${xhr.response.id}`);
                     app.game = xhr.response;
                 }

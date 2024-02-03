@@ -46,6 +46,7 @@ class Card {
     }
     constructor(external) {
         this.resourceCount = 0;
+        this.warnings = new Set();
         const name = external.name;
         let internal = cardProperties.get(name);
         if (internal === undefined) {

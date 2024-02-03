@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiWaitingFor = void 0;
+const responses = require("./responses");
 const Handler_1 = require("./Handler");
 const Phase_1 = require("../../common/Phase");
 const Types_1 = require("../../common/Types");
@@ -45,24 +46,24 @@ class ApiWaitingFor extends Handler_1.Handler {
                 game = yield ctx.gameLoader.getGame(id);
             }
             if (game === undefined) {
-                ctx.route.notFound(req, res, 'cannot find game for that player');
+                responses.notFound(req, res, 'cannot find game for that player');
                 return;
             }
             try {
                 if ((0, Types_1.isPlayerId)(id)) {
                     ctx.ipTracker.addParticipant(id, ctx.ip);
-                    ctx.route.writeJson(res, this.getPlayerWaitingForModel(game.getPlayerById(id), game, gameAge, undoCount));
+                    responses.writeJson(res, this.getPlayerWaitingForModel(game.getPlayerById(id), game, gameAge, undoCount));
                 }
                 else if ((0, Types_1.isSpectatorId)(id)) {
-                    ctx.route.writeJson(res, this.getSpectatorWaitingForModel(game, gameAge, undoCount));
+                    responses.writeJson(res, this.getSpectatorWaitingForModel(game, gameAge, undoCount));
                 }
                 else {
-                    ctx.route.internalServerError(req, res, 'id not found');
+                    responses.internalServerError(req, res, 'id not found');
                 }
             }
             catch (err) {
                 console.warn(`unable to find player ${id}`, err);
-                ctx.route.notFound(req, res, 'player not found');
+                responses.notFound(req, res, 'player not found');
             }
         });
     }

@@ -1256,9 +1256,13 @@ class Player {
         }
         const convertHeat = new ConvertHeat_1.ConvertHeat();
         if (convertHeat.canAct(this)) {
-            action.options.push(new SelectOption_1.SelectOption('Convert 8 heat into temperature', 'Convert heat').andThen(() => {
+            const option = new SelectOption_1.SelectOption('Convert 8 heat into temperature', 'Convert heat').andThen(() => {
                 return convertHeat.action(this);
-            }));
+            });
+            if (convertHeat.warnings.size > 0) {
+                option.warnings = Array.from(convertHeat.warnings);
+            }
+            action.options.push(option);
         }
         const turmoilInput = TurmoilHandler_1.TurmoilHandler.partyAction(this);
         if (turmoilInput !== undefined) {

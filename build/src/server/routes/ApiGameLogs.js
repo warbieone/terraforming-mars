@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiGameLogs = void 0;
+const responses = require("./responses");
 const Handler_1 = require("./Handler");
 const GameLogs_1 = require("./GameLogs");
 const Types_1 = require("../../common/Types");
@@ -23,16 +24,16 @@ class ApiGameLogs extends Handler_1.Handler {
             const searchParams = ctx.url.searchParams;
             const id = searchParams.get('id');
             if (!id) {
-                ctx.route.badRequest(req, res, 'missing id parameter');
+                responses.badRequest(req, res, 'missing id parameter');
                 return;
             }
             if (!(0, Types_1.isPlayerId)(id) && !(0, Types_1.isSpectatorId)(id)) {
-                ctx.route.badRequest(req, res, 'invalid player id');
+                responses.badRequest(req, res, 'invalid player id');
                 return;
             }
             const game = yield ctx.gameLoader.getGame(id);
             if (game === undefined) {
-                ctx.route.notFound(req, res, 'game not found');
+                responses.notFound(req, res, 'game not found');
                 return;
             }
             if (searchParams.get('full') !== null) {
@@ -41,7 +42,7 @@ class ApiGameLogs extends Handler_1.Handler {
                     logs = this.gameLogs.getLogsForGameEnd(game).join('\n');
                 }
                 catch (e) {
-                    ctx.route.badRequest(req, res, 'cannot fetch game-end log');
+                    responses.badRequest(req, res, 'cannot fetch game-end log');
                     return;
                 }
                 res.setHeader('Content-Type', 'text/plain');
@@ -50,7 +51,7 @@ class ApiGameLogs extends Handler_1.Handler {
             else {
                 const generation = searchParams.get('generation');
                 const logs = this.gameLogs.getLogsForGameView(id, game, generation);
-                ctx.route.writeJson(res, logs);
+                responses.writeJson(res, logs);
             }
         });
     }

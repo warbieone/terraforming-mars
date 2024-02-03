@@ -20,7 +20,7 @@ class ConvertHeat extends StandardActionCard_1.StandardActionCard {
     }
     canAct(player) {
         if (player.game.getTemperature() === constants_1.MAX_TEMPERATURE) {
-            return false;
+            this.warnings.add('maxtemp');
         }
         if (player.availableHeat() < constants_1.HEAT_FOR_TEMPERATURE) {
             return false;

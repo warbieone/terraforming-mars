@@ -32,11 +32,13 @@ const UnderworldExpansion_1 = require("../underworld/UnderworldExpansion");
 const SelectResource_1 = require("../inputs/SelectResource");
 const RemoveResourcesFromCard_1 = require("../deferredActions/RemoveResourcesFromCard");
 const IProjectCard_1 = require("../cards/IProjectCard");
+const constants_1 = require("../../common/constants");
 class Executor {
     canExecute(behavior, player, card, canAffordOptions) {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
         const ctx = new Counter_1.Counter(player, card);
         const asTrSource = this.toTRSource(behavior, ctx);
+        const game = player.game;
         if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
             return false;
         }
@@ -44,6 +46,21 @@ class Executor {
             if (!behavior.or.behaviors.some((behavior) => this.canExecute(behavior, player, card, canAffordOptions))) {
                 return false;
             }
+        }
+        if (behavior.global !== undefined) {
+            const g = behavior.global;
+            if (g.temperature !== undefined && game.getTemperature() >= constants_1.MAX_TEMPERATURE) {
+                card.warnings.add('maxtemp');
+            }
+            if (g.oxygen !== undefined && game.getOxygenLevel() >= constants_1.MAX_OXYGEN_LEVEL) {
+                card.warnings.add('maxoxygen');
+            }
+            if (g.venus !== undefined && game.getVenusScaleLevel() >= constants_1.MAX_VENUS_SCALE) {
+                card.warnings.add('maxvenus');
+            }
+        }
+        if (behavior.ocean !== undefined && game.board.getOceanSpaces().length >= constants_1.MAX_OCEAN_TILES) {
+            card.warnings.add('maxoceans');
         }
         if (behavior.stock !== undefined) {
             const stock = behavior.stock;
@@ -94,8 +111,15 @@ class Executor {
             }
         }
         if (behavior.decreaseAnyProduction !== undefined) {
-            if (!player.canReduceAnyProduction(behavior.decreaseAnyProduction.type, behavior.decreaseAnyProduction.count)) {
-                return false;
+            if (!game.isSoloMode()) {
+                const dap = behavior.decreaseAnyProduction;
+                const targets = game.getPlayers().filter((p) => p.canHaveProductionReduced(dap.type, dap.count, player));
+                if (targets.length === 0) {
+                    return false;
+                }
+                if (targets.length === 1 && targets[0] === player) {
+                    card.warnings.add('decreaseOwnProduction');
+                }
             }
         }
         if (((_a = behavior.colonies) === null || _a === void 0 ? void 0 : _a.buildColony) !== undefined) {
@@ -105,18 +129,18 @@ class Executor {
         }
         if (behavior.city !== undefined) {
             if (behavior.city.space === undefined) {
-                if (player.game.board.getAvailableSpacesForType(player, (_b = behavior.city.on) !== null && _b !== void 0 ? _b : 'city', canAffordOptions).length === 0) {
+                if (game.board.getAvailableSpacesForType(player, (_b = behavior.city.on) !== null && _b !== void 0 ? _b : 'city', canAffordOptions).length === 0) {
                     return false;
                 }
             }
         }
         if (behavior.greenery !== undefined) {
-            if (player.game.board.getAvailableSpacesForType(player, (_c = behavior.greenery.on) !== null && _c !== void 0 ? _c : 'greenery', canAffordOptions).length === 0) {
+            if (game.board.getAvailableSpacesForType(player, (_c = behavior.greenery.on) !== null && _c !== void 0 ? _c : 'greenery', canAffordOptions).length === 0) {
                 return false;
             }
         }
         if (behavior.tile !== undefined) {
-            if (player.game.board.getAvailableSpacesForType(player, behavior.tile.on, canAffordOptions).length === 0) {
+            if (game.board.getAvailableSpacesForType(player, behavior.tile.on, canAffordOptions).length === 0) {
                 return false;
             }
         }
@@ -143,14 +167,14 @@ class Executor {
         }
         if (behavior.turmoil) {
             if (behavior.turmoil.sendDelegates) {
-                if (Turmoil_1.Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player) < behavior.turmoil.sendDelegates.count) {
+                if (Turmoil_1.Turmoil.getTurmoil(game).getAvailableDelegateCount(player) < behavior.turmoil.sendDelegates.count) {
                     return false;
                 }
             }
         }
         if (behavior.moon !== undefined) {
             const moon = behavior.moon;
-            const moonData = MoonExpansion_1.MoonExpansion.moonData(player.game);
+            const moonData = MoonExpansion_1.MoonExpansion.moonData(game);
             if (moon.habitatTile !== undefined && moon.habitatTile.space === undefined) {
                 if (moonData.moon.getAvailableSpacesOnLand(player).length === 0) {
                     return false;
@@ -165,6 +189,15 @@ class Executor {
                 if (moonData.moon.getAvailableSpacesOnLand(player).length === 0) {
                     return false;
                 }
+            }
+            if ((_g = moon.habitatRate) !== null && _g !== void 0 ? _g : 0 >= constants_1.MAXIMUM_HABITAT_RATE) {
+                card.warnings.add('maxHabitatRate');
+            }
+            if ((_h = moon.miningRate) !== null && _h !== void 0 ? _h : 0 >= constants_1.MAXIMUM_MINING_RATE) {
+                card.warnings.add('maxMiningRate');
+            }
+            if ((_j = moon.logisticsRate) !== null && _j !== void 0 ? _j : 0 >= constants_1.MAXIMUM_LOGISTICS_RATE) {
+                card.warnings.add('maxLogisticsRate');
             }
         }
         return true;

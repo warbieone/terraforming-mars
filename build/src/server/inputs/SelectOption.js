@@ -6,6 +6,7 @@ const InputResponse_1 = require("../../common/inputs/InputResponse");
 class SelectOption extends PlayerInput_1.BasePlayerInput {
     constructor(title, buttonLabel = 'Confirm') {
         super('option', title);
+        this.warnings = undefined;
         this.buttonLabel = buttonLabel;
     }
     toModel() {
@@ -13,6 +14,7 @@ class SelectOption extends PlayerInput_1.BasePlayerInput {
             title: this.title,
             buttonLabel: this.buttonLabel,
             type: 'option',
+            warnings: this.warnings,
         };
     }
     process(response) {

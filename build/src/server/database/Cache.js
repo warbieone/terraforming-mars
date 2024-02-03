@@ -39,7 +39,14 @@ class Cache extends events_2.EventEmitter {
     }
     getInstance(gameId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const game = yield this.db.getGame(gameId);
+            let game;
+            try {
+                game = yield this.db.getGame(gameId);
+            }
+            catch (e) {
+                console.error(`getInstance for ${gameId}`, e);
+                return;
+            }
             if (this.games.get(gameId) === undefined) {
                 this.games.set(gameId, undefined);
                 const participantIds = [];

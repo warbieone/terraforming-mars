@@ -10,21 +10,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiStats = void 0;
+const responses = require("./responses");
 const Handler_1 = require("./Handler");
 const Database_1 = require("../database/Database");
 class ApiStats extends Handler_1.Handler {
     constructor() {
         super({ validateStatsId: true });
     }
-    get(req, res, ctx) {
+    get(req, res, _ctx) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const stats = yield Database_1.Database.getInstance().stats();
-                ctx.route.writeJson(res, stats, 2);
+                responses.writeJson(res, stats, 2);
             }
             catch (err) {
                 console.error(err);
-                ctx.route.badRequest(req, res, 'could not load admin stats');
+                responses.badRequest(req, res, 'could not load admin stats');
             }
         });
     }

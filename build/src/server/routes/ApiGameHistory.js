@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiGameHistory = void 0;
+const responses = require("./responses");
 const Handler_1 = require("./Handler");
 const Database_1 = require("../database/Database");
 const Types_1 = require("../../common/Types");
@@ -21,20 +22,20 @@ class ApiGameHistory extends Handler_1.Handler {
         return __awaiter(this, void 0, void 0, function* () {
             const gameId = ctx.url.searchParams.get('id');
             if (!gameId) {
-                ctx.route.badRequest(req, res, 'missing id parameter');
+                responses.badRequest(req, res, 'missing id parameter');
                 return;
             }
             if (!(0, Types_1.isGameId)(gameId)) {
-                ctx.route.badRequest(req, res, 'Invalid game id');
+                responses.badRequest(req, res, 'Invalid game id');
                 return;
             }
             try {
                 const saveIds = yield Database_1.Database.getInstance().getSaveIds(gameId);
-                ctx.route.writeJson(res, [...saveIds].sort());
+                responses.writeJson(res, [...saveIds].sort());
             }
             catch (err) {
                 console.error(err);
-                ctx.route.badRequest(req, res, 'could not load admin stats');
+                responses.badRequest(req, res, 'could not load admin stats');
             }
         });
     }

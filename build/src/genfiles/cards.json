@@ -23046,7 +23046,7 @@
         "tags": [
             "space"
         ],
-        "cost": 10,
+        "cost": 15,
         "type": "active",
         "requirements": [],
         "metadata": {
@@ -23109,7 +23109,7 @@
                                         "cancelled": false,
                                         "questionMark": false
                                     },
-                                    "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here"
+                                    "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here."
                                 ]
                             ],
                             "is": "effect"
@@ -23159,7 +23159,7 @@
                                         "isIcon": false,
                                         "is": "symbol"
                                     },
-                                    "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLACER CHOOSES WHERE YOU MUST PLACE IT"
+                                    "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT."
                                 ]
                             ],
                             "is": "effect"
@@ -24868,6 +24868,69 @@
                 "is": "root"
             },
             "description": "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "startingMegaCredits": 0,
+        "compatibility": []
+    },
+    {
+        "module": "promo",
+        "name": "Merger",
+        "tags": [],
+        "cost": 0,
+        "type": "prelude",
+        "requirements": [],
+        "metadata": {
+            "cardNumber": "X41",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "corporation",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "nbsp",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "megacredits",
+                            "amount": -42,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "showDigit": false,
+                            "size": "S",
+                            "amountInside": true
+                        }
+                    ],
+                    [],
+                    []
+                ],
+                "is": "root"
+            },
+            "description": "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€."
         },
         "productionBox": {
             "megacredits": 0,
@@ -42627,17 +42690,45 @@
                     ],
                     [
                         {
-                            "type": "text",
-                            "amount": -1,
-                            "is": "item",
-                            "multiplier": false,
-                            "clone": false,
-                            "cancelled": false,
-                            "questionMark": false,
-                            "text": "AWARDS AND MILESTONES ALWAYS COST 0 M€ FOR YOU.",
-                            "size": "M",
-                            "isUppercase": false,
-                            "isBold": true
+                            "rows": [
+                                [
+                                    {
+                                        "type": "plate",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "Awards and Milestones",
+                                        "isPlate": true,
+                                        "isBold": true
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 0,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "showDigit": false,
+                                        "size": "M",
+                                        "amountInside": true
+                                    },
+                                    "Effect: AWARDS and MILESTONES ALWAYS COST 0 M€ FOR YOU."
+                                ]
+                            ],
+                            "is": "effect"
                         }
                     ]
                 ],
@@ -74179,17 +74270,12 @@
                             "cancelled": false
                         },
                         {
-                            "type": "text",
-                            "amount": -1,
+                            "type": "geoscan-icon",
+                            "amount": 1,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
-                            "cancelled": false,
-                            "questionMark": false,
-                            "text": "TODO ICON",
-                            "size": "M",
-                            "isUppercase": false,
-                            "isBold": true
+                            "cancelled": false
                         }
                     ]
                 ],
@@ -74937,7 +75023,7 @@
                                         "multiplier": false,
                                         "clone": false,
                                         "cancelled": false,
-                                        "questionMark": false
+                                        "showDigit": true
                                     },
                                     {
                                         "type": "heat",
@@ -75263,7 +75349,7 @@
                         },
                         {
                             "type": "data resource",
-                            "amount": 1,
+                            "amount": 2,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
@@ -75696,6 +75782,12 @@
                             "clone": false,
                             "cancelled": false,
                             "showDigit": true
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
                         }
                     ]
                 ],
@@ -75863,7 +75955,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Requires 1 Earth tag. Until the end of this generation, you can excavate ignoring placement restrictions. Excavation 1 underground resource. Gain 1 corruption.",
+            "description": "Requires 1 Earth tag. Until the end of this generation, you can excavate ignoring placement restrictions. Excavate 1 underground resource. Gain 1 corruption.",
             "victoryPoints": -1
         },
         "productionBox": {
@@ -76070,32 +76162,90 @@
                 "rows": [
                     [
                         {
-                            "type": "text",
-                            "amount": -1,
-                            "is": "item",
-                            "multiplier": false,
-                            "clone": false,
-                            "cancelled": false,
-                            "questionMark": false,
-                            "text": "Effect: The excavate standard project costs 1 M€ less for all players.",
-                            "size": "M",
-                            "isUppercase": false,
-                            "isBold": true
+                            "rows": [
+                                [
+                                    {
+                                        "type": "excavate",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "anyPlayer": true
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "-",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    },
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    },
+                                    "Effect: The excavate standard project costs 1 M€ less for all players."
+                                ]
+                            ],
+                            "is": "effect"
                         }
                     ],
                     [
                         {
-                            "type": "text",
-                            "amount": -1,
-                            "is": "item",
-                            "multiplier": false,
-                            "clone": false,
-                            "cancelled": false,
-                            "questionMark": false,
-                            "text": "Effect: When any player excavates underground resources, you gain 1 M€ per excavation.",
-                            "size": "M",
-                            "isUppercase": false,
-                            "isBold": true
+                            "rows": [
+                                [
+                                    {
+                                        "type": "excavate",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "anyPlayer": true
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    },
+                                    "Effect: When any player excavates underground resources, you gain 1 M€ per excavation."
+                                ]
+                            ],
+                            "is": "effect"
                         }
                     ],
                     []
@@ -76138,55 +76288,20 @@
                                         "multiplier": false,
                                         "clone": false,
                                         "cancelled": false,
-                                        "questionMark": false,
+                                        "questionMark": true,
                                         "showDigit": false,
-                                        "amountInside": true,
-                                        "size": "M"
-                                    },
-                                    {
-                                        "type": "/",
                                         "size": "M",
-                                        "isIcon": false,
-                                        "is": "symbol"
-                                    },
-                                    {
-                                        "rows": [
-                                            [
-                                                {
-                                                    "type": "text",
-                                                    "amount": -1,
-                                                    "is": "item",
-                                                    "multiplier": false,
-                                                    "clone": false,
-                                                    "cancelled": false,
-                                                    "questionMark": false,
-                                                    "text": "1+",
-                                                    "size": "M",
-                                                    "isUppercase": false,
-                                                    "isBold": true
-                                                },
-                                                {
-                                                    "type": "wild",
-                                                    "amount": 1,
-                                                    "is": "item",
-                                                    "multiplier": false,
-                                                    "clone": false,
-                                                    "cancelled": false,
-                                                    "questionMark": false
-                                                }
-                                            ]
-                                        ],
-                                        "is": "production-box"
-                                    },
-                                    {
-                                        "type": "*",
-                                        "size": "M",
-                                        "isIcon": false,
-                                        "is": "symbol"
+                                        "amountInside": true
                                     }
                                 ]
                             ],
                             "is": "production-box"
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
                         }
                     ]
                 ],
@@ -76272,9 +76387,9 @@
                             "clone": false,
                             "cancelled": false,
                             "questionMark": false,
-                            "text": "TARGET A PLAYER THAT HAS MORE CORRUPTION THAN YOU.",
-                            "size": "M",
-                            "isUppercase": false,
+                            "text": "TARGET A PLAYER WITH MORE CORRUPTION THAN YOU.",
+                            "size": "S",
+                            "isUppercase": true,
                             "isBold": true
                         }
                     ],
@@ -76287,9 +76402,9 @@
                             "clone": false,
                             "cancelled": false,
                             "questionMark": false,
-                            "text": "PLACE THIS CARD FACE DOWN IN THAT PLAYER'S PROJECT CARD PILE",
-                            "size": "M",
-                            "isUppercase": false,
+                            "text": "PLACE THIS CARD FACE DOWN IN THAT PLAYER'S PROJECT CARD PILE.",
+                            "size": "S",
+                            "isUppercase": true,
                             "isBold": true
                         }
                     ],
@@ -76352,7 +76467,7 @@
                             "cancelled": false,
                             "questionMark": false,
                             "text": "PAYS YOU",
-                            "size": "M",
+                            "size": "S",
                             "isUppercase": false,
                             "isBold": true
                         },
@@ -76394,7 +76509,7 @@
                             "cancelled": false,
                             "questionMark": false,
                             "text": "THIS CANNOT BE BLOCKED BY CORRUPTION",
-                            "size": "M",
+                            "size": "S",
                             "isUppercase": false,
                             "isBold": true
                         }
@@ -76977,6 +77092,7 @@
             "energy": 0,
             "heat": 0
         },
+        "resourceType": "Data",
         "compatibility": []
     },
     {
@@ -77248,7 +77364,7 @@
                                         "cancelled": false,
                                         "questionMark": false
                                     },
-                                    "Action: Spend 1 titanium to gain 1 fighter resource on this card."
+                                    "Action: Spend 1 titanium to add 1 fighter resource to this card."
                                 ]
                             ],
                             "is": "effect"
@@ -77268,7 +77384,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Put 1 fighter resource on this card."
+            "description": "Add 1 fighter resource to this card."
         },
         "productionBox": {
             "megacredits": 0,
@@ -77906,7 +78022,7 @@
                             "multiplier": false,
                             "clone": false,
                             "cancelled": false,
-                            "questionMark": false
+                            "showDigit": true
                         },
                         {
                             "type": "data resource",
@@ -78165,11 +78281,9 @@
     {
         "module": "underworld",
         "name": "Price Wars",
-        "tags": [
-            "building"
-        ],
+        "tags": [],
         "victoryPoints": -1,
-        "cost": 6,
+        "cost": 1,
         "type": "event",
         "requirements": [
             {
@@ -78339,7 +78453,13 @@
                             "multiplier": false,
                             "clone": false,
                             "cancelled": false,
-                            "questionMark": false
+                            "anyPlayer": true
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
                         }
                     ],
                     [
@@ -78397,6 +78517,44 @@
                             "clone": false,
                             "cancelled": false,
                             "questionMark": false
+                        }
+                    ],
+                    [
+                        {
+                            "type": "plate",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "Awards and Milestones",
+                            "isPlate": true,
+                            "isBold": true
+                        },
+                        {
+                            "type": ":",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "megacredits",
+                            "amount": 8,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
                         }
                     ]
                 ],
@@ -78694,7 +78852,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers in the city space and adjacent spaces."
+            "description": "Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces."
         },
         "productionBox": {
             "megacredits": 0,
@@ -78799,8 +78957,14 @@
                             "rows": [
                                 [
                                     {
+                                        "type": "-",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    },
+                                    {
                                         "type": "energy",
-                                        "amount": -5,
+                                        "amount": 5,
                                         "is": "item",
                                         "multiplier": false,
                                         "clone": false,
@@ -79106,7 +79270,7 @@
                             "multiplier": false,
                             "clone": false,
                             "cancelled": false,
-                            "questionMark": false
+                            "isPlayed": true
                         },
                         {
                             "type": "jovian",
@@ -79115,7 +79279,7 @@
                             "multiplier": false,
                             "clone": false,
                             "cancelled": false,
-                            "questionMark": false
+                            "isPlayed": true
                         }
                     ],
                     [
@@ -79233,7 +79397,9 @@
                                 ]
                             ],
                             "is": "effect"
-                        },
+                        }
+                    ],
+                    [
                         {
                             "rows": [
                                 [
@@ -79376,50 +79542,10 @@
                             "is": "effect"
                         }
                     ],
-                    [
-                        {
-                            "type": "excavate",
-                            "amount": 1,
-                            "is": "item",
-                            "multiplier": false,
-                            "clone": false,
-                            "cancelled": false,
-                            "questionMark": false
-                        },
-                        {
-                            "type": "/",
-                            "size": "M",
-                            "isIcon": false,
-                            "is": "symbol"
-                        },
-                        {
-                            "type": "text",
-                            "amount": -1,
-                            "is": "item",
-                            "multiplier": false,
-                            "clone": false,
-                            "cancelled": false,
-                            "questionMark": false,
-                            "text": "3",
-                            "size": "M",
-                            "isUppercase": false,
-                            "isBold": true
-                        },
-                        {
-                            "type": "city",
-                            "amount": -1,
-                            "is": "item",
-                            "multiplier": false,
-                            "clone": false,
-                            "cancelled": false,
-                            "size": "M",
-                            "anyPlayer": true
-                        }
-                    ]
+                    []
                 ],
                 "is": "root"
             },
-            "description": "Excavate 1 underground resource for every 3 cities in play.",
             "victoryPoints": 1
         },
         "productionBox": {
@@ -79435,9 +79561,7 @@
     {
         "module": "underworld",
         "name": "Cut-throat Budgeting",
-        "tags": [
-            "mars"
-        ],
+        "tags": [],
         "victoryPoints": -2,
         "cost": 2,
         "type": "event",
@@ -79556,6 +79680,112 @@
     },
     {
         "module": "underworld",
+        "name": "Research & Development Hub",
+        "tags": [
+            "science",
+            "building"
+        ],
+        "victoryPoints": {
+            "resourcesHere": {},
+            "per": 3
+        },
+        "cost": 14,
+        "type": "active",
+        "requirements": [],
+        "metadata": {
+            "cardNumber": "U84",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "7+",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    },
+                                    {
+                                        "type": "cards",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    {
+                                        "type": "*",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "data resource",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    "Effect: At the end of each production phase, add 1 data here for EACH OTHER PLAYER that has 7 or more cards in their hand."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "1 VP for every 3 data resources on this card.",
+            "victoryPoints": {
+                "item": {
+                    "type": "data resource",
+                    "amount": -1,
+                    "is": "item",
+                    "multiplier": false,
+                    "clone": false,
+                    "cancelled": false,
+                    "questionMark": false
+                },
+                "points": 1,
+                "target": 3,
+                "targetOneOrMore": false,
+                "anyPlayer": false
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "resourceType": "Data",
+        "compatibility": []
+    },
+    {
+        "module": "underworld",
         "name": "Planetary Rights Buyout",
         "tags": [],
         "victoryPoints": -3,
@@ -79597,6 +79827,131 @@
             "energy": 0,
             "heat": 0
         },
+        "compatibility": []
+    },
+    {
+        "module": "underworld",
+        "name": "Investigative Journalism",
+        "tags": [
+            "earth"
+        ],
+        "victoryPoints": {
+            "resourcesHere": {},
+            "per": 2
+        },
+        "cost": 3,
+        "type": "active",
+        "requirements": [],
+        "metadata": {
+            "cardNumber": "U87",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 5,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    },
+                                    {
+                                        "type": "corruption",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    {
+                                        "type": "*",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "journalism",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    "Action: Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": -2,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Decrease your M€ production 2 steps. 1 VP per 2 journalism resources on this card.",
+            "victoryPoints": {
+                "item": {
+                    "type": "journalism",
+                    "amount": -1,
+                    "is": "item",
+                    "multiplier": false,
+                    "clone": false,
+                    "cancelled": false,
+                    "questionMark": false
+                },
+                "points": 1,
+                "target": 2,
+                "targetOneOrMore": false,
+                "anyPlayer": false
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "resourceType": "Journalism",
         "compatibility": []
     },
     {
@@ -79791,7 +80146,7 @@
         "requirements": [],
         "metadata": {
             "cardNumber": "UC01",
-            "description": "You start with 36M€ and 5 steel. As your first action, identify any 3 underground resources on Mars.",
+            "description": "You start with 36 M€ and 5 steel. As your first action, identify any 3 underground resources on Mars.",
             "renderData": {
                 "rows": [
                     [
@@ -79895,7 +80250,7 @@
         "requirements": [],
         "metadata": {
             "cardNumber": "UC03",
-            "description": "You start with 46M€ and 2 corruption.",
+            "description": "You start with 46 M€ and 2 corruption.",
             "renderData": {
                 "rows": [
                     [
@@ -79921,72 +80276,46 @@
                             "questionMark": false
                         }
                     ],
+                    [],
                     [
                         {
-                            "rows": [
-                                [
-                                    {
-                                        "type": "corruption",
-                                        "amount": 1,
-                                        "is": "item",
-                                        "multiplier": false,
-                                        "clone": false,
-                                        "cancelled": false,
-                                        "questionMark": false
-                                    }
-                                ],
-                                [
-                                    {
-                                        "type": "->",
-                                        "size": "M",
-                                        "isIcon": true,
-                                        "is": "symbol"
-                                    }
-                                ],
-                                [
-                                    {
-                                        "type": "steel",
-                                        "amount": 4,
-                                        "is": "item",
-                                        "multiplier": false,
-                                        "clone": false,
-                                        "cancelled": false,
-                                        "showDigit": true
-                                    },
-                                    {
-                                        "type": "OR",
-                                        "size": "S",
-                                        "isIcon": false,
-                                        "is": "symbol"
-                                    },
-                                    {
-                                        "type": "titanium",
-                                        "amount": 3,
-                                        "is": "item",
-                                        "multiplier": false,
-                                        "clone": false,
-                                        "cancelled": false,
-                                        "showDigit": true
-                                    },
-                                    "Action: "
-                                ]
-                            ],
-                            "is": "effect"
-                        }
-                    ],
-                    [
-                        {
-                            "type": "text",
-                            "amount": -1,
+                            "type": "corruption",
+                            "amount": 1,
                             "is": "item",
                             "multiplier": false,
                             "clone": false,
                             "cancelled": false,
-                            "questionMark": false,
-                            "text": "(Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.)",
+                            "questionMark": false
+                        },
+                        {
+                            "type": "->",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "steel",
+                            "amount": 4,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "showDigit": true
+                        },
+                        {
+                            "type": "OR",
                             "size": "S",
-                            "isUppercase": false,
-                            "isBold": false
+                            "isIcon": false,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "titanium",
+                            "amount": 3,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "showDigit": true
                         }
                     ],
                     [
@@ -80020,7 +80349,23 @@
                             "cancelled": false,
                             "showDigit": true
                         }
-                    ]
+                    ],
+                    [
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "(Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.)",
+                            "size": "S",
+                            "isUppercase": false,
+                            "isBold": false
+                        }
+                    ],
+                    []
                 ],
                 "is": "root"
             }
@@ -80047,7 +80392,7 @@
         "requirements": [],
         "metadata": {
             "cardNumber": "UC04",
-            "description": "You start with 47M€ 1 corruption.",
+            "description": "You start with 47 M€ and 1 corruption.",
             "renderData": {
                 "rows": [
                     [
@@ -80105,7 +80450,7 @@
                                         "cancelled": false,
                                         "questionMark": false
                                     },
-                                    "Effect: After you play a microbe card that can hold microbes, add 2 to microbes on it."
+                                    "Effect: After you play a microbe card that can hold microbes, add 2 microbes to it."
                                 ]
                             ],
                             "is": "effect"
@@ -80175,7 +80520,7 @@
         "requirements": [],
         "metadata": {
             "cardNumber": "UC05",
-            "description": "You start with 36M€, 3 plants and 1 plant production.",
+            "description": "You start with 36 M€, 3 plants and 1 plant production.",
             "renderData": {
                 "rows": [
                     [
@@ -80454,6 +80799,181 @@
     },
     {
         "module": "underworld",
+        "name": "Aeron Genomics",
+        "tags": [
+            "animal"
+        ],
+        "victoryPoints": {
+            "resourcesHere": {},
+            "per": 3
+        },
+        "cost": 0,
+        "type": "corporation",
+        "requirements": [],
+        "metadata": {
+            "cardNumber": "UC05",
+            "description": "You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "megacredits",
+                            "amount": 35,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        },
+                        {
+                            "type": "steel",
+                            "amount": 5,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "showDigit": true
+                        },
+                        {
+                            "type": "animals",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "excavate",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "animals",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    "Effect: After you excavate an underground resource, put an animal on this card."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    },
+                                    {
+                                        "type": "animals",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "animals",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    {
+                                        "type": "*",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    },
+                                    "Action: Spend 1 M€ to move an animal from here to another card."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "victoryPoints": {
+                "item": {
+                    "type": "animals",
+                    "amount": -1,
+                    "is": "item",
+                    "multiplier": false,
+                    "clone": false,
+                    "cancelled": false,
+                    "questionMark": false
+                },
+                "points": 1,
+                "target": 3,
+                "targetOneOrMore": false,
+                "anyPlayer": false
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "resourceType": "Animal",
+        "startingMegaCredits": 35,
+        "compatibility": []
+    },
+    {
+        "module": "underworld",
         "name": "Voltagon",
         "tags": [
             "science",
@@ -80604,6 +81124,191 @@
         "startingMegaCredits": 38,
         "compatibility": [
             "venus"
+        ]
+    },
+    {
+        "module": "underworld",
+        "name": "Hectate Speditions",
+        "tags": [
+            "earth"
+        ],
+        "cost": 0,
+        "type": "corporation",
+        "requirements": [],
+        "metadata": {
+            "cardNumber": "U12",
+            "description": "You start with 38 M€. As your first action, place a colony.",
+            "renderData": {
+                "rows": [
+                    [],
+                    [
+                        {
+                            "type": "megacredits",
+                            "amount": 38,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        },
+                        {
+                            "type": "colonies",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "size": "M"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "text",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false,
+                                        "text": "planetary tag",
+                                        "size": "M",
+                                        "isUppercase": false,
+                                        "isBold": true
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "supply-chain",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    "Effect: When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "type": "supply-chain",
+                            "amount": 2,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "showDigit": true
+                        },
+                        {
+                            "type": ":",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "trade",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "size": "S"
+                        },
+                        {
+                            "type": "nbsp",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "supply-chain",
+                            "amount": 5,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "showDigit": true
+                        },
+                        {
+                            "type": "->",
+                            "size": "S",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "trade_fleet",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ],
+                    [
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "(Effect: Spend 2 supply chain resources (min. 1) to trade.)",
+                            "size": "S",
+                            "isUppercase": false,
+                            "isBold": false
+                        }
+                    ],
+                    [
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "(Action: Spend 5 supply chain resources to gain a trade fleet.)",
+                            "size": "S",
+                            "isUppercase": false,
+                            "isBold": false
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "resourceType": "Supply Chain",
+        "startingMegaCredits": 42,
+        "compatibility": [
+            "colonies"
         ]
     },
     {
@@ -81140,6 +81845,88 @@
     },
     {
         "module": "underworld",
+        "name": "Deepwater Dome",
+        "tags": [
+            "plant",
+            "building"
+        ],
+        "cost": 0,
+        "type": "prelude",
+        "requirements": [],
+        "metadata": {
+            "cardNumber": "UP11",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "plants",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        },
+                        {
+                            "type": "oceans",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "empty_tile",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "size": "M"
+                        },
+                        {
+                            "type": "identify",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Increase your plant production 1 step. Place an ocean. Then place a player cube on an adjacent unreserved space. Only you may place a tile there. Identify the underground resources in both spaces."
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "startingMegaCredits": 0,
+        "compatibility": []
+    },
+    {
+        "module": "underworld",
         "name": "Secret Research",
         "tags": [
             "science"
@@ -81186,6 +81973,82 @@
         },
         "startingMegaCredits": 0,
         "compatibility": []
+    },
+    {
+        "module": "underworld",
+        "name": "Prospecting",
+        "tags": [
+            "space"
+        ],
+        "cost": 0,
+        "type": "prelude",
+        "requirements": [],
+        "metadata": {
+            "cardNumber": "UP13",
+            "description": "Pay 4 M€. Put an additional colony tile of your choice into play. Then place a colony on it.",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "megacredits",
+                            "amount": -4,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        },
+                        {
+                            "type": "nbsp",
+                            "size": "M",
+                            "isIcon": true,
+                            "is": "symbol"
+                        },
+                        {
+                            "type": "colony_tile",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        },
+                        {
+                            "type": "colonies",
+                            "amount": 1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "size": "M"
+                        },
+                        {
+                            "type": "*",
+                            "size": "M",
+                            "isIcon": false,
+                            "is": "symbol"
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "startingMegaCredits": -4,
+        "compatibility": [
+            "colonies"
+        ]
     },
     {
         "module": "underworld",
@@ -81304,6 +82167,106 @@
         "startingMegaCredits": 0,
         "compatibility": [
             "turmoil"
+        ]
+    },
+    {
+        "module": "underworld",
+        "name": "Cloud Vortex Outpost",
+        "tags": [
+            "venus"
+        ],
+        "cost": 0,
+        "type": "prelude",
+        "requirements": [],
+        "metadata": {
+            "cardNumber": "UP15",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "venus",
+                            "amount": 2,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false
+                        }
+                    ],
+                    [
+                        {
+                            "type": "text",
+                            "amount": -1,
+                            "is": "item",
+                            "multiplier": false,
+                            "clone": false,
+                            "cancelled": false,
+                            "questionMark": false,
+                            "text": "Raise Venus 2 steps",
+                            "size": "S",
+                            "isUppercase": false,
+                            "isBold": false
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "cards",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "secondaryTag": "floater"
+                                    },
+                                    {
+                                        "type": "*",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "is": "symbol"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "floaters",
+                                        "amount": 3,
+                                        "is": "item",
+                                        "multiplier": false,
+                                        "clone": false,
+                                        "cancelled": false,
+                                        "questionMark": false
+                                    },
+                                    "Effect: After you play your FIRST project card that can hold floaters, put 3 floaters on it."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ]
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "startingMegaCredits": 0,
+        "compatibility": [
+            "venus"
         ]
     },
     {

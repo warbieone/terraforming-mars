@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiCloneableGame = void 0;
+const responses = require("./responses");
 const Handler_1 = require("./Handler");
 const Database_1 = require("../database/Database");
 const Types_1 = require("../../common/Types");
@@ -21,20 +22,20 @@ class ApiCloneableGame extends Handler_1.Handler {
         return __awaiter(this, void 0, void 0, function* () {
             const gameId = ctx.url.searchParams.get('id');
             if (gameId === null) {
-                ctx.route.badRequest(req, res, 'missing id parameter');
+                responses.badRequest(req, res, 'missing id parameter');
                 return;
             }
             if (!(0, Types_1.isGameId)(gameId)) {
-                ctx.route.badRequest(req, res, 'invalid game id');
+                responses.badRequest(req, res, 'invalid game id');
                 return;
             }
             yield Database_1.Database.getInstance().getPlayerCount(gameId)
                 .then((playerCount) => {
-                ctx.route.writeJson(res, { gameId, playerCount });
+                responses.writeJson(res, { gameId, playerCount });
             })
                 .catch((err) => {
                 console.warn('Could not load cloneable game: ', err);
-                ctx.route.notFound(req, res);
+                responses.notFound(req, res);
             });
         });
     }

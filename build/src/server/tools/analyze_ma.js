@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 const http = require("http");
 const fs = require("fs");
+const responses = require("../routes/responses");
 const MilestoneAwardSelector_1 = require("../ma/MilestoneAwardSelector");
 const GameOptions_1 = require("../game/GameOptions");
 const BoardName_1 = require("../../common/boards/BoardName");
@@ -16,9 +17,7 @@ function processRequest(req, res) {
     if (url.pathname === '/') {
         fs.readFile('src/server/tools/analyze_ma.html', (err, data) => {
             if (err) {
-                res.writeHead(500);
-                res.write('Internal server error ' + err);
-                res.end();
+                responses.internalServerError(req, res, err);
             }
             res.setHeader('Content-Length', data.length);
             res.end(data);
@@ -31,9 +30,7 @@ function processRequest(req, res) {
         res.end(data);
     }
     else {
-        res.writeHead(404);
-        res.write('Not found');
-        res.end();
+        responses.notFound(req, res);
     }
 }
 const server = http.createServer(processRequest);

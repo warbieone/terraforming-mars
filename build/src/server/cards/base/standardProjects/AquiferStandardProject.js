@@ -28,8 +28,9 @@ class AquiferStandardProject extends StandardProjectCard_1.StandardProjectCard {
         }
     }
     canAct(player) {
-        if (!player.game.canAddOcean())
-            return false;
+        if (!player.game.canAddOcean()) {
+            this.warnings.add('maxoceans');
+        }
         return super.canAct(player);
     }
     actionEssence(player) {

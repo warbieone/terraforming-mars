@@ -176,12 +176,17 @@ class LocalFilesystem {
         (0, fs_1.readdirSync)(this.dbFolder, { withFileTypes: true }).forEach((dirent) => {
             const gameId = this.asGameId(dirent);
             if (gameId !== undefined) {
-                const text = (0, fs_1.readFileSync)(this.filename(gameId));
-                const game = JSON.parse(text.toString());
-                const participantIds = game.players.map((p) => p.id);
-                if (game.spectatorId)
-                    participantIds.push(game.spectatorId);
-                gameIds.push({ gameId, participantIds });
+                try {
+                    const text = (0, fs_1.readFileSync)(this.filename(gameId));
+                    const game = JSON.parse(text.toString());
+                    const participantIds = game.players.map((p) => p.id);
+                    if (game.spectatorId)
+                        participantIds.push(game.spectatorId);
+                    gameIds.push({ gameId, participantIds });
+                }
+                catch (e) {
+                    console.error(`While reading ${gameId} `, e);
+                }
             }
         });
         return Promise.resolve(gameIds);

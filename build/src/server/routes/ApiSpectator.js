@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiSpectator = void 0;
+const responses = require("./responses");
 const ServerModel_1 = require("../models/ServerModel");
 const Handler_1 = require("./Handler");
 const Types_1 = require("../../common/Types");
@@ -21,7 +22,7 @@ class ApiSpectator extends Handler_1.Handler {
         return __awaiter(this, void 0, void 0, function* () {
             const id = ctx.url.searchParams.get('id');
             if (!id) {
-                ctx.route.badRequest(req, res, 'invalid id');
+                responses.badRequest(req, res, 'invalid id');
                 return;
             }
             let game;
@@ -29,10 +30,10 @@ class ApiSpectator extends Handler_1.Handler {
                 game = yield ctx.gameLoader.getGame(id);
             }
             if (game === undefined) {
-                ctx.route.notFound(req, res);
+                responses.notFound(req, res);
                 return;
             }
-            ctx.route.writeJson(res, ServerModel_1.Server.getSpectatorModel(game));
+            responses.writeJson(res, ServerModel_1.Server.getSpectatorModel(game));
         });
     }
 }

@@ -1185,17 +1185,6 @@ class Game {
         this.gameLog.push(logMessage);
         this.gameAge++;
     }
-    someoneCanHaveProductionReduced(resource, minQuantity = 1) {
-        if (this.isSoloMode())
-            return true;
-        return this.getPlayers().some((p) => {
-            if (p.production[resource] < minQuantity)
-                return false;
-            if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName_1.CardName.PRIVATE_SECURITY))
-                return false;
-            return true;
-        });
-    }
     discardForCost(cardCount, toPlace) {
         if (cardCount === 1) {
             const card = this.projectDeck.drawLegacy(this);

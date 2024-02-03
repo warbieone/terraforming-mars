@@ -20,8 +20,9 @@ class AirScrappingStandardProject extends StandardProjectCard_1.StandardProjectC
         super(properties);
     }
     canAct(player) {
-        if (player.game.getVenusScaleLevel() >= constants.MAX_VENUS_SCALE)
-            return false;
+        if (player.game.getVenusScaleLevel() >= constants.MAX_VENUS_SCALE) {
+            this.warnings.add('maxvenus');
+        }
         return super.canAct(player);
     }
     actionEssence(player) {

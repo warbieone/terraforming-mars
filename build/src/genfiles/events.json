@@ -2740,20 +2740,13 @@
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
-                                }
-                            ]
-                        ],
-                        "is": "production-box"
-                    },
-                    {
-                        "type": "/",
-                        "size": "M",
-                        "isIcon": false,
-                        "is": "symbol"
-                    },
-                    {
-                        "rows": [
-                            [
+                                },
+                                {
+                                    "type": "/",
+                                    "size": "M",
+                                    "isIcon": false,
+                                    "is": "symbol"
+                                },
                                 {
                                     "type": "megacredits",
                                     "amount": 1,

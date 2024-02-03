@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Reset = void 0;
+const responses = require("./responses");
 const ServerModel_1 = require("../models/ServerModel");
 const Handler_1 = require("./Handler");
 const Types_1 = require("../../common/Types");
@@ -21,16 +22,16 @@ class Reset extends Handler_1.Handler {
         return __awaiter(this, void 0, void 0, function* () {
             const playerId = ctx.url.searchParams.get('id');
             if (playerId === null) {
-                ctx.route.badRequest(req, res, 'missing id parameter');
+                responses.badRequest(req, res, 'missing id parameter');
                 return;
             }
             if (!(0, Types_1.isPlayerId)(playerId)) {
-                ctx.route.badRequest(req, res, 'invalid player id');
+                responses.badRequest(req, res, 'invalid player id');
                 return;
             }
             const game = yield ctx.gameLoader.getGame(playerId);
             if (game === undefined) {
-                ctx.route.notFound(req, res);
+                responses.notFound(req, res);
                 return;
             }
             if (game.getPlayers().length > 1) {
@@ -44,11 +45,11 @@ class Reset extends Handler_1.Handler {
                 console.warn(`unable to find player ${playerId}`, err);
             }
             if (player === undefined) {
-                ctx.route.notFound(req, res);
+                responses.notFound(req, res);
                 return;
             }
             if (player.game.activePlayer !== player.id) {
-                ctx.route.badRequest(req, res, 'Not the active player');
+                responses.badRequest(req, res, 'Not the active player');
                 return;
             }
             try {
@@ -56,14 +57,14 @@ class Reset extends Handler_1.Handler {
                 if (game !== undefined) {
                     const reloadedPlayer = game.getPlayerById(player.id);
                     game.inputsThisRound = 0;
-                    ctx.route.writeJson(res, ServerModel_1.Server.getPlayerModel(reloadedPlayer));
+                    responses.writeJson(res, ServerModel_1.Server.getPlayerModel(reloadedPlayer));
                     return;
                 }
             }
             catch (err) {
                 console.error(err);
             }
-            ctx.route.badRequest(req, res, 'Could not reset');
+            responses.badRequest(req, res, 'Could not reset');
         });
     }
 }

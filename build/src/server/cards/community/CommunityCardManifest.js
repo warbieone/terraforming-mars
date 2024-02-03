@@ -37,7 +37,7 @@ exports.COMMUNITY_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     preludeCards: {
         [CardName_1.CardName.RESEARCH_GRANT]: { Factory: ResearchGrant_1.ResearchGrant },
         [CardName_1.CardName.VALUABLE_GASES]: { Factory: ValuableGases_1.ValuableGases, compatibility: 'venus' },
-        [CardName_1.CardName.VENUS_FIRST]: { Factory: VenusFirst_1.VenusFirst, compatibility: 'venus' },
+        [CardName_1.CardName.VENUS_FIRST]: { Factory: VenusFirst_1.VenusFirst, compatibility: 'venus', instantiate: false },
         [CardName_1.CardName.AEROSPACE_MISSION]: { Factory: AerospaceMission_1.AerospaceMission, compatibility: 'colonies' },
         [CardName_1.CardName.TRADE_ADVANCE]: { Factory: TradeAdvance_1.TradeAdvance, compatibility: 'colonies' },
         [CardName_1.CardName.POLITICAL_UPRISING]: { Factory: PoliticalUprising_1.PoliticalUprising, compatibility: 'turmoil' },

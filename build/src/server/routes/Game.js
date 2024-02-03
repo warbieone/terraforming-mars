@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameHandler = void 0;
+const responses = require("./responses");
 const Handler_1 = require("./Handler");
 const Database_1 = require("../database/Database");
 const BoardName_1 = require("../../common/boards/BoardName");
@@ -21,9 +22,42 @@ const Player_1 = require("../Player");
 const ServerModel_1 = require("../models/ServerModel");
 const ServeAsset_1 = require("./ServeAsset");
 const server_ids_1 = require("../utils/server-ids");
+const QuotaHandler_1 = require("../server/QuotaHandler");
+const durations_1 = require("../utils/durations");
+function get() {
+    const defaultQuota = { limit: 1, perMs: 1 };
+    const val = process.env.GAME_QUOTA;
+    try {
+        if (val === undefined) {
+            throw new Error('Undefined quota');
+        }
+        const struct = JSON.parse(val);
+        let { limit, per } = struct;
+        if (limit === undefined) {
+            throw new Error('limit is absent');
+        }
+        limit = Number.parseInt(limit);
+        if (isNaN(limit)) {
+            throw new Error('limit is invalid');
+        }
+        if (per === undefined) {
+            throw new Error('per is absent');
+        }
+        const perMs = (0, durations_1.durationToMilliseconds)(per);
+        if (isNaN(perMs)) {
+            throw new Error('perMillis is invalid');
+        }
+        return { limit, perMs };
+    }
+    catch (e) {
+        console.log(e);
+        return defaultQuota;
+    }
+}
 class GameHandler extends Handler_1.Handler {
-    constructor() {
+    constructor(quotaConfig = get()) {
         super();
+        this.quotaHandler = new QuotaHandler_1.QuotaHandler(quotaConfig);
     }
     static boardOptions(board) {
         const allBoards = Object.values(BoardName_1.BoardName);
@@ -44,6 +78,11 @@ class GameHandler extends Handler_1.Handler {
     }
     put(req, res, ctx) {
         return new Promise((resolve) => {
+            if (this.quotaHandler.measure(ctx) === false) {
+                responses.quotaExceeded(req, res);
+                resolve();
+                return;
+            }
             let body = '';
             req.on('data', function (data) {
                 body += data.toString();
@@ -127,10 +166,10 @@ class GameHandler extends Handler_1.Handler {
                         game = Game_1.Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed, spectatorId);
                     }
                     GameLoader_1.GameLoader.getInstance().add(game);
-                    ctx.route.writeJson(res, ServerModel_1.Server.getSimpleGameModel(game));
+                    responses.writeJson(res, ServerModel_1.Server.getSimpleGameModel(game));
                 }
                 catch (error) {
-                    ctx.route.internalServerError(req, res, error);
+                    responses.internalServerError(req, res, error);
                 }
                 resolve();
             }));

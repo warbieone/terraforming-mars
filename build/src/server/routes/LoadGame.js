@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoadGame = void 0;
+const responses = require("./responses");
 const Database_1 = require("../database/Database");
 const GameLoader_1 = require("../database/GameLoader");
 const ServerModel_1 = require("../models/ServerModel");
@@ -19,7 +20,7 @@ class LoadGame extends Handler_1.Handler {
     constructor() {
         super();
     }
-    put(req, res, ctx) {
+    put(req, res, _ctx) {
         return new Promise((resolve) => {
             let body = '';
             req.on('data', function (data) {
@@ -39,14 +40,14 @@ class LoadGame extends Handler_1.Handler {
                     const game = yield GameLoader_1.GameLoader.getInstance().getGame(gameId, true);
                     if (game === undefined) {
                         console.warn(`unable to find ${gameId} in database`);
-                        ctx.route.notFound(req, res, 'game_id not found');
+                        responses.notFound(req, res, 'game_id not found');
                     }
                     else {
-                        ctx.route.writeJson(res, ServerModel_1.Server.getSimpleGameModel(game));
+                        responses.writeJson(res, ServerModel_1.Server.getSimpleGameModel(game));
                     }
                 }
                 catch (error) {
-                    ctx.route.internalServerError(req, res, error);
+                    responses.internalServerError(req, res, error);
                 }
                 resolve();
             }));

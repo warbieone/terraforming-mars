@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AsteroidStandardProject = void 0;
+const constants = require("../../../../common/constants");
 const CardName_1 = require("../../../../common/cards/CardName");
 const CardRenderer_1 = require("../../render/CardRenderer");
 const StandardProjectCard_1 = require("../../StandardProjectCard");
-const constants = require("../../../../common/constants");
 class AsteroidStandardProject extends StandardProjectCard_1.StandardProjectCard {
     constructor() {
         super({
@@ -13,7 +13,7 @@ class AsteroidStandardProject extends StandardProjectCard_1.StandardProjectCard 
             tr: { temperature: 1 },
             metadata: {
                 cardNumber: 'SP9',
-                renderData: CardRenderer_1.CardRenderer.builder((b) => b.standardProject('Spend 14 M€ to raise temperature 1 step.', (eb) => {
+                renderData: CardRenderer_1.CardRenderer.builder((b) => b.standardProject('Spend 14 M€ to raise the temperature 1 step.', (eb) => {
                     eb.megacredits(14).startAction.temperature(1);
                 })),
             },
@@ -28,8 +28,8 @@ class AsteroidStandardProject extends StandardProjectCard_1.StandardProjectCard 
         }
     }
     canAct(player) {
-        if (player.game.getTemperature() === constants.MAX_TEMPERATURE) {
-            return false;
+        if (player.game.getTemperature() >= constants.MAX_TEMPERATURE) {
+            this.warnings.add('maxtemp');
         }
         return super.canAct(player);
     }

@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiGame = void 0;
+const responses = require("./responses");
 const Handler_1 = require("./Handler");
 const ServerModel_1 = require("../models/ServerModel");
 const Types_1 = require("../../common/Types");
@@ -21,7 +22,7 @@ class ApiGame extends Handler_1.Handler {
         return __awaiter(this, void 0, void 0, function* () {
             const gameId = ctx.url.searchParams.get('id');
             if (!gameId) {
-                ctx.route.badRequest(req, res, 'missing id parameter');
+                responses.badRequest(req, res, 'missing id parameter');
                 return;
             }
             let game;
@@ -29,11 +30,11 @@ class ApiGame extends Handler_1.Handler {
                 game = yield ctx.gameLoader.getGame(gameId);
             }
             if (game === undefined) {
-                ctx.route.notFound(req, res, 'game not found');
+                responses.notFound(req, res, 'game not found');
                 return;
             }
             const model = ServerModel_1.Server.getSimpleGameModel(game);
-            ctx.route.writeJson(res, model);
+            responses.writeJson(res, model);
         });
     }
 }

@@ -8,7 +8,7 @@ const SelectOption_1 = require("../../inputs/SelectOption");
 const Resource_1 = require("../../../common/Resource");
 const Card_1 = require("../Card");
 const MessageBuilder_1 = require("../../logs/MessageBuilder");
-const PathfindersExpansion_1 = require("../..//pathfinders/PathfindersExpansion");
+const PathfindersExpansion_1 = require("../../pathfinders/PathfindersExpansion");
 class MarketCard extends Card_1.Card {
     constructor(tradeResource, buyingTerms, sellingTerms, properties) {
         super(properties);
