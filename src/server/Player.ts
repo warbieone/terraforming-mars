@@ -1099,13 +1099,13 @@ export class Player implements IPlayer {
       const diff = this.cardsInHand.length * this.cardCost;
       this.stock.deduct(Resource.MEGACREDITS, diff);
     }
+    this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
     // Calculating this before playing the corporation card, which might change the player's hand size.
     const numberOfCardInHand = this.cardsInHand.length;
     corporationCard.play(this);
     if (corporationCard.initialAction !== undefined || corporationCard.firstAction !== undefined) {
       this.pendingInitialActions.push(corporationCard);
     }
-    this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
     if (additionalCorp === false) {
       this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(numberOfCardInHand));
     }
@@ -1314,6 +1314,7 @@ export class Player implements IPlayer {
 
     const playableCards: Array<PlayableCard> = [];
     for (const card of candidateCards) {
+      card.warnings.clear();
       const canPlay = this.canPlay(card);
       if (canPlay !== false) {
         playableCards.push({
@@ -1706,6 +1707,9 @@ export class Player implements IPlayer {
       });
       if (convertHeat.warnings.size > 0) {
         option.warnings = Array.from(convertHeat.warnings);
+        if (convertHeat.warnings.has('maxtemp')) {
+          option.eligibleForDefault = false;
+        }
       }
       action.options.push(option);
     }
