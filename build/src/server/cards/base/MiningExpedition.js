@@ -30,4 +30,3 @@ class MiningExpedition extends Card_1.Card {
     }
 }
 exports.MiningExpedition = MiningExpedition;
-//# sourceMappingURL=MiningExpedition.js.map

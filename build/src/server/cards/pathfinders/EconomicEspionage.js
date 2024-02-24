@@ -33,4 +33,3 @@ class EconomicEspionage extends ActionCard_1.ActionCard {
     }
 }
 exports.EconomicEspionage = EconomicEspionage;
-//# sourceMappingURL=EconomicEspionage.js.map

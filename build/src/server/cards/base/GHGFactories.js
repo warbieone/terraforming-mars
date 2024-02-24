@@ -31,4 +31,3 @@ class GHGFactories extends Card_1.Card {
     }
 }
 exports.GHGFactories = GHGFactories;
-//# sourceMappingURL=GHGFactories.js.map

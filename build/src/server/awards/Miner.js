@@ -16,4 +16,3 @@ class Miner {
     }
 }
 exports.Miner = Miner;
-//# sourceMappingURL=Miner.js.map

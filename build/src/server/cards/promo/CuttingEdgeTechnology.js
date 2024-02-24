@@ -30,4 +30,3 @@ class CuttingEdgeTechnology extends Card_1.Card {
     }
 }
 exports.CuttingEdgeTechnology = CuttingEdgeTechnology;
-//# sourceMappingURL=CuttingEdgeTechnology.js.map

@@ -33,4 +33,3 @@ class ParliamentHall extends Card_1.Card {
     }
 }
 exports.ParliamentHall = ParliamentHall;
-//# sourceMappingURL=ParliamentHall.js.map

@@ -31,4 +31,3 @@ class JovianTaxRights extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.JovianTaxRights = JovianTaxRights;
-//# sourceMappingURL=JovianTaxRights.js.map

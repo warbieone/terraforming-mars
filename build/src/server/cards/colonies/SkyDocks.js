@@ -33,4 +33,3 @@ class SkyDocks extends Card_1.Card {
     }
 }
 exports.SkyDocks = SkyDocks;
-//# sourceMappingURL=SkyDocks.js.map

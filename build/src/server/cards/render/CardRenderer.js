@@ -105,9 +105,8 @@ class Builder {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.TEMPERATURE, amount));
     }
     oceans(amount, options) {
-        var _a;
-        const opts = options !== null && options !== void 0 ? options : { size: Size_1.Size.MEDIUM };
-        opts.size = (_a = opts.size) !== null && _a !== void 0 ? _a : Size_1.Size.MEDIUM;
+        const opts = options ?? { size: Size_1.Size.MEDIUM };
+        opts.size = opts.size ?? Size_1.Size.MEDIUM;
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.OCEANS, amount, options);
         return this._appendToRow(item);
     }
@@ -143,11 +142,10 @@ class Builder {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.TR, amount, options));
     }
     megacredits(amount, options) {
-        var _a;
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.MEGACREDITS, amount, options);
         item.amountInside = true;
         item.showDigit = false;
-        item.size = (_a = options === null || options === void 0 ? void 0 : options.size) !== null && _a !== void 0 ? _a : Size_1.Size.MEDIUM;
+        item.size = options?.size ?? Size_1.Size.MEDIUM;
         return this._appendToRow(item);
     }
     cards(amount, options) {
@@ -190,9 +188,8 @@ class Builder {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.TRADE_FLEET));
     }
     colonies(amount = 1, options) {
-        var _a;
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.COLONIES, amount, options);
-        item.size = (_a = options === null || options === void 0 ? void 0 : options.size) !== null && _a !== void 0 ? _a : Size_1.Size.MEDIUM;
+        item.size = options?.size ?? Size_1.Size.MEDIUM;
         return this._appendToRow(item);
     }
     tradeDiscount(amount) {
@@ -207,19 +204,17 @@ class Builder {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.INFLUENCE, 1, options));
     }
     city(options) {
-        var _a;
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CITY, -1, options);
-        item.size = (_a = options === null || options === void 0 ? void 0 : options.size) !== null && _a !== void 0 ? _a : Size_1.Size.MEDIUM;
+        item.size = options?.size ?? Size_1.Size.MEDIUM;
         return this._appendToRow(item);
     }
     greenery(options) {
-        var _a;
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.GREENERY);
-        item.size = (_a = options === null || options === void 0 ? void 0 : options.size) !== null && _a !== void 0 ? _a : Size_1.Size.MEDIUM;
-        if ((options === null || options === void 0 ? void 0 : options.withO2) !== false) {
+        item.size = options?.size ?? Size_1.Size.MEDIUM;
+        if (options?.withO2 !== false) {
             item.secondaryTag = AltSecondaryTag_1.AltSecondaryTag.OXYGEN;
         }
-        if ((options === null || options === void 0 ? void 0 : options.any) === true) {
+        if (options?.any === true) {
             item.anyPlayer = true;
         }
         return this._appendToRow(item);
@@ -367,9 +362,8 @@ class Builder {
         return this;
     }
     cityorSpecialTile(options) {
-        var _a;
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CITY_OR_SPECIAL_TILE, -1, options);
-        item.size = (_a = options === null || options === void 0 ? void 0 : options.size) !== null && _a !== void 0 ? _a : Size_1.Size.MEDIUM;
+        item.size = options?.size ?? Size_1.Size.MEDIUM;
         return this._appendToRow(item);
     }
     neutralDelegate(amount, options) {
@@ -420,15 +414,14 @@ class Builder {
         return this._appendToRow(item);
     }
     emptyTile(type = 'normal', options) {
-        var _a, _b;
         if (type === 'normal') {
             const normal = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.EMPTY_TILE, -1, options);
-            normal.size = (_a = options === null || options === void 0 ? void 0 : options.size) !== null && _a !== void 0 ? _a : Size_1.Size.MEDIUM;
+            normal.size = options?.size ?? Size_1.Size.MEDIUM;
             this._appendToRow(normal);
         }
         else if (type === 'golden') {
             const golden = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.EMPTY_TILE_GOLDEN, -1, options);
-            golden.size = (_b = options === null || options === void 0 ? void 0 : options.size) !== null && _b !== void 0 ? _b : Size_1.Size.MEDIUM;
+            golden.size = options?.size ?? Size_1.Size.MEDIUM;
             this._appendToRow(golden);
         }
         return this;
@@ -596,4 +589,3 @@ class CorpEffectBuilderAction extends Builder {
         return new CardRenderCorpBoxAction(this._data);
     }
 }
-//# sourceMappingURL=CardRenderer.js.map

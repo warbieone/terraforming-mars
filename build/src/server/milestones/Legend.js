@@ -11,4 +11,3 @@ class Legend extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Legend = Legend;
-//# sourceMappingURL=Legend.js.map

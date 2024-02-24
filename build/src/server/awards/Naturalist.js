@@ -11,4 +11,3 @@ class Naturalist {
     }
 }
 exports.Naturalist = Naturalist;
-//# sourceMappingURL=Naturalist.js.map

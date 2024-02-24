@@ -29,4 +29,3 @@ class GalileanWaystation extends Card_1.Card {
     }
 }
 exports.GalileanWaystation = GalileanWaystation;
-//# sourceMappingURL=GalileanWaystation.js.map

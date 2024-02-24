@@ -41,8 +41,9 @@ class RedsBonus01 {
         const players = game.getPlayersInGenerationOrder();
         const scores = players.map((player) => this.getScore(player));
         players.forEach((player, idx) => {
-            if (scores[idx] > 0)
-                player.increaseTerraformRating();
+            if (scores[idx] > 0) {
+                player.increaseTerraformRating(1, { log: true });
+            }
         });
     }
 }
@@ -217,4 +218,3 @@ exports.REDS_POLICY_1 = new RedsPolicy01();
 exports.REDS_POLICY_2 = new RedsPolicy02();
 exports.REDS_POLICY_3 = new RedsPolicy03();
 exports.REDS_POLICY_4 = new RedsPolicy04();
-//# sourceMappingURL=Reds.js.map

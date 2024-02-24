@@ -9,7 +9,6 @@ const Turmoil_1 = require("../turmoil/Turmoil");
 const VictoryPointsBreakdown_1 = require("./VictoryPointsBreakdown");
 const AwardScorer_1 = require("../awards/AwardScorer");
 function calculateVictoryPoints(player) {
-    var _a;
     const victoryPointsBreakdown = new VictoryPointsBreakdown_1.VictoryPointsBreakdown();
     let negativeVP = 0;
     for (const playedCard of player.tableau) {
@@ -58,7 +57,7 @@ function calculateVictoryPoints(player) {
         const threshold = player.game.gameOptions.escapeVelocityThreshold;
         const bonusSecondsPerAction = player.game.gameOptions.escapeVelocityBonusSeconds;
         const period = player.game.gameOptions.escapeVelocityPeriod;
-        const penaltyPerMin = (_a = player.game.gameOptions.escapeVelocityPenalty) !== null && _a !== void 0 ? _a : 1;
+        const penaltyPerMin = player.game.gameOptions.escapeVelocityPenalty ?? 1;
         const elapsedTimeInMinutes = player.timer.getElapsedTimeInMinutes();
         if (threshold !== undefined && bonusSecondsPerAction !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
             const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (player.actionsTakenThisGame * (bonusSecondsPerAction / 60)), 0);
@@ -110,4 +109,3 @@ function giveAwards(player, vpb) {
         }
     });
 }
-//# sourceMappingURL=calculateVictoryPoints.js.map

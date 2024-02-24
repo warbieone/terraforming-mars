@@ -44,4 +44,3 @@ class HellasBoard extends MarsBoard_1.MarsBoard {
     }
 }
 exports.HellasBoard = HellasBoard;
-//# sourceMappingURL=HellasBoard.js.map

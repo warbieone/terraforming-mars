@@ -42,7 +42,6 @@ class LunaMiningHub extends Card_1.Card {
                 }),
                 victoryPoints: CardRenderDynamicVictoryPoints_1.CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
             },
-            tilesBuilt: [TileType_1.TileType.LUNA_MINING_HUB],
         });
     }
     getVictoryPoints(player) {
@@ -57,4 +56,3 @@ class LunaMiningHub extends Card_1.Card {
     }
 }
 exports.LunaMiningHub = LunaMiningHub;
-//# sourceMappingURL=LunaMiningHub.js.map

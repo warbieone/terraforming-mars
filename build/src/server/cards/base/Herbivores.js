@@ -48,4 +48,3 @@ class Herbivores extends Card_1.Card {
     }
 }
 exports.Herbivores = Herbivores;
-//# sourceMappingURL=Herbivores.js.map

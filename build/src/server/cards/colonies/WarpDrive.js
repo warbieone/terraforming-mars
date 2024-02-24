@@ -30,4 +30,3 @@ class WarpDrive extends Card_1.Card {
     }
 }
 exports.WarpDrive = WarpDrive;
-//# sourceMappingURL=WarpDrive.js.map

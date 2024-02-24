@@ -37,4 +37,3 @@ class EcologicalSurvey extends SurveyCard_1.SurveyCard {
     }
 }
 exports.EcologicalSurvey = EcologicalSurvey;
-//# sourceMappingURL=EcologicalSurvey.js.map

@@ -29,4 +29,3 @@ class EquatorialMagnetizer extends ActionCard_1.ActionCard {
     }
 }
 exports.EquatorialMagnetizer = EquatorialMagnetizer;
-//# sourceMappingURL=EquatorialMagnetizer.js.map

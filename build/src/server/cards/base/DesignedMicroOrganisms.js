@@ -29,4 +29,3 @@ class DesignedMicroOrganisms extends Card_1.Card {
     }
 }
 exports.DesignedMicroOrganisms = DesignedMicroOrganisms;
-//# sourceMappingURL=DesignedMicroOrganisms.js.map

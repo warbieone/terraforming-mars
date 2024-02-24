@@ -44,4 +44,3 @@ class Arklight extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Arklight = Arklight;
-//# sourceMappingURL=Arklight.js.map

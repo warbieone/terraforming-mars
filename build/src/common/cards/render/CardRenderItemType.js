@@ -104,4 +104,3 @@ var CardRenderItemType;
     CardRenderItemType["SUPPLY_CHAIN"] = "supply-chain";
     CardRenderItemType["GEOSCAN_ICON"] = "geoscan-icon";
 })(CardRenderItemType = exports.CardRenderItemType || (exports.CardRenderItemType = {}));
-//# sourceMappingURL=CardRenderItemType.js.map

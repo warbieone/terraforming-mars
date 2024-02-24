@@ -37,6 +37,9 @@ class Odyssey extends CorporationCard_1.CorporationCard {
         try {
             const array = [];
             for (const card of player.playedCards) {
+                if (card.name === CardName_1.CardName.PRICE_WARS) {
+                    continue;
+                }
                 if (card.type === CardType_1.CardType.EVENT && card.cost <= 16) {
                     const details = player.canPlay(card);
                     if (details !== false) {
@@ -63,4 +66,3 @@ class Odyssey extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Odyssey = Odyssey;
-//# sourceMappingURL=Odyssey.js.map

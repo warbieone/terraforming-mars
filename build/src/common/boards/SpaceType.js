@@ -10,4 +10,3 @@ var SpaceType;
     SpaceType["COVE"] = "cove";
     SpaceType["RESTRICTED"] = "restricted";
 })(SpaceType = exports.SpaceType || (exports.SpaceType = {}));
-//# sourceMappingURL=SpaceType.js.map

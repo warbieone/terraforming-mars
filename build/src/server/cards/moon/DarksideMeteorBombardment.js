@@ -30,4 +30,3 @@ class DarksideMeteorBombardment extends Card_1.Card {
     }
 }
 exports.DarksideMeteorBombardment = DarksideMeteorBombardment;
-//# sourceMappingURL=DarksideMeteorBombardment.js.map

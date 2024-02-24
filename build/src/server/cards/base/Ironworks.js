@@ -31,4 +31,3 @@ class Ironworks extends ActionCard_1.ActionCard {
     }
 }
 exports.Ironworks = Ironworks;
-//# sourceMappingURL=Ironworks.js.map

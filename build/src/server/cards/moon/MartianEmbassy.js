@@ -32,4 +32,3 @@ class MartianEmbassy extends Card_1.Card {
     }
 }
 exports.MartianEmbassy = MartianEmbassy;
-//# sourceMappingURL=MartianEmbassy.js.map

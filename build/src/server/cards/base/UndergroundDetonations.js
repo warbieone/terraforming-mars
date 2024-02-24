@@ -29,4 +29,3 @@ class UndergroundDetonations extends ActionCard_1.ActionCard {
     }
 }
 exports.UndergroundDetonations = UndergroundDetonations;
-//# sourceMappingURL=UndergroundDetonations.js.map

@@ -35,7 +35,7 @@ class Ants extends Card_1.Card {
     canAct(player) {
         if (player.game.isSoloMode())
             return true;
-        return RemoveResourcesFromCard_1.RemoveResourcesFromCard.getAvailableTargetCards(player, this.resourceType).length > 0;
+        return RemoveResourcesFromCard_1.RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource_1.CardResource.MICROBE).length > 0;
     }
     action(player) {
         player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.MICROBE));
@@ -44,4 +44,3 @@ class Ants extends Card_1.Card {
     }
 }
 exports.Ants = Ants;
-//# sourceMappingURL=Ants.js.map

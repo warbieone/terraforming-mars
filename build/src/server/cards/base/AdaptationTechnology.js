@@ -27,4 +27,3 @@ class AdaptationTechnology extends Card_1.Card {
     }
 }
 exports.AdaptationTechnology = AdaptationTechnology;
-//# sourceMappingURL=AdaptationTechnology.js.map

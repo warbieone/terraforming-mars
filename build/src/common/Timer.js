@@ -72,4 +72,3 @@ class Timer {
 }
 exports.Timer = Timer;
 Timer.lastStoppedAt = 0;
-//# sourceMappingURL=Timer.js.map

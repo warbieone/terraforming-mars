@@ -12,14 +12,13 @@ class SelectAmount extends PlayerInput_1.BasePlayerInput {
         this.buttonLabel = buttonLabel;
     }
     toModel() {
-        var _a;
         return {
             title: this.title,
             buttonLabel: this.buttonLabel,
             type: 'amount',
             max: this.max,
             min: this.min,
-            maxByDefault: (_a = this.maxByDefault) !== null && _a !== void 0 ? _a : false,
+            maxByDefault: this.maxByDefault ?? false,
         };
     }
     process(input) {
@@ -39,4 +38,3 @@ class SelectAmount extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectAmount = SelectAmount;
-//# sourceMappingURL=SelectAmount.js.map

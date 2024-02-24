@@ -31,4 +31,3 @@ class SymbioticFungus extends ActionCard_1.ActionCard {
     }
 }
 exports.SymbioticFungus = SymbioticFungus;
-//# sourceMappingURL=SymbioticFungus.js.map

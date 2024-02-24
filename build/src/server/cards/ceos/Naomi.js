@@ -44,4 +44,3 @@ class Naomi extends CeoCard_1.CeoCard {
     }
 }
 exports.Naomi = Naomi;
-//# sourceMappingURL=Naomi.js.map

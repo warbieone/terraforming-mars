@@ -74,4 +74,3 @@ class PoliticalAgendas {
 }
 exports.PoliticalAgendas = PoliticalAgendas;
 PoliticalAgendas.randomElement = PoliticalAgendas.defaultRandomElement;
-//# sourceMappingURL=PoliticalAgendas.js.map

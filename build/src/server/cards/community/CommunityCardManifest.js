@@ -51,4 +51,3 @@ exports.COMMUNITY_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [GlobalEventName_1.GlobalEventName.LEADERSHIP_SUMMIT]: { Factory: LeadershipSummit_1.LeadershipSummit },
     },
 });
-//# sourceMappingURL=CommunityCardManifest.js.map

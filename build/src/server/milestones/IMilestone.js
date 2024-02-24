@@ -12,4 +12,3 @@ class BaseMilestone {
     }
 }
 exports.BaseMilestone = BaseMilestone;
-//# sourceMappingURL=IMilestone.js.map

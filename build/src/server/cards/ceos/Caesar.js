@@ -36,10 +36,9 @@ class Caesar extends CeoCard_1.CeoCard {
         for (let i = 0; i < game.generation; i++) {
             game.defer(new PlaceHazardTile_1.PlaceHazardTile(player, TileType_1.TileType.EROSION_MILD));
         }
-        const otherPlayers = game.getPlayers().filter((p) => p.id !== player.id);
         player.defer(() => {
             const hazardTileCount = game.board.spaces.filter((space) => space.tile && TileType_1.HAZARD_TILES.has(space.tile.tileType)).length;
-            otherPlayers.forEach((opponent) => {
+            player.getOpponents().forEach((opponent) => {
                 const units = hazardTileCount < 6 ? 1 : 2;
                 game.defer(new SelectProductionToLoseDeferred_1.SelectProductionToLoseDeferred(opponent, units));
             });
@@ -49,4 +48,3 @@ class Caesar extends CeoCard_1.CeoCard {
     }
 }
 exports.Caesar = Caesar;
-//# sourceMappingURL=Caesar.js.map

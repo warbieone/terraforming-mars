@@ -32,4 +32,3 @@ class BeamFromAThoriumAsteroid extends Card_1.Card {
     }
 }
 exports.BeamFromAThoriumAsteroid = BeamFromAThoriumAsteroid;
-//# sourceMappingURL=BeamFromAThoriumAsteroid.js.map

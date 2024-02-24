@@ -39,4 +39,3 @@ class WaterImportFromEuropa extends Card_1.Card {
     }
 }
 exports.WaterImportFromEuropa = WaterImportFromEuropa;
-//# sourceMappingURL=WaterImportFromEuropa.js.map

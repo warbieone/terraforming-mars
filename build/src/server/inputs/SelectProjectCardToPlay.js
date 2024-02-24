@@ -77,16 +77,14 @@ class SelectProjectCardToPlay extends PlayerInput_1.BasePlayerInput {
         return undefined;
     }
     payAndPlay(card, payment, yesAnd) {
-        var _a, _b;
-        this.player.checkPaymentAndPlayCard(card, payment, (_a = this.config) === null || _a === void 0 ? void 0 : _a.action);
-        if (((_b = yesAnd === null || yesAnd === void 0 ? void 0 : yesAnd.thinkTankResources) !== null && _b !== void 0 ? _b : 0) > 0) {
+        this.player.checkPaymentAndPlayCard(card, payment, this.config?.action);
+        if ((yesAnd?.thinkTankResources ?? 0) > 0) {
             const thinkTank = this.player.tableau.find((card) => card.name === CardName_1.CardName.THINK_TANK);
             if (thinkTank !== undefined) {
-                this.player.removeResourceFrom(thinkTank, yesAnd === null || yesAnd === void 0 ? void 0 : yesAnd.thinkTankResources, { log: true });
+                this.player.removeResourceFrom(thinkTank, yesAnd?.thinkTankResources, { log: true });
             }
         }
         this.cb(card);
     }
 }
 exports.SelectProjectCardToPlay = SelectProjectCardToPlay;
-//# sourceMappingURL=SelectProjectCardToPlay.js.map

@@ -26,4 +26,3 @@ class EarthEmbassy extends Card_1.Card {
     }
 }
 exports.EarthEmbassy = EarthEmbassy;
-//# sourceMappingURL=EarthEmbassy.js.map

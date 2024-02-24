@@ -31,4 +31,3 @@ class BactoviralResearch extends Card_1.Card {
     }
 }
 exports.BactoviralResearch = BactoviralResearch;
-//# sourceMappingURL=BactoviralResearch.js.map

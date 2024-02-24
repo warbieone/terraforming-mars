@@ -7,7 +7,6 @@ const AresHandler_1 = require("../ares/AresHandler");
 const Units_1 = require("../../common/Units");
 const AresTileType_1 = require("../../common/AresTileType");
 const utils_1 = require("../../common/utils/utils");
-const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
 class Board {
     constructor(spaces) {
         this.spaces = spaces;
@@ -95,15 +94,14 @@ class Board {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
     spaceCosts(_space) {
-        return { stock: Object.assign({}, Units_1.Units.EMPTY), production: 0, tr: {} };
+        return { stock: { ...Units_1.Units.EMPTY }, production: 0, tr: {} };
     }
     computeAdditionalCosts(space, aresExtension) {
-        var _a, _b, _c;
         const costs = this.spaceCosts(space);
         if (aresExtension === false) {
             return costs;
         }
-        switch ((0, AresTileType_1.hazardSeverity)((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType)) {
+        switch ((0, AresTileType_1.hazardSeverity)(space.tile?.tileType)) {
             case AresTileType_1.HazardSeverity.MILD:
                 costs.stock.megacredits += 8;
                 break;
@@ -112,7 +110,7 @@ class Board {
                 break;
         }
         for (const adjacentSpace of this.getAdjacentSpaces(space)) {
-            switch ((0, AresTileType_1.hazardSeverity)((_b = adjacentSpace.tile) === null || _b === void 0 ? void 0 : _b.tileType)) {
+            switch ((0, AresTileType_1.hazardSeverity)(adjacentSpace.tile?.tileType)) {
                 case AresTileType_1.HazardSeverity.MILD:
                     costs.production += 1;
                     break;
@@ -122,7 +120,7 @@ class Board {
             }
             if (adjacentSpace.adjacency !== undefined) {
                 const adjacency = adjacentSpace.adjacency;
-                costs.stock.megacredits += (_c = adjacency.cost) !== null && _c !== void 0 ? _c : 0;
+                costs.stock.megacredits += adjacency.cost ?? 0;
             }
         }
         return costs;
@@ -130,7 +128,7 @@ class Board {
     canAfford(player, space, canAffordOptions) {
         const additionalCosts = this.computeAdditionalCosts(space, player.game.gameOptions.aresExtension);
         if (additionalCosts.stock.megacredits > 0) {
-            const plan = canAffordOptions !== undefined ? Object.assign({}, canAffordOptions) : { cost: 0, tr: {} };
+            const plan = canAffordOptions !== undefined ? { ...canAffordOptions } : { cost: 0, tr: {} };
             plan.cost += additionalCosts.stock.megacredits;
             plan.tr = additionalCosts.tr;
             const afford = player.canAfford(plan);
@@ -146,11 +144,10 @@ class Board {
     }
     getAvailableSpacesOnLand(player, canAffordOptions) {
         const landSpaces = this.getSpaces(SpaceType_1.SpaceType.LAND, player).filter((space) => {
-            var _a;
             if (space.player !== undefined && space.player !== player) {
                 return false;
             }
-            const playableSpace = space.tile === undefined || (AresHandler_1.AresHandler.hasHazardTile(space) && ((_a = space.tile) === null || _a === void 0 ? void 0 : _a.protectedHazard) !== true);
+            const playableSpace = space.tile === undefined || (AresHandler_1.AresHandler.hasHazardTile(space) && space.tile?.protectedHazard !== true);
             if (!playableSpace) {
                 return false;
             }
@@ -193,7 +190,7 @@ class Board {
         return space.tile !== undefined && TileType_1.GREENERY_TILES.has(space.tile.tileType);
     }
     static ownedBy(player) {
-        return (space) => { var _a; return ((_a = space.player) === null || _a === void 0 ? void 0 : _a.id) === player.id; };
+        return (space) => space.player?.id === player.id;
     }
     static spaceOwnedBy(space, player) {
         return Board.ownedBy(player)(space);
@@ -201,12 +198,11 @@ class Board {
     serialize() {
         return {
             spaces: this.spaces.map((space) => {
-                var _a;
                 const serialized = {
                     id: space.id,
                     spaceType: space.spaceType,
                     tile: space.tile,
-                    player: (_a = space.player) === null || _a === void 0 ? void 0 : _a.id,
+                    player: space.player?.id,
                     bonus: space.bonus,
                     adjacency: space.adjacency,
                     x: space.x,
@@ -233,10 +229,6 @@ class Board {
             x: serialized.x,
             y: serialized.y,
         };
-        if (space.bonus.length > 0 && space.bonus[0] === SpaceBonus_1.SpaceBonus._RESTRICTED) {
-            space.bonus = [];
-            space.spaceType = SpaceType_1.SpaceType.RESTRICTED;
-        }
         if (serialized.tile !== undefined) {
             space.tile = serialized.tile;
         }
@@ -260,7 +252,7 @@ class Board {
 }
 exports.Board = Board;
 function playerTileFn(player) {
-    return (space) => { var _a; return ((_a = space.player) === null || _a === void 0 ? void 0 : _a.id) === player.id; };
+    return (space) => space.player?.id === player.id;
 }
 exports.playerTileFn = playerTileFn;
 function isSpecialTile(tileType) {
@@ -283,8 +275,6 @@ function isSpecialTile(tileType) {
 }
 exports.isSpecialTile = isSpecialTile;
 function isSpecialTileSpace(space) {
-    var _a;
-    return isSpecialTile((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType);
+    return isSpecialTile(space.tile?.tileType);
 }
 exports.isSpecialTileSpace = isSpecialTileSpace;
-//# sourceMappingURL=Board.js.map

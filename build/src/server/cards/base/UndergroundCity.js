@@ -31,4 +31,3 @@ class UndergroundCity extends Card_1.Card {
     }
 }
 exports.UndergroundCity = UndergroundCity;
-//# sourceMappingURL=UndergroundCity.js.map

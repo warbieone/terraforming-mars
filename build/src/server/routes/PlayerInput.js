@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlayerInput = void 0;
 const responses = require("./responses");
@@ -23,36 +14,34 @@ class PlayerInput extends Handler_1.Handler {
     constructor() {
         super();
     }
-    post(req, res, ctx) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const playerId = ctx.url.searchParams.get('id');
-            if (playerId === null) {
-                responses.badRequest(req, res, 'missing id parameter');
-                return;
-            }
-            if (!(0, Types_1.isPlayerId)(playerId)) {
-                responses.badRequest(req, res, 'invalid player id');
-                return;
-            }
-            ctx.ipTracker.addParticipant(playerId, ctx.ip);
-            const game = yield ctx.gameLoader.getGame(playerId);
-            if (game === undefined) {
-                responses.notFound(req, res);
-                return;
-            }
-            let player;
-            try {
-                player = game.getPlayerById(playerId);
-            }
-            catch (err) {
-                console.warn(`unable to find player ${playerId}`, err);
-            }
-            if (player === undefined) {
-                responses.notFound(req, res);
-                return;
-            }
-            return this.processInput(req, res, ctx, player);
-        });
+    async post(req, res, ctx) {
+        const playerId = ctx.url.searchParams.get('id');
+        if (playerId === null) {
+            responses.badRequest(req, res, 'missing id parameter');
+            return;
+        }
+        if (!(0, Types_1.isPlayerId)(playerId)) {
+            responses.badRequest(req, res, 'invalid player id');
+            return;
+        }
+        ctx.ipTracker.addParticipant(playerId, ctx.ip);
+        const game = await ctx.gameLoader.getGame(playerId);
+        if (game === undefined) {
+            responses.notFound(req, res);
+            return;
+        }
+        let player;
+        try {
+            player = game.getPlayerById(playerId);
+        }
+        catch (err) {
+            console.warn(`unable to find player ${playerId}`, err);
+        }
+        if (player === undefined) {
+            responses.notFound(req, res);
+            return;
+        }
+        return this.processInput(req, res, ctx, player);
     }
     isWaitingForUndo(player, entity) {
         const waitingFor = player.getWaitingFor();
@@ -62,23 +51,21 @@ class PlayerInput extends Handler_1.Handler {
         }
         return false;
     }
-    performUndo(_req, res, ctx, player) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const lastSaveId = player.game.lastSaveId - 2;
-            try {
-                const game = yield ctx.gameLoader.restoreGameAt(player.game.id, lastSaveId);
-                if (game === undefined) {
-                    player.game.log('Unable to perform undo operation. Error retrieving game from database. Please try again.', () => { }, { reservedFor: player });
-                }
-                else {
-                    player = game.getPlayerById(player.id);
-                }
+    async performUndo(_req, res, ctx, player) {
+        const lastSaveId = player.game.lastSaveId - 2;
+        try {
+            const game = await ctx.gameLoader.restoreGameAt(player.game.id, lastSaveId);
+            if (game === undefined) {
+                player.game.log('Unable to perform undo operation. Error retrieving game from database. Please try again.', () => { }, { reservedFor: player });
             }
-            catch (err) {
-                console.error(err);
+            else {
+                player = game.getPlayerById(player.id);
             }
-            responses.writeJson(res, ServerModel_1.Server.getPlayerModel(player));
-        });
+        }
+        catch (err) {
+            console.error(err);
+        }
+        responses.writeJson(res, ServerModel_1.Server.getPlayerModel(player));
     }
     processInput(req, res, ctx, player) {
         return new Promise((resolve) => {
@@ -86,12 +73,12 @@ class PlayerInput extends Handler_1.Handler {
             req.on('data', (data) => {
                 body += data.toString();
             });
-            req.once('end', () => __awaiter(this, void 0, void 0, function* () {
+            req.once('end', async () => {
                 try {
                     const entity = JSON.parse(body);
                     validateRunId(entity);
                     if (this.isWaitingForUndo(player, entity)) {
-                        yield this.performUndo(req, res, ctx, player);
+                        await this.performUndo(req, res, ctx, player);
                     }
                     else {
                         player.process(entity);
@@ -112,7 +99,7 @@ class PlayerInput extends Handler_1.Handler {
                     res.end();
                     resolve();
                 }
-            }));
+            });
         });
     }
 }
@@ -126,4 +113,3 @@ function validateRunId(entity) {
     }
     delete entity.runId;
 }
-//# sourceMappingURL=PlayerInput.js.map

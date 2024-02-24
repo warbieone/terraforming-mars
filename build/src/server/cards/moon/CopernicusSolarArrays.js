@@ -33,4 +33,3 @@ class CopernicusSolarArrays extends Card_1.Card {
     }
 }
 exports.CopernicusSolarArrays = CopernicusSolarArrays;
-//# sourceMappingURL=CopernicusSolarArrays.js.map

@@ -11,4 +11,3 @@ class Capitalist extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Capitalist = Capitalist;
-//# sourceMappingURL=Capitalist.js.map

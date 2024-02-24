@@ -28,4 +28,3 @@ class FusionPower extends Card_1.Card {
     }
 }
 exports.FusionPower = FusionPower;
-//# sourceMappingURL=FusionPower.js.map

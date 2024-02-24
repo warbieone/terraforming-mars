@@ -15,7 +15,7 @@ class _AresHazardPlacement {
     }
     static makeSevere(game, from, to) {
         game.board.spaces
-            .filter((s) => { var _a; return ((_a = s.tile) === null || _a === void 0 ? void 0 : _a.tileType) === from; })
+            .filter((s) => s.tile?.tileType === from)
             .forEach((s) => {
             if (s.tile !== undefined) {
                 s.tile.tileType = to;
@@ -56,8 +56,7 @@ class _AresHazardPlacement {
     static testToRemoveDustStorms(aresData, player) {
         this.testConstraint(aresData.hazardData.removeDustStormsOceanCount, player.game.board.getOceanSpaces().length, () => {
             player.game.board.spaces.forEach((space) => {
-                var _a, _b;
-                if (((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType) === TileType_1.TileType.DUST_STORM_MILD || ((_b = space.tile) === null || _b === void 0 ? void 0 : _b.tileType) === TileType_1.TileType.DUST_STORM_SEVERE) {
+                if (space.tile?.tileType === TileType_1.TileType.DUST_STORM_MILD || space.tile?.tileType === TileType_1.TileType.DUST_STORM_SEVERE) {
                     if (space.tile.protectedHazard !== true) {
                         space.tile = undefined;
                     }
@@ -80,4 +79,3 @@ class _AresHazardPlacement {
     }
 }
 exports._AresHazardPlacement = _AresHazardPlacement;
-//# sourceMappingURL=AresHazards.js.map

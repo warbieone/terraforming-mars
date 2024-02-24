@@ -25,4 +25,3 @@ class AcquiredCompany extends Card_1.Card {
     }
 }
 exports.AcquiredCompany = AcquiredCompany;
-//# sourceMappingURL=AcquiredCompany.js.map

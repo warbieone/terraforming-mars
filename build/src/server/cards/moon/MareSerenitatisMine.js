@@ -50,4 +50,3 @@ class MareSerenitatisMine extends Card_1.Card {
     }
 }
 exports.MareSerenitatisMine = MareSerenitatisMine;
-//# sourceMappingURL=MareSerenitatisMine.js.map

@@ -40,4 +40,3 @@ class ConvertHeat extends StandardActionCard_1.StandardActionCard {
     }
 }
 exports.ConvertHeat = ConvertHeat;
-//# sourceMappingURL=ConvertHeat.js.map

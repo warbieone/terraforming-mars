@@ -11,8 +11,6 @@ function hasShowModal(dialogElement) {
 }
 exports.hasShowModal = hasShowModal;
 function showModal(dialogElement) {
-    var _a, _b;
-    (_b = (_a = dialogElement).showModal) === null || _b === void 0 ? void 0 : _b.call(_a);
+    dialogElement.showModal?.();
 }
 exports.showModal = showModal;
-//# sourceMappingURL=HTMLDialogElementCompatibility.js.map

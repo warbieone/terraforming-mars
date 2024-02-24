@@ -52,4 +52,3 @@ class GreatDamPromo extends Card_1.Card {
     }
 }
 exports.GreatDamPromo = GreatDamPromo;
-//# sourceMappingURL=GreatDamPromo.js.map

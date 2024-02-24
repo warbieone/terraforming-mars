@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CeoCard_1 = require("./CeoCard");
 const Resource_1 = require("../../../common/Resource");
-const Options_1 = require("../Options");
 class Bjorn extends CeoCard_1.CeoCard {
     constructor() {
         super({
@@ -13,7 +12,7 @@ class Bjorn extends CeoCard_1.CeoCard {
             metadata: {
                 cardNumber: 'L02',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.opgArrow().text('STEAL').megacredits(0, { multiplier: Options_1.multiplier }).megacredits(2).asterix();
+                    b.opgArrow().text('STEAL').megacredits(1, { text: 'x+2' }).asterix();
                     b.br;
                 }),
                 description: 'Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.',
@@ -23,7 +22,7 @@ class Bjorn extends CeoCard_1.CeoCard {
     action(player) {
         this.isDisabled = true;
         const game = player.game;
-        const targets = game.getPlayers().filter((p) => p.id !== player.id && p.megaCredits > player.megaCredits);
+        const targets = player.getOpponents().filter((p) => p.megaCredits > player.megaCredits);
         targets.forEach((target) => {
             target.maybeBlockAttack(player, (proceed) => {
                 if (proceed) {
@@ -36,4 +35,3 @@ class Bjorn extends CeoCard_1.CeoCard {
     }
 }
 exports.Bjorn = Bjorn;
-//# sourceMappingURL=Bjorn.js.map

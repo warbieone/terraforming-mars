@@ -27,4 +27,3 @@ exports.paths = {
     SPECTATOR: 'spectator',
     THE_END: 'the-end',
 };
-//# sourceMappingURL=paths.js.map

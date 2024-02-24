@@ -50,4 +50,3 @@ class ExecutiveOrder extends PreludeCard_1.PreludeCard {
     }
 }
 exports.ExecutiveOrder = ExecutiveOrder;
-//# sourceMappingURL=ExecutiveOrder.js.map

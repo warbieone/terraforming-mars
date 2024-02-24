@@ -10,4 +10,3 @@ var SpecialTags;
     SpecialTags["EXCAVATIONS"] = "excavation-count";
     SpecialTags["CORRUPTION"] = "corruption-count";
 })(SpecialTags = exports.SpecialTags || (exports.SpecialTags = {}));
-//# sourceMappingURL=SpecialTags.js.map

@@ -17,7 +17,11 @@ class SelectPayment extends PlayerInput_1.BasePlayerInput {
             buttonLabel: this.buttonLabel,
             type: 'payment',
             amount: this.amount,
-            paymentOptions: Object.assign({ heat: player.canUseHeatAsMegaCredits, lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits }, this.paymentOptions),
+            paymentOptions: {
+                heat: player.canUseHeatAsMegaCredits,
+                lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
+                ...this.paymentOptions,
+            },
             seeds: player.getSpendable('seeds'),
             auroraiData: player.getSpendable('auroraiData'),
             kuiperAsteroids: player.getSpendable('kuiperAsteroids'),
@@ -46,4 +50,3 @@ class SelectPayment extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectPayment = SelectPayment;
-//# sourceMappingURL=SelectPayment.js.map

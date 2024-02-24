@@ -32,4 +32,3 @@ class SolarnetShutdown extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.SolarnetShutdown = SolarnetShutdown;
-//# sourceMappingURL=SolarnetShutdown.js.map

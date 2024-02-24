@@ -27,4 +27,3 @@ class Midas extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Midas = Midas;
-//# sourceMappingURL=Midas.js.map

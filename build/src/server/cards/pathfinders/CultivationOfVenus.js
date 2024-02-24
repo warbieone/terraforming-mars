@@ -31,4 +31,3 @@ class CultivationOfVenus extends ActionCard_1.ActionCard {
     }
 }
 exports.CultivationOfVenus = CultivationOfVenus;
-//# sourceMappingURL=CultivationOfVenus.js.map

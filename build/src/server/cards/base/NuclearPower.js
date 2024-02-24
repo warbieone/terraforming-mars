@@ -30,4 +30,3 @@ class NuclearPower extends Card_1.Card {
     }
 }
 exports.NuclearPower = NuclearPower;
-//# sourceMappingURL=NuclearPower.js.map

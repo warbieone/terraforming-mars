@@ -28,4 +28,3 @@ class RimFreighters extends Card_1.Card {
     }
 }
 exports.RimFreighters = RimFreighters;
-//# sourceMappingURL=RimFreighters.js.map

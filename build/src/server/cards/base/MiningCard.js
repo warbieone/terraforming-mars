@@ -19,16 +19,14 @@ class MiningCard extends Card_1.Card {
             cost,
             metadata,
         });
+        this.isAres = false;
+        this.placeTile = true;
     }
     bespokeCanPlay(player, canAffordOptions) {
         return this.getAvailableSpaces(player, canAffordOptions).length > 0;
     }
-    isAres() {
-        return this.name === CardName_1.CardName.MINING_AREA_ARES ||
-            this.name === CardName_1.CardName.MINING_RIGHTS_ARES;
-    }
     getAdjacencyBonus(bonusType) {
-        if (this.isAres()) {
+        if (this.isAres) {
             return { bonus: [bonusType] };
         }
         return undefined;
@@ -38,15 +36,8 @@ class MiningCard extends Card_1.Card {
             .filter((space) => space.tile === undefined)
             .filter((space) => space.bonus.includes(SpaceBonus_1.SpaceBonus.STEEL) || space.bonus.includes(SpaceBonus_1.SpaceBonus.TITANIUM));
     }
-    getSelectTitle() {
-        let result = 'Select a space with a steel or titanium bonus';
-        if (this.name === CardName_1.CardName.MINING_AREA || this.name === CardName_1.CardName.MINING_AREA_ARES) {
-            result += ' adjacent to one of your tiles';
-        }
-        return result;
-    }
     getTileType(bonus) {
-        if (this.isAres()) {
+        if (this.isAres) {
             return bonus === SpaceBonus_1.SpaceBonus.STEEL ? TileType_1.TileType.MINING_STEEL_BONUS : TileType_1.TileType.MINING_TITANIUM_BONUS;
         }
         if (this.name === CardName_1.CardName.MINING_RIGHTS) {
@@ -60,7 +51,7 @@ class MiningCard extends Card_1.Card {
         }
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player))
+        return new SelectSpace_1.SelectSpace(this.title, this.getAvailableSpaces(player))
             .andThen((space) => {
             const bonusResources = [];
             if (space.bonus.includes(SpaceBonus_1.SpaceBonus.STEEL)) {
@@ -73,13 +64,14 @@ class MiningCard extends Card_1.Card {
                 .andThen((resource) => {
                 player.production.add(resource, 1, { log: true });
                 this.bonusResource = [resource];
-                const spaceBonus = resource === Resource_1.Resource.TITANIUM ? SpaceBonus_1.SpaceBonus.TITANIUM : SpaceBonus_1.SpaceBonus.STEEL;
-                player.game.addTile(player, space, { tileType: this.getTileType(spaceBonus) });
-                space.adjacency = this.getAdjacencyBonus(spaceBonus);
+                if (this.placeTile) {
+                    const spaceBonus = resource === Resource_1.Resource.TITANIUM ? SpaceBonus_1.SpaceBonus.TITANIUM : SpaceBonus_1.SpaceBonus.STEEL;
+                    player.game.addTile(player, space, { tileType: this.getTileType(spaceBonus) });
+                    space.adjacency = this.getAdjacencyBonus(spaceBonus);
+                }
             });
             return undefined;
         });
     }
 }
 exports.MiningCard = MiningCard;
-//# sourceMappingURL=MiningCard.js.map

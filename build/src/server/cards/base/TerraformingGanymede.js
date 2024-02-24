@@ -32,4 +32,3 @@ class TerraformingGanymede extends Card_1.Card {
     }
 }
 exports.TerraformingGanymede = TerraformingGanymede;
-//# sourceMappingURL=TerraformingGanymede.js.map

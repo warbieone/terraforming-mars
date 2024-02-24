@@ -28,4 +28,3 @@ class TerraformingContract extends Card_1.Card {
     }
 }
 exports.TerraformingContract = TerraformingContract;
-//# sourceMappingURL=TerraformingContract.js.map

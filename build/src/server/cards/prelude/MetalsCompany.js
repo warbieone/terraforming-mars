@@ -22,4 +22,3 @@ class MetalsCompany extends PreludeCard_1.PreludeCard {
     }
 }
 exports.MetalsCompany = MetalsCompany;
-//# sourceMappingURL=MetalsCompany.js.map

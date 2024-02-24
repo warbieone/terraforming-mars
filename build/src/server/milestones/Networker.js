@@ -7,9 +7,7 @@ class Networker extends IMilestone_1.BaseMilestone {
         super('Networker', 'Have placed 3 tiles adjacent to tiles that grant adjacency bonuses', 3);
     }
     getScore(player) {
-        var _a, _b;
-        return ((_b = (_a = player.game.aresData) === null || _a === void 0 ? void 0 : _a.milestoneResults.find((e) => e.id === player.id)) === null || _b === void 0 ? void 0 : _b.count) || 0;
+        return player.game.aresData?.milestoneResults.find((e) => e.id === player.id)?.count || 0;
     }
 }
 exports.Networker = Networker;
-//# sourceMappingURL=Networker.js.map

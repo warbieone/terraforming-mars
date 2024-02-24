@@ -65,7 +65,7 @@ class Merger extends PreludeCard_1.PreludeCard {
     }
     static setCardCost(player) {
         return player.corporations
-            .map((card) => { var _a; return ((_a = card.cardCost) !== null && _a !== void 0 ? _a : constants_1.CARD_COST) - constants_1.CARD_COST; })
+            .map((card) => (card.cardCost ?? constants_1.CARD_COST) - constants_1.CARD_COST)
             .reduce((prev, curr) => prev + curr, constants_1.CARD_COST);
     }
     spendableMegacredits(player, corp) {
@@ -73,15 +73,15 @@ class Merger extends PreludeCard_1.PreludeCard {
             return corp.startingMegaCredits;
         }
         const behavior = corp.behavior;
-        const stock = behavior === null || behavior === void 0 ? void 0 : behavior.stock;
-        const production = behavior === null || behavior === void 0 ? void 0 : behavior.production;
+        const stock = behavior?.stock;
+        const production = behavior?.production;
         let sum = corp.startingMegaCredits;
         const asNumber = (x) => typeof (x) === 'number' ? x : 0;
-        let incomingTitanium = asNumber(stock === null || stock === void 0 ? void 0 : stock.titanium);
+        let incomingTitanium = asNumber(stock?.titanium);
         const titaniumValue = player.getTitaniumValue();
         if (player.isCorporation(CardName_1.CardName.MANUTECH)) {
-            sum += asNumber(production === null || production === void 0 ? void 0 : production.megacredits);
-            incomingTitanium += asNumber(production === null || production === void 0 ? void 0 : production.titanium);
+            sum += asNumber(production?.megacredits);
+            incomingTitanium += asNumber(production?.titanium);
         }
         if (corp.name === CardName_1.CardName.LUNA_TRADE_FEDERATION || player.isCorporation(CardName_1.CardName.LUNA_TRADE_FEDERATION)) {
             sum += (player.titanium + incomingTitanium) * (titaniumValue - 1);
@@ -91,4 +91,3 @@ class Merger extends PreludeCard_1.PreludeCard {
 }
 exports.Merger = Merger;
 Merger.mergerCost = 42;
-//# sourceMappingURL=Merger.js.map

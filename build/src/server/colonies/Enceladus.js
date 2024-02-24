@@ -25,4 +25,3 @@ class Enceladus extends Colony_1.Colony {
     }
 }
 exports.Enceladus = Enceladus;
-//# sourceMappingURL=Enceladus.js.map

@@ -68,4 +68,3 @@ class Revolution extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.Revolution = Revolution;
-//# sourceMappingURL=Revolution.js.map

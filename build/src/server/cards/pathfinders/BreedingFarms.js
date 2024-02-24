@@ -37,4 +37,3 @@ class BreedingFarms extends ActionCard_1.ActionCard {
     }
 }
 exports.BreedingFarms = BreedingFarms;
-//# sourceMappingURL=BreedingFarms.js.map

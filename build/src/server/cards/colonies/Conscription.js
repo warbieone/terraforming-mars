@@ -33,4 +33,3 @@ class Conscription extends Card_1.Card {
     }
 }
 exports.Conscription = Conscription;
-//# sourceMappingURL=Conscription.js.map

@@ -17,4 +17,3 @@ class PlaceMoonRoadTile extends BasePlaceMoonTile_1.BasePlaceMoonTile {
     }
 }
 exports.PlaceMoonRoadTile = PlaceMoonRoadTile;
-//# sourceMappingURL=PlaceMoonRoadTile.js.map

@@ -27,4 +27,3 @@ class InventionContest extends Card_1.Card {
     }
 }
 exports.InventionContest = InventionContest;
-//# sourceMappingURL=InventionContest.js.map

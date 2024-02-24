@@ -14,11 +14,10 @@ class Counter {
         this.cardIsUnplayed = !player.cardIsInEffect(card.name);
     }
     count(countable, context = 'default') {
-        var _a;
         if (typeof (countable) === 'number') {
             return countable;
         }
-        let sum = (_a = countable.start) !== null && _a !== void 0 ? _a : 0;
+        let sum = countable.start ?? 0;
         const player = this.player;
         const card = this.card;
         const game = player.game;
@@ -65,8 +64,7 @@ class Counter {
                     }
                 }
                 if (countable.all === true || countable.others === true) {
-                    game.getPlayers()
-                        .filter((p) => p.id !== player.id)
+                    player.getOpponents()
                         .forEach((p) => sum += p.tags.count(tag, 'raw'));
                 }
             }
@@ -135,15 +133,13 @@ class Counter {
         return sum;
     }
     countUnits(countableUnits) {
-        var _a;
-        const units = Object.assign({}, Units_1.Units.EMPTY);
+        const units = { ...Units_1.Units.EMPTY };
         for (const key of Object.keys(units)) {
             const safeKey = key;
-            const countable = (_a = countableUnits[safeKey]) !== null && _a !== void 0 ? _a : 0;
+            const countable = countableUnits[safeKey] ?? 0;
             units[safeKey] = this.count(countable);
         }
         return units;
     }
 }
 exports.Counter = Counter;
-//# sourceMappingURL=Counter.js.map

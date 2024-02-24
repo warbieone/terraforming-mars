@@ -24,4 +24,3 @@ class NitrogenShipment extends PreludeCard_1.PreludeCard {
     }
 }
 exports.NitrogenShipment = NitrogenShipment;
-//# sourceMappingURL=NitrogenShipment.js.map

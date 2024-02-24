@@ -33,4 +33,3 @@ class FieldCappedCity extends Card_1.Card {
     }
 }
 exports.FieldCappedCity = FieldCappedCity;
-//# sourceMappingURL=FieldCappedCity.js.map

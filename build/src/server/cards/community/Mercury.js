@@ -29,4 +29,3 @@ class Mercury extends Colony_1.Colony {
     }
 }
 exports.Mercury = Mercury;
-//# sourceMappingURL=Mercury.js.map

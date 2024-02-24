@@ -39,4 +39,3 @@ class NobelLabs extends Card_1.Card {
 exports.NobelLabs = NobelLabs;
 NobelLabs.RESOURCE_TYPES = [CardResource_1.CardResource.MICROBE, CardResource_1.CardResource.DATA, CardResource_1.CardResource.FLOATER, CardResource_1.CardResource.WARE];
 NobelLabs.PREDICATE = (card) => card.resourceType !== undefined && NobelLabs.RESOURCE_TYPES.includes(card.resourceType);
-//# sourceMappingURL=NobelLabs.js.map

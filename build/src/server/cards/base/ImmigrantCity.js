@@ -54,4 +54,3 @@ class ImmigrantCity extends Card_1.Card {
     }
 }
 exports.ImmigrantCity = ImmigrantCity;
-//# sourceMappingURL=ImmigrantCity.js.map

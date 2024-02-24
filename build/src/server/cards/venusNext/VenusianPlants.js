@@ -55,4 +55,3 @@ class VenusianPlants extends Card_1.Card {
     }
 }
 exports.VenusianPlants = VenusianPlants;
-//# sourceMappingURL=VenusianPlants.js.map

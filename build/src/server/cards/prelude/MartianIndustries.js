@@ -26,4 +26,3 @@ class MartianIndustries extends PreludeCard_1.PreludeCard {
     }
 }
 exports.MartianIndustries = MartianIndustries;
-//# sourceMappingURL=MartianIndustries.js.map

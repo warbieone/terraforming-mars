@@ -177,8 +177,7 @@ class Player {
         }
     }
     getSelfReplicatingRobotsTargetCards() {
-        var _a, _b;
-        return (_b = (_a = this.playedCards.find((card) => card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots)) === null || _a === void 0 ? void 0 : _a.targetCards) !== null && _b !== void 0 ? _b : [];
+        return this.playedCards.find((card) => card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots)?.targetCards ?? [];
     }
     getSteelValue() {
         return this.steelValue;
@@ -203,12 +202,10 @@ class Player {
             }
             this.game.getPlayersInGenerationOrder().forEach((player) => {
                 player.corporations.forEach((corp) => {
-                    var _a;
-                    (_a = corp.onIncreaseTerraformRating) === null || _a === void 0 ? void 0 : _a.call(corp, this, player, steps);
+                    corp.onIncreaseTerraformRating?.(this, player, steps);
                 });
                 player.playedCards.filter((card) => card.type === CardType_1.CardType.CEO).forEach((ceo) => {
-                    var _a;
-                    (_a = ceo.onIncreaseTerraformRating) === null || _a === void 0 ? void 0 : _a.call(ceo, this, player, steps);
+                    ceo.onIncreaseTerraformRating?.(this, player, steps);
                 });
             });
         };
@@ -290,14 +287,9 @@ class Player {
         return game.getPlayers().some((p) => p.canHaveProductionReduced(resource, minQuantity, this));
     }
     canHaveProductionReduced(resource, minQuantity, attacker) {
-        if (resource === Resource_1.Resource.MEGACREDITS) {
-            if ((this.production[resource] + 5) < minQuantity)
-                return false;
-        }
-        else {
-            if (this.production[resource] < minQuantity)
-                return false;
-        }
+        const reducable = this.production[resource] + (resource === Resource_1.Resource.MEGACREDITS ? 5 : 0);
+        if (reducable < minQuantity)
+            return false;
         if (resource === Resource_1.Resource.STEEL || resource === Resource_1.Resource.TITANIUM) {
             if (this.alloysAreProtected())
                 return false;
@@ -322,7 +314,7 @@ class Player {
     }
     resolveInsuranceInSoloGame() {
         const monsInsurance = this.getCorporation(CardName_1.CardName.MONS_INSURANCE);
-        monsInsurance === null || monsInsurance === void 0 ? void 0 : monsInsurance.payDebt(this, undefined);
+        monsInsurance?.payDebt(this, undefined);
     }
     getColoniesCount() {
         if (!this.game.gameOptions.coloniesExtension)
@@ -334,9 +326,8 @@ class Player {
         return coloniesCount;
     }
     getPlayedEventsCount() {
-        var _a;
         let count = this.playedCards.filter((card) => card.type === CardType_1.CardType.EVENT).length;
-        if ((_a = this.getCorporation(CardName_1.CardName.PHARMACY_UNION)) === null || _a === void 0 ? void 0 : _a.isDisabled)
+        if (this.getCorporation(CardName_1.CardName.PHARMACY_UNION)?.isDisabled)
             count++;
         return count;
     }
@@ -351,8 +342,7 @@ class Player {
         return requirementsBonus;
     }
     removeResourceFrom(card, count = 1, options) {
-        var _a;
-        const removingPlayer = options === null || options === void 0 ? void 0 : options.removingPlayer;
+        const removingPlayer = options?.removingPlayer;
         if (card.resourceCount) {
             const amountRemoved = Math.min(card.resourceCount, count);
             if (amountRemoved === 0)
@@ -360,14 +350,11 @@ class Player {
             card.resourceCount -= amountRemoved;
             if (removingPlayer !== undefined && removingPlayer !== this)
                 this.resolveInsurance();
-            if ((_a = options === null || options === void 0 ? void 0 : options.log) !== null && _a !== void 0 ? _a : true === true) {
-                this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) => {
-                    var _a;
-                    return b.player((_a = options === null || options === void 0 ? void 0 : options.removingPlayer) !== null && _a !== void 0 ? _a : this)
-                        .number(amountRemoved)
-                        .player(this)
-                        .card(card);
-                });
+            if (options?.log ?? true === true) {
+                this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) => b.player(options?.removingPlayer ?? this)
+                    .number(amountRemoved)
+                    .player(this)
+                    .card(card));
             }
             if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.includes(removingPlayer.id) === false) {
                 this.removingPlayers.push(removingPlayer.id);
@@ -375,8 +362,7 @@ class Player {
         }
     }
     addResourceTo(card, options = 1) {
-        var _a, _b;
-        const count = typeof (options) === 'number' ? options : ((_a = options.qty) !== null && _a !== void 0 ? _a : 1);
+        const count = typeof (options) === 'number' ? options : (options.qty ?? 1);
         if (card.resourceCount !== undefined) {
             card.resourceCount += count;
         }
@@ -387,7 +373,7 @@ class Player {
         }
         if (count > 0) {
             for (const playedCard of this.tableau) {
-                (_b = playedCard.onResourceAdded) === null || _b === void 0 ? void 0 : _b.call(playedCard, this, card, count);
+                playedCard.onResourceAdded?.(this, card, count);
             }
         }
     }
@@ -454,7 +440,7 @@ class Player {
         this.plants += this.production.plants;
         this.energy += this.production.energy;
         this.heat += this.production.heat;
-        this.tableau.forEach((card) => { var _a; return (_a = card.onProductionPhase) === null || _a === void 0 ? void 0 : _a.call(card, this); });
+        this.tableau.forEach((card) => card.onProductionPhase?.(this));
         for (const card of this.playedCards) {
             if ((0, ICeoCard_1.isCeoCard)(card)) {
                 card.opgActionIsActive = false;
@@ -598,8 +584,7 @@ class Player {
         let cost = card.cost;
         cost -= this.colonies.cardDiscount;
         this.tableau.forEach((playedCard) => {
-            var _a, _b;
-            cost -= (_b = (_a = playedCard.getCardDiscount) === null || _a === void 0 ? void 0 : _a.call(playedCard, this, card)) !== null && _b !== void 0 ? _b : 0;
+            cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
         });
         this.removedFromPlayCards.forEach((removedFromPlayCard) => {
             if (removedFromPlayCard.getCardDiscount !== undefined) {
@@ -649,9 +634,8 @@ class Player {
         return this.playCard(selectedCard, payment, cardAction);
     }
     resourcesOnCard(name) {
-        var _a;
         const card = this.tableau.find((card) => card.name === name);
-        return (_a = card === null || card === void 0 ? void 0 : card.resourceCount) !== null && _a !== void 0 ? _a : 0;
+        return card?.resourceCount ?? 0;
     }
     getSpendable(SpendableResource) {
         return this.resourcesOnCard(Spendable_1.CARD_FOR_SPENDABLE_RESOURCE[SpendableResource]);
@@ -752,22 +736,21 @@ class Player {
         }
     }
     onCardPlayed(card) {
-        var _a, _b, _c;
         if (card.type === CardType_1.CardType.PROXY) {
             return;
         }
         for (const playedCard of this.playedCards) {
-            const actionFromPlayedCard = (_a = playedCard.onCardPlayed) === null || _a === void 0 ? void 0 : _a.call(playedCard, this, card);
+            const actionFromPlayedCard = playedCard.onCardPlayed?.(this, card);
             this.defer(actionFromPlayedCard);
         }
         TurmoilHandler_1.TurmoilHandler.applyOnCardPlayedEffect(this, card);
         for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
             for (const corporationCard of somePlayer.corporations) {
-                const actionFromPlayedCard = (_b = corporationCard.onCardPlayed) === null || _b === void 0 ? void 0 : _b.call(corporationCard, this, card);
+                const actionFromPlayedCard = corporationCard.onCardPlayed?.(this, card);
                 this.defer(actionFromPlayedCard);
             }
             for (const someCard of somePlayer.playedCards) {
-                const actionFromPlayedCard = (_c = someCard.onCardPlayedFromAnyPlayer) === null || _c === void 0 ? void 0 : _c.call(someCard, somePlayer, this, card);
+                const actionFromPlayedCard = someCard.onCardPlayedFromAnyPlayer?.(somePlayer, this, card);
                 this.defer(actionFromPlayedCard);
             }
         }
@@ -786,9 +769,8 @@ class Player {
     playCeoOPGAction() {
         return new SelectCard_1.SelectCard('Use CEO once per game action', 'Take action', this.getUsableOPGCeoCards(), { selectBlueCardAction: true })
             .andThen(([card]) => {
-            var _a;
             this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
-            const action = (_a = card.action) === null || _a === void 0 ? void 0 : _a.call(card, this);
+            const action = card.action?.(this);
             this.defer(action);
             this.actionsThisGeneration.add(card.name);
             return undefined;
@@ -822,12 +804,12 @@ class Player {
             const diff = this.cardsInHand.length * this.cardCost;
             this.stock.deduct(Resource_1.Resource.MEGACREDITS, diff);
         }
+        this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
         const numberOfCardInHand = this.cardsInHand.length;
         corporationCard.play(this);
         if (corporationCard.initialAction !== undefined || corporationCard.firstAction !== undefined) {
             this.pendingInitialActions.push(corporationCard);
         }
-        this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
         if (additionalCorp === false) {
             this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(numberOfCardInHand));
         }
@@ -845,14 +827,13 @@ class Player {
         this.game.defer(DrawCards_1.DrawCards.keepSome(this, count, options));
     }
     discardPlayedCard(card) {
-        var _a;
         const found = (0, utils_1.inplaceRemove)(this.playedCards, card);
         if (found === false) {
             console.error(`Error: card ${card.name} not in ${this.id}'s hand`);
             return;
         }
         this.game.projectDeck.discard(card);
-        (_a = card.onDiscard) === null || _a === void 0 ? void 0 : _a.call(card, this);
+        card.onDiscard?.(this);
         this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card));
     }
     discardCardFromHand(card, options) {
@@ -862,13 +843,12 @@ class Player {
             return;
         }
         this.game.projectDeck.discard(card);
-        if ((options === null || options === void 0 ? void 0 : options.log) === true) {
+        if (options?.log === true) {
             this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card), { reservedFor: this });
         }
     }
     availableHeat() {
-        var _a, _b;
-        const floaters = (_b = (_a = this.getCorporation(CardName_1.CardName.STORMCRAFT_INCORPORATED)) === null || _a === void 0 ? void 0 : _a.resourceCount) !== null && _b !== void 0 ? _b : 0;
+        const floaters = this.getCorporation(CardName_1.CardName.STORMCRAFT_INCORPORATED)?.resourceCount ?? 0;
         return this.heat + (floaters * 2);
     }
     spendHeat(amount, cb = () => undefined) {
@@ -909,7 +889,7 @@ class Player {
             return false;
         }
         const stagedProtests = owner.playedCards.find((card) => card.name === CardName_1.CardName.STAGED_PROTESTS);
-        return (stagedProtests === null || stagedProtests === void 0 ? void 0 : stagedProtests.generationUsed) === this.game.generation;
+        return stagedProtests?.generationUsed === this.game.generation;
     }
     milestoneCost() {
         if (this.isCorporation(CardName_1.CardName.NIRGAL_ENTERPRISES)) {
@@ -985,7 +965,7 @@ class Player {
         }
     }
     getPlayableCeoCards() {
-        return this.ceoCardsInHand.filter((card) => { var _a; return ((_a = card.canPlay) === null || _a === void 0 ? void 0 : _a.call(card, this)) === true; });
+        return this.ceoCardsInHand.filter((card) => card.canPlay?.(this) === true);
     }
     getPlayableCards() {
         const candidateCards = [...this.cardsInHand];
@@ -997,6 +977,7 @@ class Player {
         }
         const playableCards = [];
         for (const card of candidateCards) {
+            card.warnings.clear();
             const canPlay = this.canPlay(card);
             if (canPlay !== false) {
                 playableCards.push({
@@ -1012,14 +993,32 @@ class Player {
             (card.behavior !== undefined ?
                 (0, BehaviorExecutor_1.getBehaviorExecutor)().toTRSource(card.behavior, new Counter_1.Counter(this, card)) :
                 undefined);
-        return Object.assign(Object.assign({ cost: this.getCardCost(card) }, this.paymentOptionsForCard(card)), { reserveUnits: MoonExpansion_1.MoonExpansion.adjustedReserveCosts(this, card), tr: trSource });
+        return {
+            cost: this.getCardCost(card),
+            ...this.paymentOptionsForCard(card),
+            reserveUnits: MoonExpansion_1.MoonExpansion.adjustedReserveCosts(this, card),
+            tr: trSource,
+        };
     }
     canPlay(card) {
         const options = this.affordOptionsForCard(card);
-        if (!this.canAfford(options)) {
+        const canAfford = this.newCanAfford(options);
+        if (!canAfford.canAfford) {
             return false;
         }
-        return this.simpleCanPlay(card, options);
+        const canPlay = this.simpleCanPlay(card, options);
+        if (canPlay === false) {
+            return false;
+        }
+        if (canAfford.redsCost > 0) {
+            if (typeof canPlay === 'boolean') {
+                return { redsCost: canAfford.redsCost };
+            }
+            else {
+                return { ...canPlay, redsCost: canAfford.redsCost };
+            }
+        }
+        return canPlay;
     }
     simpleCanPlay(card, canAffordOptions) {
         return card.canPlay(this, canAffordOptions);
@@ -1046,22 +1045,25 @@ class Player {
         return Spendable_1.SPENDABLE_RESOURCES.every((key) => 0 <= payment[key] && payment[key] <= maxPayable[key]);
     }
     payingAmount(payment, options) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
-        const multiplier = Object.assign(Object.assign({}, Payment_1.DEFAULT_PAYMENT_VALUES), { steel: this.getSteelValue(), titanium: this.getTitaniumValue() });
+        const multiplier = {
+            ...Payment_1.DEFAULT_PAYMENT_VALUES,
+            steel: this.getSteelValue(),
+            titanium: this.getTitaniumValue(),
+        };
         const usable = {
             megaCredits: true,
-            steel: (_a = options === null || options === void 0 ? void 0 : options.steel) !== null && _a !== void 0 ? _a : false,
-            titanium: (_b = options === null || options === void 0 ? void 0 : options.titanium) !== null && _b !== void 0 ? _b : false,
+            steel: options?.steel ?? false,
+            titanium: options?.titanium ?? false,
             heat: this.canUseHeatAsMegaCredits,
-            plants: (_c = options === null || options === void 0 ? void 0 : options.plants) !== null && _c !== void 0 ? _c : false,
-            microbes: (_d = options === null || options === void 0 ? void 0 : options.microbes) !== null && _d !== void 0 ? _d : false,
-            floaters: (_e = options === null || options === void 0 ? void 0 : options.floaters) !== null && _e !== void 0 ? _e : false,
-            lunaArchivesScience: (_f = options === null || options === void 0 ? void 0 : options.lunaArchivesScience) !== null && _f !== void 0 ? _f : false,
-            spireScience: (_g = options === null || options === void 0 ? void 0 : options.spireScience) !== null && _g !== void 0 ? _g : false,
-            seeds: (_h = options === null || options === void 0 ? void 0 : options.seeds) !== null && _h !== void 0 ? _h : false,
-            auroraiData: (_j = options === null || options === void 0 ? void 0 : options.auroraiData) !== null && _j !== void 0 ? _j : false,
-            graphene: (_k = options === null || options === void 0 ? void 0 : options.graphene) !== null && _k !== void 0 ? _k : false,
-            kuiperAsteroids: (_l = options === null || options === void 0 ? void 0 : options.kuiperAsteroids) !== null && _l !== void 0 ? _l : false,
+            plants: options?.plants ?? false,
+            microbes: options?.microbes ?? false,
+            floaters: options?.floaters ?? false,
+            lunaArchivesScience: options?.lunaArchivesScience ?? false,
+            spireScience: options?.spireScience ?? false,
+            seeds: options?.seeds ?? false,
+            auroraiData: options?.auroraiData ?? false,
+            graphene: options?.graphene ?? false,
+            kuiperAsteroids: options?.kuiperAsteroids ?? false,
         };
         if (usable.titanium === false && payment.titanium > 0 && this.isCorporation(CardName_1.CardName.LUNA_TRADE_FEDERATION)) {
             usable.titanium = true;
@@ -1074,24 +1076,23 @@ class Player {
         }
         return totalToPay;
     }
-    canAfford(o) {
-        var _a;
-        const options = typeof (o) === 'number' ? { cost: o } : Object.assign({}, o);
+    newCanAfford(o) {
+        const options = typeof (o) === 'number' ? { cost: o } : { ...o };
         options.heat = this.canUseHeatAsMegaCredits;
         options.lunaTradeFederationTitanium = this.canUseTitaniumAsMegacredits;
-        const reserveUnits = (_a = options.reserveUnits) !== null && _a !== void 0 ? _a : Units_1.Units.EMPTY;
+        const reserveUnits = options.reserveUnits ?? Units_1.Units.EMPTY;
         if (reserveUnits.heat > 0) {
-            const unitsWithoutHeat = Object.assign(Object.assign({}, reserveUnits), { heat: 0 });
+            const unitsWithoutHeat = { ...reserveUnits, heat: 0 };
             if (!this.stock.has(unitsWithoutHeat)) {
-                return false;
+                return Player.CANNOT_AFFORD;
             }
             if (this.availableHeat() < reserveUnits.heat) {
-                return false;
+                return Player.CANNOT_AFFORD;
             }
         }
         else {
             if (!this.stock.has(reserveUnits)) {
-                return false;
+                return Player.CANNOT_AFFORD;
             }
         }
         const maxPayable = this.maxSpendable(reserveUnits);
@@ -1099,11 +1100,15 @@ class Player {
         if (redsCost > 0) {
             const usableForRedsCost = this.payingAmount(maxPayable, {});
             if (usableForRedsCost < redsCost) {
-                return false;
+                return Player.CANNOT_AFFORD;
             }
         }
         const usable = this.payingAmount(maxPayable, options);
-        return options.cost + redsCost <= usable;
+        const canAfford = options.cost + redsCost <= usable;
+        return { canAfford, redsCost };
+    }
+    canAfford(o) {
+        return this.newCanAfford(o).canAfford;
     }
     getStandardProjects() {
         const gameOptions = this.game.gameOptions;
@@ -1198,7 +1203,8 @@ class Player {
             this.pendingInitialActions.forEach((corp) => {
                 const option = new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Take first action of ${0} corporation', (b) => b.card(corp)), corp.initialActionText)
                     .andThen(() => {
-                    this.deferInitialAction(corp);
+                    game.log('${0} took the first action of ${1} corporation', (b) => b.player(this).card(corp)),
+                        this.deferInitialAction(corp);
                     this.pendingInitialActions.splice(this.pendingInitialActions.indexOf(corp), 1);
                     return undefined;
                 });
@@ -1261,6 +1267,9 @@ class Player {
             });
             if (convertHeat.warnings.size > 0) {
                 option.warnings = Array.from(convertHeat.warnings);
+                if (convertHeat.warnings.has('maxtemp')) {
+                    option.eligibleForDefault = false;
+                }
             }
             action.options.push(option);
         }
@@ -1375,20 +1384,18 @@ class Player {
         }
     }
     serialize() {
-        var _a;
         const result = {
             id: this.id,
             corporations: this.corporations.map((corporation) => {
-                var _a;
                 const serialized = {
                     name: corporation.name,
                     resourceCount: corporation.resourceCount,
                     isDisabled: false,
                 };
-                (_a = corporation.serialize) === null || _a === void 0 ? void 0 : _a.call(corporation, serialized);
+                corporation.serialize?.(serialized);
                 return serialized;
             }),
-            pickedCorporationCard: (_a = this.pickedCorporationCard) === null || _a === void 0 ? void 0 : _a.name,
+            pickedCorporationCard: this.pickedCorporationCard?.name,
             terraformRating: this.terraformRating,
             hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,
             megaCredits: this.megaCredits,
@@ -1452,7 +1459,6 @@ class Player {
         return result;
     }
     static deserialize(d) {
-        var _a, _b, _c;
         const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
         const cardFinder = new CardFinder_1.CardFinder();
         player.actionsTakenThisGame = d.actionsTakenThisGame;
@@ -1468,7 +1474,7 @@ class Player {
         player.colonies.victoryPoints = d.colonyVictoryPoints;
         player.victoryPointsByGeneration = d.victoryPointsByGeneration;
         player.energy = d.energy;
-        player.hasIncreasedTerraformRatingThisGeneration = (_a = d.hasIncreasedTerraformRatingThisGeneration) !== null && _a !== void 0 ? _a : false;
+        player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration ?? false;
         player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
         player.heat = d.heat;
         player.megaCredits = d.megaCredits;
@@ -1511,11 +1517,11 @@ class Player {
                 if (corporation.resourceCount !== undefined) {
                     card.resourceCount = corporation.resourceCount;
                 }
-                (_b = card.deserialize) === null || _b === void 0 ? void 0 : _b.call(card, corporation);
+                card.deserialize?.(corporation);
                 player.corporations.push(card);
             }
         }
-        player.pendingInitialActions = cardFinder.corporationCardsFromJSON((_c = d.pendingInitialActions) !== null && _c !== void 0 ? _c : []);
+        player.pendingInitialActions = cardFinder.corporationCardsFromJSON(d.pendingInitialActions ?? []);
         player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
         player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
         player.dealtCeoCards = cardFinder.ceosFromJSON(d.dealtCeoCards);
@@ -1531,6 +1537,9 @@ class Player {
         }
         return player;
     }
+    getOpponents() {
+        return this.game.getPlayers().filter((p) => p !== this);
+    }
     defer(input, priority = DeferredAction_1.Priority.DEFAULT) {
         if (input === undefined) {
             return;
@@ -1541,4 +1550,4 @@ class Player {
     }
 }
 exports.Player = Player;
-//# sourceMappingURL=Player.js.map
+Player.CANNOT_AFFORD = { canAfford: false, redsCost: 0 };

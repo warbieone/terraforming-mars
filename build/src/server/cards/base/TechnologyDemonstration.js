@@ -27,4 +27,3 @@ class TechnologyDemonstration extends Card_1.Card {
     }
 }
 exports.TechnologyDemonstration = TechnologyDemonstration;
-//# sourceMappingURL=TechnologyDemonstration.js.map

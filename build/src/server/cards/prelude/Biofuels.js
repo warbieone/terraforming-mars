@@ -26,4 +26,3 @@ class Biofuels extends PreludeCard_1.PreludeCard {
     }
 }
 exports.Biofuels = Biofuels;
-//# sourceMappingURL=Biofuels.js.map

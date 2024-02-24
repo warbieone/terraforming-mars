@@ -31,4 +31,3 @@ class Steelworks extends ActionCard_1.ActionCard {
     }
 }
 exports.Steelworks = Steelworks;
-//# sourceMappingURL=Steelworks.js.map

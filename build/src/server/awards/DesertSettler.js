@@ -17,4 +17,3 @@ class DesertSettler {
     }
 }
 exports.DesertSettler = DesertSettler;
-//# sourceMappingURL=DesertSettler.js.map

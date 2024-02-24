@@ -29,4 +29,3 @@ class WavePower extends Card_1.Card {
     }
 }
 exports.WavePower = WavePower;
-//# sourceMappingURL=WavePower.js.map

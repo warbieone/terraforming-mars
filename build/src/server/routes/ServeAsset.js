@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServeAsset = exports.FileAPI = void 0;
 const fs = require("fs");
@@ -54,56 +45,54 @@ class ServeAsset extends Handler_1.Handler {
         const brotli = fileApi.readFileSync('build/styles.css.br');
         this.cache.set('build/styles.css.br', brotli);
     }
-    get(req, res, _ctx) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (req.url === undefined) {
-                responses.internalServerError(req, res, new Error('no url on request'));
+    async get(req, res, _ctx) {
+        if (req.url === undefined) {
+            responses.internalServerError(req, res, new Error('no url on request'));
+            return;
+        }
+        const path = req.url.substring(1);
+        const supportedEncodings = this.supportedEncodings(req);
+        const toFile = this.toFile(path, supportedEncodings);
+        if (toFile.file === undefined) {
+            return responses.notFound(req, res);
+        }
+        const file = toFile.file;
+        const buffer = this.cacheAssets ? this.cache.get(file) : undefined;
+        if (buffer !== undefined) {
+            if (req.headers['if-none-match'] === buffer.hash) {
+                responses.notModified(res);
                 return;
             }
-            const path = req.url.substring(1);
-            const supportedEncodings = this.supportedEncodings(req);
-            const toFile = this.toFile(path, supportedEncodings);
-            if (toFile.file === undefined) {
-                return responses.notFound(req, res);
+            res.setHeader('Cache-Control', 'must-revalidate');
+            res.setHeader('ETag', buffer.hash);
+        }
+        else if (this.cacheAssets === false && req.url !== '/main.js' && req.url !== '/main.js.map') {
+            res.setHeader('Cache-Control', 'max-age=' + this.cacheAgeSeconds);
+        }
+        const contentType = ContentType_1.ContentType.getContentType(file);
+        if (contentType !== undefined) {
+            res.setHeader('Content-Type', contentType);
+        }
+        if (toFile.encoding !== undefined) {
+            res.setHeader('Content-Encoding', toFile.encoding);
+        }
+        if (buffer !== undefined) {
+            res.setHeader('Content-Length', buffer.buffer.length);
+            res.end(buffer.buffer);
+            return;
+        }
+        try {
+            const data = await this.fileApi.readFile(file);
+            res.setHeader('Content-Length', data.length);
+            res.end(data);
+            if (this.cacheAssets === true) {
+                this.cache.set(file, data);
             }
-            const file = toFile.file;
-            const buffer = this.cacheAssets ? this.cache.get(file) : undefined;
-            if (buffer !== undefined) {
-                if (req.headers['if-none-match'] === buffer.hash) {
-                    responses.notModified(res);
-                    return;
-                }
-                res.setHeader('Cache-Control', 'must-revalidate');
-                res.setHeader('ETag', buffer.hash);
-            }
-            else if (this.cacheAssets === false && req.url !== '/main.js' && req.url !== '/main.js.map') {
-                res.setHeader('Cache-Control', 'max-age=' + this.cacheAgeSeconds);
-            }
-            const contentType = ContentType_1.ContentType.getContentType(file);
-            if (contentType !== undefined) {
-                res.setHeader('Content-Type', contentType);
-            }
-            if (toFile.encoding !== undefined) {
-                res.setHeader('Content-Encoding', toFile.encoding);
-            }
-            if (buffer !== undefined) {
-                res.setHeader('Content-Length', buffer.buffer.length);
-                res.end(buffer.buffer);
-                return;
-            }
-            try {
-                const data = yield this.fileApi.readFile(file);
-                res.setHeader('Content-Length', data.length);
-                res.end(data);
-                if (this.cacheAssets === true) {
-                    this.cache.set(file, data);
-                }
-            }
-            catch (err) {
-                console.log(err);
-                responses.internalServerError(req, res, 'Cannot serve ' + path);
-            }
-        });
+        }
+        catch (err) {
+            console.log(err);
+            responses.internalServerError(req, res, 'Cannot serve ' + path);
+        }
     }
     toMainFile(urlPath, encodings) {
         let file = `build/${urlPath}`;
@@ -172,4 +161,3 @@ class ServeAsset extends Handler_1.Handler {
 }
 exports.ServeAsset = ServeAsset;
 ServeAsset.INSTANCE = new ServeAsset();
-//# sourceMappingURL=ServeAsset.js.map

@@ -42,4 +42,3 @@ class NanotechIndustries extends CorporationCard_1.CorporationCard {
     }
 }
 exports.NanotechIndustries = NanotechIndustries;
-//# sourceMappingURL=NanotechIndustries.js.map

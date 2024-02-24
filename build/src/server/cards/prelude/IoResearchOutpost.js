@@ -26,4 +26,3 @@ class IoResearchOutpost extends PreludeCard_1.PreludeCard {
     }
 }
 exports.IoResearchOutpost = IoResearchOutpost;
-//# sourceMappingURL=IoResearchOutpost.js.map

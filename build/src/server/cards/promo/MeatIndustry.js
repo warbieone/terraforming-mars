@@ -32,4 +32,3 @@ class MeatIndustry extends Card_1.Card {
     }
 }
 exports.MeatIndustry = MeatIndustry;
-//# sourceMappingURL=MeatIndustry.js.map

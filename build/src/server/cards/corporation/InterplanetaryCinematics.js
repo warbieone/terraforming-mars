@@ -39,4 +39,3 @@ class InterplanetaryCinematics extends CorporationCard_1.CorporationCard {
     }
 }
 exports.InterplanetaryCinematics = InterplanetaryCinematics;
-//# sourceMappingURL=InterplanetaryCinematics.js.map

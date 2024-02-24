@@ -57,4 +57,3 @@ class MinorityRefuge extends Card_1.Card {
     }
 }
 exports.MinorityRefuge = MinorityRefuge;
-//# sourceMappingURL=MinorityRefuge.js.map

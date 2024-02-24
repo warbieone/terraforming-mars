@@ -122,4 +122,3 @@ exports.COLONIES_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.STORMCRAFT_INCORPORATED]: { Factory: StormCraftIncorporated_1.StormCraftIncorporated },
     },
 });
-//# sourceMappingURL=ColoniesCardManifest.js.map

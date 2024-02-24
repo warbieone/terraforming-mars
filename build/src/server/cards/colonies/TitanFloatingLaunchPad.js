@@ -74,8 +74,7 @@ class TradeWithTitanFloatingLaunchPad {
         this.titanFloatingLaunchPad = card === undefined ? undefined : card;
     }
     canUse() {
-        var _a, _b;
-        return ((_b = (_a = this.titanFloatingLaunchPad) === null || _a === void 0 ? void 0 : _a.resourceCount) !== null && _b !== void 0 ? _b : 0) > 0 &&
+        return (this.titanFloatingLaunchPad?.resourceCount ?? 0) > 0 &&
             !this.player.getActionsThisGeneration().has(CardName_1.CardName.TITAN_FLOATING_LAUNCHPAD);
     }
     optionText() {
@@ -91,4 +90,3 @@ class TradeWithTitanFloatingLaunchPad {
     }
 }
 exports.TradeWithTitanFloatingLaunchPad = TradeWithTitanFloatingLaunchPad;
-//# sourceMappingURL=TitanFloatingLaunchPad.js.map

@@ -44,4 +44,3 @@ class ValleyTrust extends CorporationCard_1.CorporationCard {
     }
 }
 exports.ValleyTrust = ValleyTrust;
-//# sourceMappingURL=ValleyTrust.js.map

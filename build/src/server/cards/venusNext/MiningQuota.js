@@ -28,4 +28,3 @@ class MiningQuota extends Card_1.Card {
     }
 }
 exports.MiningQuota = MiningQuota;
-//# sourceMappingURL=MiningQuota.js.map

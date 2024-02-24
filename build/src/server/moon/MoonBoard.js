@@ -87,4 +87,3 @@ class Row {
         return this;
     }
 }
-//# sourceMappingURL=MoonBoard.js.map

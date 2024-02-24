@@ -42,4 +42,3 @@ class SmallOpenPitMine extends Card_1.Card {
     }
 }
 exports.SmallOpenPitMine = SmallOpenPitMine;
-//# sourceMappingURL=SmallOpenPitMine.js.map

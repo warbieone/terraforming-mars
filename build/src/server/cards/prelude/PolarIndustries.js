@@ -28,4 +28,3 @@ class PolarIndustries extends PreludeCard_1.PreludeCard {
     }
 }
 exports.PolarIndustries = PolarIndustries;
-//# sourceMappingURL=PolarIndustries.js.map

@@ -35,4 +35,3 @@ class MoholeArea extends Card_1.Card {
     }
 }
 exports.MoholeArea = MoholeArea;
-//# sourceMappingURL=MoholeArea.js.map

@@ -55,15 +55,14 @@ var Units;
     }
     Units.negative = negative;
     function isEmpty(u) {
-        var _a, _b, _c, _d, _e, _f;
         if (u === undefined)
             return true;
-        return ((_a = u.megacredits) !== null && _a !== void 0 ? _a : 0) === 0 &&
-            ((_b = u.steel) !== null && _b !== void 0 ? _b : 0) === 0 &&
-            ((_c = u.titanium) !== null && _c !== void 0 ? _c : 0) === 0 &&
-            ((_d = u.plants) !== null && _d !== void 0 ? _d : 0) === 0 &&
-            ((_e = u.energy) !== null && _e !== void 0 ? _e : 0) === 0 &&
-            ((_f = u.heat) !== null && _f !== void 0 ? _f : 0) === 0;
+        return (u.megacredits ?? 0) === 0 &&
+            (u.steel ?? 0) === 0 &&
+            (u.titanium ?? 0) === 0 &&
+            (u.plants ?? 0) === 0 &&
+            (u.energy ?? 0) === 0 &&
+            (u.heat ?? 0) === 0;
     }
     Units.isEmpty = isEmpty;
     function partial(u) {
@@ -90,4 +89,3 @@ var Units;
         heat: Resource_1.Resource.HEAT,
     };
 })(Units = exports.Units || (exports.Units = {}));
-//# sourceMappingURL=Units.js.map

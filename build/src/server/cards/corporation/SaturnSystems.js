@@ -43,4 +43,3 @@ class SaturnSystems extends CorporationCard_1.CorporationCard {
     }
 }
 exports.SaturnSystems = SaturnSystems;
-//# sourceMappingURL=SaturnSystems.js.map

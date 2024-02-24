@@ -87,4 +87,3 @@ class AsteroidRights extends Card_1.Card {
     }
 }
 exports.AsteroidRights = AsteroidRights;
-//# sourceMappingURL=AsteroidRights.js.map

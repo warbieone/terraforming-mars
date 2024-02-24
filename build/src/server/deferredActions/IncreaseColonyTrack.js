@@ -37,4 +37,3 @@ class IncreaseColonyTrack extends DeferredAction_1.DeferredAction {
     }
 }
 exports.IncreaseColonyTrack = IncreaseColonyTrack;
-//# sourceMappingURL=IncreaseColonyTrack.js.map

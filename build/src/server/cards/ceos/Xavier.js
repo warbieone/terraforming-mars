@@ -39,4 +39,3 @@ class Xavier extends CeoCard_1.CeoCard {
     }
 }
 exports.Xavier = Xavier;
-//# sourceMappingURL=Xavier.js.map

@@ -9,10 +9,9 @@ class PlaceCityTile extends DeferredAction_1.DeferredAction {
         this.options = options;
     }
     execute() {
-        var _a, _b, _c, _d;
-        const type = ((_a = this.options) === null || _a === void 0 ? void 0 : _a.on) || 'city';
-        const spaces = ((_b = this.options) === null || _b === void 0 ? void 0 : _b.spaces) || this.player.game.board.getAvailableSpacesForType(this.player, type);
-        const title = (_d = (_c = this.options) === null || _c === void 0 ? void 0 : _c.title) !== null && _d !== void 0 ? _d : this.getTitle(type);
+        const type = this.options?.on || 'city';
+        const spaces = this.options?.spaces || this.player.game.board.getAvailableSpacesForType(this.player, type);
+        const title = this.options?.title ?? this.getTitle(type);
         if (spaces.length === 0) {
             return undefined;
         }
@@ -31,4 +30,3 @@ class PlaceCityTile extends DeferredAction_1.DeferredAction {
     }
 }
 exports.PlaceCityTile = PlaceCityTile;
-//# sourceMappingURL=PlaceCityTile.js.map

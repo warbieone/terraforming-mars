@@ -25,4 +25,3 @@ class ReleaseOfInertGases extends Card_1.Card {
     }
 }
 exports.ReleaseOfInertGases = ReleaseOfInertGases;
-//# sourceMappingURL=ReleaseOfInertGases.js.map

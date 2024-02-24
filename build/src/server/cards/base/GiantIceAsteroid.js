@@ -33,4 +33,3 @@ class GiantIceAsteroid extends Card_1.Card {
     }
 }
 exports.GiantIceAsteroid = GiantIceAsteroid;
-//# sourceMappingURL=GiantIceAsteroid.js.map

@@ -99,4 +99,3 @@ exports.CITY_TILES = new Set([TileType.CITY, TileType.CAPITAL, TileType.OCEAN_CI
 exports.OCEAN_TILES = new Set([TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY, TileType.WETLANDS]);
 exports.BASE_OCEAN_TILES = new Set([TileType.OCEAN, TileType.WETLANDS]);
 exports.GREENERY_TILES = new Set([TileType.GREENERY, TileType.WETLANDS]);
-//# sourceMappingURL=TileType.js.map

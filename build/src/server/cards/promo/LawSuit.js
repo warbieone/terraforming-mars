@@ -66,4 +66,3 @@ class LawSuit extends Card_1.Card {
     }
 }
 exports.LawSuit = LawSuit;
-//# sourceMappingURL=LawSuit.js.map

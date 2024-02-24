@@ -38,9 +38,8 @@ class HiredRaiders extends Card_1.Card {
                 return undefined;
             }));
         }
-        const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);
         const availableActions = new OrOptions_1.OrOptions();
-        availablePlayerTargets.forEach((target) => {
+        player.getOpponents().forEach((target) => {
             if (target.steel > 0 && !target.alloysAreProtected()) {
                 const amountStolen = Math.min(2, target.steel);
                 const optionTitle = (0, MessageBuilder_1.message)('Steal ${0} steel from ${1}', (b) => b.number(amountStolen).player(target).getMessage());
@@ -80,4 +79,3 @@ class HiredRaiders extends Card_1.Card {
     }
 }
 exports.HiredRaiders = HiredRaiders;
-//# sourceMappingURL=HiredRaiders.js.map

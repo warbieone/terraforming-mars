@@ -33,4 +33,3 @@ class GlobalDustStorm extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.GlobalDustStorm = GlobalDustStorm;
-//# sourceMappingURL=GlobalDustStorm.js.map

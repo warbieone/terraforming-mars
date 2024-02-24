@@ -38,4 +38,3 @@ class PhoboLog extends CorporationCard_1.CorporationCard {
     }
 }
 exports.PhoboLog = PhoboLog;
-//# sourceMappingURL=PhoboLog.js.map

@@ -46,4 +46,3 @@ class HeavyDutyRovers extends Card_1.Card {
     }
 }
 exports.HeavyDutyRovers = HeavyDutyRovers;
-//# sourceMappingURL=HeavyDutyRovers.js.map

@@ -27,4 +27,3 @@ class HE3Lobbyists extends Card_1.Card {
     }
 }
 exports.HE3Lobbyists = HE3Lobbyists;
-//# sourceMappingURL=HE3Lobbyists.js.map

@@ -5,4 +5,3 @@ function policyDescription(policy, player) {
     return typeof (policy.description) === 'string' ? policy.description : policy.description(player);
 }
 exports.policyDescription = policyDescription;
-//# sourceMappingURL=Policy.js.map

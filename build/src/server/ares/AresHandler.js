@@ -25,10 +25,10 @@ class AresHandler {
     static earnAdjacencyBonuses(aresData, player, space, options) {
         let incrementMilestone = false;
         for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
-            const grantedBonus = this.earnAdacencyBonus(space, adjacentSpace, player, options === null || options === void 0 ? void 0 : options.giveAresTileOwnerBonus);
-            incrementMilestone || (incrementMilestone = grantedBonus);
+            const grantedBonus = this.earnAdacencyBonus(space, adjacentSpace, player, options?.giveAresTileOwnerBonus);
+            incrementMilestone ||= grantedBonus;
         }
-        if (incrementMilestone && (options === null || options === void 0 ? void 0 : options.incrementMilestone) !== false) {
+        if (incrementMilestone && options?.incrementMilestone !== false) {
             const entry = aresData.milestoneResults.find((e) => e.id === player.id);
             if (entry === undefined) {
                 throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
@@ -37,7 +37,6 @@ class AresHandler {
         }
     }
     static earnAdacencyBonus(newTileSpace, adjacentSpace, player, giveAresTileOwnerBonus = true) {
-        var _a;
         if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
             return false;
         }
@@ -67,7 +66,7 @@ class AresHandler {
                 bonuses.add(bonus);
                 continue;
             }
-            const cardName = (_a = adjacentSpace.tile) === null || _a === void 0 ? void 0 : _a.card;
+            const cardName = adjacentSpace.tile?.card;
             if (cardName !== CardName_1.CardName.CRASHLANDING) {
                 throw new Error('\'callback\' only applies to Crashlanding now.');
             }
@@ -111,18 +110,15 @@ class AresHandler {
         return true;
     }
     static hasHazardTile(space) {
-        var _a;
-        return (0, AresTileType_1.hazardSeverity)((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType) !== AresTileType_1.HazardSeverity.NONE;
+        return (0, AresTileType_1.hazardSeverity)(space.tile?.tileType) !== AresTileType_1.HazardSeverity.NONE;
     }
     static computeAdjacencyCosts(game, space, subjectToHazardAdjacency) {
-        var _a;
         let megaCreditCost = 0;
         let productionCost = 0;
         game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-            var _a, _b;
-            megaCreditCost += ((_a = adjacentSpace.adjacency) === null || _a === void 0 ? void 0 : _a.cost) || 0;
+            megaCreditCost += adjacentSpace.adjacency?.cost || 0;
             if (subjectToHazardAdjacency === true) {
-                const severity = (0, AresTileType_1.hazardSeverity)((_b = adjacentSpace.tile) === null || _b === void 0 ? void 0 : _b.tileType);
+                const severity = (0, AresTileType_1.hazardSeverity)(adjacentSpace.tile?.tileType);
                 switch (severity) {
                     case AresTileType_1.HazardSeverity.MILD:
                         productionCost += 1;
@@ -133,7 +129,7 @@ class AresHandler {
                 }
             }
         });
-        const severity = (0, AresTileType_1.hazardSeverity)((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType);
+        const severity = (0, AresTileType_1.hazardSeverity)(space.tile?.tileType);
         switch (severity) {
             case AresTileType_1.HazardSeverity.MILD:
                 megaCreditCost += 8;
@@ -219,4 +215,3 @@ class AresHandler {
     }
 }
 exports.AresHandler = AresHandler;
-//# sourceMappingURL=AresHandler.js.map

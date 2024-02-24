@@ -32,4 +32,3 @@ class ResearchOutpost extends Card_1.Card {
     }
 }
 exports.ResearchOutpost = ResearchOutpost;
-//# sourceMappingURL=ResearchOutpost.js.map

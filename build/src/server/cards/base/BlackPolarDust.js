@@ -29,4 +29,3 @@ class BlackPolarDust extends Card_1.Card {
     }
 }
 exports.BlackPolarDust = BlackPolarDust;
-//# sourceMappingURL=BlackPolarDust.js.map

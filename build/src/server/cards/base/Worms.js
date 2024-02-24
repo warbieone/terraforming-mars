@@ -29,4 +29,3 @@ class Worms extends Card_1.Card {
     }
 }
 exports.Worms = Worms;
-//# sourceMappingURL=Worms.js.map

@@ -43,4 +43,3 @@ class SmallDutyRovers extends Card_1.Card {
     }
 }
 exports.SmallDutyRovers = SmallDutyRovers;
-//# sourceMappingURL=SmallDutyRovers.js.map

@@ -36,4 +36,3 @@ class PrideoftheEarthArkship extends ActionCard_1.ActionCard {
     }
 }
 exports.PrideoftheEarthArkship = PrideoftheEarthArkship;
-//# sourceMappingURL=PrideoftheEarthArkship.js.map

@@ -26,4 +26,3 @@ class Callisto extends Colony_1.Colony {
     }
 }
 exports.Callisto = Callisto;
-//# sourceMappingURL=Callisto.js.map

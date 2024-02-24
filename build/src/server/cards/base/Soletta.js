@@ -27,4 +27,3 @@ class Soletta extends Card_1.Card {
     }
 }
 exports.Soletta = Soletta;
-//# sourceMappingURL=Soletta.js.map

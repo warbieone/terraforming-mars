@@ -35,7 +35,6 @@ const IProjectCard_1 = require("../cards/IProjectCard");
 const constants_1 = require("../../common/constants");
 class Executor {
     canExecute(behavior, player, card, canAffordOptions) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
         const ctx = new Counter_1.Counter(player, card);
         const asTrSource = this.toTRSource(behavior, ctx);
         const game = player.game;
@@ -122,20 +121,20 @@ class Executor {
                 }
             }
         }
-        if (((_a = behavior.colonies) === null || _a === void 0 ? void 0 : _a.buildColony) !== undefined) {
+        if (behavior.colonies?.buildColony !== undefined) {
             if (player.colonies.getPlayableColonies(behavior.colonies.buildColony.allowDuplicates).length === 0) {
                 return false;
             }
         }
         if (behavior.city !== undefined) {
             if (behavior.city.space === undefined) {
-                if (game.board.getAvailableSpacesForType(player, (_b = behavior.city.on) !== null && _b !== void 0 ? _b : 'city', canAffordOptions).length === 0) {
+                if (game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city', canAffordOptions).length === 0) {
                     return false;
                 }
             }
         }
         if (behavior.greenery !== undefined) {
-            if (game.board.getAvailableSpacesForType(player, (_c = behavior.greenery.on) !== null && _c !== void 0 ? _c : 'greenery', canAffordOptions).length === 0) {
+            if (game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery', canAffordOptions).length === 0) {
                 return false;
             }
         }
@@ -158,8 +157,8 @@ class Executor {
                 if (count === 0) {
                     return false;
                 }
-                if (count === 1 && ((_e = (_d = behavior.spend) === null || _d === void 0 ? void 0 : _d.resourcesHere) !== null && _e !== void 0 ? _e : 0 > 0)) {
-                    if (((_f = cards[0][0]) === null || _f === void 0 ? void 0 : _f.name) === card.name) {
+                if (count === 1 && (behavior.spend?.resourcesHere ?? 0 > 0)) {
+                    if (cards[0][0]?.name === card.name) {
                         return false;
                     }
                 }
@@ -190,20 +189,19 @@ class Executor {
                     return false;
                 }
             }
-            if ((_g = moon.habitatRate) !== null && _g !== void 0 ? _g : 0 >= constants_1.MAXIMUM_HABITAT_RATE) {
+            if ((moon.habitatRate ?? 0) >= constants_1.MAXIMUM_HABITAT_RATE) {
                 card.warnings.add('maxHabitatRate');
             }
-            if ((_h = moon.miningRate) !== null && _h !== void 0 ? _h : 0 >= constants_1.MAXIMUM_MINING_RATE) {
+            if ((moon.miningRate ?? 0) >= constants_1.MAXIMUM_MINING_RATE) {
                 card.warnings.add('maxMiningRate');
             }
-            if ((_j = moon.logisticsRate) !== null && _j !== void 0 ? _j : 0 >= constants_1.MAXIMUM_LOGISTICS_RATE) {
+            if ((moon.logisticsRate ?? 0) >= constants_1.MAXIMUM_LOGISTICS_RATE) {
                 card.warnings.add('maxLogisticsRate');
             }
         }
         return true;
     }
     execute(behavior, player, card) {
-        var _a, _b, _c, _d;
         const ctx = new Counter_1.Counter(player, card);
         if (behavior.or !== undefined) {
             const options = behavior.or.behaviors
@@ -224,7 +222,7 @@ class Executor {
         }
         if (behavior.spend !== undefined) {
             const spend = behavior.spend;
-            const remainder = Object.assign({}, behavior);
+            const remainder = { ...behavior };
             delete remainder['spend'];
             if (spend.megacredits) {
                 player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, spend.megacredits, {
@@ -233,8 +231,8 @@ class Executor {
                 return;
             }
             player.pay(Payment_1.Payment.of({
-                steel: (_a = spend.steel) !== null && _a !== void 0 ? _a : 0,
-                titanium: (_b = spend.titanium) !== null && _b !== void 0 ? _b : 0,
+                steel: spend.steel ?? 0,
+                titanium: spend.titanium ?? 0,
             }));
             if (spend.plants) {
                 player.stock.deduct(Resource_1.Resource.PLANTS, spend.plants);
@@ -253,7 +251,7 @@ class Executor {
                 player.removeResourceFrom(card, spend.resourcesHere);
             }
             if (spend.resourceFromAnyCard) {
-                player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, spend.resourceFromAnyCard.type, 1, { ownCardsOnly: true, blockable: false }))
+                player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, spend.resourceFromAnyCard.type, 1, { source: 'self', blockable: false }))
                     .andThen(() => this.execute(remainder, player, card));
                 return;
             }
@@ -272,7 +270,7 @@ class Executor {
         if (behavior.standardResource) {
             const entry = behavior.standardResource;
             const count = typeof (entry) === 'number' ? entry : entry.count;
-            const same = typeof (entry) === 'number' ? false : (_c = entry.same) !== null && _c !== void 0 ? _c : false;
+            const same = typeof (entry) === 'number' ? false : entry.same ?? false;
             if (same === false) {
                 player.defer(new SelectResources_1.SelectResources(player, count, (0, MessageBuilder_1.message)('Gain ${0} standard resources', (b) => b.number(count))));
             }
@@ -289,7 +287,7 @@ class Executor {
         if (behavior.titanumValue === 1) {
             player.increaseTitaniumValue();
         }
-        if (behavior === null || behavior === void 0 ? void 0 : behavior.greeneryDiscount) {
+        if (behavior?.greeneryDiscount) {
             player.plantsNeededForGreenery -= behavior.greeneryDiscount;
         }
         if (behavior.drawCard !== undefined) {
@@ -398,7 +396,7 @@ class Executor {
                     card: card.name,
                 },
                 on: tile.on,
-                title: (_d = tile.title) !== null && _d !== void 0 ? _d : (0, MessageBuilder_1.message)('Select space for ${0} tile', (b) => b.cardName(card.name)),
+                title: tile.title ?? (0, MessageBuilder_1.message)('Select space for ${0} tile', (b) => b.cardName(card.name)),
                 adjacencyBonus: tile.adjacencyBonus,
             }));
         }
@@ -426,7 +424,7 @@ class Executor {
                     player.game.defer(new PlaceMoonHabitatTile_1.PlaceMoonHabitatTile(player));
                 }
                 else {
-                    MoonExpansion_1.MoonExpansion.addHabitatTile(player, moon.habitatTile.space, card === null || card === void 0 ? void 0 : card.name);
+                    MoonExpansion_1.MoonExpansion.addHabitatTile(player, moon.habitatTile.space, card?.name);
                     MoonExpansion_1.MoonExpansion.raiseHabitatRate(player);
                 }
             }
@@ -435,7 +433,7 @@ class Executor {
                     player.game.defer(new PlaceMoonMineTile_1.PlaceMoonMineTile(player));
                 }
                 else {
-                    MoonExpansion_1.MoonExpansion.addMineTile(player, moon.mineTile.space, card === null || card === void 0 ? void 0 : card.name);
+                    MoonExpansion_1.MoonExpansion.addMineTile(player, moon.mineTile.space, card?.name);
                     MoonExpansion_1.MoonExpansion.raiseMiningRate(player);
                 }
             }
@@ -444,16 +442,16 @@ class Executor {
                     player.game.defer(new PlaceMoonRoadTile_1.PlaceMoonRoadTile(player));
                 }
                 else {
-                    MoonExpansion_1.MoonExpansion.addRoadTile(player, moon.roadTile.space, card === null || card === void 0 ? void 0 : card.name);
+                    MoonExpansion_1.MoonExpansion.addRoadTile(player, moon.roadTile.space, card?.name);
                     MoonExpansion_1.MoonExpansion.raiseLogisticRate(player);
                 }
             }
             if (moon.tile !== undefined) {
                 if (moon.tile.space !== undefined) {
-                    MoonExpansion_1.MoonExpansion.addTile(player, moon.tile.space, { tileType: moon.tile.type, card: card === null || card === void 0 ? void 0 : card.name });
+                    MoonExpansion_1.MoonExpansion.addTile(player, moon.tile.space, { tileType: moon.tile.type, card: card?.name });
                 }
                 else {
-                    player.game.defer(new PlaceSpecialMoonTile_1.PlaceSpecialMoonTile(player, { tileType: moon.tile.type, card: card === null || card === void 0 ? void 0 : card.name }));
+                    player.game.defer(new PlaceSpecialMoonTile_1.PlaceSpecialMoonTile(player, { tileType: moon.tile.type, card: card?.name }));
                 }
             }
             if (moon.habitatRate !== undefined)
@@ -494,7 +492,7 @@ class Executor {
         if (behavior.titanumValue === 1) {
             player.decreaseTitaniumValue();
         }
-        if (behavior === null || behavior === void 0 ? void 0 : behavior.greeneryDiscount) {
+        if (behavior?.greeneryDiscount) {
             player.plantsNeededForGreenery += behavior.greeneryDiscount;
         }
         if (behavior.colonies !== undefined) {
@@ -513,7 +511,6 @@ class Executor {
         }
     }
     toTRSource(behavior, ctx) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
         let tr = undefined;
         if (behavior.tr !== undefined) {
             if (typeof (behavior.tr) === 'number') {
@@ -525,16 +522,15 @@ class Executor {
         }
         const trSource = {
             tr: tr,
-            temperature: (_a = behavior.global) === null || _a === void 0 ? void 0 : _a.temperature,
-            oxygen: ((_c = (_b = behavior.global) === null || _b === void 0 ? void 0 : _b.oxygen) !== null && _c !== void 0 ? _c : 0) + (behavior.greenery !== undefined ? 1 : 0),
-            venus: (_d = behavior.global) === null || _d === void 0 ? void 0 : _d.venus,
+            temperature: behavior.global?.temperature,
+            oxygen: (behavior.global?.oxygen ?? 0) + (behavior.greenery !== undefined ? 1 : 0),
+            venus: behavior.global?.venus,
             oceans: behavior.ocean !== undefined ? 1 : undefined,
-            moonHabitat: ((_f = (_e = behavior.moon) === null || _e === void 0 ? void 0 : _e.habitatRate) !== null && _f !== void 0 ? _f : 0) + (((_g = behavior.moon) === null || _g === void 0 ? void 0 : _g.habitatTile) !== undefined ? 1 : 0),
-            moonMining: ((_j = (_h = behavior.moon) === null || _h === void 0 ? void 0 : _h.miningRate) !== null && _j !== void 0 ? _j : 0) + (((_k = behavior.moon) === null || _k === void 0 ? void 0 : _k.mineTile) !== undefined ? 1 : 0),
-            moonLogistics: ((_m = (_l = behavior.moon) === null || _l === void 0 ? void 0 : _l.logisticsRate) !== null && _m !== void 0 ? _m : 0) + (((_o = behavior.moon) === null || _o === void 0 ? void 0 : _o.roadTile) !== undefined ? 1 : 0),
+            moonHabitat: (behavior.moon?.habitatRate ?? 0) + (behavior.moon?.habitatTile !== undefined ? 1 : 0),
+            moonMining: (behavior.moon?.miningRate ?? 0) + (behavior.moon?.mineTile !== undefined ? 1 : 0),
+            moonLogistics: (behavior.moon?.logisticsRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),
         };
         return trSource;
     }
 }
 exports.Executor = Executor;
-//# sourceMappingURL=Executor.js.map

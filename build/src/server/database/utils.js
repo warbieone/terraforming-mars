@@ -22,4 +22,3 @@ function daysAgoToSeconds(dayString, defaultValue) {
     return dateToSeconds(date);
 }
 exports.daysAgoToSeconds = daysAgoToSeconds;
-//# sourceMappingURL=utils.js.map

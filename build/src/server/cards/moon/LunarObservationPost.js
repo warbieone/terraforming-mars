@@ -35,4 +35,3 @@ class LunarObservationPost extends ActionCard_1.ActionCard {
     }
 }
 exports.LunarObservationPost = LunarObservationPost;
-//# sourceMappingURL=LunarObservationPost.js.map

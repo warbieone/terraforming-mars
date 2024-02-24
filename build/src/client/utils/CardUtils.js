@@ -17,4 +17,3 @@ function isCardActivated(card, player) {
     return player.actionsThisGeneration.includes(card.name) || (card.isDisabled === true);
 }
 exports.isCardActivated = isCardActivated;
-//# sourceMappingURL=CardUtils.js.map

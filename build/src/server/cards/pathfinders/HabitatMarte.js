@@ -28,4 +28,3 @@ class HabitatMarte extends CorporationCard_1.CorporationCard {
     }
 }
 exports.HabitatMarte = HabitatMarte;
-//# sourceMappingURL=HabitatMarte.js.map

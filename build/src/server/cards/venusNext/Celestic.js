@@ -65,4 +65,3 @@ Celestic.floaterCards = new Set([
     CardName_1.CardName.VENERA_BASE,
     CardName_1.CardName.CLOUD_CITY,
 ]);
-//# sourceMappingURL=Celestic.js.map

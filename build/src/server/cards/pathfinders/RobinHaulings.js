@@ -81,4 +81,3 @@ class RobinHaulings extends CorporationCard_1.CorporationCard {
     }
 }
 exports.RobinHaulings = RobinHaulings;
-//# sourceMappingURL=RobinHaulings.js.map

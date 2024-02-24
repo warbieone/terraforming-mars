@@ -15,4 +15,3 @@ class Collector extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Collector = Collector;
-//# sourceMappingURL=Collector.js.map

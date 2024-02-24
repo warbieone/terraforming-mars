@@ -6,7 +6,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const PreludeCard_1 = require("../prelude/PreludeCard");
 const CardRenderer_1 = require("../render/CardRenderer");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
-const TileType_1 = require("../../../common/TileType");
 class CoreMine extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
@@ -16,7 +15,6 @@ class CoreMine extends PreludeCard_1.PreludeCard {
                 production: { titanium: 1 },
                 moon: { mineTile: {} },
             },
-            tilesBuilt: [TileType_1.TileType.MOON_MINE],
             metadata: {
                 description: 'Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.',
                 cardNumber: '',
@@ -28,4 +26,3 @@ class CoreMine extends PreludeCard_1.PreludeCard {
     }
 }
 exports.CoreMine = CoreMine;
-//# sourceMappingURL=CoreMine.js.map

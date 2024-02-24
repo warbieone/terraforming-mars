@@ -36,4 +36,3 @@ class EcologyExperts extends PreludeCard_1.PreludeCard {
     }
 }
 exports.EcologyExperts = EcologyExperts;
-//# sourceMappingURL=EcologyExperts.js.map

@@ -34,4 +34,3 @@ class RefugeeCamps extends ActionCard_1.ActionCard {
     }
 }
 exports.RefugeeCamps = RefugeeCamps;
-//# sourceMappingURL=RefugeeCamps.js.map

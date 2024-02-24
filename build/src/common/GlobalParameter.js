@@ -20,4 +20,3 @@ exports.GLOBAL_PARAMETERS = [
     GlobalParameter.MOON_MINING_RATE,
     GlobalParameter.MOON_LOGISTICS_RATE,
 ];
-//# sourceMappingURL=GlobalParameter.js.map

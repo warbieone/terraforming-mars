@@ -54,4 +54,3 @@ class Ringcom extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Ringcom = Ringcom;
-//# sourceMappingURL=Ringcom.js.map

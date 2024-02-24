@@ -15,4 +15,3 @@ class Excentric {
     }
 }
 exports.Excentric = Excentric;
-//# sourceMappingURL=Excentric.js.map

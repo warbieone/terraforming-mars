@@ -65,7 +65,7 @@ class Colony {
     addColony(player, options) {
         player.game.log('${0} built a colony on ${1}', (b) => b.player(player).colony(this));
         this.giveBonus(player, this.metadata.buildType, this.metadata.buildQuantity[this.colonies.length], this.metadata.buildResource);
-        if ((options === null || options === void 0 ? void 0 : options.giveBonusTwice) === true) {
+        if (options?.giveBonusTwice === true) {
             this.giveBonus(player, this.metadata.buildType, this.metadata.buildQuantity[this.colonies.length], this.metadata.buildResource);
         }
         this.colonies.push(player.id);
@@ -278,4 +278,3 @@ class Colony {
     }
 }
 exports.Colony = Colony;
-//# sourceMappingURL=Colony.js.map

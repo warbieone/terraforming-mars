@@ -35,4 +35,3 @@ class PrefabricationofHumanHabitats extends Card_1.Card {
     }
 }
 exports.PrefabricationofHumanHabitats = PrefabricationofHumanHabitats;
-//# sourceMappingURL=PrefabricationofHumanHabitats.js.map

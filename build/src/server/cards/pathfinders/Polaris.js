@@ -46,11 +46,9 @@ class Polaris extends CorporationCard_1.CorporationCard {
             if (activePlayer.id === cardOwner.id && cardOwner.game.phase !== Phase_1.Phase.SOLAR) {
                 cardOwner.game.defer(new GainResources_1.GainResources(cardOwner, Resource_1.Resource.MEGACREDITS, {
                     count: 4,
-                    cb: () => activePlayer.game.log('${0} gained ${1} from ${2}', (b) => b.player(cardOwner).string(Resource_1.Resource.MEGACREDITS).cardName(this.name)),
-                }), cardOwner.id !== activePlayer.id ? DeferredAction_1.Priority.OPPONENT_TRIGGER : undefined);
+                }).andThen(() => activePlayer.game.log('${0} gained ${1} from ${2}', (b) => b.player(cardOwner).string(Resource_1.Resource.MEGACREDITS).cardName(this.name))), cardOwner.id !== activePlayer.id ? DeferredAction_1.Priority.OPPONENT_TRIGGER : undefined);
             }
         }
     }
 }
 exports.Polaris = Polaris;
-//# sourceMappingURL=Polaris.js.map

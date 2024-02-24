@@ -43,4 +43,3 @@ class SubZeroSaltFish extends ActionCard_1.ActionCard {
     }
 }
 exports.SubZeroSaltFish = SubZeroSaltFish;
-//# sourceMappingURL=SubZeroSaltFish.js.map

@@ -24,4 +24,3 @@ class IceCapMelting extends Card_1.Card {
     }
 }
 exports.IceCapMelting = IceCapMelting;
-//# sourceMappingURL=IceCapMelting.js.map

@@ -124,4 +124,3 @@ exports.VENUS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.VIRON]: { Factory: Viron_1.Viron },
     },
 });
-//# sourceMappingURL=VenusCardManifest.js.map

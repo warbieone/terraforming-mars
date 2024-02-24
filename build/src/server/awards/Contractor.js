@@ -12,4 +12,3 @@ class Contractor {
     }
 }
 exports.Contractor = Contractor;
-//# sourceMappingURL=Contractor.js.map

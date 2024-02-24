@@ -12,14 +12,13 @@ class PlaceHazardTile extends DeferredAction_1.DeferredAction {
         this.options = options;
     }
     execute() {
-        var _a;
         const type = 'land';
         const availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, type);
         if (availableSpaces.length === 0) {
             return undefined;
         }
         const hazardType = this.hazardType;
-        const title = ((_a = this.options) === null || _a === void 0 ? void 0 : _a.title) || (0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.tileType(hazardType));
+        const title = this.options?.title || (0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.tileType(hazardType));
         return new SelectSpace_1.SelectSpace(title, availableSpaces)
             .andThen((space) => {
             AresHazards_1._AresHazardPlacement.putHazardAt(space, hazardType);
@@ -28,4 +27,3 @@ class PlaceHazardTile extends DeferredAction_1.DeferredAction {
     }
 }
 exports.PlaceHazardTile = PlaceHazardTile;
-//# sourceMappingURL=PlaceHazardTile.js.map

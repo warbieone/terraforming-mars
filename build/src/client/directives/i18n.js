@@ -20,7 +20,6 @@ exports.setTranslationContext = setTranslationContext;
 function translateMessage(message) {
     message.message = translateText(message.message);
     return Log_1.Log.applyData(message, (datum) => {
-        var _a;
         if (datum === undefined) {
             return '';
         }
@@ -28,7 +27,7 @@ function translateMessage(message) {
             case LogMessageDataType_1.LogMessageDataType.RAW_STRING:
                 return datum.value;
             case LogMessageDataType_1.LogMessageDataType.PLAYER:
-                return (_a = context.players.get(datum.value)) !== null && _a !== void 0 ? _a : datum.value;
+                return context.players.get(datum.value) ?? datum.value;
             case LogMessageDataType_1.LogMessageDataType.TILE_TYPE:
                 return TileType_1.tileTypeToString[datum.value];
             case LogMessageDataType_1.LogMessageDataType.CARD:
@@ -124,4 +123,3 @@ const $t = function (msg) {
     return translateMessage(msg);
 };
 exports.$t = $t;
-//# sourceMappingURL=i18n.js.map

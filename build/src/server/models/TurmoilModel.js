@@ -7,7 +7,6 @@ const PoliticalAgendas_1 = require("../turmoil/PoliticalAgendas");
 const Turmoil_1 = require("../turmoil/Turmoil");
 function getTurmoilModel(game) {
     return Turmoil_1.Turmoil.ifTurmoilElse(game, (turmoil) => {
-        var _a, _b, _c;
         const parties = getParties(game);
         let chairman;
         if (turmoil.chairman) {
@@ -52,9 +51,9 @@ function getTurmoilModel(game) {
             parties,
             lobby,
             reserve,
-            distant: (_a = turmoil.distantGlobalEvent) === null || _a === void 0 ? void 0 : _a.name,
-            coming: (_b = turmoil.comingGlobalEvent) === null || _b === void 0 ? void 0 : _b.name,
-            current: (_c = turmoil.currentGlobalEvent) === null || _c === void 0 ? void 0 : _c.name,
+            distant: turmoil.distantGlobalEvent?.name,
+            coming: turmoil.comingGlobalEvent?.name,
+            current: turmoil.currentGlobalEvent?.name,
             politicalAgendas,
             policyActionUsers,
         };
@@ -84,4 +83,3 @@ function getParties(game) {
 function delegateColor(delegate) {
     return delegate === 'NEUTRAL' ? Color_1.Color.NEUTRAL : delegate.color;
 }
-//# sourceMappingURL=TurmoilModel.js.map

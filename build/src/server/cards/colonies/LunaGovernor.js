@@ -28,4 +28,3 @@ class LunaGovernor extends Card_1.Card {
     }
 }
 exports.LunaGovernor = LunaGovernor;
-//# sourceMappingURL=LunaGovernor.js.map

@@ -48,4 +48,3 @@ class MarsUniversity extends Card_1.Card {
     }
 }
 exports.MarsUniversity = MarsUniversity;
-//# sourceMappingURL=MarsUniversity.js.map

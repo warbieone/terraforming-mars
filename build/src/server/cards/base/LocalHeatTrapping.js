@@ -31,10 +31,9 @@ class LocalHeatTrapping extends Card_1.Card {
         });
     }
     canPlay(player) {
-        var _a, _b;
         const cardCost = player.getCardCost(this);
         let heat = player.heat;
-        let floaters = (_b = (_a = player.getCorporation(CardName_1.CardName.STORMCRAFT_INCORPORATED)) === null || _a === void 0 ? void 0 : _a.resourceCount) !== null && _b !== void 0 ? _b : 0;
+        let floaters = player.getCorporation(CardName_1.CardName.STORMCRAFT_INCORPORATED)?.resourceCount ?? 0;
         if (cardCost === 1 && player.megaCredits === 0) {
             if (heat > 0) {
                 heat--;
@@ -81,4 +80,3 @@ class LocalHeatTrapping extends Card_1.Card {
     }
 }
 exports.LocalHeatTrapping = LocalHeatTrapping;
-//# sourceMappingURL=LocalHeatTrapping.js.map

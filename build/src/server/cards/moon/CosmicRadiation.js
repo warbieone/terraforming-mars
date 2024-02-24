@@ -33,7 +33,7 @@ class CosmicRadiation extends Card_1.Card {
         const game = player.game;
         const mines = MoonExpansion_1.MoonExpansion.spaces(game, TileType_1.TileType.MOON_MINE);
         game.getPlayersInGenerationOrder().forEach((mineTileOwner) => {
-            const owned = mines.filter((mine) => { var _a; return ((_a = mine.player) === null || _a === void 0 ? void 0 : _a.id) === mineTileOwner.id; }).length;
+            const owned = mines.filter((mine) => mine.player?.id === mineTileOwner.id).length;
             if (owned > 0) {
                 const bill = owned * 4;
                 const owes = Math.min(bill, mineTileOwner.spendableMegacredits());
@@ -47,4 +47,3 @@ class CosmicRadiation extends Card_1.Card {
     }
 }
 exports.CosmicRadiation = CosmicRadiation;
-//# sourceMappingURL=CosmicRadiation.js.map

@@ -26,4 +26,3 @@ class Triton extends Colony_1.Colony {
     }
 }
 exports.Triton = Triton;
-//# sourceMappingURL=Triton.js.map

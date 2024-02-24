@@ -10,4 +10,3 @@ var PartyName;
     PartyName["REDS"] = "Reds";
     PartyName["GREENS"] = "Greens";
 })(PartyName = exports.PartyName || (exports.PartyName = {}));
-//# sourceMappingURL=PartyName.js.map

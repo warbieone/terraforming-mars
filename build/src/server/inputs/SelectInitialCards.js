@@ -84,4 +84,3 @@ class SelectInitialCards extends AndOptions_1.AndOptions {
     }
 }
 exports.SelectInitialCards = SelectInitialCards;
-//# sourceMappingURL=SelectInitialCards.js.map

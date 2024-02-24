@@ -34,4 +34,3 @@ class HighTempSuperconductors extends Card_1.Card {
     }
 }
 exports.HighTempSuperconductors = HighTempSuperconductors;
-//# sourceMappingURL=HighTempSuperconductors.js.map

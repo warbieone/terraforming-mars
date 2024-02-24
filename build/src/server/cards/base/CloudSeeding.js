@@ -32,4 +32,3 @@ class CloudSeeding extends Card_1.Card {
     }
 }
 exports.CloudSeeding = CloudSeeding;
-//# sourceMappingURL=CloudSeeding.js.map

@@ -36,4 +36,3 @@ class OutdoorSports extends Card_1.Card {
     }
 }
 exports.OutdoorSports = OutdoorSports;
-//# sourceMappingURL=OutdoorSports.js.map

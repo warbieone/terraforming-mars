@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const MoonSpaces_1 = require("../../../common/moon/MoonSpaces");
-const TileType_1 = require("../../../common/TileType");
 const Card_1 = require("../Card");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
 class MareImbriumMine extends Card_1.Card {
@@ -32,9 +31,7 @@ class MareImbriumMine extends Card_1.Card {
                     b.moonMine({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_MINING_RATE }).asterix();
                 }),
             },
-            tilesBuilt: [TileType_1.TileType.MOON_MINE],
         });
     }
 }
 exports.MareImbriumMine = MareImbriumMine;
-//# sourceMappingURL=MareImbriumMine.js.map

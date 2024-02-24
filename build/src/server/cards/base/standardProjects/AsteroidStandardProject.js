@@ -38,4 +38,3 @@ class AsteroidStandardProject extends StandardProjectCard_1.StandardProjectCard 
     }
 }
 exports.AsteroidStandardProject = AsteroidStandardProject;
-//# sourceMappingURL=AsteroidStandardProject.js.map

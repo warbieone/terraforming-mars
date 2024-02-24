@@ -33,4 +33,3 @@ class SocialEvents extends Card_1.Card {
     }
 }
 exports.SocialEvents = SocialEvents;
-//# sourceMappingURL=SocialEvents.js.map

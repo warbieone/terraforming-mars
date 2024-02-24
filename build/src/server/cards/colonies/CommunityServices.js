@@ -30,4 +30,3 @@ class CommunityServices extends Card_1.Card {
     }
 }
 exports.CommunityServices = CommunityServices;
-//# sourceMappingURL=CommunityServices.js.map

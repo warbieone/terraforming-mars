@@ -55,4 +55,3 @@ class Cloner {
     }
 }
 exports.Cloner = Cloner;
-//# sourceMappingURL=Cloner.js.map

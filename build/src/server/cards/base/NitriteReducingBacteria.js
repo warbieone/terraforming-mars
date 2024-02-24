@@ -52,4 +52,3 @@ class NitriteReducingBacteria extends ActionCard_1.ActionCard {
     }
 }
 exports.NitriteReducingBacteria = NitriteReducingBacteria;
-//# sourceMappingURL=NitriteReducingBacteria.js.map

@@ -44,4 +44,3 @@ class SpaceDebrisCleaningOperation extends Card_1.Card {
     }
 }
 exports.SpaceDebrisCleaningOperation = SpaceDebrisCleaningOperation;
-//# sourceMappingURL=SpaceDebrisCleaningOperation.js.map

@@ -71,4 +71,3 @@ class DarksideIncubationPlant extends Card_1.Card {
     }
 }
 exports.DarksideIncubationPlant = DarksideIncubationPlant;
-//# sourceMappingURL=DarksideIncubationPlant.js.map

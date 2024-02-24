@@ -28,4 +28,3 @@ class InvestmentLoan extends Card_1.Card {
     }
 }
 exports.InvestmentLoan = InvestmentLoan;
-//# sourceMappingURL=InvestmentLoan.js.map

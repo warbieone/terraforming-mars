@@ -29,4 +29,3 @@ class ImmigrationShuttles extends Card_1.Card {
     }
 }
 exports.ImmigrationShuttles = ImmigrationShuttles;
-//# sourceMappingURL=ImmigrationShuttles.js.map

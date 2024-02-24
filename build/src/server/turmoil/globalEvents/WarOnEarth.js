@@ -26,4 +26,3 @@ class WarOnEarth extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.WarOnEarth = WarOnEarth;
-//# sourceMappingURL=WarOnEarth.js.map

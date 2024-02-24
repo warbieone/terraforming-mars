@@ -51,4 +51,3 @@ class FloaterUrbanism extends Card_1.Card {
     }
 }
 exports.FloaterUrbanism = FloaterUrbanism;
-//# sourceMappingURL=FloaterUrbanism.js.map

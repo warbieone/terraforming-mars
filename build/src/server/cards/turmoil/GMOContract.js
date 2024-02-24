@@ -37,4 +37,3 @@ class GMOContract extends Card_1.Card {
     }
 }
 exports.GMOContract = GMOContract;
-//# sourceMappingURL=GMOContract.js.map

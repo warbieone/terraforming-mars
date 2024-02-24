@@ -43,10 +43,9 @@ class Engineer {
         }).length;
     }
     static autoInclude(card) {
-        var _a;
         if (card.produce !== undefined)
             return true;
-        const production = (_a = card.behavior) === null || _a === void 0 ? void 0 : _a.production;
+        const production = card.behavior?.production;
         if (production !== undefined) {
             return Object.keys(production).length > 0;
         }
@@ -54,4 +53,3 @@ class Engineer {
     }
 }
 exports.Engineer = Engineer;
-//# sourceMappingURL=Engineer.js.map

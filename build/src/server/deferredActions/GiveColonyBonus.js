@@ -33,8 +33,7 @@ class GiveColonyBonus extends DeferredAction_1.DeferredAction {
         return undefined;
     }
     giveColonyBonus(player) {
-        var _a;
-        if ((_a = this.waitingFor.get(player.id)) !== null && _a !== void 0 ? _a : 0 > 0) {
+        if (this.waitingFor.get(player.id) ?? 0 > 0) {
             this.waitingFor.remove(player.id);
             const input = this.colony.giveColonyBonus(player, true);
             if (input !== undefined) {
@@ -56,4 +55,3 @@ class GiveColonyBonus extends DeferredAction_1.DeferredAction {
     }
 }
 exports.GiveColonyBonus = GiveColonyBonus;
-//# sourceMappingURL=GiveColonyBonus.js.map

@@ -25,4 +25,3 @@ class GiantSpaceMirror extends Card_1.Card {
     }
 }
 exports.GiantSpaceMirror = GiantSpaceMirror;
-//# sourceMappingURL=GiantSpaceMirror.js.map

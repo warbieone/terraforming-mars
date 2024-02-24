@@ -30,4 +30,3 @@ class MicrobiologyPatents extends Card_1.Card {
     }
 }
 exports.MicrobiologyPatents = MicrobiologyPatents;
-//# sourceMappingURL=MicrobiologyPatents.js.map

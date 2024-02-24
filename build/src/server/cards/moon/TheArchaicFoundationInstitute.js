@@ -67,4 +67,3 @@ class TheArchaicFoundationInstitute extends CorporationCard_1.CorporationCard {
     }
 }
 exports.TheArchaicFoundationInstitute = TheArchaicFoundationInstitute;
-//# sourceMappingURL=TheArchaicFoundationInstitute.js.map

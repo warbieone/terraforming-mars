@@ -32,4 +32,3 @@ class ProcessorFactory extends ActionCard_1.ActionCard {
     }
 }
 exports.ProcessorFactory = ProcessorFactory;
-//# sourceMappingURL=ProcessorFactory.js.map

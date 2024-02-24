@@ -70,4 +70,3 @@ class JetStreamMicroscrappers extends Card_1.Card {
     }
 }
 exports.JetStreamMicroscrappers = JetStreamMicroscrappers;
-//# sourceMappingURL=JetStreamMicroscrappers.js.map

@@ -16,4 +16,3 @@ class Irrigator extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Irrigator = Irrigator;
-//# sourceMappingURL=Irrigator.js.map

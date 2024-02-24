@@ -17,11 +17,10 @@ class SurveyCard extends Card_1.Card {
         super(properties);
     }
     anyAdjacentSpaceGivesBonus(player, space, bonus) {
-        return player.game.board.getAdjacentSpaces(space).some((adj) => { var _a; return (_a = adj.adjacency) === null || _a === void 0 ? void 0 : _a.bonus.includes(bonus); });
+        return player.game.board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
     }
     grantsBonusNow(space, bonus) {
-        var _a;
-        return ((_a = space.tile) === null || _a === void 0 ? void 0 : _a.covers) === undefined && space.bonus.includes(bonus);
+        return space.tile?.covers === undefined && space.bonus.includes(bonus);
     }
     onTilePlaced(cardOwner, activePlayer, space, boardType) {
         if (boardType !== BoardType_1.BoardType.MARS) {
@@ -49,19 +48,15 @@ class SurveyCard extends Card_1.Card {
             }
         }
         if (grant) {
-            cardOwner.game.defer(new GainResources_1.GainResources(cardOwner, resource, {
-                cb: () => this.log(cardOwner, resource),
-            }));
+            cardOwner.game.defer(new GainResources_1.GainResources(cardOwner, resource).andThen(() => this.log(cardOwner, resource)));
         }
     }
     testForCardResource(cardOwner, space, resource, bonus) {
         if (cardOwner.playedCards.some((card) => card.resourceType === resource) &&
             (this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus))) {
-            cardOwner.game.defer(new AddResourcesToCard_1.AddResourcesToCard(cardOwner, resource, {
-                log: () => this.log(cardOwner, resource),
-            }));
+            cardOwner.game.defer(new AddResourcesToCard_1.AddResourcesToCard(cardOwner, resource, { log: false }))
+                .andThen(() => this.log(cardOwner, resource));
         }
     }
 }
 exports.SurveyCard = SurveyCard;
-//# sourceMappingURL=SurveyCard.js.map

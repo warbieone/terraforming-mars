@@ -61,4 +61,3 @@ class Viron extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Viron = Viron;
-//# sourceMappingURL=Viron.js.map

@@ -31,4 +31,3 @@ class ImprovedMoonConcrete extends Card_1.Card {
     }
 }
 exports.ImprovedMoonConcrete = ImprovedMoonConcrete;
-//# sourceMappingURL=ImprovedMoonConcrete.js.map

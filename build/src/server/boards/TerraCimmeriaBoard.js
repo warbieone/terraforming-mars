@@ -49,4 +49,3 @@ class TerraCimmeriaBoard extends MarsBoard_1.MarsBoard {
     }
 }
 exports.TerraCimmeriaBoard = TerraCimmeriaBoard;
-//# sourceMappingURL=TerraCimmeriaBoard.js.map

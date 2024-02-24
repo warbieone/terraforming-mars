@@ -14,4 +14,3 @@ class ServeApp extends Handler_1.Handler {
 }
 exports.ServeApp = ServeApp;
 ServeApp.INSTANCE = new ServeApp();
-//# sourceMappingURL=ServeApp.js.map

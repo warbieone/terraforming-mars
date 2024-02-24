@@ -16,4 +16,3 @@ var LogMessageDataType;
     LogMessageDataType[LogMessageDataType["SPACE_BONUS"] = 10] = "SPACE_BONUS";
     LogMessageDataType[LogMessageDataType["GLOBAL_EVENT"] = 11] = "GLOBAL_EVENT";
 })(LogMessageDataType = exports.LogMessageDataType || (exports.LogMessageDataType = {}));
-//# sourceMappingURL=LogMessageDataType.js.map

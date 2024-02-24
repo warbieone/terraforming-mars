@@ -24,4 +24,3 @@ var ColonyName;
     ColonyName["LEAVITT_II"] = "Leavitt II";
     ColonyName["IAPETUS_II"] = "Iapetus II";
 })(ColonyName = exports.ColonyName || (exports.ColonyName = {}));
-//# sourceMappingURL=ColonyName.js.map

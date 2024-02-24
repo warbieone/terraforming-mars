@@ -36,4 +36,3 @@ class Pollinators extends ActionCard_1.ActionCard {
     }
 }
 exports.Pollinators = Pollinators;
-//# sourceMappingURL=Pollinators.js.map

@@ -24,7 +24,7 @@ class Gaia extends CeoCard_1.CeoCard {
     action(player) {
         this.isDisabled = true;
         const board = player.game.board;
-        const tilesOnMars = board.spaces.filter((space) => { var _a; return ((_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType) !== undefined && space.player !== undefined && !(0, AresTileType_1.isHazardTileType)(space.tile.tileType) && space.spaceType !== SpaceType_1.SpaceType.COLONY; });
+        const tilesOnMars = board.spaces.filter((space) => space.tile?.tileType !== undefined && space.player !== undefined && !(0, AresTileType_1.isHazardTileType)(space.tile.tileType) && space.spaceType !== SpaceType_1.SpaceType.COLONY);
         tilesOnMars.forEach((space) => {
             AresHandler_1.AresHandler.ifAres(player.game, (aresData) => {
                 AresHandler_1.AresHandler.earnAdjacencyBonuses(aresData, player, space, { incrementMilestone: false, giveAresTileOwnerBonus: false });
@@ -34,4 +34,3 @@ class Gaia extends CeoCard_1.CeoCard {
     }
 }
 exports.Gaia = Gaia;
-//# sourceMappingURL=Gaia.js.map

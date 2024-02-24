@@ -129,4 +129,3 @@ exports.TURMOIL_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [GlobalEventName_1.GlobalEventName.SOLAR_FLARE]: { Factory: SolarFlare_1.SolarFlare, negative: true },
     },
 });
-//# sourceMappingURL=TurmoilCardManifest.js.map

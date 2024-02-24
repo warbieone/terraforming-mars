@@ -28,4 +28,3 @@ class SmeltingPlant extends PreludeCard_1.PreludeCard {
     }
 }
 exports.SmeltingPlant = SmeltingPlant;
-//# sourceMappingURL=SmeltingPlant.js.map

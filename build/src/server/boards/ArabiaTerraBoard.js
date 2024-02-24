@@ -59,4 +59,3 @@ class ArabiaTerraBoard extends MarsBoard_1.MarsBoard {
     }
 }
 exports.ArabiaTerraBoard = ArabiaTerraBoard;
-//# sourceMappingURL=ArabiaTerraBoard.js.map

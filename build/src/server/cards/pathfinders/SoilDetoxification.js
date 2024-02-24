@@ -31,4 +31,3 @@ class SoilDetoxification extends Card_1.Card {
     }
 }
 exports.SoilDetoxification = SoilDetoxification;
-//# sourceMappingURL=SoilDetoxification.js.map

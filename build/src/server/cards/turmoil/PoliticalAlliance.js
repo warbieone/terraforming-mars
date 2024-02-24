@@ -26,4 +26,3 @@ class PoliticalAlliance extends Card_1.Card {
     }
 }
 exports.PoliticalAlliance = PoliticalAlliance;
-//# sourceMappingURL=PoliticalAlliance.js.map

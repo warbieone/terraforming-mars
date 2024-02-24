@@ -22,4 +22,3 @@ function getGlobalEventOrThrow(globalEventName) {
     return globalEvent;
 }
 exports.getGlobalEventOrThrow = getGlobalEventOrThrow;
-//# sourceMappingURL=ClientGlobalEventManifest.js.map

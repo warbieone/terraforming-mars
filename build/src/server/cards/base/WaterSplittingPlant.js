@@ -31,4 +31,3 @@ class WaterSplittingPlant extends ActionCard_1.ActionCard {
     }
 }
 exports.WaterSplittingPlant = WaterSplittingPlant;
-//# sourceMappingURL=WaterSplittingPlant.js.map

@@ -27,4 +27,3 @@ class MooncrateBlockFactory extends Card_1.Card {
     }
 }
 exports.MooncrateBlockFactory = MooncrateBlockFactory;
-//# sourceMappingURL=MooncrateBlockFactory.js.map

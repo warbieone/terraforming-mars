@@ -87,11 +87,10 @@ class Turmoil {
         return elseCb();
     }
     initGlobalEvent(game) {
-        var _a, _b;
         this.comingGlobalEvent = this.globalEventDealer.draw();
-        this.addNeutralDelegate((_a = this.comingGlobalEvent) === null || _a === void 0 ? void 0 : _a.revealedDelegate, game);
+        this.addNeutralDelegate(this.comingGlobalEvent?.revealedDelegate, game);
         this.distantGlobalEvent = this.globalEventDealer.draw();
-        this.addNeutralDelegate((_b = this.distantGlobalEvent) === null || _b === void 0 ? void 0 : _b.revealedDelegate, game);
+        this.addNeutralDelegate(this.distantGlobalEvent?.revealedDelegate, game);
     }
     getPartyByName(name) {
         const party = this.parties.find((party) => party.name === name);
@@ -169,7 +168,6 @@ class Turmoil {
         });
     }
     endGeneration(game) {
-        var _a, _b;
         game.getPlayers().forEach((player) => {
             player.decreaseTerraformRating();
         });
@@ -185,11 +183,10 @@ class Turmoil {
             this.globalEventDealer.discard(this.currentGlobalEvent);
         }
         this.currentGlobalEvent = this.comingGlobalEvent;
-        this.addNeutralDelegate((_a = this.currentGlobalEvent) === null || _a === void 0 ? void 0 : _a.currentDelegate, game);
+        this.addNeutralDelegate(this.currentGlobalEvent?.currentDelegate, game);
         this.comingGlobalEvent = this.distantGlobalEvent;
         this.distantGlobalEvent = this.globalEventDealer.draw();
-        this.addNeutralDelegate((_b = this.distantGlobalEvent) === null || _b === void 0 ? void 0 : _b.revealedDelegate, game);
-        game.log('Turmoil phase has been resolved');
+        this.addNeutralDelegate(this.distantGlobalEvent?.revealedDelegate, game);
     }
     addNeutralDelegate(partyName, game) {
         if (partyName) {
@@ -198,8 +195,7 @@ class Turmoil {
         }
     }
     setRulingParty(game) {
-        var _a, _b;
-        (_b = (_a = this.rulingPolicy()).onPolicyEnd) === null || _b === void 0 ? void 0 : _b.call(_a, game);
+        this.rulingPolicy().onPolicyEnd?.(game);
         if (game.beholdTheEmperor !== true) {
             this.rulingParty = this.dominantParty;
         }
@@ -247,7 +243,6 @@ class Turmoil {
         }
     }
     onAgendaSelected(game) {
-        var _a;
         const rulingParty = this.rulingParty;
         const bonusId = PoliticalAgendas_1.PoliticalAgendas.currentAgenda(this).bonusId;
         const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);
@@ -263,11 +258,11 @@ class Turmoil {
         }
         const description = (0, Policy_1.policyDescription)(policy, undefined);
         game.log('The ruling policy is: ${0}', (b) => b.string(description));
-        (_a = policy.onPolicyStart) === null || _a === void 0 ? void 0 : _a.call(policy, game);
+        policy.onPolicyStart?.(game);
     }
     getPlayerInfluence(player) {
         let influence = 0;
-        if (this.chairman !== undefined && this.chairman === player)
+        if (this.chairman === player)
             influence++;
         const dominantParty = this.dominantParty;
         const isPartyLeader = dominantParty.partyLeader === player;
@@ -288,8 +283,7 @@ class Turmoil {
             }
         }
         player.tableau.forEach((card) => {
-            var _a;
-            const bonus = (_a = card.getInfluenceBonus) === null || _a === void 0 ? void 0 : _a.call(card, player);
+            const bonus = card.getInfluenceBonus?.(player);
             if (bonus !== undefined) {
                 influence += bonus;
             }
@@ -347,7 +341,6 @@ class Turmoil {
         return undefined;
     }
     serialize() {
-        var _a, _b;
         const result = {
             chairman: serializeDelegateOrUndefined(this.chairman),
             rulingParty: this.rulingParty.name,
@@ -363,8 +356,8 @@ class Turmoil {
             }),
             playersInfluenceBonus: Array.from(this.playersInfluenceBonus.entries()),
             globalEventDealer: this.globalEventDealer.serialize(),
-            distantGlobalEvent: (_a = this.distantGlobalEvent) === null || _a === void 0 ? void 0 : _a.name,
-            comingGlobalEvent: (_b = this.comingGlobalEvent) === null || _b === void 0 ? void 0 : _b.name,
+            distantGlobalEvent: this.distantGlobalEvent?.name,
+            comingGlobalEvent: this.comingGlobalEvent?.name,
             politicalAgendasData: PoliticalAgendas_1.PoliticalAgendas.serialize(this.politicalAgendasData),
         };
         if (this.currentGlobalEvent !== undefined) {
@@ -438,4 +431,3 @@ function deserializeDelegateOrUndefined(serializedDelegate, players) {
     }
     return deserializeDelegate(serializedDelegate, players);
 }
-//# sourceMappingURL=Turmoil.js.map

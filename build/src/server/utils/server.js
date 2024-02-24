@@ -5,4 +5,3 @@ function isProduction() {
     return process.env.NODE_ENV === 'production';
 }
 exports.isProduction = isProduction;
-//# sourceMappingURL=server.js.map

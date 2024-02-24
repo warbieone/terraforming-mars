@@ -80,4 +80,3 @@ class MindSetMars extends CorporationCard_1.CorporationCard {
     }
 }
 exports.MindSetMars = MindSetMars;
-//# sourceMappingURL=MindSetMars.js.map

@@ -923,7 +923,7 @@ var CardName;
     CardName["VOLTAGON"] = "Voltagon";
     CardName["ARES_MEDIA"] = "Ares Media";
     CardName["ANUBIS_SECURITIES"] = "Anubis Securities";
-    CardName["HECTATE_SPEDITIONS"] = "Hectate Speditions";
+    CardName["HECATE_SPEDITIONS"] = "Hecate Speditions";
     CardName["FREE_TRADE_PORT"] = "Free Trade Port";
     CardName["INVESTOR_PLAZA"] = "Investor Plaza";
     CardName["INHERITED_FORTUNE"] = "Inherited Fortune";
@@ -971,4 +971,3 @@ var CardName;
     CardName["JOVIAN_OUTPOST"] = "Jovian Outpost";
     CardName["SCAVENGERS"] = "Scavengers";
 })(CardName = exports.CardName || (exports.CardName = {}));
-//# sourceMappingURL=CardName.js.map

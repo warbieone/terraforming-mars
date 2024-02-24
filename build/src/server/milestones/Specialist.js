@@ -11,4 +11,3 @@ class Specialist extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Specialist = Specialist;
-//# sourceMappingURL=Specialist.js.map

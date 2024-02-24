@@ -27,4 +27,3 @@ class InventorsGuild extends ActionCard_1.ActionCard {
     }
 }
 exports.InventorsGuild = InventorsGuild;
-//# sourceMappingURL=InventorsGuild.js.map

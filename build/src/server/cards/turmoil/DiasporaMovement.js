@@ -31,4 +31,3 @@ class DiasporaMovement extends Card_1.Card {
     }
 }
 exports.DiasporaMovement = DiasporaMovement;
-//# sourceMappingURL=DiasporaMovement.js.map

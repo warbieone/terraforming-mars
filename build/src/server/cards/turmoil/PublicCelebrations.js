@@ -21,4 +21,3 @@ class PublicCelebrations extends Card_1.Card {
     }
 }
 exports.PublicCelebrations = PublicCelebrations;
-//# sourceMappingURL=PublicCelebrations.js.map

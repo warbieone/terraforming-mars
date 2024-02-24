@@ -36,4 +36,3 @@ class Inventrix extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Inventrix = Inventrix;
-//# sourceMappingURL=Inventrix.js.map

@@ -85,8 +85,7 @@ class MessageBuilder {
 exports.MessageBuilder = MessageBuilder;
 function message(message, f) {
     const builder = new MessageBuilder(message);
-    f === null || f === void 0 ? void 0 : f(builder);
+    f?.(builder);
     return builder.getMessage();
 }
 exports.message = message;
-//# sourceMappingURL=MessageBuilder.js.map

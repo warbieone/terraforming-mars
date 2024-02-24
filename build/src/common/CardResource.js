@@ -30,4 +30,3 @@ var CardResource;
     CardResource["ACTIVIST"] = "Activist";
     CardResource["SUPPLY_CHAIN"] = "Supply Chain";
 })(CardResource = exports.CardResource || (exports.CardResource = {}));
-//# sourceMappingURL=CardResource.js.map

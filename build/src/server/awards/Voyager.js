@@ -12,4 +12,3 @@ class Voyager {
     }
 }
 exports.Voyager = Voyager;
-//# sourceMappingURL=Voyager.js.map

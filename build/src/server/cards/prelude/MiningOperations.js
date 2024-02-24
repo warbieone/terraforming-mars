@@ -26,4 +26,3 @@ class MiningOperations extends PreludeCard_1.PreludeCard {
     }
 }
 exports.MiningOperations = MiningOperations;
-//# sourceMappingURL=MiningOperations.js.map

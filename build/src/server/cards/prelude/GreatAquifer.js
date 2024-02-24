@@ -22,4 +22,3 @@ class GreatAquifer extends PreludeCard_1.PreludeCard {
     }
 }
 exports.GreatAquifer = GreatAquifer;
-//# sourceMappingURL=GreatAquifer.js.map

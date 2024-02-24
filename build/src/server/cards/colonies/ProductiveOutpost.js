@@ -30,4 +30,3 @@ class ProductiveOutpost extends Card_1.Card {
     }
 }
 exports.ProductiveOutpost = ProductiveOutpost;
-//# sourceMappingURL=ProductiveOutpost.js.map

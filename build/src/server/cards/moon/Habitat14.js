@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
-const TileType_1 = require("../../../common/TileType");
 const Card_1 = require("../Card");
 class Habitat14 extends Card_1.Card {
     constructor() {
@@ -30,9 +29,7 @@ class Habitat14 extends Card_1.Card {
                     b.moonHabitat();
                 }),
             },
-            tilesBuilt: [TileType_1.TileType.MOON_HABITAT],
         });
     }
 }
 exports.Habitat14 = Habitat14;
-//# sourceMappingURL=Habitat14.js.map

@@ -11,4 +11,3 @@ class Smith extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Smith = Smith;
-//# sourceMappingURL=Smith.js.map

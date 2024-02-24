@@ -29,7 +29,7 @@ class Playwrights extends CorporationCard_1.CorporationCard {
                     b.megacredits(38).production((pb) => pb.energy(1));
                     b.corpBox('action', (cb) => {
                         cb.action('Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
-                            eb.megacredits(0, { questionMark: true }).startAction;
+                            eb.megacredits(1, { text: '?' }).startAction;
                             eb.text('replay', Size_1.Size.SMALL, true);
                             eb.nbsp.cards(1, { all: Options_1.all, secondaryTag: Tag_1.Tag.EVENT });
                         });
@@ -67,7 +67,7 @@ class Playwrights extends CorporationCard_1.CorporationCard {
                     player.defer(() => {
                         player.game.getPlayers().some((p) => {
                             const card = p.playedCards[p.playedCards.length - 1];
-                            if ((card === null || card === void 0 ? void 0 : card.name) === selectedCard.name) {
+                            if (card?.name === selectedCard.name) {
                                 p.playedCards.pop();
                                 return true;
                             }
@@ -89,6 +89,9 @@ class Playwrights extends CorporationCard_1.CorporationCard {
         try {
             player.game.getPlayers().forEach((p) => {
                 playedEvents.push(...p.playedCards.filter((card) => {
+                    if (card.name === CardName_1.CardName.PRICE_WARS) {
+                        return false;
+                    }
                     const canAffordOptions = {
                         cost: player.getCardCost(card),
                         reserveUnits: MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, card),
@@ -105,4 +108,3 @@ class Playwrights extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Playwrights = Playwrights;
-//# sourceMappingURL=Playwrights.js.map

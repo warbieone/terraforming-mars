@@ -29,4 +29,3 @@ class IronExtractionCenter extends Card_1.Card {
     }
 }
 exports.IronExtractionCenter = IronExtractionCenter;
-//# sourceMappingURL=IronExtractionCenter.js.map

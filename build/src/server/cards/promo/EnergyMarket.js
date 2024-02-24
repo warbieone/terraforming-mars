@@ -11,7 +11,6 @@ const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectAmount_1 = require("../../inputs/SelectAmount");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class EnergyMarket extends Card_1.Card {
     constructor() {
         super({
@@ -23,7 +22,7 @@ class EnergyMarket extends Card_1.Card {
                 cardNumber: 'X03',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 2X M€ to gain X energy.', (eb) => {
-                        eb.megacredits(2, { multiplier: Options_1.multiplier }).startAction.text('x').energy(1);
+                        eb.megacredits(1, { text: '2x' }).startAction.text('x').energy(1);
                     }).br;
                     b.or().br;
                     b.action('Decrease energy production 1 step to gain 8 M€.', (eb) => {
@@ -69,4 +68,3 @@ class EnergyMarket extends Card_1.Card {
     }
 }
 exports.EnergyMarket = EnergyMarket;
-//# sourceMappingURL=EnergyMarket.js.map

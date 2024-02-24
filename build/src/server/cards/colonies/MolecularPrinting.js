@@ -31,4 +31,3 @@ class MolecularPrinting extends Card_1.Card {
     }
 }
 exports.MolecularPrinting = MolecularPrinting;
-//# sourceMappingURL=MolecularPrinting.js.map

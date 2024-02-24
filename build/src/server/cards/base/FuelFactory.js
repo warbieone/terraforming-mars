@@ -30,4 +30,3 @@ class FuelFactory extends Card_1.Card {
     }
 }
 exports.FuelFactory = FuelFactory;
-//# sourceMappingURL=FuelFactory.js.map

@@ -28,4 +28,3 @@ class DeepWellHeating extends Card_1.Card {
     }
 }
 exports.DeepWellHeating = DeepWellHeating;
-//# sourceMappingURL=DeepWellHeating.js.map

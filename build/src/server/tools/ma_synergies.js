@@ -30,4 +30,3 @@ for (const name of manames) {
     entries.forEach((x) => console.log(x));
     console.log();
 }
-//# sourceMappingURL=ma_synergies.js.map

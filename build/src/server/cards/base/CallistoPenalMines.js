@@ -28,4 +28,3 @@ class CallistoPenalMines extends Card_1.Card {
     }
 }
 exports.CallistoPenalMines = CallistoPenalMines;
-//# sourceMappingURL=CallistoPenalMines.js.map

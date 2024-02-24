@@ -30,4 +30,3 @@ class GenerousFunding extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.GenerousFunding = GenerousFunding;
-//# sourceMappingURL=GenerousFunding.js.map

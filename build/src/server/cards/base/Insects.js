@@ -29,4 +29,3 @@ class Insects extends Card_1.Card {
     }
 }
 exports.Insects = Insects;
-//# sourceMappingURL=Insects.js.map

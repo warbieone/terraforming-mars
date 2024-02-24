@@ -65,4 +65,3 @@ class LargeConvoy extends Card_1.Card {
     }
 }
 exports.LargeConvoy = LargeConvoy;
-//# sourceMappingURL=LargeConvoy.js.map

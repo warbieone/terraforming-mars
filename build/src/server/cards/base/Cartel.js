@@ -28,4 +28,3 @@ class Cartel extends Card_1.Card {
     }
 }
 exports.Cartel = Cartel;
-//# sourceMappingURL=Cartel.js.map

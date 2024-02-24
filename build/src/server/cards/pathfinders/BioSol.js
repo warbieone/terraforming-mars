@@ -33,4 +33,3 @@ class BioSol extends CorporationCard_1.ActiveCorporationCard {
     }
 }
 exports.BioSol = BioSol;
-//# sourceMappingURL=BioSol.js.map

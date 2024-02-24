@@ -32,4 +32,3 @@ class MartianRails extends ActionCard_1.ActionCard {
     }
 }
 exports.MartianRails = MartianRails;
-//# sourceMappingURL=MartianRails.js.map

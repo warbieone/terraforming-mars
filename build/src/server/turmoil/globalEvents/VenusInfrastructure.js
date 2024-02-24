@@ -32,4 +32,3 @@ class VenusInfrastructure extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.VenusInfrastructure = VenusInfrastructure;
-//# sourceMappingURL=VenusInfrastructure.js.map

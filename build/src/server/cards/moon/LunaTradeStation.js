@@ -36,9 +36,7 @@ class LunaTradeStation extends ActionCard_1.ActionCard {
                     b.br.minus().titanium(2).tile(TileType_1.TileType.LUNA_TRADE_STATION, true).asterix();
                 }),
             },
-            tilesBuilt: [TileType_1.TileType.LUNA_TRADE_STATION],
         });
     }
 }
 exports.LunaTradeStation = LunaTradeStation;
-//# sourceMappingURL=LunaTradeStation.js.map

@@ -37,4 +37,3 @@ class MorningStarInc extends CorporationCard_1.CorporationCard {
     }
 }
 exports.MorningStarInc = MorningStarInc;
-//# sourceMappingURL=MorningStarInc.js.map

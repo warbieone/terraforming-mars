@@ -72,4 +72,3 @@ class MoonRoadStandardProjectVariant2 extends MoonRoadStandardProject_1.MoonRoad
     }
 }
 exports.MoonRoadStandardProjectVariant2 = MoonRoadStandardProjectVariant2;
-//# sourceMappingURL=MoonStandardProjectVariants.js.map

@@ -37,4 +37,3 @@ class TopsoilContract extends Card_1.Card {
     }
 }
 exports.TopsoilContract = TopsoilContract;
-//# sourceMappingURL=TopsoilContract.js.map

@@ -28,4 +28,3 @@ class CorporateArchives extends PreludeCard_1.PreludeCard {
     }
 }
 exports.CorporateArchives = CorporateArchives;
-//# sourceMappingURL=CorporateArchives.js.map

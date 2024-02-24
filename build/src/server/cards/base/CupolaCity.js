@@ -33,4 +33,3 @@ class CupolaCity extends Card_1.Card {
     }
 }
 exports.CupolaCity = CupolaCity;
-//# sourceMappingURL=CupolaCity.js.map

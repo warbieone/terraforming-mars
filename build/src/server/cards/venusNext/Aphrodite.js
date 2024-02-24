@@ -33,4 +33,3 @@ class Aphrodite extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Aphrodite = Aphrodite;
-//# sourceMappingURL=Aphrodite.js.map

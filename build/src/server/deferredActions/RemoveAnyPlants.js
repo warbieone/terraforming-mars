@@ -11,7 +11,7 @@ class RemoveAnyPlants extends DeferredAction_1.DeferredAction {
     constructor(player, count = 1, title) {
         super(player, DeferredAction_1.Priority.ATTACK_OPPONENT);
         this.count = count;
-        this.title = title !== null && title !== void 0 ? title : (0, MessageBuilder_1.message)('Select player to remove up to ${0} plants', (b) => b.number(count));
+        this.title = title ?? (0, MessageBuilder_1.message)('Select player to remove up to ${0} plants', (b) => b.number(count));
     }
     execute() {
         if (this.player.game.isSoloMode()) {
@@ -19,7 +19,7 @@ class RemoveAnyPlants extends DeferredAction_1.DeferredAction {
             this.player.resolveInsuranceInSoloGame();
             return undefined;
         }
-        const candidates = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && !p.plantsAreProtected() && p.plants > 0);
+        const candidates = this.player.getOpponents().filter((p) => !p.plantsAreProtected() && p.plants > 0);
         if (candidates.length === 0) {
             return undefined;
         }
@@ -50,4 +50,3 @@ class RemoveAnyPlants extends DeferredAction_1.DeferredAction {
     }
 }
 exports.RemoveAnyPlants = RemoveAnyPlants;
-//# sourceMappingURL=RemoveAnyPlants.js.map

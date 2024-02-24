@@ -33,4 +33,3 @@ class MassConverter extends Card_1.Card {
     }
 }
 exports.MassConverter = MassConverter;
-//# sourceMappingURL=MassConverter.js.map

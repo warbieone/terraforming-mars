@@ -23,4 +23,3 @@ class RemoveOceanTile extends DeferredAction_1.DeferredAction {
     }
 }
 exports.RemoveOceanTile = RemoveOceanTile;
-//# sourceMappingURL=RemoveOceanTile.js.map

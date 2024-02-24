@@ -30,4 +30,3 @@ class IceMoonColony extends Card_1.Card {
     }
 }
 exports.IceMoonColony = IceMoonColony;
-//# sourceMappingURL=IceMoonColony.js.map

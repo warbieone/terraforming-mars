@@ -53,4 +53,3 @@ class MoholeLake extends Card_1.Card {
     }
 }
 exports.MoholeLake = MoholeLake;
-//# sourceMappingURL=MoholeLake.js.map

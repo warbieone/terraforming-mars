@@ -26,4 +26,3 @@ class FloaterLeasing extends Card_1.Card {
     }
 }
 exports.FloaterLeasing = FloaterLeasing;
-//# sourceMappingURL=FloaterLeasing.js.map

@@ -5,8 +5,7 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 class PreludeCard extends Card_1.Card {
     constructor(properties) {
-        var _a, _b, _c;
-        const startingMegaCredits = (_a = properties.startingMegacredits) !== null && _a !== void 0 ? _a : (_c = (_b = properties.behavior) === null || _b === void 0 ? void 0 : _b.stock) === null || _c === void 0 ? void 0 : _c.megacredits;
+        const startingMegaCredits = properties.startingMegacredits ?? properties.behavior?.stock?.megacredits;
         if (typeof (startingMegaCredits) === 'object') {
             throw new Error('Cannot have a Countable for a Prelude stock MC: ' + properties.name);
         }
@@ -19,6 +18,7 @@ class PreludeCard extends Card_1.Card {
             globalParameterRequirementBonus: properties.globalParameterRequirementBonus,
             metadata: properties.metadata,
             resourceType: properties.resourceType,
+            tilesBuilt: properties.tilesBuilt,
             victoryPoints: properties.victoryPoints,
         };
         if (startingMegaCredits !== undefined) {
@@ -31,4 +31,3 @@ class PreludeCard extends Card_1.Card {
     }
 }
 exports.PreludeCard = PreludeCard;
-//# sourceMappingURL=PreludeCard.js.map

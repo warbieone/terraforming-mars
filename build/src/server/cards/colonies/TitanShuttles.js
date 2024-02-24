@@ -54,4 +54,3 @@ class TitanShuttles extends Card_1.Card {
     }
 }
 exports.TitanShuttles = TitanShuttles;
-//# sourceMappingURL=TitanShuttles.js.map

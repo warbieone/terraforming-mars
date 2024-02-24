@@ -25,4 +25,3 @@ class AcquiredSpaceAgency extends PreludeCard_1.PreludeCard {
     }
 }
 exports.AcquiredSpaceAgency = AcquiredSpaceAgency;
-//# sourceMappingURL=AcquiredSpaceAgency.js.map

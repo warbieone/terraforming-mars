@@ -39,4 +39,3 @@ class RestrictedArea extends ActionCard_1.ActionCard {
     }
 }
 exports.RestrictedArea = RestrictedArea;
-//# sourceMappingURL=RestrictedArea.js.map

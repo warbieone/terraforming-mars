@@ -59,4 +59,3 @@ class RobinsonIndustries extends CorporationCard_1.CorporationCard {
     }
 }
 exports.RobinsonIndustries = RobinsonIndustries;
-//# sourceMappingURL=RobinsonIndustries.js.map

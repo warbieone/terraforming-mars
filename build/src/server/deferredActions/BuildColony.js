@@ -9,20 +9,17 @@ class BuildColony extends DeferredAction_1.DeferredAction {
         this.options = options;
     }
     execute() {
-        var _a, _b, _c, _d;
-        const colonies = ((_a = this.options) === null || _a === void 0 ? void 0 : _a.colonies) || this.player.colonies.getPlayableColonies((_b = this.options) === null || _b === void 0 ? void 0 : _b.allowDuplicate);
+        const colonies = this.options?.colonies || this.player.colonies.getPlayableColonies(this.options?.allowDuplicate);
         if (colonies.length === 0) {
             return undefined;
         }
-        const title = (_d = (_c = this.options) === null || _c === void 0 ? void 0 : _c.title) !== null && _d !== void 0 ? _d : 'Select where to build a colony';
+        const title = this.options?.title ?? 'Select where to build a colony';
         return new SelectColony_1.SelectColony(title, 'Build', colonies)
             .andThen((colony) => {
-            var _a, _b;
-            colony.addColony(this.player, { giveBonusTwice: (_b = (_a = this.options) === null || _a === void 0 ? void 0 : _a.giveBonusTwice) !== null && _b !== void 0 ? _b : false });
+            colony.addColony(this.player, { giveBonusTwice: this.options?.giveBonusTwice ?? false });
             this.cb(colony);
             return undefined;
         });
     }
 }
 exports.BuildColony = BuildColony;
-//# sourceMappingURL=BuildColony.js.map

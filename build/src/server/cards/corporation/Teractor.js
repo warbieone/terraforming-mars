@@ -30,4 +30,3 @@ class Teractor extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Teractor = Teractor;
-//# sourceMappingURL=Teractor.js.map

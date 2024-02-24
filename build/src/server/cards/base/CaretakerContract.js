@@ -29,4 +29,3 @@ class CaretakerContract extends ActionCard_1.ActionCard {
     }
 }
 exports.CaretakerContract = CaretakerContract;
-//# sourceMappingURL=CaretakerContract.js.map

@@ -35,4 +35,3 @@ class SpinoffDepartment extends Card_1.Card {
     }
 }
 exports.SpinoffDepartment = SpinoffDepartment;
-//# sourceMappingURL=SpinoffDepartment.js.map

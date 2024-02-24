@@ -79,4 +79,3 @@ exports.ARES_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         CardName_1.CardName.RESTRICTED_AREA,
     ],
 });
-//# sourceMappingURL=AresCardManifest.js.map

@@ -44,4 +44,3 @@ exports.awardNames = [
     'Kingpin',
     'EdgeLord',
 ];
-//# sourceMappingURL=AwardName.js.map

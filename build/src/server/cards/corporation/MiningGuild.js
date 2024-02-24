@@ -40,14 +40,13 @@ class MiningGuild extends CorporationCard_1.CorporationCard {
         });
     }
     onTilePlaced(cardOwner, activePlayer, space, boardType) {
-        var _a;
         if (boardType !== BoardType_1.BoardType.MARS) {
             return;
         }
         if (cardOwner.id !== activePlayer.id || cardOwner.game.phase === Phase_1.Phase.SOLAR) {
             return;
         }
-        if (((_a = space.tile) === null || _a === void 0 ? void 0 : _a.covers) !== undefined) {
+        if (space.tile?.covers !== undefined) {
             return;
         }
         if (space.bonus.some((bonus) => bonus === SpaceBonus_1.SpaceBonus.STEEL)) {
@@ -59,4 +58,3 @@ class MiningGuild extends CorporationCard_1.CorporationCard {
     }
 }
 exports.MiningGuild = MiningGuild;
-//# sourceMappingURL=MiningGuild.js.map

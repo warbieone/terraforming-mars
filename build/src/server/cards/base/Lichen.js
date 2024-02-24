@@ -28,4 +28,3 @@ class Lichen extends Card_1.Card {
     }
 }
 exports.Lichen = Lichen;
-//# sourceMappingURL=Lichen.js.map

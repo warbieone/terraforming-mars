@@ -26,4 +26,3 @@ class AsteroidMining extends Card_1.Card {
     }
 }
 exports.AsteroidMining = AsteroidMining;
-//# sourceMappingURL=AsteroidMining.js.map

@@ -47,4 +47,3 @@ class MoonHabitatStandardProject extends StandardProjectCard_1.StandardProjectCa
     }
 }
 exports.MoonHabitatStandardProject = MoonHabitatStandardProject;
-//# sourceMappingURL=MoonHabitatStandardProject.js.map

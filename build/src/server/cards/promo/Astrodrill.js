@@ -93,4 +93,3 @@ class Astrodrill extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Astrodrill = Astrodrill;
-//# sourceMappingURL=Astrodrill.js.map

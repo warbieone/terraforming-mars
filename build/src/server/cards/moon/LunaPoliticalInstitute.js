@@ -30,4 +30,3 @@ class LunaPoliticalInstitute extends ActionCard_1.ActionCard {
     }
 }
 exports.LunaPoliticalInstitute = LunaPoliticalInstitute;
-//# sourceMappingURL=LunaPoliticalInstitute.js.map

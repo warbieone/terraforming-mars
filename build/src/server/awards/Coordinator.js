@@ -11,4 +11,3 @@ class Coordinator {
     }
 }
 exports.Coordinator = Coordinator;
-//# sourceMappingURL=Coordinator.js.map

@@ -37,4 +37,3 @@ class NaturalPreserve extends Card_1.Card {
     }
 }
 exports.NaturalPreserve = NaturalPreserve;
-//# sourceMappingURL=NaturalPreserve.js.map

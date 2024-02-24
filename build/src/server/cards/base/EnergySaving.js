@@ -29,4 +29,3 @@ class EnergySaving extends Card_1.Card {
     }
 }
 exports.EnergySaving = EnergySaving;
-//# sourceMappingURL=EnergySaving.js.map

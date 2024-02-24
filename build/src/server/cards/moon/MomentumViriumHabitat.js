@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const MoonSpaces_1 = require("../../../common/moon/MoonSpaces");
 const CardRenderer_1 = require("../render/CardRenderer");
-const TileType_1 = require("../../../common/TileType");
 const Card_1 = require("../Card");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
 class MomentumViriumHabitat extends Card_1.Card {
@@ -35,9 +34,7 @@ class MomentumViriumHabitat extends Card_1.Card {
                     b.moonHabitat({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_HABITAT_RATE }).asterix();
                 }),
             },
-            tilesBuilt: [TileType_1.TileType.MOON_HABITAT],
         });
     }
 }
 exports.MomentumViriumHabitat = MomentumViriumHabitat;
-//# sourceMappingURL=MomentumViriumHabitat.js.map

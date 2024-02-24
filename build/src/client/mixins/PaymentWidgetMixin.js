@@ -29,8 +29,8 @@ exports.PaymentWidgetMixin = {
         getTitaniumResourceRate() {
             const paymentOptions = this.asModel().playerinput.paymentOptions;
             const titaniumValue = this.asModel().playerView.thisPlayer.titaniumValue;
-            if ((paymentOptions === null || paymentOptions === void 0 ? void 0 : paymentOptions.titanium) !== true &&
-                (paymentOptions === null || paymentOptions === void 0 ? void 0 : paymentOptions.lunaTradeFederationTitanium) === true) {
+            if (paymentOptions?.titanium !== true &&
+                paymentOptions?.lunaTradeFederationTitanium === true) {
                 return titaniumValue - 1;
             }
             return titaniumValue;
@@ -68,14 +68,13 @@ exports.PaymentWidgetMixin = {
             }
         },
         setRemainingMCValue() {
-            var _a;
             const ta = this.asModel();
             let remainingMC = ta.cost;
             for (const resource of Spendable_1.SPENDABLE_RESOURCES) {
                 if (resource === 'megaCredits') {
                     continue;
                 }
-                const value = ((_a = ta.payment[resource]) !== null && _a !== void 0 ? _a : 0) * this.getResourceRate(resource);
+                const value = (ta.payment[resource] ?? 0) * this.getResourceRate(resource);
                 remainingMC -= value;
             }
             ta.payment.megaCredits = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
@@ -98,14 +97,13 @@ exports.PaymentWidgetMixin = {
             return this.getAvailableUnits(unit) > 0;
         },
         getAvailableUnits(unit) {
-            var _a, _b, _c, _d, _e;
             let amount = undefined;
             const model = this.asModel();
             const thisPlayer = model.playerView.thisPlayer;
             switch (unit) {
                 case 'heat':
                     if (model.hasOwnProperty('available')) {
-                        amount = (_b = (_a = model.available) === null || _a === void 0 ? void 0 : _a[unit]) !== null && _b !== void 0 ? _b : -1;
+                        amount = model.available?.[unit] ?? -1;
                     }
                     else {
                         amount = this.availableHeat();
@@ -115,7 +113,7 @@ exports.PaymentWidgetMixin = {
                 case 'titanium':
                 case 'plants':
                     if (model.hasOwnProperty('available')) {
-                        amount = (_d = (_c = model.available) === null || _c === void 0 ? void 0 : _c[unit]) !== null && _d !== void 0 ? _d : -1;
+                        amount = model.available?.[unit] ?? -1;
                         break;
                     }
                 case 'megaCredits':
@@ -135,10 +133,9 @@ exports.PaymentWidgetMixin = {
             if (amount === undefined) {
                 return 0;
             }
-            if (unit === 'floaters' && ((_e = this.asModel().card) === null || _e === void 0 ? void 0 : _e.name) === CardName_1.CardName.STRATOSPHERIC_BIRDS) {
+            if (unit === 'floaters' && this.asModel().card?.name === CardName_1.CardName.STRATOSPHERIC_BIRDS) {
                 if (!thisPlayer.tableau.some((card) => {
-                    var _a, _b;
-                    return card.name !== CardName_1.CardName.DIRIGIBLES && ((_a = (0, ClientCardManifest_1.getCard)(card.name)) === null || _a === void 0 ? void 0 : _a.resourceType) === CardResource_1.CardResource.FLOATER && ((_b = card.resources) !== null && _b !== void 0 ? _b : 0) > 0;
+                    return card.name !== CardName_1.CardName.DIRIGIBLES && (0, ClientCardManifest_1.getCard)(card.name)?.resourceType === CardResource_1.CardResource.FLOATER && (card.resources ?? 0) > 0;
                 })) {
                     amount = Math.max(amount - 1, 0);
                 }
@@ -149,7 +146,7 @@ exports.PaymentWidgetMixin = {
             const model = this.asModel();
             const thisPlayer = model.playerView.thisPlayer;
             const stormcraft = thisPlayer.tableau.find((card) => card.name === CardName_1.CardName.STORMCRAFT_INCORPORATED);
-            if ((stormcraft === null || stormcraft === void 0 ? void 0 : stormcraft.resources) !== undefined) {
+            if (stormcraft?.resources !== undefined) {
                 return thisPlayer.heat + (stormcraft.resources * 2);
             }
             return thisPlayer.heat;
@@ -175,4 +172,3 @@ exports.PaymentWidgetMixin = {
         },
     },
 };
-//# sourceMappingURL=PaymentWidgetMixin.js.map

@@ -30,4 +30,3 @@ class TowingAComet extends Card_1.Card {
     }
 }
 exports.TowingAComet = TowingAComet;
-//# sourceMappingURL=TowingAComet.js.map

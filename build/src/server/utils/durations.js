@@ -36,4 +36,3 @@ function durationToMilliseconds(input) {
     return valid ? total : NaN;
 }
 exports.durationToMilliseconds = durationToMilliseconds;
-//# sourceMappingURL=durations.js.map

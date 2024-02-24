@@ -12,4 +12,3 @@ class Biologist {
     }
 }
 exports.Biologist = Biologist;
-//# sourceMappingURL=Biologist.js.map

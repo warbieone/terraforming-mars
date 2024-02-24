@@ -42,4 +42,3 @@ class Ingrid extends CeoCard_1.CeoCard {
     }
 }
 exports.Ingrid = Ingrid;
-//# sourceMappingURL=Ingrid.js.map

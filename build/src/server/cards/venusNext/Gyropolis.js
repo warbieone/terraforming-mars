@@ -33,4 +33,3 @@ class Gyropolis extends Card_1.Card {
     }
 }
 exports.Gyropolis = Gyropolis;
-//# sourceMappingURL=Gyropolis.js.map

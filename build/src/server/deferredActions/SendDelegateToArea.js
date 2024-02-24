@@ -31,15 +31,13 @@ class SendDelegateToArea extends DeferredAction_1.DeferredAction {
         return parties.map((party) => party.name);
     }
     execute() {
-        var _a;
         const availableParties = this.getAvailableParties();
         if (availableParties.length === 0) {
             return undefined;
         }
-        const numDelegateToSend = (_a = this.options.count) !== null && _a !== void 0 ? _a : 1;
+        const numDelegateToSend = this.options.count ?? 1;
         const sendDelegate = new SelectParty_1.SelectParty(this.title, 'Send delegate', availableParties)
             .andThen((partyName) => {
-            var _a;
             if (this.options.cost) {
                 this.player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(this.player, this.options.cost, { title: 'Select how to pay for send delegate action' }));
             }
@@ -51,7 +49,7 @@ class SendDelegateToArea extends DeferredAction_1.DeferredAction {
                     this.turmoil.sendDelegateToParty(this.player, partyName, this.player.game);
                 }
             }
-            if (((_a = this.options) === null || _a === void 0 ? void 0 : _a.freeStandardAction) === true) {
+            if (this.options?.freeStandardAction === true) {
                 this.turmoil.usedFreeDelegateAction.add(this.player);
             }
             this.player.totalDelegatesPlaced += numDelegateToSend;
@@ -62,4 +60,3 @@ class SendDelegateToArea extends DeferredAction_1.DeferredAction {
     }
 }
 exports.SendDelegateToArea = SendDelegateToArea;
-//# sourceMappingURL=SendDelegateToArea.js.map

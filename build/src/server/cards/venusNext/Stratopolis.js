@@ -48,4 +48,3 @@ class Stratopolis extends ActionCard_1.ActionCard {
     }
 }
 exports.Stratopolis = Stratopolis;
-//# sourceMappingURL=Stratopolis.js.map

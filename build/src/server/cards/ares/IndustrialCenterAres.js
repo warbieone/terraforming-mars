@@ -21,4 +21,3 @@ class IndustrialCenterAres extends IndustrialCenter_1.IndustrialCenter {
     }
 }
 exports.IndustrialCenterAres = IndustrialCenterAres;
-//# sourceMappingURL=IndustrialCenterAres.js.map

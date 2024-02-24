@@ -73,4 +73,3 @@ class Splice extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Splice = Splice;
-//# sourceMappingURL=Splice.js.map

@@ -8,9 +8,10 @@ import {IPlayer} from '../../../IPlayer';
 import { TileType } from '../../../../common/TileType';
 import { Resource } from '../../../../common/Resource';
 import {Priority} from '../../../deferredActions/DeferredAction';
-import {GainResources} from '../../../deferredActions/GainResources';
 import { SpaceType } from '../../../../common/boards/SpaceType';
 import {Space} from '../../../boards/Space';
+import { GainStock } from '../../../../server/deferredActions/GainStock';
+import {Units} from '../../../../common/Units';
 
 export class SoilEnhancers extends Card implements IProjectCard {
   // hodgepodge
@@ -32,11 +33,11 @@ export class SoilEnhancers extends Card implements IProjectCard {
   }
 
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
+    const game = cardOwner.game;
     if (cardOwner.id === activePlayer.id && space.tile?.tileType !== TileType.OCEAN && space.spaceType !== SpaceType.COLONY) {
-      cardOwner.game.defer(
-        new GainResources(cardOwner, Resource.PLANTS, {
-          count: 1,
-          cb: () => activePlayer.game.log(
+      game.defer(
+        new GainStock(cardOwner, Units.of({plants: 1}), {
+          cb: () => game.log(
             '${0} gained 1 ${1} from ${2}',
             (b) => b.player(cardOwner).string(Resource.PLANTS).cardName(this.name)),
         }),

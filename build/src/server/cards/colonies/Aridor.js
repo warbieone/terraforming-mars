@@ -30,6 +30,20 @@ class Aridor extends CorporationCard_1.CorporationCard {
         });
         this.allTags = new Set();
     }
+    tagsForCard(card) {
+        if (card.type === CardType_1.CardType.EVENT) {
+            return [];
+        }
+        return card.tags.filter((tag) => tag !== Tag_1.Tag.WILD);
+    }
+    bespokePlay(player) {
+        for (const card of player.tableau) {
+            for (const tag of this.tagsForCard(card)) {
+                this.allTags.add(tag);
+            }
+        }
+        return undefined;
+    }
     initialAction(player) {
         ColoniesHandler_1.ColoniesHandler.addColonyTile(player, { title: 'Aridor first action - Select colony tile to add' });
         return undefined;
@@ -38,15 +52,14 @@ class Aridor extends CorporationCard_1.CorporationCard {
         return this.onCardPlayed(player, card);
     }
     onCardPlayed(player, card) {
-        if (card.type === CardType_1.CardType.EVENT ||
-            card.tags.filter((tag) => tag !== Tag_1.Tag.WILD).length === 0 ||
-            !player.isCorporation(this.name)) {
+        if (!player.isCorporation(this.name)) {
             return;
         }
-        for (const tag of card.tags.filter((tag) => tag !== Tag_1.Tag.WILD)) {
+        for (const tag of this.tagsForCard(card)) {
             const currentSize = this.allTags.size;
             this.allTags.add(tag);
             if (this.allTags.size > currentSize) {
+                player.game.log('${0} gained 1 MC production from ${1} for ${2}', (b) => b.player(player).card(this).string(tag));
                 player.production.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
             }
         }
@@ -59,4 +72,3 @@ class Aridor extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Aridor = Aridor;
-//# sourceMappingURL=Aridor.js.map

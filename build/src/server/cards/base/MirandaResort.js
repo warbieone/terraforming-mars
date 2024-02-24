@@ -31,4 +31,3 @@ class MirandaResort extends Card_1.Card {
     }
 }
 exports.MirandaResort = MirandaResort;
-//# sourceMappingURL=MirandaResort.js.map

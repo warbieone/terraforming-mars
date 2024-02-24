@@ -30,4 +30,3 @@ class BuildingIndustries extends Card_1.Card {
     }
 }
 exports.BuildingIndustries = BuildingIndustries;
-//# sourceMappingURL=BuildingIndustries.js.map

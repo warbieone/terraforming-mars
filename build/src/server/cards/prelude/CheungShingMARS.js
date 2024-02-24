@@ -40,4 +40,3 @@ class CheungShingMARS extends CorporationCard_1.CorporationCard {
     }
 }
 exports.CheungShingMARS = CheungShingMARS;
-//# sourceMappingURL=CheungShingMARS.js.map

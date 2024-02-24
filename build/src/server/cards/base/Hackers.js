@@ -36,4 +36,3 @@ class Hackers extends Card_1.Card {
     }
 }
 exports.Hackers = Hackers;
-//# sourceMappingURL=Hackers.js.map

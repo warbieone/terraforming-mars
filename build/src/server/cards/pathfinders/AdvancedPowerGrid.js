@@ -28,4 +28,3 @@ class AdvancedPowerGrid extends Card_1.Card {
     }
 }
 exports.AdvancedPowerGrid = AdvancedPowerGrid;
-//# sourceMappingURL=AdvancedPowerGrid.js.map

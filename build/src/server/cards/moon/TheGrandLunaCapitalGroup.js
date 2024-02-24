@@ -69,4 +69,3 @@ class TheGrandLunaCapitalGroup extends CorporationCard_1.CorporationCard {
     }
 }
 exports.TheGrandLunaCapitalGroup = TheGrandLunaCapitalGroup;
-//# sourceMappingURL=TheGrandLunaCapitalGroup.js.map

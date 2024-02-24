@@ -38,4 +38,3 @@ exports.MODULE_NAMES = {
     starwars: 'Star Wars',
     underworld: 'Underworld',
 };
-//# sourceMappingURL=GameModule.js.map

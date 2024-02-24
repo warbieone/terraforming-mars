@@ -32,19 +32,25 @@ class RevoltingColonists extends Card_1.Card {
     bespokePlay(player) {
         const game = player.game;
         const colonies = MoonExpansion_1.MoonExpansion.spaces(game, TileType_1.TileType.MOON_HABITAT);
-        game.getPlayers().forEach((habitatTileOwner) => {
-            const owned = colonies.filter((colony) => { var _a; return ((_a = colony.player) === null || _a === void 0 ? void 0 : _a.id) === habitatTileOwner.id; }).length;
+        game.getPlayers().forEach((target) => {
+            const owned = colonies.filter((colony) => colony.player?.id === target.id).length;
             if (owned > 0) {
                 const bill = owned * 3;
-                const owes = Math.min(bill, habitatTileOwner.spendableMegacredits());
-                game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(habitatTileOwner, owes, {
-                    title: (0, MessageBuilder_1.message)('You must spend ${0} M€ for ${1} habitat tiles', (b) => b.number(owes).number(owned))
-                }))
-                    .andThen(() => game.log('${0} spends ${1} M€ for the ${2} habitat tiles they own.', (b) => b.player(habitatTileOwner).number(owes).number(owned)));
+                const owes = Math.min(bill, target.spendableMegacredits());
+                if (owes > 0) {
+                    target.maybeBlockAttack(player, (proceed) => {
+                        if (proceed) {
+                            game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(target, owes, {
+                                title: (0, MessageBuilder_1.message)('You must spend ${0} M€ for ${1} habitat tiles', (b) => b.number(owes).number(owned))
+                            }))
+                                .andThen(() => game.log('${0} spends ${1} M€ for the ${2} habitat tiles they own.', (b) => b.player(target).number(owes).number(owned)));
+                        }
+                        return undefined;
+                    });
+                }
             }
         });
         return undefined;
     }
 }
 exports.RevoltingColonists = RevoltingColonists;
-//# sourceMappingURL=RevoltingColonists.js.map

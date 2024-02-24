@@ -22,9 +22,7 @@ class BasicInfrastructure extends PreludeCard_1.PreludeCard {
                     b.tile(TileType_1.TileType.MOON_ROAD, false).tradeFleet();
                 }),
             },
-            tilesBuilt: [TileType_1.TileType.MOON_ROAD],
         });
     }
 }
 exports.BasicInfrastructure = BasicInfrastructure;
-//# sourceMappingURL=BasicInfrastructure.js.map

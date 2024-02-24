@@ -33,23 +33,23 @@ class Production {
         return this.units[resource];
     }
     override(units) {
-        this.units = Units_1.Units.of(Object.assign({}, units));
+        this.units = Units_1.Units.of({ ...units });
     }
     asUnits() {
-        return Object.assign({}, this.units);
+        return { ...this.units };
     }
     add(resource, amount, options) {
         const adj = resource === Resource_1.Resource.MEGACREDITS ? -5 : 0;
         const delta = (amount >= 0) ? amount : Math.max(amount, -(this.units[resource] - adj));
         this.units[resource] += delta;
-        if ((options === null || options === void 0 ? void 0 : options.log) === true) {
+        if (options?.log === true) {
             this.player.logUnitDelta(resource, amount, 'production', options.from, options.stealing);
         }
-        const from = options === null || options === void 0 ? void 0 : options.from;
+        const from = options?.from;
         if (typeof (from) === 'object') {
             LawSuit_1.LawSuit.resourceHook(this.player, resource, delta, from);
         }
-        if ((options === null || options === void 0 ? void 0 : options.from) !== undefined && delta < 0 && (typeof (from) === 'object' && from.id !== this.player.id)) {
+        if (options?.from !== undefined && delta < 0 && (typeof (from) === 'object' && from.id !== this.player.id)) {
             this.player.resolveInsurance();
         }
         if (this.player.isCorporation(CardName_1.CardName.MANUTECH)) {
@@ -65,25 +65,24 @@ class Production {
             this.units.heat + units.heat >= 0;
     }
     adjust(units, options) {
-        if (units.megacredits !== undefined) {
+        if (units.megacredits !== 0) {
             this.add(Resource_1.Resource.MEGACREDITS, units.megacredits, options);
         }
-        if (units.steel !== undefined) {
+        if (units.steel !== 0) {
             this.add(Resource_1.Resource.STEEL, units.steel, options);
         }
-        if (units.titanium !== undefined) {
+        if (units.titanium !== 0) {
             this.add(Resource_1.Resource.TITANIUM, units.titanium, options);
         }
-        if (units.plants !== undefined) {
+        if (units.plants !== 0) {
             this.add(Resource_1.Resource.PLANTS, units.plants, options);
         }
-        if (units.energy !== undefined) {
+        if (units.energy !== 0) {
             this.add(Resource_1.Resource.ENERGY, units.energy, options);
         }
-        if (units.heat !== undefined) {
+        if (units.heat !== 0) {
             this.add(Resource_1.Resource.HEAT, units.heat, options);
         }
     }
 }
 exports.Production = Production;
-//# sourceMappingURL=Production.js.map

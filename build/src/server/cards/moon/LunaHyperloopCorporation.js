@@ -34,4 +34,3 @@ class LunaHyperloopCorporation extends CorporationCard_1.ActiveCorporationCard {
     }
 }
 exports.LunaHyperloopCorporation = LunaHyperloopCorporation;
-//# sourceMappingURL=LunaHyperloopCorporation.js.map

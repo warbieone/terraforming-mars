@@ -31,4 +31,3 @@ class SelectSpace extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectSpace = SelectSpace;
-//# sourceMappingURL=SelectSpace.js.map

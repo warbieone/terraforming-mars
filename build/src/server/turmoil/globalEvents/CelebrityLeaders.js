@@ -30,4 +30,3 @@ class CelebrityLeaders extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.CelebrityLeaders = CelebrityLeaders;
-//# sourceMappingURL=CelebrityLeaders.js.map

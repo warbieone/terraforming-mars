@@ -31,4 +31,3 @@ class ActionCard extends Card_1.Card {
     }
 }
 exports.ActionCard = ActionCard;
-//# sourceMappingURL=ActionCard.js.map

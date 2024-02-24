@@ -30,4 +30,3 @@ class Meltworks extends ActionCard_1.ActionCard {
     }
 }
 exports.Meltworks = Meltworks;
-//# sourceMappingURL=Meltworks.js.map

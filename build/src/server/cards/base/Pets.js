@@ -20,6 +20,7 @@ class Pets extends Card_1.Card {
             tags: [Tag_1.Tag.EARTH, Tag_1.Tag.ANIMAL],
             cost: 10,
             resourceType: CardResource_1.CardResource.ANIMAL,
+            protectedResources: true,
             victoryPoints: { resourcesHere: {}, per: 2 },
             behavior: {
                 addResources: 1,
@@ -45,4 +46,3 @@ class Pets extends Card_1.Card {
     }
 }
 exports.Pets = Pets;
-//# sourceMappingURL=Pets.js.map

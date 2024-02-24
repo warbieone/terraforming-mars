@@ -26,4 +26,3 @@ class LagrangeObservatory extends Card_1.Card {
     }
 }
 exports.LagrangeObservatory = LagrangeObservatory;
-//# sourceMappingURL=LagrangeObservatory.js.map

@@ -27,4 +27,3 @@ class Mohole extends PreludeCard_1.PreludeCard {
     }
 }
 exports.Mohole = Mohole;
-//# sourceMappingURL=Mohole.js.map

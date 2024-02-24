@@ -25,4 +25,3 @@ class Titan extends Colony_1.Colony {
     }
 }
 exports.Titan = Titan;
-//# sourceMappingURL=Titan.js.map

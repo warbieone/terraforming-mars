@@ -28,4 +28,3 @@ class MiningColony extends Card_1.Card {
     }
 }
 exports.MiningColony = MiningColony;
-//# sourceMappingURL=MiningColony.js.map

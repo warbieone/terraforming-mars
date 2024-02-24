@@ -37,7 +37,7 @@ class SecretLabs extends Card_1.Card {
         });
     }
     adjustedOptions(options, trSource, cost) {
-        const newOptions = Object.assign({}, options);
+        const newOptions = { ...options };
         newOptions.tr = trSource;
         if (cost !== undefined) {
             newOptions.cost = cost;
@@ -79,4 +79,3 @@ class SecretLabs extends Card_1.Card {
     }
 }
 exports.SecretLabs = SecretLabs;
-//# sourceMappingURL=SecretLabs.js.map

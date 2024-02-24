@@ -24,4 +24,3 @@ exports.COLONY_DESCRIPTIONS = new Map([
     [ColonyName_1.ColonyName.LEAVITT_II, 'Science & Clone Tags'],
     [ColonyName_1.ColonyName.IAPETUS_II, 'Data'],
 ]);
-//# sourceMappingURL=ColonyDescription.js.map

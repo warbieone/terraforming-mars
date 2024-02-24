@@ -41,4 +41,3 @@ class Incite extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Incite = Incite;
-//# sourceMappingURL=Incite.js.map

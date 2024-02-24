@@ -28,4 +28,3 @@ class SpaceStation extends Card_1.Card {
     }
 }
 exports.SpaceStation = SpaceStation;
-//# sourceMappingURL=SpaceStation.js.map

@@ -27,4 +27,3 @@ class MagneticShield extends Card_1.Card {
     }
 }
 exports.MagneticShield = MagneticShield;
-//# sourceMappingURL=MagneticShield.js.map

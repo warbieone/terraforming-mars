@@ -33,4 +33,3 @@ class TerralabsResearch extends CorporationCard_1.CorporationCard {
     }
 }
 exports.TerralabsResearch = TerralabsResearch;
-//# sourceMappingURL=TerralabsResearch.js.map

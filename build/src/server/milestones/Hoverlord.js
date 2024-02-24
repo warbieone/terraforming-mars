@@ -16,4 +16,3 @@ class Hoverlord extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Hoverlord = Hoverlord;
-//# sourceMappingURL=Hoverlord.js.map

@@ -29,4 +29,3 @@ class Windmills extends Card_1.Card {
     }
 }
 exports.Windmills = Windmills;
-//# sourceMappingURL=Windmills.js.map

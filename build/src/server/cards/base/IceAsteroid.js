@@ -26,4 +26,3 @@ class IceAsteroid extends Card_1.Card {
     }
 }
 exports.IceAsteroid = IceAsteroid;
-//# sourceMappingURL=IceAsteroid.js.map

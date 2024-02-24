@@ -36,4 +36,3 @@ class GeologicalSurvey extends SurveyCard_1.SurveyCard {
     }
 }
 exports.GeologicalSurvey = GeologicalSurvey;
-//# sourceMappingURL=GeologicalSurvey.js.map

@@ -26,4 +26,3 @@ class BribedCommittee extends Card_1.Card {
     }
 }
 exports.BribedCommittee = BribedCommittee;
-//# sourceMappingURL=BribedCommittee.js.map

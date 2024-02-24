@@ -37,4 +37,3 @@ class UrbanDecomposers extends Card_1.Card {
     }
 }
 exports.UrbanDecomposers = UrbanDecomposers;
-//# sourceMappingURL=UrbanDecomposers.js.map

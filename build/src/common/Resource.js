@@ -11,4 +11,3 @@ var Resource;
     Resource["HEAT"] = "heat";
 })(Resource = exports.Resource || (exports.Resource = {}));
 exports.ALL_RESOURCES = [Resource.MEGACREDITS, Resource.STEEL, Resource.TITANIUM, Resource.PLANTS, Resource.ENERGY, Resource.HEAT];
-//# sourceMappingURL=Resource.js.map

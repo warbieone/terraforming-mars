@@ -44,4 +44,3 @@ class HiTechLab extends Card_1.Card {
     }
 }
 exports.HiTechLab = HiTechLab;
-//# sourceMappingURL=HiTechLab.js.map

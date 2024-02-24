@@ -11,4 +11,3 @@ var BoardName;
     BoardName["AMAZONIS"] = "amazonis p.";
     BoardName["TERRA_CIMMERIA"] = "t. cimmeria";
 })(BoardName = exports.BoardName || (exports.BoardName = {}));
-//# sourceMappingURL=BoardName.js.map

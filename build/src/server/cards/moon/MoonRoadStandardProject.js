@@ -45,4 +45,3 @@ class MoonRoadStandardProject extends StandardProjectCard_1.StandardProjectCard 
     }
 }
 exports.MoonRoadStandardProject = MoonRoadStandardProject;
-//# sourceMappingURL=MoonRoadStandardProject.js.map

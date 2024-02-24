@@ -26,4 +26,3 @@ class VitalColony extends PreludeCard_1.PreludeCard {
     }
 }
 exports.VitalColony = VitalColony;
-//# sourceMappingURL=VitalColony.js.map

@@ -96,4 +96,3 @@ class HuygensObservatory extends Card_1.Card {
     }
 }
 exports.HuygensObservatory = HuygensObservatory;
-//# sourceMappingURL=HuygensObservatory.js.map

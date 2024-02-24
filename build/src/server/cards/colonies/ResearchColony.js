@@ -28,4 +28,3 @@ class ResearchColony extends Card_1.Card {
     }
 }
 exports.ResearchColony = ResearchColony;
-//# sourceMappingURL=ResearchColony.js.map

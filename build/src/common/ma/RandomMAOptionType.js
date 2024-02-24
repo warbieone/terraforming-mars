@@ -7,4 +7,3 @@ var RandomMAOptionType;
     RandomMAOptionType["LIMITED"] = "Limited synergy";
     RandomMAOptionType["UNLIMITED"] = "Full random";
 })(RandomMAOptionType = exports.RandomMAOptionType || (exports.RandomMAOptionType = {}));
-//# sourceMappingURL=RandomMAOptionType.js.map

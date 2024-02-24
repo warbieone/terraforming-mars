@@ -48,4 +48,3 @@ class SolarStorm extends Card_1.Card {
     }
 }
 exports.SolarStorm = SolarStorm;
-//# sourceMappingURL=SolarStorm.js.map

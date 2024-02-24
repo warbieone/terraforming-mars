@@ -39,4 +39,3 @@ class TollStation extends Card_1.Card {
     }
 }
 exports.TollStation = TollStation;
-//# sourceMappingURL=TollStation.js.map

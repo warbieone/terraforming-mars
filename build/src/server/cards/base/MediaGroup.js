@@ -28,9 +28,8 @@ class MediaGroup extends Card_1.Card {
     }
     onCardPlayed(player, card) {
         if (card.type === CardType_1.CardType.EVENT) {
-            player.game.defer(new GainResources_1.GainResources(player, Resource_1.Resource.MEGACREDITS, { count: 3 }));
+            player.game.defer(new GainResources_1.GainResources(player, Resource_1.Resource.MEGACREDITS, { count: 3, log: true }));
         }
     }
 }
 exports.MediaGroup = MediaGroup;
-//# sourceMappingURL=MediaGroup.js.map

@@ -38,4 +38,3 @@ class Stefan extends CeoCard_1.CeoCard {
     }
 }
 exports.Stefan = Stefan;
-//# sourceMappingURL=Stefan.js.map

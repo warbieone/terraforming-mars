@@ -34,4 +34,3 @@ class VenusianInsects extends ActionCard_1.ActionCard {
     }
 }
 exports.VenusianInsects = VenusianInsects;
-//# sourceMappingURL=VenusianInsects.js.map

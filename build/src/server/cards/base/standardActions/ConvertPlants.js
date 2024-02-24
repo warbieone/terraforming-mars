@@ -47,4 +47,3 @@ class ConvertPlants extends StandardActionCard_1.StandardActionCard {
     }
 }
 exports.ConvertPlants = ConvertPlants;
-//# sourceMappingURL=ConvertPlants.js.map

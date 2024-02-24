@@ -24,9 +24,8 @@ class Advertising extends Card_1.Card {
     }
     onCardPlayed(player, card) {
         if (card.cost >= 20) {
-            player.production.add(Resource_1.Resource.MEGACREDITS, 1);
+            player.production.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
         }
     }
 }
 exports.Advertising = Advertising;
-//# sourceMappingURL=Advertising.js.map

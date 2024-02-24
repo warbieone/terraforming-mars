@@ -27,4 +27,3 @@ class EarthCatapult extends Card_1.Card {
     }
 }
 exports.EarthCatapult = EarthCatapult;
-//# sourceMappingURL=EarthCatapult.js.map

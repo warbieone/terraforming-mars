@@ -10,4 +10,3 @@ var MoonSpaces;
     MoonSpaces["MARE_NECTARIS"] = "m26";
     MoonSpaces["MOMENTUM_VIRIUM"] = "m37";
 })(MoonSpaces = exports.MoonSpaces || (exports.MoonSpaces = {}));
-//# sourceMappingURL=MoonSpaces.js.map

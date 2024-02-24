@@ -30,4 +30,3 @@ class VolcanicEruptions extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.VolcanicEruptions = VolcanicEruptions;
-//# sourceMappingURL=VolcanicEruptions.js.map

@@ -32,4 +32,3 @@ class TundraFarming extends Card_1.Card {
     }
 }
 exports.TundraFarming = TundraFarming;
-//# sourceMappingURL=TundraFarming.js.map

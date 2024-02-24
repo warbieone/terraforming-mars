@@ -34,4 +34,3 @@ class SelectColony extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectColony = SelectColony;
-//# sourceMappingURL=SelectColony.js.map

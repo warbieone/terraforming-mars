@@ -7,7 +7,6 @@ const SelectAmount_1 = require("../../inputs/SelectAmount");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class Insulation extends Card_1.Card {
     constructor() {
         super({
@@ -18,7 +17,7 @@ class Insulation extends Card_1.Card {
                 cardNumber: '152',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => {
-                        pb.text('-X').heat(1).nbsp.text('+').megacredits(0, { multiplier: Options_1.multiplier });
+                        pb.text('-X').heat(1).nbsp.text('+').megacredits(1, { text: 'x' });
                     });
                 }),
                 description: 'Decrease your heat production any number of steps and increase your M€ production the same number of steps.',
@@ -38,4 +37,3 @@ class Insulation extends Card_1.Card {
     }
 }
 exports.Insulation = Insulation;
-//# sourceMappingURL=Insulation.js.map

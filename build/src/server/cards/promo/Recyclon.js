@@ -38,6 +38,9 @@ class Recyclon extends CorporationCard_1.CorporationCard {
         });
     }
     onCardPlayed(player, card) {
+        if (!player.isCorporation(this.name)) {
+            return undefined;
+        }
         if (card.tags.includes(Tag_1.Tag.BUILDING) === false || !player.isCorporation(this.name)) {
             return undefined;
         }
@@ -56,6 +59,8 @@ class Recyclon extends CorporationCard_1.CorporationCard {
         });
         return new OrOptions_1.OrOptions(spendResource, addResource);
     }
+    onCorpCardPlayed(player, card) {
+        return this.onCardPlayed(player, card);
+    }
 }
 exports.Recyclon = Recyclon;
-//# sourceMappingURL=Recyclon.js.map

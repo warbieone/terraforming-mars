@@ -31,4 +31,3 @@ class LunaArchives extends ActionCard_1.ActionCard {
     }
 }
 exports.LunaArchives = LunaArchives;
-//# sourceMappingURL=LunaArchives.js.map

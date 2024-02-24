@@ -36,9 +36,7 @@ class AncientShipyards extends Card_1.Card {
     }
     action(player) {
         const game = player.game;
-        for (const target of game.getPlayers()) {
-            if (target === player)
-                continue;
+        for (const target of player.getOpponents()) {
             target.maybeBlockAttack(player, (proceed) => {
                 if (proceed) {
                     target.stock.steal(Resource_1.Resource.MEGACREDITS, 2, player);
@@ -54,4 +52,3 @@ class AncientShipyards extends Card_1.Card {
     }
 }
 exports.AncientShipyards = AncientShipyards;
-//# sourceMappingURL=AncientShipyards.js.map

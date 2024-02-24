@@ -5,6 +5,7 @@ class BasePlayerInput {
     constructor(type, title = '') {
         this.buttonLabel = 'Save';
         this.cb = () => undefined;
+        this.eligibleForDefault = undefined;
         this.type = type;
         this.title = title;
     }
@@ -23,4 +24,3 @@ function getCardFromPlayerInput(cards, cardName) {
     return { card, idx };
 }
 exports.getCardFromPlayerInput = getCardFromPlayerInput;
-//# sourceMappingURL=PlayerInput.js.map

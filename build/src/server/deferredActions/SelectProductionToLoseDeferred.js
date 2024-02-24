@@ -19,4 +19,3 @@ class SelectProductionToLoseDeferred extends DeferredAction_1.DeferredAction {
     }
 }
 exports.SelectProductionToLoseDeferred = SelectProductionToLoseDeferred;
-//# sourceMappingURL=SelectProductionToLoseDeferred.js.map

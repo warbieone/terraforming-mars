@@ -109,4 +109,3 @@ class ProjectWorkshop extends CorporationCard_1.CorporationCard {
     }
 }
 exports.ProjectWorkshop = ProjectWorkshop;
-//# sourceMappingURL=ProjectWorkshop.js.map

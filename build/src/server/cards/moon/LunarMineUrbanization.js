@@ -51,4 +51,3 @@ class LunarMineUrbanization extends Card_1.Card {
     }
 }
 exports.LunarMineUrbanization = LunarMineUrbanization;
-//# sourceMappingURL=LunarMineUrbanization.js.map

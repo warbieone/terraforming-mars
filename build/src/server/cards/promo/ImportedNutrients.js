@@ -30,4 +30,3 @@ class ImportedNutrients extends Card_1.Card {
     }
 }
 exports.ImportedNutrients = ImportedNutrients;
-//# sourceMappingURL=ImportedNutrients.js.map

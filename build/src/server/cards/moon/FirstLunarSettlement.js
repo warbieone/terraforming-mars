@@ -5,14 +5,12 @@ const CardName_1 = require("../../../common/cards/CardName");
 const Tag_1 = require("../../../common/cards/Tag");
 const PreludeCard_1 = require("../prelude/PreludeCard");
 const CardRenderer_1 = require("../render/CardRenderer");
-const TileType_1 = require("../../../common/TileType");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
 class FirstLunarSettlement extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
             name: CardName_1.CardName.FIRST_LUNAR_SETTLEMENT,
             tags: [Tag_1.Tag.CITY, Tag_1.Tag.MOON],
-            tilesBuilt: [TileType_1.TileType.MOON_HABITAT],
             behavior: {
                 production: { megacredits: 1 },
                 moon: { habitatTile: {} },
@@ -28,4 +26,3 @@ class FirstLunarSettlement extends PreludeCard_1.PreludeCard {
     }
 }
 exports.FirstLunarSettlement = FirstLunarSettlement;
-//# sourceMappingURL=FirstLunarSettlement.js.map

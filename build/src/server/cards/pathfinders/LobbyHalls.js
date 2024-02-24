@@ -37,4 +37,3 @@ class LobbyHalls extends Card_1.Card {
     }
 }
 exports.LobbyHalls = LobbyHalls;
-//# sourceMappingURL=LobbyHalls.js.map

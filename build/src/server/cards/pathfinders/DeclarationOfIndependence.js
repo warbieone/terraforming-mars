@@ -27,4 +27,3 @@ class DeclarationOfIndependence extends Card_1.Card {
     }
 }
 exports.DeclarationOfIndependence = DeclarationOfIndependence;
-//# sourceMappingURL=DeclarationOfIndependence.js.map

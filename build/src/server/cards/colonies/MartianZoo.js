@@ -51,4 +51,3 @@ class MartianZoo extends Card_1.Card {
     }
 }
 exports.MartianZoo = MartianZoo;
-//# sourceMappingURL=MartianZoo.js.map

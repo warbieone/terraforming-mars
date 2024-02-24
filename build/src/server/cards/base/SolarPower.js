@@ -28,4 +28,3 @@ class SolarPower extends Card_1.Card {
     }
 }
 exports.SolarPower = SolarPower;
-//# sourceMappingURL=SolarPower.js.map

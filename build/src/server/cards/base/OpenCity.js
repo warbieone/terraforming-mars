@@ -37,4 +37,3 @@ class OpenCity extends Card_1.Card {
     }
 }
 exports.OpenCity = OpenCity;
-//# sourceMappingURL=OpenCity.js.map

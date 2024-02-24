@@ -17,7 +17,7 @@ class MiningRights extends MiningCard_1.MiningCard {
         description: 'Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.',
     }) {
         super(name, 9, metadata);
+        this.title = 'Select a space with a steel or titanium bonus';
     }
 }
 exports.MiningRights = MiningRights;
-//# sourceMappingURL=MiningRights.js.map

@@ -40,4 +40,3 @@ class AgroDrones extends Card_1.Card {
     }
 }
 exports.AgroDrones = AgroDrones;
-//# sourceMappingURL=AgroDrones.js.map

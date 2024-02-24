@@ -36,4 +36,3 @@ class VenusianAnimals extends Card_1.Card {
     }
 }
 exports.VenusianAnimals = VenusianAnimals;
-//# sourceMappingURL=VenusianAnimals.js.map

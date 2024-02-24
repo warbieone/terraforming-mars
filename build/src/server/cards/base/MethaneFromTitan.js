@@ -30,4 +30,3 @@ class MethaneFromTitan extends Card_1.Card {
     }
 }
 exports.MethaneFromTitan = MethaneFromTitan;
-//# sourceMappingURL=MethaneFromTitan.js.map

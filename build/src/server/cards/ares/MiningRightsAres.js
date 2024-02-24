@@ -18,7 +18,7 @@ class MiningRightsAres extends MiningRights_1.MiningRights {
             }),
             description: 'Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.',
         });
+        this.isAres = true;
     }
 }
 exports.MiningRightsAres = MiningRightsAres;
-//# sourceMappingURL=MiningRightsAres.js.map

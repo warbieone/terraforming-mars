@@ -27,4 +27,3 @@ var ColonyBenefit;
     ColonyBenefit[ColonyBenefit["GAIN_SCIENCE_TAGS_AND_CLONE_TAG"] = 21] = "GAIN_SCIENCE_TAGS_AND_CLONE_TAG";
     ColonyBenefit[ColonyBenefit["RAISE_PLANETARY_TRACK"] = 22] = "RAISE_PLANETARY_TRACK";
 })(ColonyBenefit = exports.ColonyBenefit || (exports.ColonyBenefit = {}));
-//# sourceMappingURL=ColonyBenefit.js.map

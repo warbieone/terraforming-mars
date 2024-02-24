@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Game = void 0;
 const constants = require("../common/constants");
@@ -100,7 +91,7 @@ class Game {
         this.tradeEmbargo = false;
         this.beholdTheEmperor = false;
         this.id = id;
-        this.gameOptions = Object.assign({}, gameOptions);
+        this.gameOptions = { ...gameOptions };
         this.players = players;
         const playerIds = players.map((p) => p.id);
         if (playerIds.includes(first.id) === false) {
@@ -142,7 +133,7 @@ class Game {
         });
     }
     static newInstance(id, players, firstPlayer, options = {}, seed = 0, spectatorId = undefined) {
-        const gameOptions = Object.assign(Object.assign({}, GameOptions_1.DEFAULT_GAME_OPTIONS), options);
+        const gameOptions = { ...GameOptions_1.DEFAULT_GAME_OPTIONS, ...options };
         if (gameOptions.clonedGamedId !== undefined) {
             throw new Error('Cloning should not come through this execution path.');
         }
@@ -778,30 +769,28 @@ class Game {
             this.playerIsFinishedTakingActions();
         }
     }
-    gotoEndGame() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
-                const clonedGamedId = this.clonedGamedId;
-                this.log('This game was a clone from game ${0}', (b) => b.rawString(clonedGamedId));
-            }
-            else {
-                const id = this.id;
-                this.log('This game id was ${0}', (b) => b.rawString(id));
-            }
-            const scores = [];
-            this.players.forEach((player) => {
-                const corporation = player.corporations.map((c) => c.name).join('|');
-                const vpb = player.getVictoryPoints();
-                scores.push({ corporation: corporation, playerScore: vpb.total });
-            });
-            Database_1.Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
-            this.phase = Phase_1.Phase.END;
-            const gameLoader = GameLoader_1.GameLoader.getInstance();
-            yield gameLoader.saveGame(this);
-            gameLoader.completeGame(this);
-            gameLoader.mark(this.id);
-            gameLoader.maintenance();
+    async gotoEndGame() {
+        if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
+            const clonedGamedId = this.clonedGamedId;
+            this.log('This game was a clone from game ${0}', (b) => b.rawString(clonedGamedId));
+        }
+        else {
+            const id = this.id;
+            this.log('This game id was ${0}', (b) => b.rawString(id));
+        }
+        const scores = [];
+        this.players.forEach((player) => {
+            const corporation = player.corporations.map((c) => c.name).join('|');
+            const vpb = player.getVictoryPoints();
+            scores.push({ corporation: corporation, playerScore: vpb.total });
         });
+        Database_1.Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
+        this.phase = Phase_1.Phase.END;
+        const gameLoader = GameLoader_1.GameLoader.getInstance();
+        await gameLoader.saveGame(this);
+        gameLoader.completeGame(this);
+        gameLoader.mark(this.id);
+        gameLoader.maintenance();
     }
     canPlaceGreenery(player) {
         return !this.donePlayers.has(player.id) &&
@@ -927,7 +916,7 @@ class Game {
                 this.temperature + steps * 2 >= constants.TEMPERATURE_BONUS_FOR_HEAT_2) {
                 player.production.add(Resource_1.Resource.HEAT, 1, { log: true });
             }
-            player.playedCards.forEach((card) => { var _a; return (_a = card.onGlobalParameterIncrease) === null || _a === void 0 ? void 0 : _a.call(card, player, GlobalParameter_1.GlobalParameter.TEMPERATURE, steps); });
+            player.playedCards.forEach((card) => card.onGlobalParameterIncrease?.(player, GlobalParameter_1.GlobalParameter.TEMPERATURE, steps));
             TurmoilHandler_1.TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter_1.GlobalParameter.TEMPERATURE, steps);
             player.increaseTerraformRating(steps);
         }
@@ -955,7 +944,6 @@ class Game {
         return passedPlayersColors;
     }
     addTile(player, space, tile) {
-        var _a;
         if (space.tile !== undefined && !(this.gameOptions.aresExtension || this.gameOptions.pathfindersExpansion)) {
             throw new Error('Selected space is occupied');
         }
@@ -974,7 +962,7 @@ class Game {
         });
         TurmoilHandler_1.TurmoilHandler.resolveTilePlacementCosts(player);
         const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName_1.CardName.ARCADIAN_COMMUNITIES);
-        const initialTileTypeForAres = (_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType;
+        const initialTileTypeForAres = space.tile?.tileType;
         const coveringExistingTile = space.tile !== undefined;
         this.simpleAddTile(player, space, tile);
         if (this.phase !== Phase_1.Phase.SOLAR) {
@@ -987,7 +975,7 @@ class Game {
                 }
             });
             AresHandler_1.AresHandler.ifAres(this, (aresData) => {
-                const incrementMilestone = (tile === null || tile === void 0 ? void 0 : tile.tileType) !== TileType_1.TileType.MARS_NOMADS;
+                const incrementMilestone = tile?.tileType !== TileType_1.TileType.MARS_NOMADS;
                 AresHandler_1.AresHandler.earnAdjacencyBonuses(aresData, player, space, { incrementMilestone });
             });
             TurmoilHandler_1.TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
@@ -1000,8 +988,7 @@ class Game {
         }
         this.players.forEach((p) => {
             p.tableau.forEach((playedCard) => {
-                var _a;
-                (_a = playedCard.onTilePlaced) === null || _a === void 0 ? void 0 : _a.call(playedCard, p, player, space, BoardType_1.BoardType.MARS);
+                playedCard.onTilePlaced?.(p, player, space, BoardType_1.BoardType.MARS);
             });
         });
         AresHandler_1.AresHandler.ifAres(this, () => {
@@ -1177,11 +1164,10 @@ class Game {
         return player.cardsInHand.filter((card) => card.type === cardType);
     }
     log(message, f, options) {
-        var _a;
         const builder = new LogMessageBuilder_1.LogMessageBuilder(message);
-        f === null || f === void 0 ? void 0 : f(builder);
+        f?.(builder);
         const logMessage = builder.build();
-        logMessage.playerId = (_a = options === null || options === void 0 ? void 0 : options.reservedFor) === null || _a === void 0 ? void 0 : _a.id;
+        logMessage.playerId = options?.reservedFor?.id;
         this.gameLog.push(logMessage);
         this.gameAge++;
     }
@@ -1207,7 +1193,7 @@ class Game {
         const space = this.board.getNthAvailableLandSpace(distance, direction, undefined, (space) => {
             if (toPlace === TileType_1.TileType.CITY) {
                 const adjacentSpaces = this.board.getAdjacentSpaces(space);
-                return adjacentSpaces.every((sp) => { var _a; return ((_a = sp.tile) === null || _a === void 0 ? void 0 : _a.tileType) !== TileType_1.TileType.CITY; }) &&
+                return adjacentSpaces.every((sp) => sp.tile?.tileType !== TileType_1.TileType.CITY) &&
                     adjacentSpaces.some((sp) => this.board.canPlaceTile(sp));
             }
             else {
@@ -1227,10 +1213,9 @@ class Game {
         return (0, utils_1.addDays)(this.createdTime, days).getTime();
     }
     static deserialize(d) {
-        var _a, _b, _c, _d, _e, _f;
         const gameOptions = d.gameOptions;
-        gameOptions.starWarsExpansion = (_a = gameOptions.starWarsExpansion) !== null && _a !== void 0 ? _a : false;
-        gameOptions.bannedCards = (_b = gameOptions.bannedCards) !== null && _b !== void 0 ? _b : [];
+        gameOptions.starWarsExpansion = gameOptions.starWarsExpansion ?? false;
+        gameOptions.bannedCards = gameOptions.bannedCards ?? [];
         const players = d.players.map((element) => Player_1.Player.deserialize(element));
         const first = players.find((player) => player.id === d.first);
         if (first === undefined) {
@@ -1303,7 +1288,7 @@ class Game {
         game.generation = d.generation;
         game.phase = d.phase;
         game.oxygenLevel = d.oxygenLevel;
-        game.undoCount = (_c = d.undoCount) !== null && _c !== void 0 ? _c : 0;
+        game.undoCount = d.undoCount ?? 0;
         game.temperature = d.temperature;
         game.venusScaleLevel = d.venusScaleLevel;
         game.activePlayer = d.activePlayer;
@@ -1314,9 +1299,9 @@ class Game {
         game.gagarinBase = d.gagarinBase;
         game.stJosephCathedrals = d.stJosephCathedrals;
         game.nomadSpace = d.nomadSpace;
-        game.tradeEmbargo = (_d = d.tradeEmbargo) !== null && _d !== void 0 ? _d : false;
-        game.beholdTheEmperor = (_e = d.beholdTheEmperor) !== null && _e !== void 0 ? _e : false;
-        game.globalsPerGeneration = (_f = d.globalsPerGeneration) !== null && _f !== void 0 ? _f : [];
+        game.tradeEmbargo = d.tradeEmbargo ?? false;
+        game.beholdTheEmperor = d.beholdTheEmperor ?? false;
+        game.globalsPerGeneration = d.globalsPerGeneration ?? [];
         if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
             if (game.phase === Phase_1.Phase.INITIALDRAFTING) {
                 if (game.initialDraftIteration === 3) {
@@ -1357,4 +1342,3 @@ class Game {
     }
 }
 exports.Game = Game;
-//# sourceMappingURL=Game.js.map

@@ -31,4 +31,3 @@ class Apollo extends CeoCard_1.CeoCard {
     }
 }
 exports.Apollo = Apollo;
-//# sourceMappingURL=Apollo.js.map

@@ -71,4 +71,3 @@ class ForcedPrecipitation extends Card_1.Card {
     }
 }
 exports.ForcedPrecipitation = ForcedPrecipitation;
-//# sourceMappingURL=ForcedPrecipitation.js.map

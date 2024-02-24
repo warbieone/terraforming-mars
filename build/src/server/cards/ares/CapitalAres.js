@@ -27,4 +27,3 @@ class CapitalAres extends Capital_1.Capital {
     }
 }
 exports.CapitalAres = CapitalAres;
-//# sourceMappingURL=CapitalAres.js.map

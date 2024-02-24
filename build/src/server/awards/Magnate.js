@@ -13,4 +13,3 @@ class Magnate {
     }
 }
 exports.Magnate = Magnate;
-//# sourceMappingURL=Magnate.js.map

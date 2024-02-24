@@ -69,4 +69,3 @@ function isSelectGlobalEventResponse(response) {
     return response.type === 'globalEvent' && matches(response, ['type', 'globalEventName']);
 }
 exports.isSelectGlobalEventResponse = isSelectGlobalEventResponse;
-//# sourceMappingURL=InputResponse.js.map

@@ -63,4 +63,3 @@ class ArcadianCommunities extends CorporationCard_1.CorporationCard {
     }
 }
 exports.ArcadianCommunities = ArcadianCommunities;
-//# sourceMappingURL=ArcadianCommunities.js.map

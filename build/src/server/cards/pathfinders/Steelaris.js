@@ -35,7 +35,6 @@ class Steelaris extends CorporationCard_1.CorporationCard {
         });
     }
     onTilePlaced(cardOwner, activePlayer, space, boardType) {
-        var _a;
         const game = cardOwner.game;
         if (boardType !== BoardType_1.BoardType.MARS) {
             return;
@@ -43,7 +42,7 @@ class Steelaris extends CorporationCard_1.CorporationCard {
         if (space.spaceType === SpaceType_1.SpaceType.COLONY) {
             return;
         }
-        const tileType = (_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType;
+        const tileType = space.tile?.tileType;
         if (tileType === TileType_1.TileType.OCEAN || tileType === TileType_1.TileType.GREENERY) {
             return;
         }
@@ -53,4 +52,3 @@ class Steelaris extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Steelaris = Steelaris;
-//# sourceMappingURL=Steelaris.js.map

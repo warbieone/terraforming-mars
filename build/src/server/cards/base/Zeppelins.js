@@ -32,4 +32,3 @@ class Zeppelins extends Card_1.Card {
     }
 }
 exports.Zeppelins = Zeppelins;
-//# sourceMappingURL=Zeppelins.js.map

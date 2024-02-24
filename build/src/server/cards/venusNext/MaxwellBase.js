@@ -45,4 +45,3 @@ class MaxwellBase extends ActionCard_1.ActionCard {
     }
 }
 exports.MaxwellBase = MaxwellBase;
-//# sourceMappingURL=MaxwellBase.js.map

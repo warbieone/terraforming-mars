@@ -41,7 +41,6 @@ class CuriosityII extends CorporationCard_1.CorporationCard {
         });
     }
     onTilePlaced(cardOwner, activePlayer, space) {
-        var _a;
         const eligibleBonuses = [SpaceBonus_1.SpaceBonus.STEEL, SpaceBonus_1.SpaceBonus.TITANIUM, SpaceBonus_1.SpaceBonus.HEAT, SpaceBonus_1.SpaceBonus.PLANT, SpaceBonus_1.SpaceBonus.MEGACREDITS, SpaceBonus_1.SpaceBonus.ANIMAL, SpaceBonus_1.SpaceBonus.MICROBE, SpaceBonus_1.SpaceBonus.ENERGY];
         if (cardOwner.id !== activePlayer.id)
             return;
@@ -49,7 +48,7 @@ class CuriosityII extends CorporationCard_1.CorporationCard {
             return;
         if (space.spaceType === SpaceType_1.SpaceType.COLONY)
             return;
-        if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus)) || ((_a = space.tile) === null || _a === void 0 ? void 0 : _a.covers) !== undefined) {
+        if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus)) || space.tile?.covers !== undefined) {
             cardOwner.defer(() => this.corpAction(cardOwner));
         }
     }
@@ -64,4 +63,3 @@ class CuriosityII extends CorporationCard_1.CorporationCard {
     }
 }
 exports.CuriosityII = CuriosityII;
-//# sourceMappingURL=CuriosityII.js.map

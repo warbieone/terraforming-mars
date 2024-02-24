@@ -39,7 +39,6 @@ class LunaTrainStation extends Card_1.Card {
                 }),
                 victoryPoints: CardRenderDynamicVictoryPoints_1.CardRenderDynamicVictoryPoints.moonRoadTile(2, true),
             },
-            tilesBuilt: [TileType_1.TileType.LUNA_TRAIN_STATION],
         });
     }
     getVictoryPoints(player) {
@@ -54,4 +53,3 @@ class LunaTrainStation extends Card_1.Card {
     }
 }
 exports.LunaTrainStation = LunaTrainStation;
-//# sourceMappingURL=LunaTrainStation.js.map

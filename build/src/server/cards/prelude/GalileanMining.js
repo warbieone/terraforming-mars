@@ -34,4 +34,3 @@ class GalileanMining extends PreludeCard_1.PreludeCard {
     }
 }
 exports.GalileanMining = GalileanMining;
-//# sourceMappingURL=GalileanMining.js.map

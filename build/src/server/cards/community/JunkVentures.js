@@ -55,4 +55,3 @@ class JunkVentures extends CorporationCard_1.CorporationCard {
     }
 }
 exports.JunkVentures = JunkVentures;
-//# sourceMappingURL=JunkVentures.js.map

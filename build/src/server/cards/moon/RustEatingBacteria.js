@@ -33,4 +33,3 @@ class RustEatingBacteria extends ActionCard_1.ActionCard {
     }
 }
 exports.RustEatingBacteria = RustEatingBacteria;
-//# sourceMappingURL=RustEatingBacteria.js.map

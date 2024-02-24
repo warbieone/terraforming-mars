@@ -29,4 +29,3 @@ class AquiferReleasedByPublicCouncil extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.AquiferReleasedByPublicCouncil = AquiferReleasedByPublicCouncil;
-//# sourceMappingURL=AquiferReleasedByPublicCouncil.js.map

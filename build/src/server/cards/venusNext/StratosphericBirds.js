@@ -53,9 +53,8 @@ class StratosphericBirds extends ActionCard_1.ActionCard {
         }
     }
     bespokePlay(player) {
-        player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.FLOATER, 1, { ownCardsOnly: true, blockable: false }));
+        player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.FLOATER, 1, { source: 'self', blockable: false }));
         return undefined;
     }
 }
 exports.StratosphericBirds = StratosphericBirds;
-//# sourceMappingURL=StratosphericBirds.js.map

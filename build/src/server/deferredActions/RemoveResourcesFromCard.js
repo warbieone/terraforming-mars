@@ -5,31 +5,32 @@ const CardResource_1 = require("../../common/CardResource");
 const OrOptions_1 = require("../inputs/OrOptions");
 const SelectCard_1 = require("../inputs/SelectCard");
 const SelectOption_1 = require("../inputs/SelectOption");
-const CardName_1 = require("../../common/cards/CardName");
 const DeferredAction_1 = require("./DeferredAction");
 const UnderworldExpansion_1 = require("../underworld/UnderworldExpansion");
-const animalsProtectedCards = [CardName_1.CardName.PETS, CardName_1.CardName.BIOENGINEERING_ENCLOSURE];
 class RemoveResourcesFromCard extends DeferredAction_1.DeferredAction {
-    constructor(player, resourceType, count = 1, options) {
-        var _a, _b, _c, _d;
+    constructor(player, cardResource, count = 1, options) {
         super(player, DeferredAction_1.Priority.ATTACK_OPPONENT);
         this.priority = DeferredAction_1.Priority.ATTACK_OPPONENT;
-        this.resourceType = resourceType;
+        this.cardResource = cardResource;
         this.count = count;
-        this.ownCardsOnly = (_a = options === null || options === void 0 ? void 0 : options.ownCardsOnly) !== null && _a !== void 0 ? _a : false;
-        this.mandatory = (_b = options === null || options === void 0 ? void 0 : options.mandatory) !== null && _b !== void 0 ? _b : true;
-        this.blockable = (_c = options === null || options === void 0 ? void 0 : options.blockable) !== null && _c !== void 0 ? _c : true;
-        this.title = (_d = options === null || options === void 0 ? void 0 : options.title) !== null && _d !== void 0 ? _d : (`Select card to remove ${count} ${resourceType}(s)`);
-        if (this.ownCardsOnly === true) {
+        this.source = options?.source ?? 'all';
+        this.mandatory = options?.mandatory ?? true;
+        this.blockable = options?.blockable ?? true;
+        this.autoselect = options?.autoselect ?? true;
+        this.title = options?.title ?? (`Select card to remove ${count} ${cardResource}(s)`);
+        if (this.source === 'self') {
             this.priority = DeferredAction_1.Priority.LOSE_RESOURCE_OR_PRODUCTION;
+            if (this.blockable) {
+                throw new Error('Cannot block removing resources from self');
+            }
         }
     }
     execute() {
-        if (this.ownCardsOnly === false && this.player.game.isSoloMode()) {
+        if (this.source !== 'self' && this.player.game.isSoloMode()) {
             this.player.resolveInsuranceInSoloGame();
             return undefined;
         }
-        const cards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.resourceType, this.ownCardsOnly);
+        const cards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.cardResource, this.source);
         if (cards.length === 0) {
             return undefined;
         }
@@ -39,7 +40,7 @@ class RemoveResourcesFromCard extends DeferredAction_1.DeferredAction {
             return undefined;
         });
         if (this.mandatory) {
-            if (cards.length === 1) {
+            if (cards.length === 1 && this.autoselect === true) {
                 this.attack(cards[0]);
                 return undefined;
             }
@@ -49,48 +50,39 @@ class RemoveResourcesFromCard extends DeferredAction_1.DeferredAction {
     }
     attack(card) {
         const target = this.player.game.getCardPlayerOrThrow(card.name);
-        if (this.blockable === false) {
-            target.removeResourceFrom(card, this.count, { removingPlayer: this.player });
-            this.cb(true);
-            return;
-        }
-        return UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, this.player, ((proceed) => {
+        target.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(target, this.player, ((proceed) => {
             if (proceed) {
                 target.removeResourceFrom(card, this.count, { removingPlayer: this.player });
             }
-            this.cb(proceed);
+            this.cb({ card: card, owner: target, proceed: proceed });
             return undefined;
-        }));
+        })));
     }
-    static getAvailableTargetCards(player, resourceType, ownCardsOnly = false) {
-        let resourceCards;
-        if (ownCardsOnly) {
-            if (resourceType === CardResource_1.CardResource.ANIMAL) {
-                resourceCards = player.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.includes(card.name) === false);
+    static getAvailableTargetCards(player, resourceType, source = 'all') {
+        const resourceCards = [];
+        for (const p of player.game.getPlayers()) {
+            const get = () => p.getCardsWithResources(resourceType).filter((card) => card.protectedResources !== true);
+            if (p === player) {
+                if (source !== 'opponents') {
+                    resourceCards.push(...get());
+                }
             }
             else {
-                resourceCards = player.getCardsWithResources(resourceType);
-            }
-        }
-        else {
-            resourceCards = [];
-            player.game.getPlayers().forEach((p) => {
-                switch (resourceType) {
-                    case CardResource_1.CardResource.ANIMAL:
-                        if (p.hasProtectedHabitats() && player.id !== p.id)
-                            return;
-                        resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.includes(card.name) === false));
-                        break;
-                    case CardResource_1.CardResource.MICROBE:
-                        if (p.hasProtectedHabitats() && player.id !== p.id)
-                            return;
-                    default:
-                        resourceCards.push(...p.getCardsWithResources(resourceType));
+                if (source !== 'self') {
+                    switch (resourceType) {
+                        case CardResource_1.CardResource.ANIMAL:
+                        case CardResource_1.CardResource.MICROBE:
+                            if (!p.hasProtectedHabitats()) {
+                                resourceCards.push(...get());
+                            }
+                            break;
+                        default:
+                            resourceCards.push(...get());
+                    }
                 }
-            });
+            }
         }
         return resourceCards;
     }
 }
 exports.RemoveResourcesFromCard = RemoveResourcesFromCard;
-//# sourceMappingURL=RemoveResourcesFromCard.js.map

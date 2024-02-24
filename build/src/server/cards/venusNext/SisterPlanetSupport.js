@@ -28,4 +28,3 @@ class SisterPlanetSupport extends Card_1.Card {
     }
 }
 exports.SisterPlanetSupport = SisterPlanetSupport;
-//# sourceMappingURL=SisterPlanetSupport.js.map

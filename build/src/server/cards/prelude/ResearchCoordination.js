@@ -20,4 +20,3 @@ class ResearchCoordination extends Card_1.Card {
     }
 }
 exports.ResearchCoordination = ResearchCoordination;
-//# sourceMappingURL=ResearchCoordination.js.map

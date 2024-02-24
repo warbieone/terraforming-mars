@@ -52,4 +52,3 @@ class ViralEnhancers extends Card_1.Card {
     }
 }
 exports.ViralEnhancers = ViralEnhancers;
-//# sourceMappingURL=ViralEnhancers.js.map

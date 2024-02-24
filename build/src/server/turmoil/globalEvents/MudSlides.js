@@ -35,4 +35,3 @@ class MudSlides extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.MudSlides = MudSlides;
-//# sourceMappingURL=MudSlides.js.map

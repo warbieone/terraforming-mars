@@ -12,4 +12,3 @@ class SpaceBaron {
     }
 }
 exports.SpaceBaron = SpaceBaron;
-//# sourceMappingURL=SpaceBaron.js.map

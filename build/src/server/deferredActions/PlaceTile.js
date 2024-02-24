@@ -9,14 +9,13 @@ class PlaceTile extends DeferredAction_1.DeferredAction {
         this.options = options;
     }
     execute() {
-        var _a;
         const game = this.player.game;
         const on = this.options.on;
         const availableSpaces = game.board.getAvailableSpacesForType(this.player, on);
-        const title = (_a = this.options) === null || _a === void 0 ? void 0 : _a.title;
+        const title = this.options?.title;
         return new SelectSpace_1.SelectSpace(title, availableSpaces)
             .andThen((space) => {
-            const tile = Object.assign({}, this.options.tile);
+            const tile = { ...this.options.tile };
             if (this.options.on === 'upgradeable-ocean') {
                 tile.covers = space.tile;
             }
@@ -27,4 +26,3 @@ class PlaceTile extends DeferredAction_1.DeferredAction {
     }
 }
 exports.PlaceTile = PlaceTile;
-//# sourceMappingURL=PlaceTile.js.map

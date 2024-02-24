@@ -71,11 +71,10 @@ class SurveyMission extends PreludeCard_1.PreludeCard {
         spaces.sort((s1, s2) => parseInt(s2.id) - parseInt(s1.id));
         return new SelectSpace_1.SelectSpace(messages[iteration], spaces)
             .andThen((space) => {
-            var _a, _b;
             space.player = player;
             player.game.grantSpaceBonuses(player, space);
             LogHelper_1.LogHelper.logBoardTileAction(player, space, 'claimed');
-            (_b = (_a = player.getCorporation(CardName_1.CardName.MINING_GUILD)) === null || _a === void 0 ? void 0 : _a.onTilePlaced) === null || _b === void 0 ? void 0 : _b.call(_a, player, player, space, BoardType_1.BoardType.MARS);
+            player.getCorporation(CardName_1.CardName.MINING_GUILD)?.onTilePlaced?.(player, player, space, BoardType_1.BoardType.MARS);
             if (iteration === 2)
                 return undefined;
             const revisedTriplets = triplets.filter((triplet) => {
@@ -94,4 +93,3 @@ class SurveyMission extends PreludeCard_1.PreludeCard {
     }
 }
 exports.SurveyMission = SurveyMission;
-//# sourceMappingURL=SurveyMission.js.map

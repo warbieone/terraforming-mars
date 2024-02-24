@@ -67,4 +67,3 @@ class Vitor extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Vitor = Vitor;
-//# sourceMappingURL=Vitor.js.map

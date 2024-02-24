@@ -44,4 +44,3 @@ class EnergyTapping extends Card_1.Card {
     }
 }
 exports.EnergyTapping = EnergyTapping;
-//# sourceMappingURL=EnergyTapping.js.map

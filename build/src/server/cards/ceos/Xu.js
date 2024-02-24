@@ -37,4 +37,3 @@ class Xu extends CeoCard_1.CeoCard {
     }
 }
 exports.Xu = Xu;
-//# sourceMappingURL=Xu.js.map

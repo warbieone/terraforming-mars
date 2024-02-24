@@ -26,4 +26,3 @@ class UNMIContractor extends PreludeCard_1.PreludeCard {
     }
 }
 exports.UNMIContractor = UNMIContractor;
-//# sourceMappingURL=UNMIContractor.js.map

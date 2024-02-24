@@ -13,4 +13,3 @@ var CardType;
     CardType["STANDARD_ACTION"] = "standard_action";
     CardType["PROXY"] = "proxy";
 })(CardType = exports.CardType || (exports.CardType = {}));
-//# sourceMappingURL=CardType.js.map

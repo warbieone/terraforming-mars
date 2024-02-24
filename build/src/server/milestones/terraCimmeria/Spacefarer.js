@@ -12,4 +12,3 @@ class Spacefarer extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Spacefarer = Spacefarer;
-//# sourceMappingURL=Spacefarer.js.map

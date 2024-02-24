@@ -36,4 +36,3 @@ class SocietySupport extends PreludeCard_1.PreludeCard {
     }
 }
 exports.SocietySupport = SocietySupport;
-//# sourceMappingURL=SocietySupport.js.map

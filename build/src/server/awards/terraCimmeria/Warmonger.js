@@ -64,4 +64,3 @@ Warmonger.attackCards = [
     CardName_1.CardName.SPACE_PRIVATEERS,
     CardName_1.CardName.SUBNAUTIC_PIRATES,
 ];
-//# sourceMappingURL=Warmonger.js.map

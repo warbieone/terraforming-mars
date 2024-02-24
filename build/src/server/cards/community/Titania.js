@@ -26,4 +26,3 @@ class Titania extends Colony_1.Colony {
     }
 }
 exports.Titania = Titania;
-//# sourceMappingURL=Titania.js.map

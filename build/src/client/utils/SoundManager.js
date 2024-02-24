@@ -70,4 +70,3 @@ var SoundManager;
     }
     SoundManager.newLog = newLog;
 })(SoundManager = exports.SoundManager || (exports.SoundManager = {}));
-//# sourceMappingURL=SoundManager.js.map

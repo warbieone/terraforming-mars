@@ -32,4 +32,3 @@ class BigAsteroid extends Card_1.Card {
     }
 }
 exports.BigAsteroid = BigAsteroid;
-//# sourceMappingURL=BigAsteroid.js.map

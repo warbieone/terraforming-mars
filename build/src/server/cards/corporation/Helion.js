@@ -5,7 +5,6 @@ const CorporationCard_1 = require("./CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class Helion extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -23,7 +22,7 @@ class Helion extends CorporationCard_1.CorporationCard {
                     b.production((pb) => pb.heat(4)).nbsp.megacredits(40);
                     b.corpBox('effect', (ce) => {
                         ce.effect('You may use heat as M€. You may not use M€ as heat.', (eb) => {
-                            eb.startEffect.text('x').heat(1).equals().megacredits(0, { multiplier: Options_1.multiplier });
+                            eb.startEffect.text('x').heat(1).equals().megacredits(1, { text: 'x' });
                         });
                     });
                 }),
@@ -36,4 +35,3 @@ class Helion extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Helion = Helion;
-//# sourceMappingURL=Helion.js.map

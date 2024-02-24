@@ -60,4 +60,3 @@ class Ambient extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Ambient = Ambient;
-//# sourceMappingURL=Ambient.js.map

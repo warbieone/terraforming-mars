@@ -29,4 +29,3 @@ class Grass extends Card_1.Card {
     }
 }
 exports.Grass = Grass;
-//# sourceMappingURL=Grass.js.map

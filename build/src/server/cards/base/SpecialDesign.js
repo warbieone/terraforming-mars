@@ -25,4 +25,3 @@ class SpecialDesign extends Card_1.Card {
     }
 }
 exports.SpecialDesign = SpecialDesign;
-//# sourceMappingURL=SpecialDesign.js.map

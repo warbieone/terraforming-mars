@@ -29,4 +29,3 @@ var RequirementType;
     RequirementType["EXCAVATION"] = "Excavation";
     RequirementType["CORRUPTION"] = "Corruption";
 })(RequirementType = exports.RequirementType || (exports.RequirementType = {}));
-//# sourceMappingURL=RequirementType.js.map

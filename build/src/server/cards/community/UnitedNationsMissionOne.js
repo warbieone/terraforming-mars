@@ -42,4 +42,3 @@ class UnitedNationsMissionOne extends CorporationCard_1.CorporationCard {
     }
 }
 exports.UnitedNationsMissionOne = UnitedNationsMissionOne;
-//# sourceMappingURL=UnitedNationsMissionOne.js.map

@@ -32,4 +32,3 @@ class FlatMarsTheory extends Card_1.Card {
     }
 }
 exports.FlatMarsTheory = FlatMarsTheory;
-//# sourceMappingURL=FlatMarsTheory.js.map

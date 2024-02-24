@@ -34,4 +34,3 @@ class PhysicsComplex extends ActionCard_1.ActionCard {
     }
 }
 exports.PhysicsComplex = PhysicsComplex;
-//# sourceMappingURL=PhysicsComplex.js.map

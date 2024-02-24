@@ -14,9 +14,7 @@ class AwardScorer {
         }
     }
     get(player) {
-        var _a;
-        return (_a = this.scores.get(player.id)) !== null && _a !== void 0 ? _a : 0;
+        return this.scores.get(player.id) ?? 0;
     }
 }
 exports.AwardScorer = AwardScorer;
-//# sourceMappingURL=AwardScorer.js.map

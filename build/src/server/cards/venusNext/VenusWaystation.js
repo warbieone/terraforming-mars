@@ -28,4 +28,3 @@ class VenusWaystation extends Card_1.Card {
     }
 }
 exports.VenusWaystation = VenusWaystation;
-//# sourceMappingURL=VenusWaystation.js.map

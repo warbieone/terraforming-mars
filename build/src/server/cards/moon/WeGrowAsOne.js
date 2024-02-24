@@ -41,4 +41,3 @@ class WeGrowAsOne extends Card_1.Card {
     }
 }
 exports.WeGrowAsOne = WeGrowAsOne;
-//# sourceMappingURL=WeGrowAsOne.js.map

@@ -45,4 +45,3 @@ class SelectProductionToLose extends PlayerInput_1.BasePlayerInput {
     }
 }
 exports.SelectProductionToLose = SelectProductionToLose;
-//# sourceMappingURL=SelectProductionToLose.js.map

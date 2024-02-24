@@ -28,4 +28,3 @@ class Research extends Card_1.Card {
     }
 }
 exports.Research = Research;
-//# sourceMappingURL=Research.js.map

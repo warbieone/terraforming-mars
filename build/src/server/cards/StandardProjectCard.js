@@ -7,9 +7,13 @@ const SelectPaymentDeferred_1 = require("../deferredActions/SelectPaymentDeferre
 const Card_1 = require("./Card");
 const MoonExpansion_1 = require("../moon/MoonExpansion");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
+const utils_1 = require("../../common/utils/utils");
 class StandardProjectCard extends Card_1.Card {
     constructor(properties) {
-        super(Object.assign({ type: CardType_1.CardType.STANDARD_PROJECT }, properties));
+        super({
+            type: CardType_1.CardType.STANDARD_PROJECT,
+            ...properties,
+        });
     }
     get type() {
         return CardType_1.CardType.STANDARD_PROJECT;
@@ -18,20 +22,24 @@ class StandardProjectCard extends Card_1.Card {
         return 0;
     }
     _discount(player) {
-        var _a, _b;
-        const underworldStandardProjectCard = player.playedCards.find((card) => card.name === CardName_1.CardName.STANDARD_TECHNOLOGY_UNDERWORLD);
-        const underworldDiscount = (_b = (_a = underworldStandardProjectCard === null || underworldStandardProjectCard === void 0 ? void 0 : underworldStandardProjectCard.getCardDiscount) === null || _a === void 0 ? void 0 : _a.call(underworldStandardProjectCard, player, this)) !== null && _b !== void 0 ? _b : 0;
-        return underworldDiscount + this.discount(player);
+        const discountFromCards = (0, utils_1.sum)(player.playedCards.map((card) => card.getStandardProjectDiscount?.(player, this) ?? 0));
+        return discountFromCards + this.discount(player);
     }
     onStandardProject(player) {
-        var _a;
         for (const playedCard of player.tableau) {
-            (_a = playedCard.onStandardProject) === null || _a === void 0 ? void 0 : _a.call(playedCard, player, this);
+            playedCard.onStandardProject?.(player, this);
         }
     }
     canPlayOptions(player) {
         const canPayWith = this.canPayWith(player);
-        return Object.assign(Object.assign({}, canPayWith), { cost: this.cost - this._discount(player), tr: this.tr, auroraiData: true, spireScience: true, reserveUnits: MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, this) });
+        return {
+            ...canPayWith,
+            cost: this.cost - this._discount(player),
+            tr: this.tr,
+            auroraiData: true,
+            spireScience: true,
+            reserveUnits: MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, this),
+        };
     }
     canAct(player) {
         return player.canAfford(this.canPlayOptions(player));
@@ -61,4 +69,3 @@ class StandardProjectCard extends Card_1.Card {
     }
 }
 exports.StandardProjectCard = StandardProjectCard;
-//# sourceMappingURL=StandardProjectCard.js.map

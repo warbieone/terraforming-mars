@@ -29,4 +29,3 @@ class SpinoffProducts extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.SpinoffProducts = SpinoffProducts;
-//# sourceMappingURL=SpinoffProducts.js.map

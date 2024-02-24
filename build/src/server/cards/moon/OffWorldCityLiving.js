@@ -32,4 +32,3 @@ class OffWorldCityLiving extends Card_1.Card {
     }
 }
 exports.OffWorldCityLiving = OffWorldCityLiving;
-//# sourceMappingURL=OffWorldCityLiving.js.map

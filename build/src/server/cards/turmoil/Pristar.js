@@ -56,4 +56,3 @@ class Pristar extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Pristar = Pristar;
-//# sourceMappingURL=Pristar.js.map

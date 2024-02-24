@@ -29,4 +29,3 @@ class MoonTether extends Card_1.Card {
     }
 }
 exports.MoonTether = MoonTether;
-//# sourceMappingURL=MoonTether.js.map

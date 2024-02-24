@@ -49,4 +49,3 @@ class LavaTubeSettlement extends Card_1.Card {
     }
 }
 exports.LavaTubeSettlement = LavaTubeSettlement;
-//# sourceMappingURL=LavaTubeSettlement.js.map

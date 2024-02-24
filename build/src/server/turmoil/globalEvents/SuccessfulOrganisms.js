@@ -27,4 +27,3 @@ class SuccessfulOrganisms extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.SuccessfulOrganisms = SuccessfulOrganisms;
-//# sourceMappingURL=SuccessfulOrganisms.js.map

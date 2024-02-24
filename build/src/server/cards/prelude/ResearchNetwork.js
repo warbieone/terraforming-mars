@@ -26,4 +26,3 @@ class ResearchNetwork extends PreludeCard_1.PreludeCard {
     }
 }
 exports.ResearchNetwork = ResearchNetwork;
-//# sourceMappingURL=ResearchNetwork.js.map

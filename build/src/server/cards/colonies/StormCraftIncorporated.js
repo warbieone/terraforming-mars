@@ -33,4 +33,3 @@ class StormCraftIncorporated extends CorporationCard_1.ActiveCorporationCard {
     }
 }
 exports.StormCraftIncorporated = StormCraftIncorporated;
-//# sourceMappingURL=StormCraftIncorporated.js.map

@@ -15,4 +15,3 @@ class SpecialDesignProxy extends ProxyCard_1.ProxyCard {
     }
 }
 exports.SpecialDesignProxy = SpecialDesignProxy;
-//# sourceMappingURL=SpecialDesignProxy.js.map

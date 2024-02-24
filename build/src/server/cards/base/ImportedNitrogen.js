@@ -37,4 +37,3 @@ class ImportedNitrogen extends Card_1.Card {
     }
 }
 exports.ImportedNitrogen = ImportedNitrogen;
-//# sourceMappingURL=ImportedNitrogen.js.map

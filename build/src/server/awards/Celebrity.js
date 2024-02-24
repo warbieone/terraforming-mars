@@ -13,4 +13,3 @@ class Celebrity {
     }
 }
 exports.Celebrity = Celebrity;
-//# sourceMappingURL=Celebrity.js.map

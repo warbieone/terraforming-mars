@@ -26,4 +26,3 @@ class PermafrostExtraction extends Card_1.Card {
     }
 }
 exports.PermafrostExtraction = PermafrostExtraction;
-//# sourceMappingURL=PermafrostExtraction.js.map

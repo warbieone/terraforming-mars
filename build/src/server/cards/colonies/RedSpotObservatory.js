@@ -64,4 +64,3 @@ class RedSpotObservatory extends Card_1.Card {
     }
 }
 exports.RedSpotObservatory = RedSpotObservatory;
-//# sourceMappingURL=RedSpotObservatory.js.map

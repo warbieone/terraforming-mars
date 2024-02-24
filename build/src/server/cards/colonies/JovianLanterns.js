@@ -48,4 +48,3 @@ class JovianLanterns extends Card_1.Card {
     }
 }
 exports.JovianLanterns = JovianLanterns;
-//# sourceMappingURL=JovianLanterns.js.map

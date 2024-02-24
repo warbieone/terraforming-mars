@@ -52,4 +52,3 @@ class TempestConsultancy extends CorporationCard_1.CorporationCard {
     }
 }
 exports.TempestConsultancy = TempestConsultancy;
-//# sourceMappingURL=TempestConsultancy.js.map

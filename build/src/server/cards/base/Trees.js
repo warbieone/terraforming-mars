@@ -30,4 +30,3 @@ class Trees extends Card_1.Card {
     }
 }
 exports.Trees = Trees;
-//# sourceMappingURL=Trees.js.map

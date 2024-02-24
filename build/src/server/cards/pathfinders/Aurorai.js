@@ -40,4 +40,3 @@ class Aurorai extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Aurorai = Aurorai;
-//# sourceMappingURL=Aurorai.js.map

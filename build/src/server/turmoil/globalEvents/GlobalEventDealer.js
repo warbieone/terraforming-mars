@@ -102,4 +102,3 @@ class GlobalEventDealer {
     }
 }
 exports.GlobalEventDealer = GlobalEventDealer;
-//# sourceMappingURL=GlobalEventDealer.js.map

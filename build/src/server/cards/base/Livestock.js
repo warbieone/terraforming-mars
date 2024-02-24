@@ -43,4 +43,3 @@ class Livestock extends ActionCard_1.ActionCard {
     }
 }
 exports.Livestock = Livestock;
-//# sourceMappingURL=Livestock.js.map

@@ -31,10 +31,8 @@ class MartianMonuments extends Card_1.Card {
     }
     bespokeCanPlay(player) {
         return player.game.board.spaces.some((space) => {
-            var _a;
-            return Board_1.Board.isCitySpace(space) && ((_a = space.player) === null || _a === void 0 ? void 0 : _a.id) === player.id && space.spaceType !== SpaceType_1.SpaceType.COLONY;
+            return Board_1.Board.isCitySpace(space) && space.player?.id === player.id && space.spaceType !== SpaceType_1.SpaceType.COLONY;
         });
     }
 }
 exports.MartianMonuments = MartianMonuments;
-//# sourceMappingURL=MartianMonuments.js.map

@@ -11,4 +11,3 @@ class Botanist {
     }
 }
 exports.Botanist = Botanist;
-//# sourceMappingURL=Botanist.js.map

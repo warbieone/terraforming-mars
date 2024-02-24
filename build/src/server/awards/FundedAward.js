@@ -46,4 +46,3 @@ function deserializeFundedAwards(fundedAwards, players, awards) {
     });
 }
 exports.deserializeFundedAwards = deserializeFundedAwards;
-//# sourceMappingURL=FundedAward.js.map

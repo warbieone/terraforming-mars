@@ -21,4 +21,3 @@ class Leavitt extends Colony_1.Colony {
     }
 }
 exports.Leavitt = Leavitt;
-//# sourceMappingURL=Leavitt.js.map

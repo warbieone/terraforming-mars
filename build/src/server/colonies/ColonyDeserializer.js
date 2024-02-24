@@ -25,4 +25,3 @@ class ColonyDeserializer {
     }
 }
 exports.ColonyDeserializer = ColonyDeserializer;
-//# sourceMappingURL=ColonyDeserializer.js.map

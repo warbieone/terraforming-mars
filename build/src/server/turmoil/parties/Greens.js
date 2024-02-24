@@ -137,4 +137,3 @@ exports.GREENS_POLICY_1 = new GreensPolicy01();
 exports.GREENS_POLICY_2 = new GreensPolicy02();
 exports.GREENS_POLICY_3 = new GreensPolicy03();
 exports.GREENS_POLICY_4 = new GreensPolicy04();
-//# sourceMappingURL=Greens.js.map

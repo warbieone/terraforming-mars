@@ -30,4 +30,3 @@ class Pandemic extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.Pandemic = Pandemic;
-//# sourceMappingURL=Pandemic.js.map

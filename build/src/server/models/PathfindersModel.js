@@ -14,4 +14,3 @@ function createPathfindersModel(game) {
     };
 }
 exports.createPathfindersModel = createPathfindersModel;
-//# sourceMappingURL=PathfindersModel.js.map

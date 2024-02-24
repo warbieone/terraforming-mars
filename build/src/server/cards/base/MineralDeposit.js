@@ -24,4 +24,3 @@ class MineralDeposit extends Card_1.Card {
     }
 }
 exports.MineralDeposit = MineralDeposit;
-//# sourceMappingURL=MineralDeposit.js.map

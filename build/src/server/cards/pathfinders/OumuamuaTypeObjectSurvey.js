@@ -67,4 +67,3 @@ class OumuamuaTypeObjectSurvey extends Card_1.Card {
     }
 }
 exports.OumuamuaTypeObjectSurvey = OumuamuaTypeObjectSurvey;
-//# sourceMappingURL=OumuamuaTypeObjectSurvey.js.map

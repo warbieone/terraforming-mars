@@ -18,6 +18,9 @@ function serializeProjectCard(card) {
     if (card.resourceCount !== undefined) {
         serialized.resourceCount = card.resourceCount;
     }
+    if (card.generationUsed !== undefined) {
+        serialized.generationUsed = card.generationUsed;
+    }
     if (card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots) {
         serialized.targetCards = card.targetCards.map((t) => {
             return {
@@ -33,9 +36,6 @@ function serializeProjectCard(card) {
         serialized.isDisabled = card.isDisabled;
         if (card.opgActionIsActive !== undefined) {
             serialized.opgActionIsActive = card.opgActionIsActive;
-        }
-        if (card.generationUsed !== undefined) {
-            serialized.generationUsed = card.generationUsed;
         }
     }
     if (card.data !== undefined) {
@@ -54,6 +54,9 @@ function deserializeProjectCard(element, cardFinder) {
     }
     if (card.hasOwnProperty('data')) {
         card.data = element.data;
+    }
+    if (element.generationUsed !== undefined) {
+        card.generationUsed = element.generationUsed;
     }
     if ((0, ICloneTagCard_1.isICloneTagCard)(card) && element.cloneTag !== undefined) {
         card.cloneTag = element.cloneTag;
@@ -83,11 +86,7 @@ function deserializeProjectCard(element, cardFinder) {
         if (element.opgActionIsActive !== undefined) {
             card.opgActionIsActive = element.opgActionIsActive;
         }
-        if (element.generationUsed !== undefined) {
-            card.generationUsed = element.generationUsed;
-        }
     }
     return card;
 }
 exports.deserializeProjectCard = deserializeProjectCard;
-//# sourceMappingURL=CardSerialization.js.map

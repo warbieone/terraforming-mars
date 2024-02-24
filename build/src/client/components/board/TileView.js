@@ -10,4 +10,3 @@ function nextTileView(tileView) {
     return nextView[tileView];
 }
 exports.nextTileView = nextTileView;
-//# sourceMappingURL=TileView.js.map

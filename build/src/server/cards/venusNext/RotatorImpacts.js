@@ -72,4 +72,3 @@ class RotatorImpacts extends Card_1.Card {
     }
 }
 exports.RotatorImpacts = RotatorImpacts;
-//# sourceMappingURL=RotatorImpacts.js.map

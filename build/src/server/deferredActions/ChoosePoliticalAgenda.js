@@ -37,4 +37,3 @@ class ChoosePoliticalAgenda extends DeferredAction_1.DeferredAction {
     }
 }
 exports.ChoosePoliticalAgenda = ChoosePoliticalAgenda;
-//# sourceMappingURL=ChoosePoliticalAgenda.js.map

@@ -32,4 +32,3 @@ class StripMine extends Card_1.Card {
     }
 }
 exports.StripMine = StripMine;
-//# sourceMappingURL=StripMine.js.map

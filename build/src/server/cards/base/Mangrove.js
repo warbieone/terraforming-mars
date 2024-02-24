@@ -28,4 +28,3 @@ class Mangrove extends Card_1.Card {
     }
 }
 exports.Mangrove = Mangrove;
-//# sourceMappingURL=Mangrove.js.map

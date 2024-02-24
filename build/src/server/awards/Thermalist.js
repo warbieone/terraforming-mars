@@ -16,4 +16,3 @@ class Thermalist {
     }
 }
 exports.Thermalist = Thermalist;
-//# sourceMappingURL=Thermalist.js.map

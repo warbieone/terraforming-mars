@@ -30,4 +30,3 @@ class MarketingExperts extends Card_1.Card {
     }
 }
 exports.MarketingExperts = MarketingExperts;
-//# sourceMappingURL=MarketingExperts.js.map

@@ -8,4 +8,3 @@ var KeyboardNavigation;
     KeyboardNavigation["HAND"] = "KeyD";
     KeyboardNavigation["COLONIES"] = "KeyF";
 })(KeyboardNavigation = exports.KeyboardNavigation || (exports.KeyboardNavigation = {}));
-//# sourceMappingURL=KeyboardNavigation.js.map

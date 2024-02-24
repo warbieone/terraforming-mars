@@ -27,4 +27,3 @@ class CryoSleep extends Card_1.Card {
     }
 }
 exports.CryoSleep = CryoSleep;
-//# sourceMappingURL=CryoSleep.js.map

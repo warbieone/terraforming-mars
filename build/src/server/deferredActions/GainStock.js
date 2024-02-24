@@ -13,11 +13,9 @@ class GainStock extends DeferredAction_1.DeferredAction {
         }
     }
     execute() {
-        var _a, _b;
         this.player.stock.addUnits(this.units, { log: this.options.log });
-        (_b = (_a = this.options).cb) === null || _b === void 0 ? void 0 : _b.call(_a);
+        this.options.cb?.();
         return undefined;
     }
 }
 exports.GainStock = GainStock;
-//# sourceMappingURL=GainStock.js.map

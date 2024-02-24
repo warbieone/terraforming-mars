@@ -15,4 +15,3 @@ class Adapter {
     }
 }
 exports.Adapter = Adapter;
-//# sourceMappingURL=Adapter.js.map

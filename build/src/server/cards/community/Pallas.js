@@ -21,4 +21,3 @@ class Pallas extends Colony_1.Colony {
     }
 }
 exports.Pallas = Pallas;
-//# sourceMappingURL=Pallas.js.map

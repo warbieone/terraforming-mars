@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameHandler = void 0;
 const responses = require("./responses");
@@ -87,7 +78,7 @@ class GameHandler extends Handler_1.Handler {
             req.on('data', function (data) {
                 body += data.toString();
             });
-            req.once('end', () => __awaiter(this, void 0, void 0, function* () {
+            req.once('end', async () => {
                 try {
                     const gameReq = JSON.parse(body);
                     const gameId = (0, server_ids_1.generateRandomId)('g');
@@ -158,7 +149,7 @@ class GameHandler extends Handler_1.Handler {
                     };
                     let game;
                     if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
-                        const serialized = yield Database_1.Database.getInstance().getGameVersion(gameOptions.clonedGamedId, 0);
+                        const serialized = await Database_1.Database.getInstance().getGameVersion(gameOptions.clonedGamedId, 0);
                         game = Cloner_1.Cloner.clone(gameId, players, firstPlayerIdx, serialized);
                     }
                     else {
@@ -172,10 +163,9 @@ class GameHandler extends Handler_1.Handler {
                     responses.internalServerError(req, res, error);
                 }
                 resolve();
-            }));
+            });
         });
     }
 }
 exports.GameHandler = GameHandler;
 GameHandler.INSTANCE = new GameHandler();
-//# sourceMappingURL=Game.js.map

@@ -12,4 +12,3 @@ class RimSettler extends IMilestone_1.BaseMilestone {
     }
 }
 exports.RimSettler = RimSettler;
-//# sourceMappingURL=RimSettler.js.map

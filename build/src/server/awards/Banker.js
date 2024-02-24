@@ -11,4 +11,3 @@ class Banker {
     }
 }
 exports.Banker = Banker;
-//# sourceMappingURL=Banker.js.map

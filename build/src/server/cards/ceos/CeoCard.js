@@ -5,7 +5,10 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 class CeoCard extends Card_1.Card {
     constructor(properties) {
-        super(Object.assign({ type: CardType_1.CardType.CEO }, properties));
+        super({
+            type: CardType_1.CardType.CEO,
+            ...properties,
+        });
         this.isDisabled = false;
     }
     canAct(_player) {
@@ -19,4 +22,3 @@ class CeoCard extends Card_1.Card {
     }
 }
 exports.CeoCard = CeoCard;
-//# sourceMappingURL=CeoCard.js.map

@@ -26,4 +26,3 @@ class SFMemorial extends Card_1.Card {
     }
 }
 exports.SFMemorial = SFMemorial;
-//# sourceMappingURL=SFMemorial.js.map

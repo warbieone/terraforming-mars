@@ -56,4 +56,3 @@ class Flooding extends Card_1.Card {
     }
 }
 exports.Flooding = Flooding;
-//# sourceMappingURL=Flooding.js.map

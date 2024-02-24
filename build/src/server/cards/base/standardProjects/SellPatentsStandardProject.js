@@ -5,7 +5,6 @@ const CardName_1 = require("../../../../common/cards/CardName");
 const CardRenderer_1 = require("../../render/CardRenderer");
 const StandardProjectCard_1 = require("../../StandardProjectCard");
 const SelectCard_1 = require("../../../inputs/SelectCard");
-const Options_1 = require("../../Options");
 class SellPatentsStandardProject extends StandardProjectCard_1.StandardProjectCard {
     constructor() {
         super({
@@ -14,7 +13,7 @@ class SellPatentsStandardProject extends StandardProjectCard_1.StandardProjectCa
             metadata: {
                 cardNumber: 'SP8',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => b.standardProject('Discard any number of cards to gain that amount of M€.', (eb) => {
-                    eb.text('X').cards(1).startAction.megacredits(0, { multiplier: Options_1.multiplier });
+                    eb.text('X').cards(1).startAction.megacredits(1, { text: 'x' });
                 })),
             },
         });
@@ -36,4 +35,3 @@ class SellPatentsStandardProject extends StandardProjectCard_1.StandardProjectCa
     }
 }
 exports.SellPatentsStandardProject = SellPatentsStandardProject;
-//# sourceMappingURL=SellPatentsStandardProject.js.map

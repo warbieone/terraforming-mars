@@ -23,4 +23,3 @@ class BufferGasStandardProject extends StandardProjectCard_1.StandardProjectCard
     }
 }
 exports.BufferGasStandardProject = BufferGasStandardProject;
-//# sourceMappingURL=BufferGasStandardProject.js.map

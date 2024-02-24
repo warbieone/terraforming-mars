@@ -34,10 +34,8 @@ class MonsInsurance extends CorporationCard_1.CorporationCard {
         });
     }
     bespokePlay(player) {
-        for (const p of player.game.getPlayers()) {
-            if (p.id !== player.id) {
-                p.production.add(Resource_1.Resource.MEGACREDITS, -2, { log: true });
-            }
+        for (const p of player.getOpponents()) {
+            p.production.add(Resource_1.Resource.MEGACREDITS, -2, { log: true });
         }
         player.game.monsInsuranceOwner = player.id;
         return undefined;
@@ -65,4 +63,3 @@ class MonsInsurance extends CorporationCard_1.CorporationCard {
     }
 }
 exports.MonsInsurance = MonsInsurance;
-//# sourceMappingURL=MonsInsurance.js.map

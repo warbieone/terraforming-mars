@@ -27,4 +27,3 @@ class AntiGravityTechnology extends Card_1.Card {
     }
 }
 exports.AntiGravityTechnology = AntiGravityTechnology;
-//# sourceMappingURL=AntiGravityTechnology.js.map

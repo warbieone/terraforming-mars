@@ -32,4 +32,3 @@ class ColonistShuttles extends Card_1.Card {
     }
 }
 exports.ColonistShuttles = ColonistShuttles;
-//# sourceMappingURL=ColonistShuttles.js.map

@@ -32,4 +32,3 @@ class CorporateStronghold extends Card_1.Card {
     }
 }
 exports.CorporateStronghold = CorporateStronghold;
-//# sourceMappingURL=CorporateStronghold.js.map

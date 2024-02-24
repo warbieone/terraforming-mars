@@ -105,8 +105,8 @@ class Philares extends CorporationCard_1.CorporationCard {
         const adjacentSpaces = cardOwner.game.board.getAdjacentSpaces(space);
         const adjacentSpacesWithPlayerTiles = adjacentSpaces.filter((space) => space.tile !== undefined && space.player !== undefined);
         const eligibleTiles = (cardOwner.id === activePlayer.id) ?
-            adjacentSpacesWithPlayerTiles.filter((space) => { var _a; return ((_a = space.player) === null || _a === void 0 ? void 0 : _a.id) !== cardOwner.id; }) :
-            adjacentSpacesWithPlayerTiles.filter((space) => { var _a; return ((_a = space.player) === null || _a === void 0 ? void 0 : _a.id) === cardOwner.id; });
+            adjacentSpacesWithPlayerTiles.filter((space) => space.player?.id !== cardOwner.id) :
+            adjacentSpacesWithPlayerTiles.filter((space) => space.player?.id === cardOwner.id);
         if (eligibleTiles.length > 0) {
             cardOwner.defer(() => {
                 cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(eligibleTiles.length).card(this));
@@ -116,4 +116,3 @@ class Philares extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Philares = Philares;
-//# sourceMappingURL=Philares.js.map

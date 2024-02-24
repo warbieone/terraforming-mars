@@ -11,4 +11,3 @@ class Pioneer extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Pioneer = Pioneer;
-//# sourceMappingURL=Pioneer.js.map

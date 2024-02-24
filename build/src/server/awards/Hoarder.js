@@ -11,4 +11,3 @@ class Hoarder {
     }
 }
 exports.Hoarder = Hoarder;
-//# sourceMappingURL=Hoarder.js.map

@@ -34,12 +34,10 @@ class SponsoredAcademies extends Card_1.Card {
     bespokePlay(player) {
         player.game.defer(new DiscardCards_1.DiscardCards(player), DeferredAction_1.Priority.SPONSORED_ACADEMIES);
         player.game.defer(DrawCards_1.DrawCards.keepAll(player, 3), DeferredAction_1.Priority.SPONSORED_ACADEMIES);
-        const otherPlayers = player.game.getPlayers().filter((p) => p.id !== player.id);
-        for (const p of otherPlayers) {
+        for (const p of player.getOpponents()) {
             player.game.defer(DrawCards_1.DrawCards.keepAll(p));
         }
         return undefined;
     }
 }
 exports.SponsoredAcademies = SponsoredAcademies;
-//# sourceMappingURL=SponsoredAcademies.js.map

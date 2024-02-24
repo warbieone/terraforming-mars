@@ -13,4 +13,3 @@ class Ecologist extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Ecologist = Ecologist;
-//# sourceMappingURL=Ecologist.js.map

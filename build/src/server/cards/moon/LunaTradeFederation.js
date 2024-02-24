@@ -9,7 +9,6 @@ const TileType_1 = require("../../../common/TileType");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const Resource_1 = require("../../../common/Resource");
 const Size_1 = require("../../../common/cards/render/Size");
-const Options_1 = require("../Options");
 class LunaTradeFederation extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -29,7 +28,7 @@ class LunaTradeFederation extends CorporationCard_1.CorporationCard {
                     });
                     b.br;
                     b.effect('You may use titanium resources as 2M€ each.', (eb) => {
-                        eb.startEffect.text('X').titanium(1).equals().megacredits(2, { multiplier: Options_1.multiplier });
+                        eb.startEffect.text('X').titanium(1).equals().megacredits(1, { text: '2x' });
                     });
                 }),
             },
@@ -46,4 +45,3 @@ class LunaTradeFederation extends CorporationCard_1.CorporationCard {
     }
 }
 exports.LunaTradeFederation = LunaTradeFederation;
-//# sourceMappingURL=LunaTradeFederation.js.map

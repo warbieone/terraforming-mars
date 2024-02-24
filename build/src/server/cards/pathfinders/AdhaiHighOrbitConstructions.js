@@ -61,4 +61,3 @@ class AdhaiHighOrbitConstructions extends CorporationCard_1.CorporationCard {
     }
 }
 exports.AdhaiHighOrbitConstructions = AdhaiHighOrbitConstructions;
-//# sourceMappingURL=AdhaiHighOrbitConstructions.js.map

@@ -16,42 +16,36 @@ const Policy_1 = require("./Policy");
 class TurmoilHandler {
     constructor() { }
     static partyAction(player) {
-        var _a;
         const turmoil = player.game.turmoil;
         if (turmoil === undefined) {
             return undefined;
         }
         const policy = turmoil.rulingPolicy();
-        if ((_a = policy.canAct) === null || _a === void 0 ? void 0 : _a.call(policy, player)) {
-            return new SelectOption_1.SelectOption((0, Policy_1.policyDescription)(policy, player), 'Pay').andThen(() => { var _a; return (_a = policy.action) === null || _a === void 0 ? void 0 : _a.call(policy, player); });
+        if (policy.canAct?.(player)) {
+            return new SelectOption_1.SelectOption((0, Policy_1.policyDescription)(policy, player), 'Pay').andThen(() => policy.action?.(player));
         }
         return undefined;
     }
     static applyOnCardPlayedEffect(player, selectedCard) {
         if (PartyHooks_1.PartyHooks.shouldApplyPolicy(player, PartyName_1.PartyName.GREENS, 'gp03')) {
-            const policy = Greens_1.GREENS_POLICY_3;
-            policy.onCardPlayed(player, selectedCard);
+            Greens_1.GREENS_POLICY_3.onCardPlayed(player, selectedCard);
         }
         if (PartyHooks_1.PartyHooks.shouldApplyPolicy(player, PartyName_1.PartyName.MARS, 'mfp02')) {
-            const policy = MarsFirst_1.MARS_FIRST_POLICY_2;
-            policy.onCardPlayed(player, selectedCard);
+            MarsFirst_1.MARS_FIRST_POLICY_2.onCardPlayed(player, selectedCard);
         }
     }
     static resolveTilePlacementCosts(player) {
         if (PartyHooks_1.PartyHooks.shouldApplyPolicy(player, PartyName_1.PartyName.REDS, 'rp02')) {
-            const redsPolicy = Reds_1.REDS_POLICY_2;
-            redsPolicy.onTilePlaced(player);
+            Reds_1.REDS_POLICY_2.onTilePlaced(player);
         }
     }
     static resolveTilePlacementBonuses(player, spaceType) {
         PartyHooks_1.PartyHooks.applyMarsFirstRulingPolicy(player, spaceType);
         if (PartyHooks_1.PartyHooks.shouldApplyPolicy(player, PartyName_1.PartyName.GREENS, 'gp02')) {
-            const greensPolicy = Greens_1.GREENS_POLICY_2;
-            greensPolicy.onTilePlaced(player);
+            Greens_1.GREENS_POLICY_2.onTilePlaced(player);
         }
         if (PartyHooks_1.PartyHooks.shouldApplyPolicy(player, PartyName_1.PartyName.KELVINISTS, 'kp04')) {
-            const kelvinistsPolicy = Kelvinists_1.KELVINISTS_POLICY_4;
-            kelvinistsPolicy.onTilePlaced(player);
+            Kelvinists_1.KELVINISTS_POLICY_4.onTilePlaced(player);
         }
     }
     static onGlobalParameterIncrease(player, parameter, steps = 1) {
@@ -68,11 +62,10 @@ class TurmoilHandler {
         }
     }
     static computeTerraformRatingBump(player, inputTr = {}) {
-        var _a, _b, _c, _d;
         if (!PartyHooks_1.PartyHooks.shouldApplyPolicy(player, PartyName_1.PartyName.REDS, 'rp01'))
             return 0;
         let tr = inputTr instanceof Function ? inputTr(player) : inputTr;
-        tr = Object.assign({}, tr);
+        tr = { ...tr };
         let total = 0;
         if (tr.oxygen !== undefined) {
             const availableSteps = constants.MAX_OXYGEN_LEVEL - player.game.getOxygenLevel();
@@ -80,7 +73,7 @@ class TurmoilHandler {
             total = total + steps;
             if (player.game.getOxygenLevel() < constants.OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS &&
                 player.game.getOxygenLevel() + steps >= constants.OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS) {
-                tr.temperature = ((_a = tr.temperature) !== null && _a !== void 0 ? _a : 0) + 1;
+                tr.temperature = (tr.temperature ?? 0) + 1;
             }
         }
         if (tr.temperature !== undefined) {
@@ -89,7 +82,7 @@ class TurmoilHandler {
             total = total + steps;
             if (player.game.getTemperature() < constants.TEMPERATURE_FOR_OCEAN_BONUS &&
                 player.game.getTemperature() + (steps * 2) >= constants.TEMPERATURE_FOR_OCEAN_BONUS) {
-                tr.oceans = ((_b = tr.oceans) !== null && _b !== void 0 ? _b : 0) + 1;
+                tr.oceans = (tr.oceans ?? 0) + 1;
             }
         }
         if (tr.oceans !== undefined) {
@@ -103,7 +96,7 @@ class TurmoilHandler {
             total = total + steps;
             if (player.game.getVenusScaleLevel() < constants.VENUS_LEVEL_FOR_TR_BONUS &&
                 player.game.getVenusScaleLevel() + (steps * 2) >= constants.VENUS_LEVEL_FOR_TR_BONUS) {
-                tr.tr = ((_c = tr.tr) !== null && _c !== void 0 ? _c : 0) + 1;
+                tr.tr = (tr.tr ?? 0) + 1;
             }
         }
         MoonExpansion_1.MoonExpansion.ifMoon(player.game, (moonData) => {
@@ -120,9 +113,8 @@ class TurmoilHandler {
                 total = total + Math.min(availableSteps, tr.moonLogistics);
             }
         });
-        total += (_d = tr.tr) !== null && _d !== void 0 ? _d : 0;
+        total += tr.tr ?? 0;
         return total;
     }
 }
 exports.TurmoilHandler = TurmoilHandler;
-//# sourceMappingURL=TurmoilHandler.js.map

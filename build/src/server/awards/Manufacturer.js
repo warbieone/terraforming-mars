@@ -12,4 +12,3 @@ class Manufacturer {
     }
 }
 exports.Manufacturer = Manufacturer;
-//# sourceMappingURL=Manufacturer.js.map

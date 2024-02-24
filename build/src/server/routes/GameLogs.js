@@ -7,12 +7,11 @@ const Log_1 = require("../../common/logs/Log");
 const LogMessageDataType_1 = require("../../common/logs/LogMessageDataType");
 class GameLogs {
     getLogsForGeneration(messages, generation) {
-        var _a;
         let foundStart = generation === 1;
         const newMessages = [];
         for (const message of messages) {
             if (message.type === LogMessageType_1.LogMessageType.NEW_GENERATION) {
-                const value = Number((_a = message.data[0]) === null || _a === void 0 ? void 0 : _a.value);
+                const value = Number(message.data[0]?.value);
                 if (value === generation) {
                     foundStart = true;
                 }
@@ -62,4 +61,3 @@ class GameLogs {
     }
 }
 exports.GameLogs = GameLogs;
-//# sourceMappingURL=GameLogs.js.map

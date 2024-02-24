@@ -67,4 +67,3 @@ class RedCity extends Card_1.Card {
     }
 }
 exports.RedCity = RedCity;
-//# sourceMappingURL=RedCity.js.map

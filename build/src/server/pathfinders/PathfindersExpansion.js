@@ -102,15 +102,14 @@ class PathfindersExpansion {
         }
     }
     static grant(reward, player, tag) {
-        var _a, _b;
         const game = player.game;
         switch (reward) {
             case '1vp':
-                (_a = game.pathfindersData) === null || _a === void 0 ? void 0 : _a.vps.push({ id: player.id, tag, points: 1 });
+                game.pathfindersData?.vps.push({ id: player.id, tag, points: 1 });
                 game.log('${0} has the most ${1} tags and earns 1VP', (b) => b.player(player).string(tag));
                 break;
             case '2vp':
-                (_b = game.pathfindersData) === null || _b === void 0 ? void 0 : _b.vps.push({ id: player.id, tag, points: 2 });
+                game.pathfindersData?.vps.push({ id: player.id, tag, points: 2 });
                 game.log('${0} has the most ${1} tags and earns 2VP', (b) => b.player(player).string(tag));
                 break;
             case '3mc':
@@ -200,7 +199,7 @@ class PathfindersExpansion {
     }
     static playersWithMostTags(tag, players, activePlayer) {
         const counts = players.map((player) => {
-            const includeWildTags = player.id === (activePlayer === null || activePlayer === void 0 ? void 0 : activePlayer.id);
+            const includeWildTags = player.id === activePlayer?.id;
             const count = player.tags.count(tag, includeWildTags ? 'default' : 'raw');
             return { player, count };
         });
@@ -226,4 +225,3 @@ class PathfindersExpansion {
     }
 }
 exports.PathfindersExpansion = PathfindersExpansion;
-//# sourceMappingURL=PathfindersExpansion.js.map

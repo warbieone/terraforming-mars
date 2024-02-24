@@ -27,4 +27,3 @@ class VanAllen extends CeoCard_1.CeoCard {
     }
 }
 exports.VanAllen = VanAllen;
-//# sourceMappingURL=VanAllen.js.map

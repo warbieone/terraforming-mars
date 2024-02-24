@@ -11,4 +11,3 @@ class Historian {
     }
 }
 exports.Historian = Historian;
-//# sourceMappingURL=Historian.js.map

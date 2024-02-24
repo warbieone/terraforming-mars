@@ -38,4 +38,3 @@ class DoubleDown extends PreludeCard_1.PreludeCard {
     }
 }
 exports.DoubleDown = DoubleDown;
-//# sourceMappingURL=DoubleDown.js.map

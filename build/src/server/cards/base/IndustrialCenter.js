@@ -52,4 +52,3 @@ class IndustrialCenter extends ActionCard_1.ActionCard {
     }
 }
 exports.IndustrialCenter = IndustrialCenter;
-//# sourceMappingURL=IndustrialCenter.js.map

@@ -18,4 +18,3 @@ class NuclearZoneAres extends NuclearZone_1.NuclearZone {
     }
 }
 exports.NuclearZoneAres = NuclearZoneAres;
-//# sourceMappingURL=NuclearZoneAres.js.map

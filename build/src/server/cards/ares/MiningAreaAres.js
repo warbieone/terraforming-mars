@@ -18,7 +18,7 @@ class MiningAreaAres extends MiningArea_1.MiningArea {
             }),
             description: 'Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.',
         });
+        this.isAres = true;
     }
 }
 exports.MiningAreaAres = MiningAreaAres;
-//# sourceMappingURL=MiningAreaAres.js.map

@@ -28,4 +28,3 @@ class Omnicourt extends Card_1.Card {
     }
 }
 exports.Omnicourt = Omnicourt;
-//# sourceMappingURL=Omnicourt.js.map

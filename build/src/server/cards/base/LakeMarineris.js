@@ -26,4 +26,3 @@ class LakeMarineris extends Card_1.Card {
     }
 }
 exports.LakeMarineris = LakeMarineris;
-//# sourceMappingURL=LakeMarineris.js.map

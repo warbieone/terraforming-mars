@@ -26,4 +26,3 @@ class ConvoyFromEuropa extends Card_1.Card {
     }
 }
 exports.ConvoyFromEuropa = ConvoyFromEuropa;
-//# sourceMappingURL=ConvoyFromEuropa.js.map

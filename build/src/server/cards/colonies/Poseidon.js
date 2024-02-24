@@ -30,4 +30,3 @@ class Poseidon extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Poseidon = Poseidon;
-//# sourceMappingURL=Poseidon.js.map

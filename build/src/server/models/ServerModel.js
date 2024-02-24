@@ -245,12 +245,11 @@ class Server {
         return protection;
     }
     static getColor(space) {
-        var _a;
         if ((space.tile === undefined || space.tile.tileType !== TileType_1.TileType.OCEAN) &&
             space.player !== undefined) {
             return space.player.color;
         }
-        if (((_a = space.tile) === null || _a === void 0 ? void 0 : _a.protectedHazard) === true) {
+        if (space.tile?.protectedHazard === true) {
             return Color_1.Color.BRONZE;
         }
         return undefined;
@@ -259,7 +258,6 @@ class Server {
         const volcanicSpaceIds = board.getVolcanicSpaceIds();
         const noctisCitySpaceIds = board.getNoctisCitySpaceId();
         return board.spaces.map((space) => {
-            var _a, _b;
             let highlight = undefined;
             if (volcanicSpaceIds.includes(space.id)) {
                 highlight = 'volcanic';
@@ -274,7 +272,7 @@ class Server {
                 spaceType: space.spaceType,
                 bonus: space.bonus,
             };
-            const tileType = (_a = space.tile) === null || _a === void 0 ? void 0 : _a.tileType;
+            const tileType = space.tile?.tileType;
             if (tileType !== undefined) {
                 model.tileType = tileType;
             }
@@ -285,7 +283,7 @@ class Server {
             if (highlight === undefined) {
                 model.highlight = highlight;
             }
-            if (((_b = space.tile) === null || _b === void 0 ? void 0 : _b.rotated) === true) {
+            if (space.tile?.rotated === true) {
                 model.rotated = true;
             }
             const gagarinIndex = gagarin.indexOf(space.id);
@@ -363,4 +361,3 @@ class Server {
     }
 }
 exports.Server = Server;
-//# sourceMappingURL=ServerModel.js.map

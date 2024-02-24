@@ -8,4 +8,3 @@ var Size;
     Size["LARGE"] = "L";
     Size["TINY"] = "XS";
 })(Size = exports.Size || (exports.Size = {}));
-//# sourceMappingURL=Size.js.map

@@ -31,4 +31,3 @@ class VenusMagnetizer extends ActionCard_1.ActionCard {
     }
 }
 exports.VenusMagnetizer = VenusMagnetizer;
-//# sourceMappingURL=VenusMagnetizer.js.map

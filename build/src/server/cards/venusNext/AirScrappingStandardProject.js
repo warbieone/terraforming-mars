@@ -30,4 +30,3 @@ class AirScrappingStandardProject extends StandardProjectCard_1.StandardProjectC
     }
 }
 exports.AirScrappingStandardProject = AirScrappingStandardProject;
-//# sourceMappingURL=AirScrappingStandardProject.js.map

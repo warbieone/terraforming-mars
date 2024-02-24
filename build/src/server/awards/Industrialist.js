@@ -16,4 +16,3 @@ class Industrialist {
     }
 }
 exports.Industrialist = Industrialist;
-//# sourceMappingURL=Industrialist.js.map

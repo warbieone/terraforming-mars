@@ -20,4 +20,3 @@ class PlayProjectCard extends DeferredAction_1.DeferredAction {
     }
 }
 exports.PlayProjectCard = PlayProjectCard;
-//# sourceMappingURL=PlayProjectCard.js.map

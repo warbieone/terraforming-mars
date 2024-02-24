@@ -11,9 +11,8 @@ class Urbanist {
     getScore(player) {
         let score = 0;
         player.game.board.spaces.forEach((space) => {
-            var _a, _b;
-            if (Board_1.Board.isCitySpace(space) && ((_a = space.player) === null || _a === void 0 ? void 0 : _a.id) === player.id) {
-                switch ((_b = space.tile) === null || _b === void 0 ? void 0 : _b.tileType) {
+            if (Board_1.Board.isCitySpace(space) && space.player?.id === player.id) {
+                switch (space.tile?.tileType) {
                     case TileType_1.TileType.CITY:
                     case TileType_1.TileType.OCEAN_CITY:
                         score += this.countGreeneries(player, space);
@@ -42,7 +41,7 @@ class Urbanist {
         return score;
     }
     getVictoryPoints(player, space) {
-        const card = player.playedCards.find((c) => { var _a; return c.name === ((_a = space === null || space === void 0 ? void 0 : space.tile) === null || _a === void 0 ? void 0 : _a.card); });
+        const card = player.playedCards.find((c) => c.name === space?.tile?.card);
         if (card !== undefined) {
             return card.getVictoryPoints(player);
         }
@@ -50,4 +49,3 @@ class Urbanist {
     }
 }
 exports.Urbanist = Urbanist;
-//# sourceMappingURL=Urbanist.js.map

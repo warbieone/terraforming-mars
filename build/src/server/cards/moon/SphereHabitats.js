@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const TileType_1 = require("../../../common/TileType");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
 class SphereHabitats extends Card_1.Card {
     constructor() {
@@ -29,9 +28,7 @@ class SphereHabitats extends Card_1.Card {
                     b.moonHabitat({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_HABITAT_RATE });
                 }),
             },
-            tilesBuilt: [TileType_1.TileType.MOON_HABITAT],
         });
     }
 }
 exports.SphereHabitats = SphereHabitats;
-//# sourceMappingURL=SphereHabitats.js.map

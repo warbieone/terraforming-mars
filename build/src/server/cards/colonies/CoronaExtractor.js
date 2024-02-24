@@ -27,4 +27,3 @@ class CoronaExtractor extends Card_1.Card {
     }
 }
 exports.CoronaExtractor = CoronaExtractor;
-//# sourceMappingURL=CoronaExtractor.js.map

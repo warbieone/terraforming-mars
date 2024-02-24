@@ -36,4 +36,3 @@ class RoverDriversUnion extends Card_1.Card {
     }
 }
 exports.RoverDriversUnion = RoverDriversUnion;
-//# sourceMappingURL=RoverDriversUnion.js.map

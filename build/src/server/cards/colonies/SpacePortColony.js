@@ -41,4 +41,3 @@ class SpacePortColony extends Card_1.Card {
     }
 }
 exports.SpacePortColony = SpacePortColony;
-//# sourceMappingURL=SpacePortColony.js.map

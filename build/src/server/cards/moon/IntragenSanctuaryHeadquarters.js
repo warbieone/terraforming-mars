@@ -45,4 +45,3 @@ class IntragenSanctuaryHeadquarters extends CorporationCard_1.CorporationCard {
     }
 }
 exports.IntragenSanctuaryHeadquarters = IntragenSanctuaryHeadquarters;
-//# sourceMappingURL=IntragenSanctuaryHeadquarters.js.map

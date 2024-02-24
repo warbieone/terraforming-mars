@@ -28,4 +28,3 @@ class NeutralizerFactory extends Card_1.Card {
     }
 }
 exports.NeutralizerFactory = NeutralizerFactory;
-//# sourceMappingURL=NeutralizerFactory.js.map

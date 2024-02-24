@@ -25,4 +25,3 @@ class InterplanetaryColonyShip extends Card_1.Card {
     }
 }
 exports.InterplanetaryColonyShip = InterplanetaryColonyShip;
-//# sourceMappingURL=InterplanetaryColonyShip.js.map

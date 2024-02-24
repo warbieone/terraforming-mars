@@ -90,4 +90,3 @@ class LogHelper {
     }
 }
 exports.LogHelper = LogHelper;
-//# sourceMappingURL=LogHelper.js.map

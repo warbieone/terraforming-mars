@@ -31,4 +31,3 @@ class TropicalResort extends Card_1.Card {
     }
 }
 exports.TropicalResort = TropicalResort;
-//# sourceMappingURL=TropicalResort.js.map

@@ -19,4 +19,3 @@ MoonCards.otherScienceCards = new Set([
     CardName_1.CardName.SEARCH_FOR_LIFE,
     CardName_1.CardName.SEARCH_FOR_LIFE_UNDERGROUND,
 ]);
-//# sourceMappingURL=MoonCards.js.map

@@ -35,4 +35,3 @@ class Ender extends CeoCard_1.CeoCard {
     }
 }
 exports.Ender = Ender;
-//# sourceMappingURL=Ender.js.map

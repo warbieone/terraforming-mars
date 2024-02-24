@@ -24,4 +24,3 @@ class PowerGeneration extends PreludeCard_1.PreludeCard {
     }
 }
 exports.PowerGeneration = PowerGeneration;
-//# sourceMappingURL=PowerGeneration.js.map

@@ -25,4 +25,3 @@ class MicroMills extends Card_1.Card {
     }
 }
 exports.MicroMills = MicroMills;
-//# sourceMappingURL=MicroMills.js.map

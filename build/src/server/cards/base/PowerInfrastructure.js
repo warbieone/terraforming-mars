@@ -8,7 +8,6 @@ const SelectAmount_1 = require("../../inputs/SelectAmount");
 const CardName_1 = require("../../../common/cards/CardName");
 const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class PowerInfrastructure extends Card_1.Card {
     constructor() {
         super({
@@ -20,7 +19,7 @@ class PowerInfrastructure extends Card_1.Card {
                 cardNumber: '194',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend any amount of energy and gain that amount of M€.', (eb) => {
-                        eb.text('x').energy(1).startAction.megacredits(0, { multiplier: Options_1.multiplier });
+                        eb.text('x').energy(1).startAction.megacredits(1, { text: 'x' });
                     });
                 }),
             },
@@ -39,4 +38,3 @@ class PowerInfrastructure extends Card_1.Card {
     }
 }
 exports.PowerInfrastructure = PowerInfrastructure;
-//# sourceMappingURL=PowerInfrastructure.js.map

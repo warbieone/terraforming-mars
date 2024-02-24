@@ -39,4 +39,3 @@ class MagneticFieldGeneratorsPromo extends Card_1.Card {
     }
 }
 exports.MagneticFieldGeneratorsPromo = MagneticFieldGeneratorsPromo;
-//# sourceMappingURL=MagneticFieldGeneratorsPromo.js.map

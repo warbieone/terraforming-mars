@@ -31,4 +31,3 @@ class MedicalLab extends Card_1.Card {
     }
 }
 exports.MedicalLab = MedicalLab;
-//# sourceMappingURL=MedicalLab.js.map

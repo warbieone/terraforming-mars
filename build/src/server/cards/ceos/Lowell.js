@@ -38,8 +38,7 @@ class Lowell extends CeoCard_1.CeoCard {
             game.ceoDeck.drawLegacy(game),
         ];
         ceosDrawn = ceosDrawn.filter((ceo) => {
-            var _a;
-            if (((_a = ceo.canPlay) === null || _a === void 0 ? void 0 : _a.call(ceo, player)) === false) {
+            if (ceo.canPlay?.(player) === false) {
                 game.ceoDeck.discard(ceo);
                 game.log('${0} was discarded as ${1} could not play it.', (b) => b.card(ceo).player(player), { reservedFor: player });
                 return false;
@@ -58,4 +57,3 @@ class Lowell extends CeoCard_1.CeoCard {
     }
 }
 exports.Lowell = Lowell;
-//# sourceMappingURL=Lowell.js.map

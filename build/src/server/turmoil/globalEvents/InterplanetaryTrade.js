@@ -29,4 +29,3 @@ class InterplanetaryTrade extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.InterplanetaryTrade = InterplanetaryTrade;
-//# sourceMappingURL=InterplanetaryTrade.js.map

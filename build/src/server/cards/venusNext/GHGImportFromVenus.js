@@ -30,4 +30,3 @@ class GHGImportFromVenus extends Card_1.Card {
     }
 }
 exports.GHGImportFromVenus = GHGImportFromVenus;
-//# sourceMappingURL=GHGImportFromVenus.js.map

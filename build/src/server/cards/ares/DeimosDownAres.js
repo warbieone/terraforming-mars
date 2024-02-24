@@ -21,4 +21,3 @@ class DeimosDownAres extends DeimosDownPromo_1.DeimosDownPromo {
     }
 }
 exports.DeimosDownAres = DeimosDownAres;
-//# sourceMappingURL=DeimosDownAres.js.map

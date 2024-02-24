@@ -6,4 +6,3 @@ function isICorporationCard(card) {
     return card.type === CardType_1.CardType.CORPORATION;
 }
 exports.isICorporationCard = isICorporationCard;
-//# sourceMappingURL=ICorporationCard.js.map

@@ -37,4 +37,3 @@ class CeresSpaceport extends Card_1.Card {
     }
 }
 exports.CeresSpaceport = CeresSpaceport;
-//# sourceMappingURL=CeresSpaceport.js.map

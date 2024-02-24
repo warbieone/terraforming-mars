@@ -73,4 +73,3 @@ class Wetlands extends Card_1.Card {
     }
 }
 exports.Wetlands = Wetlands;
-//# sourceMappingURL=Wetlands.js.map

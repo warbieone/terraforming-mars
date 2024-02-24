@@ -90,4 +90,3 @@ class CometAiming extends Card_1.Card {
     }
 }
 exports.CometAiming = CometAiming;
-//# sourceMappingURL=CometAiming.js.map

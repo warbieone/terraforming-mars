@@ -52,4 +52,3 @@ class RedTourismWave extends Card_1.Card {
     }
 }
 exports.RedTourismWave = RedTourismWave;
-//# sourceMappingURL=RedTourismWave.js.map

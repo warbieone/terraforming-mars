@@ -32,4 +32,3 @@ class DeimosDown extends Card_1.Card {
     }
 }
 exports.DeimosDown = DeimosDown;
-//# sourceMappingURL=DeimosDown.js.map

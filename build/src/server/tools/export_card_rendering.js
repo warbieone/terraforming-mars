@@ -30,7 +30,6 @@ class CardProcessor {
         }
     }
     static processCard(module, card, compatibility) {
-        var _a, _b;
         if (card.type === CardType_1.CardType.PROXY)
             return;
         let startingMegaCredits = undefined;
@@ -42,7 +41,7 @@ class CardProcessor {
             startingMegaCredits = card.startingMegaCredits;
             cardCost = card.cardCost;
         }
-        const production = (_a = card.behavior) === null || _a === void 0 ? void 0 : _a.production;
+        const production = card.behavior?.production;
         const clientCard = {
             module: module,
             name: card.name,
@@ -51,7 +50,7 @@ class CardProcessor {
             victoryPoints: card.victoryPoints,
             cost: card.cost,
             type: card.type,
-            requirements: (_b = card.requirements) !== null && _b !== void 0 ? _b : [],
+            requirements: card.requirements ?? [],
             metadata: card.metadata,
             productionBox: Units_1.Units.isUnits(production) ? production : Units_1.Units.EMPTY,
             resourceType: card.resourceType,
@@ -148,4 +147,3 @@ fs.writeFileSync('src/genfiles/cards.json', JSON.stringify(CardProcessor.json, n
 fs.writeFileSync('src/genfiles/events.json', JSON.stringify(GlobalEventProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/colonies.json', JSON.stringify(ColoniesProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/ma.json', JSON.stringify(MAProcessor.json, null, 2));
-//# sourceMappingURL=export_card_rendering.js.map

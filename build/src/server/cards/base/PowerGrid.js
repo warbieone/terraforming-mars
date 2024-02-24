@@ -28,4 +28,3 @@ class PowerGrid extends Card_1.Card {
     }
 }
 exports.PowerGrid = PowerGrid;
-//# sourceMappingURL=PowerGrid.js.map

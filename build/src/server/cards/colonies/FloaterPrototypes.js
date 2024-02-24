@@ -26,4 +26,3 @@ class FloaterPrototypes extends Card_1.Card {
     }
 }
 exports.FloaterPrototypes = FloaterPrototypes;
-//# sourceMappingURL=FloaterPrototypes.js.map

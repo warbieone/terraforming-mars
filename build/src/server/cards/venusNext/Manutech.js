@@ -36,4 +36,3 @@ class Manutech extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Manutech = Manutech;
-//# sourceMappingURL=Manutech.js.map

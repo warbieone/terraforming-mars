@@ -5,8 +5,8 @@ const responses = require("./responses");
 class Handler {
     constructor(options) {
         this.options = {
-            validateServerId: (options === null || options === void 0 ? void 0 : options.validateServerId) === true,
-            validateStatsId: (options === null || options === void 0 ? void 0 : options.validateStatsId) === true,
+            validateServerId: options?.validateServerId === true,
+            validateStatsId: options?.validateStatsId === true,
         };
     }
     isServerIdValid(ctx) {
@@ -58,4 +58,3 @@ class Handler {
     }
 }
 exports.Handler = Handler;
-//# sourceMappingURL=Handler.js.map

@@ -29,4 +29,3 @@ class Karen extends CeoCard_1.CeoCard {
     }
 }
 exports.Karen = Karen;
-//# sourceMappingURL=Karen.js.map

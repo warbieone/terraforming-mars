@@ -29,4 +29,3 @@ class SpinInducingAsteroid extends Card_1.Card {
     }
 }
 exports.SpinInducingAsteroid = SpinInducingAsteroid;
-//# sourceMappingURL=SpinInducingAsteroid.js.map

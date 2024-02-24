@@ -98,4 +98,3 @@ class SpecializedSettlement extends Card_1.Card {
     }
 }
 exports.SpecializedSettlement = SpecializedSettlement;
-//# sourceMappingURL=SpecializedSettlement.js.map

@@ -72,4 +72,3 @@ class PioneerSettlement extends Card_1.Card {
     }
 }
 exports.PioneerSettlement = PioneerSettlement;
-//# sourceMappingURL=PioneerSettlement.js.map

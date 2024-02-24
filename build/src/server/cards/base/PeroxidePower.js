@@ -30,4 +30,3 @@ class PeroxidePower extends Card_1.Card {
     }
 }
 exports.PeroxidePower = PeroxidePower;
-//# sourceMappingURL=PeroxidePower.js.map

@@ -39,4 +39,3 @@ class SeptumTribus extends CorporationCard_1.CorporationCard {
     }
 }
 exports.SeptumTribus = SeptumTribus;
-//# sourceMappingURL=SeptumTribus.js.map

@@ -29,4 +29,3 @@ class SpaceMirrors extends ActionCard_1.ActionCard {
     }
 }
 exports.SpaceMirrors = SpaceMirrors;
-//# sourceMappingURL=SpaceMirrors.js.map

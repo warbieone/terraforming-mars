@@ -45,4 +45,3 @@ class RegolithEaters extends ActionCard_1.ActionCard {
     }
 }
 exports.RegolithEaters = RegolithEaters;
-//# sourceMappingURL=RegolithEaters.js.map

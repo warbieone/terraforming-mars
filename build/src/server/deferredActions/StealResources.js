@@ -20,7 +20,7 @@ class StealResources extends DeferredAction_1.DeferredAction {
             this.player.resolveInsuranceInSoloGame();
             return undefined;
         }
-        let candidates = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.stock.get(this.resource) > 0);
+        let candidates = this.player.getOpponents().filter((p) => p.stock.get(this.resource) > 0);
         if (this.resource === Resource_1.Resource.PLANTS) {
             candidates = candidates.filter((p) => !p.plantsAreProtected());
         }
@@ -51,4 +51,3 @@ class StealResources extends DeferredAction_1.DeferredAction {
     }
 }
 exports.StealResources = StealResources;
-//# sourceMappingURL=StealResources.js.map

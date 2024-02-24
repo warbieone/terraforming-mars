@@ -33,15 +33,13 @@ class AddResourcesToCards extends DeferredAction_1.DeferredAction {
         return new AndOptions_1.AndOptions(...options).andThen(() => {
             let sum = 0;
             cards.forEach((card) => {
-                var _a;
-                sum += (_a = map.get(card.name)) !== null && _a !== void 0 ? _a : 0;
+                sum += map.get(card.name) ?? 0;
             });
             if (sum !== this.count) {
                 throw new Error(`Expecting ${this.count} resources distributed, got ${sum}.`);
             }
             cards.forEach((card) => {
-                var _a;
-                const amount = (_a = map.get(card.name)) !== null && _a !== void 0 ? _a : 0;
+                const amount = map.get(card.name) ?? 0;
                 if (amount > 0) {
                     this.player.addResourceTo(card, { qty: amount, log: true });
                 }
@@ -51,4 +49,3 @@ class AddResourcesToCards extends DeferredAction_1.DeferredAction {
     }
 }
 exports.AddResourcesToCards = AddResourcesToCards;
-//# sourceMappingURL=AddResourcesToCards.js.map

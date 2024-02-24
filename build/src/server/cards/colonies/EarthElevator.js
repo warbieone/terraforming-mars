@@ -28,4 +28,3 @@ class EarthElevator extends Card_1.Card {
     }
 }
 exports.EarthElevator = EarthElevator;
-//# sourceMappingURL=EarthElevator.js.map

@@ -31,13 +31,11 @@ class LunaProjectOffice extends Card_1.Card {
     }
     static isActive(player) {
         return MoonExpansion_1.MoonExpansion.ifElseMoon(player.game, (moonData) => {
-            var _a;
             if (!player.cardIsInEffect(CardName_1.CardName.LUNA_PROJECT_OFFICE)) {
                 return false;
             }
-            return player.game.generation <= ((_a = moonData.lunaProjectOfficeLastGeneration) !== null && _a !== void 0 ? _a : -1);
+            return player.game.generation <= (moonData.lunaProjectOfficeLastGeneration ?? -1);
         }, () => false);
     }
 }
 exports.LunaProjectOffice = LunaProjectOffice;
-//# sourceMappingURL=LunaProjectOffice.js.map

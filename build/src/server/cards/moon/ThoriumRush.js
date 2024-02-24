@@ -35,4 +35,3 @@ class ThoriumRush extends Card_1.Card {
     }
 }
 exports.ThoriumRush = ThoriumRush;
-//# sourceMappingURL=ThoriumRush.js.map

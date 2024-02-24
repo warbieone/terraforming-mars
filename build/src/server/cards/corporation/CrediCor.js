@@ -38,4 +38,3 @@ class CrediCor extends CorporationCard_1.CorporationCard {
     }
 }
 exports.CrediCor = CrediCor;
-//# sourceMappingURL=CrediCor.js.map

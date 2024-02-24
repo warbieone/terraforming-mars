@@ -36,4 +36,3 @@ class BusinessEmpire extends PreludeCard_1.PreludeCard {
     }
 }
 exports.BusinessEmpire = BusinessEmpire;
-//# sourceMappingURL=BusinessEmpire.js.map

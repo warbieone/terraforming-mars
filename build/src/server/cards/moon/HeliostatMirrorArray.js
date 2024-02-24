@@ -31,4 +31,3 @@ class HeliostatMirrorArray extends Card_1.Card {
     }
 }
 exports.HeliostatMirrorArray = HeliostatMirrorArray;
-//# sourceMappingURL=HeliostatMirrorArray.js.map

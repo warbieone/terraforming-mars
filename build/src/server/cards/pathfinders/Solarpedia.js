@@ -37,4 +37,3 @@ class Solarpedia extends ActionCard_1.ActionCard {
     }
 }
 exports.Solarpedia = Solarpedia;
-//# sourceMappingURL=Solarpedia.js.map

@@ -8,4 +8,3 @@ function isIProjectCard(card) {
         card.type === CardType_1.CardType.EVENT;
 }
 exports.isIProjectCard = isIProjectCard;
-//# sourceMappingURL=IProjectCard.js.map

@@ -17,7 +17,7 @@ class Neil extends CeoCard_1.CeoCard {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.moon(1, { played: Options_1.played, all: Options_1.all }).colon().megacredits(1);
                     b.br.br;
-                    b.opgArrow().production((pb) => pb.megacredits(0, { questionMark: true })).asterix();
+                    b.opgArrow().production((pb) => pb.megacredits(1, { text: '?' })).asterix();
                 }),
                 description: 'Gain 1 M€ when any player plays a Moon tag. Once per game, increase your M€ production by the value of the LOWEST Moon rate.',
             },
@@ -43,4 +43,3 @@ class Neil extends CeoCard_1.CeoCard {
     }
 }
 exports.Neil = Neil;
-//# sourceMappingURL=Neil.js.map

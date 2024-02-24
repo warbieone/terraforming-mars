@@ -45,23 +45,21 @@ var Payment;
         kuiperAsteroids: 0,
     };
     function of(payment) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
         return {
-            auroraiData: (_a = payment.auroraiData) !== null && _a !== void 0 ? _a : 0,
-            floaters: (_b = payment.floaters) !== null && _b !== void 0 ? _b : 0,
-            heat: (_c = payment.heat) !== null && _c !== void 0 ? _c : 0,
-            lunaArchivesScience: (_d = payment.lunaArchivesScience) !== null && _d !== void 0 ? _d : 0,
-            spireScience: (_e = payment.spireScience) !== null && _e !== void 0 ? _e : 0,
-            megaCredits: (_f = payment.megaCredits) !== null && _f !== void 0 ? _f : 0,
-            microbes: (_g = payment.microbes) !== null && _g !== void 0 ? _g : 0,
-            seeds: (_h = payment.seeds) !== null && _h !== void 0 ? _h : 0,
-            steel: (_j = payment.steel) !== null && _j !== void 0 ? _j : 0,
-            titanium: (_k = payment.titanium) !== null && _k !== void 0 ? _k : 0,
-            graphene: (_l = payment.graphene) !== null && _l !== void 0 ? _l : 0,
-            kuiperAsteroids: (_m = payment.kuiperAsteroids) !== null && _m !== void 0 ? _m : 0,
-            plants: (_o = payment.plants) !== null && _o !== void 0 ? _o : 0,
+            auroraiData: payment.auroraiData ?? 0,
+            floaters: payment.floaters ?? 0,
+            heat: payment.heat ?? 0,
+            lunaArchivesScience: payment.lunaArchivesScience ?? 0,
+            spireScience: payment.spireScience ?? 0,
+            megaCredits: payment.megaCredits ?? 0,
+            microbes: payment.microbes ?? 0,
+            seeds: payment.seeds ?? 0,
+            steel: payment.steel ?? 0,
+            titanium: payment.titanium ?? 0,
+            graphene: payment.graphene ?? 0,
+            kuiperAsteroids: payment.kuiperAsteroids ?? 0,
+            plants: payment.plants ?? 0,
         };
     }
     Payment.of = of;
 })(Payment = exports.Payment || (exports.Payment = {}));
-//# sourceMappingURL=Payment.js.map

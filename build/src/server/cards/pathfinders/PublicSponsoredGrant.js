@@ -11,6 +11,7 @@ const PartyName_1 = require("../../../common/turmoil/PartyName");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const Options_1 = require("../Options");
+const utils_1 = require("../../../common/utils/utils");
 class PublicSponsoredGrant extends Card_1.Card {
     constructor() {
         super({
@@ -33,15 +34,10 @@ class PublicSponsoredGrant extends Card_1.Card {
     }
     bespokePlay(player) {
         player.game.getPlayers().forEach((p) => p.stock.deduct(Resource_1.Resource.MEGACREDITS, Math.min(p.megaCredits, 2), { log: true, from: player }));
-        const tags = [
-            Tag_1.Tag.BUILDING,
-            Tag_1.Tag.SPACE,
-            Tag_1.Tag.SCIENCE,
-            Tag_1.Tag.POWER,
-            Tag_1.Tag.PLANT,
-            Tag_1.Tag.MICROBE,
-            Tag_1.Tag.ANIMAL
-        ];
+        const tags = [...Tag_1.ALL_TAGS];
+        (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.CITY);
+        (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.WILD);
+        (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.CLONE);
         const options = tags.map((tag) => {
             return new SelectOption_1.SelectOption(tag).andThen(() => {
                 this.draw2Cards(player, tag);
@@ -52,4 +48,3 @@ class PublicSponsoredGrant extends Card_1.Card {
     }
 }
 exports.PublicSponsoredGrant = PublicSponsoredGrant;
-//# sourceMappingURL=PublicSponsoredGrant.js.map

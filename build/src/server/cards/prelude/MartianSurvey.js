@@ -30,4 +30,3 @@ class MartianSurvey extends Card_1.Card {
     }
 }
 exports.MartianSurvey = MartianSurvey;
-//# sourceMappingURL=MartianSurvey.js.map

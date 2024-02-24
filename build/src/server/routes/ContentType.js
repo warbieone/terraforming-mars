@@ -27,4 +27,3 @@ class ContentType {
     }
 }
 exports.ContentType = ContentType;
-//# sourceMappingURL=ContentType.js.map

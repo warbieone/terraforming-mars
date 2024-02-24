@@ -38,4 +38,3 @@ class MooncrateConvoysToMars extends Card_1.Card {
     }
 }
 exports.MooncrateConvoysToMars = MooncrateConvoysToMars;
-//# sourceMappingURL=MooncrateConvoysToMars.js.map

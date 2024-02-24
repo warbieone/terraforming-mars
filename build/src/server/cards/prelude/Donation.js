@@ -22,4 +22,3 @@ class Donation extends PreludeCard_1.PreludeCard {
     }
 }
 exports.Donation = Donation;
-//# sourceMappingURL=Donation.js.map

@@ -84,6 +84,20 @@ function calc(params) {
     return 'name,count\n' + copy.map(([name, count]) => `${name},${count}`).join('\n');
 }
 function simpleGameOptions() {
-    return Object.assign(Object.assign({}, GameOptions_1.DEFAULT_GAME_OPTIONS), { aresHazards: false, corporateEra: false, initialDraftVariant: false, showTimers: false, startingCorporations: 0, boardName: BoardName_1.BoardName.THARSIS, venusNextExtension: false, aresExtension: false, includeVenusMA: false, moonExpansion: false, pathfindersExpansion: false, includeFanMA: false, randomMA: RandomMAOptionType_1.RandomMAOptionType.NONE });
+    return {
+        ...GameOptions_1.DEFAULT_GAME_OPTIONS,
+        aresHazards: false,
+        corporateEra: false,
+        initialDraftVariant: false,
+        showTimers: false,
+        startingCorporations: 0,
+        boardName: BoardName_1.BoardName.THARSIS,
+        venusNextExtension: false,
+        aresExtension: false,
+        includeVenusMA: false,
+        moonExpansion: false,
+        pathfindersExpansion: false,
+        includeFanMA: false,
+        randomMA: RandomMAOptionType_1.RandomMAOptionType.NONE,
+    };
 }
-//# sourceMappingURL=analyze_ma.js.map

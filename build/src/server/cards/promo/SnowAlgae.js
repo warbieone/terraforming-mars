@@ -30,4 +30,3 @@ class SnowAlgae extends Card_1.Card {
     }
 }
 exports.SnowAlgae = SnowAlgae;
-//# sourceMappingURL=SnowAlgae.js.map

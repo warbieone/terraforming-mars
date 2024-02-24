@@ -34,4 +34,3 @@ class AsteroidHollowing extends ActionCard_1.ActionCard {
     }
 }
 exports.AsteroidHollowing = AsteroidHollowing;
-//# sourceMappingURL=AsteroidHollowing.js.map

@@ -17,6 +17,7 @@ class MiningArea extends MiningCard_1.MiningCard {
         description: 'Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.',
     }) {
         super(name, 4, metadata);
+        this.title = 'Select a space with a steel or titanium bonus adjacent to one of your tiles';
     }
     getAvailableSpaces(player, canAffordOptions) {
         return super.getAvailableSpaces(player, canAffordOptions)
@@ -24,4 +25,3 @@ class MiningArea extends MiningCard_1.MiningCard {
     }
 }
 exports.MiningArea = MiningArea;
-//# sourceMappingURL=MiningArea.js.map

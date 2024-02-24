@@ -27,4 +27,3 @@ class EarthOffice extends Card_1.Card {
     }
 }
 exports.EarthOffice = EarthOffice;
-//# sourceMappingURL=EarthOffice.js.map

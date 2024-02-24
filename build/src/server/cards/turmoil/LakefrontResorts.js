@@ -49,4 +49,3 @@ class LakefrontResorts extends CorporationCard_1.CorporationCard {
     }
 }
 exports.LakefrontResorts = LakefrontResorts;
-//# sourceMappingURL=LakefrontResorts.js.map

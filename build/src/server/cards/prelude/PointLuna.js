@@ -49,4 +49,3 @@ class PointLuna extends CorporationCard_1.CorporationCard {
     }
 }
 exports.PointLuna = PointLuna;
-//# sourceMappingURL=PointLuna.js.map

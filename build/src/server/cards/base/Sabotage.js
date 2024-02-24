@@ -35,9 +35,8 @@ class Sabotage extends Card_1.Card {
     bespokePlay(player) {
         if (player.game.isSoloMode())
             return undefined;
-        const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);
         const availableActions = new OrOptions_1.OrOptions();
-        availablePlayerTargets.forEach((target) => {
+        player.getOpponents().forEach((target) => {
             if (target.titanium > 0 && !target.alloysAreProtected()) {
                 const amountRemoved = Math.min(3, target.titanium);
                 const optionTitle = this.title(amountRemoved, 'titanium', target);
@@ -73,4 +72,3 @@ class Sabotage extends Card_1.Card {
     }
 }
 exports.Sabotage = Sabotage;
-//# sourceMappingURL=Sabotage.js.map

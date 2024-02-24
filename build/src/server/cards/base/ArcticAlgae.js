@@ -34,12 +34,8 @@ class ArcticAlgae extends Card_1.Card {
     }
     onTilePlaced(cardOwner, activePlayer, space) {
         if (Board_1.Board.isUncoveredOceanSpace(space)) {
-            cardOwner.game.defer(new GainResources_1.GainResources(cardOwner, Resource_1.Resource.PLANTS, {
-                count: 2,
-                cb: () => activePlayer.game.log('${0} gained 2 ${1} from ${2}', (b) => b.player(cardOwner).string(Resource_1.Resource.PLANTS).cardName(this.name)),
-            }), cardOwner.id !== activePlayer.id ? DeferredAction_1.Priority.OPPONENT_TRIGGER : undefined);
+            cardOwner.game.defer(new GainResources_1.GainResources(cardOwner, Resource_1.Resource.PLANTS, { count: 2 }).andThen(() => activePlayer.game.log('${0} gained 2 ${1} from ${2}', (b) => b.player(cardOwner).string(Resource_1.Resource.PLANTS).cardName(this.name))), cardOwner.id !== activePlayer.id ? DeferredAction_1.Priority.OPPONENT_TRIGGER : undefined);
         }
     }
 }
 exports.ArcticAlgae = ArcticAlgae;
-//# sourceMappingURL=ArcticAlgae.js.map

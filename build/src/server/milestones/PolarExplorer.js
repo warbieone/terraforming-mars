@@ -17,4 +17,3 @@ class PolarExplorer extends IMilestone_1.BaseMilestone {
     }
 }
 exports.PolarExplorer = PolarExplorer;
-//# sourceMappingURL=PolarExplorer.js.map

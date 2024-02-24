@@ -21,4 +21,3 @@ class RemoveColonyFromGame extends DeferredAction_1.DeferredAction {
     }
 }
 exports.RemoveColonyFromGame = RemoveColonyFromGame;
-//# sourceMappingURL=RemoveColonyFromGame.js.map

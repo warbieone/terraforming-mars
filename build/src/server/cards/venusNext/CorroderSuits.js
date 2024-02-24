@@ -30,4 +30,3 @@ class CorroderSuits extends Card_1.Card {
     }
 }
 exports.CorroderSuits = CorroderSuits;
-//# sourceMappingURL=CorroderSuits.js.map

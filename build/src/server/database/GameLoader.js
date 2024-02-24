@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameLoader = void 0;
 const prometheus = require("prom-client");
@@ -43,9 +34,8 @@ class GameLoader {
         });
     }
     static getInstance() {
-        var _a;
         if (GameLoader.instance === undefined) {
-            const config = parseConfigString((_a = process.env.GAME_CACHE) !== null && _a !== void 0 ? _a : '');
+            const config = parseConfigString(process.env.GAME_CACHE ?? '');
             GameLoader.instance = new GameLoader(config, new Timer_1.Clock());
         }
         return GameLoader.instance;
@@ -57,78 +47,68 @@ class GameLoader {
         this.cache = new Cache_1.Cache(this.config, this.clock);
         this.cache.load();
     }
-    add(game) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const d = yield this.cache.getGames();
-            d.games.set(game.id, game);
-            if (game.spectatorId !== undefined) {
-                d.participantIds.set(game.spectatorId, game.id);
-            }
-            for (const player of game.getPlayers()) {
-                d.participantIds.set(player.id, game.id);
-            }
-        });
+    async add(game) {
+        const d = await this.cache.getGames();
+        d.games.set(game.id, game);
+        if (game.spectatorId !== undefined) {
+            d.participantIds.set(game.spectatorId, game.id);
+        }
+        for (const player of game.getPlayers()) {
+            d.participantIds.set(player.id, game.id);
+        }
     }
-    getIds() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const d = yield this.cache.getGames();
-            const map = new mnemonist_1.MultiMap();
-            d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
-            const arry = Array.from(map.associations());
-            return arry.map(([gameId, participantIds]) => ({ gameId, participantIds }));
-        });
+    async getIds() {
+        const d = await this.cache.getGames();
+        const map = new mnemonist_1.MultiMap();
+        d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
+        const arry = Array.from(map.associations());
+        return arry.map(([gameId, participantIds]) => ({ gameId, participantIds }));
     }
-    isCached(gameId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const d = yield this.cache.getGames();
-            return d.games.get(gameId) !== undefined;
-        });
+    async isCached(gameId) {
+        const d = await this.cache.getGames();
+        return d.games.get(gameId) !== undefined;
     }
-    getGame(id, forceLoad = false) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const d = yield this.cache.getGames();
-            const gameId = (0, Types_1.isGameId)(id) ? id : d.participantIds.get(id);
-            if (gameId === undefined)
-                return undefined;
-            if (forceLoad === false && d.games.get(gameId) !== undefined)
-                return d.games.get(gameId);
-            if (d.games.has(gameId)) {
-                try {
-                    const serializedGame = yield Database_1.Database.getInstance().getGame(gameId);
-                    if (serializedGame === undefined) {
-                        console.error(`GameLoader:loadGame: game ${gameId} not found`);
-                        return undefined;
-                    }
-                    const game = Game_1.Game.deserialize(serializedGame);
-                    yield this.add(game);
-                    console.log(`GameLoader loaded game ${gameId} into memory from database`);
-                    return game;
-                }
-                catch (e) {
-                    console.error('GameLoader:loadGame', e);
+    async getGame(id, forceLoad = false) {
+        const d = await this.cache.getGames();
+        const gameId = (0, Types_1.isGameId)(id) ? id : d.participantIds.get(id);
+        if (gameId === undefined)
+            return undefined;
+        if (forceLoad === false && d.games.get(gameId) !== undefined)
+            return d.games.get(gameId);
+        if (d.games.has(gameId)) {
+            try {
+                const serializedGame = await Database_1.Database.getInstance().getGame(gameId);
+                if (serializedGame === undefined) {
+                    console.error(`GameLoader:loadGame: game ${gameId} not found`);
                     return undefined;
                 }
+                const game = Game_1.Game.deserialize(serializedGame);
+                await this.add(game);
+                console.log(`GameLoader loaded game ${gameId} into memory from database`);
+                return game;
             }
-            return undefined;
-        });
+            catch (e) {
+                console.error('GameLoader:loadGame', e);
+                return undefined;
+            }
+        }
+        return undefined;
     }
-    restoreGameAt(gameId, saveId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const current = yield this.getGame(gameId);
-            if (current === undefined) {
-                throw new Error('Cannot find game');
-            }
-            const currentSaveId = current.lastSaveId;
-            const serializedGame = yield Database_1.Database.getInstance().getGameVersion(gameId, saveId);
-            const game = Game_1.Game.deserialize(serializedGame);
-            const deletes = (currentSaveId - saveId) - 1;
-            if (deletes > 0) {
-                yield Database_1.Database.getInstance().deleteGameNbrSaves(gameId, deletes);
-            }
-            yield this.add(game);
-            game.undoCount++;
-            return game;
-        });
+    async restoreGameAt(gameId, saveId) {
+        const current = await this.getGame(gameId);
+        if (current === undefined) {
+            throw new Error('Cannot find game');
+        }
+        const currentSaveId = current.lastSaveId;
+        const serializedGame = await Database_1.Database.getInstance().getGameVersion(gameId, saveId);
+        const game = Game_1.Game.deserialize(serializedGame);
+        const deletes = (currentSaveId - saveId) - 1;
+        if (deletes > 0) {
+            await Database_1.Database.getInstance().deleteGameNbrSaves(gameId, deletes);
+        }
+        await this.add(game);
+        game.undoCount++;
+        return game;
     }
     mark(gameId) {
         this.cache.mark(gameId);
@@ -136,19 +116,17 @@ class GameLoader {
     sweep() {
         this.cache.sweep();
     }
-    completeGame(game) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const database = Database_1.Database.getInstance();
-            yield database.saveGame(game);
-            try {
-                this.mark(game.id);
-                yield database.markFinished(game.id);
-                yield this.maintenance();
-            }
-            catch (err) {
-                console.error(err);
-            }
-        });
+    async completeGame(game) {
+        const database = Database_1.Database.getInstance();
+        await database.saveGame(game);
+        try {
+            this.mark(game.id);
+            await database.markFinished(game.id);
+            await this.maintenance();
+        }
+        catch (err) {
+            console.error(err);
+        }
     }
     saveGame(game) {
         if (this.purgedGames.includes(game.id)) {
@@ -156,13 +134,11 @@ class GameLoader {
         }
         return Database_1.Database.getInstance().saveGame(game);
     }
-    maintenance() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const database = Database_1.Database.getInstance();
-            const purgedGames = yield database.purgeUnfinishedGames();
-            this.purgedGames.push(...purgedGames);
-            yield database.compressCompletedGames();
-        });
+    async maintenance() {
+        const database = Database_1.Database.getInstance();
+        const purgedGames = await database.purgeUnfinishedGames();
+        this.purgedGames.push(...purgedGames);
+        await database.compressCompletedGames();
     }
 }
 exports.GameLoader = GameLoader;
@@ -172,7 +148,7 @@ function parseConfigString(stringValue) {
         evictMillis: (0, durations_1.durationToMilliseconds)('15m'),
         sleepMillis: (0, durations_1.durationToMilliseconds)('5m'),
     };
-    const parsed = Object.fromEntries((stringValue !== null && stringValue !== void 0 ? stringValue : '').split(';').map((s) => s.split('=', 2)));
+    const parsed = Object.fromEntries((stringValue ?? '').split(';').map((s) => s.split('=', 2)));
     if (parsed.sweep === 'auto' || parsed.sweep === 'manual') {
         options.sweep = parsed.sweep;
     }
@@ -187,4 +163,3 @@ function parseConfigString(stringValue) {
         options.sleepMillis = sleepMillis;
     return options;
 }
-//# sourceMappingURL=GameLoader.js.map

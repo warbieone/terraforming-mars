@@ -20,9 +20,8 @@ class BuildColonyStandardProject extends StandardProjectCard_1.StandardProjectCa
         });
     }
     discount(player) {
-        var _a;
         const adhai = player.getCorporation(CardName_1.CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
-        const adhaiDiscount = Math.floor(((_a = adhai === null || adhai === void 0 ? void 0 : adhai.resourceCount) !== null && _a !== void 0 ? _a : 0) / 2);
+        const adhaiDiscount = Math.floor((adhai?.resourceCount ?? 0) / 2);
         return adhaiDiscount + super.discount(player);
     }
     getOpenColonies(player) {
@@ -43,4 +42,3 @@ class BuildColonyStandardProject extends StandardProjectCard_1.StandardProjectCa
     }
 }
 exports.BuildColonyStandardProject = BuildColonyStandardProject;
-//# sourceMappingURL=BuildColonyStandardProject.js.map

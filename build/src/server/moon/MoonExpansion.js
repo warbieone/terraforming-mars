@@ -86,8 +86,7 @@ class MoonExpansion {
             MoonExpansion.logTilePlacement(player, space, tile.tileType);
             game.getPlayers().forEach((p) => {
                 p.tableau.forEach((playedCard) => {
-                    var _a;
-                    (_a = playedCard.onTilePlaced) === null || _a === void 0 ? void 0 : _a.call(playedCard, p, player, space, BoardType_1.BoardType.MOON);
+                    playedCard.onTilePlaced?.(p, player, space, BoardType_1.BoardType.MOON);
                 });
             });
         });
@@ -181,7 +180,7 @@ class MoonExpansion {
         const lunaFirstPlayer = MoonExpansion.moonData(game).lunaFirstPlayer;
         if (lunaFirstPlayer !== undefined) {
             lunaFirstPlayer.stock.add(Resource_1.Resource.MEGACREDITS, count, { log: true });
-            if (lunaFirstPlayer.id === (sourcePlayer === null || sourcePlayer === void 0 ? void 0 : sourcePlayer.id)) {
+            if (lunaFirstPlayer.id === sourcePlayer?.id) {
                 lunaFirstPlayer.production.add(Resource_1.Resource.MEGACREDITS, count, { log: true });
             }
         }
@@ -227,12 +226,12 @@ class MoonExpansion {
                 }
                 let include = true;
                 if (tileType) {
-                    include = MoonExpansion.spaceHasType(space, tileType, options === null || options === void 0 ? void 0 : options.upgradedTiles);
+                    include = MoonExpansion.spaceHasType(space, tileType, options?.upgradedTiles);
                 }
-                if (include && (options === null || options === void 0 ? void 0 : options.surfaceOnly)) {
+                if (include && options?.surfaceOnly) {
                     include = space.spaceType !== SpaceType_1.SpaceType.COLONY;
                 }
-                if (include && (options === null || options === void 0 ? void 0 : options.ownedBy) !== undefined) {
+                if (include && options?.ownedBy !== undefined) {
                     include = space.player === options.ownedBy;
                 }
                 return include;
@@ -247,14 +246,13 @@ class MoonExpansion {
         const heat = reserveUnits.heat || 0;
         let steel = reserveUnits.steel || 0;
         let titanium = reserveUnits.titanium || 0;
-        const tilesBuilt = card.tilesBuilt || [];
-        if (tilesBuilt.includes(TileType_1.TileType.MOON_HABITAT) && player.cardIsInEffect(CardName_1.CardName.SUBTERRANEAN_HABITATS)) {
+        if (card.tilesBuilt.includes(TileType_1.TileType.MOON_HABITAT) && player.cardIsInEffect(CardName_1.CardName.SUBTERRANEAN_HABITATS)) {
             titanium -= 1;
         }
-        if (tilesBuilt.includes(TileType_1.TileType.MOON_MINE) && player.cardIsInEffect(CardName_1.CardName.IMPROVED_MOON_CONCRETE)) {
+        if (card.tilesBuilt.includes(TileType_1.TileType.MOON_MINE) && player.cardIsInEffect(CardName_1.CardName.IMPROVED_MOON_CONCRETE)) {
             titanium -= 1;
         }
-        if (tilesBuilt.includes(TileType_1.TileType.MOON_ROAD) && player.cardIsInEffect(CardName_1.CardName.LUNAR_DUST_PROCESSING_PLANT)) {
+        if (card.tilesBuilt.includes(TileType_1.TileType.MOON_ROAD) && player.cardIsInEffect(CardName_1.CardName.LUNAR_DUST_PROCESSING_PLANT)) {
             steel = 0;
         }
         steel = Math.max(steel, 0);
@@ -264,7 +262,7 @@ class MoonExpansion {
     static calculateVictoryPoints(player, vpb) {
         MoonExpansion.ifMoon(player.game, (moonData) => {
             const moon = moonData.moon;
-            const mySpaces = moon.spaces.filter((space) => { var _a; return ((_a = space.player) === null || _a === void 0 ? void 0 : _a.id) === player.id; });
+            const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id);
             mySpaces.forEach((space) => {
                 if (space.tile !== undefined) {
                     const type = space.tile.tileType;
@@ -299,4 +297,3 @@ MoonExpansion.MOON_TILES = new Set([
     TileType_1.TileType.LUNA_TRAIN_STATION,
     TileType_1.TileType.LUNAR_MINE_URBANIZATION,
 ]);
-//# sourceMappingURL=MoonExpansion.js.map

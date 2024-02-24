@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const TileType_1 = require("../../../common/TileType");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
 class TheWomb extends Card_1.Card {
     constructor() {
@@ -33,9 +32,7 @@ class TheWomb extends Card_1.Card {
                     b.minus().titanium(2).moonHabitat({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_HABITAT_RATE });
                 }),
             },
-            tilesBuilt: [TileType_1.TileType.MOON_HABITAT],
         });
     }
 }
 exports.TheWomb = TheWomb;
-//# sourceMappingURL=TheWomb.js.map

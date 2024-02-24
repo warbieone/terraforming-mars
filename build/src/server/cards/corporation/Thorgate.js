@@ -56,4 +56,3 @@ class Thorgate extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Thorgate = Thorgate;
-//# sourceMappingURL=Thorgate.js.map

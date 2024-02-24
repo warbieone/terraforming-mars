@@ -58,9 +58,9 @@ class AddResourcesToCard extends DeferredAction_1.DeferredAction {
         }
     }
     execute1() {
-        var _a, _b;
-        const count = (_a = this.options.count) !== null && _a !== void 0 ? _a : 1;
-        const title = (_b = this.options.title) !== null && _b !== void 0 ? _b : (0, MessageBuilder_1.message)('Select card to add ${0} ${1}', (b) => b.number(count).string(this.resourceType || 'resources'));
+        const count = this.options.count ?? 1;
+        const title = this.options.title ??
+            (0, MessageBuilder_1.message)('Select card to add ${0} ${1}', (b) => b.number(count).string(this.resourceType || 'resources'));
         const cards = this.getCardsInPlay();
         if (cards.length === 0) {
             return undefined;
@@ -76,8 +76,7 @@ class AddResourcesToCard extends DeferredAction_1.DeferredAction {
         });
     }
     execute2() {
-        var _a;
-        const count = (_a = this.options.count) !== null && _a !== void 0 ? _a : 1;
+        const count = this.options.count ?? 1;
         const cards = this.getCardsInPlay();
         const robotCards = this.getSelfReplicatingRobotCards();
         return new SelectCard_1.SelectCard('Select card to add resource', 'Add resource', cards.concat(robotCards.map((c) => c.card)))
@@ -97,11 +96,9 @@ class AddResourcesToCard extends DeferredAction_1.DeferredAction {
         });
     }
     addResource(card, qty) {
-        var _a, _b;
-        const autoLog = this.options.log === undefined;
+        const autoLog = this.options.log !== false;
         this.player.addResourceTo(card, { qty, log: autoLog });
-        (_b = (_a = this.options).log) === null || _b === void 0 ? void 0 : _b.call(_a);
+        this.cb(undefined);
     }
 }
 exports.AddResourcesToCard = AddResourcesToCard;
-//# sourceMappingURL=AddResourcesToCard.js.map

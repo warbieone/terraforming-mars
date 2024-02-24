@@ -1,8 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CardFinder = void 0;
+const CardName_1 = require("../common/cards/CardName");
 const AllManifests_1 = require("./cards/AllManifests");
-const CARD_RENAMES = new Map([]);
+const CARD_RENAMES = new Map([
+    ['Hectate Speditions', CardName_1.CardName.HECATE_SPEDITIONS],
+]);
 class CardFinder {
     getCard(cardName, cardManifestNames) {
         const standardizedCardName = CARD_RENAMES.get(cardName) || cardName;
@@ -103,4 +106,3 @@ class CardFinder {
     }
 }
 exports.CardFinder = CardFinder;
-//# sourceMappingURL=CardFinder.js.map

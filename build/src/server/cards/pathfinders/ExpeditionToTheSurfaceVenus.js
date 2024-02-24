@@ -31,4 +31,3 @@ class ExpeditionToTheSurfaceVenus extends Card_1.Card {
     }
 }
 exports.ExpeditionToTheSurfaceVenus = ExpeditionToTheSurfaceVenus;
-//# sourceMappingURL=ExpeditionToTheSurfaceVenus.js.map

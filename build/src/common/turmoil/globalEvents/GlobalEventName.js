@@ -52,4 +52,3 @@ var GlobalEventName;
     GlobalEventName["SEISMIC_PREDICTIONS"] = "Seismic Predictions";
     GlobalEventName["MEDIA_STIR"] = "Media Stir";
 })(GlobalEventName = exports.GlobalEventName || (exports.GlobalEventName = {}));
-//# sourceMappingURL=GlobalEventName.js.map

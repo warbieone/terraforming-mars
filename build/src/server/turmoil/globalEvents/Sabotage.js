@@ -34,4 +34,3 @@ class Sabotage extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.Sabotage = Sabotage;
-//# sourceMappingURL=Sabotage.js.map

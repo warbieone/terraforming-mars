@@ -6,4 +6,3 @@ var LogMessageType;
     LogMessageType[LogMessageType["DEFAULT"] = 0] = "DEFAULT";
     LogMessageType[LogMessageType["NEW_GENERATION"] = 1] = "NEW_GENERATION";
 })(LogMessageType = exports.LogMessageType || (exports.LogMessageType = {}));
-//# sourceMappingURL=LogMessageType.js.map

@@ -16,6 +16,7 @@ class BioengineeringEnclosure extends Card_1.Card {
             tags: [Tag_1.Tag.ANIMAL],
             cost: 7,
             resourceType: CardResource_1.CardResource.ANIMAL,
+            protectedResources: true,
             behavior: {
                 addResources: 2,
             },
@@ -59,4 +60,3 @@ class BioengineeringEnclosure extends Card_1.Card {
     }
 }
 exports.BioengineeringEnclosure = BioengineeringEnclosure;
-//# sourceMappingURL=BioengineeringEnclosure.js.map

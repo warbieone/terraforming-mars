@@ -69,4 +69,3 @@ class TitanAirScrapping extends Card_1.Card {
     }
 }
 exports.TitanAirScrapping = TitanAirScrapping;
-//# sourceMappingURL=TitanAirScrapping.js.map

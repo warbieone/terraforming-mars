@@ -63,4 +63,3 @@ class EcoLine extends CorporationCard_1.CorporationCard {
     }
 }
 exports.EcoLine = EcoLine;
-//# sourceMappingURL=EcoLine.js.map

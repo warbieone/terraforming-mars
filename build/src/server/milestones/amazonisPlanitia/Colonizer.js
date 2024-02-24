@@ -11,4 +11,3 @@ class Colonizer extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Colonizer = Colonizer;
-//# sourceMappingURL=Colonizer.js.map

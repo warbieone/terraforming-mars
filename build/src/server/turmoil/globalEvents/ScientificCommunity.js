@@ -28,4 +28,3 @@ class ScientificCommunity extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.ScientificCommunity = ScientificCommunity;
-//# sourceMappingURL=ScientificCommunity.js.map

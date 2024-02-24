@@ -47,4 +47,3 @@ class MoonMineStandardProject extends StandardProjectCard_1.StandardProjectCard 
     }
 }
 exports.MoonMineStandardProject = MoonMineStandardProject;
-//# sourceMappingURL=MoonMineStandardProject.js.map

@@ -30,4 +30,3 @@ class Satellites extends Card_1.Card {
     }
 }
 exports.Satellites = Satellites;
-//# sourceMappingURL=Satellites.js.map

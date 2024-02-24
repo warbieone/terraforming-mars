@@ -15,4 +15,3 @@ var Color;
     Color["BRONZE"] = "bronze";
 })(Color = exports.Color || (exports.Color = {}));
 exports.PLAYER_COLORS = [Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK, Color.PURPLE, Color.ORANGE, Color.PINK];
-//# sourceMappingURL=Color.js.map

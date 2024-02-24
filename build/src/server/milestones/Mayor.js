@@ -11,4 +11,3 @@ class Mayor extends IMilestone_1.BaseMilestone {
     }
 }
 exports.Mayor = Mayor;
-//# sourceMappingURL=Mayor.js.map

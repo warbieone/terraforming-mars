@@ -33,4 +33,3 @@ class QuantumExtractor extends Card_1.Card {
     }
 }
 exports.QuantumExtractor = QuantumExtractor;
-//# sourceMappingURL=QuantumExtractor.js.map

@@ -30,4 +30,3 @@ class Clarke extends CeoCard_1.CeoCard {
     }
 }
 exports.Clarke = Clarke;
-//# sourceMappingURL=Clarke.js.map

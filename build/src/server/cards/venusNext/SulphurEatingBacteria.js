@@ -10,7 +10,6 @@ const SelectAmount_1 = require("../../inputs/SelectAmount");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const Options_1 = require("../Options");
 class SulphurEatingBacteria extends Card_1.Card {
     constructor() {
         super({
@@ -28,7 +27,7 @@ class SulphurEatingBacteria extends Card_1.Card {
                     }).br;
                     b.or().br;
                     b.action('Spend any number of microbes here to gain triple amount of M€.', (eb) => {
-                        eb.text('x').microbes(1).startAction.megacredits(3, { multiplier: Options_1.multiplier });
+                        eb.text('x').microbes(1).startAction.megacredits(1, { text: '3x' });
                     });
                 }),
                 description: 'Requires Venus 6%',
@@ -65,4 +64,3 @@ class SulphurEatingBacteria extends Card_1.Card {
     }
 }
 exports.SulphurEatingBacteria = SulphurEatingBacteria;
-//# sourceMappingURL=SulphurEatingBacteria.js.map

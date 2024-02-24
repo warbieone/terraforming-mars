@@ -40,4 +40,3 @@ class Polyphemos extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Polyphemos = Polyphemos;
-//# sourceMappingURL=Polyphemos.js.map

@@ -28,4 +28,3 @@ class GlobalEvent {
     }
 }
 exports.GlobalEvent = GlobalEvent;
-//# sourceMappingURL=GlobalEvent.js.map

@@ -33,4 +33,3 @@ class EosChasmaNationalPark extends Card_1.Card {
     }
 }
 exports.EosChasmaNationalPark = EosChasmaNationalPark;
-//# sourceMappingURL=EOSChasmaNationalPark.js.map

@@ -25,4 +25,3 @@ class ExperimentalForest extends PreludeCard_1.PreludeCard {
     }
 }
 exports.ExperimentalForest = ExperimentalForest;
-//# sourceMappingURL=ExperimentalForest.js.map

@@ -25,4 +25,3 @@ class LTFPrivileges extends Card_1.Card {
     }
 }
 exports.LTFPrivileges = LTFPrivileges;
-//# sourceMappingURL=LTFPrivileges.js.map

@@ -31,7 +31,7 @@ class PreferencesManager {
         this.INSTANCE = new PreferencesManager();
     }
     constructor() {
-        this._values = Object.assign({}, defaults);
+        this._values = { ...defaults };
         for (const key of Object.keys(defaults)) {
             const value = this.localStorageSupported() ? localStorage.getItem(key) : undefined;
             if (value)
@@ -69,4 +69,3 @@ function getPreferences() {
     return PreferencesManager.INSTANCE.values();
 }
 exports.getPreferences = getPreferences;
-//# sourceMappingURL=PreferencesManager.js.map

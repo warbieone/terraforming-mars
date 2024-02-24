@@ -22,8 +22,7 @@ class DeimosDownPromo extends Card_1.Card {
             type: CardType_1.CardType.EVENT,
             name,
             tags: [Tag_1.Tag.SPACE],
-            cost: 35,
-            tilesBuilt: [TileType_1.TileType.DEIMOS_DOWN],
+            cost: 31,
             metadata,
             behavior: {
                 stock: { steel: 4 },
@@ -39,4 +38,3 @@ class DeimosDownPromo extends Card_1.Card {
     }
 }
 exports.DeimosDownPromo = DeimosDownPromo;
-//# sourceMappingURL=DeimosDownPromo.js.map

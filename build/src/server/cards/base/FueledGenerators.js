@@ -30,4 +30,3 @@ class FueledGenerators extends Card_1.Card {
     }
 }
 exports.FueledGenerators = FueledGenerators;
-//# sourceMappingURL=FueledGenerators.js.map

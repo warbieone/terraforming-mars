@@ -28,4 +28,3 @@ class LuxuryEstate extends Card_1.Card {
     }
 }
 exports.LuxuryEstate = LuxuryEstate;
-//# sourceMappingURL=LuxuryEstate.js.map

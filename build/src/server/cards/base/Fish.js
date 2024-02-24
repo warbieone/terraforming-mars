@@ -43,4 +43,3 @@ class Fish extends ActionCard_1.ActionCard {
     }
 }
 exports.Fish = Fish;
-//# sourceMappingURL=Fish.js.map

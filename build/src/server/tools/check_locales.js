@@ -40,4 +40,3 @@ for (sourceString in raw_translations) {
         console.log('"' + sourceString + '": "' + missingLocales + '"');
     }
 }
-//# sourceMappingURL=check_locales.js.map

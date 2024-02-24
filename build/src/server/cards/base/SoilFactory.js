@@ -31,4 +31,3 @@ class SoilFactory extends Card_1.Card {
     }
 }
 exports.SoilFactory = SoilFactory;
-//# sourceMappingURL=SoilFactory.js.map

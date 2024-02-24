@@ -29,4 +29,3 @@ class MicrosingularityPlant extends Card_1.Card {
     }
 }
 exports.MicrosingularityPlant = MicrosingularityPlant;
-//# sourceMappingURL=MicrosingularityPlant.js.map

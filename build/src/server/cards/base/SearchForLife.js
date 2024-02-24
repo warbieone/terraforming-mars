@@ -58,4 +58,3 @@ class SearchForLife extends Card_1.Card {
     }
 }
 exports.SearchForLife = SearchForLife;
-//# sourceMappingURL=SearchForLife.js.map

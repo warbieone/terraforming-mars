@@ -20,7 +20,6 @@ class LavaFlows extends Card_1.Card {
             name,
             cost: 18,
             adjacencyBonus,
-            tilesBuilt: [TileType_1.TileType.LAVA_FLOWS],
             behavior: {
                 global: { temperature: 2 },
                 tile: {
@@ -35,4 +34,3 @@ class LavaFlows extends Card_1.Card {
     }
 }
 exports.LavaFlows = LavaFlows;
-//# sourceMappingURL=LavaFlows.js.map

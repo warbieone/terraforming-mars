@@ -28,4 +28,3 @@ class ImportedGHG extends Card_1.Card {
     }
 }
 exports.ImportedGHG = ImportedGHG;
-//# sourceMappingURL=ImportedGHG.js.map

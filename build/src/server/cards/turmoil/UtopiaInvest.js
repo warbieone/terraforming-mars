@@ -107,4 +107,3 @@ class UtopiaInvest extends CorporationCard_1.CorporationCard {
     }
 }
 exports.UtopiaInvest = UtopiaInvest;
-//# sourceMappingURL=UtopiaInvest.js.map

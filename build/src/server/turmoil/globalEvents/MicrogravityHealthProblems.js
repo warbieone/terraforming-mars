@@ -31,4 +31,3 @@ class MicrogravityHealthProblems extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.MicrogravityHealthProblems = MicrogravityHealthProblems;
-//# sourceMappingURL=MicrogravityHealthProblems.js.map

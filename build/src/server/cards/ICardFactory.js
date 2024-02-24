@@ -36,4 +36,3 @@ function isCompatibleWith(cf, gameOptions) {
     });
 }
 exports.isCompatibleWith = isCompatibleWith;
-//# sourceMappingURL=ICardFactory.js.map

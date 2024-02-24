@@ -13,4 +13,3 @@ class ScienceTagCard extends ProxyCard_1.ProxyCard {
     }
 }
 exports.ScienceTagCard = ScienceTagCard;
-//# sourceMappingURL=ScienceTagCard.js.map

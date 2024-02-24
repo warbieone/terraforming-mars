@@ -37,4 +37,3 @@ class OrbitalCleanup extends ActionCard_1.ActionCard {
     }
 }
 exports.OrbitalCleanup = OrbitalCleanup;
-//# sourceMappingURL=OrbitalCleanup.js.map

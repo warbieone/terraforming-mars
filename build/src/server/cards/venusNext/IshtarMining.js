@@ -26,4 +26,3 @@ class IshtarMining extends Card_1.Card {
     }
 }
 exports.IshtarMining = IshtarMining;
-//# sourceMappingURL=IshtarMining.js.map

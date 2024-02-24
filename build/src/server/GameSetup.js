@@ -62,4 +62,3 @@ class GameSetup {
     }
 }
 exports.GameSetup = GameSetup;
-//# sourceMappingURL=GameSetup.js.map

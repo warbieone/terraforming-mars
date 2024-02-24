@@ -110,4 +110,3 @@ exports.KELVINISTS_POLICY_1 = new KelvinistsPolicy01();
 exports.KELVINISTS_POLICY_2 = new KelvinistsPolicy02();
 exports.KELVINISTS_POLICY_3 = new KelvinistsPolicy03();
 exports.KELVINISTS_POLICY_4 = new KelvinistsPolicy04();
-//# sourceMappingURL=Kelvinists.js.map

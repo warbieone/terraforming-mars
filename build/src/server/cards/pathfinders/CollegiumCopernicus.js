@@ -79,8 +79,7 @@ class TradeWithCollegiumCopernicus {
         this.collegiumCopernicus = player.getCorporation(CardName_1.CardName.COLLEGIUM_COPERNICUS);
     }
     canUse() {
-        var _a, _b;
-        return ((_b = (_a = this.collegiumCopernicus) === null || _a === void 0 ? void 0 : _a.resourceCount) !== null && _b !== void 0 ? _b : 0) >= tradeCost(this.player) &&
+        return (this.collegiumCopernicus?.resourceCount ?? 0) >= tradeCost(this.player) &&
             !this.player.getActionsThisGeneration().has(CardName_1.CardName.COLLEGIUM_COPERNICUS);
     }
     optionText() {
@@ -94,4 +93,3 @@ class TradeWithCollegiumCopernicus {
     }
 }
 exports.TradeWithCollegiumCopernicus = TradeWithCollegiumCopernicus;
-//# sourceMappingURL=CollegiumCopernicus.js.map

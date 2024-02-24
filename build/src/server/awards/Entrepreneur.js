@@ -14,4 +14,3 @@ class Entrepreneur {
     }
 }
 exports.Entrepreneur = Entrepreneur;
-//# sourceMappingURL=Entrepreneur.js.map

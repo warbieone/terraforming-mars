@@ -16,4 +16,3 @@ class Edgedancer {
     }
 }
 exports.Edgedancer = Edgedancer;
-//# sourceMappingURL=Edgedancer.js.map

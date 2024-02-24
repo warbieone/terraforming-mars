@@ -31,4 +31,3 @@ class Chimera extends CorporationCard_1.CorporationCard {
     }
 }
 exports.Chimera = Chimera;
-//# sourceMappingURL=Chimera.js.map

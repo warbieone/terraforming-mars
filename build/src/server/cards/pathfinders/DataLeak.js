@@ -24,4 +24,3 @@ class DataLeak extends Card_1.Card {
     }
 }
 exports.DataLeak = DataLeak;
-//# sourceMappingURL=DataLeak.js.map

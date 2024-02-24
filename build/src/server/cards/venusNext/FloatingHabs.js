@@ -35,4 +35,3 @@ class FloatingHabs extends ActionCard_1.ActionCard {
     }
 }
 exports.FloatingHabs = FloatingHabs;
-//# sourceMappingURL=FloatingHabs.js.map

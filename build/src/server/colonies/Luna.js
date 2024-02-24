@@ -27,4 +27,3 @@ class Luna extends Colony_1.Colony {
     }
 }
 exports.Luna = Luna;
-//# sourceMappingURL=Luna.js.map

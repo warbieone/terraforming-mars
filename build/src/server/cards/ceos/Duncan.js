@@ -5,7 +5,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CeoCard_1 = require("./CeoCard");
 const Resource_1 = require("../../../common/Resource");
-const Options_1 = require("../Options");
 const CardRenderDynamicVictoryPoints_1 = require("../render/CardRenderDynamicVictoryPoints");
 class Duncan extends CeoCard_1.CeoCard {
     constructor() {
@@ -15,7 +14,7 @@ class Duncan extends CeoCard_1.CeoCard {
             metadata: {
                 cardNumber: 'L04',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.opgArrow().vpIcon().asterix().megacredits(4, { multiplier: Options_1.multiplier });
+                    b.opgArrow().vpIcon().asterix().megacredits(1, { text: '4x' });
                     b.br;
                 }),
                 victoryPoints: CardRenderDynamicVictoryPoints_1.CardRenderDynamicVictoryPoints.questionmark(),
@@ -38,4 +37,3 @@ class Duncan extends CeoCard_1.CeoCard {
     }
 }
 exports.Duncan = Duncan;
-//# sourceMappingURL=Duncan.js.map

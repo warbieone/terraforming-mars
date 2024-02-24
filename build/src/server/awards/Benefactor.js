@@ -11,4 +11,3 @@ class Benefactor {
     }
 }
 exports.Benefactor = Benefactor;
-//# sourceMappingURL=Benefactor.js.map

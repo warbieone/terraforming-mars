@@ -26,4 +26,3 @@ class CO2Reducers extends PreludeCard_1.PreludeCard {
     }
 }
 exports.CO2Reducers = CO2Reducers;
-//# sourceMappingURL=CO2Reducers.js.map

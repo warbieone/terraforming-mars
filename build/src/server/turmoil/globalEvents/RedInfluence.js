@@ -32,4 +32,3 @@ class RedInfluence extends GlobalEvent_1.GlobalEvent {
     }
 }
 exports.RedInfluence = RedInfluence;
-//# sourceMappingURL=RedInfluence.js.map

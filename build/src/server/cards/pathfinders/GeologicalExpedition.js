@@ -45,14 +45,13 @@ class GeologicalExpedition extends Card_1.Card {
         });
     }
     onTilePlaced(cardOwner, activePlayer, space, boardType) {
-        var _a;
         if (boardType !== BoardType_1.BoardType.MARS || space.spaceType === SpaceType_1.SpaceType.COLONY)
             return;
         if (cardOwner !== activePlayer)
             return;
         if (cardOwner.game.phase === Phase_1.Phase.SOLAR)
             return;
-        if (((_a = space.tile) === null || _a === void 0 ? void 0 : _a.covers) !== undefined)
+        if (space.tile?.covers !== undefined)
             return;
         const bonuses = space.bonus;
         if (bonuses.length === 0) {
@@ -81,4 +80,3 @@ class GeologicalExpedition extends Card_1.Card {
     }
 }
 exports.GeologicalExpedition = GeologicalExpedition;
-//# sourceMappingURL=GeologicalExpedition.js.map

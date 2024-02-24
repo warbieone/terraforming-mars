@@ -36,4 +36,3 @@ class PartyHooks {
     }
 }
 exports.PartyHooks = PartyHooks;
-//# sourceMappingURL=PartyHooks.js.map

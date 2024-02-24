@@ -45,4 +45,3 @@ class MartianNatureWonders extends Card_1.Card {
     }
 }
 exports.MartianNatureWonders = MartianNatureWonders;
-//# sourceMappingURL=MartianNatureWonders.js.map

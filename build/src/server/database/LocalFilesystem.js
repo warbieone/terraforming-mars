@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocalFilesystem = void 0;
 const Types_1 = require("../../common/Types");
@@ -66,16 +57,14 @@ class LocalFilesystem {
             throw error;
         }
     }
-    getGameId(participantId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const participants = yield this.getParticipants();
-            for (const entry of participants) {
-                if (entry.participantIds.includes(participantId)) {
-                    return entry.gameId;
-                }
+    async getGameId(participantId) {
+        const participants = await this.getParticipants();
+        for (const entry of participants) {
+            if (entry.participantIds.includes(participantId)) {
+                return entry.gameId;
             }
-            throw new Error(`participant id ${participantId} not found`);
-        });
+        }
+        throw new Error(`participant id ${participantId} not found`);
     }
     getSaveIds(gameId) {
         const results = [];
@@ -103,17 +92,15 @@ class LocalFilesystem {
             return Promise.reject(new Error(`Game ${gameId} not found at save_id ${saveId}`));
         }
     }
-    getPlayerCount(gameId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const gameIds = yield this.getGameIds();
-            const found = gameIds.find((gId) => gId === gameId && (0, fs_1.existsSync)(this.historyFilename(gameId, 0)));
-            if (found === undefined) {
-                throw new Error(`${gameId} not found`);
-            }
-            const text = (0, fs_1.readFileSync)(this.historyFilename(gameId, 0));
-            const serializedGame = JSON.parse(text.toString());
-            return serializedGame.players.length;
-        });
+    async getPlayerCount(gameId) {
+        const gameIds = await this.getGameIds();
+        const found = gameIds.find((gId) => gId === gameId && (0, fs_1.existsSync)(this.historyFilename(gameId, 0)));
+        if (found === undefined) {
+            throw new Error(`${gameId} not found`);
+        }
+        const text = (0, fs_1.readFileSync)(this.historyFilename(gameId, 0));
+        const serializedGame = JSON.parse(text.toString());
+        return serializedGame.players.length;
     }
     getGameIds() {
         const gameIds = [];
@@ -196,4 +183,3 @@ class LocalFilesystem {
     }
 }
 exports.LocalFilesystem = LocalFilesystem;
-//# sourceMappingURL=LocalFilesystem.js.map

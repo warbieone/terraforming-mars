@@ -33,4 +33,3 @@ class LunarTradeFleet extends Card_1.Card {
     }
 }
 exports.LunarTradeFleet = LunarTradeFleet;
-//# sourceMappingURL=LunarTradeFleet.js.map

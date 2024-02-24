@@ -80,6 +80,10 @@ class Asimov extends CeoCard_1.CeoCard {
                 return false;
             if (!gameOptions.moonExpansion && award.name === 'Lunar Magnate')
                 return false;
+            if (!gameOptions.underworldExpansion && award.name === 'Kingpin')
+                return false;
+            if (!gameOptions.underworldExpansion && award.name === 'EdgeLord')
+                return false;
             return true;
         });
         if (validAwards.length === 0)
@@ -88,4 +92,3 @@ class Asimov extends CeoCard_1.CeoCard {
     }
 }
 exports.Asimov = Asimov;
-//# sourceMappingURL=Asimov.js.map

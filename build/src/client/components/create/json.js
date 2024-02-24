@@ -9,4 +9,3 @@ exports.CUSTOM_PRELUDES = 'customPreludes';
 exports.BANNED_CARDS = 'bannedCards';
 exports.EXTRA_CARDS = 'extraCards';
 exports.OLD_BANNED_CARDS = 'cardsBlackList';
-//# sourceMappingURL=json.js.map

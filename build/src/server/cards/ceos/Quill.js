@@ -39,4 +39,3 @@ class Quill extends CeoCard_1.CeoCard {
     }
 }
 exports.Quill = Quill;
-//# sourceMappingURL=Quill.js.map

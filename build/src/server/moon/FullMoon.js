@@ -12,4 +12,3 @@ class FullMoon {
     }
 }
 exports.FullMoon = FullMoon;
-//# sourceMappingURL=FullMoon.js.map

@@ -8,12 +8,17 @@ class OrOptions extends OptionsPlayerInput_1.OptionsInput {
         super('or', 'Select one option', options);
     }
     toModel(player) {
-        return {
+        const initialIdx = this.options.findIndex((option) => option.eligibleForDefault !== false);
+        const model = {
             title: this.title,
             buttonLabel: this.buttonLabel,
             type: 'or',
             options: this.options.map((option) => option.toModel(player)),
         };
+        if (initialIdx > -1) {
+            model.initialIdx = initialIdx;
+        }
+        return model;
     }
     process(input, player) {
         if (!(0, InputResponse_1.isOrOptionsResponse)(input)) {
@@ -27,4 +32,3 @@ class OrOptions extends OptionsPlayerInput_1.OptionsInput {
     }
 }
 exports.OrOptions = OrOptions;
-//# sourceMappingURL=OrOptions.js.map

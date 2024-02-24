@@ -25,4 +25,3 @@ class ExperiencedMartians extends PreludeCard_1.PreludeCard {
     }
 }
 exports.ExperiencedMartians = ExperiencedMartians;
-//# sourceMappingURL=ExperiencedMartians.js.map

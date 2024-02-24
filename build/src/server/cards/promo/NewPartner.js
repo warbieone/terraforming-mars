@@ -30,4 +30,3 @@ class NewPartner extends PreludeCard_1.PreludeCard {
     }
 }
 exports.NewPartner = NewPartner;
-//# sourceMappingURL=NewPartner.js.map

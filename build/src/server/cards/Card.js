@@ -7,6 +7,7 @@ const Units_1 = require("../../common/Units");
 const CardRenderDynamicVictoryPoints_1 = require("./render/CardRenderDynamicVictoryPoints");
 const CardRenderItemType_1 = require("../../common/cards/render/CardRenderItemType");
 const MoonExpansion_1 = require("../moon/MoonExpansion");
+const TileType_1 = require("../../common/TileType");
 const BehaviorExecutor_1 = require("../behavior/BehaviorExecutor");
 const Counter_1 = require("../behavior/Counter");
 const CardRequirements_1 = require("./requirements/CardRequirements");
@@ -20,7 +21,6 @@ const CARD_TYPES_WITHOUT_COST = [
 const cardProperties = new Map();
 class Card {
     internalize(external) {
-        var _a;
         const name = external.name;
         if (external.type === CardType_1.CardType.CORPORATION && external.startingMegaCredits === undefined) {
             throw new Error(`${name}: corp cards must define startingMegaCredits`);
@@ -35,13 +35,36 @@ class Card {
             validateBehavior(external.behavior);
             validateBehavior(external.firstAction);
             validateBehavior(external.action);
+            Card.validateTilesBuilt(external);
         }
         catch (e) {
             throw new Error(`Cannot validate ${name}: ${e}`);
         }
-        const translatedRequirements = (0, utils_1.asArray)((_a = external.requirements) !== null && _a !== void 0 ? _a : []).map((req) => populateCount(req));
+        const translatedRequirements = (0, utils_1.asArray)(external.requirements ?? []).map((req) => populateCount(req));
         const compiledRequirements = CardRequirements_1.CardRequirements.compile(translatedRequirements);
-        const internal = Object.assign(Object.assign({}, external), { reserveUnits: external.reserveUnits === undefined ? undefined : Units_1.Units.of(external.reserveUnits), requirements: translatedRequirements, compiledRequirements: compiledRequirements });
+        const tilesBuilt = [...external.tilesBuilt ?? []];
+        if (external.behavior?.tile?.type !== undefined) {
+            tilesBuilt.push(external.behavior?.tile.type);
+        }
+        if (external.behavior?.moon?.tile?.type !== undefined) {
+            tilesBuilt.push(external.behavior.moon.tile.type);
+        }
+        if (external.behavior?.moon?.habitatTile !== undefined) {
+            tilesBuilt.push(TileType_1.TileType.MOON_HABITAT);
+        }
+        if (external.behavior?.moon?.mineTile !== undefined) {
+            tilesBuilt.push(TileType_1.TileType.MOON_MINE);
+        }
+        if (external.behavior?.moon?.roadTile !== undefined) {
+            tilesBuilt.push(TileType_1.TileType.MOON_ROAD);
+        }
+        const internal = {
+            ...external,
+            reserveUnits: external.reserveUnits === undefined ? undefined : Units_1.Units.of(external.reserveUnits),
+            requirements: translatedRequirements,
+            compiledRequirements: compiledRequirements,
+            tilesBuilt: tilesBuilt,
+        };
         return internal;
     }
     constructor(external) {
@@ -71,8 +94,7 @@ class Card {
         return this.properties.cost === undefined ? 0 : this.properties.cost;
     }
     get initialActionText() {
-        var _a;
-        return this.properties.initialActionText || ((_a = this.properties.firstAction) === null || _a === void 0 ? void 0 : _a.text);
+        return this.properties.initialActionText || this.properties.firstAction?.text;
     }
     get firstAction() {
         return this.properties.firstAction;
@@ -88,6 +110,9 @@ class Card {
     }
     get resourceType() {
         return this.properties.resourceType;
+    }
+    get protectedResources() {
+        return this.properties.protectedResources;
     }
     get startingMegaCredits() {
         return this.properties.startingMegaCredits === undefined ? 0 : this.properties.startingMegaCredits;
@@ -108,7 +133,7 @@ class Card {
         return this.properties.victoryPoints;
     }
     get tilesBuilt() {
-        return this.properties.tilesBuilt || [];
+        return this.properties.tilesBuilt;
     }
     canPlay(player, canAffordOptions) {
         let yesAnd = undefined;
@@ -155,7 +180,6 @@ class Card {
     bespokeOnDiscard(_player) {
     }
     getVictoryPoints(player) {
-        var _a, _b;
         const vp = this.properties.victoryPoints;
         if (typeof (vp) === 'number') {
             return vp;
@@ -176,7 +200,7 @@ class Card {
             throw new Error('Not yet handled');
         }
         let units = 0;
-        switch ((_a = vps.item) === null || _a === void 0 ? void 0 : _a.type) {
+        switch (vps.item?.type) {
             case CardRenderItemType_1.CardRenderItemType.MICROBES:
             case CardRenderItemType_1.CardRenderItemType.ANIMALS:
             case CardRenderItemType_1.CardRenderItemType.FIGHTER:
@@ -187,13 +211,13 @@ class Card {
             case CardRenderItemType_1.CardRenderItemType.RESOURCE_CUBE:
             case CardRenderItemType_1.CardRenderItemType.SCIENCE:
             case CardRenderItemType_1.CardRenderItemType.CAMPS:
-                units = (_b = this.resourceCount) !== null && _b !== void 0 ? _b : 0;
+                units = this.resourceCount ?? 0;
                 break;
             case CardRenderItemType_1.CardRenderItemType.JOVIAN:
-                units = player === null || player === void 0 ? void 0 : player.tags.count(Tag_1.Tag.JOVIAN, 'raw');
+                units = player?.tags.count(Tag_1.Tag.JOVIAN, 'raw');
                 break;
             case CardRenderItemType_1.CardRenderItemType.MOON:
-                units = player === null || player === void 0 ? void 0 : player.tags.count(Tag_1.Tag.MOON, 'raw');
+                units = player?.tags.count(Tag_1.Tag.MOON, 'raw');
                 break;
         }
         if (units === undefined) {
@@ -202,7 +226,6 @@ class Card {
         return vps.points * Math.floor(units / vps.target);
     }
     static autopopulateMetadataVictoryPoints(properties) {
-        var _a, _b;
         const vps = properties.victoryPoints;
         if (vps === undefined) {
             return;
@@ -222,8 +245,8 @@ class Card {
             properties.metadata.victoryPoints = vps;
             return;
         }
-        const each = (_a = vps.each) !== null && _a !== void 0 ? _a : 1;
-        const per = (_b = vps.per) !== null && _b !== void 0 ? _b : 1;
+        const each = vps.each ?? 1;
+        const per = vps.per ?? 1;
         if (vps.resourcesHere !== undefined) {
             if (properties.resourceType === undefined) {
                 throw new Error('When defining a card-resource based VP, resourceType must be defined.');
@@ -252,8 +275,26 @@ class Card {
             throw new Error('Unknown VPs defined');
         }
     }
+    static validateTilesBuilt(properties) {
+        if (properties.tilesBuilt !== undefined) {
+            if (properties.behavior?.tile?.type !== undefined) {
+                throw new Error('tilesBuilt and behavior.tile.tileType both defined: ' + properties.name);
+            }
+            if (properties.behavior?.moon?.tile?.type !== undefined) {
+                throw new Error('tilesBuilt and behavior.moon.tile.tileType both defined: ' + properties.name);
+            }
+            if (properties.behavior?.moon?.habitatTile !== undefined) {
+                throw new Error('tilesBuilt and behavior.moon.habitatTile both defined: ' + properties.name);
+            }
+            if (properties.behavior?.moon?.mineTile !== undefined) {
+                throw new Error('tilesBuilt and behavior.moon.mineTile both defined: ' + properties.name);
+            }
+            if (properties.behavior?.moon?.roadTile !== undefined) {
+                throw new Error('tilesBuilt and behavior.moon.roadTile both defined: ' + properties.name);
+            }
+        }
+    }
     getCardDiscount(_player, card) {
-        var _a;
         if (this.cardDiscount === undefined) {
             return 0;
         }
@@ -264,7 +305,7 @@ class Card {
                 sum += discount.amount;
             }
             else {
-                const tags = (_a = card === null || card === void 0 ? void 0 : card.tags.filter((tag) => tag === discount.tag).length) !== null && _a !== void 0 ? _a : 0;
+                const tags = card?.tags.filter((tag) => tag === discount.tag).length ?? 0;
                 if (discount.per !== 'card') {
                     sum += discount.amount * tags;
                 }
@@ -295,13 +336,30 @@ class Card {
 }
 exports.Card = Card;
 function populateCount(requirement) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
     requirement.count =
-        (_u = (_t = (_s = (_r = (_q = (_p = (_o = (_m = (_l = (_k = (_j = (_h = (_g = (_f = (_e = (_d = (_c = (_b = (_a = requirement.count) !== null && _a !== void 0 ? _a : requirement.oceans) !== null && _b !== void 0 ? _b : requirement.oxygen) !== null && _c !== void 0 ? _c : requirement.temperature) !== null && _d !== void 0 ? _d : requirement.venus) !== null && _e !== void 0 ? _e : requirement.tr) !== null && _f !== void 0 ? _f : requirement.resourceTypes) !== null && _g !== void 0 ? _g : requirement.greeneries) !== null && _h !== void 0 ? _h : requirement.cities) !== null && _j !== void 0 ? _j : requirement.colonies) !== null && _k !== void 0 ? _k : requirement.floaters) !== null && _l !== void 0 ? _l : requirement.partyLeader) !== null && _m !== void 0 ? _m : requirement.habitatRate) !== null && _o !== void 0 ? _o : requirement.miningRate) !== null && _p !== void 0 ? _p : requirement.logisticRate) !== null && _q !== void 0 ? _q : requirement.habitatTiles) !== null && _r !== void 0 ? _r : requirement.miningTiles) !== null && _s !== void 0 ? _s : requirement.roadTiles) !== null && _t !== void 0 ? _t : requirement.corruption) !== null && _u !== void 0 ? _u : requirement.excavation;
+        requirement.count ??
+            requirement.oceans ??
+            requirement.oxygen ??
+            requirement.temperature ??
+            requirement.venus ??
+            requirement.tr ??
+            requirement.resourceTypes ??
+            requirement.greeneries ??
+            requirement.cities ??
+            requirement.colonies ??
+            requirement.floaters ??
+            requirement.partyLeader ??
+            requirement.habitatRate ??
+            requirement.miningRate ??
+            requirement.logisticRate ??
+            requirement.habitatTiles ??
+            requirement.miningTiles ??
+            requirement.roadTiles ??
+            requirement.corruption ??
+            requirement.excavation;
     return requirement;
 }
 function validateBehavior(behavior) {
-    var _a, _b, _c;
     function validate(condition, error) {
         if (condition === false) {
             throw new Error(error);
@@ -315,9 +373,9 @@ function validateBehavior(behavior) {
         if (spend.megacredits) {
             validate(behavior.tr === undefined, 'spend.megacredits is not yet compatible with tr');
             validate(behavior.global === undefined, 'spend.megacredits is not yet compatible with global');
-            validate(((_a = behavior.moon) === null || _a === void 0 ? void 0 : _a.habitatRate) === undefined, 'spend.megacredits is not yet compatible with moon.habitatRate');
-            validate(((_b = behavior.moon) === null || _b === void 0 ? void 0 : _b.logisticsRate) === undefined, 'spend.megacredits is not yet compatible with moon.logisticsRate');
-            validate(((_c = behavior.moon) === null || _c === void 0 ? void 0 : _c.miningRate) === undefined, 'spend.megacredits is not yet compatible with moon.miningRate');
+            validate(behavior.moon?.habitatRate === undefined, 'spend.megacredits is not yet compatible with moon.habitatRate');
+            validate(behavior.moon?.logisticsRate === undefined, 'spend.megacredits is not yet compatible with moon.logisticsRate');
+            validate(behavior.moon?.miningRate === undefined, 'spend.megacredits is not yet compatible with moon.miningRate');
         }
         if (spend.heat) {
             validate(Object.keys(spend).length === 1, 'spend.heat cannot be used with another spend');
@@ -325,4 +383,3 @@ function validateBehavior(behavior) {
     }
 }
 exports.validateBehavior = validateBehavior;
-//# sourceMappingURL=Card.js.map

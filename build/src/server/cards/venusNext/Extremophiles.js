@@ -34,4 +34,3 @@ class Extremophiles extends ActionCard_1.ActionCard {
     }
 }
 exports.Extremophiles = Extremophiles;
-//# sourceMappingURL=Extremophiles.js.map

@@ -31,7 +31,7 @@ class CometForVenus extends Card_1.Card {
         });
     }
     bespokePlay(player) {
-        const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.tags.count(Tag_1.Tag.VENUS, 'raw') > 0);
+        const venusTagPlayers = player.getOpponents().filter((opponent) => opponent.tags.count(Tag_1.Tag.VENUS, 'raw') > 0);
         if (player.game.isSoloMode() || venusTagPlayers.length === 0) {
             return undefined;
         }
@@ -51,4 +51,3 @@ class CometForVenus extends Card_1.Card {
     }
 }
 exports.CometForVenus = CometForVenus;
-//# sourceMappingURL=CometForVenus.js.map

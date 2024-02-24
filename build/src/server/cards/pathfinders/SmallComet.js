@@ -39,11 +39,10 @@ class SmallComet extends Card_1.Card {
     }
     bespokePlay(player) {
         const game = player.game;
-        game.getPlayers().forEach((p) => {
-            player.game.defer(new RemoveResources_1.RemoveResources(player, p, Resource_1.Resource.PLANTS, 2), DeferredAction_1.Priority.ATTACK_OPPONENT);
-        });
+        for (const target of game.getPlayers()) {
+            game.defer(new RemoveResources_1.RemoveResources(target, player, Resource_1.Resource.PLANTS, 2), DeferredAction_1.Priority.ATTACK_OPPONENT);
+        }
         return undefined;
     }
 }
 exports.SmallComet = SmallComet;
-//# sourceMappingURL=SmallComet.js.map

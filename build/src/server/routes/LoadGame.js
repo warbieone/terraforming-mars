@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoadGame = void 0;
 const responses = require("./responses");
@@ -26,7 +17,7 @@ class LoadGame extends Handler_1.Handler {
             req.on('data', function (data) {
                 body += data.toString();
             });
-            req.once('end', () => __awaiter(this, void 0, void 0, function* () {
+            req.once('end', async () => {
                 try {
                     const gameReq = JSON.parse(body);
                     const gameId = gameReq.gameId;
@@ -37,7 +28,7 @@ class LoadGame extends Handler_1.Handler {
                     if (rollbackCount > 0) {
                         Database_1.Database.getInstance().deleteGameNbrSaves(gameId, rollbackCount);
                     }
-                    const game = yield GameLoader_1.GameLoader.getInstance().getGame(gameId, true);
+                    const game = await GameLoader_1.GameLoader.getInstance().getGame(gameId, true);
                     if (game === undefined) {
                         console.warn(`unable to find ${gameId} in database`);
                         responses.notFound(req, res, 'game_id not found');
@@ -50,10 +41,9 @@ class LoadGame extends Handler_1.Handler {
                     responses.internalServerError(req, res, error);
                 }
                 resolve();
-            }));
+            });
         });
     }
 }
 exports.LoadGame = LoadGame;
 LoadGame.INSTANCE = new LoadGame();
-//# sourceMappingURL=LoadGame.js.map

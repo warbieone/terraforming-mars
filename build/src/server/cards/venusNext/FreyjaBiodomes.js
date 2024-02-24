@@ -54,4 +54,3 @@ class FreyjaBiodomes extends Card_1.Card {
     }
 }
 exports.FreyjaBiodomes = FreyjaBiodomes;
-//# sourceMappingURL=FreyjaBiodomes.js.map

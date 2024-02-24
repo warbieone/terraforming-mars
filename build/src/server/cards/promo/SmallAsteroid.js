@@ -30,4 +30,3 @@ class SmallAsteroid extends Card_1.Card {
     }
 }
 exports.SmallAsteroid = SmallAsteroid;
-//# sourceMappingURL=SmallAsteroid.js.map

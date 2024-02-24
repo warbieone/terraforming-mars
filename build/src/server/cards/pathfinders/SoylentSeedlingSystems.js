@@ -43,4 +43,3 @@ class SoylentSeedlingSystems extends CorporationCard_1.CorporationCard {
     }
 }
 exports.SoylentSeedlingSystems = SoylentSeedlingSystems;
-//# sourceMappingURL=SoylentSeedlingSystems.js.map

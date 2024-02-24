@@ -18,4 +18,3 @@ class GreatDamAres extends GreatDamPromo_1.GreatDamPromo {
     }
 }
 exports.GreatDamAres = GreatDamAres;
-//# sourceMappingURL=GreatDamAres.js.map

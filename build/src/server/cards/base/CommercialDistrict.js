@@ -49,4 +49,3 @@ class CommercialDistrict extends Card_1.Card {
     }
 }
 exports.CommercialDistrict = CommercialDistrict;
-//# sourceMappingURL=CommercialDistrict.js.map

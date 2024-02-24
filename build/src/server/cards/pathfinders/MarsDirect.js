@@ -34,4 +34,3 @@ class MarsDirect extends CorporationCard_1.CorporationCard {
     }
 }
 exports.MarsDirect = MarsDirect;
-//# sourceMappingURL=MarsDirect.js.map

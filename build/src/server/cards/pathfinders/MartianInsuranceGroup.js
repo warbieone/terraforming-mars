@@ -39,4 +39,3 @@ class MartianInsuranceGroup extends CorporationCard_1.CorporationCard {
     }
 }
 exports.MartianInsuranceGroup = MartianInsuranceGroup;
-//# sourceMappingURL=MartianInsuranceGroup.js.map

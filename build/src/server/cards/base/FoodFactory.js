@@ -31,4 +31,3 @@ class FoodFactory extends Card_1.Card {
     }
 }
 exports.FoodFactory = FoodFactory;
-//# sourceMappingURL=FoodFactory.js.map

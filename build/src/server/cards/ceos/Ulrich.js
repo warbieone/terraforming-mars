@@ -6,7 +6,6 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const CeoCard_1 = require("./CeoCard");
 const Resource_1 = require("../../../common/Resource");
 const constants_1 = require("../../../common/constants");
-const Options_1 = require("../Options");
 class Ulrich extends CeoCard_1.CeoCard {
     constructor() {
         super({
@@ -14,7 +13,7 @@ class Ulrich extends CeoCard_1.CeoCard {
             metadata: {
                 cardNumber: 'L21',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.opgArrow().oceans(1).colon().megacredits(4, { multiplier: Options_1.multiplier }).slash().megacredits(15).asterix();
+                    b.opgArrow().oceans(1).colon().megacredits(1, { text: '4x' }).slash().megacredits(15).asterix();
                 }),
                 description: 'Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.',
             },
@@ -30,4 +29,3 @@ class Ulrich extends CeoCard_1.CeoCard {
     }
 }
 exports.Ulrich = Ulrich;
-//# sourceMappingURL=Ulrich.js.map

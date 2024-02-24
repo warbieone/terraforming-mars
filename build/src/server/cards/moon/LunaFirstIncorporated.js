@@ -44,4 +44,3 @@ class LunaFirstIncorporated extends CorporationCard_1.CorporationCard {
     }
 }
 exports.LunaFirstIncorporated = LunaFirstIncorporated;
-//# sourceMappingURL=LunaFirstIncorporated.js.map
