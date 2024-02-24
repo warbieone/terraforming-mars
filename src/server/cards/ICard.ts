@@ -56,6 +56,10 @@ export interface ICard {
    * Having descriptions this simple also makes it easier to render its discount in the UI.
    */
   cardDiscount?: OneOrArray<CardDiscount>;
+  /**
+   * Describes the M€ discount `player` could apply to playing `card`.
+   */
+  getStandardProjectDiscount?(player: IPlayer, card: IStandardProjectCard): number;
 
   /**
    * The +/- bonus applied to global parameter requirements, e.g. Adaptation Technology.
@@ -131,6 +135,7 @@ export interface ICard {
   tr?: TRSource | DynamicTRSource;
   resourceCount: number;
   resourceType?: CardResource;
+  protectedResources?: boolean;
   /** Currently used for The Moon, but can be expanded to encompass other tile-placing cards. */
   tilesBuilt: ReadonlyArray<TileType>;
   isDisabled?: boolean; // For Pharmacy Union and CEO cards.

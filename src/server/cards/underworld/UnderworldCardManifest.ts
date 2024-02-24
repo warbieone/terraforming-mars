@@ -20,10 +20,10 @@ import {CloudVortexOutpost} from './CloudVortexOutpost';
 import {CollusionStandardProject} from './CollusionStandardProject';
 import {ConcessionRights} from './ConcessionRights';
 import {CorporateBlackmail} from './CorporateBlackmail';
-// // import {CorporateTheft} from './CorporateTheft';
+import {CorporateTheft} from './CorporateTheft';
 import {CraterSurvey} from './CraterSurvey';
 import {CutThroatBudgeting} from './CutThroatBudgeting';
-// import {Deepmining} from './Deepmining';
+import {Deepmining} from './Deepmining';
 import {Deepnuking} from './Deepnuking';
 import {DeepwaterDome} from './DeepwaterDome';
 // import {DemetronLabs} from './DemetronLabs';
@@ -63,7 +63,7 @@ import {InvestorPlaza} from './InvestorPlaza';
 import {JensonBoyleCo} from './JensonBoyleCo';
 import {Keplertec} from './Keplertec';
 import {KingdomofTauraro} from './KingdomofTauraro';
-// import {LaborTrafficking} from './LaborTrafficking';
+import {LaborTrafficking} from './LaborTrafficking';
 import {LaggingRegulation} from './LaggingRegulation';
 import {Landfill} from './Landfill';
 import {LobbyingNetwork} from './LobbyingNetwork';
@@ -77,7 +77,7 @@ import {Microgravimetry} from './Microgravimetry';
 import {MicroprobingTechnology} from './MicroprobingTechnology';
 import {MigrationUnderground} from './MigrationUnderground';
 import {MiningMarketInsider} from './MiningMarketInsider';
-// import {Monopoly} from './Monopoly';
+import {Monopoly} from './Monopoly';
 import {Nanofoundry} from './Nanofoundry';
 import {NarrativeSpin} from './NarrativeSpin';
 // // import {Neutrinograph} from './Neutrinograph';
@@ -108,7 +108,7 @@ import {SoilExport} from './SoilExport';
 import {SpacePrivateers} from './SpacePrivateers';
 import {SpaceWargames} from './SpaceWargames';
 import {StagedProtests} from './StagedProtests';
-// import {StandardTechnology} from './StandardTechnology';
+import {StandardTechnology} from './StandardTechnology';
 // import {StarVegas} from './StarVegas';
 import {StemFieldSubsidies} from './StemFieldSubsidies';
 import {SubnauticPirates} from './SubnauticPirates';
@@ -148,7 +148,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.SUBNAUTIC_PIRATES]: {Factory: SubnauticPirates},
     // // [CardName.SOCIAL_ENGINEERING]: {Factory: SocialEngineering}, // Use another player's action. Not right now.
     [CardName.FABRICATED_SCANDAL]: {Factory: FabricatedScandal},
-    // [CardName.LABOR_TRAFFICKING]: {Factory: LaborTrafficking}, // Currently not welel written.
+    [CardName.LABOR_TRAFFICKING]: {Factory: LaborTrafficking},
     [CardName.SUBTERRANEAN_SEA]: {Factory: SubterraneanSea},
     [CardName.FOREST_TUNNELS]: {Factory: ForestTunnels},
     [CardName.MAN_MADE_VOLCANO]: {Factory: ManMadeVolcano},
@@ -165,7 +165,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.CAVE_CITY]: {Factory: CaveCity},
     // // 28-36
     [CardName.UNDERGROUND_SMUGGLING_RING]: {Factory: UndergroundSmugglingRing},
-    // [CardName.DEEPMINING]: {Factory: Deepmining}, // Don't want to deal with testing the robotic workforce assocaition.
+    [CardName.DEEPMINING]: {Factory: Deepmining},
     [CardName.BEHEMOTH_EXCAVATOR]: {Factory: BehemothExcavator},
     [CardName.LOBBYING_NETWORK]: {Factory: LobbyingNetwork},
     [CardName.CONCESSION_RIGHTS]: {Factory: ConcessionRights},
@@ -200,12 +200,12 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.SOIL_EXPORT]: {Factory: SoilExport},
     [CardName.ARTESIAN_AQUIFER]: {Factory: ArtesianAquifer},
     [CardName.CHEMICAL_FACTORY]: {Factory: ChemicalFactory},
-    // // [CardName.CORPORATE_THEFT]: {Factory: CorporateTheft}, // Tricky resource stuff and tricky corruption stuff.
+    [CardName.CORPORATE_THEFT]: {Factory: CorporateTheft},
     // // [CardName.UNDERGROUND_RESEARCH_CENTER]: {Factory: UndergroundResearchCenter}, // I want to take time to think about the tag rule.
     [CardName.PRICE_WARS]: {Factory: PriceWars},
     // // 64-72
     [CardName.ANTI_TRUST_CRACKDOWN]: {Factory: AntiTrustCrackdown},
-    // [CardName.MONOPOLY]: {Factory: Monopoly},
+    [CardName.MONOPOLY]: {Factory: Monopoly},
     [CardName.STAGED_PROTESTS]: {Factory: StagedProtests},
     [CardName.PLANT_TAX]: {Factory: PlantTax},
     [CardName.INFRASTRUCTURE_OVERLOAD]: {Factory: InfrastructureOverload},
@@ -235,7 +235,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     // // [CardName.THIOLAVA_VENTS]: {Factory: ThiolavaVents}, // Uncomment when tests are more manageable. See Production.ts
 
     // // Replacements
-    // [CardName.STANDARD_TECHNOLOGY_UNDERWORLD]: {Factory: StandardTechnology},
+    [CardName.STANDARD_TECHNOLOGY_UNDERWORLD]: {Factory: StandardTechnology},
     [CardName.HACKERS_UNDERWORLD]: {Factory: Hackers},
     [CardName.HIRED_RAIDERS_UNDERWORLD]: {Factory: HiredRaiders},
   },
