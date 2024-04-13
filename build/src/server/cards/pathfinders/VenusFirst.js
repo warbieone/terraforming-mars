@@ -8,7 +8,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 class VenusFirst extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
-            name: CardName_1.CardName.VENUS_FIRST_PATHFINDERS,
+            name: CardName_1.CardName.VENUS_FIRST,
             tags: [Tag_1.Tag.VENUS],
             behavior: {
                 drawCard: { count: 2, tag: Tag_1.Tag.VENUS },

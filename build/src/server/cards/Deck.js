@@ -40,44 +40,46 @@ class Deck {
             this.drawPile.push(...rest, ...top);
         }
     }
-    drawSpecific(cardNames) {
-        const cards = [];
-        for (const cardName of cardNames) {
-            const cardIndex = this.drawPile.findIndex(card => card.name === cardName);
-            if (cardIndex === -1) {
-                throw new Error(`Card ${cardName} not found in ${this.type} deck`);
-            }
-            const card = this.drawPile.splice(cardIndex, 1)[0];
-            cards.push(card);
-        }
-        if (this.drawPile.length === 0) {
-            this.shuffle();
-        }
-        return cards;
-    }
-    draw(logger, source = 'top') {
-        if (this.drawPile.length === 0) {
-            logger.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
-            this.shuffle();
-        }
-        const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
-        if (this.drawPile.length === 0) {
-            logger.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
-            this.shuffle();
-        }
-        return card;
-    }
     drawLegacy(logger, source = 'top') {
         return this.drawOrThrow(logger, source);
     }
-    drawOrThrow(logger, source = 'top') {
+    draw(logger, source = 'top') {
+        this.shuffleIfNecessary(logger);
         const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
-        if (card === undefined) {
-            throw new Error(`Unexpected empty ${this.type} deck`);
+        this.shuffleIfNecessary(logger);
+        return card;
+    }
+    drawN(logger, count, source = 'top') {
+        const cards = [];
+        for (let idx = 0; idx < count; idx++) {
+            const card = this.draw(logger, source);
+            if (card === undefined) {
+                break;
+            }
+            cards.push(card);
         }
-        if (this.drawPile.length === 0) {
+        return cards;
+    }
+    drawNOrThrow(logger, count) {
+        const cards = [];
+        for (let idx = 0; idx < count; idx++) {
+            cards.push(this.drawOrThrow(logger));
+        }
+        return cards;
+    }
+    canDraw(count) {
+        return this.drawPile.length + this.discardPile.length > count;
+    }
+    shuffleIfNecessary(logger) {
+        if (this.drawPile.length === 0 && this.discardPile.length !== 0) {
             logger.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
             this.shuffle();
+        }
+    }
+    drawOrThrow(logger, source = 'top') {
+        const card = this.draw(logger, source);
+        if (card === undefined) {
+            throw new Error(`Unexpected empty ${this.type} deck`);
         }
         return card;
     }

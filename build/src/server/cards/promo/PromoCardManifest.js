@@ -71,6 +71,7 @@ const SaturnSurfing_1 = require("./SaturnSurfing");
 const SelfReplicatingRobots_1 = require("./SelfReplicatingRobots");
 const SmallAsteroid_1 = require("./SmallAsteroid");
 const SnowAlgae_1 = require("./SnowAlgae");
+const SoilEnrichment_1 = require("./SoilEnrichment");
 const SolarLogistics_1 = require("./SolarLogistics");
 const Splice_1 = require("./Splice");
 const StanfordTorus_1 = require("./StanfordTorus");
@@ -144,6 +145,7 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.TESLARACT]: { Factory: Teslaract_1.Teslaract },
         [CardName_1.CardName.DIRECTED_HEAT_USAGE]: { Factory: DirectedHeatUsage_1.DirectedHeatUsage },
         [CardName_1.CardName.ICY_IMPACTORS]: { Factory: IcyImpactors_1.IcyImpactors },
+        [CardName_1.CardName.SOIL_ENRICHMENT]: { Factory: SoilEnrichment_1.SoilEnrichment },
     },
     preludeCards: {
         [CardName_1.CardName.NEW_PARTNER]: { Factory: NewPartner_1.NewPartner },

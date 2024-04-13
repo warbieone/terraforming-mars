@@ -127,6 +127,7 @@ exports.PaymentWidgetMixin = {
                 case 'auroraiData':
                 case 'graphene':
                 case 'kuiperAsteroids':
+                case 'corruption':
                     amount = model.playerinput[unit];
                     break;
             }
@@ -136,6 +137,13 @@ exports.PaymentWidgetMixin = {
             if (unit === 'floaters' && this.asModel().card?.name === CardName_1.CardName.STRATOSPHERIC_BIRDS) {
                 if (!thisPlayer.tableau.some((card) => {
                     return card.name !== CardName_1.CardName.DIRIGIBLES && (0, ClientCardManifest_1.getCard)(card.name)?.resourceType === CardResource_1.CardResource.FLOATER && (card.resources ?? 0) > 0;
+                })) {
+                    amount = Math.max(amount - 1, 0);
+                }
+            }
+            if (unit === 'microbes' && this.asModel().card?.name === CardName_1.CardName.SOIL_ENRICHMENT) {
+                if (!thisPlayer.tableau.some((card) => {
+                    return card.name !== CardName_1.CardName.PSYCHROPHILES && (0, ClientCardManifest_1.getCard)(card.name)?.resourceType === CardResource_1.CardResource.MICROBE && (card.resources ?? 0) > 0;
                 })) {
                     amount = Math.max(amount - 1, 0);
                 }
@@ -168,6 +176,7 @@ exports.PaymentWidgetMixin = {
                 lunaArchivesScience: 'Science',
                 microbes: 'Microbes',
                 plants: 'Plants',
+                corruption: 'Corruption',
             };
         },
     },

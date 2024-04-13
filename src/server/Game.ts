@@ -328,9 +328,10 @@ export class Game implements IGame, Logger {
         gameOptions.initialDraftVariant ||
         gameOptions.ceoExtension) {
 
-          const specificCardsOwen = ['Teractor','Celestic','Septem Tribus','Valley Trust','Thorgate'];
+/*           const specificCardsOwen = ['Teractor','Celestic','Septem Tribus','Valley Trust','Thorgate'];
           const specificCardsLaura = ['Inventrix','Factorum','Aphrodite','Point Luna','Splice'];
-          const specificCardsJoel = ['Mons Insurance','Astrodrill','Pristar','CrediCor','Manutech'];
+          const specificCardsJoel = ['Mons Insurance','Astrodrill','Pristar','CrediCor','Manutech']; 
+          */
          
           if (player.name !== 'Owen T' && player.name !== 'Laura T' && player.name !== 'Joel T') {
               for (let i = 0; i < gameOptions.startingCorporations; i++) {
@@ -338,7 +339,7 @@ export class Game implements IGame, Logger {
               }
           }
           
-          if (player.name === 'Owen T'){
+/*           if (player.name === 'Owen T'){
               let dealtCardsOwen;
               dealtCardsOwen = corporationDeck.drawSpecific(specificCardsOwen);
               player.dealtCorporationCards = dealtCardsOwen;
@@ -354,7 +355,8 @@ export class Game implements IGame, Logger {
               let  dealtCardsJoel
               dealtCardsJoel = corporationDeck.drawSpecific(specificCardsJoel);
               player.dealtCorporationCards = dealtCardsJoel;
-          }        
+          }         
+          */
 
         if (gameOptions.initialDraftVariant === false) {
           player.dealtProjectCards.push(...projectDeck.drawN(game, 10));

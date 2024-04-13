@@ -22,23 +22,14 @@ class AresHandler {
             cb(game.aresData);
         }
     }
-    static earnAdjacencyBonuses(aresData, player, space, options) {
-        let incrementMilestone = false;
+    static earnAdjacencyBonuses(player, space, options) {
         for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
-            const grantedBonus = this.earnAdacencyBonus(space, adjacentSpace, player, options?.giveAresTileOwnerBonus);
-            incrementMilestone ||= grantedBonus;
-        }
-        if (incrementMilestone && options?.incrementMilestone !== false) {
-            const entry = aresData.milestoneResults.find((e) => e.id === player.id);
-            if (entry === undefined) {
-                throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
-            }
-            entry.count++;
+            this.earnAdacencyBonus(space, adjacentSpace, player, options?.giveAresTileOwnerBonus);
         }
     }
     static earnAdacencyBonus(newTileSpace, adjacentSpace, player, giveAresTileOwnerBonus = true) {
         if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
-            return false;
+            return;
         }
         const adjacentPlayer = adjacentSpace.player;
         if (adjacentPlayer === undefined) {
@@ -107,7 +98,18 @@ class AresHandler {
             adjacentPlayer.megaCredits += ownerBonus;
             player.game.log('${0} gains ${1} M€ for a tile placed next to ${2}', (b) => b.player(adjacentPlayer).number(ownerBonus).string(tileText));
         }
-        return true;
+    }
+    static maybeIncrementMilestones(aresData, player, space) {
+        const hasAdjacencyBonus = player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => {
+            return (adjacentSpace.adjacency?.bonus ?? []).length > 0;
+        });
+        if (hasAdjacencyBonus) {
+            const entry = aresData.milestoneResults.find((e) => e.id === player.id);
+            if (entry === undefined) {
+                throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
+            }
+            entry.count++;
+        }
     }
     static hasHazardTile(space) {
         return (0, AresTileType_1.hazardSeverity)(space.tile?.tileType) !== AresTileType_1.HazardSeverity.NONE;

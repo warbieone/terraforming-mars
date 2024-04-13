@@ -33,6 +33,7 @@ const SelectResource_1 = require("../inputs/SelectResource");
 const RemoveResourcesFromCard_1 = require("../deferredActions/RemoveResourcesFromCard");
 const IProjectCard_1 = require("../cards/IProjectCard");
 const constants_1 = require("../../common/constants");
+const CardName_1 = require("../../common/cards/CardName");
 class Executor {
     canExecute(behavior, player, card, canAffordOptions) {
         const ctx = new Counter_1.Counter(player, card);
@@ -132,6 +133,11 @@ class Executor {
                     return false;
                 }
             }
+            else {
+                if (game.board.getSpace(behavior.city.space).tile !== undefined) {
+                    return false;
+                }
+            }
         }
         if (behavior.greenery !== undefined) {
             if (game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery', canAffordOptions).length === 0) {
@@ -197,6 +203,21 @@ class Executor {
             }
             if ((moon.logisticsRate ?? 0) >= constants_1.MAXIMUM_LOGISTICS_RATE) {
                 card.warnings.add('maxLogisticsRate');
+            }
+        }
+        if (behavior.underworld !== undefined) {
+            const underworld = behavior.underworld;
+            if (underworld.identify !== undefined) {
+                if (card.name === CardName_1.CardName.NEUTRINOGRAPH || player.cardIsInEffect(CardName_1.CardName.NEUTRINOGRAPH)) {
+                    if (UnderworldExpansion_1.UnderworldExpansion.excavatableSpaces(player).length === 0) {
+                        return false;
+                    }
+                }
+                else {
+                    if (UnderworldExpansion_1.UnderworldExpansion.identifiableSpaces(player).length === 0) {
+                        return false;
+                    }
+                }
             }
         }
         return true;
@@ -380,6 +401,9 @@ class Executor {
             if (behavior.city.space !== undefined) {
                 const space = player.game.board.getSpace(behavior.city.space);
                 player.game.addCity(player, space);
+                if (space.tile !== undefined) {
+                    space.tile.card = card.name;
+                }
             }
             else {
                 player.game.defer(new PlaceCityTile_1.PlaceCityTile(player, { on: behavior.city.on }));

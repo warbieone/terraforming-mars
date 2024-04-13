@@ -18,13 +18,15 @@ class CoLeadership extends PreludeCard_1.PreludeCard {
             },
         });
     }
+    bespokeCanPlay(player) {
+        if (!player.game.ceoDeck.canDraw(3)) {
+            this.warnings.add('deckTooSmall');
+        }
+        return true;
+    }
     bespokePlay(player) {
         const game = player.game;
-        let ceosDrawn = [
-            game.ceoDeck.drawLegacy(game),
-            game.ceoDeck.drawLegacy(game),
-            game.ceoDeck.drawLegacy(game),
-        ];
+        let ceosDrawn = game.ceoDeck.drawN(game, 3);
         ceosDrawn = ceosDrawn.filter((ceo) => {
             if (ceo.canPlay?.(player) === false) {
                 game.ceoDeck.discard(ceo);

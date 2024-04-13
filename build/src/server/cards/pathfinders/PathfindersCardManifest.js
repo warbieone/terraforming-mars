@@ -215,7 +215,7 @@ exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: { Factory: AdhaiHighOrbitConstructions_1.AdhaiHighOrbitConstructions, compatibility: 'colonies' },
     },
     preludeCards: {
-        [CardName_1.CardName.VENUS_FIRST_PATHFINDERS]: { Factory: VenusFirst_1.VenusFirst, compatibility: 'venus' },
+        [CardName_1.CardName.VENUS_FIRST]: { Factory: VenusFirst_1.VenusFirst, compatibility: 'venus' },
         [CardName_1.CardName.VALUABLE_GASES_PATHFINDERS]: { Factory: ValuableGases_1.ValuableGases, compatibility: 'venus' },
         [CardName_1.CardName.CO2_REDUCERS]: { Factory: CO2Reducers_1.CO2Reducers, compatibility: 'venus' },
         [CardName_1.CardName.HYDROGEN_BOMBARDMENT]: { Factory: HydrogenBombardment_1.HydrogenBombardment, compatibility: 'venus' },
@@ -239,7 +239,6 @@ exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [GlobalEventName_1.GlobalEventName.COMMUNICATION_BOOM]: { Factory: CommunicationBoom_1.CommunicationBoom, negative: true },
     },
     cardsToRemove: [
-        CardName_1.CardName.VENUS_FIRST,
         CardName_1.CardName.RESEARCH_GRANT,
         CardName_1.CardName.VALUABLE_GASES,
     ],

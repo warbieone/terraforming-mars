@@ -68,6 +68,7 @@ class PlayerInput extends Handler_1.Handler {
         responses.writeJson(res, ServerModel_1.Server.getPlayerModel(player));
     }
     processInput(req, res, ctx, player) {
+        player.tableau.forEach((card) => card.warnings.clear());
         return new Promise((resolve) => {
             let body = '';
             req.on('data', (data) => {

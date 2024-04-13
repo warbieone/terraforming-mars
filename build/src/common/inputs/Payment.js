@@ -26,6 +26,7 @@ exports.DEFAULT_PAYMENT_VALUES = {
     auroraiData: constants_1.DATA_VALUE,
     graphene: constants_1.GRAPHENE_VALUE,
     kuiperAsteroids: 1,
+    corruption: constants_1.CORRUPTION_VALUE,
 };
 var Payment;
 (function (Payment) {
@@ -43,6 +44,7 @@ var Payment;
         auroraiData: 0,
         graphene: 0,
         kuiperAsteroids: 0,
+        corruption: 0,
     };
     function of(payment) {
         return {
@@ -59,6 +61,7 @@ var Payment;
             graphene: payment.graphene ?? 0,
             kuiperAsteroids: payment.kuiperAsteroids ?? 0,
             plants: payment.plants ?? 0,
+            corruption: payment.corruption ?? 0,
         };
     }
     Payment.of = of;

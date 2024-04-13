@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaceOceanTile = void 0;
 const SelectSpace_1 = require("../inputs/SelectSpace");
 const DeferredAction_1 = require("./DeferredAction");
+const CardName_1 = require("../../common/cards/CardName");
 class PlaceOceanTile extends DeferredAction_1.DeferredAction {
     constructor(player, options = {}) {
         super(player, DeferredAction_1.Priority.PLACE_OCEAN_TILE);
@@ -10,6 +11,10 @@ class PlaceOceanTile extends DeferredAction_1.DeferredAction {
     }
     execute() {
         if (!this.player.game.canAddOcean()) {
+            const whales = this.player.playedCards.find((card) => card.name === CardName_1.CardName.WHALES);
+            if (whales !== undefined) {
+                this.player.addResourceTo(whales, { qty: 1, log: true });
+            }
             return undefined;
         }
         let title = this.options.title ?? this.getTitle('ocean');
@@ -24,8 +29,9 @@ class PlaceOceanTile extends DeferredAction_1.DeferredAction {
         }
         return new SelectSpace_1.SelectSpace(title, availableSpaces)
             .andThen((space) => {
-            this.player.game.addOcean(this.player, space);
-            this.cb(space);
+            const creditedPlayer = this.options.creditedPlayer ?? this.player;
+            creditedPlayer.game.addOcean(creditedPlayer, space);
+            creditedPlayer.defer(this.cb(space));
             return undefined;
         });
     }

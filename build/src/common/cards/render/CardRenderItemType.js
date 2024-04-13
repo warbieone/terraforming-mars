@@ -103,4 +103,5 @@ var CardRenderItemType;
     CardRenderItemType["ACTIVIST"] = "activist";
     CardRenderItemType["SUPPLY_CHAIN"] = "supply-chain";
     CardRenderItemType["GEOSCAN_ICON"] = "geoscan-icon";
+    CardRenderItemType["UNDERGROUND_SHELTERS"] = "underground-shelters";
 })(CardRenderItemType = exports.CardRenderItemType || (exports.CardRenderItemType = {}));

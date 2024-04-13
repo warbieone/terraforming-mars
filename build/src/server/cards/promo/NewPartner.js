@@ -21,11 +21,16 @@ class NewPartner extends PreludeCard_1.PreludeCard {
             },
         });
     }
+    bespokeCanPlay(player) {
+        const game = player.game;
+        if (!game.preludeDeck.canDraw(2)) {
+            this.warnings.add('deckTooSmall');
+        }
+        return true;
+    }
     bespokePlay(player) {
-        const cards = [
-            player.game.preludeDeck.drawLegacy(player.game),
-            player.game.preludeDeck.drawLegacy(player.game),
-        ];
+        const game = player.game;
+        const cards = game.preludeDeck.drawN(game, 2);
         return PreludesExpansion_1.PreludesExpansion.playPrelude(player, cards);
     }
 }

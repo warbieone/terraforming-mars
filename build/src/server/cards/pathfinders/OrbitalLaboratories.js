@@ -22,7 +22,7 @@ class OrbitalLaboratories extends Card_1.Card {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production(((pb) => pb.plants(2))).nbsp.plants(1);
                 }),
-                description: 'Increase your plant production by 2. Gain 1 plant.',
+                description: 'Increase your plant production 2 steps. Gain 1 plant.',
             },
         });
     }

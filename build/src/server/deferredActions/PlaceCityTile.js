@@ -13,11 +13,13 @@ class PlaceCityTile extends DeferredAction_1.DeferredAction {
         const spaces = this.options?.spaces || this.player.game.board.getAvailableSpacesForType(this.player, type);
         const title = this.options?.title ?? this.getTitle(type);
         if (spaces.length === 0) {
+            this.cb(undefined);
             return undefined;
         }
         return new SelectSpace_1.SelectSpace(title, spaces)
             .andThen((space) => {
             this.player.game.addCity(this.player, space);
+            this.cb(space);
             return undefined;
         });
     }

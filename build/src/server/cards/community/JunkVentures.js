@@ -6,7 +6,6 @@ const Size_1 = require("../../../common/cards/render/Size");
 const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ChooseCards_1 = require("../../deferredActions/ChooseCards");
-const LogHelper_1 = require("../../LogHelper");
 class JunkVentures extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -27,13 +26,10 @@ class JunkVentures extends CorporationCard_1.CorporationCard {
         });
     }
     initialAction(player) {
-        const discardedCards = new Set();
-        for (let i = 0; i < 3; i++) {
-            const card = player.game.projectDeck.drawLegacy(player.game);
+        const cards = player.game.projectDeck.drawN(player.game, 3);
+        for (const card of cards) {
             player.game.projectDeck.discard(card);
-            discardedCards.add(card.name);
         }
-        LogHelper_1.LogHelper.logDiscardedCards(player.game, Array.from(discardedCards));
         return undefined;
     }
     canAct(player) {

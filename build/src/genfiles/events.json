@@ -15,10 +15,8 @@
                                     "type": "megacredits",
                                     "amount": 1,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
                                     "cancelled": false,
-                                    "questionMark": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
@@ -37,10 +35,8 @@
                         "type": "colonies",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "size": "M"
                     },
                     {
@@ -53,10 +49,8 @@
                         "type": "titanium",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -68,10 +62,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -91,10 +83,8 @@
                         "type": "megacredits",
                         "amount": -3,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -109,17 +99,14 @@
                         "type": "colonies",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "size": "M"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -142,7 +129,6 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "secondaryTag": "floater"
@@ -157,10 +143,8 @@
                         "type": "floaters",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "nbsp",
@@ -172,10 +156,8 @@
                         "type": "floaters",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -187,10 +169,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -216,10 +196,8 @@
                         "type": "floaters",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "OR",
@@ -231,10 +209,8 @@
                         "type": "megacredits",
                         "amount": -10,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -255,10 +231,8 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -270,10 +244,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -293,10 +265,8 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -311,7 +281,6 @@
                         "type": "venus",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -320,7 +289,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -343,7 +311,6 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "secondaryTag": "wild-resource"
@@ -358,10 +325,8 @@
                         "type": "wild",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "nbsp",
@@ -373,10 +338,8 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -388,10 +351,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -411,10 +372,8 @@
                         "type": "titanium",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -426,7 +385,6 @@
                         "type": "jovian",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -435,7 +393,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -458,10 +415,8 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -476,10 +431,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "+",
@@ -491,7 +444,6 @@
                         "type": "tr",
                         "amount": 5,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "showDigit": true,
@@ -517,10 +469,8 @@
                         "type": "plants",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -535,10 +485,8 @@
                                     "type": "plants",
                                     "amount": 1,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
-                                    "cancelled": false,
-                                    "questionMark": false
+                                    "cancelled": false
                                 }
                             ]
                         ],
@@ -554,7 +502,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -577,10 +524,8 @@
                         "type": "steel",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -595,10 +540,8 @@
                                     "type": "steel",
                                     "amount": 1,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
-                                    "cancelled": false,
-                                    "questionMark": false
+                                    "cancelled": false
                                 }
                             ]
                         ],
@@ -614,7 +557,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -637,10 +579,8 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -655,7 +595,6 @@
                         "type": "earth",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -664,7 +603,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -687,10 +625,8 @@
                         "type": "temperature",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "nbsp",
@@ -705,10 +641,8 @@
                                     "type": "heat",
                                     "amount": 1,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
-                                    "cancelled": false,
-                                    "questionMark": false
+                                    "cancelled": false
                                 }
                             ]
                         ],
@@ -724,10 +658,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -747,10 +679,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "9",
                         "size": "M",
                         "isUppercase": false,
@@ -760,17 +690,14 @@
                         "type": "diverse_tag",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "isPlayed": true
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -785,10 +712,8 @@
                         "type": "megacredits",
                         "amount": 10,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -814,10 +739,8 @@
                                     "type": "energy",
                                     "amount": 1,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
-                                    "cancelled": false,
-                                    "questionMark": false
+                                    "cancelled": false
                                 }
                             ]
                         ],
@@ -833,7 +756,6 @@
                         "type": "energy",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -842,7 +764,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -865,10 +786,8 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -883,7 +802,6 @@
                         "type": "space",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -892,7 +810,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -915,10 +832,8 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -933,7 +848,6 @@
                         "type": "event",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -942,7 +856,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -965,10 +878,8 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -983,7 +894,6 @@
                         "type": "science",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -992,7 +902,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -1015,10 +924,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "+",
@@ -1030,7 +937,6 @@
                         "type": "building",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S",
@@ -1046,7 +952,6 @@
                         "type": "city",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "M"
@@ -1063,10 +968,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "1st:",
                         "size": "S",
                         "isUppercase": false,
@@ -1076,7 +979,6 @@
                         "type": "tr",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "XS"
@@ -1091,10 +993,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "2nd:",
                         "size": "S",
                         "isUppercase": false,
@@ -1104,7 +1004,6 @@
                         "type": "tr",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "XS"
@@ -1127,10 +1026,8 @@
                         "type": "oceans",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "nbsp",
@@ -1142,19 +1039,15 @@
                         "type": "plants",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "steel",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -1166,10 +1059,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1189,10 +1080,8 @@
                         "type": "megacredits",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -1207,16 +1096,13 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -1239,10 +1125,8 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -1257,17 +1141,14 @@
                         "type": "city",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "size": "M"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -1290,10 +1171,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "Lose all",
                         "size": "M",
                         "isUppercase": false,
@@ -1303,10 +1182,8 @@
                         "type": "heat",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "nbsp",
@@ -1318,10 +1195,8 @@
                         "type": "megacredits",
                         "amount": -2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -1336,7 +1211,6 @@
                         "type": "building",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -1345,7 +1219,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -1368,10 +1241,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "max 3",
                         "size": "M",
                         "isUppercase": false,
@@ -1381,16 +1252,13 @@
                         "type": "plants",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -1419,10 +1287,8 @@
                         "type": "titanium",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -1434,7 +1300,6 @@
                         "type": "jovian",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -1443,7 +1308,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -1472,10 +1336,8 @@
                         "type": "megacredits",
                         "amount": 4,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -1490,26 +1352,21 @@
                         "type": "oceans",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "empty_tile",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "size": "M"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -1532,7 +1389,6 @@
                         "type": "earth",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S",
@@ -1548,10 +1404,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": ":",
@@ -1565,10 +1419,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "1st:",
                         "size": "S",
                         "isUppercase": false,
@@ -1584,7 +1436,6 @@
                         "type": "tr",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "XS"
@@ -1599,10 +1450,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "2nd:",
                         "size": "S",
                         "isUppercase": false,
@@ -1618,7 +1467,6 @@
                         "type": "tr",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "XS"
@@ -1647,10 +1495,8 @@
                         "type": "megacredits",
                         "amount": 4,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -1665,17 +1511,14 @@
                         "type": "city",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "size": "M"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -1707,19 +1550,15 @@
                                     "type": "energy",
                                     "amount": 1,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
-                                    "cancelled": false,
-                                    "questionMark": false
+                                    "cancelled": false
                                 },
                                 {
                                     "type": "steel",
                                     "amount": 1,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
-                                    "cancelled": false,
-                                    "questionMark": false
+                                    "cancelled": false
                                 }
                             ]
                         ],
@@ -1741,10 +1580,8 @@
                         "type": "steel",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -1756,7 +1593,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "M"
@@ -1785,10 +1621,8 @@
                         "type": "temperature",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "nbsp",
@@ -1800,10 +1634,8 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -1815,10 +1647,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1838,10 +1668,8 @@
                         "type": "megacredits",
                         "amount": -3,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -1856,7 +1684,6 @@
                         "type": "building",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -1865,7 +1692,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -1894,10 +1720,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "4",
                         "size": "M",
                         "isUppercase": false,
@@ -1907,16 +1731,13 @@
                         "type": "tr",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -1945,10 +1766,8 @@
                         "type": "cards",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "nbsp",
@@ -1960,10 +1779,8 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -1978,10 +1795,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2007,10 +1822,8 @@
                         "type": "oceans",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "nbsp",
@@ -2028,10 +1841,8 @@
                         "type": "wild",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -2043,10 +1854,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2066,10 +1875,8 @@
                         "type": "megacredits",
                         "amount": -3,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -2084,7 +1891,6 @@
                         "type": "tr",
                         "amount": 5,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "showDigit": true,
@@ -2103,10 +1909,8 @@
                                     "type": "megacredits",
                                     "amount": 1,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
                                     "cancelled": false,
-                                    "questionMark": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
@@ -2125,10 +1929,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ],
                 []
@@ -2155,10 +1957,8 @@
                         "type": "megacredits",
                         "amount": 3,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -2173,7 +1973,6 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "secondaryTag": "blue"
@@ -2182,7 +1981,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -2211,10 +2009,8 @@
                         "type": "megacredits",
                         "amount": 3,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -2229,7 +2025,6 @@
                         "type": "space",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -2238,7 +2033,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -2261,10 +2055,8 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -2276,10 +2068,8 @@
                         "type": "party_leaders",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "+",
@@ -2291,10 +2081,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2314,10 +2102,8 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -2332,7 +2118,6 @@
                         "type": "mars",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -2341,7 +2126,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -2367,10 +2151,8 @@
                                     "type": "megacredits",
                                     "amount": 1,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
                                     "cancelled": false,
-                                    "questionMark": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
@@ -2389,10 +2171,8 @@
                         "type": "empty_tile_special",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "nbsp",
@@ -2404,10 +2184,8 @@
                         "type": "energy",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -2419,10 +2197,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2448,10 +2224,8 @@
                         "type": "megacredits",
                         "amount": 10,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -2460,7 +2234,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -2469,19 +2242,15 @@
                         "type": "plantary-track",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "2",
                         "size": "M",
                         "isUppercase": false,
@@ -2511,10 +2280,8 @@
                         "type": "plants",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -2526,7 +2293,6 @@
                         "type": "earth",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "isPlayed": true
@@ -2535,7 +2301,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -2564,10 +2329,8 @@
                         "type": "temperature",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "nbsp",
@@ -2585,10 +2348,8 @@
                         "type": "oxygen",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2608,10 +2369,8 @@
                         "type": "megacredits",
                         "amount": -10,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -2626,7 +2385,6 @@
                         "type": "data resource",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false
                     },
@@ -2646,10 +2404,8 @@
                         "type": "data resource",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "/",
@@ -2661,10 +2417,8 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2684,19 +2438,15 @@
                         "type": "corruption",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": ":",
@@ -2708,10 +2458,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "1st/2nd",
                         "size": "S",
                         "isUppercase": false,
@@ -2721,10 +2469,8 @@
                         "type": "corruption",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "rows": [
@@ -2733,10 +2479,8 @@
                                     "type": "megacredits",
                                     "amount": 3,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
                                     "cancelled": false,
-                                    "questionMark": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
@@ -2751,10 +2495,8 @@
                                     "type": "megacredits",
                                     "amount": 1,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
                                     "cancelled": false,
-                                    "questionMark": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
@@ -2784,10 +2526,8 @@
                                     "type": "megacredits",
                                     "amount": 1,
                                     "is": "item",
-                                    "multiplier": false,
                                     "clone": false,
                                     "cancelled": false,
-                                    "questionMark": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
@@ -2806,7 +2546,6 @@
                         "type": "excavate",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "showDigit": true
@@ -2815,7 +2554,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -2838,10 +2576,8 @@
                         "type": "megacredits",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -2856,7 +2592,6 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "over": 6
@@ -2865,7 +2600,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -2880,10 +2614,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "MAX 6",
                         "size": "M",
                         "isUppercase": false,
@@ -2893,10 +2625,8 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": ":",
@@ -2908,7 +2638,6 @@
                         "type": "cards",
                         "amount": 2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "showDigit": true
@@ -2931,10 +2660,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "ALL",
                         "size": "M",
                         "isUppercase": false,
@@ -2944,7 +2671,6 @@
                         "type": "underground-resources",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": true
                     },
@@ -2958,10 +2684,8 @@
                         "type": "megacredits",
                         "amount": -2,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -2976,10 +2700,8 @@
                         "type": "empty_tile",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "size": "M"
                     },
                     {
@@ -2992,7 +2714,6 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -3015,10 +2736,8 @@
                         "type": "megacredits",
                         "amount": -3,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -3033,16 +2752,13 @@
                         "type": "corruption",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
                         "size": "S"
@@ -3057,10 +2773,8 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
                         "cancelled": false,
-                        "questionMark": false,
                         "text": "0",
                         "size": "M",
                         "isUppercase": false,
@@ -3070,10 +2784,8 @@
                         "type": "corruption",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     },
                     {
                         "type": ":",
@@ -3085,10 +2797,8 @@
                         "type": "tr",
                         "amount": 1,
                         "is": "item",
-                        "multiplier": false,
                         "clone": false,
-                        "cancelled": false,
-                        "questionMark": false
+                        "cancelled": false
                     }
                 ]
             ],

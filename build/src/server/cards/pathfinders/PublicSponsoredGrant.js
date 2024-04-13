@@ -33,7 +33,14 @@ class PublicSponsoredGrant extends Card_1.Card {
         player.drawCard(2, { tag: tag });
     }
     bespokePlay(player) {
-        player.game.getPlayers().forEach((p) => p.stock.deduct(Resource_1.Resource.MEGACREDITS, Math.min(p.megaCredits, 2), { log: true, from: player }));
+        player.game.getPlayers().forEach((target) => {
+            target.maybeBlockAttack(player, (proceed) => {
+                if (proceed) {
+                    target.stock.deduct(Resource_1.Resource.MEGACREDITS, Math.min(target.megaCredits, 2), { log: true, from: player });
+                }
+                return undefined;
+            });
+        });
         const tags = [...Tag_1.ALL_TAGS];
         (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.CITY);
         (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.WILD);

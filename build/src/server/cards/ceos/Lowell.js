@@ -24,6 +24,9 @@ class Lowell extends CeoCard_1.CeoCard {
         });
     }
     canAct(player) {
+        if (!player.game.ceoDeck.canDraw(3)) {
+            this.warnings.add('deckTooSmall');
+        }
         if (!super.canAct(player)) {
             return false;
         }
@@ -32,11 +35,7 @@ class Lowell extends CeoCard_1.CeoCard {
     action(player) {
         this.isDisabled = true;
         const game = player.game;
-        let ceosDrawn = [
-            game.ceoDeck.drawLegacy(game),
-            game.ceoDeck.drawLegacy(game),
-            game.ceoDeck.drawLegacy(game),
-        ];
+        let ceosDrawn = game.ceoDeck.drawN(game, 3);
         ceosDrawn = ceosDrawn.filter((ceo) => {
             if (ceo.canPlay?.(player) === false) {
                 game.ceoDeck.discard(ceo);
@@ -52,7 +51,8 @@ class Lowell extends CeoCard_1.CeoCard {
             const lowellIndex = player.playedCards.findIndex((c) => c.name === this.name);
             player.playedCards.splice(lowellIndex, 1);
             game.ceoDeck.discard(this);
-            return player.playCard(chosenCeo);
+            player.playCard(chosenCeo);
+            return undefined;
         });
     }
 }

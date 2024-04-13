@@ -51,14 +51,10 @@ class Merger extends PreludeCard_1.PreludeCard {
         return undefined;
     }
     static dealCorporations(player, corporationDeck) {
-        const cards = [];
-        try {
-            while (cards.length < 4) {
-                cards.push(corporationDeck.drawLegacy(player.game));
-            }
-        }
-        catch (err) {
-            player.game.log('Not enough corporations while resolving ${0}', (b) => b.cardName(CardName_1.CardName.MERGER));
+        const game = player.game;
+        const cards = corporationDeck.drawN(game, 4);
+        if (cards.length !== 4) {
+            game.log('Not enough corporations while resolving ${0}', (b) => b.cardName(CardName_1.CardName.MERGER));
         }
         LogHelper_1.LogHelper.logDrawnCards(player, cards, true);
         return cards;

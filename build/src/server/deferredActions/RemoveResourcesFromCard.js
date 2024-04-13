@@ -28,10 +28,12 @@ class RemoveResourcesFromCard extends DeferredAction_1.DeferredAction {
     execute() {
         if (this.source !== 'self' && this.player.game.isSoloMode()) {
             this.player.resolveInsuranceInSoloGame();
+            this.cb({ card: undefined, owner: undefined, proceed: true });
             return undefined;
         }
         const cards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.cardResource, this.source);
         if (cards.length === 0) {
+            this.cb({ card: undefined, owner: undefined, proceed: false });
             return undefined;
         }
         const selectCard = new SelectCard_1.SelectCard(this.title, 'Remove resource(s)', cards, { showOwner: true })

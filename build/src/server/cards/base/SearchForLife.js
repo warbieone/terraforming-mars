@@ -41,18 +41,24 @@ class SearchForLife extends Card_1.Card {
         return 0;
     }
     canAct(player) {
+        if (!player.game.projectDeck.canDraw(1)) {
+            this.warnings.add('deckTooSmall');
+        }
         return player.canAfford(1);
     }
     action(player) {
         player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 1, { title: titles_1.TITLES.payForCardAction(this.name) }))
             .andThen(() => {
-            const topCard = player.game.projectDeck.drawLegacy(player.game);
-            player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard, { tags: true }));
-            if (topCard.tags.includes(Tag_1.Tag.MICROBE)) {
+            const card = player.game.projectDeck.draw(player.game);
+            if (card === undefined) {
+                return;
+            }
+            player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(card, { tags: true }));
+            if (card.tags.includes(Tag_1.Tag.MICROBE)) {
                 player.addResourceTo(this, 1);
                 player.game.log('${0} found life!', (b) => b.player(player));
             }
-            player.game.projectDeck.discard(topCard);
+            player.game.projectDeck.discard(card);
         });
         return undefined;
     }

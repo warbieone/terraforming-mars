@@ -107,6 +107,7 @@ class Player {
         this.canUseHeatAsMegaCredits = false;
         this.canUsePlantsAsMegacredits = false;
         this.canUseTitaniumAsMegacredits = false;
+        this.canUseCorruptionAsMegacredits = false;
         this.actionsTakenThisRound = 0;
         this.actionsThisGeneration = new Set();
         this.pendingInitialActions = [];
@@ -279,12 +280,6 @@ class Player {
     }
     alloysAreProtected() {
         return this.cardIsInEffect(CardName_1.CardName.LUNAR_SECURITY_STATIONS);
-    }
-    canReduceAnyProduction(resource, minQuantity = 1) {
-        const game = this.game;
-        if (game.isSoloMode())
-            return true;
-        return game.getPlayers().some((p) => p.canHaveProductionReduced(resource, minQuantity, this));
     }
     canHaveProductionReduced(resource, minQuantity, attacker) {
         const reducable = this.production[resource] + (resource === Resource_1.Resource.MEGACREDITS ? 5 : 0);
@@ -509,9 +504,7 @@ class Player {
         });
     }
     dealForDraft(quantity, cards) {
-        for (let i = 0; i < quantity; i++) {
-            cards.push(this.game.projectDeck.drawLegacy(this.game, 'bottom'));
-        }
+        cards.push(...this.game.projectDeck.drawN(this.game, quantity, 'bottom'));
     }
     askPlayerToDraft(initialDraft, passTo, passedCards) {
         let cardsToDraw = 4;
@@ -611,6 +604,7 @@ class Player {
             auroraiData: card.type === CardType_1.CardType.STANDARD_PROJECT,
             graphene: card.tags.includes(Tag_1.Tag.CITY) || card.tags.includes(Tag_1.Tag.SPACE),
             kuiperAsteroids: card.name === CardName_1.CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName_1.CardName.ASTEROID_STANDARD_PROJECT,
+            corruption: card.tags.includes(Tag_1.Tag.EARTH) && this.cardIsInEffect(CardName_1.CardName.FRIENDS_IN_HIGH_PLACES),
         };
     }
     checkPaymentAndPlayCard(selectedCard, payment, cardAction = 'add') {
@@ -624,6 +618,14 @@ class Player {
                 const cardsWithFloater = this.getCardsWithResources(CardResource_1.CardResource.FLOATER);
                 if (cardsWithFloater.length === 1) {
                     throw new Error('Cannot spend all floaters to play Stratospheric Birds');
+                }
+            }
+        }
+        if (payment.microbes > 0) {
+            if (selectedCard.name === CardName_1.CardName.SOIL_ENRICHMENT && payment.microbes === this.getSpendable('microbes')) {
+                const cardsWithMicrobe = this.getCardsWithResources(CardResource_1.CardResource.MICROBE);
+                if (cardsWithMicrobe.length === 1) {
+                    throw new Error('Cannot spend all microbes to play Soil Enrichment');
                 }
             }
         }
@@ -669,6 +671,9 @@ class Player {
         removeResourcesOnCard(CardName_1.CardName.SOYLENT_SEEDLING_SYSTEMS, payment.seeds);
         removeResourcesOnCard(CardName_1.CardName.AURORAI, payment.auroraiData);
         removeResourcesOnCard(CardName_1.CardName.KUIPER_COOPERATIVE, payment.kuiperAsteroids);
+        if (payment.corruption > 0) {
+            UnderworldExpansion_1.UnderworldExpansion.loseCorruption(this, payment.corruption);
+        }
         if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
             PathfindersExpansion_1.PathfindersExpansion.addToSolBank(this);
         }
@@ -705,7 +710,7 @@ class Player {
         }
         switch (cardAction) {
             case 'add':
-                if (selectedCard.name !== CardName_1.CardName.LAW_SUIT) {
+                if (selectedCard.name !== CardName_1.CardName.LAW_SUIT && selectedCard.name !== CardName_1.CardName.PRIVATE_INVESTIGATOR) {
                     this.playedCards.push(selectedCard);
                 }
                 break;
@@ -1038,6 +1043,7 @@ class Player {
             auroraiData: this.getSpendable('auroraiData'),
             graphene: this.getSpendable('graphene'),
             kuiperAsteroids: this.getSpendable('kuiperAsteroids'),
+            corruption: this.underworldData.corruption,
         };
     }
     canSpend(payment, reserveUnits) {
@@ -1064,6 +1070,7 @@ class Player {
             auroraiData: options?.auroraiData ?? false,
             graphene: options?.graphene ?? false,
             kuiperAsteroids: options?.kuiperAsteroids ?? false,
+            corruption: options?.corruption ?? false,
         };
         if (usable.titanium === false && payment.titanium > 0 && this.isCorporation(CardName_1.CardName.LUNA_TRADE_FEDERATION)) {
             usable.titanium = true;
@@ -1415,6 +1422,7 @@ class Player {
             canUseHeatAsMegaCredits: this.canUseHeatAsMegaCredits,
             canUsePlantsAsMegaCredits: this.canUsePlantsAsMegacredits,
             canUseTitaniumAsMegacredits: this.canUseTitaniumAsMegacredits,
+            canUseCorruptionAsMegacredits: this.canUseCorruptionAsMegacredits,
             actionsTakenThisRound: this.actionsTakenThisRound,
             actionsThisGeneration: Array.from(this.actionsThisGeneration),
             pendingInitialActions: this.pendingInitialActions.map((c) => c.name),

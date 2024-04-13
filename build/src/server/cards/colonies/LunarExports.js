@@ -17,11 +17,11 @@ class LunarExports extends Card_1.Card {
             behavior: {
                 or: {
                     behaviors: [{
-                            title: 'Increase your M€ production by 5',
+                            title: 'Increase your M€ production 5 steps',
                             production: { megacredits: 5 },
                         },
                         {
-                            title: 'Increase your plant production by 2',
+                            title: 'Increase your plant production 2 steps',
                             production: { plants: 2 },
                         }],
                 },

@@ -30,5 +30,14 @@ class OrOptions extends OptionsPlayerInput_1.OptionsInput {
         player.runInput(input.response, this.options[input.index]);
         return this.cb(undefined);
     }
+    reduce() {
+        if (this.options.length === 0) {
+            return undefined;
+        }
+        if (this.options.length === 1) {
+            return this.options[0].cb();
+        }
+        return this;
+    }
 }
 exports.OrOptions = OrOptions;

@@ -212,45 +212,19 @@ class Game {
                 gameOptions.turmoilExtension ||
                 gameOptions.initialDraftVariant ||
                 gameOptions.ceoExtension) {
-                const specificCardsOwen = ['Teractor', 'Celestic', 'Septem Tribus', 'Valley Trust', 'Thorgate'];
-                const specificCardsLaura = ['Inventrix', 'Factorum', 'Aphrodite', 'Point Luna', 'Splice'];
-                const specificCardsJoel = ['Mons Insurance', 'Astrodrill', 'Pristar', 'CrediCor', 'Manutech'];
                 if (player.name !== 'Owen T' && player.name !== 'Laura T' && player.name !== 'Joel T') {
                     for (let i = 0; i < gameOptions.startingCorporations; i++) {
-                        player.dealtCorporationCards.push(corporationDeck.drawLegacy(game));
+                        player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
                     }
-                }
-                if (player.name === 'Owen T') {
-                    let dealtCardsOwen;
-                    dealtCardsOwen = corporationDeck.drawSpecific(specificCardsOwen);
-                    player.dealtCorporationCards = dealtCardsOwen;
-                }
-                if (player.name === 'Laura T') {
-                    let dealtCardsLaura;
-                    dealtCardsLaura = corporationDeck.drawSpecific(specificCardsLaura);
-                    player.dealtCorporationCards = dealtCardsLaura;
-                }
-                if (player.name === 'Joel T') {
-                    let dealtCardsJoel;
-                    dealtCardsJoel = corporationDeck.drawSpecific(specificCardsJoel);
-                    player.dealtCorporationCards = dealtCardsJoel;
                 }
                 if (gameOptions.initialDraftVariant === false) {
-                    for (let i = 0; i < 10; i++) {
-                        player.dealtProjectCards.push(projectDeck.drawLegacy(game));
-                    }
+                    player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
                 }
                 if (gameOptions.preludeExtension) {
-                    for (let i = 0; i < constants.PRELUDE_CARDS_DEALT_PER_PLAYER; i++) {
-                        const prelude = preludeDeck.drawLegacy(game);
-                        player.dealtPreludeCards.push(prelude);
-                    }
+                    player.dealtPreludeCards.push(...preludeDeck.drawN(game, constants.PRELUDE_CARDS_DEALT_PER_PLAYER));
                 }
                 if (gameOptions.ceoExtension) {
-                    for (let i = 0; i < gameOptions.startingCeos; i++) {
-                        const ceoCard = ceoDeck.drawLegacy(game);
-                        player.dealtCeoCards.push(ceoCard);
-                    }
+                    player.dealtCeoCards.push(...ceoDeck.drawN(game, gameOptions.startingCeos));
                 }
             }
             else {
@@ -961,26 +935,15 @@ class Game {
             AresHandler_1.AresHandler.payAdjacencyAndHazardCosts(player, space, subjectToHazardAdjacency);
         });
         TurmoilHandler_1.TurmoilHandler.resolveTilePlacementCosts(player);
-        const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName_1.CardName.ARCADIAN_COMMUNITIES);
         const initialTileTypeForAres = space.tile?.tileType;
         const coveringExistingTile = space.tile !== undefined;
         this.simpleAddTile(player, space, tile);
         if (this.phase !== Phase_1.Phase.SOLAR) {
-            if (!coveringExistingTile) {
-                this.grantSpaceBonuses(player, space);
-            }
-            this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-                if (Board_1.Board.isOceanSpace(adjacentSpace)) {
-                    player.megaCredits += player.oceanBonus;
-                }
-            });
-            AresHandler_1.AresHandler.ifAres(this, (aresData) => {
-                const incrementMilestone = tile?.tileType !== TileType_1.TileType.MARS_NOMADS;
-                AresHandler_1.AresHandler.earnAdjacencyBonuses(aresData, player, space, { incrementMilestone });
-            });
-            TurmoilHandler_1.TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
-            if (arcadianCommunityBonus) {
-                this.defer(new GainResources_1.GainResources(player, Resource_1.Resource.MEGACREDITS, { count: 3 }));
+            this.grantPlacementBonuses(player, space, coveringExistingTile);
+            if (tile?.tileType !== TileType_1.TileType.MARS_NOMADS) {
+                AresHandler_1.AresHandler.ifAres(this, (aresData) => {
+                    AresHandler_1.AresHandler.maybeIncrementMilestones(aresData, player, space);
+                });
             }
         }
         else {
@@ -998,6 +961,24 @@ class Game {
             if (space.spaceType !== SpaceType_1.SpaceType.COLONY && space.player === player) {
                 UnderworldExpansion_1.UnderworldExpansion.identify(this, space, player);
             }
+        }
+    }
+    grantPlacementBonuses(player, space, coveringExistingTile) {
+        const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName_1.CardName.ARCADIAN_COMMUNITIES);
+        if (!coveringExistingTile) {
+            this.grantSpaceBonuses(player, space);
+        }
+        this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+            if (Board_1.Board.isOceanSpace(adjacentSpace)) {
+                player.megaCredits += player.oceanBonus;
+            }
+        });
+        AresHandler_1.AresHandler.ifAres(this, () => {
+            AresHandler_1.AresHandler.earnAdjacencyBonuses(player, space);
+        });
+        TurmoilHandler_1.TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
+        if (arcadianCommunityBonus) {
+            this.defer(new GainResources_1.GainResources(player, Resource_1.Resource.MEGACREDITS, { count: 3 }));
         }
     }
     simpleAddTile(player, space, tile) {
@@ -1173,15 +1154,15 @@ class Game {
     }
     discardForCost(cardCount, toPlace) {
         if (cardCount === 1) {
-            const card = this.projectDeck.drawLegacy(this);
+            const card = this.projectDeck.drawOrThrow(this);
             this.projectDeck.discard(card);
             this.log('Drew and discarded ${0} to place a ${1}', (b) => b.card(card, { cost: true }).tileType(toPlace));
             return card.cost;
         }
         else {
-            const card1 = this.projectDeck.drawLegacy(this);
+            const card1 = this.projectDeck.drawOrThrow(this);
             this.projectDeck.discard(card1);
-            const card2 = this.projectDeck.drawLegacy(this);
+            const card2 = this.projectDeck.drawOrThrow(this);
             this.projectDeck.discard(card2);
             this.log('Drew and discarded ${0} and ${1} to place a ${2}', (b) => b.card(card1, { cost: true }).card(card2, { cost: true }).tileType(toPlace));
             return card1.cost + card2.cost;

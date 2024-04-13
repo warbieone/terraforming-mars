@@ -29,7 +29,7 @@ class Manutech extends CorporationCard_1.CorporationCard {
             },
         });
     }
-    static onProductionGain(player, resource, amount) {
+    onProductionGain(player, resource, amount) {
         if (amount > 0) {
             player.stock.add(resource, amount);
         }

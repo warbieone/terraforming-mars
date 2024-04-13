@@ -5,6 +5,7 @@ const CardName_1 = require("../common/cards/CardName");
 const AllManifests_1 = require("./cards/AllManifests");
 const CARD_RENAMES = new Map([
     ['Hectate Speditions', CardName_1.CardName.HECATE_SPEDITIONS],
+    ['Venus First:Pathfinders', CardName_1.CardName.VENUS_FIRST],
 ]);
 class CardFinder {
     getCard(cardName, cardManifestNames) {

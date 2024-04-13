@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Production = void 0;
-const CardName_1 = require("../../common/cards/CardName");
 const LawSuit_1 = require("../cards/promo/LawSuit");
-const Manutech_1 = require("../cards/venusNext/Manutech");
 const Resource_1 = require("../../common/Resource");
 const Units_1 = require("../../common/Units");
 class Production {
@@ -52,8 +50,8 @@ class Production {
         if (options?.from !== undefined && delta < 0 && (typeof (from) === 'object' && from.id !== this.player.id)) {
             this.player.resolveInsurance();
         }
-        if (this.player.isCorporation(CardName_1.CardName.MANUTECH)) {
-            Manutech_1.Manutech.onProductionGain(this.player, resource, amount);
+        for (const card of this.player.tableau) {
+            card.onProductionGain?.(this.player, resource, amount);
         }
     }
     canAdjust(units) {
@@ -65,22 +63,22 @@ class Production {
             this.units.heat + units.heat >= 0;
     }
     adjust(units, options) {
-        if (units.megacredits !== 0) {
+        if (units.megacredits !== undefined) {
             this.add(Resource_1.Resource.MEGACREDITS, units.megacredits, options);
         }
-        if (units.steel !== 0) {
+        if (units.steel !== undefined) {
             this.add(Resource_1.Resource.STEEL, units.steel, options);
         }
-        if (units.titanium !== 0) {
+        if (units.titanium !== undefined) {
             this.add(Resource_1.Resource.TITANIUM, units.titanium, options);
         }
-        if (units.plants !== 0) {
+        if (units.plants !== undefined) {
             this.add(Resource_1.Resource.PLANTS, units.plants, options);
         }
-        if (units.energy !== 0) {
+        if (units.energy !== undefined) {
             this.add(Resource_1.Resource.ENERGY, units.energy, options);
         }
-        if (units.heat !== 0) {
+        if (units.heat !== undefined) {
             this.add(Resource_1.Resource.HEAT, units.heat, options);
         }
     }

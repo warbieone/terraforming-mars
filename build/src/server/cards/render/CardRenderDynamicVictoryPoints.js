@@ -46,6 +46,7 @@ class CardRenderDynamicVictoryPoints {
         this.target = target;
         this.targetOneOrMore = false;
         this.anyPlayer = false;
+        this.asterisk = undefined;
     }
     static resource(type, points, target) {
         const itemType = RESOURCE_TO_ITEM_TYPE[type];
@@ -110,6 +111,11 @@ class CardRenderDynamicVictoryPoints {
     static any(points) {
         const item = new CardRenderDynamicVictoryPoints(undefined, points, points);
         item.anyPlayer = true;
+        return item;
+    }
+    static undergroundShelters() {
+        const item = new CardRenderDynamicVictoryPoints(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.UNDERGROUND_SHELTERS), 1, 3);
+        item.asterisk = true;
         return item;
     }
 }

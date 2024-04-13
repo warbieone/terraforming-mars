@@ -38,8 +38,11 @@ class Ants extends Card_1.Card {
         return RemoveResourcesFromCard_1.RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource_1.CardResource.MICROBE).length > 0;
     }
     action(player) {
-        player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.MICROBE));
-        player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.MICROBE, { filter: (c) => c.name === this.name }));
+        player.game.defer(new RemoveResourcesFromCard_1.RemoveResourcesFromCard(player, CardResource_1.CardResource.MICROBE).andThen((response) => {
+            if (response.proceed) {
+                player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.MICROBE, { filter: (c) => c.name === this.name }));
+            }
+        }));
         return undefined;
     }
 }
