@@ -19,6 +19,7 @@ import {OneOrArray} from '../../common/utils/types';
 import {JSONValue} from '../../common/Types';
 import {IStandardProjectCard} from './IStandardProjectCard';
 import {Warning} from '../../common/cards/Warning';
+import {Resource} from '../../common/Resource';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -107,8 +108,9 @@ export interface ICard {
    *   or undefined if added by a neutral player.
    * @param cardOwner the player who owns THIS CARD.
    * @param space the space that was just identified.
+   * @param fromExcavate when true, this identifacation came from excavating an unidentified space.
    */
-  onIdentification?(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space): void;
+  onIdentification?(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space, fromExcavate: boolean): void;
 
   /**
    * Optional callback when any player excavates a space.
@@ -118,6 +120,7 @@ export interface ICard {
    */
   onExcavation?(player: IPlayer, space: Space): void;
 
+  onProductionGain?(player: IPlayer, resource: Resource, amount: number): void;
   onProductionPhase?(player: IPlayer): void;
 
   cost?: number; /** Used with IProjectCard and PreludeCard. */

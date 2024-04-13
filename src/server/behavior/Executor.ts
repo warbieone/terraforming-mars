@@ -35,6 +35,7 @@ import {SelectResource} from '../inputs/SelectResource';
 import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCard';
 import {isIProjectCard} from '../cards/IProjectCard';
 import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../common/constants';
+import {CardName} from '../../common/cards/CardName';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -151,6 +152,11 @@ export class Executor implements BehaviorExecutor {
         if (game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city', canAffordOptions).length === 0) {
           return false;
         }
+      } else {
+        // Special case for Star Vegas. The space may already be occupied.
+        if (game.board.getSpace(behavior.city.space).tile !== undefined) {
+          return false;
+        }
       }
     }
 
@@ -239,6 +245,21 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
+    if (behavior.underworld !== undefined) {
+      const underworld = behavior.underworld;
+      if (underworld.identify !== undefined) {
+        if (card.name === CardName.NEUTRINOGRAPH || player.cardIsInEffect(CardName.NEUTRINOGRAPH)) {
+          // Special case for Neutrinograph. Excavatable spaces are ones that are unidentified or reidentifiable.
+          if (UnderworldExpansion.excavatableSpaces(player).length === 0) {
+            return false;
+          }
+        } else {
+          if (UnderworldExpansion.identifiableSpaces(player).length === 0) {
+            return false;
+          }
+        }
+      }
+    }
     return true;
   }
 
@@ -446,6 +467,9 @@ export class Executor implements BehaviorExecutor {
       if (behavior.city.space !== undefined) {
         const space = player.game.board.getSpace(behavior.city.space);
         player.game.addCity(player, space);
+        if (space.tile !== undefined) { // Should never be undefined
+          space.tile.card = card.name;
+        }
       } else {
         player.game.defer(new PlaceCityTile(player, {on: behavior.city.on}));
       }

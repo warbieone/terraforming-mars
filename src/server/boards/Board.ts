@@ -51,6 +51,7 @@ export abstract class Board {
   }
 
   /* Returns the space given a Space ID. */
+  // TODO(kberg): rename to getSpaceOrThrow
   public getSpace(id: SpaceId): Space {
     const space = this.map.get(id);
     if (space === undefined) {
@@ -209,6 +210,7 @@ export abstract class Board {
   }
 
   public getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
+    // Does this also apply to cove spaces?
     const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
       // A space is available if it doesn't have a player marker on it, or it belongs to |player|
       if (space.player !== undefined && space.player !== player) {
