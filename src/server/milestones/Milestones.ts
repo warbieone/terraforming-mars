@@ -60,6 +60,14 @@ export const ELYSIUM_MILESTONES = [
   new Legend(),
 ];
 
+export const UTOPIA_PLANITIA_MILESTONES = [
+  // new Specialist(),
+  // new Pioneer(),
+  // new Trader(),
+  // new Metallurgist(),
+  // new Researcher(),
+];
+
 export const HELLAS_MILESTONES = [
   new Diversifier(),
   new Tactician(),
@@ -117,6 +125,7 @@ export const ALL_MILESTONES = [
   ...THARSIS_MILESTONES,
   ...ELYSIUM_MILESTONES,
   ...HELLAS_MILESTONES,
+  ...UTOPIA_PLANITIA_MILESTONES,
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES,

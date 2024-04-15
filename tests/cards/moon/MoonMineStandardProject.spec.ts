@@ -8,7 +8,6 @@ import {TestPlayer} from '../../TestPlayer';
 import {MoonMineStandardProject} from '../../../src/server/cards/moon/MoonMineStandardProject';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
-import {Phase} from '../../../src/common/Phase';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 import {TileType} from '../../../src/common/TileType';
@@ -72,17 +71,16 @@ describe('MoonMineStandardProject', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 
-  it('can act when Reds are in power.', () => {
+  it('can act when Reds are in power', () => {
     const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     const moonData = MoonExpansion.moonData(game);
-    game.phase = Phase.ACTION;
 
     // Card requirements
     player.titanium = 1;
 
-    testRedsCosts(() => card.canAct(player), player, card.cost, 3, /* canAct */ true);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 3);
     moonData.miningRate = 8;
-    testRedsCosts(() => card.canAct(player), player, card.cost, 0, /* canAct */ true);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });
 
