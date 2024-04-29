@@ -10,6 +10,7 @@ const Types_1 = require("../../common/Types");
 const server_ids_1 = require("../utils/server-ids");
 const AppError_1 = require("../server/AppError");
 const statusCode_1 = require("../../common/http/statusCode");
+const InputError_1 = require("../inputs/InputError");
 class PlayerInput extends Handler_1.Handler {
     constructor() {
         super();
@@ -88,7 +89,7 @@ class PlayerInput extends Handler_1.Handler {
                     resolve();
                 }
                 catch (e) {
-                    if (!(e instanceof AppError_1.AppError)) {
+                    if (!(e instanceof AppError_1.AppError || e instanceof InputError_1.InputError)) {
                         console.warn('Error processing input from player', e);
                     }
                     res.writeHead(statusCode_1.statusCode.badRequest, {

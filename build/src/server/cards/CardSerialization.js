@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deserializeProjectCard = exports.serializeProjectCard = void 0;
+const createCard_1 = require("../createCard");
 const ICeoCard_1 = require("./ceos/ICeoCard");
 const ICloneTagCard_1 = require("./pathfinders/ICloneTagCard");
 const SelfReplicatingRobots_1 = require("./promo/SelfReplicatingRobots");
@@ -24,7 +25,7 @@ function serializeProjectCard(card) {
     if (card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots) {
         serialized.targetCards = card.targetCards.map((t) => {
             return {
-                card: { name: t.card.name },
+                card: { name: t.name },
                 resourceCount: t.resourceCount,
             };
         });
@@ -44,8 +45,8 @@ function serializeProjectCard(card) {
     return serialized;
 }
 exports.serializeProjectCard = serializeProjectCard;
-function deserializeProjectCard(element, cardFinder) {
-    const card = cardFinder.getProjectCardByName(element.name);
+function deserializeProjectCard(element) {
+    const card = (0, createCard_1.newProjectCard)(element.name);
     if (card === undefined) {
         throw new Error(`Card ${element.name} not found`);
     }
@@ -64,12 +65,10 @@ function deserializeProjectCard(element, cardFinder) {
     if (card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots && element.targetCards !== undefined) {
         card.targetCards = [];
         element.targetCards.forEach((targetCard) => {
-            const foundTargetCard = cardFinder.getProjectCardByName(targetCard.card.name);
+            const foundTargetCard = (0, createCard_1.newProjectCard)(targetCard.card.name);
             if (foundTargetCard !== undefined) {
-                card.targetCards.push({
-                    card: foundTargetCard,
-                    resourceCount: targetCard.resourceCount,
-                });
+                foundTargetCard.resourceCount = targetCard.resourceCount;
+                card.targetCards.push(foundTargetCard);
             }
             else {
                 console.warn('did not find card for SelfReplicatingRobots', targetCard);

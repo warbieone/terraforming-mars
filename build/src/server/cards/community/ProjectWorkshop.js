@@ -65,9 +65,7 @@ class ProjectWorkshop extends CorporationCard_1.CorporationCard {
         });
     }
     canAct(player) {
-        if (player.canAfford(3))
-            return true;
-        return this.getEligibleCards(player).length > 0;
+        return player.canAfford(3) || this.getEligibleCards(player).length > 0;
     }
     action(player) {
         const activeCards = this.getEligibleCards(player);

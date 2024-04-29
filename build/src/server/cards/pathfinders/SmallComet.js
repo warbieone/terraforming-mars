@@ -9,7 +9,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Options_1 = require("../Options");
 const RemoveResources_1 = require("../../deferredActions/RemoveResources");
 const Resource_1 = require("../../../common/Resource");
-const DeferredAction_1 = require("../../../server/deferredActions/DeferredAction");
+const Priority_1 = require("../../../server/deferredActions/Priority");
 class SmallComet extends Card_1.Card {
     constructor() {
         super({
@@ -17,7 +17,6 @@ class SmallComet extends Card_1.Card {
             name: CardName_1.CardName.SMALL_COMET,
             cost: 32,
             tags: [Tag_1.Tag.MARS, Tag_1.Tag.SPACE],
-            tr: { temperature: 1, oxygen: 1, oceans: 1 },
             behavior: {
                 stock: { titanium: 1 },
                 global: { temperature: 1, oxygen: 1 },
@@ -40,7 +39,7 @@ class SmallComet extends Card_1.Card {
     bespokePlay(player) {
         const game = player.game;
         for (const target of game.getPlayers()) {
-            game.defer(new RemoveResources_1.RemoveResources(target, player, Resource_1.Resource.PLANTS, 2), DeferredAction_1.Priority.ATTACK_OPPONENT);
+            game.defer(new RemoveResources_1.RemoveResources(target, player, Resource_1.Resource.PLANTS, 2), Priority_1.Priority.ATTACK_OPPONENT);
         }
         return undefined;
     }

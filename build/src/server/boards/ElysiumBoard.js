@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ElysiumBoard = void 0;
 const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
 const SpaceName_1 = require("../SpaceName");
-const Board_1 = require("./Board");
 const BoardBuilder_1 = require("./BoardBuilder");
 const MarsBoard_1 = require("./MarsBoard");
 class ElysiumBoard extends MarsBoard_1.MarsBoard {
@@ -28,16 +27,13 @@ class ElysiumBoard extends MarsBoard_1.MarsBoard {
         const spaces = builder.build();
         return new ElysiumBoard(spaces);
     }
-    static deserialize(board, players) {
-        return new ElysiumBoard(Board_1.Board.deserializeSpaces(board.spaces, players));
-    }
-    getVolcanicSpaceIds() {
-        return [
+    constructor(spaces) {
+        super(spaces, undefined, [
             SpaceName_1.SpaceName.ARSIA_MONS_ELYSIUM,
             SpaceName_1.SpaceName.ELYSIUM_MONS,
             SpaceName_1.SpaceName.HECATES_THOLUS,
             SpaceName_1.SpaceName.OLYMPUS_MONS,
-        ];
+        ]);
     }
 }
 exports.ElysiumBoard = ElysiumBoard;

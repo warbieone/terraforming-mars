@@ -9,7 +9,7 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const TileType_1 = require("../../../common/TileType");
 const GainStock_1 = require("../../deferredActions/GainStock");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 const Size_1 = require("../../../common/cards/render/Size");
 const BoardType_1 = require("../../boards/BoardType");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
@@ -48,7 +48,7 @@ class Steelaris extends CorporationCard_1.CorporationCard {
         }
         game.defer(new GainStock_1.GainStock(cardOwner, Units_1.Units.of({ steel: 1, plants: 1 }), {
             cb: () => game.log('${0} gained 1 ${1} and 1 ${2} from ${3}', (b) => b.player(cardOwner).string(Resource_1.Resource.STEEL).string(Resource_1.Resource.PLANTS).cardName(this.name)),
-        }), cardOwner.id !== activePlayer.id ? DeferredAction_1.Priority.OPPONENT_TRIGGER : undefined);
+        }), cardOwner.id !== activePlayer.id ? Priority_1.Priority.OPPONENT_TRIGGER : undefined);
     }
 }
 exports.Steelaris = Steelaris;

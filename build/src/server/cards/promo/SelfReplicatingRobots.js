@@ -31,12 +31,7 @@ class SelfReplicatingRobots extends Card_1.Card {
         this.targetCards = [];
     }
     getCardDiscount(_player, card) {
-        for (const targetCard of this.targetCards) {
-            if (targetCard.card.name === card.name) {
-                return targetCard.resourceCount;
-            }
-        }
-        return 0;
+        return this.targetCards.find((c) => c.name === card.name)?.resourceCount ?? 0;
     }
     canAct(player) {
         return this.targetCards.length > 0 ||
@@ -46,18 +41,12 @@ class SelfReplicatingRobots extends Card_1.Card {
         const orOptions = new OrOptions_1.OrOptions();
         const selectableCards = player.cardsInHand.filter((card) => card.tags.some((tag) => tag === Tag_1.Tag.SPACE || tag === Tag_1.Tag.BUILDING));
         if (this.targetCards.length > 0) {
-            const robotCards = this.targetCards.map((targetCard) => targetCard.card);
-            orOptions.options.push(new SelectCard_1.SelectCard('Select card to double robots resource', 'Double resource', robotCards, { played: CardName_1.CardName.SELF_REPLICATING_ROBOTS })
+            orOptions.options.push(new SelectCard_1.SelectCard('Select card to double robots resource', 'Double resource', this.targetCards, { played: CardName_1.CardName.SELF_REPLICATING_ROBOTS })
                 .andThen(([card]) => {
-                let resourceCount = 0;
-                for (const targetCard of this.targetCards) {
-                    if (targetCard.card.name === card.name) {
-                        resourceCount = targetCard.resourceCount;
-                        targetCard.resourceCount *= 2;
-                    }
-                }
+                const resourceCount = card.resourceCount;
+                card.resourceCount *= 2;
                 player.game.log('${0} doubled resources on ${1} from ${2} to ${3}', (b) => {
-                    b.player(player).card(card).number(resourceCount).number(resourceCount * 2);
+                    b.player(player).card(card).number(resourceCount).number(card.resourceCount);
                 });
                 return undefined;
             }));
@@ -66,10 +55,8 @@ class SelfReplicatingRobots extends Card_1.Card {
             orOptions.options.push(new SelectCard_1.SelectCard('Select card to link with Self-Replicating Robots', 'Link card', selectableCards, { played: CardName_1.CardName.SELF_REPLICATING_ROBOTS }).andThen(([card]) => {
                 const projectCardIndex = player.cardsInHand.findIndex((c) => c.name === card.name);
                 player.cardsInHand.splice(projectCardIndex, 1);
-                this.targetCards.push({
-                    card: card,
-                    resourceCount: 2,
-                });
+                this.targetCards.push(card);
+                card.resourceCount = 2;
                 player.game.log('${0} linked ${1} with ${2}', (b) => b.player(player).card(card).card(this));
                 return undefined;
             }));

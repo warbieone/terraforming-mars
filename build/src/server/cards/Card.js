@@ -32,9 +32,9 @@ class Card {
         }
         try {
             Card.autopopulateMetadataVictoryPoints(external);
-            validateBehavior(external.behavior);
-            validateBehavior(external.firstAction);
-            validateBehavior(external.action);
+            validateBehavior(external.behavior, name);
+            validateBehavior(external.firstAction, name);
+            validateBehavior(external.action, name);
             Card.validateTilesBuilt(external);
         }
         catch (e) {
@@ -149,7 +149,7 @@ class Card {
                 return false;
             }
         }
-        const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions);
+        const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions ?? { cost: 0 });
         if (bespokeCanPlay === false) {
             return false;
         }
@@ -211,7 +211,7 @@ class Card {
             case CardRenderItemType_1.CardRenderItemType.RESOURCE_CUBE:
             case CardRenderItemType_1.CardRenderItemType.SCIENCE:
             case CardRenderItemType_1.CardRenderItemType.CAMPS:
-                units = this.resourceCount ?? 0;
+                units = this.resourceCount;
                 break;
             case CardRenderItemType_1.CardRenderItemType.JOVIAN:
                 units = player?.tags.count(Tag_1.Tag.JOVIAN, 'raw');
@@ -359,10 +359,10 @@ function populateCount(requirement) {
             requirement.excavation;
     return requirement;
 }
-function validateBehavior(behavior) {
+function validateBehavior(behavior, name) {
     function validate(condition, error) {
         if (condition === false) {
-            throw new Error(error);
+            throw new Error(`for ${name}: ${error}`);
         }
     }
     if (behavior === undefined) {

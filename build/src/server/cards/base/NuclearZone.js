@@ -31,7 +31,6 @@ class NuclearZone extends Card_1.Card {
             },
             metadata,
             victoryPoints: -2,
-            tr: { temperature: 2 },
         });
     }
 }

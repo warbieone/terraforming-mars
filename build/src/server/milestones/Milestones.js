@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Milestones = exports.ALL_MILESTONES = exports.UNDERWORLD_MILESTONES = exports.VASTITAS_BOREALIS_MILESTONES = exports.TERRA_CIMMERIA_MILESTONES = exports.ARABIA_TERRA_MILESTONES = exports.AMAZONIS_PLANITIA_MILESTONES = exports.MOON_MILESTONES = exports.ARES_MILESTONES = exports.HELLAS_MILESTONES = exports.ELYSIUM_MILESTONES = exports.VENUS_MILESTONES = exports.THARSIS_MILESTONES = void 0;
+exports.Milestones = exports.ALL_MILESTONES = exports.UNDERWORLD_MILESTONES = exports.VASTITAS_BOREALIS_MILESTONES = exports.TERRA_CIMMERIA_MILESTONES = exports.ARABIA_TERRA_MILESTONES = exports.AMAZONIS_PLANITIA_MILESTONES = exports.MOON_MILESTONES = exports.ARES_MILESTONES = exports.HELLAS_MILESTONES = exports.UTOPIA_PLANITIA_MILESTONES = exports.ELYSIUM_MILESTONES = exports.VENUS_MILESTONES = exports.THARSIS_MILESTONES = void 0;
 const Terraformer_1 = require("./Terraformer");
 const Mayor_1 = require("./Mayor");
 const Gardener_1 = require("./Gardener");
@@ -58,6 +58,7 @@ exports.ELYSIUM_MILESTONES = [
     new Tycoon_1.Tycoon(),
     new Legend_1.Legend(),
 ];
+exports.UTOPIA_PLANITIA_MILESTONES = [];
 exports.HELLAS_MILESTONES = [
     new Diversifier_1.Diversifier(),
     new Tactician_1.Tactician(),
@@ -107,6 +108,7 @@ exports.ALL_MILESTONES = [
     ...exports.THARSIS_MILESTONES,
     ...exports.ELYSIUM_MILESTONES,
     ...exports.HELLAS_MILESTONES,
+    ...exports.UTOPIA_PLANITIA_MILESTONES,
     ...exports.VENUS_MILESTONES,
     ...exports.ARES_MILESTONES,
     ...exports.MOON_MILESTONES,

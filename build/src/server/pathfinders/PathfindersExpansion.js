@@ -16,7 +16,7 @@ const CardResource_1 = require("../../common/CardResource");
 const SelectResourcesDeferred_1 = require("../deferredActions/SelectResourcesDeferred");
 const SendDelegateToArea_1 = require("../deferredActions/SendDelegateToArea");
 const Turmoil_1 = require("../turmoil/Turmoil");
-const DeferredAction_1 = require("../deferredActions/DeferredAction");
+const Priority_1 = require("../deferredActions/Priority");
 exports.TRACKS = PlanetaryTracks_1.PlanetaryTracks.initialize();
 class PathfindersExpansion {
     constructor() {
@@ -220,7 +220,7 @@ class PathfindersExpansion {
     static addToSolBank(player) {
         const solBank = player.getCorporation(CardName_1.CardName.SOLBANK);
         if (solBank !== undefined) {
-            player.defer(() => player.addResourceTo(solBank, { qty: 1, log: true }), DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
+            player.defer(() => player.addResourceTo(solBank, { qty: 1, log: true }), Priority_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
         }
     }
 }

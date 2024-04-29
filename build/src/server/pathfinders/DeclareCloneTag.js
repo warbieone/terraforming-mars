@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeclareCloneTag = void 0;
 const DeferredAction_1 = require("../deferredActions/DeferredAction");
+const Priority_1 = require("../deferredActions/Priority");
 const OrOptions_1 = require("../inputs/OrOptions");
 const SelectOption_1 = require("../inputs/SelectOption");
 const PathfindersData_1 = require("../pathfinders/PathfindersData");
@@ -9,7 +10,7 @@ const utils_1 = require("../../common/utils/utils");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
 class DeclareCloneTag extends DeferredAction_1.DeferredAction {
     constructor(player, card, title = undefined) {
-        super(player, DeferredAction_1.Priority.DECLARE_CLONE_TAG);
+        super(player, Priority_1.Priority.DECLARE_CLONE_TAG);
         this.card = card;
         this.title = title;
     }

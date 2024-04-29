@@ -6,6 +6,7 @@ const SelectCard_1 = require("./SelectCard");
 const Merger_1 = require("../cards/promo/Merger");
 const CardName_1 = require("../../common/cards/CardName");
 const titles = require("../../common/inputs/SelectInitialCards");
+const InputError_1 = require("./InputError");
 class SelectInitialCards extends AndOptions_1.AndOptions {
     constructor(player, cb) {
         super();
@@ -16,7 +17,7 @@ class SelectInitialCards extends AndOptions_1.AndOptions {
         this.buttonLabel = 'Start';
         this.options.push(new SelectCard_1.SelectCard(titles.SELECT_CORPORATION_TITLE, undefined, player.dealtCorporationCards, { min: 1, max: 1 }).andThen((cards) => {
             if (cards.length !== 1) {
-                throw new Error('Only select 1 corporation card');
+                throw new InputError_1.InputError('Only select 1 corporation card');
             }
             corporation = cards[0];
             return undefined;
@@ -28,7 +29,7 @@ class SelectInitialCards extends AndOptions_1.AndOptions {
             this.options.push(new SelectCard_1.SelectCard(titles.SELECT_PRELUDE_TITLE, undefined, player.dealtPreludeCards, { min: 2, max: 2 })
                 .andThen((preludeCards) => {
                 if (preludeCards.length !== 2) {
-                    throw new Error('Only select 2 preludes');
+                    throw new InputError_1.InputError('Only select 2 preludes');
                 }
                 player.preludeCardsInHand.push(...preludeCards);
                 return undefined;
@@ -37,7 +38,7 @@ class SelectInitialCards extends AndOptions_1.AndOptions {
         if (player.game.gameOptions.ceoExtension) {
             this.options.push(new SelectCard_1.SelectCard(titles.SELECT_CEO_TITLE, undefined, player.dealtCeoCards, { min: 1, max: 1 }).andThen((ceoCards) => {
                 if (ceoCards.length !== 1) {
-                    throw new Error('Only select 1 CEO');
+                    throw new InputError_1.InputError('Only select 1 CEO');
                 }
                 player.ceoCardsInHand.push(ceoCards[0]);
                 player.dealtCeoCards.filter((c) => c !== ceoCards[0]).forEach((c) => player.game.ceoDeck.discard(c));
@@ -61,7 +62,7 @@ class SelectInitialCards extends AndOptions_1.AndOptions {
         if (corporation.name !== CardName_1.CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
             player.cardsInHand = [];
             player.preludeCardsInHand = [];
-            throw new Error('Too many cards selected');
+            throw new InputError_1.InputError('Too many cards selected');
         }
         player.dealtProjectCards.forEach((card) => {
             if (player.cardsInHand.includes(card) === false) {

@@ -1,12 +1,11 @@
-import {IProjectCard} from '../../IProjectCard';
+import {ActionCard} from '../../ActionCard';
 import {Tag} from '../../../../common/cards/Tag';
 import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
-import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
 import {CardResource} from '../../../../common/CardResource';
 
-export class DNAExtractionFromSoil extends Card implements IProjectCard {
+export class DNAExtractionFromSoil extends ActionCard{
 
   constructor() {
     super({
@@ -20,13 +19,13 @@ export class DNAExtractionFromSoil extends Card implements IProjectCard {
         or: {
           behaviors: [
             {
-              title: 'Add microbe',
               addResources: 1,
+              title: 'Add 1 microbe to this card',
             },
             {
-              title: 'Remove microbe',
               spend: {resourcesHere: 1},
               drawCard: 1,
+              title: 'Remove microbe',
             },
           ],
           autoSelect: true,

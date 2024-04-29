@@ -9,6 +9,7 @@ const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
 const Resource_1 = require("../../../common/Resource");
 const Size_1 = require("../../../common/cards/render/Size");
+const TileType_1 = require("../../../common/TileType");
 const Options_1 = require("../Options");
 const Card_1 = require("../Card");
 class SmallDutyRovers extends Card_1.Card {
@@ -37,7 +38,10 @@ class SmallDutyRovers extends Card_1.Card {
     }
     bespokePlay(player) {
         const moonData = MoonExpansion_1.MoonExpansion.moonData(player.game);
-        const gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType_1.SpaceType.COLONY).length;
+        let gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType_1.SpaceType.COLONY).length;
+        if (moonData.moon.spaces.some((s) => s.tile?.tileType === TileType_1.TileType.LUNAR_MINE_URBANIZATION)) {
+            gain++;
+        }
         player.stock.add(Resource_1.Resource.MEGACREDITS, gain, { log: true });
         return undefined;
     }

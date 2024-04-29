@@ -216,7 +216,7 @@ class Turmoil {
         this.setNewChairman(newChairman, game, true);
     }
     setNewChairman(newChairman, game, setAgenda = true, gainTR = true) {
-        if (this.chairman) {
+        if (this.chairman && game.beholdTheEmperor !== true) {
             this.delegateReserve.add(this.chairman);
         }
         this.chairman = newChairman;
@@ -308,8 +308,8 @@ class Turmoil {
     getPresentPlayersInReserve() {
         return Array.from(new Set(this.delegateReserve));
     }
-    hasDelegatesInReserve(playerId) {
-        return this.getAvailableDelegateCount(playerId) > 0;
+    hasDelegatesInReserve(player) {
+        return this.getAvailableDelegateCount(player) > 0;
     }
     getPlayerVictoryPoints(player) {
         let victory = 0;

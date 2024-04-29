@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TerraCimmeriaBoard = void 0;
 const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
-const Board_1 = require("./Board");
 const BoardBuilder_1 = require("./BoardBuilder");
 const SpaceName_1 = require("../SpaceName");
 const MarsBoard_1 = require("./MarsBoard");
@@ -25,27 +24,18 @@ class TerraCimmeriaBoard extends MarsBoard_1.MarsBoard {
         builder.ocean(STEEL, STEEL).land(PLANT).land(TITANIUM).land(DRAW_CARD).land(PLANT).ocean(PLANT);
         builder.ocean(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT, PLANT).land(PLANT).ocean(PLANT, PLANT);
         if (gameOptions.shuffleMapOption) {
-            builder.shuffle(rng);
+            builder.shuffle(rng, SpaceName_1.SpaceName.ALBOR_THOLUS_TERRACIMMERIA, SpaceName_1.SpaceName.APOLLINARIS_MONS, SpaceName_1.SpaceName.HADRIACUS_MONS, SpaceName_1.SpaceName.TYRRHENUS_MONS);
         }
         const spaces = builder.build();
         return new TerraCimmeriaBoard(spaces);
     }
-    static deserialize(board, players) {
-        return new TerraCimmeriaBoard(Board_1.Board.deserializeSpaces(board.spaces, players));
-    }
-    getNonReservedLandSpaces() {
-        return super.getNonReservedLandSpaces();
-    }
-    getVolcanicSpaceIds() {
-        return [
+    constructor(spaces) {
+        super(spaces, undefined, [
             SpaceName_1.SpaceName.ALBOR_THOLUS_TERRACIMMERIA,
             SpaceName_1.SpaceName.APOLLINARIS_MONS,
             SpaceName_1.SpaceName.HADRIACUS_MONS,
             SpaceName_1.SpaceName.TYRRHENUS_MONS,
-        ];
-    }
-    getNoctisCitySpaceId() {
-        return undefined;
+        ]);
     }
 }
 exports.TerraCimmeriaBoard = TerraCimmeriaBoard;

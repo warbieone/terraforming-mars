@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.VastitasBorealisBoard = void 0;
 const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
 const SpaceName_1 = require("../SpaceName");
-const Board_1 = require("./Board");
 const BoardBuilder_1 = require("./BoardBuilder");
 const constants_1 = require("../../common/constants");
 const MarsBoard_1 = require("./MarsBoard");
@@ -26,13 +25,18 @@ class VastitasBorealisBoard extends MarsBoard_1.MarsBoard {
         builder.ocean(PLANT).land().land(DRAW_CARD).land(STEEL).land().land(PLANT, PLANT);
         builder.ocean(PLANT, PLANT).land().land(PLANT).land(PLANT, PLANT).land(STEEL, PLANT);
         if (gameOptions.shuffleMapOption) {
-            builder.shuffle(rng);
+            builder.shuffle(rng, SpaceName_1.SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS, SpaceName_1.SpaceName.ALBA_FOSSAE, SpaceName_1.SpaceName.CERANIUS_FOSSAE, SpaceName_1.SpaceName.ALBA_MONS);
         }
         const spaces = builder.build();
         return new VastitasBorealisBoard(spaces);
     }
-    static deserialize(board, players) {
-        return new VastitasBorealisBoard(Board_1.Board.deserializeSpaces(board.spaces, players));
+    constructor(spaces) {
+        super(spaces, undefined, [
+            SpaceName_1.SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
+            SpaceName_1.SpaceName.ALBA_FOSSAE,
+            SpaceName_1.SpaceName.CERANIUS_FOSSAE,
+            SpaceName_1.SpaceName.ALBA_MONS,
+        ]);
     }
     spaceCosts(space) {
         const costs = super.spaceCosts(space);
@@ -41,14 +45,6 @@ class VastitasBorealisBoard extends MarsBoard_1.MarsBoard {
             costs.tr.oceans = 1;
         }
         return costs;
-    }
-    getVolcanicSpaceIds() {
-        return [
-            SpaceName_1.SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
-            SpaceName_1.SpaceName.ALBA_FOSSAE,
-            SpaceName_1.SpaceName.CERANIUS_FOSSAE,
-            SpaceName_1.SpaceName.ALBA_MONS,
-        ];
     }
 }
 exports.VastitasBorealisBoard = VastitasBorealisBoard;

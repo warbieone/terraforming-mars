@@ -19,17 +19,18 @@ class LunaEcumenopolis extends Card_1.Card {
             cost: 35,
             reserveUnits: { titanium: 2 },
             metadata: {
+                cardNumber: 'M84',
+                hasExternalHelp: true,
                 description: 'Spend 2 titanium. ' +
                     'Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. ' +
                     'Increase your TR 1 step for each 2 steps of the habitat rate.',
-                cardNumber: 'M84',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.minus().titanium(2).nbsp;
                     b.text('2').moonHabitat({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_HABITAT_RATE }).asterix().br;
                     b.tr(1).slash().moonHabitatRate().moonHabitatRate();
                 }),
             },
-            tilesBuilt: [TileType_1.TileType.MOON_HABITAT],
+            tilesBuilt: [TileType_1.TileType.MOON_HABITAT, TileType_1.TileType.MOON_HABITAT],
         });
     }
     canAffordTRBump(player) {

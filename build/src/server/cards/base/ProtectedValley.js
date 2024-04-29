@@ -13,7 +13,6 @@ class ProtectedValley extends Card_1.Card {
             name: CardName_1.CardName.PROTECTED_VALLEY,
             tags: [Tag_1.Tag.PLANT, Tag_1.Tag.BUILDING],
             cost: 23,
-            tr: { oxygen: 1 },
             behavior: {
                 production: { megacredits: 2 },
                 greenery: { on: 'ocean' },

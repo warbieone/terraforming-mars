@@ -97,7 +97,7 @@ class Playwrights extends CorporationCard_1.CorporationCard {
                         reserveUnits: MoonExpansion_1.MoonExpansion.adjustedReserveCosts(player, card),
                     };
                     return card.type === CardType_1.CardType.EVENT &&
-                        player.canAfford(canAffordOptions) && player.simpleCanPlay(card, canAffordOptions);
+                        player.canAfford(canAffordOptions) && card.canPlay(player, canAffordOptions);
                 }));
             });
         }

@@ -30,7 +30,14 @@ class DustStorm extends Card_1.Card {
         });
     }
     bespokePlay(player) {
-        player.game.getPlayers().forEach((p) => p.stock.deduct(Resource_1.Resource.ENERGY, p.energy, { log: true }));
+        player.game.getPlayers().forEach((target) => {
+            target.maybeBlockAttack(player, (proceed) => {
+                if (proceed) {
+                    target.stock.deduct(Resource_1.Resource.ENERGY, target.energy, { log: true });
+                }
+                return undefined;
+            });
+        });
         return undefined;
     }
 }

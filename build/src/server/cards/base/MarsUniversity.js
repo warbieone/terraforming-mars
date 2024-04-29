@@ -8,7 +8,7 @@ const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const CardName_1 = require("../../../common/cards/CardName");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class MarsUniversity extends Card_1.Card {
@@ -42,7 +42,7 @@ class MarsUniversity extends Card_1.Card {
                     player.drawCard();
                     return undefined;
                 }), new SelectOption_1.SelectOption('Do nothing'));
-            }, DeferredAction_1.Priority.DISCARD_AND_DRAW);
+            }, Priority_1.Priority.DISCARD_AND_DRAW);
         }
         return undefined;
     }

@@ -9,6 +9,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const LogHelper_1 = require("../../LogHelper");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 class CharityDonation extends Card_1.Card {
     constructor() {
         super({
@@ -38,7 +39,7 @@ class CharityDonation extends Card_1.Card {
 exports.CharityDonation = CharityDonation;
 class SelectCharityDonationCard extends DeferredAction_1.DeferredAction {
     constructor(players, playerIdx, boundaryIndex, cards) {
-        super(players[playerIdx], DeferredAction_1.Priority.DRAW_CARDS);
+        super(players[playerIdx], Priority_1.Priority.DRAW_CARDS);
         this.players = players;
         this.playerIdx = playerIdx;
         this.boundaryIndex = boundaryIndex;

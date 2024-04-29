@@ -6,7 +6,7 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const Resource_1 = require("../../../common/Resource");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 const GainResources_1 = require("../../deferredActions/GainResources");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
@@ -34,7 +34,7 @@ class ArcticAlgae extends Card_1.Card {
     }
     onTilePlaced(cardOwner, activePlayer, space) {
         if (Board_1.Board.isUncoveredOceanSpace(space)) {
-            cardOwner.game.defer(new GainResources_1.GainResources(cardOwner, Resource_1.Resource.PLANTS, { count: 2 }).andThen(() => activePlayer.game.log('${0} gained 2 ${1} from ${2}', (b) => b.player(cardOwner).string(Resource_1.Resource.PLANTS).cardName(this.name))), cardOwner.id !== activePlayer.id ? DeferredAction_1.Priority.OPPONENT_TRIGGER : undefined);
+            cardOwner.game.defer(new GainResources_1.GainResources(cardOwner, Resource_1.Resource.PLANTS, { count: 2 }).andThen(() => activePlayer.game.log('${0} gained 2 ${1} from ${2}', (b) => b.player(cardOwner).string(Resource_1.Resource.PLANTS).cardName(this.name))), cardOwner.id !== activePlayer.id ? Priority_1.Priority.OPPONENT_TRIGGER : undefined);
         }
     }
 }

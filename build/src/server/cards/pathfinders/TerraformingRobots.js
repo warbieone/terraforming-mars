@@ -13,13 +13,13 @@ class TerraformingRobots extends Card_1.Card {
         super({
             type: CardType_1.CardType.ACTIVE,
             name: CardName_1.CardName.TERRAFORMING_ROBOTS,
-            cost: 7,
+            cost: 10,
             tags: [Tag_1.Tag.SCIENCE],
             resourceType: CardResource_1.CardResource.SPECIALIZED_ROBOT,
             requirements: { tag: Tag_1.Tag.SCIENCE, count: 4 },
             victoryPoints: { resourcesHere: {} },
             metadata: {
-                cardNumber: 'PfTMP',
+                cardNumber: 'PfT12',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you play a Mars tag, add 1 specialized robot on this card.', (eb) => {
                         eb.mars(1, { played: Options_1.played }).startEffect.specializedRobot(1);

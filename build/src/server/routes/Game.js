@@ -12,6 +12,7 @@ const Game_1 = require("../Game");
 const Player_1 = require("../Player");
 const ServerModel_1 = require("../models/ServerModel");
 const ServeAsset_1 = require("./ServeAsset");
+const Types_1 = require("../../common/Types");
 const server_ids_1 = require("../utils/server-ids");
 const QuotaHandler_1 = require("../server/QuotaHandler");
 const durations_1 = require("../utils/durations");
@@ -19,29 +20,29 @@ function get() {
     const defaultQuota = { limit: 1, perMs: 1 };
     const val = process.env.GAME_QUOTA;
     try {
-        if (val === undefined) {
-            throw new Error('Undefined quota');
+        if (val !== undefined) {
+            const struct = JSON.parse(val);
+            let { limit, per } = struct;
+            if (limit === undefined) {
+                throw new Error('limit is absent');
+            }
+            limit = Number.parseInt(limit);
+            if (isNaN(limit)) {
+                throw new Error('limit is invalid');
+            }
+            if (per === undefined) {
+                throw new Error('per is absent');
+            }
+            const perMs = (0, durations_1.durationToMilliseconds)(per);
+            if (isNaN(perMs)) {
+                throw new Error('perMillis is invalid');
+            }
+            return { limit, perMs };
         }
-        const struct = JSON.parse(val);
-        let { limit, per } = struct;
-        if (limit === undefined) {
-            throw new Error('limit is absent');
-        }
-        limit = Number.parseInt(limit);
-        if (isNaN(limit)) {
-            throw new Error('limit is invalid');
-        }
-        if (per === undefined) {
-            throw new Error('per is absent');
-        }
-        const perMs = (0, durations_1.durationToMilliseconds)(per);
-        if (isNaN(perMs)) {
-            throw new Error('perMillis is invalid');
-        }
-        return { limit, perMs };
+        return defaultQuota;
     }
     catch (e) {
-        console.log(e);
+        console.warn('While initialzing quota:', (e instanceof Error ? e.message : e));
         return defaultQuota;
     }
 }
@@ -81,10 +82,10 @@ class GameHandler extends Handler_1.Handler {
             req.once('end', async () => {
                 try {
                     const gameReq = JSON.parse(body);
-                    const gameId = (0, server_ids_1.generateRandomId)('g');
-                    const spectatorId = (0, server_ids_1.generateRandomId)('s');
+                    const gameId = (0, Types_1.safeCast)((0, server_ids_1.generateRandomId)('g'), Types_1.isGameId);
+                    const spectatorId = (0, Types_1.safeCast)((0, server_ids_1.generateRandomId)('s'), Types_1.isSpectatorId);
                     const players = gameReq.players.map((obj) => {
-                        return new Player_1.Player(obj.name, obj.color, obj.beginner, Number(obj.handicap), (0, server_ids_1.generateRandomId)('p'));
+                        return new Player_1.Player(obj.name, obj.color, obj.beginner, Number(obj.handicap), (0, Types_1.safeCast)((0, server_ids_1.generateRandomId)('p'), Types_1.isPlayerId));
                     });
                     let firstPlayerIdx = 0;
                     for (let i = 0; i < gameReq.players.length; i++) {
@@ -128,7 +129,7 @@ class GameHandler extends Handler_1.Handler {
                         soloTR: gameReq.soloTR,
                         customCorporationsList: gameReq.customCorporationsList,
                         bannedCards: gameReq.bannedCards,
-                        extraCards: gameReq.extraCards,
+                        includedCards: gameReq.includedCards,
                         customColoniesList: gameReq.customColoniesList,
                         customPreludes: gameReq.customPreludes,
                         requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,

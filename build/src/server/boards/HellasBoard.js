@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HellasBoard = void 0;
 const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
 const SpaceName_1 = require("../SpaceName");
-const Board_1 = require("./Board");
 const constants_1 = require("../../common/constants");
 const BoardBuilder_1 = require("./BoardBuilder");
 const MarsBoard_1 = require("./MarsBoard");
@@ -15,10 +14,9 @@ class HellasBoard extends MarsBoard_1.MarsBoard {
         const DRAW_CARD = SpaceBonus_1.SpaceBonus.DRAW_CARD;
         const HEAT = SpaceBonus_1.SpaceBonus.HEAT;
         const TITANIUM = SpaceBonus_1.SpaceBonus.TITANIUM;
-        const TWO_PLANTS = [PLANT, PLANT];
-        builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT);
-        builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT).land(PLANT, STEEL).land(PLANT).land(PLANT);
-        builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL).land().land(...TWO_PLANTS).land(PLANT, DRAW_CARD);
+        builder.ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, STEEL).land(PLANT);
+        builder.ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT).land(PLANT, STEEL).land(PLANT).land(PLANT);
+        builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL).land().land(PLANT, PLANT).land(PLANT, DRAW_CARD);
         builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL, STEEL).land(STEEL).ocean(PLANT).ocean(PLANT).land(PLANT);
         builder.land(DRAW_CARD).land().land().land(STEEL, STEEL).land().ocean(DRAW_CARD).ocean(HEAT, HEAT, HEAT).ocean().land(PLANT);
         builder.land(TITANIUM).land().land(STEEL).land().land().ocean().ocean(STEEL).land();
@@ -31,8 +29,8 @@ class HellasBoard extends MarsBoard_1.MarsBoard {
         const spaces = builder.build();
         return new HellasBoard(spaces);
     }
-    static deserialize(board, players) {
-        return new HellasBoard(Board_1.Board.deserializeSpaces(board.spaces, players));
+    constructor(spaces) {
+        super(spaces, undefined, []);
     }
     spaceCosts(space) {
         const costs = super.spaceCosts(space);

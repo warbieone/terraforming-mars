@@ -52,13 +52,9 @@ class Wetlands extends Card_1.Card {
             .filter((space) => !spacesNextToRedCity.includes(space));
     }
     bespokeCanPlay(player, canAffordOptions) {
-        if (!player.stock.has(this.reserveUnits)) {
-            return false;
-        }
         return this.availableSpaces(player, canAffordOptions).length > 0;
     }
     bespokePlay(player) {
-        player.stock.deductUnits(this.reserveUnits);
         return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)), this.availableSpaces(player))
             .andThen((space) => {
             const tile = {

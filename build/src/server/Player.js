@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Player = void 0;
 const constants = require("../common/constants");
 const constants_1 = require("../common/constants");
-const CardFinder_1 = require("./CardFinder");
+const createCard_1 = require("./createCard");
 const CardName_1 = require("../common/cards/CardName");
 const CardType_1 = require("../common/cards/CardType");
 const Payment_1 = require("../common/inputs/Payment");
@@ -18,6 +18,7 @@ const CardResource_1 = require("../common/CardResource");
 const SelectCard_1 = require("./inputs/SelectCard");
 const SellPatentsStandardProject_1 = require("./cards/base/standardProjects/SellPatentsStandardProject");
 const DeferredAction_1 = require("./deferredActions/DeferredAction");
+const Priority_1 = require("./deferredActions/Priority");
 const SelectPaymentDeferred_1 = require("./deferredActions/SelectPaymentDeferred");
 const SelectProjectCardToPlay_1 = require("./inputs/SelectProjectCardToPlay");
 const SelectOption_1 = require("./inputs/SelectOption");
@@ -56,7 +57,7 @@ const PreludesExpansion_1 = require("./preludes/PreludesExpansion");
 const ChooseCards_1 = require("./deferredActions/ChooseCards");
 const UnderworldExpansion_1 = require("./underworld/UnderworldExpansion");
 const Counter_1 = require("./behavior/Counter");
-const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
+const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 class Player {
     get megaCredits() {
         return this.stock.megacredits;
@@ -178,7 +179,11 @@ class Player {
         }
     }
     getSelfReplicatingRobotsTargetCards() {
-        return this.playedCards.find((card) => card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots)?.targetCards ?? [];
+        const selfReplicatingRobots = this.playedCards.find((card) => card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots);
+        if (selfReplicatingRobots instanceof SelfReplicatingRobots_1.SelfReplicatingRobots) {
+            return selfReplicatingRobots.targetCards;
+        }
+        return [];
     }
     getSteelValue() {
         return this.steelValue;
@@ -214,7 +219,7 @@ class Player {
             if (!this.canAfford(constants_1.REDS_RULING_POLICY_COST * steps)) {
                 return;
             }
-            this.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(this, constants_1.REDS_RULING_POLICY_COST * steps, { title: 'Select how to pay for TR increase' }), DeferredAction_1.Priority.COST)
+            this.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(this, constants_1.REDS_RULING_POLICY_COST * steps, { title: 'Select how to pay for TR increase' }), Priority_1.Priority.COST)
                 .andThen(raiseRating);
         }
         else {
@@ -391,7 +396,7 @@ class Player {
     }
     runInput(input, pi) {
         const result = pi.process(input, this);
-        this.defer(result, DeferredAction_1.Priority.DEFAULT);
+        this.defer(result, Priority_1.Priority.DEFAULT);
     }
     getAvailableBlueActionCount() {
         return this.getPlayableActionCards().length;
@@ -688,7 +693,7 @@ class Player {
             this.game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
         }
         const action = selectedCard.play(this);
-        this.defer(action, DeferredAction_1.Priority.DEFAULT);
+        this.defer(action, Priority_1.Priority.DEFAULT);
         if (cardAction !== 'discard') {
             const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
             const preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
@@ -700,12 +705,7 @@ class Player {
             }
             const card = this.playedCards.find((card) => card.name === CardName_1.CardName.SELF_REPLICATING_ROBOTS);
             if (card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots) {
-                for (const targetCard of card.targetCards) {
-                    if (targetCard.card.name === selectedCard.name) {
-                        const index = card.targetCards.indexOf(targetCard);
-                        card.targetCards.splice(index, 1);
-                    }
-                }
+                (0, utils_1.inplaceRemove)(card.targetCards, selectedCard);
             }
         }
         switch (cardAction) {
@@ -853,7 +853,7 @@ class Player {
         }
     }
     availableHeat() {
-        const floaters = this.getCorporation(CardName_1.CardName.STORMCRAFT_INCORPORATED)?.resourceCount ?? 0;
+        const floaters = this.resourcesOnCard(CardName_1.CardName.STORMCRAFT_INCORPORATED);
         return this.heat + (floaters * 2);
     }
     spendHeat(amount, cb = () => undefined) {
@@ -976,9 +976,7 @@ class Player {
         const candidateCards = [...this.cardsInHand];
         const card = this.playedCards.find((card) => card.name === CardName_1.CardName.SELF_REPLICATING_ROBOTS);
         if (card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots) {
-            for (const targetCard of card.targetCards) {
-                candidateCards.push(targetCard.card);
-            }
+            candidateCards.push(...card.targetCards);
         }
         const playableCards = [];
         for (const card of candidateCards) {
@@ -994,13 +992,24 @@ class Player {
         return playableCards;
     }
     affordOptionsForCard(card) {
-        const trSource = card.tr ||
-            (card.behavior !== undefined ?
-                (0, BehaviorExecutor_1.getBehaviorExecutor)().toTRSource(card.behavior, new Counter_1.Counter(this, card)) :
-                undefined);
+        let trSource = undefined;
+        if (card.tr) {
+            trSource = card.tr;
+        }
+        else {
+            const computedTr = card.computeTr?.(this);
+            if (computedTr !== undefined) {
+                trSource = computedTr;
+            }
+            else if (card.behavior !== undefined) {
+                trSource = (0, BehaviorExecutor_1.getBehaviorExecutor)().toTRSource(card.behavior, new Counter_1.Counter(this, card));
+            }
+        }
+        const cost = this.getCardCost(card);
+        const paymentOptionsForCard = this.paymentOptionsForCard(card);
         return {
-            cost: this.getCardCost(card),
-            ...this.paymentOptionsForCard(card),
+            cost,
+            ...paymentOptionsForCard,
             reserveUnits: MoonExpansion_1.MoonExpansion.adjustedReserveCosts(this, card),
             tr: trSource,
         };
@@ -1011,7 +1020,7 @@ class Player {
         if (!canAfford.canAfford) {
             return false;
         }
-        const canPlay = this.simpleCanPlay(card, options);
+        const canPlay = card.canPlay(this, options);
         if (canPlay === false) {
             return false;
         }
@@ -1024,9 +1033,6 @@ class Player {
             }
         }
         return canPlay;
-    }
-    simpleCanPlay(card, canAffordOptions) {
-        return card.canPlay(this, canAffordOptions);
     }
     maxSpendable(reserveUnits = Units_1.Units.EMPTY) {
         return {
@@ -1362,8 +1368,8 @@ class Player {
     }
     setWaitingFor(input, cb = () => { }) {
         if (this.waitingFor !== undefined) {
-            const message = 'Overwriting a waitingFor: ' + this.waitingFor.type;
-            if (THROW_WAITING_FOR) {
+            const message = `Overwriting waitingFor ${this.waitingFor.type} with ${input?.type}`;
+            if (THROW_STATE_ERRORS) {
                 throw new Error(message);
             }
             else {
@@ -1468,7 +1474,6 @@ class Player {
     }
     static deserialize(d) {
         const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
-        const cardFinder = new CardFinder_1.CardFinder();
         player.actionsTakenThisGame = d.actionsTakenThisGame;
         player.actionsTakenThisRound = d.actionsTakenThisRound;
         player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
@@ -1482,7 +1487,7 @@ class Player {
         player.colonies.victoryPoints = d.colonyVictoryPoints;
         player.victoryPointsByGeneration = d.victoryPointsByGeneration;
         player.energy = d.energy;
-        player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration ?? false;
+        player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
         player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
         player.heat = d.heat;
         player.megaCredits = d.megaCredits;
@@ -1510,15 +1515,15 @@ class Player {
         player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
         player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
         player.lastCardPlayed = d.lastCardPlayed;
-        player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);
+        player.removedFromPlayCards = (0, createCard_1.cardsFromJSON)(d.removedFromPlayCards);
         player.actionsThisGeneration = new Set(d.actionsThisGeneration);
         if (d.pickedCorporationCard !== undefined) {
-            player.pickedCorporationCard = cardFinder.getCorporationCardByName(d.pickedCorporationCard);
+            player.pickedCorporationCard = (0, createCard_1.newCorporationCard)(d.pickedCorporationCard);
         }
         const corporations = d.corporations;
         if (corporations !== undefined) {
             for (const corporation of corporations) {
-                const card = cardFinder.getCorporationCardByName(corporation.name);
+                const card = (0, createCard_1.newCorporationCard)(corporation.name);
                 if (card === undefined) {
                     continue;
                 }
@@ -1529,16 +1534,16 @@ class Player {
                 player.corporations.push(card);
             }
         }
-        player.pendingInitialActions = cardFinder.corporationCardsFromJSON(d.pendingInitialActions ?? []);
-        player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
-        player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
-        player.dealtCeoCards = cardFinder.ceosFromJSON(d.dealtCeoCards);
-        player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
-        player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
-        player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
-        player.ceoCardsInHand = cardFinder.ceosFromJSON(d.ceoCardsInHand);
-        player.playedCards = d.playedCards.map((element) => (0, CardSerialization_1.deserializeProjectCard)(element, cardFinder));
-        player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
+        player.pendingInitialActions = (0, createCard_1.corporationCardsFromJSON)(d.pendingInitialActions ?? []);
+        player.dealtCorporationCards = (0, createCard_1.corporationCardsFromJSON)(d.dealtCorporationCards);
+        player.dealtPreludeCards = (0, createCard_1.cardsFromJSON)(d.dealtPreludeCards);
+        player.dealtCeoCards = (0, createCard_1.ceosFromJSON)(d.dealtCeoCards);
+        player.dealtProjectCards = (0, createCard_1.cardsFromJSON)(d.dealtProjectCards);
+        player.cardsInHand = (0, createCard_1.cardsFromJSON)(d.cardsInHand);
+        player.preludeCardsInHand = (0, createCard_1.cardsFromJSON)(d.preludeCardsInHand);
+        player.ceoCardsInHand = (0, createCard_1.ceosFromJSON)(d.ceoCardsInHand);
+        player.playedCards = d.playedCards.map((element) => (0, CardSerialization_1.deserializeProjectCard)(element));
+        player.draftedCards = (0, createCard_1.cardsFromJSON)(d.draftedCards);
         player.timer = Timer_1.Timer.deserialize(d.timer);
         if (d.underworldData !== undefined) {
             player.underworldData = d.underworldData;
@@ -1548,7 +1553,7 @@ class Player {
     getOpponents() {
         return this.game.getPlayers().filter((p) => p !== this);
     }
-    defer(input, priority = DeferredAction_1.Priority.DEFAULT) {
+    defer(input, priority = Priority_1.Priority.DEFAULT) {
         if (input === undefined) {
             return;
         }

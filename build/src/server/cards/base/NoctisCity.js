@@ -31,7 +31,7 @@ class NoctisCity extends Card_1.Card {
         });
     }
     bespokeCanPlay(player) {
-        if (player.game.board.getNoctisCitySpaceId() !== undefined) {
+        if (player.game.board.noctisCitySpaceId !== undefined) {
             return true;
         }
         else {
@@ -39,9 +39,9 @@ class NoctisCity extends Card_1.Card {
         }
     }
     bespokePlay(player) {
-        const noctisCitySpaceId = player.game.board.getNoctisCitySpaceId();
+        const noctisCitySpaceId = player.game.board.noctisCitySpaceId;
         if (noctisCitySpaceId !== undefined) {
-            const space = player.game.board.getSpace(noctisCitySpaceId);
+            const space = player.game.board.getSpaceOrThrow(noctisCitySpaceId);
             player.game.addCity(player, space);
             return undefined;
         }

@@ -13,7 +13,6 @@ class IceAsteroid extends Card_1.Card {
             name: CardName_1.CardName.ICE_ASTEROID,
             tags: [Tag_1.Tag.SPACE],
             cost: 23,
-            tr: { oceans: 2 },
             behavior: {
                 ocean: { count: 2 },
             },

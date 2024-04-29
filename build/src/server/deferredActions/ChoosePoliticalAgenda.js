@@ -4,11 +4,12 @@ exports.ChoosePoliticalAgenda = void 0;
 const OrOptions_1 = require("../inputs/OrOptions");
 const SelectOption_1 = require("../inputs/SelectOption");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const Policy_1 = require("../turmoil/Policy");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
 class ChoosePoliticalAgenda extends DeferredAction_1.DeferredAction {
     constructor(player, party, bonusCb, policyCb) {
-        super(player, DeferredAction_1.Priority.DEFAULT);
+        super(player, Priority_1.Priority.DEFAULT);
         this.party = party;
         this.bonusCb = bonusCb;
         this.policyCb = policyCb;
@@ -16,7 +17,7 @@ class ChoosePoliticalAgenda extends DeferredAction_1.DeferredAction {
     execute() {
         const players = this.player.game.getPlayers();
         const bonuses = this.party.bonuses.map((bonus) => {
-            const description = bonus.description + ' (' + players.map((player) => player.name + ': ' + bonus.getScore(player)).join(' / ') + ')';
+            const description = (0, MessageBuilder_1.message)(bonus.description + ' (${0})', (b) => b.rawString(players.map((player) => player.name + ': ' + bonus.getScore(player)).join(' / ')));
             return new SelectOption_1.SelectOption(description).andThen(() => {
                 this.bonusCb(bonus.id);
                 return undefined;

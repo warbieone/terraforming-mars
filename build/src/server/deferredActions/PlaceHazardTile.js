@@ -3,11 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaceHazardTile = void 0;
 const SelectSpace_1 = require("../inputs/SelectSpace");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const AresHazards_1 = require("../ares/AresHazards");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
 class PlaceHazardTile extends DeferredAction_1.DeferredAction {
     constructor(player, hazardType, options) {
-        super(player, DeferredAction_1.Priority.DEFAULT);
+        super(player, Priority_1.Priority.DEFAULT);
         this.hazardType = hazardType;
         this.options = options;
     }

@@ -8,7 +8,7 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 class EcoLine extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -49,7 +49,7 @@ class EcoLine extends CorporationCard_1.CorporationCard {
                 player.plants += 1, { log: true };
                 return undefined;
             }));
-            player.defer(options, DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
+            player.defer(options, Priority_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
         }
         return undefined;
     }

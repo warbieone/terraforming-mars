@@ -3,9 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaceGreeneryTile = void 0;
 const SelectSpace_1 = require("../inputs/SelectSpace");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 class PlaceGreeneryTile extends DeferredAction_1.DeferredAction {
     constructor(player, on = 'greenery') {
-        super(player, DeferredAction_1.Priority.DEFAULT);
+        super(player, Priority_1.Priority.DEFAULT);
         this.on = on;
     }
     execute() {

@@ -45,6 +45,7 @@ class LunarMineUrbanization extends Card_1.Card {
                 throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
             }
             space.tile.tileType = TileType_1.TileType.LUNAR_MINE_URBANIZATION;
+            space.tile.card = this.name;
             MoonExpansion_1.MoonExpansion.raiseHabitatRate(player);
             return undefined;
         });

@@ -2,11 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddResourcesToCards = void 0;
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const SelectAmount_1 = require("../inputs/SelectAmount");
 const AndOptions_1 = require("../inputs/AndOptions");
 class AddResourcesToCards extends DeferredAction_1.DeferredAction {
     constructor(player, resourceType, count) {
-        super(player, DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
+        super(player, Priority_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
         this.resourceType = resourceType;
         this.count = count;
     }

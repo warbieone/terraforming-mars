@@ -8,8 +8,10 @@ const Units_1 = require("../../common/Units");
 const AresTileType_1 = require("../../common/AresTileType");
 const utils_1 = require("../../common/utils/utils");
 class Board {
-    constructor(spaces) {
+    constructor(spaces, noctisCitySpaceId, volcanicSpaceIds) {
         this.spaces = spaces;
+        this.noctisCitySpaceId = noctisCitySpaceId;
+        this.volcanicSpaceIds = volcanicSpaceIds;
         this.maxX = 0;
         this.maxY = 0;
         this.map = new Map();
@@ -23,13 +25,7 @@ class Board {
             this.map.set(space.id, space);
         });
     }
-    getVolcanicSpaceIds() {
-        return [];
-    }
-    getNoctisCitySpaceId() {
-        return undefined;
-    }
-    getSpace(id) {
+    getSpaceOrThrow(id) {
         const space = this.map.get(id);
         if (space === undefined) {
             throw new Error(`Can't find space with id ${id}`);
@@ -88,7 +84,7 @@ class Board {
         return this.computeAdjacentSpaces(space);
     }
     getSpaceByTileCard(cardName) {
-        return this.spaces.find((space) => space.tile !== undefined && space.tile.card === cardName);
+        return this.spaces.find((space) => space.tile?.card === cardName);
     }
     getSpaces(spaceType, _player) {
         return this.spaces.filter((space) => space.spaceType === spaceType);
@@ -147,6 +143,9 @@ class Board {
             if (space.player !== undefined && space.player !== player) {
                 return false;
             }
+            if (space.id === this.noctisCitySpaceId) {
+                return false;
+            }
             const playableSpace = space.tile === undefined || (AresHandler_1.AresHandler.hasHazardTile(space) && space.tile?.protectedHazard !== true);
             if (!playableSpace) {
                 return false;
@@ -175,7 +174,7 @@ class Board {
         return spaces[idx];
     }
     canPlaceTile(space) {
-        return space.tile === undefined && space.spaceType === SpaceType_1.SpaceType.LAND;
+        return space.tile === undefined && space.spaceType === SpaceType_1.SpaceType.LAND && space.id !== this.noctisCitySpaceId;
     }
     static isCitySpace(space) {
         return space.tile !== undefined && TileType_1.CITY_TILES.has(space.tile.tileType);
@@ -214,14 +213,20 @@ class Board {
                 if (space.excavator !== undefined) {
                     serialized.excavator = space.excavator.id;
                 }
+                if (space.coOwner !== undefined) {
+                    serialized.coOwner = space.coOwner.id;
+                }
                 return serialized;
             }),
         };
     }
+    static findPlayer(players, playerId) {
+        return players.find((p) => p.id === playerId);
+    }
     static deserializeSpace(serialized, players) {
-        const playerId = serialized.player;
-        const player = players.find((p) => p.id === playerId);
-        const excavator = players.find((p) => p.id === serialized.excavator);
+        const player = this.findPlayer(players, serialized.player);
+        const excavator = this.findPlayer(players, serialized.excavator);
+        const coOwner = this.findPlayer(players, serialized.coOwner);
         const space = {
             id: serialized.id,
             spaceType: serialized.spaceType,
@@ -244,10 +249,14 @@ class Board {
         if (excavator !== undefined) {
             space.excavator = excavator;
         }
+        if (coOwner !== undefined) {
+            space.coOwner = coOwner;
+        }
         return space;
     }
-    static deserializeSpaces(spaces, players) {
-        return spaces.map((space) => Board.deserializeSpace(space, players));
+    static deserialize(board, players) {
+        const spaces = board.spaces.map((space) => Board.deserializeSpace(space, players));
+        return { spaces };
     }
 }
 exports.Board = Board;

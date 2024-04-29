@@ -71,6 +71,11 @@ function chooseMilestonesAndAwards(gameOptions) {
                 case BoardName_1.BoardName.VASTITAS_BOREALIS:
                     push(Milestones_1.VASTITAS_BOREALIS_MILESTONES, Awards_1.VASTITAS_BOREALIS_AWARDS);
                     break;
+                case BoardName_1.BoardName.UTOPIA_PLANITIA:
+                case BoardName_1.BoardName.VASTITAS_BOREALIS_NOVUS:
+                case BoardName_1.BoardName.TERRA_CIMMERIA_NOVUS:
+                    drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty, exports.LIMITED_SYNERGY);
+                    break;
             }
             if (includeVenus) {
                 push(Milestones_1.VENUS_MILESTONES, Awards_1.VENUS_AWARDS);

@@ -13,7 +13,6 @@ class Plantation extends Card_1.Card {
             name: CardName_1.CardName.PLANTATION,
             tags: [Tag_1.Tag.PLANT],
             cost: 15,
-            tr: { oxygen: 1 },
             behavior: {
                 greenery: {},
             },

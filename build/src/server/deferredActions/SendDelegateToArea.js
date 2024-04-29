@@ -3,11 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SendDelegateToArea = void 0;
 const SelectParty_1 = require("../inputs/SelectParty");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const SelectPaymentDeferred_1 = require("./SelectPaymentDeferred");
 const Turmoil_1 = require("../turmoil/Turmoil");
 class SendDelegateToArea extends DeferredAction_1.DeferredAction {
     constructor(player, title = 'Select where to send a delegate', options = {}) {
-        super(player, DeferredAction_1.Priority.DEFAULT);
+        super(player, Priority_1.Priority.DEFAULT);
         this.title = title;
         this.options = options;
         this.turmoil = Turmoil_1.Turmoil.getTurmoil(player.game);

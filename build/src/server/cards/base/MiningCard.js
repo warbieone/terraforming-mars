@@ -10,6 +10,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const SpaceBonus_1 = require("../../../common/boards/SpaceBonus");
 const TileType_1 = require("../../../common/TileType");
 const SelectResourceTypeDeferred_1 = require("../../deferredActions/SelectResourceTypeDeferred");
+const Units_1 = require("../../../common/Units");
 class MiningCard extends Card_1.Card {
     constructor(name, cost, metadata) {
         super({
@@ -45,10 +46,12 @@ class MiningCard extends Card_1.Card {
         }
         return TileType_1.TileType.MINING_AREA;
     }
-    produce(player) {
+    productionBox() {
+        const units = { ...Units_1.Units.EMPTY };
         if (this.bonusResource && this.bonusResource.length === 1) {
-            player.production.add(this.bonusResource[0], 1, { log: true });
+            units[this.bonusResource[0]] += 1;
         }
+        return units;
     }
     bespokePlay(player) {
         return new SelectSpace_1.SelectSpace(this.title, this.getAvailableSpaces(player))

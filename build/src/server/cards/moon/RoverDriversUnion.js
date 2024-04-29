@@ -16,7 +16,9 @@ class RoverDriversUnion extends Card_1.Card {
             tags: [Tag_1.Tag.MOON],
             cost: 16,
             requirements: { logisticRate: 2 },
-            tr: { moonLogistics: 1 },
+            behavior: {
+                moon: { logisticsRate: 1 },
+            },
             metadata: {
                 description: 'Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.',
                 cardNumber: 'M78',
@@ -29,7 +31,6 @@ class RoverDriversUnion extends Card_1.Card {
     }
     bespokePlay(player) {
         MoonExpansion_1.MoonExpansion.ifMoon(player.game, (moonData) => {
-            MoonExpansion_1.MoonExpansion.raiseLogisticRate(player);
             player.production.add(Resource_1.Resource.MEGACREDITS, moonData.logisticRate, { log: true });
         });
         return undefined;

@@ -5,6 +5,7 @@ const AndOptions_1 = require("./AndOptions");
 const SelectAmount_1 = require("./SelectAmount");
 const Units_1 = require("../../common/Units");
 const utils_1 = require("../../common/utils/utils");
+const InputError_1 = require("./InputError");
 class SelectResources extends AndOptions_1.AndOptions {
     static makeOptions(count, units) {
         const selectMegacredits = new SelectAmount_1.SelectAmount('Megacredits', 'Select', 0, count)
@@ -48,10 +49,10 @@ class SelectResources extends AndOptions_1.AndOptions {
         this.andThen(() => {
             const array = Object.values(units);
             if (array.some((count) => count < 0)) {
-                throw new Error('All units must be positive');
+                throw new InputError_1.InputError('All units must be positive');
             }
             if ((0, utils_1.sum)(array) !== this.count) {
-                throw new Error(`Select ${this.count} resources.`);
+                throw new InputError_1.InputError(`Select ${this.count} resources.`);
             }
             this.player.stock.addUnits(this.units, { log: true });
             return undefined;

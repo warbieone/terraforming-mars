@@ -47,6 +47,7 @@ class CardRenderDynamicVictoryPoints {
         this.targetOneOrMore = false;
         this.anyPlayer = false;
         this.asterisk = undefined;
+        this.asFraction = undefined;
     }
     static resource(type, points, target) {
         const itemType = RESOURCE_TO_ITEM_TYPE[type];
@@ -63,15 +64,18 @@ class CardRenderDynamicVictoryPoints {
         return new CardRenderDynamicVictoryPoints(new CardRenderItem_1.CardRenderItem(itemType, 1, { played: true }), points, target);
     }
     static oceans(points, target) {
-        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.OCEANS);
-        item.size = Size_1.Size.SMALL;
-        return new CardRenderDynamicVictoryPoints(item, points, target);
+        const inner = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.OCEANS, -1, { size: Size_1.Size.SMALL });
+        const item = new CardRenderDynamicVictoryPoints(inner, points, target);
+        item.asterisk = true;
+        return item;
     }
-    static cities(points, target, any = false) {
+    static cities(points, target, any = false, asterisk = false) {
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CITY);
         item.size = Size_1.Size.SMALL;
         item.anyPlayer = any;
-        return new CardRenderDynamicVictoryPoints(item, points, target);
+        const vps = new CardRenderDynamicVictoryPoints(item, points, target);
+        vps.asterisk = asterisk;
+        return vps;
     }
     static searchForLife() {
         const item = new CardRenderDynamicVictoryPoints(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.SCIENCE), 3, 3);
@@ -116,6 +120,7 @@ class CardRenderDynamicVictoryPoints {
     static undergroundShelters() {
         const item = new CardRenderDynamicVictoryPoints(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.UNDERGROUND_SHELTERS), 1, 3);
         item.asterisk = true;
+        item.asFraction = true;
         return item;
     }
 }

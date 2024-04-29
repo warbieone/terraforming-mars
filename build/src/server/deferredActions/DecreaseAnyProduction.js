@@ -3,13 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DecreaseAnyProduction = void 0;
 const SelectPlayer_1 = require("../inputs/SelectPlayer");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
 class DecreaseAnyProduction extends DeferredAction_1.DeferredAction {
     constructor(player, resource, options = {
         count: 1,
         stealing: false,
     }, title = (0, MessageBuilder_1.message)('Select player to decrease ${0} production by ${1} step(s)', (b) => b.string(resource).number(options.count))) {
-        super(player, DeferredAction_1.Priority.ATTACK_OPPONENT);
+        super(player, Priority_1.Priority.ATTACK_OPPONENT);
         this.resource = resource;
         this.options = options;
         this.title = title;

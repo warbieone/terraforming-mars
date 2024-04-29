@@ -4,7 +4,6 @@ exports.ArabiaTerraBoard = void 0;
 const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
 const SpaceName_1 = require("../SpaceName");
 const SpaceType_1 = require("../../common/boards/SpaceType");
-const Board_1 = require("./Board");
 const BoardBuilder_1 = require("./BoardBuilder");
 const MarsBoard_1 = require("./MarsBoard");
 class ArabiaTerraBoard extends MarsBoard_1.MarsBoard {
@@ -28,18 +27,18 @@ class ArabiaTerraBoard extends MarsBoard_1.MarsBoard {
         builder.ocean(PLANT, PLANT).land(PLANT).land(STEEL, DRAW_CARD).land(STEEL, STEEL).land(STEEL).land(DRAW_CARD);
         builder.land().land().land().land().land(STEEL);
         if (gameOptions.shuffleMapOption) {
-            builder.shuffle(rng);
+            builder.shuffle(rng, SpaceName_1.SpaceName.TIKHONAROV, SpaceName_1.SpaceName.LADON, SpaceName_1.SpaceName.FLAUGERGUES, SpaceName_1.SpaceName.CHARYBDIS);
         }
         const spaces = builder.build();
         return new ArabiaTerraBoard(spaces);
     }
-    getVolcanicSpaceIds() {
-        return [
+    constructor(spaces) {
+        super(spaces, undefined, [
             SpaceName_1.SpaceName.TIKHONAROV,
             SpaceName_1.SpaceName.LADON,
             SpaceName_1.SpaceName.FLAUGERGUES,
             SpaceName_1.SpaceName.CHARYBDIS,
-        ];
+        ]);
     }
     getSpaces(spaceType) {
         switch (spaceType) {
@@ -53,9 +52,6 @@ class ArabiaTerraBoard extends MarsBoard_1.MarsBoard {
     getAvailableSpacesForOcean(player) {
         return super.getAvailableSpacesForOcean(player)
             .filter((space) => space.id !== player.game.nomadSpace);
-    }
-    static deserialize(board, players) {
-        return new ArabiaTerraBoard(Board_1.Board.deserializeSpaces(board.spaces, players));
     }
 }
 exports.ArabiaTerraBoard = ArabiaTerraBoard;

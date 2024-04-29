@@ -33,6 +33,7 @@ const HE3ProductionQuotas_1 = require("./HE3ProductionQuotas");
 const HE3Refinery_1 = require("./HE3Refinery");
 const HeavyDutyRovers_1 = require("./HeavyDutyRovers");
 const HeliostatMirrorArray_1 = require("./HeliostatMirrorArray");
+const HostileTakeover_1 = require("./HostileTakeover");
 const HypersensitiveSiliconChipFactory_1 = require("./HypersensitiveSiliconChipFactory");
 const ImprovedMoonConcrete_1 = require("./ImprovedMoonConcrete");
 const IntragenSanctuaryHeadquarters_1 = require("./IntragenSanctuaryHeadquarters");
@@ -176,6 +177,7 @@ exports.MOON_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.MOONCRATE_CONVOYS_TO_MARS]: { Factory: MooncrateConvoysToMars_1.MooncrateConvoysToMars, compatibility: ['turmoil'] },
         [CardName_1.CardName.AN_OFFER_YOU_CANT_REFUSE]: { Factory: AnOfferYouCantRefuse_1.AnOfferYouCantRefuse, compatibility: 'turmoil' },
         [CardName_1.CardName.PRELIMINARY_DARKSIDE]: { Factory: PreliminaryDarkside_1.PreliminaryDarkside },
+        [CardName_1.CardName.HOSTILE_TAKEOVER]: { Factory: HostileTakeover_1.HostileTakeover },
         [CardName_1.CardName.SYNDICATE_PIRATE_RAIDS]: { Factory: SyndicatePirateRaids_1.SyndicatePirateRaids, compatibility: 'colonies' },
         [CardName_1.CardName.DARKSIDE_MINING_SYNDICATE]: { Factory: DarksideMiningSyndicate_1.DarksideMiningSyndicate },
         [CardName_1.CardName.STAGING_STATION_BEHEMOTH]: { Factory: StagingStationBehemoth_1.StagingStationBehemoth, compatibility: 'colonies' },

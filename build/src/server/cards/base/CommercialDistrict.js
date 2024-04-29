@@ -20,7 +20,7 @@ class CommercialDistrict extends Card_1.Card {
             }).nbsp.nbsp.tile(TileType_1.TileType.COMMERCIAL_DISTRICT, true).br;
             b.vpText('1 VP per adjacent city tile.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints_1.CardRenderDynamicVictoryPoints.cities(1, 1, true),
+        victoryPoints: CardRenderDynamicVictoryPoints_1.CardRenderDynamicVictoryPoints.cities(1, 1, true, true),
     }) {
         super({
             type: CardType_1.CardType.AUTOMATED,

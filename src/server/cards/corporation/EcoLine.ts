@@ -7,7 +7,7 @@ import {IPlayer} from '../../../server/IPlayer';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 
 export class EcoLine extends CorporationCard {
   constructor() {

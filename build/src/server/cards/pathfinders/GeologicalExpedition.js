@@ -11,7 +11,7 @@ const BoardType_1 = require("../../boards/BoardType");
 const Resource_1 = require("../../../common/Resource");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
 const Phase_1 = require("../../../common/Phase");
 const VALID_BONUSES = [
@@ -76,7 +76,7 @@ class GeologicalExpedition extends Card_1.Card {
         if (options.options.length === 0) {
             return;
         }
-        activePlayer.defer(options, DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
+        activePlayer.defer(options, Priority_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
     }
 }
 exports.GeologicalExpedition = GeologicalExpedition;

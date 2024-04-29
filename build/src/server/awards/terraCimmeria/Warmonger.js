@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Warmonger = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
+const CardType_1 = require("../../../common/cards/CardType");
 class Warmonger {
     constructor() {
         this.name = 'Warmonger';
@@ -16,6 +17,9 @@ class Warmonger {
         return score;
     }
     static autoInclude(card) {
+        if (card.type === CardType_1.CardType.EVENT) {
+            return;
+        }
         if (card.behavior !== undefined) {
             const behavior = card.behavior;
             if (behavior.removeAnyPlants !== undefined)

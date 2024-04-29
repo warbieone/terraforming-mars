@@ -61,10 +61,9 @@ class TurmoilHandler {
             player.drawCard(steps);
         }
     }
-    static computeTerraformRatingBump(player, inputTr = {}) {
+    static computeTerraformRatingBump(player, tr = {}) {
         if (!PartyHooks_1.PartyHooks.shouldApplyPolicy(player, PartyName_1.PartyName.REDS, 'rp01'))
             return 0;
-        let tr = inputTr instanceof Function ? inputTr(player) : inputTr;
         tr = { ...tr };
         let total = 0;
         if (tr.oxygen !== undefined) {

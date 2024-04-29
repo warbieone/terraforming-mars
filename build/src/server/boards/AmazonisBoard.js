@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AmazonisBoard = void 0;
 const SpaceBonus_1 = require("../../common/boards/SpaceBonus");
-const Board_1 = require("./Board");
 const BoardBuilder_1 = require("./BoardBuilder");
 const SpaceName_1 = require("../SpaceName");
 const MarsBoard_1 = require("./MarsBoard");
@@ -32,19 +31,13 @@ class AmazonisBoard extends MarsBoard_1.MarsBoard {
         const spaces = builder.build();
         return new AmazonisBoard(spaces);
     }
-    static deserialize(board, players) {
-        return new AmazonisBoard(Board_1.Board.deserializeSpaces(board.spaces, players));
-    }
-    getVolcanicSpaceIds() {
-        return [
+    constructor(spaces) {
+        super(spaces, undefined, [
             SpaceName_1.SpaceName.ALBOR_THOLUS,
             SpaceName_1.SpaceName.ANSERIS_MONS,
             SpaceName_1.SpaceName.PINDUS_MONS,
             SpaceName_1.SpaceName.ULYSSES_THOLUS,
-        ];
-    }
-    getNoctisCitySpaceId() {
-        return undefined;
+        ]);
     }
 }
 exports.AmazonisBoard = AmazonisBoard;

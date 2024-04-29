@@ -8,6 +8,7 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
 const CardResource_1 = require("../../../common/CardResource");
+const Options_1 = require("../Options");
 class SpaceDebrisCleaningOperation extends Card_1.Card {
     constructor() {
         super({
@@ -15,7 +16,7 @@ class SpaceDebrisCleaningOperation extends Card_1.Card {
             name: CardName_1.CardName.SPACE_DEBRIS_CLEANING_OPERATION,
             cost: 7,
             tags: [Tag_1.Tag.MARS, Tag_1.Tag.SPACE],
-            requirements: { tag: Tag_1.Tag.SPACE, count: 4 },
+            requirements: { tag: Tag_1.Tag.SPACE, count: 4, all: Options_1.all },
             behavior: {
                 stock: { titanium: 3 },
                 addResourcesToAnyCard: { count: 1, type: CardResource_1.CardResource.DATA },
@@ -27,7 +28,7 @@ class SpaceDebrisCleaningOperation extends Card_1.Card {
                     b.titanium(3).br;
                     b.wild(1).asterix().data().asterix().cards(1);
                 }),
-                description: 'Requires 4 space tags. Gain 3 titanium. ' +
+                description: 'Requires any 4 space tags in play. Gain 3 titanium. ' +
                     'Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) ' +
                     'Add 1 data to ANY card. Draw 1 card.',
             },

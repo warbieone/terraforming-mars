@@ -2,10 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GiveColonyBonus = void 0;
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const mnemonist_1 = require("mnemonist");
 class GiveColonyBonus extends DeferredAction_1.DeferredAction {
     constructor(player, colony, selfish = false) {
-        super(player, DeferredAction_1.Priority.DEFAULT);
+        super(player, Priority_1.Priority.DEFAULT);
         this.colony = colony;
         this.selfish = selfish;
         this.waitingFor = new mnemonist_1.MultiSet();

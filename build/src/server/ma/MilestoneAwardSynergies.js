@@ -538,6 +538,8 @@ const synergiesData = [
     ['Zoologist', 'Manufacturer', 1],
     ['Biologist', 'Zoologist', 6],
     ['Naturalist', 'Zoologist', 2],
+    ['Risktaker', 'Kingpin', 9],
+    ['Tunneler', 'EdgeLord', 8],
     ['EdgeLord', 'Edgedancer', 9],
 ];
 class SynergyMap {

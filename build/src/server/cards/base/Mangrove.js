@@ -13,7 +13,6 @@ class Mangrove extends Card_1.Card {
             name: CardName_1.CardName.MANGROVE,
             tags: [Tag_1.Tag.PLANT],
             cost: 12,
-            tr: { oxygen: 1 },
             victoryPoints: 1,
             behavior: {
                 greenery: { on: 'ocean' },

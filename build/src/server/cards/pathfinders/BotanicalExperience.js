@@ -22,6 +22,7 @@ class BotanicalExperience extends Card_1.Card {
             resourceType: CardResource_1.CardResource.DATA,
             metadata: {
                 cardNumber: 'Pf50',
+                hasExternalHelp: true,
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.greenery({ size: Size_1.Size.SMALL, withO2: false, any: true }).colon().data({ size: Size_1.Size.SMALL });
                     b.nbsp;

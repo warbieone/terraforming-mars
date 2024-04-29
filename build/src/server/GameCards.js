@@ -17,13 +17,13 @@ const LeagueCardManifest_1 = require("./cards/.league/LeagueCardManifest");
 const ModuleManifest_1 = require("./cards/ModuleManifest");
 const CardName_1 = require("../common/cards/CardName");
 const ICardFactory_1 = require("./cards/ICardFactory");
-const CardFinder_1 = require("./CardFinder");
+const IProjectCard_1 = require("./cards/IProjectCard");
+const createCard_1 = require("./createCard");
 const Prelude2CardManifest_1 = require("./cards/prelude2/Prelude2CardManifest");
 const StarwarsCardManifest_1 = require("./cards/starwars/StarwarsCardManifest");
 const UnderworldCardManifest_1 = require("./cards/underworld/UnderworldCardManifest");
 class GameCards {
     constructor(gameOptions) {
-        this.cardFinder = new CardFinder_1.CardFinder();
         this.gameOptions = gameOptions;
         const manifests = [
             [true, StandardCardManifests_1.BASE_CARD_MANIFEST],
@@ -55,7 +55,9 @@ class GameCards {
             .map((factory) => new factory.Factory());
     }
     getProjectCards() {
-        return this.getCards('projectCards');
+        const cards = this.getCards('projectCards');
+        const cardsWithIncludedCards = this.addCustomCards(cards, this.gameOptions.includedCards);
+        return cardsWithIncludedCards.filter(IProjectCard_1.isIProjectCard);
     }
     getStandardProjects() {
         return this.getCards('standardProjects');
@@ -85,11 +87,13 @@ class GameCards {
         for (const cardName of customList) {
             const idx = cards.findIndex((c) => c.name === cardName);
             if (idx === -1) {
-                const card = this.cardFinder.getCardByName(cardName);
+                const card = (0, createCard_1.newCard)(cardName);
                 if (card === undefined) {
                     console.warn(`Unknown card: ${cardName}`);
                 }
-                cards.push(card);
+                else {
+                    cards.push(card);
+                }
             }
         }
         return cards;

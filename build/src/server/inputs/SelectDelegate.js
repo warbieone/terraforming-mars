@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectDelegate = void 0;
 const PlayerInput_1 = require("../PlayerInput");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
+const InputError_1 = require("./InputError");
 class SelectDelegate extends PlayerInput_1.BasePlayerInput {
     constructor(players, title) {
         super('delegate', title);
@@ -18,7 +19,7 @@ class SelectDelegate extends PlayerInput_1.BasePlayerInput {
     }
     process(input) {
         if (!(0, InputResponse_1.isSelectDelegateResponse)(input)) {
-            throw new Error('Not a valid SelectDelegateResponse');
+            throw new InputError_1.InputError('Not a valid SelectDelegateResponse');
         }
         for (const player of this.players) {
             if (player === 'NEUTRAL') {
@@ -33,7 +34,7 @@ class SelectDelegate extends PlayerInput_1.BasePlayerInput {
             }
             return this.cb(player);
         }
-        throw new Error('Player not available');
+        throw new InputError_1.InputError('Player not available');
     }
 }
 exports.SelectDelegate = SelectDelegate;

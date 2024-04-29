@@ -23,6 +23,7 @@ class MiningGuild extends CorporationCard_1.CorporationCard {
             },
             metadata: {
                 cardNumber: 'R24',
+                hasExternalHelp: true,
                 description: 'You start with 36 M€, 2 steel and 1 steel production.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br.br;

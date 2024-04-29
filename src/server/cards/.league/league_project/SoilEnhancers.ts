@@ -7,11 +7,11 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {IPlayer} from '../../../IPlayer';
 import { TileType } from '../../../../common/TileType';
 import { Resource } from '../../../../common/Resource';
-import {Priority} from '../../../deferredActions/DeferredAction';
 import { SpaceType } from '../../../../common/boards/SpaceType';
 import {Space} from '../../../boards/Space';
 import { GainStock } from '../../../../server/deferredActions/GainStock';
 import {Units} from '../../../../common/Units';
+import {Priority} from '../../../deferredActions/Priority';
 
 export class SoilEnhancers extends Card implements IProjectCard {
   // hodgepodge

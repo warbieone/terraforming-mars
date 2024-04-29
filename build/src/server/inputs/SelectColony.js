@@ -4,6 +4,7 @@ exports.SelectColony = void 0;
 const PlayerInput_1 = require("../PlayerInput");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 const ModelUtils_1 = require("../models/ModelUtils");
+const InputError_1 = require("./InputError");
 class SelectColony extends PlayerInput_1.BasePlayerInput {
     constructor(title, buttonLabel = 'Save', colonies) {
         super('colony', title);
@@ -21,14 +22,14 @@ class SelectColony extends PlayerInput_1.BasePlayerInput {
     }
     process(input) {
         if (!(0, InputResponse_1.isSelectColonyResponse)(input)) {
-            throw new Error('Not a valid SelectColonyResponse');
+            throw new InputError_1.InputError('Not a valid SelectColonyResponse');
         }
         if (input.colonyName === undefined) {
-            throw new Error('No colony selected');
+            throw new InputError_1.InputError('No colony selected');
         }
         const colony = this.colonies.find((c) => c.name === input.colonyName);
         if (colony === undefined) {
-            throw new Error(`Colony ${input.colonyName} not found`);
+            throw new InputError_1.InputError(`Colony ${input.colonyName} not found`);
         }
         return this.cb(colony);
     }

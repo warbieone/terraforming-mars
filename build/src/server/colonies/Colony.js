@@ -5,6 +5,7 @@ const AddResourcesToCard_1 = require("../deferredActions/AddResourcesToCard");
 const CardName_1 = require("../../common/cards/CardName");
 const ColonyBenefit_1 = require("../../common/colonies/ColonyBenefit");
 const DeferredAction_1 = require("../deferredActions/DeferredAction");
+const Priority_1 = require("../deferredActions/Priority");
 const DiscardCards_1 = require("../deferredActions/DiscardCards");
 const DrawCards_1 = require("../deferredActions/DrawCards");
 const GiveColonyBonus_1 = require("../deferredActions/GiveColonyBonus");
@@ -117,7 +118,7 @@ class Colony {
         if (options.decreaseTrackAfterTrade !== false) {
             player.defer(() => {
                 this.trackPosition = this.colonies.length;
-            }, DeferredAction_1.Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
+            }, Priority_1.Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
         }
     }
     giveColonyBonus(player, isGiveColonyBonus = false) {
@@ -158,8 +159,10 @@ class Colony {
                 action = DrawCards_1.DrawCards.keepSome(player, 1, { paying: true, logDrawnCard: true });
                 break;
             case ColonyBenefit_1.ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
-                player.drawCard();
-                action = new DiscardCards_1.DiscardCards(player, 1, 1, this.name + ' colony bonus. Select a card to discard');
+                player.defer(() => {
+                    player.drawCard();
+                    player.game.defer(new DiscardCards_1.DiscardCards(player, 1, 1, this.name + ' colony bonus. Select a card to discard'), Priority_1.Priority.SUPERPOWER);
+                });
                 break;
             case ColonyBenefit_1.ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
                 action = DrawCards_1.DrawCards.keepSome(player, quantity, { keepMax: 1 });

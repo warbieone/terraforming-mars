@@ -6,11 +6,12 @@ const OrOptions_1 = require("../inputs/OrOptions");
 const SelectCard_1 = require("../inputs/SelectCard");
 const SelectOption_1 = require("../inputs/SelectOption");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const UnderworldExpansion_1 = require("../underworld/UnderworldExpansion");
 class RemoveResourcesFromCard extends DeferredAction_1.DeferredAction {
     constructor(player, cardResource, count = 1, options) {
-        super(player, DeferredAction_1.Priority.ATTACK_OPPONENT);
-        this.priority = DeferredAction_1.Priority.ATTACK_OPPONENT;
+        super(player, Priority_1.Priority.ATTACK_OPPONENT);
+        this.priority = Priority_1.Priority.ATTACK_OPPONENT;
         this.cardResource = cardResource;
         this.count = count;
         this.source = options?.source ?? 'all';
@@ -19,7 +20,7 @@ class RemoveResourcesFromCard extends DeferredAction_1.DeferredAction {
         this.autoselect = options?.autoselect ?? true;
         this.title = options?.title ?? (`Select card to remove ${count} ${cardResource}(s)`);
         if (this.source === 'self') {
-            this.priority = DeferredAction_1.Priority.LOSE_RESOURCE_OR_PRODUCTION;
+            this.priority = Priority_1.Priority.LOSE_RESOURCE_OR_PRODUCTION;
             if (this.blockable) {
                 throw new Error('Cannot block removing resources from self');
             }

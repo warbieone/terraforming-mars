@@ -3,9 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectResourcesDeferred = void 0;
 const SelectResources_1 = require("../inputs/SelectResources");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 class SelectResourcesDeferred extends DeferredAction_1.DeferredAction {
     constructor(player, count, title) {
-        super(player, DeferredAction_1.Priority.DEFAULT);
+        super(player, Priority_1.Priority.DEFAULT);
         this.count = count;
         this.title = title;
     }

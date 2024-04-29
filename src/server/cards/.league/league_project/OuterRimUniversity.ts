@@ -4,11 +4,13 @@ import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Priority, SimpleDeferredAction} from '../../../deferredActions/DeferredAction';
+import { SimpleDeferredAction} from '../../../deferredActions/DeferredAction';
 import { OrOptions } from '../../../../server/inputs/OrOptions';
 import { SelectOption } from '../../../../server/inputs/SelectOption';
 import {SelectCard} from '../../../inputs/SelectCard';
 import {IPlayer} from '../../../IPlayer';
+import {Priority} from '../../../deferredActions/Priority';
+
 
 
 export class OuterRimUniversity extends Card implements IProjectCard {

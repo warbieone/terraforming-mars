@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostgreSQL = void 0;
+const Types_1 = require("../../common/Types");
 const utils_1 = require("./utils");
 const utils_2 = require("../../common/utils/utils");
 class PostgreSQL {
@@ -231,7 +232,7 @@ class PostgreSQL {
     async getParticipants() {
         const res = await this.client.query('select game_id, participants from participants');
         return res.rows.map((row) => {
-            return { gameId: row.game_id, participantIds: row.participants };
+            return { gameId: (0, Types_1.safeCast)(row.game_id, Types_1.isGameId), participantIds: row.participants };
         });
     }
     async stats() {

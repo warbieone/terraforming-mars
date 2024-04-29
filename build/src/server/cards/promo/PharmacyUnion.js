@@ -7,7 +7,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardResource_1 = require("../../../common/CardResource");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Resource_1 = require("../../../common/Resource");
@@ -73,7 +73,7 @@ class PharmacyUnion extends CorporationCard_1.CorporationCard {
                     }), new SelectOption_1.SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR').andThen(() => {
                         const megaCreditsLost = Math.min(player.megaCredits, 4);
                         player.increaseTerraformRating();
-                        player.megaCredits -= megaCreditsLost;
+                        player.stock.deduct(Resource_1.Resource.MEGACREDITS, megaCreditsLost);
                         game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                         game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
                         return undefined;
@@ -120,10 +120,10 @@ class PharmacyUnion extends CorporationCard_1.CorporationCard {
                 const player = game.getCardPlayerOrThrow(this.name);
                 const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
                 player.addResourceTo(this, microbeTagCount);
-                player.megaCredits -= megaCreditsLost;
+                player.stock.deduct(Resource_1.Resource.MEGACREDITS, megaCreditsLost);
                 game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                 return undefined;
-            }, DeferredAction_1.Priority.SUPERPOWER);
+            }, Priority_1.Priority.SUPERPOWER);
         }
     }
     serialize(serialized) {

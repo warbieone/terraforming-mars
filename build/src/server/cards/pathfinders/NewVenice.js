@@ -21,6 +21,7 @@ class NewVenice extends Card_1.Card {
                     on: 'upgradeable-ocean',
                 },
             },
+            reserveUnits: { plants: 2 },
             requirements: { oceans: 3 },
             metadata: {
                 cardNumber: 'Pf3',
@@ -34,13 +35,6 @@ class NewVenice extends Card_1.Card {
                     'Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.',
             },
         });
-    }
-    bespokeCanPlay(player) {
-        return player.plants >= 2;
-    }
-    bespokePlay(player) {
-        player.plants -= 2;
-        return undefined;
     }
 }
 exports.NewVenice = NewVenice;

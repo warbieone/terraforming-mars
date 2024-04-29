@@ -8,7 +8,7 @@ const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 class OlympusConference extends Card_1.Card {
@@ -49,7 +49,7 @@ class OlympusConference extends Card_1.Card {
                 }));
                 options.title = 'Select an option for Olympus Conference';
                 return options;
-            }, DeferredAction_1.Priority.SUPERPOWER);
+            }, Priority_1.Priority.SUPERPOWER);
         }
         return undefined;
     }

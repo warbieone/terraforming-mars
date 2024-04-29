@@ -10,6 +10,7 @@ const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../render/CardRenderer");
 const SpaceBonus_1 = require("../../../common/boards/SpaceBonus");
 const SelectResourceTypeDeferred_1 = require("../../deferredActions/SelectResourceTypeDeferred");
+const Units_1 = require("../../../common/Units");
 class SpecializedSettlement extends Card_1.Card {
     constructor() {
         super({
@@ -59,7 +60,7 @@ class SpecializedSettlement extends Card_1.Card {
         return Array.from(resources);
     }
     bespokePlay(player) {
-        this.defaultProduce(player);
+        player.production.adjust(SpecializedSettlement.defaultProductionBox);
         return new SelectSpace_1.SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player))
             .andThen((space) => {
             const coveringExistingTile = space.tile !== undefined;
@@ -77,15 +78,12 @@ class SpecializedSettlement extends Card_1.Card {
             return undefined;
         });
     }
-    produce(player) {
-        this.defaultProduce(player);
+    productionBox() {
+        const units = { ...SpecializedSettlement.defaultProductionBox };
         if (this.bonusResource && this.bonusResource.length === 1) {
-            player.production.add(this.bonusResource[0], 1, { log: true });
+            units[this.bonusResource[0]] += 1;
         }
-    }
-    defaultProduce(player) {
-        player.production.add(Resource_1.Resource.ENERGY, -1);
-        player.production.add(Resource_1.Resource.MEGACREDITS, 3);
+        return units;
     }
     produceForTile(player, bonusResources) {
         if (bonusResources.length === 0)
@@ -98,3 +96,4 @@ class SpecializedSettlement extends Card_1.Card {
     }
 }
 exports.SpecializedSettlement = SpecializedSettlement;
+SpecializedSettlement.defaultProductionBox = Units_1.Units.of({ energy: -1, megacredits: 3 });

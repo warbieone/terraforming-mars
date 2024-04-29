@@ -100,8 +100,8 @@ class Server {
         return player.getSelfReplicatingRobotsTargetCards().map((targetCard) => {
             const model = {
                 resources: targetCard.resourceCount,
-                name: targetCard.card.name,
-                calculatedCost: player.getCardCost(targetCard.card),
+                name: targetCard.name,
+                calculatedCost: player.getCardCost(targetCard),
                 isSelfReplicatingRobotsCard: true,
             };
             return model;
@@ -255,14 +255,14 @@ class Server {
         return undefined;
     }
     static getSpaces(board, gagarin = [], cathedrals = [], nomads = undefined) {
-        const volcanicSpaceIds = board.getVolcanicSpaceIds();
-        const noctisCitySpaceIds = board.getNoctisCitySpaceId();
+        const volcanicSpaceIds = board.volcanicSpaceIds;
+        const noctisCitySpaceId = board.noctisCitySpaceId;
         return board.spaces.map((space) => {
             let highlight = undefined;
             if (volcanicSpaceIds.includes(space.id)) {
                 highlight = 'volcanic';
             }
-            else if (noctisCitySpaceIds === space.id) {
+            else if (noctisCitySpaceId === space.id) {
                 highlight = 'noctis';
             }
             const model = {
@@ -302,6 +302,9 @@ class Server {
             if (space.excavator !== undefined) {
                 model.excavator = space.excavator.color;
             }
+            if (space.coOwner !== undefined) {
+                model.coOwner = space.coOwner.color;
+            }
             return model;
         });
     }
@@ -311,7 +314,7 @@ class Server {
             aresExtension: options.aresExtension,
             boardName: options.boardName,
             bannedCards: options.bannedCards,
-            extraCards: options.extraCards,
+            includedCards: options.includedCards,
             ceoExtension: options.ceoExtension,
             coloniesExtension: options.coloniesExtension,
             communityCardsOption: options.communityCardsOption,

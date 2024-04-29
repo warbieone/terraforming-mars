@@ -15,6 +15,7 @@ const Astrodrill_1 = require("./Astrodrill");
 const BactoviralResearch_1 = require("./BactoviralResearch");
 const BioPrintingFacility_1 = require("./BioPrintingFacility");
 const CarbonNanosystems_1 = require("./CarbonNanosystems");
+const CityPark_1 = require("./CityPark");
 const CometAiming_1 = require("./CometAiming");
 const CorporateArchives_1 = require("./CorporateArchives");
 const CrashSiteCleanup_1 = require("./CrashSiteCleanup");
@@ -146,6 +147,7 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.DIRECTED_HEAT_USAGE]: { Factory: DirectedHeatUsage_1.DirectedHeatUsage },
         [CardName_1.CardName.ICY_IMPACTORS]: { Factory: IcyImpactors_1.IcyImpactors },
         [CardName_1.CardName.SOIL_ENRICHMENT]: { Factory: SoilEnrichment_1.SoilEnrichment },
+        [CardName_1.CardName.CITY_PARK]: { Factory: CityPark_1.CityPark },
     },
     preludeCards: {
         [CardName_1.CardName.NEW_PARTNER]: { Factory: NewPartner_1.NewPartner },

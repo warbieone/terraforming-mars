@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameSetup = void 0;
 const BoardName_1 = require("../common/boards/BoardName");
 const ElysiumBoard_1 = require("./boards/ElysiumBoard");
+const Types_1 = require("../common/Types");
 const HellasBoard_1 = require("./boards/HellasBoard");
 const TharsisBoard_1 = require("./boards/TharsisBoard");
 const Player_1 = require("./Player");
@@ -13,10 +14,17 @@ const VastitasBorealisBoard_1 = require("./boards/VastitasBorealisBoard");
 const TerraCimmeriaBoard_1 = require("./boards/TerraCimmeriaBoard");
 const AmazonisBoard_1 = require("./boards/AmazonisBoard");
 const UnderworldExpansion_1 = require("./underworld/UnderworldExpansion");
+const UtopiaPlanitiaBoard_1 = require("./boards/UtopiaPlanitiaBoard");
+const VastitasBorealisNovusBoard_1 = require("./boards/VastitasBorealisNovusBoard");
+const TerraCimmeriaNovusBoard_1 = require("./boards/TerraCimmeriaNovusBoard");
+const Board_1 = require("./boards/Board");
 const boards = {
     [BoardName_1.BoardName.THARSIS]: TharsisBoard_1.TharsisBoard,
     [BoardName_1.BoardName.HELLAS]: HellasBoard_1.HellasBoard,
     [BoardName_1.BoardName.ELYSIUM]: ElysiumBoard_1.ElysiumBoard,
+    [BoardName_1.BoardName.UTOPIA_PLANITIA]: UtopiaPlanitiaBoard_1.UtopiaPlanitiaBoard,
+    [BoardName_1.BoardName.VASTITAS_BOREALIS_NOVUS]: VastitasBorealisNovusBoard_1.VastitasBorealisNovusBoard,
+    [BoardName_1.BoardName.TERRA_CIMMERIA_NOVUS]: TerraCimmeriaNovusBoard_1.TerraCimmeriaNovusBoard,
     [BoardName_1.BoardName.AMAZONIS]: AmazonisBoard_1.AmazonisBoard,
     [BoardName_1.BoardName.ARABIA_TERRA]: ArabiaTerraBoard_1.ArabiaTerraBoard,
     [BoardName_1.BoardName.TERRA_CIMMERIA]: TerraCimmeriaBoard_1.TerraCimmeriaBoard,
@@ -29,11 +37,12 @@ class GameSetup {
     }
     static deserializeBoard(players, gameOptions, d) {
         const playersForBoard = players.length !== 1 ? players : [players[0], GameSetup.neutralPlayerFor(d.id)];
-        const factory = boards[gameOptions.boardName];
-        return factory.deserialize(d.board, playersForBoard);
+        const deserialized = Board_1.Board.deserialize(d.board, playersForBoard).spaces;
+        const Factory = boards[gameOptions.boardName];
+        return new Factory(deserialized);
     }
     static neutralPlayerFor(gameId) {
-        const playerId = 'p-' + gameId + '-neutral';
+        const playerId = (0, Types_1.safeCast)('p-' + gameId + '-neutral', Types_1.isPlayerId);
         return new Player_1.Player('neutral', Color_1.Color.NEUTRAL, true, 0, playerId);
     }
     static setupNeutralPlayer(game) {

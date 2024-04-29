@@ -33,7 +33,7 @@ class LocalHeatTrapping extends Card_1.Card {
     canPlay(player) {
         const cardCost = player.getCardCost(this);
         let heat = player.heat;
-        let floaters = player.getCorporation(CardName_1.CardName.STORMCRAFT_INCORPORATED)?.resourceCount ?? 0;
+        let floaters = player.resourcesOnCard(CardName_1.CardName.STORMCRAFT_INCORPORATED);
         if (cardCost === 1 && player.megaCredits === 0) {
             if (heat > 0) {
                 heat--;

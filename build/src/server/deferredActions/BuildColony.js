@@ -3,9 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BuildColony = void 0;
 const SelectColony_1 = require("../inputs/SelectColony");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 class BuildColony extends DeferredAction_1.DeferredAction {
     constructor(player, options) {
-        super(player, DeferredAction_1.Priority.BUILD_COLONY);
+        super(player, Priority_1.Priority.BUILD_COLONY);
         this.options = options;
     }
     execute() {

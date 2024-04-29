@@ -9,6 +9,7 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const Options_1 = require("../Options");
 const constants_1 = require("../../../common/constants");
 const Size_1 = require("../../../common/cards/render/Size");
+const Units_1 = require("../../../common/Units");
 class Ambient extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -48,7 +49,7 @@ class Ambient extends CorporationCard_1.CorporationCard {
         }
     }
     canAct(player) {
-        return player.heat >= 8 && player.game.getTemperature() === constants_1.MAX_TEMPERATURE && player.canAfford({ cost: 0, tr: { tr: 1 } });
+        return player.heat >= 8 && player.game.getTemperature() === constants_1.MAX_TEMPERATURE && player.canAfford({ cost: 0, reserveUnits: Units_1.Units.of({ heat: 8 }), tr: { tr: 1 } });
     }
     action(player) {
         player.heat -= 8;

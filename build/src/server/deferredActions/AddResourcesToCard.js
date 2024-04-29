@@ -3,11 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddResourcesToCard = void 0;
 const SelectCard_1 = require("../inputs/SelectCard");
 const DeferredAction_1 = require("./DeferredAction");
-const LogHelper_1 = require("../LogHelper");
-const MessageBuilder_1 = require("../logs/MessageBuilder");
+const Priority_1 = require("./Priority");
 class AddResourcesToCard extends DeferredAction_1.DeferredAction {
     constructor(player, resourceType, options = {}) {
-        super(player, DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
+        super(player, Priority_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
         this.resourceType = resourceType;
         this.options = options;
     }
@@ -47,51 +46,21 @@ class AddResourcesToCard extends DeferredAction_1.DeferredAction {
         return this.getCardsInPlay().length + this.getSelfReplicatingRobotCards().length;
     }
     getCards() {
-        return [this.getCardsInPlay(), this.getSelfReplicatingRobotCards()];
+        return [...this.getCardsInPlay(), ...this.getSelfReplicatingRobotCards()];
     }
     execute() {
-        if (this.options.robotCards !== true) {
-            return this.execute1();
-        }
-        else {
-            return this.execute2();
-        }
-    }
-    execute1() {
-        const count = this.options.count ?? 1;
-        const title = this.options.title ??
-            (0, MessageBuilder_1.message)('Select card to add ${0} ${1}', (b) => b.number(count).string(this.resourceType || 'resources'));
-        const cards = this.getCardsInPlay();
+        const qty = this.options.count ?? 1;
+        const cards = this.getCards();
         if (cards.length === 0) {
             return undefined;
         }
         if (cards.length === 1) {
-            this.addResource(cards[0], count);
+            this.addResource(cards[0], qty);
             return undefined;
         }
-        return new SelectCard_1.SelectCard(title, count === 1 ? 'Add resource' : 'Add resources', cards)
+        return new SelectCard_1.SelectCard('Select card to add resource', 'Add resource', cards)
             .andThen(([card]) => {
-            this.addResource(card, count);
-            return undefined;
-        });
-    }
-    execute2() {
-        const count = this.options.count ?? 1;
-        const cards = this.getCardsInPlay();
-        const robotCards = this.getSelfReplicatingRobotCards();
-        return new SelectCard_1.SelectCard('Select card to add resource', 'Add resource', cards.concat(robotCards.map((c) => c.card)))
-            .andThen(([card]) => {
-            const robotCard = robotCards.find((c) => c.card.name === card.name);
-            if (robotCard) {
-                robotCard.resourceCount++;
-                LogHelper_1.LogHelper.logAddResource(this.player, robotCard.card);
-            }
-            else {
-                if (!cards.includes(card)) {
-                    throw new Error('Invalid card selection');
-                }
-                this.addResource(card, count);
-            }
+            this.addResource(card, qty);
             return undefined;
         });
     }

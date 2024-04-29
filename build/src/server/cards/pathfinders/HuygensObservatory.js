@@ -79,10 +79,16 @@ class HuygensObservatory extends Card_1.Card {
         }
     }
     bespokeCanPlay(player) {
-        if (!player.colonies.canTrade()) {
+        if (player.game.tradeEmbargo === true) {
             return false;
         }
-        return player.colonies.getPlayableColonies(true).length > 0;
+        if (player.colonies.getPlayableColonies(true).length === 0) {
+            return false;
+        }
+        if (ColoniesHandler_1.ColoniesHandler.tradeableColonies(player.game).length === 0) {
+            return false;
+        }
+        return true;
     }
     bespokePlay(player) {
         const game = player.game;

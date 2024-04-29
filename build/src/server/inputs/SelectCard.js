@@ -6,6 +6,7 @@ const PlayerInput_2 = require("../PlayerInput");
 const CardName_1 = require("../../common/cards/CardName");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 const ModelUtils_1 = require("../models/ModelUtils");
+const InputError_1 = require("./InputError");
 class SelectCard extends PlayerInput_2.BasePlayerInput {
     constructor(title, buttonLabel = 'Save', cards, config) {
         super('card', title);
@@ -39,20 +40,20 @@ class SelectCard extends PlayerInput_2.BasePlayerInput {
     }
     process(input) {
         if (!(0, InputResponse_1.isSelectCardResponse)(input)) {
-            throw new Error('Not a valid SelectCardResponse');
+            throw new InputError_1.InputError('Not a valid SelectCardResponse');
         }
         if (input.cards.length < this.config.min) {
-            throw new Error('Not enough cards selected');
+            throw new InputError_1.InputError('Not enough cards selected');
         }
         if (input.cards.length > this.config.max) {
-            throw new Error('Too many cards selected');
+            throw new InputError_1.InputError('Too many cards selected');
         }
         const cards = [];
         for (const cardName of input.cards) {
             const { card, idx } = (0, PlayerInput_1.getCardFromPlayerInput)(this.cards, cardName);
             cards.push(card);
             if (this.config.enabled?.[idx] === false) {
-                throw new Error(`${cardName} is not available`);
+                throw new InputError_1.InputError(`${cardName} is not available`);
             }
         }
         return this.cb(cards);

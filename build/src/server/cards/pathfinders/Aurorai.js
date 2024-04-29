@@ -7,7 +7,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 class Aurorai extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -35,7 +35,7 @@ class Aurorai extends CorporationCard_1.CorporationCard {
     }
     onIncreaseTerraformRating(player, cardOwner, steps) {
         if (player === cardOwner) {
-            player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.DATA, { count: steps }), DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
+            player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.DATA, { count: steps }), Priority_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
         }
     }
 }

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Awards = exports.ALL_AWARDS = exports.UNDERWORLD_AWARDS = exports.VASTITAS_BOREALIS_AWARDS = exports.TERRA_CIMMERIA_AWARDS = exports.ARABIA_TERRA_AWARDS = exports.AMAZONIS_PLANITIA_AWARDS = exports.MOON_AWARDS = exports.ARES_AWARDS = exports.HELLAS_AWARDS = exports.ELYSIUM_AWARDS = exports.VENUS_AWARDS = exports.THARSIS_AWARDS = void 0;
+exports.Awards = exports.ALL_AWARDS = exports.UNDERWORLD_AWARDS = exports.VASTITAS_BOREALIS_AWARDS = exports.TERRA_CIMMERIA_AWARDS = exports.ARABIA_TERRA_AWARDS = exports.AMAZONIS_PLANITIA_AWARDS = exports.MOON_AWARDS = exports.ARES_AWARDS = exports.HELLAS_AWARDS = exports.UTOPIA_PLANITIA_AWARDS = exports.ELYSIUM_AWARDS = exports.VENUS_AWARDS = exports.THARSIS_AWARDS = void 0;
 const Landlord_1 = require("./Landlord");
 const Banker_1 = require("./Banker");
 const Scientist_1 = require("./Scientist");
@@ -59,6 +59,7 @@ exports.ELYSIUM_AWARDS = [
     new EstateDealer_1.EstateDealer(),
     new Benefactor_1.Benefactor(),
 ];
+exports.UTOPIA_PLANITIA_AWARDS = [];
 exports.HELLAS_AWARDS = [
     new Cultivator_1.Cultivator(),
     new Magnate_1.Magnate(),
@@ -109,6 +110,7 @@ exports.ALL_AWARDS = [
     ...exports.THARSIS_AWARDS,
     ...exports.ELYSIUM_AWARDS,
     ...exports.HELLAS_AWARDS,
+    ...exports.UTOPIA_PLANITIA_AWARDS,
     ...exports.VENUS_AWARDS,
     ...exports.ARES_AWARDS,
     ...exports.MOON_AWARDS,

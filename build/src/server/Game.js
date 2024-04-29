@@ -4,7 +4,7 @@ exports.Game = void 0;
 const constants = require("../common/constants");
 const BeginnerCorporation_1 = require("./cards/corporation/BeginnerCorporation");
 const Board_1 = require("./boards/Board");
-const CardFinder_1 = require("./CardFinder");
+const createCard_1 = require("./createCard");
 const CardName_1 = require("../common/cards/CardName");
 const ClaimedMilestone_1 = require("./milestones/ClaimedMilestone");
 const ColonyDealer_1 = require("./colonies/ColonyDealer");
@@ -54,6 +54,8 @@ const utils_1 = require("./database/utils");
 const Tag_1 = require("../common/cards/Tag");
 const UnderworldExpansion_1 = require("./underworld/UnderworldExpansion");
 const SpaceType_1 = require("../common/boards/SpaceType");
+const SendDelegateToArea_1 = require("./deferredActions/SendDelegateToArea");
+const BuildColony_1 = require("./deferredActions/BuildColony");
 class Game {
     constructor(id, players, first, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck) {
         this.lastSaveId = 0;
@@ -183,7 +185,7 @@ class Game {
             AresSetup_1.AresSetup.setupHazards(game, players.length);
         }
         if (gameOptions.moonExpansion) {
-            game.moonData = MoonExpansion_1.MoonExpansion.initialize();
+            game.moonData = MoonExpansion_1.MoonExpansion.initialize(gameOptions, rng);
         }
         if (gameOptions.pathfindersExpansion) {
             game.pathfindersData = PathfindersExpansion_1.PathfindersExpansion.initialize(gameOptions);
@@ -940,11 +942,9 @@ class Game {
         this.simpleAddTile(player, space, tile);
         if (this.phase !== Phase_1.Phase.SOLAR) {
             this.grantPlacementBonuses(player, space, coveringExistingTile);
-            if (tile?.tileType !== TileType_1.TileType.MARS_NOMADS) {
-                AresHandler_1.AresHandler.ifAres(this, (aresData) => {
-                    AresHandler_1.AresHandler.maybeIncrementMilestones(aresData, player, space);
-                });
-            }
+            AresHandler_1.AresHandler.ifAres(this, (aresData) => {
+                AresHandler_1.AresHandler.maybeIncrementMilestones(aresData, player, space);
+            });
         }
         else {
             space.player = undefined;
@@ -964,7 +964,6 @@ class Game {
         }
     }
     grantPlacementBonuses(player, space, coveringExistingTile) {
-        const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName_1.CardName.ARCADIAN_COMMUNITIES);
         if (!coveringExistingTile) {
             this.grantSpaceBonuses(player, space);
         }
@@ -973,12 +972,15 @@ class Game {
                 player.megaCredits += player.oceanBonus;
             }
         });
-        AresHandler_1.AresHandler.ifAres(this, () => {
-            AresHandler_1.AresHandler.earnAdjacencyBonuses(player, space);
-        });
-        TurmoilHandler_1.TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
-        if (arcadianCommunityBonus) {
-            this.defer(new GainResources_1.GainResources(player, Resource_1.Resource.MEGACREDITS, { count: 3 }));
+        if (space.tile !== undefined) {
+            AresHandler_1.AresHandler.ifAres(this, () => {
+                AresHandler_1.AresHandler.earnAdjacencyBonuses(player, space);
+            });
+            TurmoilHandler_1.TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
+            const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName_1.CardName.ARCADIAN_COMMUNITIES);
+            if (arcadianCommunityBonus) {
+                this.defer(new GainResources_1.GainResources(player, Resource_1.Resource.MEGACREDITS, { count: 3 }));
+            }
         }
     }
     simpleAddTile(player, space, tile) {
@@ -1039,8 +1041,8 @@ class Game {
                 break;
             case SpaceBonus_1.SpaceBonus.TEMPERATURE:
                 if (this.getTemperature() < constants.MAX_TEMPERATURE) {
-                    player.defer(() => this.increaseTemperature(player, 1));
-                    this.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, { title: 'Select how to pay for placement bonus temperature' }));
+                    this.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, { title: 'Select how to pay for placement bonus temperature' }))
+                        .andThen(() => this.increaseTemperature(player, 1));
                 }
                 break;
             case SpaceBonus_1.SpaceBonus.ENERGY:
@@ -1048,6 +1050,13 @@ class Game {
                 break;
             case SpaceBonus_1.SpaceBonus.ASTEROID:
                 this.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.ASTEROID, { count: count }));
+                break;
+            case SpaceBonus_1.SpaceBonus.DELEGATE:
+                Turmoil_1.Turmoil.ifTurmoil(this, () => this.defer(new SendDelegateToArea_1.SendDelegateToArea(player)));
+                break;
+            case SpaceBonus_1.SpaceBonus.COLONY:
+                this.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, { title: 'Select how to pay for placement bonus temperature' }))
+                    .andThen(() => this.defer(new BuildColony_1.BuildColony(player)));
                 break;
             default:
                 throw new Error('Unhandled space bonus ' + spaceBonus + '. Report this exact error, please.');
@@ -1090,7 +1099,7 @@ class Game {
         });
     }
     removeTile(spaceId) {
-        const space = this.board.getSpace(spaceId);
+        const space = this.board.getSpaceOrThrow(spaceId);
         space.tile = undefined;
         space.player = undefined;
     }
@@ -1195,8 +1204,6 @@ class Game {
     }
     static deserialize(d) {
         const gameOptions = d.gameOptions;
-        gameOptions.starWarsExpansion = gameOptions.starWarsExpansion ?? false;
-        gameOptions.bannedCards = gameOptions.bannedCards ?? [];
         const players = d.players.map((element) => Player_1.Player.deserialize(element));
         const first = players.find((player) => player.id === d.first);
         if (first === undefined) {
@@ -1257,10 +1264,9 @@ class Game {
         game.donePlayers = new Set(d.donePlayers);
         game.researchedPlayers = new Set(d.researchedPlayers);
         game.draftedPlayers = new Set(d.draftedPlayers);
-        const cardFinder = new CardFinder_1.CardFinder();
         game.unDraftedCards = new Map();
         d.unDraftedCards.forEach((unDraftedCard) => {
-            game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
+            game.unDraftedCards.set(unDraftedCard[0], (0, createCard_1.cardsFromJSON)(unDraftedCard[1]));
         });
         game.lastSaveId = d.lastSaveId;
         game.clonedGamedId = d.clonedGamedId;
@@ -1282,7 +1288,7 @@ class Game {
         game.nomadSpace = d.nomadSpace;
         game.tradeEmbargo = d.tradeEmbargo ?? false;
         game.beholdTheEmperor = d.beholdTheEmperor ?? false;
-        game.globalsPerGeneration = d.globalsPerGeneration ?? [];
+        game.globalsPerGeneration = d.globalsPerGeneration;
         if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
             if (game.phase === Phase_1.Phase.INITIALDRAFTING) {
                 if (game.initialDraftIteration === 3) {

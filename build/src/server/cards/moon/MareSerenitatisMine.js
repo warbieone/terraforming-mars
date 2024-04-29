@@ -41,7 +41,7 @@ class MareSerenitatisMine extends Card_1.Card {
         MoonExpansion_1.MoonExpansion.addMineTile(player, MoonSpaces_1.MoonSpaces.MARE_SERENITATIS, this.name);
         MoonExpansion_1.MoonExpansion.raiseMiningRate(player);
         const moon = MoonExpansion_1.MoonExpansion.moonData(player.game).moon;
-        const spaces = moon.getAdjacentSpaces(moon.getSpace(MoonSpaces_1.MoonSpaces.MARE_SERENITATIS));
+        const spaces = moon.getAdjacentSpaces(moon.getSpaceOrThrow(MoonSpaces_1.MoonSpaces.MARE_SERENITATIS));
         const availableRoadSpaces = spaces.filter((space) => {
             return space.player === undefined && space.spaceType === SpaceType_1.SpaceType.LAND;
         });

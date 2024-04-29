@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CeoDeck = exports.PreludeDeck = exports.ProjectDeck = exports.CorporationDeck = exports.Deck = void 0;
-const CardFinder_1 = require("../CardFinder");
+const createCard_1 = require("../createCard");
 const CardName_1 = require("../../common/cards/CardName");
 const LogHelper_1 = require("../LogHelper");
 const shuffle_1 = require("../utils/shuffle");
@@ -124,9 +124,8 @@ class CorporationDeck extends Deck {
         super('corporation', deck, discarded, random);
     }
     static deserialize(d, random) {
-        const cardFinder = new CardFinder_1.CardFinder();
-        const deck = cardFinder.corporationCardsFromJSON(d.drawPile);
-        const discarded = cardFinder.corporationCardsFromJSON(d.discardPile);
+        const deck = (0, createCard_1.corporationCardsFromJSON)(d.drawPile);
+        const discarded = (0, createCard_1.corporationCardsFromJSON)(d.discardPile);
         return new CorporationDeck(deck, discarded, random);
     }
 }
@@ -136,9 +135,8 @@ class ProjectDeck extends Deck {
         super('project', deck, discarded, random);
     }
     static deserialize(d, random) {
-        const cardFinder = new CardFinder_1.CardFinder();
-        const deck = cardFinder.cardsFromJSON(d.drawPile);
-        const discarded = cardFinder.cardsFromJSON(d.discardPile);
+        const deck = (0, createCard_1.cardsFromJSON)(d.drawPile);
+        const discarded = (0, createCard_1.cardsFromJSON)(d.discardPile);
         return new ProjectDeck(deck, discarded, random);
     }
 }
@@ -156,9 +154,8 @@ class PreludeDeck extends Deck {
         super('prelude', copy, discarded, random);
     }
     static deserialize(d, random) {
-        const cardFinder = new CardFinder_1.CardFinder();
-        const deck = cardFinder.preludesFromJSON(d.drawPile);
-        const discarded = cardFinder.preludesFromJSON(d.discardPile);
+        const deck = (0, createCard_1.preludesFromJSON)(d.drawPile);
+        const discarded = (0, createCard_1.preludesFromJSON)(d.discardPile);
         return new PreludeDeck(deck, discarded, random);
     }
 }
@@ -168,9 +165,8 @@ class CeoDeck extends Deck {
         super('ceo', deck, discarded, random);
     }
     static deserialize(d, random) {
-        const cardFinder = new CardFinder_1.CardFinder();
-        const deck = cardFinder.ceosFromJSON(d.drawPile);
-        const discarded = cardFinder.ceosFromJSON(d.discardPile);
+        const deck = (0, createCard_1.ceosFromJSON)(d.drawPile);
+        const discarded = (0, createCard_1.ceosFromJSON)(d.discardPile);
         return new CeoDeck(deck, discarded, random);
     }
 }

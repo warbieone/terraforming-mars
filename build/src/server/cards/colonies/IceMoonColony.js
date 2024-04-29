@@ -13,7 +13,6 @@ class IceMoonColony extends Card_1.Card {
             tags: [Tag_1.Tag.SPACE],
             name: CardName_1.CardName.ICE_MOON_COLONY,
             type: CardType_1.CardType.AUTOMATED,
-            tr: { oceans: 1 },
             behavior: {
                 colonies: { buildColony: {} },
                 ocean: {},

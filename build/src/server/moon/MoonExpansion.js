@@ -42,9 +42,9 @@ class MoonExpansion {
         }
         throw new Error('Assertion error: Using a Moon feature when the Moon expansion is undefined.');
     }
-    static initialize() {
+    static initialize(gameOptions, rng) {
         return {
-            moon: MoonBoard_1.MoonBoard.newInstance(),
+            moon: MoonBoard_1.MoonBoard.newInstance(gameOptions, rng),
             habitatRate: 0,
             miningRate: 0,
             logisticRate: 0,
@@ -64,7 +64,7 @@ class MoonExpansion {
     static addTile(player, spaceId, tile) {
         const game = player.game;
         MoonExpansion.ifMoon(game, (moonData) => {
-            const space = moonData.moon.getSpace(spaceId);
+            const space = moonData.moon.getSpaceOrThrow(spaceId);
             if (!this.MOON_TILES.has(tile.tileType)) {
                 throw new Error(`Bad tile type for the moon: ${tile.tileType}`);
             }
@@ -232,7 +232,7 @@ class MoonExpansion {
                     include = space.spaceType !== SpaceType_1.SpaceType.COLONY;
                 }
                 if (include && options?.ownedBy !== undefined) {
-                    include = space.player === options.ownedBy;
+                    include = space.player === options.ownedBy || space.coOwner === options.ownedBy;
                 }
                 return include;
             });
@@ -244,25 +244,37 @@ class MoonExpansion {
         }
         const reserveUnits = card.reserveUnits || Units_1.Units.EMPTY;
         const heat = reserveUnits.heat || 0;
+        const plants = reserveUnits.plants || 0;
         let steel = reserveUnits.steel || 0;
         let titanium = reserveUnits.titanium || 0;
-        if (card.tilesBuilt.includes(TileType_1.TileType.MOON_HABITAT) && player.cardIsInEffect(CardName_1.CardName.SUBTERRANEAN_HABITATS)) {
-            titanium -= 1;
-        }
-        if (card.tilesBuilt.includes(TileType_1.TileType.MOON_MINE) && player.cardIsInEffect(CardName_1.CardName.IMPROVED_MOON_CONCRETE)) {
-            titanium -= 1;
-        }
-        if (card.tilesBuilt.includes(TileType_1.TileType.MOON_ROAD) && player.cardIsInEffect(CardName_1.CardName.LUNAR_DUST_PROCESSING_PLANT)) {
-            steel = 0;
+        for (const tileBuilt of card.tilesBuilt) {
+            switch (tileBuilt) {
+                case TileType_1.TileType.MOON_HABITAT:
+                    if (player.cardIsInEffect(CardName_1.CardName.SUBTERRANEAN_HABITATS)) {
+                        if (card.name !== CardName_1.CardName.MOMENTUM_VIRUM_HABITAT) {
+                            titanium -= 1;
+                        }
+                    }
+                    break;
+                case TileType_1.TileType.MOON_MINE:
+                    if (player.cardIsInEffect(CardName_1.CardName.IMPROVED_MOON_CONCRETE)) {
+                        titanium -= 1;
+                    }
+                    break;
+                case TileType_1.TileType.MOON_ROAD:
+                    if (player.cardIsInEffect(CardName_1.CardName.LUNAR_DUST_PROCESSING_PLANT)) {
+                        steel = 0;
+                    }
+            }
         }
         steel = Math.max(steel, 0);
         titanium = Math.max(titanium, 0);
-        return Units_1.Units.of({ steel, titanium, heat });
+        return Units_1.Units.of({ steel, titanium, heat, plants });
     }
     static calculateVictoryPoints(player, vpb) {
         MoonExpansion.ifMoon(player.game, (moonData) => {
             const moon = moonData.moon;
-            const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id);
+            const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id || space.coOwner?.id === player.id);
             mySpaces.forEach((space) => {
                 if (space.tile !== undefined) {
                     const type = space.tile.tileType;

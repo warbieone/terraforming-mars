@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deNull = exports.asArray = exports.zip = exports.partition = exports.sum = exports.inplaceRemoveIf = exports.inplaceRemove = exports.twoWayDifference = exports.oneWayDifference = exports.hasIntersection = exports.intersection = exports.range = exports.playerColorClass = void 0;
+exports.deNull = exports.definedOrThrow = exports.asArray = exports.zip = exports.partition = exports.sum = exports.inplaceRemoveIf = exports.inplaceRemove = exports.twoWayDifference = exports.oneWayDifference = exports.hasIntersection = exports.intersection = exports.range = exports.playerColorClass = void 0;
 const playerColorClass = (color, type) => {
     const prefix = {
         shadow: 'player_shadow_color_',
@@ -63,6 +63,13 @@ function asArray(elem) {
     return Array.isArray(elem) ? elem : [elem];
 }
 exports.asArray = asArray;
+function definedOrThrow(obj) {
+    if (obj === undefined) {
+        throw new Error('object is undefined');
+    }
+    return obj;
+}
+exports.definedOrThrow = definedOrThrow;
 function deNull(array) {
     const output = [];
     for (const elem of array) {

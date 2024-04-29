@@ -15,7 +15,6 @@ class TerraformingGanymede extends Card_1.Card {
             tags: [Tag_1.Tag.JOVIAN, Tag_1.Tag.SPACE],
             cost: 33,
             victoryPoints: 2,
-            tr: (player) => ({ tr: 1 + player.tags.count(Tag_1.Tag.JOVIAN) }),
             metadata: {
                 cardNumber: '197',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -24,6 +23,9 @@ class TerraformingGanymede extends Card_1.Card {
                 description: 'Raise your TR 1 step for each Jovian tag you have, including this.',
             },
         });
+    }
+    computeTr(player) {
+        return { tr: 1 + player.tags.count(Tag_1.Tag.JOVIAN) };
     }
     bespokePlay(player) {
         const steps = 1 + player.tags.count(Tag_1.Tag.JOVIAN);

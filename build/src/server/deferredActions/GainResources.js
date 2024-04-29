@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GainResources = void 0;
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 class GainResources extends DeferredAction_1.DeferredAction {
     constructor(player, resource, options = {}) {
-        super(player, DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
+        super(player, Priority_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
         this.resource = resource;
         this.options = options;
         if ((options.count ?? 0) < 0) {

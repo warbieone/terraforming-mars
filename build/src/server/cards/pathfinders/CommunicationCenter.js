@@ -9,7 +9,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardResource_1 = require("../../../common/CardResource");
 const Options_1 = require("../Options");
 const Size_1 = require("../../../common/cards/render/Size");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 class CommunicationCenter extends Card_1.Card {
     constructor() {
         super({
@@ -47,7 +47,7 @@ class CommunicationCenter extends Card_1.Card {
     }
     onCardPlayedFromAnyPlayer(thisCardOwner, _playedCardOwner, card) {
         if (card.type === CardType_1.CardType.EVENT) {
-            const priority = (card.name === CardName_1.CardName.CEOS_FAVORITE_PROJECT) ? DeferredAction_1.Priority.BACK_OF_THE_LINE : DeferredAction_1.Priority.DEFAULT;
+            const priority = (card.name === CardName_1.CardName.CEOS_FAVORITE_PROJECT) ? Priority_1.Priority.BACK_OF_THE_LINE : Priority_1.Priority.DEFAULT;
             thisCardOwner.defer(() => {
                 thisCardOwner.addResourceTo(this, { qty: 1, log: true });
             }, priority);

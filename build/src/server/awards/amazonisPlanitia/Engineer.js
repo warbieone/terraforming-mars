@@ -23,7 +23,7 @@ exports.BESPOKE_PRODUCTION_CARDS = [
     CardName_1.CardName.RARE_EARTH_ELEMENTS,
     CardName_1.CardName.MICROBIOLOGY_PATENTS,
     CardName_1.CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
-    CardName_1.CardName.RARE_EARTH_ELEMENTS,
+    CardName_1.CardName.SMALL_OPEN_PIT_MINE,
 ];
 const map = new Map(exports.BESPOKE_PRODUCTION_CARDS.map((name) => [name, true]));
 class Engineer {
@@ -43,8 +43,9 @@ class Engineer {
         }).length;
     }
     static autoInclude(card) {
-        if (card.produce !== undefined)
+        if (card.productionBox !== undefined) {
             return true;
+        }
         const production = card.behavior?.production;
         if (production !== undefined) {
             return Object.keys(production).length > 0;

@@ -13,7 +13,6 @@ class ArtificialLake extends Card_1.Card {
             name: CardName_1.CardName.ARTIFICIAL_LAKE,
             tags: [Tag_1.Tag.BUILDING],
             cost: 15,
-            tr: { oceans: 1 },
             victoryPoints: 1,
             behavior: {
                 ocean: { on: 'land' },

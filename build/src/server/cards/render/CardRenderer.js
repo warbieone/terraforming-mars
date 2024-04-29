@@ -101,8 +101,8 @@ class Builder {
         this._currentRow().push(thing);
         return this;
     }
-    temperature(amount) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.TEMPERATURE, amount));
+    temperature(amount, options) {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.TEMPERATURE, amount, options));
     }
     oceans(amount, options) {
         const opts = options ?? { size: Size_1.Size.MEDIUM };
@@ -110,8 +110,8 @@ class Builder {
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.OCEANS, amount, options);
         return this._appendToRow(item);
     }
-    oxygen(amount) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.OXYGEN, amount));
+    oxygen(amount, options) {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.OXYGEN, amount, options));
     }
     venus(amount, options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.VENUS, amount, options));

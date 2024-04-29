@@ -7,7 +7,7 @@ const CardType_1 = require("../../../common/cards/CardType");
 const SelectSpace_1 = require("../../inputs/SelectSpace");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 const GainProduction_1 = require("../../deferredActions/GainProduction");
 const LoseProduction_1 = require("../../deferredActions/LoseProduction");
 const Board_1 = require("../../boards/Board");
@@ -40,7 +40,7 @@ class ImmigrantCity extends Card_1.Card {
     }
     onTilePlaced(cardOwner, activePlayer, space) {
         if (Board_1.Board.isCitySpace(space)) {
-            cardOwner.game.defer(new GainProduction_1.GainProduction(cardOwner, Resource_1.Resource.MEGACREDITS), cardOwner.id !== activePlayer.id ? DeferredAction_1.Priority.OPPONENT_TRIGGER : undefined);
+            cardOwner.game.defer(new GainProduction_1.GainProduction(cardOwner, Resource_1.Resource.MEGACREDITS), cardOwner.id !== activePlayer.id ? Priority_1.Priority.OPPONENT_TRIGGER : undefined);
         }
     }
     bespokePlay(player) {

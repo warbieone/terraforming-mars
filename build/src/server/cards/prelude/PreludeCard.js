@@ -20,6 +20,7 @@ class PreludeCard extends Card_1.Card {
             resourceType: properties.resourceType,
             tilesBuilt: properties.tilesBuilt,
             victoryPoints: properties.victoryPoints,
+            cardDiscount: properties.cardDiscount,
         };
         if (startingMegaCredits !== undefined) {
             obj.startingMegaCredits = startingMegaCredits;

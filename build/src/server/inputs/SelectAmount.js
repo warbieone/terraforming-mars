@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectAmount = void 0;
 const PlayerInput_1 = require("../PlayerInput");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
+const InputError_1 = require("./InputError");
 class SelectAmount extends PlayerInput_1.BasePlayerInput {
     constructor(title, buttonLabel = 'Save', min, max, maxByDefault) {
         super('amount', title);
@@ -23,16 +24,16 @@ class SelectAmount extends PlayerInput_1.BasePlayerInput {
     }
     process(input) {
         if (!(0, InputResponse_1.isSelectAmountResponse)(input)) {
-            throw new Error('Not a valid SelectAmountResponse');
+            throw new InputError_1.InputError('Not a valid SelectAmountResponse');
         }
         if (isNaN(input.amount)) {
-            throw new Error('Amount is not a number');
+            throw new InputError_1.InputError('Amount is not a number');
         }
         if (input.amount > this.max) {
-            throw new Error('Amount provided too high (max ' + String(this.max) + ')');
+            throw new InputError_1.InputError('Amount provided too high (max ' + String(this.max) + ')');
         }
         if (input.amount < this.min) {
-            throw new Error('Amount provided too low (min ' + String(this.min) + ')');
+            throw new InputError_1.InputError('Amount provided too low (min ' + String(this.min) + ')');
         }
         return this.cb(input.amount);
     }

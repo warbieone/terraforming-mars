@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AndOptions = void 0;
 const InputResponse_1 = require("../../common/inputs/InputResponse");
 const OptionsPlayerInput_1 = require("./OptionsPlayerInput");
+const InputError_1 = require("./InputError");
 class AndOptions extends OptionsPlayerInput_1.OptionsInput {
     constructor(...options) {
         super('and', '', options);
@@ -17,10 +18,10 @@ class AndOptions extends OptionsPlayerInput_1.OptionsInput {
     }
     process(input, player) {
         if (!(0, InputResponse_1.isAndOptionsResponse)(input)) {
-            throw new Error('Not a valid AndOptionsResponse');
+            throw new InputError_1.InputError('Not a valid AndOptionsResponse');
         }
         if (input.responses.length !== this.options.length) {
-            throw new Error('Incorrect options provided');
+            throw new InputError_1.InputError('Incorrect options provided');
         }
         for (let i = 0; i < input.responses.length; i++) {
             player.runInput(input.responses[i], this.options[i]);

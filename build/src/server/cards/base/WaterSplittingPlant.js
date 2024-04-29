@@ -29,5 +29,8 @@ class WaterSplittingPlant extends ActionCard_1.ActionCard {
             },
         });
     }
+    bespokeCanAct(player) {
+        return player.canAfford({ cost: 0, tr: { oxygen: 1 } });
+    }
 }
 exports.WaterSplittingPlant = WaterSplittingPlant;

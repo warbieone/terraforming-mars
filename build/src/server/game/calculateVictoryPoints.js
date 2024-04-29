@@ -24,7 +24,7 @@ function calculateVictoryPoints(player) {
     giveAwards(player, victoryPointsBreakdown);
     for (const milestone of player.game.claimedMilestones) {
         if (milestone.player !== undefined && milestone.player.id === player.id) {
-            victoryPointsBreakdown.setVictoryPoints('milestones', 5, 'Claimed ' + milestone.milestone.name + ' milestone');
+            victoryPointsBreakdown.setVictoryPoints('milestones', 5, 'Claimed ${0} milestone', [milestone.milestone.name]);
         }
     }
     player.game.board.spaces.forEach((space) => {
@@ -73,7 +73,7 @@ function calculateVictoryPoints(player) {
 exports.calculateVictoryPoints = calculateVictoryPoints;
 function maybeSetVP(thisPlayer, awardWinner, fundedAward, vps, place, vpb) {
     if (thisPlayer.id === awardWinner.id) {
-        vpb.setVictoryPoints('awards', vps, `${place} place for ${fundedAward.award.name} award (funded by ${fundedAward.player.name})`);
+        vpb.setVictoryPoints('awards', vps, '${0} place for ${1} award (funded by ${2})', [place, fundedAward.award.name, fundedAward.player.name]);
     }
 }
 function giveAwards(player, vpb) {

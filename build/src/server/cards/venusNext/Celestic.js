@@ -7,6 +7,7 @@ const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
+const floaterCards_1 = require("./floaterCards");
 class Celestic extends CorporationCard_1.ActiveCorporationCard {
     constructor() {
         super({
@@ -40,28 +41,9 @@ class Celestic extends CorporationCard_1.ActiveCorporationCard {
     }
     initialAction(player) {
         player.drawCard(2, {
-            include: (card) => Celestic.floaterCards.has(card.name) || card.resourceType === CardResource_1.CardResource.FLOATER,
+            include: (card) => floaterCards_1.floaterCards.has(card.name) || card.resourceType === CardResource_1.CardResource.FLOATER,
         });
         return undefined;
     }
 }
 exports.Celestic = Celestic;
-Celestic.floaterCards = new Set([
-    CardName_1.CardName.AEROSPORT_TOURNAMENT,
-    CardName_1.CardName.AIR_SCRAPPING_EXPEDITION,
-    CardName_1.CardName.ATMOSCOOP,
-    CardName_1.CardName.HYDROGEN_TO_VENUS,
-    CardName_1.CardName.STRATOSPHERIC_BIRDS,
-    CardName_1.CardName.AIRLINERS,
-    CardName_1.CardName.AIR_RAID,
-    CardName_1.CardName.FLOATER_LEASING,
-    CardName_1.CardName.FLOATER_PROTOTYPES,
-    CardName_1.CardName.FLOATER_TECHNOLOGY,
-    CardName_1.CardName.NITROGEN_FROM_TITAN,
-    CardName_1.CardName.CASSINI_STATION,
-    CardName_1.CardName.FLOATER_URBANISM,
-    CardName_1.CardName.NOBEL_LABS,
-    CardName_1.CardName.SECRET_LABS,
-    CardName_1.CardName.VENERA_BASE,
-    CardName_1.CardName.CLOUD_CITY,
-]);

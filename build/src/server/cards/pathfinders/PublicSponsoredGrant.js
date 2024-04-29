@@ -33,7 +33,7 @@ class PublicSponsoredGrant extends Card_1.Card {
         player.drawCard(2, { tag: tag });
     }
     bespokePlay(player) {
-        player.game.getPlayers().forEach((target) => {
+        player.getOpponents().forEach((target) => {
             target.maybeBlockAttack(player, (proceed) => {
                 if (proceed) {
                     target.stock.deduct(Resource_1.Resource.MEGACREDITS, Math.min(target.megaCredits, 2), { log: true, from: player });
@@ -45,6 +45,11 @@ class PublicSponsoredGrant extends Card_1.Card {
         (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.CITY);
         (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.WILD);
         (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.CLONE);
+        (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.EARTH);
+        (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.JOVIAN);
+        (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.VENUS);
+        (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.MOON);
+        (0, utils_1.inplaceRemove)(tags, Tag_1.Tag.MARS);
         const options = tags.map((tag) => {
             return new SelectOption_1.SelectOption(tag).andThen(() => {
                 this.draw2Cards(player, tag);

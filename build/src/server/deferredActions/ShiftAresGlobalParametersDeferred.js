@@ -2,11 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShiftAresGlobalParametersDeferred = void 0;
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const ShiftAresGlobalParameters_1 = require("../inputs/ShiftAresGlobalParameters");
 const AresHandler_1 = require("../ares/AresHandler");
 class ShiftAresGlobalParametersDeferred extends DeferredAction_1.DeferredAction {
     constructor(player) {
-        super(player, DeferredAction_1.Priority.DEFAULT);
+        super(player, Priority_1.Priority.DEFAULT);
     }
     execute() {
         let pi = undefined;

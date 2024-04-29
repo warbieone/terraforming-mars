@@ -14,7 +14,6 @@ class SocialEvents extends Card_1.Card {
             name: CardName_1.CardName.SOCIAL_EVENTS,
             cost: 18,
             tags: [Tag_1.Tag.EARTH, Tag_1.Tag.MARS],
-            tr: ((player) => ({ tr: this.getExpectedTr(player) })),
             metadata: {
                 cardNumber: '...',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
@@ -24,11 +23,13 @@ class SocialEvents extends Card_1.Card {
             },
         });
     }
-    getExpectedTr(player) {
-        return Math.floor((player.tags.count(Tag_1.Tag.MARS) + 1) / 2);
+    computeTr(player) {
+        const expectedTr = Math.floor((player.tags.count(Tag_1.Tag.MARS) + 1) / 2);
+        return { tr: expectedTr };
     }
     bespokePlay(player) {
-        player.increaseTerraformRating(this.getExpectedTr(player), { log: true });
+        const steps = this.computeTr(player).tr;
+        player.increaseTerraformRating(steps, { log: true });
         return undefined;
     }
 }

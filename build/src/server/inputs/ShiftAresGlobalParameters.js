@@ -3,13 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShiftAresGlobalParameters = void 0;
 const PlayerInput_1 = require("../PlayerInput");
 const InputResponse_1 = require("../../common/inputs/InputResponse");
+const InputError_1 = require("./InputError");
 class ShiftAresGlobalParameters extends PlayerInput_1.BasePlayerInput {
     constructor() {
         super('aresGlobalParameters', 'Adjust Ares global parameters up to 1 step.');
     }
     toModel(player) {
         if (player.game.aresData === undefined) {
-            throw new Error('Ares is not defined');
+            throw new InputError_1.InputError('Ares is not defined');
         }
         return {
             title: this.title,
@@ -20,16 +21,16 @@ class ShiftAresGlobalParameters extends PlayerInput_1.BasePlayerInput {
     }
     process(input, _player) {
         if (!(0, InputResponse_1.isShiftAresGlobalParametersResponse)(input)) {
-            throw new Error('Not a valid ShiftAresGlobalParametersResponse');
+            throw new InputError_1.InputError('Not a valid ShiftAresGlobalParametersResponse');
         }
         if (!(0, InputResponse_1.isAresGlobalParametersResponse)(input.response)) {
-            throw new Error('Not a valid ShiftAresGlobalParametersResponse');
+            throw new InputError_1.InputError('Not a valid ShiftAresGlobalParametersResponse');
         }
         if (!this.inRange(input.response.lowOceanDelta) ||
             !this.inRange(input.response.highOceanDelta) ||
             !this.inRange(input.response.temperatureDelta) ||
             !this.inRange(input.response.oxygenDelta)) {
-            throw new Error('values out of range');
+            throw new InputError_1.InputError('values out of range');
         }
         this.cb(input.response);
         return undefined;

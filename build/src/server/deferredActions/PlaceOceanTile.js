@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaceOceanTile = void 0;
 const SelectSpace_1 = require("../inputs/SelectSpace");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const CardName_1 = require("../../common/cards/CardName");
 class PlaceOceanTile extends DeferredAction_1.DeferredAction {
     constructor(player, options = {}) {
-        super(player, DeferredAction_1.Priority.PLACE_OCEAN_TILE);
+        super(player, Priority_1.Priority.PLACE_OCEAN_TILE);
         this.options = options;
     }
     execute() {

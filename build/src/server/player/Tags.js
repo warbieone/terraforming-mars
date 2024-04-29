@@ -61,6 +61,9 @@ class Tags {
                 return true;
             }
         }
+        if (target === Tag_1.Tag.EVENT && card.type === CardType_1.CardType.EVENT) {
+            return true;
+        }
         return false;
     }
     cardTagCount(card, target) {
@@ -95,15 +98,16 @@ class Tags {
         return tagCount;
     }
     multipleCount(tags, mode = 'default') {
+        const includeEvents = this.player.isCorporation(CardName_1.CardName.ODYSSEY);
         let tagCount = 0;
         tags.forEach((tag) => {
-            tagCount += this.rawCount(tag, false);
+            tagCount += this.rawCount(tag, includeEvents);
         });
         if (tags.includes(Tag_1.Tag.EARTH) && !tags.includes(Tag_1.Tag.MOON) && this.player.cardIsInEffect(CardName_1.CardName.EARTH_EMBASSY)) {
-            tagCount += this.rawCount(Tag_1.Tag.MOON, false);
+            tagCount += this.rawCount(Tag_1.Tag.MOON, includeEvents);
         }
         if (mode !== 'award') {
-            tagCount += this.rawCount(Tag_1.Tag.WILD, false);
+            tagCount += this.rawCount(Tag_1.Tag.WILD, includeEvents);
             if (this.player.isCorporation(CardName_1.CardName.CHIMERA) && mode === 'milestone')
                 tagCount--;
         }

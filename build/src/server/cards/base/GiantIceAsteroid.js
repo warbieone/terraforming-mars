@@ -14,7 +14,6 @@ class GiantIceAsteroid extends Card_1.Card {
             name: CardName_1.CardName.GIANT_ICE_ASTEROID,
             tags: [Tag_1.Tag.SPACE],
             cost: 36,
-            tr: { temperature: 2, oceans: 2 },
             behavior: {
                 global: { temperature: 2 },
                 removeAnyPlants: 6,

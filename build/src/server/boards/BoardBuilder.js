@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BoardBuilder = void 0;
-const Space_1 = require("./Space");
+exports.preservingShuffle = exports.BoardBuilder = void 0;
+const Types_1 = require("../../common/Types");
 const SpaceName_1 = require("../SpaceName");
 const SpaceType_1 = require("../../common/boards/SpaceType");
+const shuffle_1 = require("../utils/shuffle");
 function colonySpace(id) {
-    return (0, Space_1.newSpace)(id, SpaceType_1.SpaceType.COLONY, -1, -1, []);
+    return { id, spaceType: SpaceType_1.SpaceType.COLONY, x: -1, y: -1, bonus: [] };
 }
 class BoardBuilder {
     constructor(includeVenus, includePathfinders) {
@@ -15,8 +16,6 @@ class BoardBuilder {
         this.bonuses = [];
         this.spaces = [];
         this.unshufflableSpaces = [];
-        this.spaces.push(colonySpace(SpaceName_1.SpaceName.GANYMEDE_COLONY));
-        this.spaces.push(colonySpace(SpaceName_1.SpaceName.PHOBOS_SPACE_HAVEN));
     }
     ocean(...bonus) {
         this.spaceTypes.push(SpaceType_1.SpaceType.OCEAN);
@@ -43,6 +42,8 @@ class BoardBuilder {
         return this;
     }
     build() {
+        this.spaces.push(colonySpace(SpaceName_1.SpaceName.GANYMEDE_COLONY));
+        this.spaces.push(colonySpace(SpaceName_1.SpaceName.PHOBOS_SPACE_HAVEN));
         const tilesPerRow = [5, 6, 7, 8, 9, 8, 7, 6, 5];
         const idOffset = this.spaces.length + 1;
         let idx = 0;
@@ -52,7 +53,13 @@ class BoardBuilder {
             for (let i = 0; i < tilesInThisRow; i++) {
                 const spaceId = idx + idOffset;
                 const xCoordinate = xOffset + i;
-                const space = (0, Space_1.newSpace)(BoardBuilder.spaceId(spaceId), this.spaceTypes[idx], xCoordinate, row, this.bonuses[idx]);
+                const space = {
+                    id: BoardBuilder.spaceId(spaceId),
+                    spaceType: this.spaceTypes[idx],
+                    x: xCoordinate,
+                    y: row,
+                    bonus: this.bonuses[idx],
+                };
                 this.spaces.push(space);
                 idx++;
             }
@@ -66,43 +73,35 @@ class BoardBuilder {
         }
         return this.spaces;
     }
-    shuffleArray(rng, array) {
-        this.unshufflableSpaces.sort((a, b) => a < b ? a : b);
-        const spliced = this.unshufflableSpaces.reverse().map((idx) => array.splice(idx, 1)[0]).reverse();
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = rng.nextInt(i + 1);
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        for (let idx = 0; idx < this.unshufflableSpaces.length; idx++) {
-            array.splice(this.unshufflableSpaces[idx], 0, spliced[idx]);
-        }
-    }
-    shuffle(rng, ...lands) {
-        this.shuffleArray(rng, this.spaceTypes);
-        this.shuffleArray(rng, this.bonuses);
-        let safety = 0;
-        while (safety < 1000) {
-            let satisfy = true;
-            for (const land of lands) {
-                const land_id = Number(land) - 3;
-                while (this.spaceTypes[land_id] === SpaceType_1.SpaceType.OCEAN) {
-                    satisfy = false;
-                    const idx = rng.nextInt(this.spaceTypes.length);
-                    [this.spaceTypes[land_id], this.spaceTypes[idx]] = [this.spaceTypes[idx], this.spaceTypes[land_id]];
-                }
+    shuffle(rng, ...preservedSpaceIds) {
+        const preservedSpaces = [...this.unshufflableSpaces];
+        for (const spaceId of preservedSpaceIds) {
+            const idx = Number(spaceId) - 3;
+            if (!preservedSpaces.includes(idx)) {
+                preservedSpaces.push(idx);
             }
-            if (satisfy)
-                return;
-            safety++;
         }
-        throw new Error('infinite loop detected');
+        preservedSpaces.sort((a, b) => a - b);
+        preservingShuffle(this.spaceTypes, preservedSpaces, rng);
+        preservingShuffle(this.bonuses, this.unshufflableSpaces, rng);
+        return;
     }
     static spaceId(id) {
         let strId = id.toString();
         if (id < 10) {
             strId = '0' + strId;
         }
-        return strId;
+        return (0, Types_1.safeCast)(strId, Types_1.isSpaceId);
     }
 }
 exports.BoardBuilder = BoardBuilder;
+function preservingShuffle(array, preservedIndexes, rng) {
+    const forward = [...preservedIndexes].sort((a, b) => a - b);
+    const backward = [...forward].reverse();
+    const spliced = backward.map((idx) => array.splice(idx, 1)[0]).reverse();
+    (0, shuffle_1.inplaceShuffle)(array, rng);
+    for (let idx = 0; idx < forward.length; idx++) {
+        array.splice(forward[idx], 0, spliced[idx]);
+    }
+}
+exports.preservingShuffle = preservingShuffle;

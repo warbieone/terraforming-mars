@@ -11,7 +11,6 @@ class LakeMarineris extends Card_1.Card {
             type: CardType_1.CardType.AUTOMATED,
             name: CardName_1.CardName.LAKE_MARINERIS,
             cost: 18,
-            tr: { oceans: 2 },
             requirements: { temperature: 0 },
             victoryPoints: 2,
             behavior: {

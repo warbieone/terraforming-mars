@@ -4,7 +4,7 @@ exports.SponsoredAcademies = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 const DiscardCards_1 = require("../../deferredActions/DiscardCards");
 const CardRenderer_1 = require("../render/CardRenderer");
 const DrawCards_1 = require("../../deferredActions/DrawCards");
@@ -32,8 +32,8 @@ class SponsoredAcademies extends Card_1.Card {
         return player.cardsInHand.length > 1;
     }
     bespokePlay(player) {
-        player.game.defer(new DiscardCards_1.DiscardCards(player), DeferredAction_1.Priority.SPONSORED_ACADEMIES);
-        player.game.defer(DrawCards_1.DrawCards.keepAll(player, 3), DeferredAction_1.Priority.SPONSORED_ACADEMIES);
+        player.game.defer(new DiscardCards_1.DiscardCards(player), Priority_1.Priority.SPONSORED_ACADEMIES);
+        player.game.defer(DrawCards_1.DrawCards.keepAll(player, 3), Priority_1.Priority.SPONSORED_ACADEMIES);
         for (const p of player.getOpponents()) {
             player.game.defer(DrawCards_1.DrawCards.keepAll(p));
         }

@@ -4,11 +4,12 @@ exports.IncreaseColonyTrack = void 0;
 const OrOptions_1 = require("../inputs/OrOptions");
 const SelectOption_1 = require("../inputs/SelectOption");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const LogHelper_1 = require("../LogHelper");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
 class IncreaseColonyTrack extends DeferredAction_1.DeferredAction {
     constructor(player, colony, steps, title = (0, MessageBuilder_1.message)('Increase ${0} colony track before trade', (b) => b.colony(colony))) {
-        super(player, DeferredAction_1.Priority.INCREASE_COLONY_TRACK);
+        super(player, Priority_1.Priority.INCREASE_COLONY_TRACK);
         this.colony = colony;
         this.steps = steps;
         this.title = title;

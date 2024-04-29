@@ -21,9 +21,11 @@ class StandardProjectCard extends Card_1.Card {
     discount(_player) {
         return 0;
     }
-    _discount(player) {
+    adjustedCost(player) {
         const discountFromCards = (0, utils_1.sum)(player.playedCards.map((card) => card.getStandardProjectDiscount?.(player, this) ?? 0));
-        return discountFromCards + this.discount(player);
+        const discount = discountFromCards + this.discount(player);
+        const adjusted = Math.max(0, this.cost - discount);
+        return adjusted;
     }
     onStandardProject(player) {
         for (const playedCard of player.tableau) {
@@ -34,7 +36,7 @@ class StandardProjectCard extends Card_1.Card {
         const canPayWith = this.canPayWith(player);
         return {
             ...canPayWith,
-            cost: this.cost - this._discount(player),
+            cost: this.adjustedCost(player),
             tr: this.tr,
             auroraiData: true,
             spireScience: true,
@@ -53,7 +55,7 @@ class StandardProjectCard extends Card_1.Card {
     }
     action(player) {
         const canPayWith = this.canPayWith(player);
-        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, this.cost - this._discount(player), {
+        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, this.adjustedCost(player), {
             canUseSteel: canPayWith.steel,
             canUseTitanium: canPayWith.titanium,
             canUseSeeds: canPayWith.seeds,

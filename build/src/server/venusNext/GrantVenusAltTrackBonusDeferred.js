@@ -4,11 +4,12 @@ exports.GrantVenusAltTrackBonusDeferred = void 0;
 const OrOptions_1 = require("../inputs/OrOptions");
 const SelectCard_1 = require("../inputs/SelectCard");
 const DeferredAction_1 = require("../deferredActions/DeferredAction");
+const Priority_1 = require("../deferredActions/Priority");
 const SelectResources_1 = require("../inputs/SelectResources");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
 class GrantVenusAltTrackBonusDeferred extends DeferredAction_1.DeferredAction {
     constructor(player, standardResourceCount, wildResource) {
-        super(player, DeferredAction_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
+        super(player, Priority_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
         this.standardResourceCount = standardResourceCount;
         this.wildResource = wildResource;
     }

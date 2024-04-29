@@ -36,7 +36,7 @@ class VictoryPointsBreakdown {
         this.points.total += this.points.planetaryTracks;
         this.points.total += this.points.victoryPoints;
     }
-    setVictoryPoints(key, points, message) {
+    setVictoryPoints(key, points, message, messageArgs) {
         switch (key) {
             case 'terraformRating':
                 this.points.terraformRating += points;
@@ -44,12 +44,12 @@ class VictoryPointsBreakdown {
             case 'milestones':
                 this.points.milestones += points;
                 if (message !== undefined)
-                    this.points.detailsMilestones.push(message + ':' + points);
+                    this.points.detailsMilestones.push({ message: message, victoryPoint: points, messageArgs: messageArgs });
                 break;
             case 'awards':
                 this.points.awards += points;
                 if (message !== undefined)
-                    this.points.detailsAwards.push(message + ':' + points);
+                    this.points.detailsAwards.push({ message: message, victoryPoint: points, messageArgs: messageArgs });
                 break;
             case 'greenery':
                 this.points.greenery += points;

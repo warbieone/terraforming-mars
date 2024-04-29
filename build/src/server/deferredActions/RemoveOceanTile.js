@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RemoveOceanTile = void 0;
 const SelectSpace_1 = require("../inputs/SelectSpace");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const LogHelper_1 = require("../LogHelper");
 class RemoveOceanTile extends DeferredAction_1.DeferredAction {
     constructor(player, title = 'Select an Ocean tile to remove from board') {
-        super(player, DeferredAction_1.Priority.DEFAULT);
+        super(player, Priority_1.Priority.DEFAULT);
         this.title = title;
     }
     execute() {

@@ -55,8 +55,9 @@ class SecretLabs extends Card_1.Card {
             const oceanPlacementAvailable = player.game.board.getOceanSpaces().length < constants_1.MAX_OCEAN_TILES;
             const optionTitle = oceanPlacementAvailable ? 'Place an ocean tile. Add 2 microbes to ANY card.' : 'Add 2 microbes to ANY card.';
             options.options.push(new SelectOption_1.SelectOption(optionTitle).andThen(() => {
-                if (oceanPlacementAvailable)
+                if (oceanPlacementAvailable || player.cardIsInEffect(CardName_1.CardName.WHALES)) {
                     player.game.defer(new PlaceOceanTile_1.PlaceOceanTile(player));
+                }
                 player.game.defer(new AddResourcesToCard_1.AddResourcesToCard(player, CardResource_1.CardResource.MICROBE, { count: 2 }));
                 return undefined;
             }));

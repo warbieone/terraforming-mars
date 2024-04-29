@@ -6,7 +6,7 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
-const DeferredAction_1 = require("../../deferredActions/DeferredAction");
+const Priority_1 = require("../../deferredActions/Priority");
 const AddResourcesToCard_1 = require("../../deferredActions/AddResourcesToCard");
 const Board_1 = require("../../boards/Board");
 const CardRenderer_1 = require("../render/CardRenderer");
@@ -41,7 +41,7 @@ class Pets extends Card_1.Card {
     }
     onTilePlaced(cardOwner, activePlayer, space) {
         if (Board_1.Board.isCitySpace(space)) {
-            cardOwner.game.defer(new AddResourcesToCard_1.AddResourcesToCard(cardOwner, CardResource_1.CardResource.ANIMAL, { filter: (c) => c.name === this.name }), cardOwner.id !== activePlayer.id ? DeferredAction_1.Priority.OPPONENT_TRIGGER : undefined);
+            cardOwner.game.defer(new AddResourcesToCard_1.AddResourcesToCard(cardOwner, CardResource_1.CardResource.ANIMAL, { filter: (c) => c.name === this.name }), cardOwner.id !== activePlayer.id ? Priority_1.Priority.OPPONENT_TRIGGER : undefined);
         }
     }
 }

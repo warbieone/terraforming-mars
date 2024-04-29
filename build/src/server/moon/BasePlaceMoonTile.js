@@ -2,11 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BasePlaceMoonTile = void 0;
 const DeferredAction_1 = require("../deferredActions/DeferredAction");
+const Priority_1 = require("../deferredActions/Priority");
 const SelectSpace_1 = require("../inputs/SelectSpace");
 const MoonExpansion_1 = require("./MoonExpansion");
 class BasePlaceMoonTile extends DeferredAction_1.DeferredAction {
     constructor(player, spaces, title = 'Select a space for a tile') {
-        super(player, DeferredAction_1.Priority.DEFAULT);
+        super(player, Priority_1.Priority.DEFAULT);
         this.spaces = spaces;
         this.title = title;
     }

@@ -20,8 +20,7 @@ class BuildColonyStandardProject extends StandardProjectCard_1.StandardProjectCa
         });
     }
     discount(player) {
-        const adhai = player.getCorporation(CardName_1.CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
-        const adhaiDiscount = Math.floor((adhai?.resourceCount ?? 0) / 2);
+        const adhaiDiscount = Math.floor(player.resourcesOnCard(CardName_1.CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) / 2);
         return adhaiDiscount + super.discount(player);
     }
     getOpenColonies(player) {

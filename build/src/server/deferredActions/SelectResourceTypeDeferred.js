@@ -4,9 +4,10 @@ exports.SelectResourceTypeDeferred = void 0;
 const OrOptions_1 = require("../inputs/OrOptions");
 const SelectOption_1 = require("../inputs/SelectOption");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 class SelectResourceTypeDeferred extends DeferredAction_1.DeferredAction {
     constructor(player, resources, title) {
-        super(player, DeferredAction_1.Priority.DEFAULT);
+        super(player, Priority_1.Priority.DEFAULT);
         this.resources = resources;
         this.title = title;
     }

@@ -134,7 +134,7 @@ class Executor {
                 }
             }
             else {
-                if (game.board.getSpace(behavior.city.space).tile !== undefined) {
+                if (game.board.getSpaceOrThrow(behavior.city.space).tile !== undefined) {
                     return false;
                 }
             }
@@ -159,12 +159,11 @@ class Executor {
                     robotCards: arctac.robotCards !== undefined,
                 });
                 const cards = action.getCards();
-                const count = cards[0].length + cards[1].length;
-                if (count === 0) {
+                if (cards.length === 0) {
                     return false;
                 }
-                if (count === 1 && (behavior.spend?.resourcesHere ?? 0 > 0)) {
-                    if (cards[0][0]?.name === card.name) {
+                if (cards.length === 1 && (behavior.spend?.resourcesHere ?? 0 > 0)) {
+                    if (cards[0]?.name === card.name) {
                         return false;
                     }
                 }
@@ -399,7 +398,7 @@ class Executor {
         }
         if (behavior.city !== undefined) {
             if (behavior.city.space !== undefined) {
-                const space = player.game.board.getSpace(behavior.city.space);
+                const space = player.game.board.getSpaceOrThrow(behavior.city.space);
                 player.game.addCity(player, space);
                 if (space.tile !== undefined) {
                     space.tile.card = card.name;
@@ -549,7 +548,7 @@ class Executor {
             temperature: behavior.global?.temperature,
             oxygen: (behavior.global?.oxygen ?? 0) + (behavior.greenery !== undefined ? 1 : 0),
             venus: behavior.global?.venus,
-            oceans: behavior.ocean !== undefined ? 1 : undefined,
+            oceans: behavior.ocean !== undefined ? (behavior.ocean.count ?? 1) : undefined,
             moonHabitat: (behavior.moon?.habitatRate ?? 0) + (behavior.moon?.habitatTile !== undefined ? 1 : 0),
             moonMining: (behavior.moon?.miningRate ?? 0) + (behavior.moon?.mineTile !== undefined ? 1 : 0),
             moonLogistics: (behavior.moon?.logisticsRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),

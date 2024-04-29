@@ -5,11 +5,12 @@ const Resource_1 = require("../../common/Resource");
 const OrOptions_1 = require("../inputs/OrOptions");
 const SelectOption_1 = require("../inputs/SelectOption");
 const DeferredAction_1 = require("./DeferredAction");
+const Priority_1 = require("./Priority");
 const CardName_1 = require("../../common/cards/CardName");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
 class StealResources extends DeferredAction_1.DeferredAction {
     constructor(player, resource, count = 1, title = (0, MessageBuilder_1.message)('Select player to steal up to ${0} ${1} from', (b) => b.number(count).string(resource))) {
-        super(player, DeferredAction_1.Priority.ATTACK_OPPONENT);
+        super(player, Priority_1.Priority.ATTACK_OPPONENT);
         this.resource = resource;
         this.count = count;
         this.title = title;

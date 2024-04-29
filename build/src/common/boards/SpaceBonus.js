@@ -19,6 +19,8 @@ var SpaceBonus;
     SpaceBonus[SpaceBonus["TEMPERATURE"] = 13] = "TEMPERATURE";
     SpaceBonus[SpaceBonus["_RESTRICTED"] = 14] = "_RESTRICTED";
     SpaceBonus[SpaceBonus["ASTEROID"] = 15] = "ASTEROID";
+    SpaceBonus[SpaceBonus["DELEGATE"] = 16] = "DELEGATE";
+    SpaceBonus[SpaceBonus["COLONY"] = 17] = "COLONY";
 })(SpaceBonus = exports.SpaceBonus || (exports.SpaceBonus = {}));
 const TO_STRING_MAP = {
     [SpaceBonus.TITANIUM]: 'Titanium',
@@ -37,6 +39,8 @@ const TO_STRING_MAP = {
     [SpaceBonus.TEMPERATURE]: 'Temperature',
     [SpaceBonus._RESTRICTED]: 'UNUSED',
     [SpaceBonus.ASTEROID]: 'Asteroid',
+    [SpaceBonus.DELEGATE]: 'Delegate',
+    [SpaceBonus.COLONY]: 'Colony',
 };
 (function (SpaceBonus) {
     function toString(spaceBonus) {
