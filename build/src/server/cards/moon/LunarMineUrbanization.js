@@ -22,11 +22,12 @@ class LunarMineUrbanization extends Card_1.Card {
             requirements: { miningTiles: 1 },
             tr: { moonHabitat: 1 },
             metadata: {
-                description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles ' +
-                    'with this special tile. Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.',
-                cardNumber: 'M55',
+                description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. ' +
+                    'Remove 1 of your mine tiles (does not affect the mining rate.) ' +
+                    'Place this special tile there, regardless of placement rules. ' +
+                    'Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => pb.megacredits(1)).br;
+                    b.production((pb) => pb.megacredits(1));
                     b.moonHabitatRate();
                     b.tile(TileType_1.TileType.LUNAR_MINE_URBANIZATION, true).asterix();
                 }),
@@ -44,8 +45,9 @@ class LunarMineUrbanization extends Card_1.Card {
             if (space.tile === undefined) {
                 throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
             }
-            space.tile.tileType = TileType_1.TileType.LUNAR_MINE_URBANIZATION;
-            space.tile.card = this.name;
+            space.tile = undefined;
+            space.player = undefined;
+            MoonExpansion_1.MoonExpansion.addTile(player, space.id, { tileType: TileType_1.TileType.LUNAR_MINE_URBANIZATION, card: this.name });
             MoonExpansion_1.MoonExpansion.raiseHabitatRate(player);
             return undefined;
         });

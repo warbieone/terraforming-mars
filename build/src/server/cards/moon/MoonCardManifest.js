@@ -81,7 +81,7 @@ const MoonRoadStandardProject_1 = require("./MoonRoadStandardProject");
 const MoonStandardProjectVariants_3 = require("./MoonStandardProjectVariants");
 const MoonTether_1 = require("./MoonTether");
 const NanotechIndustries_1 = require("./NanotechIndustries");
-const NewColonyPlanningInitiaitives_1 = require("./NewColonyPlanningInitiaitives");
+const NewColonyPlanningInitiatives_1 = require("./NewColonyPlanningInitiatives");
 const OffWorldCityLiving_1 = require("./OffWorldCityLiving");
 const PreliminaryDarkside_1 = require("./PreliminaryDarkside");
 const OrbitalPowerGrid_1 = require("./OrbitalPowerGrid");
@@ -91,7 +91,7 @@ const RevoltingColonists_1 = require("./RevoltingColonists");
 const RoadPiracy_1 = require("./RoadPiracy");
 const RoverDriversUnion_1 = require("./RoverDriversUnion");
 const RustEatingBacteria_1 = require("./RustEatingBacteria");
-const SinusIridiumRoadNetwork_1 = require("./SinusIridiumRoadNetwork");
+const SinusIrdiumRoadNetwork_1 = require("./SinusIrdiumRoadNetwork");
 const SmallDutyRovers_1 = require("./SmallDutyRovers");
 const SolarPanelFoundry_1 = require("./SolarPanelFoundry");
 const SphereHabitats_1 = require("./SphereHabitats");
@@ -125,7 +125,7 @@ exports.MOON_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.THE_WOMB]: { Factory: TheWomb_1.TheWomb },
         [CardName_1.CardName.TYCHO_ROAD_NETWORK]: { Factory: TychoRoadNetwork_1.TychoRoadNetwork },
         [CardName_1.CardName.ARISTARCHUS_ROAD_NETWORK]: { Factory: AristarchusRoadNetwork_1.AristarchusRoadNetwork },
-        [CardName_1.CardName.SINUS_IRIDIUM_ROAD_NETWORK]: { Factory: SinusIridiumRoadNetwork_1.SinusIridiumRoadNetwork },
+        [CardName_1.CardName.SINUS_IRDIUM_ROAD_NETWORK]: { Factory: SinusIrdiumRoadNetwork_1.SinusIrdiumRoadNetwork },
         [CardName_1.CardName.MOMENTUM_VIRUM_HABITAT]: { Factory: MomentumViriumHabitat_1.MomentumViriumHabitat },
         [CardName_1.CardName.LUNA_TRADE_STATION]: { Factory: LunaTradeStation_1.LunaTradeStation },
         [CardName_1.CardName.LUNA_MINING_HUB]: { Factory: LunaMiningHub_1.LunaMiningHub },
@@ -145,7 +145,7 @@ exports.MOON_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.STEEL_MARKET_MONOPOLISTS]: { Factory: SteelMarketMonopolists_1.SteelMarketMonopolists },
         [CardName_1.CardName.TITANIUM_MARKET_MONOPOLISTS]: { Factory: TitaniumMarketMonopolists_1.TitaniumMarketMonopolists },
         [CardName_1.CardName.LUNA_STAGING_STATION]: { Factory: LunaStagingStation_1.LunaStagingStation },
-        [CardName_1.CardName.NEW_COLONY_PLANNING_INITIAITIVES]: { Factory: NewColonyPlanningInitiaitives_1.NewColonyPlanningInitiaitives },
+        [CardName_1.CardName.NEW_COLONY_PLANNING_INITIAITIVES]: { Factory: NewColonyPlanningInitiatives_1.NewColonyPlanningInitiatives },
         [CardName_1.CardName.AI_CONTROLLED_MINE_NETWORK]: { Factory: AIControlledMineNetwork_1.AIControlledMineNetwork },
         [CardName_1.CardName.DARKSIDE_METEOR_BOMBARDMENT]: { Factory: DarksideMeteorBombardment_1.DarksideMeteorBombardment },
         [CardName_1.CardName.UNDERGROUND_DETONATORS]: { Factory: UndergroundDetonators_1.UndergroundDetonators },

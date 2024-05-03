@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Colony = exports.ShouldIncreaseTrack = void 0;
 const AddResourcesToCard_1 = require("../deferredActions/AddResourcesToCard");
-const CardName_1 = require("../../common/cards/CardName");
 const ColonyBenefit_1 = require("../../common/colonies/ColonyBenefit");
 const DeferredAction_1 = require("../deferredActions/DeferredAction");
 const Priority_1 = require("../deferredActions/Priority");
@@ -73,17 +72,10 @@ class Colony {
         if (this.trackPosition < this.colonies.length) {
             this.trackPosition = this.colonies.length;
         }
-        const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName_1.CardName.POSEIDON));
-        if (poseidon !== undefined && poseidon === player) {
-            poseidon.production.add(Resource_1.Resource.MEGACREDITS, 2);
-        }
-        if (player.cardIsInEffect(CardName_1.CardName.NAOMI)) {
-            player.stock.add(Resource_1.Resource.ENERGY, 2, { log: true });
-            player.stock.add(Resource_1.Resource.MEGACREDITS, 3, { log: true });
-        }
-        const colonyTradeHub = player.game.getPlayers().find((player) => player.cardIsInEffect(CardName_1.CardName.COLONY_TRADE_HUB));
-        if (colonyTradeHub !== undefined) {
-            colonyTradeHub.stock.add(Resource_1.Resource.MEGACREDITS, 2, { log: true });
+        for (const cardOwner of player.game.getPlayers()) {
+            for (const card of cardOwner.tableau) {
+                card.onColonyAdded?.(player, cardOwner);
+            }
         }
     }
     trade(player, tradeOptions = {}, bonusTradeOffset = 0) {

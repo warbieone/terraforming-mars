@@ -121,7 +121,6 @@ class Player {
         this.ceoCardsInHand = [];
         this.playedCards = [];
         this.draftedCards = [];
-        this.draftedCorporations = [];
         this.cardCost = constants.CARD_COST;
         this.timer = Timer_1.Timer.newInstance();
         this.turmoilPolicyActionUsed = false;
@@ -511,12 +510,12 @@ class Player {
     dealForDraft(quantity, cards) {
         cards.push(...this.game.projectDeck.drawN(this.game, quantity, 'bottom'));
     }
-    askPlayerToDraft(initialDraft, passTo, passedCards) {
+    askPlayerToDraft(type, passTo, passedCards) {
         let cardsToDraw = 4;
         let cardsToKeep = 1;
         let cards = [];
         if (passedCards === undefined) {
-            if (initialDraft) {
+            if (type === 'initial') {
                 cardsToDraw = 5;
             }
             else {
@@ -543,7 +542,7 @@ class Player {
                 this.draftedCards.push(card);
                 cards = cards.filter((c) => c !== card);
             });
-            this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
+            this.game.playerIsFinishedWithDraftingPhase(type, this, cards);
             return undefined;
         }));
     }
@@ -706,6 +705,7 @@ class Player {
             const card = this.playedCards.find((card) => card.name === CardName_1.CardName.SELF_REPLICATING_ROBOTS);
             if (card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots) {
                 (0, utils_1.inplaceRemove)(card.targetCards, selectedCard);
+                selectedCard.resourceCount = 0;
             }
         }
         switch (cardAction) {

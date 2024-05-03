@@ -4,6 +4,7 @@ exports.Poseidon = void 0;
 const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
+const Resource_1 = require("../../../common/Resource");
 class Poseidon extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -20,13 +21,18 @@ class Poseidon extends CorporationCard_1.CorporationCard {
                     b.br.br;
                     b.megacredits(45).nbsp.colonies(1);
                     b.corpBox('effect', (ce) => {
-                        ce.effect('When you place a colony, including this, raise your M€ production 2 step.', (eb) => {
-                            eb.colonies(1).startEffect.production((pb) => pb.megacredits(2));
+                        ce.effect('When anyone plays a colony, including this, raise your M€ production 1 step.', (eb) => {
+                            eb.colonies(1).startEffect.production((pb) => pb.megacredits(1));
                         });
                     });
                 }),
             },
         });
+    }
+    onColonyAdded(player, cardOwner) {
+        if (player === cardOwner) {
+            player.production.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
+        }
     }
 }
 exports.Poseidon = Poseidon;

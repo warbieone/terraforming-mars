@@ -8,6 +8,7 @@ const constants_1 = require("../../../common/constants");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const ColoniesHandler_1 = require("../../colonies/ColoniesHandler");
+const Resource_1 = require("../../../common/Resource");
 class Naomi extends CeoCard_1.CeoCard {
     constructor() {
         super({
@@ -41,6 +42,12 @@ class Naomi extends CeoCard_1.CeoCard {
             })));
         });
         return undefined;
+    }
+    onColonyAdded(player, cardOwner) {
+        if (player === cardOwner) {
+            player.stock.add(Resource_1.Resource.ENERGY, 2, { log: true });
+            player.stock.add(Resource_1.Resource.MEGACREDITS, 3, { log: true });
+        }
     }
 }
 exports.Naomi = Naomi;

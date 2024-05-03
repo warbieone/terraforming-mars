@@ -52,7 +52,7 @@ class SelfReplicatingRobots extends Card_1.Card {
             }));
         }
         if (selectableCards.length > 0) {
-            orOptions.options.push(new SelectCard_1.SelectCard('Select card to link with Self-Replicating Robots', 'Link card', selectableCards, { played: CardName_1.CardName.SELF_REPLICATING_ROBOTS }).andThen(([card]) => {
+            orOptions.options.push(new SelectCard_1.SelectCard('Select card to link with Self-replicating Robots', 'Link card', selectableCards, { played: CardName_1.CardName.SELF_REPLICATING_ROBOTS }).andThen(([card]) => {
                 const projectCardIndex = player.cardsInHand.findIndex((c) => c.name === card.name);
                 player.cardsInHand.splice(projectCardIndex, 1);
                 this.targetCards.push(card);

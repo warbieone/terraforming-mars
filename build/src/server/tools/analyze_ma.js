@@ -89,6 +89,7 @@ function simpleGameOptions() {
         aresHazards: false,
         corporateEra: false,
         initialDraftVariant: false,
+        preludeDraftVariant: false,
         showTimers: false,
         startingCorporations: 0,
         boardName: BoardName_1.BoardName.THARSIS,

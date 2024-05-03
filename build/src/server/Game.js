@@ -154,6 +154,7 @@ class Game {
         if (players.length === 1) {
             gameOptions.draftVariant = false;
             gameOptions.initialDraftVariant = false;
+            gameOptions.preludeDraftVariant = false;
             gameOptions.randomMA = RandomMAOptionType_1.RandomMAOptionType.NONE;
             players[0].setTerraformRating(14);
         }
@@ -209,16 +210,15 @@ class Game {
             if (!player.beginner ||
                 gameOptions.ceoExtension ||
                 gameOptions.preludeExtension ||
+                gameOptions.prelude2Expansion ||
                 gameOptions.venusNextExtension ||
                 gameOptions.coloniesExtension ||
                 gameOptions.turmoilExtension ||
                 gameOptions.initialDraftVariant ||
-                gameOptions.ceoExtension) {
-                if (player.name !== 'Owen T' && player.name !== 'Laura T' && player.name !== 'Joel T') {
-                    for (let i = 0; i < gameOptions.startingCorporations; i++) {
-                        player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
-                    }
-                }
+                gameOptions.preludeDraftVariant ||
+                gameOptions.underworldExpansion ||
+                gameOptions.moonExpansion) {
+                player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
                 if (gameOptions.initialDraftVariant === false) {
                     player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
                 }
@@ -246,7 +246,7 @@ class Game {
     gotoInitialPhase() {
         if (this.gameOptions.initialDraftVariant) {
             this.phase = Phase_1.Phase.INITIALDRAFTING;
-            this.runDraftRound(true, false);
+            this.runDraftRound('initial');
         }
         else {
             this.gotoInitialResearchPhase();
@@ -454,22 +454,22 @@ class Game {
         }
         this.first = newFirstPlayer;
     }
-    runDraftRound(initialDraft = false, preludeDraft = false) {
+    runDraftRound(type = 'standard') {
         this.save();
         this.draftedPlayers.clear();
         this.players.forEach((player) => {
             player.needsToDraft = true;
-            if (this.draftRound === 1 && !preludeDraft) {
-                player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player));
+            if (this.draftRound === 1 && type !== 'prelude') {
+                player.askPlayerToDraft(type, this.giveDraftCardsTo(player));
             }
-            else if (this.draftRound === 1 && preludeDraft) {
-                player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player), player.dealtPreludeCards);
+            else if (this.draftRound === 1 && type === 'prelude') {
+                player.askPlayerToDraft(type, this.giveDraftCardsTo(player), player.dealtPreludeCards);
             }
             else {
                 const draftCardsFrom = this.getDraftCardsFrom(player).id;
                 const cards = this.unDraftedCards.get(draftCardsFrom);
                 this.unDraftedCards.delete(draftCardsFrom);
-                player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player), cards);
+                player.askPlayerToDraft(type, this.giveDraftCardsTo(player), cards);
             }
         });
     }
@@ -653,7 +653,7 @@ class Game {
             }
         });
     }
-    playerIsFinishedWithDraftingPhase(initialDraft, player, cards) {
+    playerIsFinishedWithDraftingPhase(type, player, cards) {
         this.draftedPlayers.add(player.id);
         this.unDraftedCards.set(player.id, cards);
         player.needsToDraft = false;
@@ -662,7 +662,7 @@ class Game {
         }
         if (cards.length > 1) {
             this.draftRound++;
-            this.runDraftRound(initialDraft);
+            this.runDraftRound(type);
             return;
         }
         this.players.forEach((player) => {
@@ -671,30 +671,28 @@ class Game {
                 player.draftedCards.push(...lastCards);
             }
             player.needsToDraft = undefined;
-            if (initialDraft) {
-                if (this.initialDraftIteration === 2) {
-                    player.dealtProjectCards = player.draftedCards;
-                    player.draftedCards = [];
-                }
-                else if (this.initialDraftIteration === 3) {
-                    player.dealtPreludeCards = player.draftedCards;
-                    player.draftedCards = [];
-                }
+            if (type === 'initial' && this.initialDraftIteration === 2) {
+                player.dealtProjectCards = player.draftedCards;
+                player.draftedCards = [];
+            }
+            else if (type === 'prelude' && this.initialDraftIteration === 3) {
+                player.dealtPreludeCards = player.draftedCards;
+                player.draftedCards = [];
             }
         });
-        if (initialDraft === false) {
+        if (type === 'standard') {
             this.gotoResearchPhase();
             return;
         }
         if (this.initialDraftIteration === 1) {
             this.initialDraftIteration++;
             this.draftRound = 1;
-            this.runDraftRound(true);
+            this.runDraftRound('initial');
         }
-        else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension) {
+        else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension && this.gameOptions.preludeDraftVariant) {
             this.initialDraftIteration++;
             this.draftRound = 1;
-            this.runDraftRound(true, true);
+            this.runDraftRound('prelude');
         }
         else {
             this.gotoInitialResearchPhase();
@@ -1292,10 +1290,10 @@ class Game {
         if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
             if (game.phase === Phase_1.Phase.INITIALDRAFTING) {
                 if (game.initialDraftIteration === 3) {
-                    game.runDraftRound(true, true);
+                    game.runDraftRound('prelude');
                 }
                 else {
-                    game.runDraftRound(true);
+                    game.runDraftRound('initial');
                 }
             }
             else {

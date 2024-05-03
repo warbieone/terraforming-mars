@@ -4,6 +4,7 @@ exports.AddResourcesToCard = void 0;
 const SelectCard_1 = require("../inputs/SelectCard");
 const DeferredAction_1 = require("./DeferredAction");
 const Priority_1 = require("./Priority");
+const MessageBuilder_1 = require("../logs/MessageBuilder");
 class AddResourcesToCard extends DeferredAction_1.DeferredAction {
     constructor(player, resourceType, options = {}) {
         super(player, Priority_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
@@ -58,7 +59,11 @@ class AddResourcesToCard extends DeferredAction_1.DeferredAction {
             this.addResource(cards[0], qty);
             return undefined;
         }
-        return new SelectCard_1.SelectCard('Select card to add resource', 'Add resource', cards)
+        const count = this.options.count ?? 1;
+        const title = this.options.title ??
+            (0, MessageBuilder_1.message)('Select card to add ${0} ${1}', (b) => b.number(count).string(this.resourceType || 'resources'));
+        const buttonLabel = count === 1 ? 'Add resource' : 'Add resources';
+        return new SelectCard_1.SelectCard(title, buttonLabel, cards)
             .andThen(([card]) => {
             this.addResource(card, qty);
             return undefined;
