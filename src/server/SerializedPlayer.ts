@@ -12,6 +12,8 @@ export interface SerializedPlayer extends DeprecatedFields{
     actionsTakenThisGame: number;
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<CardName>;
+    // TODO(kberg): remove ? by 2024-10-01
+    autoPass?: boolean;
     beginner: boolean;
     canUseCorruptionAsMegacredits: boolean;
     canUseHeatAsMegaCredits: boolean;
@@ -30,6 +32,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     dealtPreludeCards: Array<CardName>;
     dealtProjectCards: Array<CardName>;
     draftedCards: Array<CardName>;
+    draftHand: Array<CardName>,
     energy: number;
     energyProduction: number;
     fleetSize: number;

@@ -92,7 +92,7 @@ export class Server {
     const thisPlayerIndex = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
 
-    return {
+    const rv: PlayerViewModel = {
       cardsInHand: cardsToModel(player, player.cardsInHand, {showCalculatedCost: true}),
       ceoCardsInHand: cardsToModel(player, player.ceoCardsInHand),
       dealtCorporationCards: cardsToModel(player, player.dealtCorporationCards),
@@ -108,7 +108,9 @@ export class Server {
       thisPlayer: thisPlayer,
       waitingFor: this.getWaitingFor(player, player.getWaitingFor()),
       players: players,
+      autopass: player.autopass,
     };
+    return rv;
   }
 
   public static getSpectatorModel(game: IGame): SpectatorModel {
