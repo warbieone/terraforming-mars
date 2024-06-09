@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlayerInput = void 0;
-const responses = require("./responses");
+const responses = require("../server/responses");
 const ServerModel_1 = require("../models/ServerModel");
 const Handler_1 = require("./Handler");
 const OrOptions_1 = require("../inputs/OrOptions");
@@ -12,9 +12,6 @@ const AppError_1 = require("../server/AppError");
 const statusCode_1 = require("../../common/http/statusCode");
 const InputError_1 = require("../inputs/InputError");
 class PlayerInput extends Handler_1.Handler {
-    constructor() {
-        super();
-    }
     async post(req, res, ctx) {
         const playerId = ctx.url.searchParams.get('id');
         if (playerId === null) {

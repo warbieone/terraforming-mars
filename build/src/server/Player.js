@@ -33,12 +33,11 @@ const Units_1 = require("../common/Units");
 const MoonExpansion_1 = require("./moon/MoonExpansion");
 const ConvertPlants_1 = require("./cards/base/standardActions/ConvertPlants");
 const ConvertHeat_1 = require("./cards/base/standardActions/ConvertHeat");
-const LunaProjectOffice_1 = require("./cards/moon/LunaProjectOffice");
 const LogHelper_1 = require("./LogHelper");
 const UndoActionOption_1 = require("./inputs/UndoActionOption");
 const Turmoil_1 = require("./turmoil/Turmoil");
 const PathfindersExpansion_1 = require("./pathfinders/PathfindersExpansion");
-const CardSerialization_1 = require("./cards/CardSerialization");
+const cardSerialization_1 = require("./cards/cardSerialization");
 const ColoniesHandler_1 = require("./colonies/ColoniesHandler");
 const Tags_1 = require("./player/Tags");
 const Colonies_1 = require("./player/Colonies");
@@ -57,6 +56,7 @@ const PreludesExpansion_1 = require("./preludes/PreludesExpansion");
 const ChooseCards_1 = require("./deferredActions/ChooseCards");
 const UnderworldExpansion_1 = require("./underworld/UnderworldExpansion");
 const Counter_1 = require("./behavior/Counter");
+const Draft_1 = require("./Draft");
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 class Player {
     get megaCredits() {
@@ -121,8 +121,10 @@ class Player {
         this.ceoCardsInHand = [];
         this.playedCards = [];
         this.draftedCards = [];
+        this.draftHand = [];
         this.cardCost = constants.CARD_COST;
         this.timer = Timer_1.Timer.newInstance();
+        this.autopass = false;
         this.turmoilPolicyActionUsed = false;
         this.politicalAgendasActionUsedCount = 0;
         this.oceanBonus = constants.OCEAN_BONUS;
@@ -507,45 +509,6 @@ class Player {
             this.doneWorldGovernmentTerraforming();
         });
     }
-    dealForDraft(quantity, cards) {
-        cards.push(...this.game.projectDeck.drawN(this.game, quantity, 'bottom'));
-    }
-    askPlayerToDraft(type, passTo, passedCards) {
-        let cardsToDraw = 4;
-        let cardsToKeep = 1;
-        let cards = [];
-        if (passedCards === undefined) {
-            if (type === 'initial') {
-                cardsToDraw = 5;
-            }
-            else {
-                if (LunaProjectOffice_1.LunaProjectOffice.isActive(this)) {
-                    cardsToDraw = 5;
-                    cardsToKeep = 2;
-                }
-                if (this.isCorporation(CardName_1.CardName.MARS_MATHS)) {
-                    cardsToDraw = 5;
-                    cardsToKeep = 2;
-                }
-            }
-            this.dealForDraft(cardsToDraw, cards);
-        }
-        else {
-            cards = passedCards;
-        }
-        const messageTitle = cardsToKeep === 1 ?
-            'Select a card to keep and pass the rest to ${0}' :
-            'Select two cards to keep and pass the rest to ${0}';
-        this.setWaitingFor(new SelectCard_1.SelectCard((0, MessageBuilder_1.message)(messageTitle, (b) => b.player(passTo)), 'Keep', cards, { min: cardsToKeep, max: cardsToKeep, played: false })
-            .andThen((selected) => {
-            selected.forEach((card) => {
-                this.draftedCards.push(card);
-                cards = cards.filter((c) => c !== card);
-            });
-            this.game.playerIsFinishedWithDraftingPhase(type, this, cards);
-            return undefined;
-        }));
-    }
     spendableMegacredits() {
         let total = this.megaCredits;
         if (this.canUseHeatAsMegaCredits)
@@ -554,27 +517,15 @@ class Player {
             total += this.titanium * (this.titaniumValue - 1);
         return total;
     }
-    runResearchPhase(draftVariant) {
-        let dealtCards = [];
-        if (draftVariant) {
-            dealtCards = this.draftedCards;
-            this.draftedCards = [];
+    runResearchPhase() {
+        if (!this.game.gameOptions.draftVariant || this.game.isSoloMode()) {
+            this.draftedCards = (0, Draft_1.newStandardDraft)(this.game).draw(this);
         }
-        else {
-            let cardsToDraw = 4;
-            if (this.isCorporation(CardName_1.CardName.MARS_MATHS)) {
-                cardsToDraw = 5;
-            }
-            if (LunaProjectOffice_1.LunaProjectOffice.isActive(this)) {
-                cardsToDraw = 5;
-            }
-            this.dealForDraft(cardsToDraw, dealtCards);
+        let selectable = this.draftedCards.length;
+        if (this.isCorporation(CardName_1.CardName.MARS_MATHS) && !this.isCorporation(CardName_1.CardName.LUNA_PROJECT_OFFICE)) {
+            selectable--;
         }
-        let cardsToKeep = 4;
-        if (LunaProjectOffice_1.LunaProjectOffice.isActive(this)) {
-            cardsToKeep = 5;
-        }
-        const action = new ChooseCards_1.ChooseCards(this, dealtCards, { paying: true, keepMax: cardsToKeep }).execute();
+        const action = new ChooseCards_1.ChooseCards(this, (0, utils_1.copyAndClear)(this.draftedCards), { paying: true, keepMax: selectable }).execute();
         this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
     }
     getCardCost(card) {
@@ -702,10 +653,11 @@ class Player {
             else if (preludeCardIndex !== -1) {
                 this.preludeCardsInHand.splice(preludeCardIndex, 1);
             }
-            const card = this.playedCards.find((card) => card.name === CardName_1.CardName.SELF_REPLICATING_ROBOTS);
-            if (card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots) {
-                (0, utils_1.inplaceRemove)(card.targetCards, selectedCard);
-                selectedCard.resourceCount = 0;
+            const selfReplicatingRobots = this.playedCards.find((card) => card.name === CardName_1.CardName.SELF_REPLICATING_ROBOTS);
+            if (selfReplicatingRobots instanceof SelfReplicatingRobots_1.SelfReplicatingRobots) {
+                if ((0, utils_1.inplaceRemove)(selfReplicatingRobots.targetCards, selectedCard)) {
+                    selectedCard.resourceCount = 0;
+                }
             }
         }
         switch (cardAction) {
@@ -926,6 +878,7 @@ class Player {
     pass() {
         this.game.playerHasPassed(this);
         this.lastCardPlayed = undefined;
+        this.autopass = false;
         this.game.log('${0} passed', (b) => b.player(this));
     }
     passOption() {
@@ -1172,6 +1125,9 @@ class Player {
         }
         if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption)
             game.save();
+        if (this.autopass) {
+            this.passOption().cb();
+        }
         const headStartIsInEffect = this.headStartIsInEffect();
         if (!headStartIsInEffect) {
             if (this.preludeCardsInHand.length > 0) {
@@ -1439,7 +1395,7 @@ class Player {
             cardsInHand: this.cardsInHand.map((c) => c.name),
             preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
             ceoCardsInHand: this.ceoCardsInHand.map((c) => c.name),
-            playedCards: this.playedCards.map(CardSerialization_1.serializeProjectCard),
+            playedCards: this.playedCards.map(cardSerialization_1.serializeProjectCard),
             draftedCards: this.draftedCards.map((c) => c.name),
             cardCost: this.cardCost,
             needsToDraft: this.needsToDraft,
@@ -1466,6 +1422,8 @@ class Player {
             victoryPointsByGeneration: this.victoryPointsByGeneration,
             totalDelegatesPlaced: this.totalDelegatesPlaced,
             underworldData: this.underworldData,
+            draftHand: this.draftHand.map((c) => c.name),
+            autoPass: this.autopass,
         };
         if (this.lastCardPlayed !== undefined) {
             result.lastCardPlayed = this.lastCardPlayed;
@@ -1479,6 +1437,7 @@ class Player {
         player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
         player.canUsePlantsAsMegacredits = d.canUsePlantsAsMegaCredits;
         player.canUseTitaniumAsMegacredits = d.canUseTitaniumAsMegacredits;
+        player.canUseCorruptionAsMegacredits = d.canUseCorruptionAsMegacredits;
         player.cardCost = d.cardCost;
         player.colonies.cardDiscount = d.cardDiscount;
         player.colonies.tradeDiscount = d.colonyTradeDiscount;
@@ -1542,12 +1501,14 @@ class Player {
         player.cardsInHand = (0, createCard_1.cardsFromJSON)(d.cardsInHand);
         player.preludeCardsInHand = (0, createCard_1.cardsFromJSON)(d.preludeCardsInHand);
         player.ceoCardsInHand = (0, createCard_1.ceosFromJSON)(d.ceoCardsInHand);
-        player.playedCards = d.playedCards.map((element) => (0, CardSerialization_1.deserializeProjectCard)(element));
+        player.playedCards = d.playedCards.map((element) => (0, cardSerialization_1.deserializeProjectCard)(element));
         player.draftedCards = (0, createCard_1.cardsFromJSON)(d.draftedCards);
+        player.autopass = d.autoPass ?? false;
         player.timer = Timer_1.Timer.deserialize(d.timer);
         if (d.underworldData !== undefined) {
             player.underworldData = d.underworldData;
         }
+        player.draftHand = (0, createCard_1.cardsFromJSON)(d.draftHand);
         return player;
     }
     getOpponents() {

@@ -42,7 +42,7 @@ class VastitasBorealisBoard extends MarsBoard_1.MarsBoard {
         const costs = super.spaceCosts(space);
         if (space.id === SpaceName_1.SpaceName.VASTITAS_BOREALIS_NORTH_POLE) {
             costs.stock.megacredits = constants_1.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST;
-            costs.tr.oceans = 1;
+            costs.tr.temperature = 1;
         }
         return costs;
     }

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiCloneableGame = void 0;
-const responses = require("./responses");
+const responses = require("../server/responses");
 const Handler_1 = require("./Handler");
 const Database_1 = require("../database/Database");
 const Types_1 = require("../../common/Types");

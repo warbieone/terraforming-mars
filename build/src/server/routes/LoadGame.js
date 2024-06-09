@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoadGame = void 0;
-const responses = require("./responses");
+const responses = require("../server/responses");
 const Database_1 = require("../database/Database");
 const GameLoader_1 = require("../database/GameLoader");
 const ServerModel_1 = require("../models/ServerModel");

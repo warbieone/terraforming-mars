@@ -56,6 +56,7 @@ const UnderworldExpansion_1 = require("./underworld/UnderworldExpansion");
 const SpaceType_1 = require("../common/boards/SpaceType");
 const SendDelegateToArea_1 = require("./deferredActions/SendDelegateToArea");
 const BuildColony_1 = require("./deferredActions/BuildColony");
+const Draft_1 = require("./Draft");
 class Game {
     constructor(id, players, first, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck) {
         this.lastSaveId = 0;
@@ -75,10 +76,8 @@ class Game {
         this.donePlayers = new Set();
         this.passedPlayers = new Set();
         this.researchedPlayers = new Set();
-        this.draftedPlayers = new Set();
         this.draftRound = 1;
         this.initialDraftIteration = 1;
-        this.unDraftedCards = new Map();
         this.claimedMilestones = [];
         this.milestones = [];
         this.fundedAwards = [];
@@ -246,7 +245,7 @@ class Game {
     gotoInitialPhase() {
         if (this.gameOptions.initialDraftVariant) {
             this.phase = Phase_1.Phase.INITIALDRAFTING;
-            this.runDraftRound('initial');
+            (0, Draft_1.newInitialDraft)(this).startDraft();
         }
         else {
             this.gotoInitialResearchPhase();
@@ -272,7 +271,6 @@ class Game {
             currentSeed: this.rng.current,
             deferredActions: [],
             donePlayers: Array.from(this.donePlayers),
-            draftedPlayers: Array.from(this.draftedPlayers),
             draftRound: this.draftRound,
             first: this.first.id,
             fundedAwards: (0, FundedAward_1.serializeFundedAwards)(this.fundedAwards),
@@ -305,12 +303,6 @@ class Game {
             tradeEmbargo: this.tradeEmbargo,
             underworldData: this.underworldData,
             undoCount: this.undoCount,
-            unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
-                return [
-                    a[0],
-                    a[1].map((c) => c.name),
-                ];
-            }),
             venusScaleLevel: this.venusScaleLevel,
         };
         if (this.aresData !== undefined) {
@@ -454,25 +446,6 @@ class Game {
         }
         this.first = newFirstPlayer;
     }
-    runDraftRound(type = 'standard') {
-        this.save();
-        this.draftedPlayers.clear();
-        this.players.forEach((player) => {
-            player.needsToDraft = true;
-            if (this.draftRound === 1 && type !== 'prelude') {
-                player.askPlayerToDraft(type, this.giveDraftCardsTo(player));
-            }
-            else if (this.draftRound === 1 && type === 'prelude') {
-                player.askPlayerToDraft(type, this.giveDraftCardsTo(player), player.dealtPreludeCards);
-            }
-            else {
-                const draftCardsFrom = this.getDraftCardsFrom(player).id;
-                const cards = this.unDraftedCards.get(draftCardsFrom);
-                this.unDraftedCards.delete(draftCardsFrom);
-                player.askPlayerToDraft(type, this.giveDraftCardsTo(player), cards);
-            }
-        });
-    }
     gotoInitialResearchPhase() {
         this.phase = Phase_1.Phase.RESEARCH;
         this.save();
@@ -491,13 +464,13 @@ class Game {
         this.researchedPlayers.clear();
         this.save();
         this.players.forEach((player) => {
-            player.runResearchPhase(this.gameOptions.draftVariant);
+            player.runResearchPhase();
         });
     }
     gotoDraftPhase() {
         this.phase = Phase_1.Phase.DRAFTING;
         this.draftRound = 1;
-        this.runDraftRound();
+        (0, Draft_1.newStandardDraft)(this).startDraft();
     }
     gameIsOver() {
         if (this.isSoloMode()) {
@@ -623,20 +596,9 @@ class Game {
     hasResearched(player) {
         return this.researchedPlayers.has(player.id);
     }
-    hasDrafted(player) {
-        return this.draftedPlayers.has(player.id);
-    }
     allPlayersHaveFinishedResearch() {
         for (const player of this.players) {
             if (!this.hasResearched(player)) {
-                return false;
-            }
-        }
-        return true;
-    }
-    allPlayersHaveFinishedDraft() {
-        for (const player of this.players) {
-            if (!this.hasDrafted(player)) {
                 return false;
             }
         }
@@ -652,63 +614,6 @@ class Game {
                 this.startActionsForPlayer(this.first);
             }
         });
-    }
-    playerIsFinishedWithDraftingPhase(type, player, cards) {
-        this.draftedPlayers.add(player.id);
-        this.unDraftedCards.set(player.id, cards);
-        player.needsToDraft = false;
-        if (this.allPlayersHaveFinishedDraft() === false) {
-            return;
-        }
-        if (cards.length > 1) {
-            this.draftRound++;
-            this.runDraftRound(type);
-            return;
-        }
-        this.players.forEach((player) => {
-            const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player).id);
-            if (lastCards !== undefined) {
-                player.draftedCards.push(...lastCards);
-            }
-            player.needsToDraft = undefined;
-            if (type === 'initial' && this.initialDraftIteration === 2) {
-                player.dealtProjectCards = player.draftedCards;
-                player.draftedCards = [];
-            }
-            else if (type === 'prelude' && this.initialDraftIteration === 3) {
-                player.dealtPreludeCards = player.draftedCards;
-                player.draftedCards = [];
-            }
-        });
-        if (type === 'standard') {
-            this.gotoResearchPhase();
-            return;
-        }
-        if (this.initialDraftIteration === 1) {
-            this.initialDraftIteration++;
-            this.draftRound = 1;
-            this.runDraftRound('initial');
-        }
-        else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension && this.gameOptions.preludeDraftVariant) {
-            this.initialDraftIteration++;
-            this.draftRound = 1;
-            this.runDraftRound('prelude');
-        }
-        else {
-            this.gotoInitialResearchPhase();
-        }
-    }
-    getDraftCardsFrom(player) {
-        if (this.generation === 1 && this.initialDraftIteration === 2) {
-            return this.getPlayerBefore(player);
-        }
-        return this.generation % 2 === 0 ? this.getPlayerBefore(player) : this.getPlayerAfter(player);
-    }
-    giveDraftCardsTo(player) {
-        if (this.initialDraftIteration === 2 && this.generation === 1) {
-            return this.getPlayerAfter(player);
-        }
-        return this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
     }
     getPlayerBefore(player) {
         const playerIndex = this.players.indexOf(player);
@@ -937,9 +842,10 @@ class Game {
         TurmoilHandler_1.TurmoilHandler.resolveTilePlacementCosts(player);
         const initialTileTypeForAres = space.tile?.tileType;
         const coveringExistingTile = space.tile !== undefined;
+        const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName_1.CardName.ARCADIAN_COMMUNITIES);
         this.simpleAddTile(player, space, tile);
         if (this.phase !== Phase_1.Phase.SOLAR) {
-            this.grantPlacementBonuses(player, space, coveringExistingTile);
+            this.grantPlacementBonuses(player, space, coveringExistingTile, arcadianCommunityBonus);
             AresHandler_1.AresHandler.ifAres(this, (aresData) => {
                 AresHandler_1.AresHandler.maybeIncrementMilestones(aresData, player, space);
             });
@@ -961,7 +867,7 @@ class Game {
             }
         }
     }
-    grantPlacementBonuses(player, space, coveringExistingTile) {
+    grantPlacementBonuses(player, space, coveringExistingTile, arcadianCommunityBonus = false) {
         if (!coveringExistingTile) {
             this.grantSpaceBonuses(player, space);
         }
@@ -975,7 +881,6 @@ class Game {
                 AresHandler_1.AresHandler.earnAdjacencyBonuses(player, space);
             });
             TurmoilHandler_1.TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
-            const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName_1.CardName.ARCADIAN_COMMUNITIES);
             if (arcadianCommunityBonus) {
                 this.defer(new GainResources_1.GainResources(player, Resource_1.Resource.MEGACREDITS, { count: 3 }));
             }
@@ -1261,11 +1166,15 @@ class Game {
         game.passedPlayers = new Set(d.passedPlayers);
         game.donePlayers = new Set(d.donePlayers);
         game.researchedPlayers = new Set(d.researchedPlayers);
-        game.draftedPlayers = new Set(d.draftedPlayers);
-        game.unDraftedCards = new Map();
-        d.unDraftedCards.forEach((unDraftedCard) => {
-            game.unDraftedCards.set(unDraftedCard[0], (0, createCard_1.cardsFromJSON)(unDraftedCard[1]));
-        });
+        if (d.unDraftedCards && d.unDraftedCards.length > 0) {
+            d.unDraftedCards.forEach(([playerId, cardNames]) => {
+                const player = players.find((p) => p.id === playerId);
+                if (player === undefined) {
+                    throw new Error('Unexpected undefined player when deserializing undrafted cards');
+                }
+                player.draftHand = (0, createCard_1.cardsFromJSON)(cardNames);
+            });
+        }
         game.lastSaveId = d.lastSaveId;
         game.clonedGamedId = d.clonedGamedId;
         game.gameAge = d.gameAge;
@@ -1290,10 +1199,10 @@ class Game {
         if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
             if (game.phase === Phase_1.Phase.INITIALDRAFTING) {
                 if (game.initialDraftIteration === 3) {
-                    game.runDraftRound('prelude');
+                    (0, Draft_1.newPreludeDraft)(game).restoreDraft();
                 }
                 else {
-                    game.runDraftRound('initial');
+                    (0, Draft_1.newInitialDraft)(game).restoreDraft();
                 }
             }
             else {
@@ -1301,7 +1210,7 @@ class Game {
             }
         }
         else if (game.phase === Phase_1.Phase.DRAFTING) {
-            game.runDraftRound();
+            (0, Draft_1.newStandardDraft)(game).restoreDraft();
         }
         else if (game.phase === Phase_1.Phase.RESEARCH) {
             game.gotoResearchPhase();

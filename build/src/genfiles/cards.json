@@ -34294,7 +34294,7 @@
                                                         [
                                                             {
                                                                 "type": "megacredits",
-                                                                "amount": 2,
+                                                                "amount": 1,
                                                                 "is": "item",
                                                                 "clone": false,
                                                                 "cancelled": false,
@@ -34306,7 +34306,7 @@
                                                     ],
                                                     "is": "production-box"
                                                 },
-                                                "Effect: When you place a colony, including this, raise your M€ production 2 step."
+                                                "Effect: When anyone plays a colony, including this, raise your M€ production 1 step."
                                             ]
                                         ],
                                         "is": "effect"
@@ -41685,9 +41685,9 @@
                                 ],
                                 [
                                     {
-                                        "type": "->",
+                                        "type": ":",
                                         "size": "M",
-                                        "isIcon": true,
+                                        "isIcon": false,
                                         "is": "symbol"
                                     }
                                 ],
@@ -47863,7 +47863,7 @@
     },
     {
         "module": "moon",
-        "name": "Sinus Iridium Road Network",
+        "name": "Sinus Irdium Road Network",
         "tags": [
             "moon"
         ],
@@ -49807,7 +49807,7 @@
     },
     {
         "module": "moon",
-        "name": "New Colony Planning Initiaitives",
+        "name": "New Colony Planning Initiatives",
         "tags": [
             "moon"
         ],
@@ -51524,8 +51524,7 @@
             }
         ],
         "metadata": {
-            "description": "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.",
-            "cardNumber": "M55",
+            "description": "Requires you have 1 mine tile. Increase your M€ production 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.",
             "renderData": {
                 "rows": [
                     [
@@ -51545,9 +51544,7 @@
                                 ]
                             ],
                             "is": "production-box"
-                        }
-                    ],
-                    [
+                        },
                         {
                             "type": "moon-colony-rate",
                             "amount": 1,
@@ -73397,7 +73394,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Gain 1 corruption. Remove 2 data from any player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again."
+            "description": "Gain 1 corruption. Remove up to 2 data fromany player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again."
         },
         "productionBox": {
             "megacredits": 0,

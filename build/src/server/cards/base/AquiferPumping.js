@@ -20,7 +20,7 @@ class AquiferPumping extends Card_1.Card {
             metadata: {
                 cardNumber: '187',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.action('Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.', (eb) => eb.megacredits(8).openBrackets.steel(1).closeBrackets.startAction.oceans(1));
+                    b.action('Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.', (eb) => eb.megacredits(8).super((b) => b.steel(1)).startAction.oceans(1));
                 }),
             },
         });

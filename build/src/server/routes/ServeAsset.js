@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServeAsset = exports.FileAPI = void 0;
 const fs = require("fs");
 const path = require("path");
-const responses = require("./responses");
+const responses = require("../server/responses");
 const BufferCache_1 = require("./BufferCache");
 const ContentType_1 = require("./ContentType");
 const Handler_1 = require("./Handler");

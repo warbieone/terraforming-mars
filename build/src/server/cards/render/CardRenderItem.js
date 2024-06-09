@@ -36,6 +36,9 @@ class CardRenderItem {
         if (options.text !== undefined) {
             this.innerText = options.text;
         }
+        if (options.superscript === true) {
+            this.isSuperscript = true;
+        }
         return this;
     }
 }

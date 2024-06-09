@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiMetrics = void 0;
 const prometheus = require("prom-client");
-const responses = require("./responses");
+const responses = require("../server/responses");
 const Handler_1 = require("./Handler");
 class ApiMetrics extends Handler_1.Handler {
     constructor() {

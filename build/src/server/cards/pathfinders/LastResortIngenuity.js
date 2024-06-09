@@ -15,7 +15,7 @@ class LastResortIngenuity extends Card_1.Card {
             metadata: {
                 cardNumber: 'Pf47',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.cards(1).asterix().colon().openBrackets.steel(1).titanium(1).closeBrackets;
+                    b.cards(1).asterix().colon().super((b) => b.steel(1).titanium(1));
                     b.br;
                     b.text('The next card you play this generation can be paid for with steel or titanium despite its tags.', Size_1.Size.MEDIUM, true, true);
                 }),

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 const http = require("http");
 const fs = require("fs");
-const responses = require("../routes/responses");
+const responses = require("../server/responses");
 const MilestoneAwardSelector_1 = require("../ma/MilestoneAwardSelector");
 const GameOptions_1 = require("../game/GameOptions");
 const BoardName_1 = require("../../common/boards/BoardName");

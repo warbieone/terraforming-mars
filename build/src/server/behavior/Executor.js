@@ -507,6 +507,15 @@ class Executor {
                 }
             }
         }
+        if (behavior.log !== undefined) {
+            this.log(behavior.log, player, card);
+        }
+    }
+    log(message, player, card) {
+        const replaced = message
+            .replaceAll('${player}', '${0}')
+            .replaceAll('${card}', '${1}');
+        player.game.log(replaced, (b) => b.player(player).card(card));
     }
     onDiscard(behavior, player, _card) {
         if (behavior.steelValue === 1) {

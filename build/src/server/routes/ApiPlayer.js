@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiPlayer = void 0;
-const responses = require("./responses");
+const responses = require("../server/responses");
 const Types_1 = require("../../common/Types");
 const ServerModel_1 = require("../models/ServerModel");
 const Handler_1 = require("./Handler");

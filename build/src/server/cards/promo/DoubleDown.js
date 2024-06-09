@@ -21,9 +21,16 @@ class DoubleDown extends PreludeCard_1.PreludeCard {
         });
     }
     cloneablePreludes(player) {
-        return player.playedCards.filter(IPreludeCard_1.isPreludeCard)
+        const cards = player.playedCards.filter(IPreludeCard_1.isPreludeCard)
             .filter((card) => card.name !== this.name)
             .filter((card) => card.canPlay(player));
+        if (player.lastCardPlayed === CardName_1.CardName.NEW_PARTNER) {
+            const newPartner = player.preludeCardsInHand.filter((card) => card.name === CardName_1.CardName.NEW_PARTNER)[0];
+            if (newPartner !== undefined) {
+                cards.push(newPartner);
+            }
+        }
+        return cards;
     }
     bespokeCanPlay(player) {
         return this.cloneablePreludes(player).length > 0;

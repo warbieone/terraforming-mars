@@ -53,7 +53,7 @@ exports.DEFAULT_ESCAPE_VELOCITY_PENALTY = 1;
 exports.BONUS_SECONDS_PER_ACTION = 5;
 exports.ASIMOV_AWARD_BONUS = 2;
 exports.CORRUPTION_VALUE = 10;
-exports.ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu', 'jp', 'bg', 'nb'];
+exports.ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu', 'jp', 'bg', 'nb', 'ua'];
 exports.LANGUAGES = {
     en: 'English',
     de: 'Deutsch',
@@ -70,6 +70,7 @@ exports.LANGUAGES = {
     jp: '日本語',
     bg: 'Български',
     nb: 'Norsk',
+    ua: 'Українська',
 };
 exports.APP_NAME = 'Terraforming Mars';
 exports.DISCORD_INVITE = 'https://discord.gg/afeyggbN6Y';

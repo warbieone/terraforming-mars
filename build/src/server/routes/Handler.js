@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Handler = void 0;
-const responses = require("./responses");
+const responses = require("../server/responses");
 class Handler {
     constructor(options) {
         this.options = {

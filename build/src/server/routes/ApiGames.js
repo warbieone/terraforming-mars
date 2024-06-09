@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiGames = void 0;
-const responses = require("./responses");
+const responses = require("../server/responses");
 const Handler_1 = require("./Handler");
 class ApiGames extends Handler_1.Handler {
     constructor() {

@@ -29,10 +29,8 @@ class Poseidon extends CorporationCard_1.CorporationCard {
             },
         });
     }
-    onColonyAdded(player, cardOwner) {
-        if (player === cardOwner) {
-            player.production.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
-        }
+    onColonyAdded(_player, cardOwner) {
+        cardOwner.production.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
     }
 }
 exports.Poseidon = Poseidon;

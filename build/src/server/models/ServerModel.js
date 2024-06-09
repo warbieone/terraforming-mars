@@ -67,7 +67,7 @@ class Server {
         const players = game.getPlayersInGenerationOrder().map(this.getPlayer);
         const thisPlayerIndex = players.findIndex((p) => p.color === player.color);
         const thisPlayer = players[thisPlayerIndex];
-        return {
+        const rv = {
             cardsInHand: (0, ModelUtils_1.cardsToModel)(player, player.cardsInHand, { showCalculatedCost: true }),
             ceoCardsInHand: (0, ModelUtils_1.cardsToModel)(player, player.ceoCardsInHand),
             dealtCorporationCards: (0, ModelUtils_1.cardsToModel)(player, player.dealtCorporationCards),
@@ -83,7 +83,9 @@ class Server {
             thisPlayer: thisPlayer,
             waitingFor: this.getWaitingFor(player, player.getWaitingFor()),
             players: players,
+            autopass: player.autopass,
         };
+        return rv;
     }
     static getSpectatorModel(game) {
         return {

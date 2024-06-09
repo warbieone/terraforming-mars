@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiWaitingFor = void 0;
-const responses = require("./responses");
+const responses = require("../server/responses");
 const Handler_1 = require("./Handler");
 const Phase_1 = require("../../common/Phase");
 const Types_1 = require("../../common/Types");

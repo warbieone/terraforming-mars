@@ -5,6 +5,7 @@ const CardRenderItem_1 = require("./CardRenderItem");
 const CardRenderSymbol_1 = require("./CardRenderSymbol");
 const Size_1 = require("../../../common/cards/render/Size");
 const CardRenderItemType_1 = require("../../../common/cards/render/CardRenderItemType");
+const Types_1 = require("../../../common/cards/render/Types");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
 class CardRenderer {
     static builder(f) {
@@ -90,6 +91,7 @@ class CardRenderCorpBoxAction {
 class Builder {
     constructor() {
         this._data = [[]];
+        this.superscript = false;
     }
     _currentRow() {
         if (this._data.length === 0) {
@@ -98,6 +100,9 @@ class Builder {
         return this._data[this._data.length - 1];
     }
     _appendToRow(thing) {
+        if (this.superscript && (0, Types_1.isICardRenderItem)(thing)) {
+            thing.isSuperscript = true;
+        }
         this._currentRow().push(thing);
         return this;
     }
@@ -529,11 +534,13 @@ class Builder {
     vSpace(size = Size_1.Size.MEDIUM) {
         return this._appendToRow(CardRenderSymbol_1.CardRenderSymbol.vSpace(size));
     }
-    get openBrackets() {
-        return this._appendToRow(CardRenderSymbol_1.CardRenderSymbol.bracketOpen());
-    }
-    get closeBrackets() {
-        return this._appendToRow(CardRenderSymbol_1.CardRenderSymbol.bracketClose());
+    super(sb) {
+        this._appendToRow(CardRenderSymbol_1.CardRenderSymbol.bracketOpen());
+        this.superscript = true;
+        sb(this);
+        this.superscript = false;
+        this._appendToRow(CardRenderSymbol_1.CardRenderSymbol.bracketClose());
+        return this;
     }
     get startEffect() {
         this.br;

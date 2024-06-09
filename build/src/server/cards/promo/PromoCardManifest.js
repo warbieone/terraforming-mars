@@ -79,6 +79,7 @@ const StanfordTorus_1 = require("./StanfordTorus");
 const StJosephOfCupertinoMission_1 = require("./StJosephOfCupertinoMission");
 const SubCrustMeasurements_1 = require("./SubCrustMeasurements");
 const Supercapacitors_1 = require("./Supercapacitors");
+const Supermarkets_1 = require("./Supermarkets");
 const Teslaract_1 = require("./Teslaract");
 const TopsoilContract_1 = require("./TopsoilContract");
 const TychoMagnetics_1 = require("./TychoMagnetics");
@@ -148,6 +149,7 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.ICY_IMPACTORS]: { Factory: IcyImpactors_1.IcyImpactors },
         [CardName_1.CardName.SOIL_ENRICHMENT]: { Factory: SoilEnrichment_1.SoilEnrichment },
         [CardName_1.CardName.CITY_PARK]: { Factory: CityPark_1.CityPark },
+        [CardName_1.CardName.SUPERMARKETS]: { Factory: Supermarkets_1.Supermarkets },
     },
     preludeCards: {
         [CardName_1.CardName.NEW_PARTNER]: { Factory: NewPartner_1.NewPartner },

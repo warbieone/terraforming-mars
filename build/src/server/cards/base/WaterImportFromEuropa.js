@@ -22,7 +22,7 @@ class WaterImportFromEuropa extends Card_1.Card {
                 cardNumber: '012',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.', (eb) => {
-                        eb.megacredits(12).openBrackets.titanium(1).closeBrackets.startAction.oceans(1);
+                        eb.megacredits(12).super((b) => b.titanium(1)).startAction.oceans(1);
                     }).br;
                     b.vpText('1 VP for each Jovian tag you have.');
                 }),
