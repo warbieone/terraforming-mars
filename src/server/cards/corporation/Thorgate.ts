@@ -35,7 +35,7 @@ export class Thorgate extends CorporationCard {
             ce.effect('When playing a power card OR SP POWER OR TURMOIL KELVINISTS ACTION, you pay 3 M€ less for it.', (eb) => {
               eb.energy(1).asterix().slash().production((pb) => {
                 pb.energy(1).heat(1);
-              }).asterix().startEffect.megacredits(-3);
+              }).asterix().startEffect.megacredits(-3); 
             });
           });
         }),

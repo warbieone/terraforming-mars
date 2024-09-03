@@ -5,7 +5,6 @@ import {CardResource} from '../../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 import {Resource} from '../../../common/Resource';
 
 
@@ -30,7 +29,7 @@ export class Arklight extends CorporationCard {
           b.megacredits(50);
           b.corpBox('effect', (ce) => {
             ce.effect('When you play an animal or plant tag, including this, gain 1 M€ production and add 1 animal to this card.', (eb) => {
-              eb.animals(1, {played}).slash().plants(1, {played}).startEffect.production((pb) => pb.megacredits(1)).animals(1);
+              eb.tag(Tag.ANIMAL).slash().tag(Tag.PLANT).startEffect.production((pb) => pb.megacredits(1)).resource(CardResource.ANIMAL);
             });
             ce.vSpace(); // to offset the description to the top a bit so it can be readable
           });

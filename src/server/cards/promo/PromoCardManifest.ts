@@ -81,6 +81,7 @@ import {Supermarkets} from './Supermarkets';
 import {Teslaract} from './Teslaract';
 import {TopsoilContract} from './TopsoilContract';
 import {TychoMagnetics} from './TychoMagnetics';
+import {StrategicBasePlanning} from './StrategicBasePlanning';
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
@@ -158,8 +159,9 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
     // [CardName.HEAD_START]: {Factory: HeadStart}, // Head Start is disabled because it's not working well.
     [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
-    // [CardName.ESTABLISHED_METHODS]: {Factory: EstablishedMethods},
+    // [CardName.ESTABLISHED_METHODS]: {Factory: EstablishedMethods}, // X54
     [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector, compatibility: 'venus'},
+    [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning, compatibility: 'colonies'},
   },
 
   cardsToRemove: [

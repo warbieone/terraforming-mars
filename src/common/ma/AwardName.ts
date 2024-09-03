@@ -31,9 +31,9 @@ export const awardNames = [
   'Lunar Magnate',
 
   // Amazonis Planitia
+  // NB: the fifth award for Amazonis Plantia is Coordinator, also part of Arabia Terra.
   'Curator',
   'Engineer',
-  'Historian',
   'Tourist',
   'A. Zoologist',
 

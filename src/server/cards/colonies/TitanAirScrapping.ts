@@ -23,12 +23,12 @@ export class TitanAirScrapping extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C43',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 titanium to add 4 floaters here.', (eb) => {
-            eb.titanium(1).startAction.floaters(4);
+          b.action('Spend 1 titanium to add 2 floaters here.', (eb) => {
+            eb.titanium(1).startAction.resource(CardResource.FLOATER, 4); 
           }).br;
           b.or().br;
           b.action('Spend 2 floaters here to increase your TR 1 step.', (eb) => {
-            eb.floaters(2).startAction.tr(1);
+            eb.resource(CardResource.FLOATER, 2).startAction.tr(1);
           });
         }),
       },

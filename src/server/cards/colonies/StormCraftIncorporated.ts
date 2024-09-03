@@ -32,7 +32,7 @@ export class StormCraftIncorporated extends ActiveCorporationCard {
           b.megacredits(48);
           b.corpBox('action', (ce) => {
             ce.action('Add a floater to ANY card.', (eb) => {
-              eb.empty().startAction.floaters(1).asterix();
+              eb.empty().startAction.resource(CardResource.FLOATER).asterix();
             });
           });
         }),

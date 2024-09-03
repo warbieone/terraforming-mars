@@ -4,7 +4,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class OrbitalCleanup extends ActionCard implements IProjectCard {
   constructor() {
@@ -28,7 +27,7 @@ export class OrbitalCleanup extends ActionCard implements IProjectCard {
 
         renderData: CardRenderer.builder((b) => {
           b.action('Gain 1 M€ per 2 science tags you have.', (eb) => {
-            eb.empty().startAction.megacredits(1).slash().science(2, {played});
+            eb.empty().startAction.megacredits(1).slash().tag(Tag.SCIENCE,2);
           }).br;
           b.production((pb) => {
             pb.megacredits(-2);

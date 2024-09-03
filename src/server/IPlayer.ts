@@ -7,6 +7,7 @@ import {SpendableCardResource} from '../common/inputs/Spendable';
 import {ICard, IActionCard} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
 import {IProjectCard} from './cards/IProjectCard';
+import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {PlayerInput} from './PlayerInput';
 import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
@@ -97,7 +98,7 @@ export interface IPlayer {
 
   // Cards
   dealtCorporationCards: Array<ICorporationCard>;
-  dealtPreludeCards: Array<IProjectCard>;
+  dealtPreludeCards: Array<IPreludeCard>;
   dealtCeoCards: Array<ICeoCard>;
   dealtProjectCards: Array<IProjectCard>;
   cardsInHand: Array<IProjectCard>;
@@ -134,6 +135,12 @@ export interface IPlayer {
   // removedFromPlayCards is a bit of a misname: it's a temporary storage for
   // cards that provide 'next card' discounts. This will clear between turns.
   removedFromPlayCards: Array<IProjectCard>;
+  /**
+   * When true, Preservation Program is in effect, and the player has not triggered a TR gain this generation.
+   *
+   * False when the player does not have Preservation Program, or after the first TR in the action phase.
+   */
+  preservationProgram: boolean;
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value.
@@ -265,7 +272,6 @@ export interface IPlayer {
   getUsableOPGCeoCards(): Array<ICeoCard>;
   runProductionPhase(): void;
   finishProductionPhase(): void;
-  worldGovernmentTerraforming(): void;
 
   runResearchPhase(): void;
   getCardCost(card: IProjectCard): number;
@@ -309,6 +315,7 @@ export interface IPlayer {
   getOpponents(): ReadonlyArray<IPlayer>;
   /** Add `corp`'s initial action to the deferred action queue, if it has one. */
   deferInitialAction(corp: ICorporationCard): void;
+  /** Return possible mid-game actions like play a card and fund an award, but not play prelude card. */
   getActions(): OrOptions;
   process(input: InputResponse): void;
   getWaitingFor(): PlayerInput | undefined;

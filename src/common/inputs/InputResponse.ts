@@ -40,6 +40,15 @@ export function isAndOptionsResponse(response: InputResponse): response is AndOp
   return response.type === 'and' && matches(response, ['type', 'responses']);
 }
 
+export interface SelectInitialCardsResponse {
+  type: 'initialCards',
+  responses: Array<InputResponse>;
+}
+
+export function isSelectInitialCardsResponse(response: InputResponse): response is SelectInitialCardsResponse {
+  return response.type === 'initialCards' && matches(response, ['type', 'responses']);
+}
+
 export interface SelectCardResponse {
   type: 'card',
   cards: Array<CardName>;
@@ -164,9 +173,28 @@ export function isSelectPolicyResponse(response: InputResponse): response is Sel
   return response.type === 'policy' && matches(response, ['type', 'policyId']);
 }
 
+export interface SelectResourceResponse {
+  type: 'resource',
+  resource: keyof Units,
+}
+
+export function isSelectResourceResponse(response: InputResponse): response is SelectResourceResponse {
+  return response.type === 'resource' && matches(response, ['type', 'resource']);
+}
+
+export interface SelectResourcesResponse {
+  type: 'resources',
+  units: Units,
+}
+
+export function isSelectResourcesResponse(response: InputResponse): response is SelectResourcesResponse {
+  return response.type === 'resources' && matches(response, ['type', 'units']);
+}
+
 export type InputResponse =
   AndOptionsResponse |
   OrOptionsResponse |
+  SelectInitialCardsResponse |
   SelectAmountResponse |
   SelectCardResponse |
   SelectColonyResponse |
@@ -180,4 +208,6 @@ export type InputResponse =
   SelectSpaceResponse |
   ShiftAresGlobalParametersResponse |
   SelectGlobalEventResponse |
-  SelectPolicyResponse;
+  SelectPolicyResponse |
+  SelectResourceResponse |
+  SelectResourcesResponse;

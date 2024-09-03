@@ -28,7 +28,7 @@ export class Pristar extends CorporationCard {
           b.megacredits(53).nbsp.nbsp.minus().tr(2, {size: Size.SMALL});
           b.corpBox('effect', (ce) => {
             ce.effect('During production phase, if you did not get TR so far this generation, add one preservation resource here, gain 6 M€, and 1 influence.', (eb) => {
-              eb.tr(1, {size: Size.SMALL, cancelled: true}).startEffect.preservation(1).megacredits(6).influence();
+              eb.tr(1, {size: Size.SMALL, cancelled: true}).startEffect.resource(CardResource.PRESERVATION).megacredits(6).influence();
             });
           });
         }),

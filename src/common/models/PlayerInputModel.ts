@@ -9,6 +9,7 @@ import {SpaceId} from '../Types';
 import {PaymentOptions} from '../inputs/Payment';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Warning} from '../cards/Warning';
+import {Units} from '../Units';
 
 export type BaseInputModel = {
   title: string | Message;
@@ -40,7 +41,7 @@ export type SelectOptionModel = BaseInputModel & {
 
 export type SelectProjectCardToPlayModel = BaseInputModel & {
   type: 'projectCard';
-  cards: Array<CardModel>;
+  cards: ReadonlyArray<CardModel>;
   paymentOptions: Partial<PaymentOptions>,
   microbes: number;
   floaters: number;
@@ -53,7 +54,7 @@ export type SelectProjectCardToPlayModel = BaseInputModel & {
 
 export type SelectCardModel = BaseInputModel & {
   type: 'card';
-  cards: Array<CardModel>;
+  cards: ReadonlyArray<CardModel>;
   max: number;
   min: number;
   showOnlyInLearnerMode: boolean;
@@ -63,7 +64,7 @@ export type SelectCardModel = BaseInputModel & {
 
 export type SelectColonyModel = BaseInputModel & {
   type: 'colony';
-  coloniesModel: Array<ColonyModel>;
+  coloniesModel: ReadonlyArray<ColonyModel>;
 }
 
 export type SelectPaymentModel = BaseInputModel & {
@@ -78,12 +79,12 @@ export type SelectPaymentModel = BaseInputModel & {
 
 export type SelectPlayerModel = BaseInputModel & {
   type: 'player';
-  players: Array<Color>;
+  players: ReadonlyArray<Color>;
 }
 
 export type SelectSpaceModel = BaseInputModel & {
   type: 'space';
-  spaces: Array<SpaceId>;
+  spaces: ReadonlyArray<SpaceId>;
 }
 
 export type SelectAmountModel = BaseInputModel & {
@@ -118,6 +119,16 @@ export type SelectGlobalEventModel = BaseInputModel & {
   globalEventNames: Array<GlobalEventName>;
 }
 
+export type SelectResourceModel = BaseInputModel & {
+  type: 'resource';
+  include: ReadonlyArray<keyof Units>;
+}
+
+export type SelectResourcesModel = BaseInputModel & {
+  type: 'resources';
+  count: number;
+}
+
 export type PlayerInputModel =
   AndOptionsModel |
   OrOptionsModel |
@@ -136,4 +147,6 @@ export type PlayerInputModel =
   SelectProjectCardToPlayModel |
   SelectSpaceModel |
   ShiftAresGlobalParametersModel |
-  SelectGlobalEventModel;
+  SelectGlobalEventModel |
+  SelectResourceModel |
+  SelectResourcesModel;

@@ -5,7 +5,6 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {Resource} from '../../../common/Resource';
 
@@ -24,7 +23,7 @@ export class PointLuna extends CorporationCard {
           b.production((pb) => pb.titanium(1)).nbsp.megacredits(48);
           b.corpBox('effect', (ce) => {
             ce.effect('When you play an Earth tag, including this, draw a card then discard a card.', (eb) => {
-              eb.earth(1, {played}).startEffect.cards(1).minus().cards(1);
+              eb.tag(Tag.EARTH).startEffect.cards(1).minus().cards(1); 
             });
           });
         }),
