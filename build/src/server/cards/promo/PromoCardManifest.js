@@ -84,6 +84,7 @@ const Teslaract_1 = require("./Teslaract");
 const TopsoilContract_1 = require("./TopsoilContract");
 const TychoMagnetics_1 = require("./TychoMagnetics");
 const StrategicBasePlanning_1 = require("./StrategicBasePlanning");
+const Hospitals_1 = require("./Hospitals");
 exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     module: 'promo',
     projectCards: {
@@ -151,6 +152,7 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.SOIL_ENRICHMENT]: { Factory: SoilEnrichment_1.SoilEnrichment },
         [CardName_1.CardName.CITY_PARK]: { Factory: CityPark_1.CityPark },
         [CardName_1.CardName.SUPERMARKETS]: { Factory: Supermarkets_1.Supermarkets },
+        [CardName_1.CardName.HOSPITALS]: { Factory: Hospitals_1.Hospitals },
     },
     preludeCards: {
         [CardName_1.CardName.NEW_PARTNER]: { Factory: NewPartner_1.NewPartner },

@@ -263,9 +263,6 @@ class Game {
     save() {
         GameLoader_1.GameLoader.getInstance().saveGame(this);
     }
-    toJSON() {
-        return JSON.stringify(this.serialize());
-    }
     serialize() {
         const result = {
             activePlayer: this.activePlayer,
@@ -647,10 +644,10 @@ class Game {
         return orOptions;
     }
     worldGovernmentTerraforming(player) {
-        player.defer(this.worldGovernmentTerraformingInput(player).andThen(() => {
+        const input = this.worldGovernmentTerraformingInput(player);
+        player.setWaitingFor(input, () => {
             this.doneWorldGovernmentTerraforming();
-            return undefined;
-        }));
+        });
     }
     doneWorldGovernmentTerraforming() {
         this.gotoEndGeneration();

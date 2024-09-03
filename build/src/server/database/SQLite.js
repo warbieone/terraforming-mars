@@ -155,7 +155,7 @@ class SQLite {
         });
     }
     async saveGame(game) {
-        const gameJSON = game.toJSON();
+        const gameJSON = JSON.stringify(game.serialize());
         await this.runQuietly('INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?', [game.id, game.lastSaveId, gameJSON, game.getPlayers().length, gameJSON]);
         if (game.lastSaveId === 0) {
             const participantIds = game.getPlayers().map((p) => p.id);

@@ -55,11 +55,6 @@ class Tags {
                 this.player.isCorporation(CardName_1.CardName.HABITAT_MARTE)) {
                 return true;
             }
-            if (tag === Tag_1.Tag.MOON &&
-                target === Tag_1.Tag.EARTH &&
-                this.player.cardIsInEffect(CardName_1.CardName.EARTH_EMBASSY)) {
-                return true;
-            }
         }
         if (target === Tag_1.Tag.EVENT && card.type === CardType_1.CardType.EVENT) {
             return true;
@@ -77,10 +72,6 @@ class Tags {
             }
             else if (tag === Tag_1.Tag.MARS && target === Tag_1.Tag.SCIENCE &&
                 this.player.isCorporation(CardName_1.CardName.HABITAT_MARTE)) {
-                count++;
-            }
-            else if (tag === Tag_1.Tag.MOON && target === Tag_1.Tag.EARTH &&
-                this.player.cardIsInEffect(CardName_1.CardName.EARTH_EMBASSY)) {
                 count++;
             }
         }

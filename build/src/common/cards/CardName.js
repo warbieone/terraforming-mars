@@ -549,6 +549,7 @@ var CardName;
     CardName["SOIL_ENRICHMENT"] = "Soil Enrichment";
     CardName["CITY_PARK"] = "City Park";
     CardName["SUPERMARKETS"] = "Supermarkets";
+    CardName["HOSPITALS"] = "Hospitals";
     CardName["FLOYD_CONTINUUM"] = "Floyd Continuum";
     CardName["AGRICOLA_INC"] = "Agricola Inc";
     CardName["CURIOSITY_II"] = "Curiosity II";

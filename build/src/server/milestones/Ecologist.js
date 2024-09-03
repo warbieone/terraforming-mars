@@ -8,8 +8,7 @@ class Ecologist extends IMilestone_1.BaseMilestone {
         super('Ecologist', 'Have 4 bio tags in play (plant, microbe and animal tags count as bio tags)', 4);
     }
     getScore(player) {
-        const tags = [Tag_1.Tag.PLANT, Tag_1.Tag.ANIMAL, Tag_1.Tag.MICROBE];
-        return player.tags.multipleCount(tags, 'milestone');
+        return player.tags.multipleCount([Tag_1.Tag.PLANT, Tag_1.Tag.ANIMAL, Tag_1.Tag.MICROBE], 'milestone');
     }
 }
 exports.Ecologist = Ecologist;

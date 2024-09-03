@@ -101,12 +101,12 @@ class GameLoader {
             throw new Error('Cannot find game');
         }
         const currentSaveId = current.lastSaveId;
-        const serializedGame = await Database_1.Database.getInstance().getGameVersion(gameId, saveId);
-        const game = Game_1.Game.deserialize(serializedGame);
         const deletes = (currentSaveId - saveId) - 1;
         if (deletes > 0) {
             await Database_1.Database.getInstance().deleteGameNbrSaves(gameId, deletes);
         }
+        const serializedGame = await Database_1.Database.getInstance().getGame(gameId);
+        const game = Game_1.Game.deserialize(serializedGame);
         await this.add(game);
         game.undoCount++;
         return game;

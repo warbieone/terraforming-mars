@@ -16,7 +16,7 @@ class EarthEmbassy extends Card_1.Card {
             metadata: {
                 cardNumber: 'M77',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.effect('After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.', (eb) => {
+                    b.effect('When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa.', (eb) => {
                         eb.empty().startEffect.tag(Tag_1.Tag.MOON).equals().tag(Tag_1.Tag.EARTH);
                     });
                 }),
