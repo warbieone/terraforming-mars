@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = require("fs");
 const Types_1 = require("../../common/Types");
 const Database_1 = require("../database/Database");
 const LocalFilesystem_1 = require("../database/LocalFilesystem");
+const exportLogs_1 = require("./exportLogs");
 const args = process.argv.slice(2);
 const id = args[0];
 if (id === undefined) {
@@ -52,6 +54,10 @@ async function load(gameId) {
             errors++;
         }
     }
+    const logs = await (0, exportLogs_1.exportLogs)(localDb, gameId);
+    const logFilename = `logs/${gameId}.log`;
+    (0, fs_1.writeFileSync)(logFilename, logs.join('\n'));
+    console.log(`Log at ${logFilename}`);
     console.log(`Wrote ${writes} records and had ${errors} failures.`);
     console.log(`id: ${gameId}`);
 }

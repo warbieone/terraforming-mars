@@ -26,9 +26,9 @@ class JovianLanterns extends Card_1.Card {
                 cardNumber: 'C18',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 1 titanium to add 2 floaters here.', (eb) => {
-                        eb.titanium(1).startAction.floaters(2);
+                        eb.titanium(1).startAction.resource(CardResource_1.CardResource.FLOATER, 2);
                     }).br;
-                    b.tr(1).floaters(2).asterix().br;
+                    b.tr(1).resource(CardResource_1.CardResource.FLOATER, 2).asterix().br;
                     b.vpText('1 VP per 2 floaters here.');
                 }),
                 description: {

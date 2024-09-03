@@ -30,7 +30,7 @@ class DeimosDownPromo extends Card_1.Card {
                 removeAnyPlants: 8,
                 tile: {
                     type: TileType_1.TileType.DEIMOS_DOWN,
-                    on: 'city',
+                    on: 'away-from-cities',
                     adjacencyBonus: adjacencyBonus,
                 },
             },

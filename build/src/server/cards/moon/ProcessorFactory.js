@@ -23,7 +23,7 @@ class ProcessorFactory extends ActionCard_1.ActionCard {
             metadata: {
                 cardNumber: 'M86',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.action('Spend 1 steel to add 2 data resources to ANY card.', (eb) => eb.startAction.steel(1).arrow().data({ amount: 2 }).asterix());
+                    b.action('Spend 1 steel to add 2 data resources to ANY card.', (eb) => eb.startAction.steel(1).arrow().resource(CardResource_1.CardResource.DATA, 2).asterix());
                     b.br;
                     b.vpText('1 VP for every 3 data resources here.');
                 }),

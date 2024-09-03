@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SolarFarm = void 0;
 const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
-const SelectSpace_1 = require("../../inputs/SelectSpace");
+const PlaceTile_1 = require("../../../server/deferredActions/PlaceTile");
 const SpaceBonus_1 = require("../../../common/boards/SpaceBonus");
 const TileType_1 = require("../../../common/TileType");
 const CardType_1 = require("../../../common/cards/CardType");
@@ -41,16 +41,15 @@ class SolarFarm extends Card_1.Card {
         return Units_1.Units.of({ energy: plantsOnSpace });
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Select space for ${0} tile', (b) => b.card(this)), player.game.board.getAvailableSpacesOnLand(player))
-            .andThen((space) => {
-            player.game.addTile(player, space, {
-                tileType: TileType_1.TileType.SOLAR_FARM,
-                card: this.name,
-            });
+        player.game.defer(new PlaceTile_1.PlaceTile(player, {
+            tile: { tileType: TileType_1.TileType.SOLAR_FARM, card: this.name },
+            on: 'land',
+            title: (0, MessageBuilder_1.message)('Select space for ${0} tile', (b) => b.card(this)),
+            adjacencyBonus: { bonus: [SpaceBonus_1.SpaceBonus.ENERGY, SpaceBonus_1.SpaceBonus.ENERGY] },
+        }).andThen(() => {
             player.production.adjust(this.productionBox(player), { log: true });
-            space.adjacency = { bonus: [SpaceBonus_1.SpaceBonus.ENERGY, SpaceBonus_1.SpaceBonus.ENERGY] };
-            return undefined;
-        });
+        }));
+        return undefined;
     }
 }
 exports.SolarFarm = SolarFarm;

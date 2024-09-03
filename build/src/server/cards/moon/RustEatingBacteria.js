@@ -24,7 +24,7 @@ class RustEatingBacteria extends ActionCard_1.ActionCard {
                 cardNumber: 'M88',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 1 steel to add 2 microbes here.', (eb) => {
-                        eb.startAction.steel(1).arrow().microbes(2);
+                        eb.startAction.steel(1).arrow().resource(CardResource_1.CardResource.MICROBE, 2);
                     }).br;
                     b.vpText('1 VP per 3 microbes here.');
                 }),

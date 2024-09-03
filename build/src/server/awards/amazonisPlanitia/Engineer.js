@@ -11,7 +11,6 @@ exports.BESPOKE_PRODUCTION_CARDS = [
     CardName_1.CardName.NITROGEN_RICH_ASTEROID,
     CardName_1.CardName.POWER_SUPPLY_CONSORTIUM,
     CardName_1.CardName.COMMUNITY_SERVICES,
-    CardName_1.CardName.ECOLOGY_RESEARCH,
     CardName_1.CardName.LUNAR_EXPORTS,
     CardName_1.CardName.MINORITY_REFUGE,
     CardName_1.CardName.PIONEER_SETTLEMENT,
@@ -24,6 +23,8 @@ exports.BESPOKE_PRODUCTION_CARDS = [
     CardName_1.CardName.MICROBIOLOGY_PATENTS,
     CardName_1.CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
     CardName_1.CardName.SMALL_OPEN_PIT_MINE,
+    CardName_1.CardName.CLOUD_TOURISM,
+    CardName_1.CardName.MICROGRAVITY_NUTRITION,
 ];
 const map = new Map(exports.BESPOKE_PRODUCTION_CARDS.map((name) => [name, true]));
 class Engineer {

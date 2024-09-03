@@ -24,7 +24,7 @@ class SaturnSystems extends CorporationCard_1.CorporationCard {
                     b.production((pb) => pb.titanium(1)).nbsp.megacredits(42);
                     b.corpBox('effect', (ce) => {
                         ce.effect('Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.', (eb) => {
-                            eb.jovian({ played: Options_1.played, all: Options_1.all }).startEffect.production((pb) => pb.megacredits(1));
+                            eb.tag(Tag_1.Tag.JOVIAN, { all: Options_1.all }).startEffect.production((pb) => pb.megacredits(1));
                         });
                     });
                 }),

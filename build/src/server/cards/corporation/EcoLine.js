@@ -5,7 +5,6 @@ const CorporationCard_1 = require("./CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const Priority_1 = require("../../deferredActions/Priority");
@@ -26,7 +25,7 @@ class EcoLine extends CorporationCard_1.CorporationCard {
                     b.production((pb) => pb.plants(3)).nbsp.megacredits(37);
                     b.corpBox('effect', (ce) => {
                         ce.effect('Each time you play a plant, animal or microbe tag, including this, gain 2MC or 1 plant.', (eb) => {
-                            eb.animals(1, { played: Options_1.played }).slash().plants(1, { played: Options_1.played }).slash().microbes(1, { played: Options_1.played });
+                            eb.tag(Tag_1.Tag.ANIMAL).slash().tag(Tag_1.Tag.PLANT).slash().tag(Tag_1.Tag.MICROBE);
                             eb.startEffect.megacredits(2).or().plants(1);
                         });
                     });

@@ -7,7 +7,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
 const CardResource_1 = require("../../../common/CardResource");
-const Options_1 = require("../Options");
 class LunaArchives extends ActionCard_1.ActionCard {
     constructor() {
         super({
@@ -22,9 +21,9 @@ class LunaArchives extends ActionCard_1.ActionCard {
             metadata: {
                 cardNumber: 'M69',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.action('Add 1 science resource here for each Moon tag you have.', (ab) => ab.empty().startAction.science().slash().moon());
+                    b.action('Add 1 science resource here for each Moon tag you have.', (ab) => ab.empty().startAction.resource(CardResource_1.CardResource.SCIENCE).slash().tag(Tag_1.Tag.MOON));
                     b.br;
-                    b.effect('When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.', (eb) => eb.moon(1, { played: Options_1.played }).startEffect.science().equals().megacredits(1));
+                    b.effect('When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.', (eb) => eb.tag(Tag_1.Tag.MOON).startEffect.resource(CardResource_1.CardResource.SCIENCE).equals().megacredits(1));
                 }),
             },
         });

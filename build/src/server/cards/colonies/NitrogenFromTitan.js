@@ -22,7 +22,7 @@ class NitrogenFromTitan extends Card_1.Card {
             metadata: {
                 cardNumber: 'C28',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.tr(2).floaters(2, { secondaryTag: Tag_1.Tag.JOVIAN });
+                    b.tr(2).resource(CardResource_1.CardResource.FLOATER, { amount: 2, secondaryTag: Tag_1.Tag.JOVIAN });
                 }),
                 description: 'Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.',
             },

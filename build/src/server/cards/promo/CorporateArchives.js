@@ -16,7 +16,7 @@ class CorporateArchives extends PreludeCard_1.PreludeCard {
                 stock: { megacredits: 13 },
             },
             metadata: {
-                cardNumber: 'X58',
+                cardNumber: 'X39',
                 description: 'Gain 13 M€',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.text('Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.', Size_1.Size.SMALL, true);

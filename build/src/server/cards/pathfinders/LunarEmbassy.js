@@ -7,7 +7,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const SpaceName_1 = require("../../SpaceName");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class LunarEmbassy extends Card_1.Card {
     constructor() {
         super({
@@ -25,7 +24,7 @@ class LunarEmbassy extends Card_1.Card {
                 cardNumber: 'Pf16',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.megacredits(3))
-                        .production((pb) => pb.plants(1).slash().earth(2, { played: Options_1.played }))
+                        .production((pb) => pb.plants(1).slash().tag(Tag_1.Tag.EARTH, 2))
                         .br
                         .cards(1).city().asterix().br;
                 }),

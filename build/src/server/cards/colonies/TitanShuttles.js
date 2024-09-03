@@ -24,11 +24,11 @@ class TitanShuttles extends Card_1.Card {
                 cardNumber: 'C45',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 2 floaters to ANY JOVIAN CARD.', (eb) => {
-                        eb.empty().startAction.floaters(2, { secondaryTag: Tag_1.Tag.JOVIAN });
+                        eb.empty().startAction.resource(CardResource_1.CardResource.FLOATER, { amount: 2, secondaryTag: Tag_1.Tag.JOVIAN });
                     }).br;
                     b.or().br;
                     b.action('Spend any number of floaters here to gain the same number of titanium.', (eb) => {
-                        eb.text('x').floaters(1).startAction.text('x').titanium(1);
+                        eb.text('x').resource(CardResource_1.CardResource.FLOATER).startAction.text('x').titanium(1);
                     }).br;
                 }),
             },

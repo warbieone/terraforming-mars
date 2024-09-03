@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const Options_1 = require("../Options");
 class ExpeditionToTheSurfaceVenus extends Card_1.Card {
     constructor() {
         super({
@@ -23,7 +22,7 @@ class ExpeditionToTheSurfaceVenus extends Card_1.Card {
                 cardNumber: 'Pf46',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.cards(2).venus(1).br;
-                    b.megacredits(1).slash().venus(1, { played: Options_1.played });
+                    b.megacredits(1).slash().tag(Tag_1.Tag.VENUS);
                 }),
                 description: 'Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.',
             },

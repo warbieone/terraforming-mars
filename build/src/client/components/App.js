@@ -10,7 +10,7 @@ const PlayerInputFactory_vue_1 = require("@/client/components/PlayerInputFactory
 const SpectatorHome_vue_1 = require("@/client/components/SpectatorHome.vue");
 const StartScreen_vue_1 = require("@/client/components/StartScreen.vue");
 const LoadGameForm_vue_1 = require("@/client/components/LoadGameForm.vue");
-const DebugUI_vue_1 = require("@/client/components/DebugUI.vue");
+const CardList_vue_1 = require("@/client/components/cardlist/CardList.vue");
 const Help_vue_1 = require("@/client/components/help/Help.vue");
 const AdminHome_vue_1 = require("@/client/components/admin/AdminHome.vue");
 const i18n_1 = require("@/client/directives/i18n");
@@ -54,7 +54,7 @@ exports.mainAppSettings = {
         'spectator-home': SpectatorHome_vue_1.default,
         'game-end': GameEnd_vue_1.default,
         'games-overview': GamesOverview_vue_1.default,
-        'debug-ui': DebugUI_vue_1.default,
+        'card-list': CardList_vue_1.default,
         'help': Help_vue_1.default,
         'admin-home': AdminHome_vue_1.default,
     },

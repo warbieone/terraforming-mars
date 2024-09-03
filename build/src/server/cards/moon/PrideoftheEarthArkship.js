@@ -7,7 +7,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardResource_1 = require("../../../common/CardResource");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
-const Options_1 = require("../Options");
 class PrideoftheEarthArkship extends ActionCard_1.ActionCard {
     constructor() {
         super({
@@ -27,7 +26,7 @@ class PrideoftheEarthArkship extends ActionCard_1.ActionCard {
                 cardNumber: 'M24',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 science resource here per every 5 science tags you have.', (eb) => {
-                        eb.empty().startAction.science(1).slash().text('5').science(1, { played: Options_1.played });
+                        eb.empty().startAction.resource(CardResource_1.CardResource.SCIENCE).slash().text('5').tag(Tag_1.Tag.SCIENCE);
                     }).br;
                     b.minus().titanium(2);
                 }),

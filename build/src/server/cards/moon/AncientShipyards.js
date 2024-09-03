@@ -24,7 +24,7 @@ class AncientShipyards extends Card_1.Card {
                 cardNumber: 'M19',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Steal 2 M€ from each player and add a resource cube here.', (eb) => {
-                        eb.empty().startAction.text('Steal').nbsp.megacredits(2, { all: Options_1.all }).asterix().colon().resourceCube(1);
+                        eb.empty().startAction.text('Steal').nbsp.megacredits(2, { all: Options_1.all }).asterix().colon().resource(CardResource_1.CardResource.RESOURCE_CUBE);
                     }).br.br;
                     b.minus().titanium(3);
                 }),

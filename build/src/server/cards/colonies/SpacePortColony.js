@@ -23,7 +23,7 @@ class SpacePortColony extends Card_1.Card {
                 },
             },
             metadata: {
-                cardNumber: 'C39',
+                cardNumber: 'C40',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.colonies(1).asterix().nbsp.tradeFleet().br;
                     b.vpText('1VP per 2 colonies in play.');

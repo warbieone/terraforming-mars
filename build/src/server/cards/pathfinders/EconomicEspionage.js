@@ -21,10 +21,10 @@ class EconomicEspionage extends ActionCard_1.ActionCard {
                 addResourcesToAnyCard: { count: 1, type: CardResource_1.CardResource.DATA },
             },
             metadata: {
-                cardNumber: 'Pf37',
+                cardNumber: 'Pf38',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 2 M€ to Add 1 data to ANY card.', (eb) => {
-                        eb.megacredits(2).startAction.data({ amount: 1 }).asterix();
+                        eb.megacredits(2).startAction.resource(CardResource_1.CardResource.DATA).asterix();
                     }).br;
                 }),
                 description: '1VP for every 3 data here.',

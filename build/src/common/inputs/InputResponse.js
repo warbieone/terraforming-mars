@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isSelectGlobalEventResponse = exports.isAresGlobalParametersResponse = exports.isShiftAresGlobalParametersResponse = exports.isSelectProductionToLoseResponse = exports.isSelectPaymentResponse = exports.isSelectColonyResponse = exports.isSelectAmountResponse = exports.isSelectDelegateResponse = exports.isSelectPartyResponse = exports.isSelectPlayerResponse = exports.isSelectSpaceResponse = exports.isSelectProjectCardToPlayResponse = exports.isSelectCardResponse = exports.isAndOptionsResponse = exports.isOrOptionsResponse = exports.isSelectOptionResponse = void 0;
+exports.isSelectResourcesResponse = exports.isSelectResourceResponse = exports.isSelectPolicyResponse = exports.isSelectGlobalEventResponse = exports.isAresGlobalParametersResponse = exports.isShiftAresGlobalParametersResponse = exports.isSelectProductionToLoseResponse = exports.isSelectPaymentResponse = exports.isSelectColonyResponse = exports.isSelectAmountResponse = exports.isSelectDelegateResponse = exports.isSelectPartyResponse = exports.isSelectPlayerResponse = exports.isSelectSpaceResponse = exports.isSelectProjectCardToPlayResponse = exports.isSelectCardResponse = exports.isSelectInitialCardsResponse = exports.isAndOptionsResponse = exports.isOrOptionsResponse = exports.isSelectOptionResponse = void 0;
 const utils_1 = require("../utils/utils");
 function matches(response, fields) {
     return (0, utils_1.twoWayDifference)(Object.keys(response), fields).length === 0;
@@ -17,6 +17,10 @@ function isAndOptionsResponse(response) {
     return response.type === 'and' && matches(response, ['type', 'responses']);
 }
 exports.isAndOptionsResponse = isAndOptionsResponse;
+function isSelectInitialCardsResponse(response) {
+    return response.type === 'initialCards' && matches(response, ['type', 'responses']);
+}
+exports.isSelectInitialCardsResponse = isSelectInitialCardsResponse;
 function isSelectCardResponse(response) {
     return response.type === 'card' && matches(response, ['type', 'cards']);
 }
@@ -69,3 +73,15 @@ function isSelectGlobalEventResponse(response) {
     return response.type === 'globalEvent' && matches(response, ['type', 'globalEventName']);
 }
 exports.isSelectGlobalEventResponse = isSelectGlobalEventResponse;
+function isSelectPolicyResponse(response) {
+    return response.type === 'policy' && matches(response, ['type', 'policyId']);
+}
+exports.isSelectPolicyResponse = isSelectPolicyResponse;
+function isSelectResourceResponse(response) {
+    return response.type === 'resource' && matches(response, ['type', 'resource']);
+}
+exports.isSelectResourceResponse = isSelectResourceResponse;
+function isSelectResourcesResponse(response) {
+    return response.type === 'resources' && matches(response, ['type', 'units']);
+}
+exports.isSelectResourcesResponse = isSelectResourcesResponse;

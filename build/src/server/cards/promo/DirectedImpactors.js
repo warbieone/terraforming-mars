@@ -26,11 +26,11 @@ class DirectedImpactors extends Card_1.Card {
                 cardNumber: 'X19',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).', (eb) => {
-                        eb.megacredits(6).super((b) => b.titanium(1)).startAction.asteroids(1).asterix();
+                        eb.megacredits(6).super((b) => b.titanium(1)).startAction.resource(CardResource_1.CardResource.ASTEROID).asterix();
                     }).br;
                     b.or().br;
                     b.action('Remove 1 asteroid here to raise temperature 1 step.', (eb) => {
-                        eb.asteroids(1).startAction.temperature(1);
+                        eb.resource(CardResource_1.CardResource.ASTEROID).startAction.temperature(1);
                     });
                 }),
             },

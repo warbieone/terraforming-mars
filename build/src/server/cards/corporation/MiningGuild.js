@@ -11,6 +11,7 @@ const GainProduction_1 = require("../../deferredActions/GainProduction");
 const CardRenderer_1 = require("../render/CardRenderer");
 const BoardType_1 = require("../../boards/BoardType");
 const Options_1 = require("../Options");
+const AresHandler_1 = require("../../ares/AresHandler");
 class MiningGuild extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -51,10 +52,16 @@ class MiningGuild extends CorporationCard_1.CorporationCard {
             return;
         }
         if (space.bonus.some((bonus) => bonus === SpaceBonus_1.SpaceBonus.STEEL)) {
-            cardOwner.game.defer(new GainProduction_1.GainProduction(cardOwner, Resource_1.Resource.STEEL));
-        }
-        if (space.bonus.some((bonus) => bonus === SpaceBonus_1.SpaceBonus.TITANIUM)) {
-            cardOwner.game.defer(new GainProduction_1.GainProduction(cardOwner, Resource_1.Resource.TITANIUM));
+            const board = cardOwner.game.board;
+            const grant = space.bonus.some((bonus) => bonus === SpaceBonus_1.SpaceBonus.STEEL || bonus === SpaceBonus_1.SpaceBonus.TITANIUM) ||
+                AresHandler_1.AresHandler.anyAdjacentSpaceGivesBonus(board, space, SpaceBonus_1.SpaceBonus.STEEL) ||
+                AresHandler_1.AresHandler.anyAdjacentSpaceGivesBonus(board, space, SpaceBonus_1.SpaceBonus.TITANIUM);
+            if (grant) {
+                cardOwner.game.defer(new GainProduction_1.GainProduction(cardOwner, Resource_1.Resource.STEEL));
+            }
+            if (space.bonus.some((bonus) => bonus === SpaceBonus_1.SpaceBonus.TITANIUM)) {
+                cardOwner.game.defer(new GainProduction_1.GainProduction(cardOwner, Resource_1.Resource.TITANIUM));
+            }
         }
     }
 }

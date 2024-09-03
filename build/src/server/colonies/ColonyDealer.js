@@ -20,6 +20,8 @@ class ColonyDealer {
             colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName_1.ColonyName.VENUS);
         if (!gameOptions.turmoilExtension)
             colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName_1.ColonyName.PALLAS);
+        if (!gameOptions.aresExtension)
+            colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName_1.ColonyName.DEIMOS);
         this.gameColonies = colonyTiles.map((cf) => new cf.Factory());
     }
     static includesCommunityColonies(gameOptions) {

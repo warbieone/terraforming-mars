@@ -33,11 +33,11 @@ class RegolithEaters extends ActionCard_1.ActionCard {
                 cardNumber: '033',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 microbe to this card.', (eb) => {
-                        eb.empty().startAction.microbes(1);
+                        eb.empty().startAction.resource(CardResource_1.CardResource.MICROBE);
                     }).br;
                     b.or().br;
                     b.action('Remove 2 microbes from this card to raise oxygen level 1 step.', (eb) => {
-                        eb.microbes(2).startAction.oxygen(1);
+                        eb.resource(CardResource_1.CardResource.MICROBE, 2).startAction.oxygen(1);
                     }).br;
                 }),
             },

@@ -29,9 +29,9 @@ class Pets extends Card_1.Card {
                 cardNumber: '172',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When any city tile is placed, add an animal to this card.', (eb) => {
-                        eb.city({ size: Size_1.Size.SMALL, all: Options_1.all }).startEffect.animals(1);
+                        eb.city({ size: Size_1.Size.SMALL, all: Options_1.all }).startEffect.resource(CardResource_1.CardResource.ANIMAL);
                     }).br;
-                    b.animals(1).br;
+                    b.resource(CardResource_1.CardResource.ANIMAL).br;
                     b.text('Animals may not be removed from this card', Size_1.Size.SMALL, true).br;
                     b.vpText('1 VP per 2 animals here.');
                 }),

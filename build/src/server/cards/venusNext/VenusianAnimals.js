@@ -7,7 +7,6 @@ const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const Options_1 = require("../Options");
 class VenusianAnimals extends Card_1.Card {
     constructor() {
         super({
@@ -22,7 +21,7 @@ class VenusianAnimals extends Card_1.Card {
                 cardNumber: '259',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you play a science tag, including this, add 1 animal to this card.', (eb) => {
-                        eb.science(1, { played: Options_1.played }).startEffect.animals(1);
+                        eb.tag(Tag_1.Tag.SCIENCE).startEffect.resource(CardResource_1.CardResource.ANIMAL);
                     }).br;
                     b.vpText('1 VP per animal on this card.');
                 }),
@@ -33,6 +32,9 @@ class VenusianAnimals extends Card_1.Card {
     onCardPlayed(player, card) {
         const qty = player.tags.cardTagCount(card, Tag_1.Tag.SCIENCE);
         player.addResourceTo(this, { qty, log: true });
+    }
+    onColonyAddedToLeavitt(player) {
+        player.addResourceTo(this, { qty: 1, log: true });
     }
 }
 exports.VenusianAnimals = VenusianAnimals;

@@ -23,7 +23,7 @@ class QuantumExtractor extends Card_1.Card {
                 cardNumber: '079',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you play a space card, you pay 2 M€ less for it.', (eb) => {
-                        eb.space({ played: Options_1.played }).startEffect.megacredits(-2);
+                        eb.tag(Tag_1.Tag.SPACE).startEffect.megacredits(-2);
                     }).br;
                     b.production((pb) => pb.energy(4, { digit: Options_1.digit }));
                 }),

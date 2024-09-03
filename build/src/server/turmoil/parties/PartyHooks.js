@@ -30,6 +30,10 @@ class PartyHooks {
             if (partyName === PartyName_1.PartyName.REDS && player.cardIsInEffect(CardName_1.CardName.ZAN)) {
                 return false;
             }
+            const alliedPartyPolicy = player.alliedParty?.agenda.policyId;
+            if (policyId === alliedPartyPolicy && player.alliedParty?.partyName !== PartyName_1.PartyName.REDS) {
+                return true;
+            }
             const currentPolicyId = PoliticalAgendas_1.PoliticalAgendas.currentAgenda(turmoil).policyId;
             return turmoil.rulingParty.name === partyName && currentPolicyId === policyId;
         }, () => false);

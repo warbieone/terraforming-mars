@@ -21,7 +21,7 @@ class FloaterTechnology extends ActionCard_1.ActionCard {
                 cardNumber: 'C12',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 floater to ANOTHER card.', (eb) => {
-                        eb.empty().startAction.floaters(1).asterix();
+                        eb.empty().startAction.resource(CardResource_1.CardResource.FLOATER).asterix();
                     });
                 }),
             },

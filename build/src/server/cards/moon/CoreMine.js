@@ -17,7 +17,7 @@ class CoreMine extends PreludeCard_1.PreludeCard {
             },
             metadata: {
                 description: 'Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.',
-                cardNumber: '',
+                cardNumber: 'MP2',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.titanium(1)).moonMine({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_MINING_RATE });
                 }),

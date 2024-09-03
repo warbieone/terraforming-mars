@@ -27,7 +27,7 @@ class DesignedOrganisms extends Card_1.Card {
                 cardNumber: 'Pf23',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.plants(2)).plants(3).br;
-                    b.microbes(3).asterix().animals(1).asterix();
+                    b.resource(CardResource_1.CardResource.MICROBE, 3).asterix().resource(CardResource_1.CardResource.ANIMAL).asterix();
                 }),
                 description: 'Requires 5 science tags. Increase your plant production 2 steps. Gain 3 plants. ' +
                     'Add 3 microbes to ANY card. Add 1 animal to ANY card.',

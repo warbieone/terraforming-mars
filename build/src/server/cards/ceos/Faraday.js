@@ -48,10 +48,17 @@ class Faraday extends CeoCard_1.CeoCard {
         return priorTagCount % 5 + tagsOnCard >= 5;
     }
     onCardPlayed(player, card) {
-        if (card.tags.length === 0 || card.type === CardType_1.CardType.EVENT || !player.canAfford(2))
+        if (card.tags.length === 0 || card.type === CardType_1.CardType.EVENT || !player.canAfford(2)) {
             return;
+        }
+        this.processTags(player, card.tags);
+    }
+    onColonyAddedToLeavitt(player) {
+        this.processTags(player, [Tag_1.Tag.SCIENCE]);
+    }
+    processTags(player, tags) {
         const counts = this.countTags(player);
-        const tagsOnCard = mnemonist_1.MultiSet.from(card.tags);
+        const tagsOnCard = mnemonist_1.MultiSet.from(tags);
         tagsOnCard.forEachMultiplicity((countOnCard, tagOnCard) => {
             if (INVALID_TAGS.includes(tagOnCard))
                 return;

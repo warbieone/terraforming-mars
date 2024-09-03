@@ -114,7 +114,11 @@ class AresHandler {
     static hasHazardTile(space) {
         return (0, AresTileType_1.hazardSeverity)(space.tile?.tileType) !== AresTileType_1.HazardSeverity.NONE;
     }
-    static computeAdjacencyCosts(game, space, subjectToHazardAdjacency) {
+    static computeAdjacencyCosts(player, space, subjectToHazardAdjacency) {
+        if (player.isCorporation(CardName_1.CardName.ATHENA)) {
+            subjectToHazardAdjacency = false;
+        }
+        const game = player.game;
         let megaCreditCost = 0;
         let productionCost = 0;
         game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
@@ -146,7 +150,7 @@ class AresHandler {
         if (player.game.phase === Phase_1.Phase.SOLAR) {
             return { megacredits: 0, production: 0 };
         }
-        const cost = AresHandler.computeAdjacencyCosts(player.game, space, subjectToHazardAdjacency);
+        const cost = AresHandler.computeAdjacencyCosts(player, space, subjectToHazardAdjacency);
         const availableProductionUnits = (player.production.megacredits + 5) +
             player.production.steel +
             player.production.titanium +
@@ -214,6 +218,9 @@ class AresHandler {
         }
         player.increaseTerraformRating(steps);
         player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).tileType(initialTileType));
+    }
+    static anyAdjacentSpaceGivesBonus(board, space, bonus) {
+        return board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
     }
 }
 exports.AresHandler = AresHandler;

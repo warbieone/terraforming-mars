@@ -22,7 +22,7 @@ class Anthozoa extends Card_1.Card {
                 cardNumber: 'Pf55',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 1 plant to add an animal to this card.', (eb) => {
-                        eb.plants(1).startAction.animals(1);
+                        eb.plants(1).startAction.resource(CardResource_1.CardResource.ANIMAL);
                     });
                 }),
                 description: 'Requires 3 oceans on Mars. 1 VP per 2 animals on this card.',

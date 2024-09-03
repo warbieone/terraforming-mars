@@ -24,7 +24,7 @@ class DiasporaMovement extends Card_1.Card {
                 cardNumber: 'TO4',
                 description: 'Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.megacredits(1).slash().jovian({ played: Options_1.played, all: Options_1.all });
+                    b.megacredits(1).slash().tag(Tag_1.Tag.JOVIAN, { all: Options_1.all });
                 }),
             },
         });

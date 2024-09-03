@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class ParliamentHall extends Card_1.Card {
     constructor() {
         super({
@@ -24,7 +23,7 @@ class ParliamentHall extends Card_1.Card {
                 cardNumber: 'T08',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => {
-                        pb.megacredits(1).slash().building(3, { played: Options_1.played });
+                        pb.megacredits(1).slash().tag(Tag_1.Tag.BUILDING, 3);
                     });
                 }),
                 description: 'Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 building tags you have, including this.',

@@ -21,7 +21,7 @@ class LunaHyperloopCorporation extends CorporationCard_1.ActiveCorporationCard {
             victoryPoints: { moon: { road: {} }, all: Options_1.all },
             metadata: {
                 description: 'You start with 38 M€ and 4 steel.',
-                cardNumber: '',
+                cardNumber: 'MC4',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.megacredits(38).steel(4).br;
                     b.action('Gain 1 M€ for each road tile on The Moon.', (eb) => {

@@ -22,9 +22,9 @@ class OumuamuaTypeObjectSurvey extends Card_1.Card {
             metadata: {
                 cardNumber: 'Pf53',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.data({ amount: 2 }).asterix().cards(2, { size: Size_1.Size.SMALL }).asterix().br;
-                    b.science(1, { played: Options_1.played }).microbes(1, { played: Options_1.played }).colon().text('play ', Size_1.Size.SMALL, false, true);
-                    b.space({ played: Options_1.played }).colon().production((pb) => pb.energy(3, { digit: Options_1.digit })).br;
+                    b.resource(CardResource_1.CardResource.DATA, 2).asterix().cards(2, { size: Size_1.Size.SMALL }).asterix().br;
+                    b.tag(Tag_1.Tag.SCIENCE).tag(Tag_1.Tag.MICROBE).colon().text('play ', Size_1.Size.SMALL, false, true);
+                    b.tag(Tag_1.Tag.SPACE).colon().production((pb) => pb.energy(3, { digit: Options_1.digit })).br;
                     b.text('Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. ' +
                         'If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.', Size_1.Size.SMALL, false, false);
                 }),

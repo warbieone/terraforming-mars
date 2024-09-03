@@ -34,7 +34,7 @@ class Stratopolis extends ActionCard_1.ActionCard {
                 cardNumber: '248',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 2 floaters to ANY VENUS CARD.', (eb) => {
-                        eb.empty().startAction.floaters(2, { secondaryTag: Tag_1.Tag.VENUS });
+                        eb.empty().startAction.resource(CardResource_1.CardResource.FLOATER, { amount: 2, secondaryTag: Tag_1.Tag.VENUS });
                     }).br;
                     b.production((pb) => pb.megacredits(2)).city().asterix();
                     b.vpText('1 VP for every 2nd Floater on this card.');

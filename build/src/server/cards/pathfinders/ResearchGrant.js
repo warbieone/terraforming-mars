@@ -15,7 +15,7 @@ class ResearchGrant extends PreludeCard_1.PreludeCard {
                 stock: { megacredits: 14 },
             },
             metadata: {
-                cardNumber: 'P08',
+                cardNumber: 'PfP05',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.energy(1)).br;
                     b.megacredits(14);

@@ -8,9 +8,8 @@ const Resource_1 = require("../../../common/Resource");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../../cards/render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
-const Options_1 = require("../../cards/Options");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.text('Lose all').heat(1).nbsp.megacredits(-2).slash().building(1, { played: Options_1.played }).influence({ size: Size_1.Size.SMALL });
+    b.text('Lose all').heat(1).nbsp.megacredits(-2).slash().tag(Tag_1.Tag.BUILDING).influence({ size: Size_1.Size.SMALL });
 });
 class GlobalDustStorm extends GlobalEvent_1.GlobalEvent {
     constructor() {

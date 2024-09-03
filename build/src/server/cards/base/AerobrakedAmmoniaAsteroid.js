@@ -26,7 +26,7 @@ class AerobrakedAmmoniaAsteroid extends Card_1.Card {
                         pb.heat(4).br;
                         pb.plants(1);
                     }).br;
-                    b.microbes(3).asterix();
+                    b.resource(CardResource_1.CardResource.MICROBE, 3).asterix();
                 }),
             },
         });

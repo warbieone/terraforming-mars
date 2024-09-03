@@ -6,7 +6,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 const Size_1 = require("../../../common/cards/render/Size");
 const SelectProjectCardToPlay_1 = require("../../inputs/SelectProjectCardToPlay");
 class Odyssey extends CorporationCard_1.CorporationCard {
@@ -22,7 +21,7 @@ class Odyssey extends CorporationCard_1.CorporationCard {
                     b.colon().cards(1, { secondaryTag: Tag_1.Tag.EVENT }).asterix().br;
                     b.text('(Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.)', Size_1.Size.TINY, false, false).br;
                     b.action('Pay for and play an event card you have already played that has a base cost of 16M€ or less (INCLUDING events that place special tiles,) after which discard that card.', (e) => {
-                        e.empty().startAction.event({ played: Options_1.played }).asterix().nbsp.text('≤').nbsp.megacredits(16);
+                        e.empty().startAction.tag(Tag_1.Tag.EVENT).asterix().nbsp.text('≤').nbsp.megacredits(16);
                     });
                 }),
             },

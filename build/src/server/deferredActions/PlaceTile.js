@@ -12,7 +12,9 @@ class PlaceTile extends DeferredAction_1.DeferredAction {
     execute() {
         const game = this.player.game;
         const on = this.options.on;
-        const availableSpaces = game.board.getAvailableSpacesForType(this.player, on);
+        const availableSpaces = typeof on === 'string' ?
+            game.board.getAvailableSpacesForType(this.player, on) :
+            on();
         const title = this.options?.title;
         return new SelectSpace_1.SelectSpace(title, availableSpaces)
             .andThen((space) => {
@@ -22,6 +24,7 @@ class PlaceTile extends DeferredAction_1.DeferredAction {
             }
             game.addTile(this.player, space, tile);
             space.adjacency = this.options.adjacencyBonus;
+            this.cb(space);
             return undefined;
         });
     }

@@ -24,19 +24,12 @@ function translateMessage(message) {
             return '';
         }
         switch (datum.type) {
-            case LogMessageDataType_1.LogMessageDataType.RAW_STRING:
-                return datum.value;
             case LogMessageDataType_1.LogMessageDataType.PLAYER:
                 return context.players.get(datum.value) ?? datum.value;
             case LogMessageDataType_1.LogMessageDataType.TILE_TYPE:
                 return TileType_1.tileTypeToString[datum.value];
-            case LogMessageDataType_1.LogMessageDataType.CARD:
-            case LogMessageDataType_1.LogMessageDataType.GLOBAL_EVENT:
-            case LogMessageDataType_1.LogMessageDataType.STRING:
-            case LogMessageDataType_1.LogMessageDataType.PARTY:
-                return translateText(datum.value);
             default:
-                return translateText(datum.value);
+                return translateText(datum.value.toString());
         }
     });
 }

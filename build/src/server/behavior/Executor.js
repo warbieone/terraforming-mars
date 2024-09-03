@@ -34,6 +34,8 @@ const RemoveResourcesFromCard_1 = require("../deferredActions/RemoveResourcesFro
 const IProjectCard_1 = require("../cards/IProjectCard");
 const constants_1 = require("../../common/constants");
 const CardName_1 = require("../../common/cards/CardName");
+const utils_1 = require("../../common/utils/utils");
+const SelectCard_1 = require("../inputs/SelectCard");
 class Executor {
     canExecute(behavior, player, card, canAffordOptions) {
         const ctx = new Counter_1.Counter(player, card);
@@ -109,6 +111,11 @@ class Executor {
             if (spend.corruption && player.underworldData.corruption < spend.corruption) {
                 return false;
             }
+            if (spend.cards) {
+                if (player.cardsInHand.filter((c) => card !== c).length < spend.cards) {
+                    return false;
+                }
+            }
         }
         if (behavior.decreaseAnyProduction !== undefined) {
             if (!game.isSoloMode()) {
@@ -170,8 +177,10 @@ class Executor {
             }
         }
         if (behavior.turmoil) {
+            const turmoil = Turmoil_1.Turmoil.getTurmoil(game);
             if (behavior.turmoil.sendDelegates) {
-                if (Turmoil_1.Turmoil.getTurmoil(game).getAvailableDelegateCount(player) < behavior.turmoil.sendDelegates.count) {
+                const count = ctx.count(behavior.turmoil.sendDelegates.count);
+                if (turmoil.getAvailableDelegateCount(player) < count) {
                     return false;
                 }
             }
@@ -278,6 +287,19 @@ class Executor {
             if (spend.corruption) {
                 UnderworldExpansion_1.UnderworldExpansion.loseCorruption(player, spend.corruption);
             }
+            if ((spend.cards ?? 0) > 0) {
+                const count = spend.cards ?? 0;
+                const cards = player.cardsInHand.filter((c) => card !== c);
+                player.defer(new SelectCard_1.SelectCard((0, MessageBuilder_1.message)('Select ${0} card(s) to discard', (b) => b.number(count)), undefined, cards, { min: count, max: count }).andThen((cards) => {
+                    for (const c of cards) {
+                        (0, utils_1.inplaceRemove)(player.cardsInHand, c);
+                        player.game.projectDeck.discard(c);
+                    }
+                    this.execute(remainder, player, card);
+                    return undefined;
+                }));
+                return;
+            }
         }
         if (behavior.production !== undefined) {
             const units = ctx.countUnits(behavior.production);
@@ -290,12 +312,17 @@ class Executor {
         if (behavior.standardResource) {
             const entry = behavior.standardResource;
             const count = typeof (entry) === 'number' ? entry : entry.count;
-            const same = typeof (entry) === 'number' ? false : entry.same ?? false;
+            const same = typeof (entry) === 'number' ? true : entry.same ?? true;
             if (same === false) {
-                player.defer(new SelectResources_1.SelectResources(player, count, (0, MessageBuilder_1.message)('Gain ${0} standard resources', (b) => b.number(count))));
+                player.defer(new SelectResources_1.SelectResources((0, MessageBuilder_1.message)('Gain ${0} standard resources', (b) => b.number(count)), count)
+                    .andThen((units) => {
+                    player.stock.addUnits(units, { log: true });
+                    return undefined;
+                }));
             }
             else {
-                player.defer(new SelectResource_1.SelectResource((0, MessageBuilder_1.message)('Gain ${0} units of a standard resource', (b) => b.number(count)), Units_1.Units.keys, (unit) => {
+                player.defer(new SelectResource_1.SelectResource((0, MessageBuilder_1.message)('Gain ${0} units of a standard resource', (b) => b.number(count)))
+                    .andThen((unit) => {
                     player.stock.add(Units_1.Units.ResourceMap[unit], count, { log: true });
                     return undefined;
                 }));
@@ -351,7 +378,7 @@ class Executor {
             });
         }
         if (behavior.addResourcesToAnyCard) {
-            const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
+            const array = (0, utils_1.asArray)(behavior.addResourcesToAnyCard);
             for (const arctac of array) {
                 const count = ctx.count(arctac.count);
                 if (count > 0) {
@@ -430,13 +457,14 @@ class Executor {
             }
             if (behavior.turmoil.sendDelegates) {
                 const sendDelegates = behavior.turmoil.sendDelegates;
+                const count = ctx.count(sendDelegates.count);
                 if (sendDelegates.manyParties) {
-                    for (let i = 0; i < sendDelegates.count; i++) {
+                    for (let i = 0; i < count; i++) {
                         player.game.defer(new SendDelegateToArea_1.SendDelegateToArea(player, 'Select where to send delegate'));
                     }
                 }
                 else {
-                    player.game.defer(new SendDelegateToArea_1.SendDelegateToArea(player, `Select where to send ${sendDelegates.count} delegates`, { count: sendDelegates.count }));
+                    player.game.defer(new SendDelegateToArea_1.SendDelegateToArea(player, `Select where to send ${sendDelegates.count} delegates`, { count: count }));
                 }
             }
         }

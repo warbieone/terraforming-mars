@@ -19,9 +19,10 @@ class FloaterUrbanism extends Card_1.Card {
             requirements: { tag: Tag_1.Tag.VENUS, count: 4 },
             victoryPoints: { resourcesHere: {} },
             metadata: {
+                cardNumber: 'Pf59',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 1 floater from any card to add 1 Venusian habitat on this card.', (ab) => {
-                        ab.minus().floaters(1).startAction.venusianHabitat(1);
+                        ab.minus().resource(CardResource_1.CardResource.FLOATER).startAction.resource(CardResource_1.CardResource.VENUSIAN_HABITAT);
                     }).br;
                     b.vpText('1 VP for every Venusian habitat on this card.');
                 }),

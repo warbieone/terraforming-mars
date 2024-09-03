@@ -29,10 +29,10 @@ class Herbivores extends Card_1.Card {
                 cardNumber: '147',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you place a greenery tile, add an animal to this card.', (eb) => {
-                        eb.greenery({ withO2: false }).startEffect.animals(1);
+                        eb.greenery({ withO2: false }).startEffect.resource(CardResource_1.CardResource.ANIMAL);
                     }).br;
                     b.vpText('1 VP per 2 animals on this card.');
-                    b.animals(1).production((pb) => pb.minus().plants(1, { all: Options_1.all }));
+                    b.resource(CardResource_1.CardResource.ANIMAL).production((pb) => pb.minus().plants(1, { all: Options_1.all }));
                 }),
                 description: {
                     text: 'Requires 8% oxygen. +1 animal to this card. -1 any plant production',

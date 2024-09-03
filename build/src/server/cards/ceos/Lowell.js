@@ -5,9 +5,10 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CeoCard_1 = require("./CeoCard");
 const Tag_1 = require("../../../common/cards/Tag");
-const SelectCard_1 = require("../../inputs/SelectCard");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const titles_1 = require("../../inputs/titles");
+const DrawCeoCardFromDeck_1 = require("../../deferredActions/DrawCeoCardFromDeck");
+const utils_1 = require("../../../common/utils/utils");
 class Lowell extends CeoCard_1.CeoCard {
     constructor() {
         super({
@@ -35,25 +36,17 @@ class Lowell extends CeoCard_1.CeoCard {
     action(player) {
         this.isDisabled = true;
         const game = player.game;
-        let ceosDrawn = game.ceoDeck.drawN(game, 3);
-        ceosDrawn = ceosDrawn.filter((ceo) => {
-            if (ceo.canPlay?.(player) === false) {
-                game.ceoDeck.discard(ceo);
-                game.log('${0} was discarded as ${1} could not play it.', (b) => b.card(ceo).player(player), { reservedFor: player });
-                return false;
-            }
-            return true;
+        game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 8, { title: titles_1.TITLES.payForCardAction(this.name) }))
+            .andThen(() => {
+            player.game.defer(new DrawCeoCardFromDeck_1.DrawCeoCardFromDeck(player, 3)).andThen((newCeo) => {
+                if (newCeo !== undefined) {
+                    (0, utils_1.inplaceRemove)(player.playedCards, this);
+                    game.ceoDeck.discard(this);
+                    player.playCard(newCeo);
+                }
+            });
         });
-        player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 8, { title: titles_1.TITLES.payForCardAction(this.name) }));
-        return new SelectCard_1.SelectCard('Choose CEO card to play', 'Play', ceosDrawn)
-            .andThen(([chosenCeo]) => {
-            ceosDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
-            const lowellIndex = player.playedCards.findIndex((c) => c.name === this.name);
-            player.playedCards.splice(lowellIndex, 1);
-            game.ceoDeck.discard(this);
-            player.playCard(chosenCeo);
-            return undefined;
-        });
+        return undefined;
     }
 }
 exports.Lowell = Lowell;

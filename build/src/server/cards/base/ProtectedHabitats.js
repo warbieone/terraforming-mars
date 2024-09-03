@@ -6,6 +6,7 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
+const CardResource_1 = require("../../../common/CardResource");
 class ProtectedHabitats extends Card_1.Card {
     constructor() {
         super({
@@ -16,7 +17,7 @@ class ProtectedHabitats extends Card_1.Card {
                 cardNumber: '173',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.text('Opponents may not remove your', Size_1.Size.SMALL, true).br;
-                    b.plants(1).animals(1).microbes(1);
+                    b.plants(1).resource(CardResource_1.CardResource.ANIMAL).resource(CardResource_1.CardResource.MICROBE);
                 }),
             },
         });

@@ -16,6 +16,7 @@ const CardName_1 = require("../../common/cards/CardName");
 const mnemonist_1 = require("mnemonist");
 const SendDelegateToArea_1 = require("../deferredActions/SendDelegateToArea");
 const Policy_1 = require("./Policy");
+const ChoosePolicyBonus_1 = require("../deferredActions/ChoosePolicyBonus");
 exports.ALL_PARTIES = {
     [PartyName_1.PartyName.MARS]: MarsFirst_1.MarsFirst,
     [PartyName_1.PartyName.SCIENTISTS]: Scientists_1.Scientists,
@@ -194,8 +195,17 @@ class Turmoil {
             game.log('A neutral delegate was added to the ${0} party', (b) => b.partyName(partyName));
         }
     }
+    executeAlliedOnPolicyEnd(player) {
+        if (player?.alliedParty) {
+            const { alliedParty } = player;
+            const alliedPolicy = player.game.turmoil?.getPartyByName(alliedParty.partyName)?.policies.find((p) => p.id === alliedParty.agenda.policyId);
+            alliedPolicy?.onPolicyEndForPlayer?.(player);
+        }
+    }
     setRulingParty(game) {
         this.rulingPolicy().onPolicyEnd?.(game);
+        const alliedPlayer = game.getPlayers().find((p) => p.alliedParty !== undefined);
+        this.executeAlliedOnPolicyEnd(alliedPlayer);
         if (game.beholdTheEmperor !== true) {
             this.rulingParty = this.dominantParty;
         }
@@ -242,14 +252,52 @@ class Turmoil {
             game.log('A neutral delegate is the new chairman.');
         }
     }
+    findSecondDominantParty(currentDominantParty) {
+        const currentIndex = this.parties.indexOf(currentDominantParty);
+        let partiesToCheck = [];
+        if (currentIndex === 0) {
+            partiesToCheck = this.parties.slice(1);
+        }
+        else if (currentIndex === this.parties.length - 1) {
+            partiesToCheck = this.parties.slice(0, -1);
+        }
+        else {
+            partiesToCheck = [...this.parties.slice(currentIndex + 1), ...this.parties.slice(0, currentIndex)];
+        }
+        const sortParties = [...this.parties].sort((p1, p2) => p2.delegates.size - p1.delegates.size);
+        const first = sortParties[0].delegates.size;
+        const partiesOrdered = partiesToCheck.reverse();
+        return partiesOrdered.find((p) => p.delegates.size === first);
+    }
+    applyRulingBonus(game, alliedPlayer) {
+        if (game.turmoil && alliedPlayer) {
+            const currentDominantParty = game.turmoil.dominantParty;
+            const secondDominantParty = this.findSecondDominantParty(currentDominantParty);
+            if (secondDominantParty) {
+                alliedPlayer.setAlliedParty(secondDominantParty);
+            }
+        }
+    }
     onAgendaSelected(game) {
         const rulingParty = this.rulingParty;
+        const alliedPlayer = game.getPlayers().find((p) => p.alliedParty !== undefined);
+        this.applyRulingBonus(game, alliedPlayer);
         const bonusId = PoliticalAgendas_1.PoliticalAgendas.currentAgenda(this).bonusId;
         const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);
         if (bonus === undefined) {
             throw new Error(`Bonus id ${bonusId} not found in party ${rulingParty.name}`);
         }
         game.log('The ruling bonus is: ${0}', (b) => b.string(bonus.description));
+        if (alliedPlayer?.alliedParty) {
+            const alliedParty = this.parties.find((p) => p.name === alliedPlayer.alliedParty?.partyName);
+            if (alliedParty) {
+                const bonuses = [bonus, alliedParty.bonuses[0]];
+                game.defer(new ChoosePolicyBonus_1.ChoosePolicyBonus(alliedPlayer, bonuses, (bonusId) => {
+                    const chosenBonus = this.parties.flatMap((p) => p.bonuses).find((b) => b.id === bonusId);
+                    chosenBonus?.grantForPlayer?.(alliedPlayer);
+                }));
+            }
+        }
         bonus.grant(game);
         const policyId = PoliticalAgendas_1.PoliticalAgendas.currentAgenda(this).policyId;
         const policy = rulingParty.policies.find((p) => p.id === policyId);

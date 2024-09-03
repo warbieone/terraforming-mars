@@ -12,20 +12,25 @@ class ApiWaitingFor extends Handler_1.Handler {
     timeToGo(player) {
         return player.getWaitingFor() !== undefined || player.game.phase === Phase_1.Phase.END;
     }
+    playersWithInputs(game) {
+        return game.getPlayersInGenerationOrder().filter((player) => player.getWaitingFor() !== undefined).map((player) => player.color);
+    }
     getPlayerWaitingForModel(player, game, gameAge, undoCount) {
+        const inputs = this.playersWithInputs(game);
         if (this.timeToGo(player)) {
-            return { result: 'GO' };
+            return { result: 'GO', waitingFor: inputs };
         }
         else if (game.gameAge > gameAge || game.undoCount > undoCount) {
-            return { result: 'REFRESH' };
+            return { result: 'REFRESH', waitingFor: inputs };
         }
-        return { result: 'WAIT' };
+        return { result: 'WAIT', waitingFor: inputs };
     }
     getSpectatorWaitingForModel(game, gameAge, undoCount) {
+        const inputs = this.playersWithInputs(game);
         if (game.gameAge > gameAge || game.undoCount > undoCount) {
-            return { result: 'REFRESH' };
+            return { result: 'REFRESH', waitingFor: inputs };
         }
-        return { result: 'WAIT' };
+        return { result: 'WAIT', waitingFor: inputs };
     }
     async get(req, res, ctx) {
         const id = String(ctx.url.searchParams.get('id'));

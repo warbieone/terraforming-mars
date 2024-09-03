@@ -5,7 +5,7 @@ const OrOptions_1 = require("../inputs/OrOptions");
 const SelectCard_1 = require("../inputs/SelectCard");
 const DeferredAction_1 = require("../deferredActions/DeferredAction");
 const Priority_1 = require("../deferredActions/Priority");
-const SelectResources_1 = require("../inputs/SelectResources");
+const GainResources_1 = require("../inputs/GainResources");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
 class GrantVenusAltTrackBonusDeferred extends DeferredAction_1.DeferredAction {
     constructor(player, standardResourceCount, wildResource) {
@@ -14,7 +14,7 @@ class GrantVenusAltTrackBonusDeferred extends DeferredAction_1.DeferredAction {
         this.wildResource = wildResource;
     }
     selectStandardResources(count) {
-        return new SelectResources_1.SelectResources(this.player, count, `Gain ${count} resources for your Venus track bonus.`);
+        return new GainResources_1.GainResources(this.player, count, (0, MessageBuilder_1.message)('Gain ${0} resource(s) for your Venus track bonus.', (b) => b.number(count)));
     }
     execute() {
         const resourceCards = this.player.getResourceCards(undefined);

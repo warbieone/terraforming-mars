@@ -6,10 +6,9 @@ const GlobalEventName_1 = require("../../../common/turmoil/globalEvents/GlobalEv
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../../cards/render/CardRenderer");
-const Options_1 = require("../../cards/Options");
 const Size_1 = require("../../../common/cards/render/Size");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.earth(1, { played: Options_1.played, size: Size_1.Size.SMALL }).plus().influence().colon().br;
+    b.tag(Tag_1.Tag.EARTH, { size: Size_1.Size.SMALL }).plus().influence().colon().br;
     b.text('1st:', Size_1.Size.SMALL).minus().tr(2, { size: Size_1.Size.TINY }).nbsp;
     b.text('2nd:', Size_1.Size.SMALL).minus().tr(1, { size: Size_1.Size.TINY });
 });

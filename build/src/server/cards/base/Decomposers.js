@@ -8,7 +8,6 @@ const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Phase_1 = require("../../../common/Phase");
-const Options_1 = require("../Options");
 class Decomposers extends Card_1.Card {
     constructor() {
         super({
@@ -24,10 +23,10 @@ class Decomposers extends Card_1.Card {
                 description: 'Requires 3% oxygen.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you play an animal, plant, or microbe tag, including this, add a microbe to this card.', (be) => {
-                        be.animals(1, { played: Options_1.played }).slash();
-                        be.plants(1, { played: Options_1.played }).slash();
-                        be.microbes(1, { played: Options_1.played });
-                        be.startEffect.microbes(1);
+                        be.tag(Tag_1.Tag.ANIMAL).slash();
+                        be.tag(Tag_1.Tag.PLANT).slash();
+                        be.tag(Tag_1.Tag.MICROBE);
+                        be.startEffect.resource(CardResource_1.CardResource.MICROBE);
                     }).br;
                     b.vpText('1 VP per 3 microbes on this card.');
                 }),

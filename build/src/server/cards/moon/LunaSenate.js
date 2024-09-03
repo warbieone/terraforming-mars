@@ -16,14 +16,14 @@ class LunaSenate extends Card_1.Card {
             cost: 32,
             victoryPoints: { tag: Tag_1.Tag.MOON },
             behavior: {
-                production: { megacredits: { tag: Tag_1.Tag.MOON, all: true } },
+                production: { megacredits: { tag: Tag_1.Tag.MOON, others: true } },
             },
             requirements: { tag: Tag_1.Tag.MOON, count: 3 },
             metadata: {
-                description: 'Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)',
+                description: 'Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag your OPPONENTS have.',
                 cardNumber: 'M70',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => pb.megacredits(1)).slash().moon(1, { all: Options_1.all });
+                    b.production((pb) => pb.megacredits(1).slash().tag(Tag_1.Tag.MOON, { all: Options_1.all }).asterix()).br;
                     b.vpText('1 VP per Moon tag you have.');
                 }),
             },

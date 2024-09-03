@@ -30,7 +30,7 @@ class OceanSanctuary extends Card_1.Card {
             metadata: {
                 cardNumber: 'A22',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.tile(TileType_1.TileType.OCEAN_SANCTUARY, false, true).nbsp.animals(1).br;
+                    b.tile(TileType_1.TileType.OCEAN_SANCTUARY, false, true).nbsp.resource(CardResource_1.CardResource.ANIMAL).br;
                     b.vpText('1 VP per animal on this card.');
                 }),
                 description: 'Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.',

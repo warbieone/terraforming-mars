@@ -23,8 +23,8 @@ class CassiniStation extends Card_1.Card {
                 cardNumber: 'Pf62',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.energy(1).slash().colonies(1, { all: Options_1.all })).br;
-                    b.floaters(2).asterix().or().br;
-                    b.data({ amount: 3 }).asterix();
+                    b.resource(CardResource_1.CardResource.FLOATER, 2).asterix().or().br;
+                    b.resource(CardResource_1.CardResource.DATA, 3).asterix();
                 }),
                 description: 'Increase your energy production 1 step for every colony in play. ' +
                     'Add 2 floaters to ANY card OR add 3 data to ANY card.',

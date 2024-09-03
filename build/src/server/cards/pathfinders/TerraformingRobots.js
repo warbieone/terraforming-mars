@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const Tag_1 = require("../../../common/cards/Tag");
-const Options_1 = require("../Options");
 class TerraformingRobots extends Card_1.Card {
     constructor() {
         super({
@@ -22,7 +21,7 @@ class TerraformingRobots extends Card_1.Card {
                 cardNumber: 'PfT12',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you play a Mars tag, add 1 specialized robot on this card.', (eb) => {
-                        eb.mars(1, { played: Options_1.played }).startEffect.specializedRobot(1);
+                        eb.tag(Tag_1.Tag.MARS).startEffect.resource(CardResource_1.CardResource.SPECIALIZED_ROBOT);
                     }).br;
                     b.vpText('1 VP for every specialized robot on this card.');
                 }),

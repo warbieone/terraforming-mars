@@ -15,7 +15,7 @@ class DesignCompany extends PreludeCard_1.PreludeCard {
                 drawCard: { count: 3, tag: Tag_1.Tag.BUILDING },
             },
             metadata: {
-                cardNumber: 'P08',
+                cardNumber: 'PfP08',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.steel(1)).br;
                     b.cards(3, { secondaryTag: Tag_1.Tag.BUILDING });

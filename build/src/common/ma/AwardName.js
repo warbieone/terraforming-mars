@@ -23,7 +23,6 @@ exports.awardNames = [
     'Lunar Magnate',
     'Curator',
     'Engineer',
-    'Historian',
     'Tourist',
     'A. Zoologist',
     'Cosmic Settler',

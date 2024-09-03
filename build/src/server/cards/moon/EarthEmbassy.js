@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const Options_1 = require("../Options");
 class EarthEmbassy extends Card_1.Card {
     constructor() {
         super({
@@ -18,7 +17,7 @@ class EarthEmbassy extends Card_1.Card {
                 cardNumber: 'M77',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.', (eb) => {
-                        eb.empty().startEffect.moon().equals().earth(1, { played: Options_1.played });
+                        eb.empty().startEffect.tag(Tag_1.Tag.MOON).equals().tag(Tag_1.Tag.EARTH);
                     });
                 }),
             },

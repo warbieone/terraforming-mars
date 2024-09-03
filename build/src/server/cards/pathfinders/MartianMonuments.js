@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const Options_1 = require("../Options");
 const Board_1 = require("../../boards/Board");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
 class MartianMonuments extends Card_1.Card {
@@ -23,7 +22,7 @@ class MartianMonuments extends Card_1.Card {
             metadata: {
                 cardNumber: 'Pf09',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production(((pb) => pb.megacredits(1))).slash().mars(1, { played: Options_1.played });
+                    b.production(((pb) => pb.megacredits(1))).slash().tag(Tag_1.Tag.MARS);
                 }),
                 description: 'Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.)',
             },

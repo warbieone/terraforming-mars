@@ -6,6 +6,7 @@ const DeferredAction_1 = require("./DeferredAction");
 const Priority_1 = require("./Priority");
 const SelectPaymentDeferred_1 = require("./SelectPaymentDeferred");
 const Turmoil_1 = require("../turmoil/Turmoil");
+const utils_1 = require("../../common/utils/utils");
 class SendDelegateToArea extends DeferredAction_1.DeferredAction {
     constructor(player, title = 'Select where to send a delegate', options = {}) {
         super(player, Priority_1.Priority.DEFAULT);
@@ -29,7 +30,7 @@ class SendDelegateToArea extends DeferredAction_1.DeferredAction {
                 return false;
             });
         }
-        return parties.map((party) => party.name);
+        return parties.map(utils_1.toName);
     }
     execute() {
         const availableParties = this.getAvailableParties();

@@ -21,7 +21,7 @@ class AirRaid extends Card_1.Card {
                 cardNumber: 'C02',
                 description: 'Requires that you lose 1 floater. Steal 5 M€ from any player.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.minus().floaters(1);
+                    b.minus().resource(CardResource_1.CardResource.FLOATER);
                     b.text('steal', Size_1.Size.MEDIUM, true).megacredits(5, { all: Options_1.all });
                 }),
             },

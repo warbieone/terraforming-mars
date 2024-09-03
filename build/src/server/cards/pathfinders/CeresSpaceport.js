@@ -7,7 +7,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const SpaceName_1 = require("../../SpaceName");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class CeresSpaceport extends Card_1.Card {
     constructor() {
         super({
@@ -26,7 +25,7 @@ class CeresSpaceport extends Card_1.Card {
                 cardNumber: 'Pf14',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.megacredits(2))
-                        .production((pb) => pb.titanium(1).slash().jovian({ amount: 2, played: Options_1.played }))
+                        .production((pb) => pb.titanium(1).slash().tag(Tag_1.Tag.JOVIAN, 2))
                         .br
                         .cards(1).oceans(1).city().asterix().br;
                 }),

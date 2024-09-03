@@ -4,7 +4,6 @@ import {CardType} from '../../../../common/cards/CardType';
 import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import {played} from '../../Options';
 import {IPlayer} from '../../../IPlayer';
 
 
@@ -25,7 +24,7 @@ export class RecycledProjects extends Card implements IProjectCard {
         cardNumber: 'L304',
         renderData: CardRenderer.builder((b) => {
           b.effect(undefined, (eb) => {
-            eb.building(1,{played}).slash().space({played}).startEffect.steel(1);
+            eb.tag(Tag.BUILDING).slash().tag(Tag.SPACE).startEffect.steel(1);
           }).br;
         }),
         description: 'After playing a building or space tag, receive a steel resource.',

@@ -77,6 +77,9 @@ class Player {
     get heat() {
         return this.stock.heat;
     }
+    get alliedParty() {
+        return this._alliedParty;
+    }
     set megaCredits(megacredits) {
         this.stock.megacredits = megacredits;
     }
@@ -94,6 +97,17 @@ class Player {
     }
     set heat(heat) {
         this.stock.heat = heat;
+    }
+    setAlliedParty(p) {
+        this._alliedParty = {
+            partyName: p.name,
+            agenda: {
+                bonusId: p.bonuses[0].id,
+                policyId: p.policies[0].id,
+            },
+        };
+        const alliedPolicy = this.game.turmoil?.getPartyByName(p.name).policies.find((t) => t.id === p.policies[0].id);
+        alliedPolicy?.onPolicyStartForPlayer?.(this);
     }
     constructor(name, color, beginner, handicap = 0, id) {
         this.name = name;
@@ -133,6 +147,7 @@ class Player {
         this.plantsNeededForGreenery = 8;
         this.removingPlayers = [];
         this.removedFromPlayCards = [];
+        this.preservationProgram = false;
         this.underworldData = UnderworldExpansion_1.UnderworldExpansion.initializePlayer();
         this.availableActionsThisRound = 2;
         this.actionsTakenThisGame = 0;
@@ -201,20 +216,25 @@ class Player {
         return this.terraformRating;
     }
     increaseTerraformRating(steps = 1, opts = {}) {
+        if (this.preservationProgram === true && this.game.phase === Phase_1.Phase.ACTION) {
+            steps--;
+            this.game.log('${0} for ${1} is blocking 1 TR', (b) => b.cardName(CardName_1.CardName.PRESERVATION_PROGRAM).player(this));
+            this.preservationProgram = false;
+            if (steps === 0) {
+                return;
+            }
+        }
         const raiseRating = () => {
             this.terraformRating += steps;
             this.hasIncreasedTerraformRatingThisGeneration = true;
             if (opts.log === true) {
                 this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
             }
-            this.game.getPlayersInGenerationOrder().forEach((player) => {
-                player.corporations.forEach((corp) => {
-                    corp.onIncreaseTerraformRating?.(this, player, steps);
-                });
-                player.playedCards.filter((card) => card.type === CardType_1.CardType.CEO).forEach((ceo) => {
-                    ceo.onIncreaseTerraformRating?.(this, player, steps);
-                });
-            });
+            for (const player of this.game.getPlayersInGenerationOrder()) {
+                for (const card of player.tableau) {
+                    card.onIncreaseTerraformRating?.(this, player, steps);
+                }
+            }
         };
         if (PartyHooks_1.PartyHooks.shouldApplyPolicy(this, PartyName_1.PartyName.REDS, 'rp01')) {
             if (!this.canAfford(constants_1.REDS_RULING_POLICY_COST * steps)) {
@@ -404,9 +424,12 @@ class Player {
     }
     getPlayableActionCards() {
         const result = [];
-        for (const playedCard of this.tableau) {
-            if ((0, ICard_1.isIActionCard)(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && !(0, ICeoCard_1.isCeoCard)(playedCard) && playedCard.canAct(this)) {
-                result.push(playedCard);
+        for (const card of this.tableau) {
+            if ((0, ICard_1.isIActionCard)(card) && !this.actionsThisGeneration.has(card.name) && !(0, ICeoCard_1.isCeoCard)(card)) {
+                card.warnings.clear();
+                if (card.canAct(this)) {
+                    result.push(card);
+                }
             }
         }
         return result;
@@ -447,67 +470,6 @@ class Player {
                 card.opgActionIsActive = false;
             }
         }
-    }
-    doneWorldGovernmentTerraforming() {
-        this.game.deferredActions.runAll(() => this.game.doneWorldGovernmentTerraforming());
-    }
-    worldGovernmentTerraforming() {
-        const action = new OrOptions_1.OrOptions();
-        action.title = 'Select action for World Government Terraforming';
-        action.buttonLabel = 'Confirm';
-        const game = this.game;
-        if (game.getTemperature() < constants.MAX_TEMPERATURE) {
-            action.options.push(new SelectOption_1.SelectOption('Increase temperature', 'Increase').andThen(() => {
-                game.increaseTemperature(this, 1);
-                game.log('${0} acted as World Government and increased temperature', (b) => b.player(this));
-                return undefined;
-            }));
-        }
-        if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
-            action.options.push(new SelectOption_1.SelectOption('Increase oxygen', 'Increase').andThen(() => {
-                game.increaseOxygenLevel(this, 1);
-                game.log('${0} acted as World Government and increased oxygen level', (b) => b.player(this));
-                return undefined;
-            }));
-        }
-        if (game.canAddOcean()) {
-            action.options.push(new SelectSpace_1.SelectSpace('Add an ocean', game.board.getAvailableSpacesForOcean(this))
-                .andThen((space) => {
-                game.addOcean(this, space);
-                game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
-                return undefined;
-            }));
-        }
-        if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.gameOptions.venusNextExtension) {
-            action.options.push(new SelectOption_1.SelectOption('Increase Venus scale', 'Increase').andThen(() => {
-                game.increaseVenusScaleLevel(this, 1);
-                game.log('${0} acted as World Government and increased Venus scale', (b) => b.player(this));
-                return undefined;
-            }));
-        }
-        MoonExpansion_1.MoonExpansion.ifMoon(game, (moonData) => {
-            if (moonData.habitatRate < constants.MAXIMUM_HABITAT_RATE) {
-                action.options.push(new SelectOption_1.SelectOption('Increase the Moon habitat rate', 'Increase').andThen(() => {
-                    MoonExpansion_1.MoonExpansion.raiseHabitatRate(this, 1);
-                    return undefined;
-                }));
-            }
-            if (moonData.miningRate < constants.MAXIMUM_MINING_RATE) {
-                action.options.push(new SelectOption_1.SelectOption('Increase the Moon mining rate', 'Increase').andThen(() => {
-                    MoonExpansion_1.MoonExpansion.raiseMiningRate(this, 1);
-                    return undefined;
-                }));
-            }
-            if (moonData.logisticRate < constants.MAXIMUM_LOGISTICS_RATE) {
-                action.options.push(new SelectOption_1.SelectOption('Increase the Moon logistics rate', 'Increase').andThen(() => {
-                    MoonExpansion_1.MoonExpansion.raiseLogisticRate(this, 1);
-                    return undefined;
-                }));
-            }
-        });
-        this.setWaitingFor(action, () => {
-            this.doneWorldGovernmentTerraforming();
-        });
     }
     spendableMegacredits() {
         let total = this.megaCredits;
@@ -637,7 +599,7 @@ class Player {
         if (payment !== undefined) {
             this.pay(payment);
         }
-        ColoniesHandler_1.ColoniesHandler.onCardPlayed(this.game, selectedCard);
+        ColoniesHandler_1.ColoniesHandler.maybeActivateColonies(this.game, selectedCard);
         if (selectedCard.type !== CardType_1.CardType.PROXY) {
             this.lastCardPlayed = selectedCard.name;
             this.game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
@@ -771,7 +733,7 @@ class Player {
             this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(numberOfCardInHand));
         }
         this.triggerOtherCorpEffects(corporationCard);
-        ColoniesHandler_1.ColoniesHandler.onCardPlayed(this.game, corporationCard);
+        ColoniesHandler_1.ColoniesHandler.maybeActivateColonies(this.game, corporationCard);
         PathfindersExpansion_1.PathfindersExpansion.onCardPlayed(this, corporationCard);
         if (!additionalCorp) {
             this.game.playerIsFinishedWithResearchPhase(this);
@@ -945,7 +907,7 @@ class Player {
         return playableCards;
     }
     affordOptionsForCard(card) {
-        let trSource = undefined;
+        let trSource = {};
         if (card.tr) {
             trSource = card.tr;
         }
@@ -957,6 +919,10 @@ class Player {
             else if (card.behavior !== undefined) {
                 trSource = (0, BehaviorExecutor_1.getBehaviorExecutor)().toTRSource(card.behavior, new Counter_1.Counter(this, card));
             }
+        }
+        const pharmacyUnion = this.getCorporation(CardName_1.CardName.PHARMACY_UNION);
+        if ((pharmacyUnion?.resourceCount ?? 0 > 0) && this.tags.cardHasTag(card, Tag_1.Tag.SCIENCE)) {
+            trSource.tr = (trSource.tr ?? 0) + 1;
         }
         const cost = this.getCardCost(card);
         const paymentOptionsForCard = this.paymentOptionsForCard(card);
@@ -1031,7 +997,7 @@ class Player {
             kuiperAsteroids: options?.kuiperAsteroids ?? false,
             corruption: options?.corruption ?? false,
         };
-        if (usable.titanium === false && payment.titanium > 0 && this.isCorporation(CardName_1.CardName.LUNA_TRADE_FEDERATION)) {
+        if (usable.titanium === false && payment.titanium > 0 && this.canUseTitaniumAsMegacredits) {
             usable.titanium = true;
             multiplier.titanium -= 1;
         }
@@ -1090,10 +1056,14 @@ class Player {
                     return gameOptions.altVenusBoard === false;
                 case CardName_1.CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT:
                     return gameOptions.altVenusBoard === true;
-                case CardName_1.CardName.MOON_HABITAT_STANDARD_PROJECT_V2:
-                case CardName_1.CardName.MOON_MINE_STANDARD_PROJECT_V2:
-                case CardName_1.CardName.MOON_ROAD_STANDARD_PROJECT_V2:
+                case CardName_1.CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_2:
+                case CardName_1.CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_2:
+                case CardName_1.CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_2:
                     return gameOptions.moonStandardProjectVariant === true;
+                case CardName_1.CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_1:
+                case CardName_1.CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_1:
+                case CardName_1.CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_1:
+                    return gameOptions.moonStandardProjectVariant1 === true;
                 case CardName_1.CardName.EXCAVATE_STANDARD_PROJECT:
                     return gameOptions.underworldExpansion === true;
                 case CardName_1.CardName.COLLUSION_STANDARD_PROJECT:
@@ -1123,8 +1093,9 @@ class Player {
             game.deferredActions.runAll(() => this.takeAction());
             return;
         }
-        if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption)
+        if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
             game.save();
+        }
         if (this.autopass) {
             this.passOption().cb();
         }
@@ -1132,7 +1103,7 @@ class Player {
         if (!headStartIsInEffect) {
             if (this.preludeCardsInHand.length > 0) {
                 game.phase = Phase_1.Phase.PRELUDES;
-                const selectPrelude = PreludesExpansion_1.PreludesExpansion.playPrelude(this, this.preludeCardsInHand);
+                const selectPrelude = PreludesExpansion_1.PreludesExpansion.selectPreludeToPlay(this, this.preludeCardsInHand);
                 this.setWaitingFor(selectPrelude, () => {
                     if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
                         game.playerIsFinishedTakingActions();
@@ -1174,7 +1145,7 @@ class Player {
                     .andThen(() => {
                     game.log('${0} took the first action of ${1} corporation', (b) => b.player(this).card(corp)),
                         this.deferInitialAction(corp);
-                    this.pendingInitialActions.splice(this.pendingInitialActions.indexOf(corp), 1);
+                    (0, utils_1.inplaceRemove)(this.pendingInitialActions, corp);
                     return undefined;
                 });
                 orOptions.options.push(option);
@@ -1183,8 +1154,10 @@ class Player {
                 orOptions.options.push(this.passOption());
             }
             this.setWaitingFor(orOptions, () => {
-                this.actionsTakenThisRound++;
-                this.actionsTakenThisGame++;
+                if (this.pendingInitialActions.length === 0) {
+                    this.actionsTakenThisRound++;
+                    this.actionsTakenThisGame++;
+                }
                 this.timer.rebate(constants.BONUS_SECONDS_PER_ACTION * 1000);
                 this.takeAction();
             });
@@ -1385,18 +1358,19 @@ class Player {
             canUsePlantsAsMegaCredits: this.canUsePlantsAsMegacredits,
             canUseTitaniumAsMegacredits: this.canUseTitaniumAsMegacredits,
             canUseCorruptionAsMegacredits: this.canUseCorruptionAsMegacredits,
+            preservationProgram: this.preservationProgram,
             actionsTakenThisRound: this.actionsTakenThisRound,
             actionsThisGeneration: Array.from(this.actionsThisGeneration),
-            pendingInitialActions: this.pendingInitialActions.map((c) => c.name),
-            dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
-            dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
-            dealtCeoCards: this.dealtCeoCards.map((c) => c.name),
-            dealtProjectCards: this.dealtProjectCards.map((c) => c.name),
-            cardsInHand: this.cardsInHand.map((c) => c.name),
-            preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
-            ceoCardsInHand: this.ceoCardsInHand.map((c) => c.name),
+            pendingInitialActions: this.pendingInitialActions.map(utils_1.toName),
+            dealtCorporationCards: this.dealtCorporationCards.map(utils_1.toName),
+            dealtPreludeCards: this.dealtPreludeCards.map(utils_1.toName),
+            dealtCeoCards: this.dealtCeoCards.map(utils_1.toName),
+            dealtProjectCards: this.dealtProjectCards.map(utils_1.toName),
+            cardsInHand: this.cardsInHand.map(utils_1.toName),
+            preludeCardsInHand: this.preludeCardsInHand.map(utils_1.toName),
+            ceoCardsInHand: this.ceoCardsInHand.map(utils_1.toName),
             playedCards: this.playedCards.map(cardSerialization_1.serializeProjectCard),
-            draftedCards: this.draftedCards.map((c) => c.name),
+            draftedCards: this.draftedCards.map(utils_1.toName),
             cardCost: this.cardCost,
             needsToDraft: this.needsToDraft,
             cardDiscount: this.colonies.cardDiscount,
@@ -1412,7 +1386,7 @@ class Player {
             scienceTagCount: this.scienceTagCount,
             plantsNeededForGreenery: this.plantsNeededForGreenery,
             removingPlayers: this.removingPlayers,
-            removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
+            removedFromPlayCards: this.removedFromPlayCards.map(utils_1.toName),
             name: this.name,
             color: this.color,
             beginner: this.beginner,
@@ -1422,7 +1396,8 @@ class Player {
             victoryPointsByGeneration: this.victoryPointsByGeneration,
             totalDelegatesPlaced: this.totalDelegatesPlaced,
             underworldData: this.underworldData,
-            draftHand: this.draftHand.map((c) => c.name),
+            alliedParty: this._alliedParty,
+            draftHand: this.draftHand.map(utils_1.toName),
             autoPass: this.autopass,
         };
         if (this.lastCardPlayed !== undefined) {
@@ -1495,7 +1470,7 @@ class Player {
         }
         player.pendingInitialActions = (0, createCard_1.corporationCardsFromJSON)(d.pendingInitialActions ?? []);
         player.dealtCorporationCards = (0, createCard_1.corporationCardsFromJSON)(d.dealtCorporationCards);
-        player.dealtPreludeCards = (0, createCard_1.cardsFromJSON)(d.dealtPreludeCards);
+        player.dealtPreludeCards = (0, createCard_1.preludesFromJSON)(d.dealtPreludeCards);
         player.dealtCeoCards = (0, createCard_1.ceosFromJSON)(d.dealtCeoCards);
         player.dealtProjectCards = (0, createCard_1.cardsFromJSON)(d.dealtProjectCards);
         player.cardsInHand = (0, createCard_1.cardsFromJSON)(d.cardsInHand);
@@ -1504,9 +1479,13 @@ class Player {
         player.playedCards = d.playedCards.map((element) => (0, cardSerialization_1.deserializeProjectCard)(element));
         player.draftedCards = (0, createCard_1.cardsFromJSON)(d.draftedCards);
         player.autopass = d.autoPass ?? false;
+        player.preservationProgram = d.preservationProgram ?? false;
         player.timer = Timer_1.Timer.deserialize(d.timer);
         if (d.underworldData !== undefined) {
             player.underworldData = d.underworldData;
+        }
+        if (d.alliedParty !== undefined) {
+            player._alliedParty = d.alliedParty;
         }
         player.draftHand = (0, createCard_1.cardsFromJSON)(d.draftHand);
         return player;

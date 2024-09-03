@@ -7,7 +7,6 @@ const SpaceName_1 = require("../../SpaceName");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const Options_1 = require("../Options");
 class LunaMetropolis extends Card_1.Card {
     constructor() {
         super({
@@ -23,7 +22,7 @@ class LunaMetropolis extends Card_1.Card {
             metadata: {
                 cardNumber: '236',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => pb.megacredits(1).slash().earth(1, { played: Options_1.played })).br;
+                    b.production((pb) => pb.megacredits(1).slash().tag(Tag_1.Tag.EARTH)).br;
                     b.city().asterix();
                 }),
                 description: 'Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.',

@@ -8,9 +8,8 @@ const Resource_1 = require("../../../common/Resource");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../../cards/render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
-const Options_1 = require("../../cards/Options");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.megacredits(2).slash().space({ played: Options_1.played }).influence({ size: Size_1.Size.SMALL });
+    b.megacredits(2).slash().tag(Tag_1.Tag.SPACE).influence({ size: Size_1.Size.SMALL });
 });
 class InterplanetaryTrade extends GlobalEvent_1.GlobalEvent {
     constructor() {

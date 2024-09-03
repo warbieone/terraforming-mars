@@ -17,7 +17,7 @@ class DataLeak extends Card_1.Card {
             },
             metadata: {
                 cardNumber: 'Pf30',
-                renderData: CardRenderer_1.CardRenderer.builder((b) => b.data({ amount: 5 }).asterix()),
+                renderData: CardRenderer_1.CardRenderer.builder((b) => b.resource(CardResource_1.CardResource.DATA, 5).asterix()),
                 description: 'Add 5 data to ANY card.',
             },
         });

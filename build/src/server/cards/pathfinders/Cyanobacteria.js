@@ -22,7 +22,7 @@ class Cyanobacteria extends Card_1.Card {
                 cardNumber: 'Pf27',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.oxygen(1).br;
-                    b.microbes(1).asterix().slash().oceans(1).br;
+                    b.resource(CardResource_1.CardResource.MICROBE).asterix().slash().oceans(1).br;
                 }),
                 description: 'Raise the oxygen level 1%. For every ocean tile, add a microbe to ANY card.',
             },

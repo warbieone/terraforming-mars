@@ -8,6 +8,7 @@ const SelectSpace_1 = require("../../inputs/SelectSpace");
 const TileType_1 = require("../../../common/TileType");
 const AresHandler_1 = require("../../ares/AresHandler");
 const CardRenderer_1 = require("../render/CardRenderer");
+const CardResource_1 = require("../../../common/CardResource");
 class DesperateMeasures extends Card_1.Card {
     constructor() {
         super({
@@ -19,7 +20,7 @@ class DesperateMeasures extends Card_1.Card {
                 cardNumber: 'A04',
                 description: 'Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.resourceCube().asterix().br;
+                    b.resource(CardResource_1.CardResource.RESOURCE_CUBE).asterix().br;
                     b.temperature(1).slash().oxygen(1);
                 }),
             },

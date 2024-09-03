@@ -25,7 +25,7 @@ class LunarObservationPost extends ActionCard_1.ActionCard {
                 cardNumber: 'M22',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 data resource to ANY card', (ab) => {
-                        ab.empty().startAction.data().asterix();
+                        ab.empty().startAction.resource(CardResource_1.CardResource.DATA).asterix();
                     });
                     b.br;
                     b.minus().titanium(1);

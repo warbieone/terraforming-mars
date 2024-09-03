@@ -5,7 +5,6 @@ const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class Chimera extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -23,7 +22,7 @@ class Chimera extends CorporationCard_1.CorporationCard {
                     b.corpBox('effect', (ce) => {
                         ce.effect('When you perform an action, these wild tags count as any tags of your choice. ' +
                             'For claiming milestones and funding awards, both symbols count as one. ' +
-                            '(Other wild tags still do not count toward awards.)', (ce) => ce.wild(2, { played: Options_1.played }).startEffect.wild(2, { played: Options_1.played }).slash().wild(1, { played: Options_1.played }).asterix());
+                            '(Other wild tags still do not count toward awards.)', (ce) => ce.tag(Tag_1.Tag.WILD, 2).startEffect.tag(Tag_1.Tag.WILD, 2).slash().tag(Tag_1.Tag.WILD).asterix());
                     });
                 }),
             },

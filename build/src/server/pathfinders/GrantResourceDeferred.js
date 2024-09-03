@@ -5,7 +5,7 @@ const OrOptions_1 = require("../inputs/OrOptions");
 const SelectCard_1 = require("../inputs/SelectCard");
 const DeferredAction_1 = require("../deferredActions/DeferredAction");
 const Priority_1 = require("../deferredActions/Priority");
-const SelectResources_1 = require("../inputs/SelectResources");
+const GainResources_1 = require("../inputs/GainResources");
 class GrantResourceDeferred extends DeferredAction_1.DeferredAction {
     constructor(player, wild = true) {
         super(player, Priority_1.Priority.GAIN_RESOURCE_OR_PRODUCTION);
@@ -14,7 +14,7 @@ class GrantResourceDeferred extends DeferredAction_1.DeferredAction {
     execute() {
         const options = new OrOptions_1.OrOptions();
         options.title = 'Choose your resource bonus';
-        options.options.push(new SelectResources_1.SelectResources(this.player, 1, 'Gain 1 standard resource.'));
+        options.options.push(new GainResources_1.GainResources(this.player, 1, 'Gain 1 standard resource.'));
         if (this.wild) {
             const cards = this.player.getResourceCards(undefined);
             if (cards.length > 0) {

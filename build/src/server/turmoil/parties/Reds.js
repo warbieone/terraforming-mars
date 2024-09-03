@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.REDS_POLICY_4 = exports.REDS_POLICY_3 = exports.REDS_POLICY_2 = exports.REDS_POLICY_1 = exports.REDS_BONUS_2 = exports.REDS_BONUS_1 = exports.Reds = void 0;
 const Party_1 = require("./Party");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
+const Bonus_1 = require("../Bonus");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const CardName_1 = require("../../../common/cards/CardName");
 const constants_1 = require("../../../common/constants");
@@ -21,8 +22,9 @@ class Reds extends Party_1.Party {
     }
 }
 exports.Reds = Reds;
-class RedsBonus01 {
+class RedsBonus01 extends Bonus_1.Bonus {
     constructor() {
+        super(...arguments);
         this.id = 'rb01';
         this.description = 'The player(s) with the lowest TR gains 1 TR';
     }
@@ -45,6 +47,11 @@ class RedsBonus01 {
                 player.increaseTerraformRating(1, { log: true });
             }
         });
+    }
+    grantForPlayer(player) {
+        if (this.getScore(player) > 0) {
+            player.increaseTerraformRating(1, { log: true });
+        }
     }
 }
 class RedsBonus02 {

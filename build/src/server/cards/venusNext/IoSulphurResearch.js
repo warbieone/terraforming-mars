@@ -20,7 +20,7 @@ class IoSulphurResearch extends Card_1.Card {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.cards(1).br;
                     b.or().br;
-                    b.venus(3, { played: Options_1.played, digit: Options_1.digit }).colon().cards(3);
+                    b.tag(Tag_1.Tag.VENUS, { amount: 3, digit: Options_1.digit }).colon().cards(3);
                 }),
                 description: 'Draw 1 card, or draw 3 if you have at least 3 Venus tags.',
             },

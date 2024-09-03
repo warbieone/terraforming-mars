@@ -8,6 +8,7 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
 const Tag_1 = require("../../../common/cards/Tag");
 const Turmoil_1 = require("../../turmoil/Turmoil");
+const Options_1 = require("../Options");
 class TempestConsultancy extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -20,11 +21,11 @@ class TempestConsultancy extends CorporationCard_1.CorporationCard {
             },
             metadata: {
                 description: 'You start with 37 M€. As your first action, place 2 delegates in one party.',
-                cardNumber: '',
+                cardNumber: 'MC2',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.megacredits(37).delegates(1).delegates(1).br;
                     b.action('Place 1 delegate in any party for every 5 Moon tags you have [max 3.]', (eb) => {
-                        eb.empty().startAction.delegates(1).text('(max 3)', Size_1.Size.SMALL).slash().text('5 ').moon();
+                        eb.empty().startAction.delegates(1).text('(max 3)', Size_1.Size.SMALL).slash().tag(Tag_1.Tag.MOON, { amount: 5, digit: Options_1.digit });
                     }).br;
                     b.effect('When your delegate becomes the chairman, increase your TR 1 step.', (eb) => {
                         eb.chairman().startEffect.tr(1);

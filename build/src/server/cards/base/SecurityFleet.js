@@ -24,7 +24,7 @@ class SecurityFleet extends ActionCard_1.ActionCard {
                 cardNumber: '028',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 1 titanium to add 1 fighter resource to this card.', (eb) => {
-                        eb.titanium(1).startAction.fighter();
+                        eb.titanium(1).startAction.resource(CardResource_1.CardResource.FIGHTER);
                     }).br;
                     b.vpText('1 VP for each fighter resource on this card.');
                 }),

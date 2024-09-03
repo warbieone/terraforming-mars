@@ -24,7 +24,7 @@ class Predators extends Card_1.Card {
                 cardNumber: '024',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Remove 1 animal from any card and add it to this card.', (eb) => {
-                        eb.animals(1, { all: Options_1.all }).startAction.animals(1);
+                        eb.resource(CardResource_1.CardResource.ANIMAL, { all: Options_1.all }).startAction.resource(CardResource_1.CardResource.ANIMAL);
                     }).br;
                     b.vpText('1 VP per animal on this card.');
                 }),

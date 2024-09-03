@@ -124,12 +124,6 @@ class Builder {
     plants(amount, options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.PLANTS, amount, options));
     }
-    microbes(amount, options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.MICROBES, amount, options));
-    }
-    animals(amount, options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.ANIMALS, amount, options));
-    }
     heat(amount, options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.HEAT, amount, options));
     }
@@ -155,36 +149,6 @@ class Builder {
     }
     cards(amount, options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CARDS, amount, options));
-    }
-    floaters(amount, options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.FLOATERS, amount, options));
-    }
-    asteroids(amount, options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.ASTEROIDS, amount, options));
-    }
-    graphene(amount, options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.GRAPHENE, amount, options));
-    }
-    hydroelectricResource(amount, options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.HYDROELECTRIC_RESOURCE, amount, options));
-    }
-    event(options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.EVENT, -1, options));
-    }
-    space(options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.SPACE, -1, options));
-    }
-    earth(amount = -1, options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.EARTH, amount, options));
-    }
-    building(amount = -1, options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.BUILDING, amount, options));
-    }
-    jovian(options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.JOVIAN, -1, options));
-    }
-    science(amount = 1, options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.SCIENCE, amount, options));
     }
     trade(options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.TRADE, -1, options));
@@ -233,6 +197,9 @@ class Builder {
     chairman(options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CHAIRMAN, -1, options));
     }
+    policy() {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.POLICY));
+    }
     globalEvent() {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.GLOBAL_EVENT));
     }
@@ -245,22 +212,28 @@ class Builder {
     wild(amount, options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.WILD, amount, options));
     }
-    preservation(amount) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.PRESERVATION, amount));
+    one(amount, options) {
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.ONE, amount, options));
     }
     diverseTag(amount = 1) {
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.DIVERSE_TAG, amount);
-        item.isPlayed = true;
         return this._appendToRow(item);
     }
-    fighter(amount = 1) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.FIGHTER, amount));
+    tag(tag, options) {
+        const opts = typeof (options) === 'number' ? { amount: options } : { ...options };
+        opts.tag = tag;
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.TAG, opts.amount, opts));
     }
-    cloneTrooper(amount = 1) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CLONE_TROOPER, amount));
-    }
-    camps(amount = 1) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CAMPS, amount));
+    resource(resource, options) {
+        let opts;
+        if (typeof (options) === 'number') {
+            opts = { amount: options };
+        }
+        else {
+            opts = { ...options };
+        }
+        opts.resource = resource;
+        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.RESOURCE, -1, opts));
     }
     selfReplicatingRobots() {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.SELF_REPLICATING));
@@ -289,35 +262,11 @@ class Builder {
     community() {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.COMMUNITY));
     }
-    disease() {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.DISEASE));
-    }
-    data(options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.DATA_RESOURCE, 1, options));
-    }
-    venusianHabitat(amount) {
-        this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.VENUSIAN_HABITAT, amount));
-        return this;
-    }
-    specializedRobot(amount) {
-        this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.SPECIALIZED_ROBOT, amount));
-        return this;
-    }
-    agenda(options) {
-        this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.AGENDA, 1, options));
-        return this;
-    }
     multiplierWhite() {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.MULTIPLIER_WHITE));
     }
     description(description = undefined) {
         return this._appendToRow(description);
-    }
-    moon(amount = -1, options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.MOON, amount, options));
-    }
-    resourceCube(amount = 1, options) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.RESOURCE_CUBE, amount, options));
     }
     moonHabitat(options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.MOON_HABITAT, 1, options));
@@ -337,23 +286,8 @@ class Builder {
     moonMiningRate(options) {
         return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.MOON_MINING_RATE, 1, options));
     }
-    syndicateFleet(amount = 1) {
-        return this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.SYNDICATE_FLEET, amount));
-    }
-    mars(amount, options) {
-        this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.MARS, amount, options));
-        return this;
-    }
     planetaryTrack() {
         this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.PLANETARY_TRACK, 1));
-        return this;
-    }
-    seed() {
-        this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.SEED, 1));
-        return this;
-    }
-    orbital() {
-        this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.ORBITAL, 1));
         return this;
     }
     cathedral() {
@@ -392,26 +326,6 @@ class Builder {
     }
     corruptionShield() {
         const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.CORRUPTION_SHIELD);
-        return this._appendToRow(item);
-    }
-    tool(count = 1, options) {
-        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.TOOL, count, options);
-        return this._appendToRow(item);
-    }
-    ware(count = 1, options) {
-        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.WARE, count, options);
-        return this._appendToRow(item);
-    }
-    journalism(count = 1, options) {
-        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.JOURNALISM, count, options);
-        return this._appendToRow(item);
-    }
-    supplyChain(options) {
-        this._appendToRow(new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.SUPPLY_CHAIN, 1, options));
-        return this;
-    }
-    activist(count = 1, options) {
-        const item = new CardRenderItem_1.CardRenderItem(CardRenderItemType_1.CardRenderItemType.ACTIVIST, count, options);
         return this._appendToRow(item);
     }
     geoscan() {

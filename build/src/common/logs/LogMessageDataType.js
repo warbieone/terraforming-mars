@@ -10,7 +10,7 @@ var LogMessageDataType;
     LogMessageDataType[LogMessageDataType["AWARD"] = 4] = "AWARD";
     LogMessageDataType[LogMessageDataType["MILESTONE"] = 5] = "MILESTONE";
     LogMessageDataType[LogMessageDataType["COLONY"] = 6] = "COLONY";
-    LogMessageDataType[LogMessageDataType["STANDARD_PROJECT"] = 7] = "STANDARD_PROJECT";
+    LogMessageDataType[LogMessageDataType["_STANDARD_PROJECT"] = 7] = "_STANDARD_PROJECT";
     LogMessageDataType[LogMessageDataType["PARTY"] = 8] = "PARTY";
     LogMessageDataType[LogMessageDataType["TILE_TYPE"] = 9] = "TILE_TYPE";
     LogMessageDataType[LogMessageDataType["SPACE_BONUS"] = 10] = "SPACE_BONUS";

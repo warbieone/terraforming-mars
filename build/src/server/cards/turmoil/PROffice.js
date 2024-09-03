@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class PROffice extends Card_1.Card {
     constructor() {
         super({
@@ -24,7 +23,7 @@ class PROffice extends Card_1.Card {
                 cardNumber: 'T09',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.tr(1).br;
-                    b.megacredits(1).slash().earth(1, { played: Options_1.played });
+                    b.megacredits(1).slash().tag(Tag_1.Tag.EARTH);
                 }),
                 description: 'Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.',
             },

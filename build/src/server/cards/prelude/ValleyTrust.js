@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 const PreludesExpansion_1 = require("../../preludes/PreludesExpansion");
 class ValleyTrust extends CorporationCard_1.CorporationCard {
     constructor() {
@@ -23,7 +22,7 @@ class ValleyTrust extends CorporationCard_1.CorporationCard {
                     b.megacredits(37).nbsp.prelude().asterix();
                     b.corpBox('effect', (ce) => {
                         ce.effect('When you play a science tag, you pay 2M€ less for it.', (eb) => {
-                            eb.science(1, { played: Options_1.played }).startEffect.megacredits(-2);
+                            eb.tag(Tag_1.Tag.SCIENCE).startEffect.megacredits(-2);
                         });
                     });
                 }),
@@ -36,7 +35,7 @@ class ValleyTrust extends CorporationCard_1.CorporationCard {
     initialAction(player) {
         const game = player.game;
         const cards = game.preludeDeck.drawN(game, 3);
-        return PreludesExpansion_1.PreludesExpansion.playPrelude(player, cards);
+        return PreludesExpansion_1.PreludesExpansion.selectPreludeToPlay(player, cards, 'discard');
     }
 }
 exports.ValleyTrust = ValleyTrust;

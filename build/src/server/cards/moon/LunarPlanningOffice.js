@@ -16,7 +16,7 @@ class LunarPlanningOffice extends PreludeCard_1.PreludeCard {
             },
             metadata: {
                 description: 'Draw 2 cards with a Moon tag. Gain 6 steel.',
-                cardNumber: '',
+                cardNumber: 'MP4',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.cards(2, { secondaryTag: Tag_1.Tag.MOON }).br.steel(6);
                 }),

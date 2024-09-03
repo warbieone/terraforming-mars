@@ -24,9 +24,9 @@ class Pollinators extends ActionCard_1.ActionCard {
                 addResources: 1,
             },
             metadata: {
-                cardNumber: '...',
+                cardNumber: 'PfT9',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.action('Add 1 animal on this card', (ab) => ab.empty().startAction.animals(1)).br;
+                    b.action('Add 1 animal on this card', (ab) => ab.empty().startAction.resource(CardResource_1.CardResource.ANIMAL)).br;
                     b.production((pb) => pb.plants(1).megacredits(2));
                     b.vpText('1 VP per animal on this card.');
                 }),

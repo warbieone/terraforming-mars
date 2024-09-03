@@ -25,7 +25,7 @@ class InterplanetaryCinematics extends CorporationCard_1.CorporationCard {
                     b.megacredits(40).nbsp.steel(12, { digit: Options_1.digit });
                     b.corpBox('effect', (ce) => {
                         ce.effect('Each time you play an event, you gain 3 M€.', (eb) => {
-                            eb.event({ played: Options_1.played }).startEffect.megacredits(3);
+                            eb.tag(Tag_1.Tag.EVENT).startEffect.megacredits(3);
                         });
                     });
                 }),

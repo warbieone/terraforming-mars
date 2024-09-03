@@ -9,7 +9,7 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const CardRenderDynamicVictoryPoints_1 = require("../render/CardRenderDynamicVictoryPoints");
 const TileType_1 = require("../../../common/TileType");
-const SelectSpace_1 = require("../../inputs/SelectSpace");
+const PlaceTile_1 = require("../../deferredActions/PlaceTile");
 const Board_1 = require("../../boards/Board");
 const MessageBuilder_1 = require("../../logs/MessageBuilder");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
@@ -48,11 +48,12 @@ class RedCity extends Card_1.Card {
         return this.availableRedCitySpaces(player).length > 0;
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)), this.availableRedCitySpaces(player))
-            .andThen((space) => {
-            player.game.addTile(player, space, { tileType: TileType_1.TileType.RED_CITY, card: this.name });
-            return undefined;
-        });
+        player.game.defer(new PlaceTile_1.PlaceTile(player, {
+            tile: { tileType: TileType_1.TileType.RED_CITY, card: this.name },
+            on: () => this.availableRedCitySpaces(player),
+            title: (0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)),
+        }));
+        return undefined;
     }
     getVictoryPoints(player) {
         const space = player.game.board.getSpaceByTileCard(this.name);

@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
-const Options_1 = require("../Options");
 class HighTempSuperconductors extends Card_1.Card {
     constructor() {
         super({
@@ -24,7 +23,7 @@ class HighTempSuperconductors extends Card_1.Card {
                 cardNumber: 'PfTMP',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When playing a power card, THE STANDARD PROJECT POWER PLANT, OR THE KELVINIST RULING POLICY ACTION, pay 3M€ less.', (eb) => {
-                        eb.energy(1, { played: Options_1.played }).asterix().slash().text('Kelvinists').startEffect.megacredits(-3);
+                        eb.tag(Tag_1.Tag.POWER).asterix().slash().text('Kelvinists').startEffect.megacredits(-3);
                     }).br;
                     b.production((pb) => pb.energy(2));
                 }),

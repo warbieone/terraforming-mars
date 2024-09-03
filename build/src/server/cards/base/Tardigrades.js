@@ -23,7 +23,7 @@ class Tardigrades extends ActionCard_1.ActionCard {
                 cardNumber: '049',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 microbe to this card.', (eb) => {
-                        eb.empty().startAction.microbes(1);
+                        eb.empty().startAction.resource(CardResource_1.CardResource.MICROBE);
                     }).br;
                     b.vpText('1 VP per 4 Microbes on this card.');
                 }),

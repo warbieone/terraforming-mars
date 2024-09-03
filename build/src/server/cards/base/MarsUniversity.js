@@ -10,7 +10,6 @@ const SelectOption_1 = require("../../inputs/SelectOption");
 const CardName_1 = require("../../../common/cards/CardName");
 const Priority_1 = require("../../deferredActions/Priority");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class MarsUniversity extends Card_1.Card {
     constructor() {
         super({
@@ -22,7 +21,7 @@ class MarsUniversity extends Card_1.Card {
                 cardNumber: '073',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you play a science tag, including this, you may discard a card from hand to draw a card.', (eb) => {
-                        eb.science(1, { played: Options_1.played }).startEffect.minus().cards(1).nbsp.plus().cards(1);
+                        eb.tag(Tag_1.Tag.SCIENCE).startEffect.minus().cards(1).nbsp.plus().cards(1);
                     });
                 }),
             },
@@ -30,7 +29,13 @@ class MarsUniversity extends Card_1.Card {
     }
     onCardPlayed(player, card) {
         const scienceTags = player.tags.cardTagCount(card, Tag_1.Tag.SCIENCE);
-        for (let i = 0; i < scienceTags; i++) {
+        this.onScienceTagAdded(player, scienceTags);
+    }
+    onColonyAddedToLeavitt(player) {
+        this.onScienceTagAdded(player, 1);
+    }
+    onScienceTagAdded(player, count) {
+        for (let i = 0; i < count; i++) {
             player.defer(() => {
                 if (player.cardsInHand.length === 0) {
                     return undefined;

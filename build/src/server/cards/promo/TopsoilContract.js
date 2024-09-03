@@ -22,7 +22,7 @@ class TopsoilContract extends Card_1.Card {
                 cardNumber: 'X30',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you gain a microbe to ANY CARD, also gain 1 M€.', (eb) => {
-                        eb.microbes(1).asterix().startEffect.megacredits(1);
+                        eb.resource(CardResource_1.CardResource.MICROBE).asterix().startEffect.megacredits(1);
                     }).br;
                     b.plants(3);
                 }),

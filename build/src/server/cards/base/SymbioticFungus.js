@@ -22,7 +22,7 @@ class SymbioticFungus extends ActionCard_1.ActionCard {
                 cardNumber: '133',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add a microbe to ANOTHER card.', (eb) => {
-                        eb.empty().startAction.microbes(1).asterix();
+                        eb.empty().startAction.resource(CardResource_1.CardResource.MICROBE).asterix();
                     });
                 }),
                 description: 'Requires -14 C° or warmer.',

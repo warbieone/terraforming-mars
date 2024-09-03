@@ -5,6 +5,7 @@ const Tag_1 = require("../../../common/cards/Tag");
 const PreludeCard_1 = require("./PreludeCard");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
+const Options_1 = require("../Options");
 class AcquiredSpaceAgency extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
@@ -16,7 +17,7 @@ class AcquiredSpaceAgency extends PreludeCard_1.PreludeCard {
             metadata: {
                 cardNumber: 'P35',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.titanium(6, { digit: true }).br.br;
+                    b.titanium(6, { digit: Options_1.digit }).br.br;
                     b.cards(2, { secondaryTag: Tag_1.Tag.SPACE });
                 }),
                 description: 'Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.',

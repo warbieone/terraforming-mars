@@ -8,7 +8,6 @@ const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
 const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class SaturnSurfing extends Card_1.Card {
     constructor() {
         super({
@@ -25,10 +24,10 @@ class SaturnSurfing extends Card_1.Card {
                 cardNumber: 'X11',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.', (eb) => {
-                        eb.floaters(1).startAction.megacredits(1).slash().floaters(1);
+                        eb.resource(CardResource_1.CardResource.FLOATER).startAction.megacredits(1).slash().resource(CardResource_1.CardResource.FLOATER);
                         eb.asterix().text('max 5');
                     }).br;
-                    b.floaters(1).slash().earth(1, { played: Options_1.played });
+                    b.resource(CardResource_1.CardResource.FLOATER).slash().tag(Tag_1.Tag.EARTH);
                 }),
                 description: 'Add 1 floater here for every Earth tag you have, including this.',
             },

@@ -29,8 +29,8 @@ class Recyclon extends CorporationCard_1.CorporationCard {
                     b.megacredits(40).nbsp.production((pb) => pb.steel(2));
                     b.corpBox('effect', (ce) => {
                         ce.effect('When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.', (eb) => {
-                            eb.building(1, { played: Options_1.played }).colon().microbes(1).or();
-                            eb.microbes(2, { digit: Options_1.digit }).startEffect.production((pb) => pb.plants(1));
+                            eb.tag(Tag_1.Tag.BUILDING).colon().resource(CardResource_1.CardResource.MICROBE).or();
+                            eb.resource(CardResource_1.CardResource.MICROBE, { amount: 2, digit: Options_1.digit }).startEffect.production((pb) => pb.plants(1));
                         });
                     });
                 }),

@@ -32,7 +32,6 @@ const Naturalist_1 = require("./Naturalist");
 const Voyager_1 = require("./Voyager");
 const Curator_1 = require("./amazonisPlanitia/Curator");
 const Engineer_1 = require("./amazonisPlanitia/Engineer");
-const Historian_1 = require("./amazonisPlanitia/Historian");
 const Tourist_1 = require("./amazonisPlanitia/Tourist");
 const Biologist_1 = require("./terraCimmeria/Biologist");
 const Economizer2_1 = require("./terraCimmeria/Economizer2");
@@ -77,7 +76,7 @@ exports.MOON_AWARDS = [
 exports.AMAZONIS_PLANITIA_AWARDS = [
     new Curator_1.Curator(),
     new Engineer_1.Engineer(),
-    new Historian_1.Historian(),
+    new Coordinator_1.Coordinator(),
     new Tourist_1.Tourist(),
     new Zoologist_2.Zoologist2(),
 ];

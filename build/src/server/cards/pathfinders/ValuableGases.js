@@ -19,11 +19,11 @@ class ValuableGases extends PreludeCard_1.PreludeCard {
             tags: [Tag_1.Tag.JOVIAN, Tag_1.Tag.VENUS],
             globalParameterRequirementBonus: { steps: 50, nextCardOnly: true },
             metadata: {
-                cardNumber: '',
+                cardNumber: 'PfP02',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.megacredits(10).br;
                     b.text('play', Size_1.Size.MEDIUM, true).cards(1, { secondaryTag: AltSecondaryTag_1.AltSecondaryTag.FLOATER }).asterix().br;
-                    b.floaters(5, { digit: Options_1.digit });
+                    b.resource(CardResource_1.CardResource.FLOATER, { amount: 5, digit: Options_1.digit });
                 }),
                 description: 'Gain 10 M€. Play an active floater card from hand, ignoring requirements, and add 5 floaters to it.',
             },

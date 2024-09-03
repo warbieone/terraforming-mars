@@ -19,7 +19,7 @@ class LunaFirstIncorporated extends CorporationCard_1.CorporationCard {
             },
             metadata: {
                 description: 'You start with 40 M€, 1 steel, and 1 titanium.',
-                cardNumber: '',
+                cardNumber: 'MC6',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.megacredits(40).steel(1).titanium(1).br;
                     b.effect('When you raise any Moon Rate, increase your M€ production 1 step per step.', (eb) => {

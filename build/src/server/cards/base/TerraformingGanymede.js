@@ -6,7 +6,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class TerraformingGanymede extends Card_1.Card {
     constructor() {
         super({
@@ -18,7 +17,7 @@ class TerraformingGanymede extends Card_1.Card {
             metadata: {
                 cardNumber: '197',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.tr(1).slash().jovian({ played: Options_1.played });
+                    b.tr(1).slash().tag(Tag_1.Tag.JOVIAN);
                 }),
                 description: 'Raise your TR 1 step for each Jovian tag you have, including this.',
             },

@@ -24,16 +24,16 @@ class EcologicalSurvey extends SurveyCard_1.SurveyCard {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.', (eb) => {
                         eb.emptyTile().startEffect;
-                        eb.plus().plants(1).animals(1).microbes(1);
+                        eb.plus().plants(1).resource(CardResource_1.CardResource.ANIMAL).resource(CardResource_1.CardResource.MICROBE);
                     });
                 }),
             },
         });
     }
     checkForBonuses(cardOwner, space) {
-        super.testForStandardResource(cardOwner, space, Resource_1.Resource.PLANTS, SpaceBonus_1.SpaceBonus.PLANT);
-        super.testForCardResource(cardOwner, space, CardResource_1.CardResource.MICROBE, SpaceBonus_1.SpaceBonus.MICROBE);
-        super.testForCardResource(cardOwner, space, CardResource_1.CardResource.ANIMAL, SpaceBonus_1.SpaceBonus.ANIMAL);
+        super.maybeRewardStandardResource(cardOwner, space, Resource_1.Resource.PLANTS, SpaceBonus_1.SpaceBonus.PLANT);
+        super.maybeRewardCardResource(cardOwner, space, CardResource_1.CardResource.MICROBE, SpaceBonus_1.SpaceBonus.MICROBE);
+        super.maybeRewardCardResource(cardOwner, space, CardResource_1.CardResource.ANIMAL, SpaceBonus_1.SpaceBonus.ANIMAL);
     }
 }
 exports.EcologicalSurvey = EcologicalSurvey;

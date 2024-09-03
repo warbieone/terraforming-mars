@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class CheungShingMARS extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -23,7 +22,7 @@ class CheungShingMARS extends CorporationCard_1.CorporationCard {
                     b.production((pb) => pb.megacredits(3)).nbsp.megacredits(44);
                     b.corpBox('effect', (ce) => {
                         ce.effect('When you play a building tag, gain 3 M€.', (eb) => {
-                            eb.building(1, { played: Options_1.played }).startEffect.megacredits(3);
+                            eb.tag(Tag_1.Tag.BUILDING).startEffect.megacredits(3);
                         });
                     });
                 }),

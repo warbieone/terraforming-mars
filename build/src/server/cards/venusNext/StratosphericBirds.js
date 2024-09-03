@@ -25,9 +25,9 @@ class StratosphericBirds extends ActionCard_1.ActionCard {
                 cardNumber: '249',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 animal to this card.', (eb) => {
-                        eb.empty().startAction.animals(1);
+                        eb.empty().startAction.resource(CardResource_1.CardResource.ANIMAL);
                     }).br;
-                    b.minus().floaters(1).br;
+                    b.minus().resource(CardResource_1.CardResource.FLOATER).br;
                     b.vpText('1 VP for each animal on this card.');
                 }),
                 description: {

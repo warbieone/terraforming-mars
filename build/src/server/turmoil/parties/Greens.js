@@ -5,6 +5,7 @@ const Party_1 = require("./Party");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
+const Bonus_1 = require("../Bonus");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectCard_1 = require("../../inputs/SelectCard");
 const SelectOption_1 = require("../../inputs/SelectOption");
@@ -24,8 +25,9 @@ class Greens extends Party_1.Party {
     }
 }
 exports.Greens = Greens;
-class GreensBonus01 {
+class GreensBonus01 extends Bonus_1.Bonus {
     constructor() {
+        super(...arguments);
         this.id = 'gb01';
         this.description = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
     }
@@ -34,14 +36,13 @@ class GreensBonus01 {
             player.tags.count(Tag_1.Tag.MICROBE, 'raw') +
             player.tags.count(Tag_1.Tag.ANIMAL, 'raw');
     }
-    grant(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
-        });
+    grantForPlayer(player) {
+        player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
     }
 }
-class GreensBonus02 {
+class GreensBonus02 extends Bonus_1.Bonus {
     constructor() {
+        super(...arguments);
         this.id = 'gb02';
         this.description = 'Gain 2 M€ for each greenery tile you have';
     }
@@ -50,10 +51,8 @@ class GreensBonus02 {
         const count = boardSpaces.filter((space) => Board_1.Board.isGreenerySpace(space) && Board_1.Board.spaceOwnedBy(space, player)).length;
         return count * 2;
     }
-    grant(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
-        });
+    grantForPlayer(player) {
+        player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
     }
 }
 class GreensPolicy01 {
@@ -84,7 +83,7 @@ class GreensPolicy03 {
     onCardPlayed(player, card) {
         const tags = [Tag_1.Tag.ANIMAL, Tag_1.Tag.PLANT, Tag_1.Tag.MICROBE];
         const tagCount = card.tags.filter((tag) => tags.includes(tag)).length;
-        player.stock.add(Resource_1.Resource.MEGACREDITS, tagCount * 2);
+        player.defer(() => player.stock.add(Resource_1.Resource.MEGACREDITS, tagCount * 2));
     }
 }
 class GreensPolicy04 {

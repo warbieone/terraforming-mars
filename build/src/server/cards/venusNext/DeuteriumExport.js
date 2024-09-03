@@ -34,11 +34,11 @@ class DeuteriumExport extends ActionCard_1.ActionCard {
                 cardNumber: '221',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 floater to this card.', (eb) => {
-                        eb.empty().startAction.floaters(1);
+                        eb.empty().startAction.resource(CardResource_1.CardResource.FLOATER);
                     }).br;
                     b.or(Size_1.Size.SMALL).br;
                     b.action('Spend 1 floater here to increase your energy production 1 step.', (be) => {
-                        be.floaters(1).startAction.production((pb) => pb.energy(1));
+                        be.resource(CardResource_1.CardResource.FLOATER).startAction.production((pb) => pb.energy(1));
                     });
                 }),
             },

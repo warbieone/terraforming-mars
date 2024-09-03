@@ -25,8 +25,8 @@ class SearchForLife extends Card_1.Card {
                 cardNumber: '005',
                 description: 'Oxygen must be 6% or less.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.action('Spend 1 M€ to reveal the top card of t deck. If that card has a microbe tag, add a science resource here.', (eb) => {
-                        eb.megacredits(1).startAction.microbes(1, { played: Options_1.played }).asterix().nbsp.colon().nbsp.science();
+                    b.action('Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.', (eb) => {
+                        eb.megacredits(1).startAction.tag(Tag_1.Tag.MICROBE).asterix().nbsp.colon().nbsp.resource(CardResource_1.CardResource.SCIENCE);
                     }).br;
                     b.vpText('3 VPs if you have one or more science resources here.');
                 }),
@@ -41,18 +41,12 @@ class SearchForLife extends Card_1.Card {
         return 0;
     }
     canAct(player) {
-        if (!player.game.projectDeck.canDraw(1)) {
-            this.warnings.add('deckTooSmall');
-        }
-        return player.canAfford(1);
+        return player.canAfford(1) && player.game.projectDeck.canDraw(1);
     }
     action(player) {
         player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 1, { title: titles_1.TITLES.payForCardAction(this.name) }))
             .andThen(() => {
-            const card = player.game.projectDeck.draw(player.game);
-            if (card === undefined) {
-                return;
-            }
+            const card = player.game.projectDeck.drawOrThrow(player.game);
             player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(card, { tags: true }));
             if (card.tags.includes(Tag_1.Tag.MICROBE)) {
                 player.addResourceTo(this, 1);

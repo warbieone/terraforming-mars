@@ -36,8 +36,8 @@ export class DNAExtractionFromSoil extends ActionCard{
         cardNumber: 'L415',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to this card, or remove 1 microbe here to draw a card.', (eb) => {
-            eb.empty().arrow().microbes(1).or();
-            eb.microbes(1).startAction.cards(1);
+            eb.empty().arrow().resource(CardResource.MICROBE).or();
+            eb.resource(CardResource.MICROBE).startAction.cards(1);
           });
         }),
       },

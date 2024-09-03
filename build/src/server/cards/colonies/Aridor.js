@@ -48,21 +48,27 @@ class Aridor extends CorporationCard_1.CorporationCard {
         ColoniesHandler_1.ColoniesHandler.addColonyTile(player, { title: 'Aridor first action - Select colony tile to add' });
         return undefined;
     }
+    processTags(player, tags) {
+        for (const tag of tags) {
+            const currentSize = this.allTags.size;
+            this.allTags.add(tag);
+            if (this.allTags.size > currentSize) {
+                player.game.log('${0} gained 1 M€ production from ${1} for ${2}', (b) => b.player(player).card(this).string(tag));
+                player.production.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
+            }
+        }
+    }
     onCorpCardPlayed(player, card) {
         return this.onCardPlayed(player, card);
+    }
+    onColonyAddedToLeavitt(player) {
+        this.processTags(player, [Tag_1.Tag.SCIENCE]);
     }
     onCardPlayed(player, card) {
         if (!player.isCorporation(this.name)) {
             return;
         }
-        for (const tag of this.tagsForCard(card)) {
-            const currentSize = this.allTags.size;
-            this.allTags.add(tag);
-            if (this.allTags.size > currentSize) {
-                player.game.log('${0} gained 1 MC production from ${1} for ${2}', (b) => b.player(player).card(this).string(tag));
-                player.production.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
-            }
-        }
+        this.processTags(player, this.tagsForCard(card));
     }
     serialize(serialized) {
         serialized.allTags = Array.from(this.allTags);

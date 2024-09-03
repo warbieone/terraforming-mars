@@ -4,6 +4,7 @@ exports.KELVINISTS_POLICY_4 = exports.KELVINISTS_POLICY_3 = exports.KELVINISTS_P
 const Party_1 = require("./Party");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Resource_1 = require("../../../common/Resource");
+const Bonus_1 = require("../Bonus");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const constants_1 = require("../../../common/constants");
 const CardName_1 = require("../../../common/cards/CardName");
@@ -17,32 +18,30 @@ class Kelvinists extends Party_1.Party {
     }
 }
 exports.Kelvinists = Kelvinists;
-class KelvinistsBonus01 {
+class KelvinistsBonus01 extends Bonus_1.Bonus {
     constructor() {
+        super(...arguments);
         this.id = 'kb01';
         this.description = 'Gain 1 M€ for each heat production you have';
     }
     getScore(player) {
         return player.production.heat;
     }
-    grant(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
-        });
+    grantForPlayer(player) {
+        player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
     }
 }
-class KelvinistsBonus02 {
+class KelvinistsBonus02 extends Bonus_1.Bonus {
     constructor() {
+        super(...arguments);
         this.id = 'kb02';
         this.description = 'Gain 1 heat for each heat production you have';
     }
     getScore(player) {
         return player.production.heat;
     }
-    grant(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.stock.add(Resource_1.Resource.HEAT, this.getScore(player));
-        });
+    grantForPlayer(player) {
+        player.stock.add(Resource_1.Resource.HEAT, this.getScore(player));
     }
 }
 class KelvinistsPolicy01 {

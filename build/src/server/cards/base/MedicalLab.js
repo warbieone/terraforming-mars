@@ -6,7 +6,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class MedicalLab extends Card_1.Card {
     constructor() {
         super({
@@ -22,7 +21,7 @@ class MedicalLab extends Card_1.Card {
                 cardNumber: '207',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => {
-                        pb.megacredits(1).slash().building(2, { played: Options_1.played });
+                        pb.megacredits(1).slash().tag(Tag_1.Tag.BUILDING, 2);
                     });
                 }),
                 description: 'Increase your M€ production 1 step for every 2 building tags you have, including this.',

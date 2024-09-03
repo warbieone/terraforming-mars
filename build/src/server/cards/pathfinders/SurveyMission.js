@@ -18,7 +18,7 @@ class SurveyMission extends PreludeCard_1.PreludeCard {
                 stock: { steel: 5 },
             },
             metadata: {
-                cardNumber: 'P07',
+                cardNumber: 'PfP07',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.steel(5, { digit: Options_1.digit });
                     b.br;

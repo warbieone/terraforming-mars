@@ -19,7 +19,7 @@ class MeatIndustry extends Card_1.Card {
                 cardNumber: 'X25',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you gain an animal to ANY CARD, gain 2 M€.', (eb) => {
-                        eb.animals(1).asterix().startEffect.megacredits(2);
+                        eb.resource(CardResource_1.CardResource.ANIMAL).asterix().startEffect.megacredits(2);
                     });
                 }),
             },

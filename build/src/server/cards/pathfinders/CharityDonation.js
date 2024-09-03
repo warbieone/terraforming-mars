@@ -26,11 +26,14 @@ class CharityDonation extends Card_1.Card {
             },
         });
     }
+    bespokeCanPlay(player) {
+        return player.game.projectDeck.canDraw(player.game.getPlayers().length + 1);
+    }
     bespokePlay(player) {
         const game = player.game;
         const players = game.getPlayersInGenerationOrder();
         const thisIdx = players.findIndex((p) => p === player);
-        const cards = game.projectDeck.drawByCondition(game, players.length + 1, () => true);
+        const cards = game.projectDeck.drawByConditionOrThrow(game, players.length + 1, () => true);
         LogHelper_1.LogHelper.logDrawnCards(player, cards);
         game.defer(new SelectCharityDonationCard(players, thisIdx, thisIdx, cards));
         return undefined;

@@ -26,7 +26,7 @@ class SpaceDebrisCleaningOperation extends Card_1.Card {
                 cardNumber: 'Pf24',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.titanium(3).br;
-                    b.wild(1).asterix().data().asterix().cards(1);
+                    b.wild(1).asterix().resource(CardResource_1.CardResource.DATA).asterix().cards(1);
                 }),
                 description: 'Requires any 4 space tags in play. Gain 3 titanium. ' +
                     'Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) ' +

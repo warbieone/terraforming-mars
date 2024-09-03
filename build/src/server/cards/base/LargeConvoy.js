@@ -30,7 +30,7 @@ class LargeConvoy extends Card_1.Card {
                 cardNumber: '143',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.oceans(1).cards(2).br;
-                    b.plants(5, { digit: Options_1.digit }).or(Size_1.Size.MEDIUM).animals(4, { digit: Options_1.digit }).asterix();
+                    b.plants(5, { digit: Options_1.digit }).or(Size_1.Size.MEDIUM).resource(CardResource_1.CardResource.ANIMAL, { amount: 4, digit: Options_1.digit }).asterix();
                 }),
                 description: 'Place an ocean tile and draw 2 cards. Gain 5 plants or add 4 animals to ANOTHER card.',
             },

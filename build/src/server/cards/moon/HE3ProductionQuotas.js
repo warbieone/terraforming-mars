@@ -11,6 +11,7 @@ const TileType_1 = require("../../../common/TileType");
 const Card_1 = require("../Card");
 const Size_1 = require("../../../common/cards/render/Size");
 const Options_1 = require("../Options");
+const Resource_1 = require("../../../common/Resource");
 class HE3ProductionQuotas extends Card_1.Card {
     constructor() {
         super({
@@ -43,8 +44,11 @@ class HE3ProductionQuotas extends Card_1.Card {
     }
     bespokePlay(player) {
         const moonTiles = MoonExpansion_1.MoonExpansion.spaces(player.game, TileType_1.TileType.MOON_MINE, { surfaceOnly: true });
-        player.steel -= moonTiles.length;
-        player.heat += (4 * moonTiles.length);
+        const steelSpent = moonTiles.length;
+        const heatGained = moonTiles.length * 4;
+        player.stock.deduct(Resource_1.Resource.STEEL, steelSpent);
+        player.heat += heatGained;
+        player.game.log('Player spent ${0} steel and gained ${1} heat', (b) => b.number(steelSpent).number(heatGained));
         return undefined;
     }
 }

@@ -12,11 +12,8 @@ const Database_1 = require("./database/Database");
 const server_ids_1 = require("./utils/server-ids");
 const requestProcessor_1 = require("./server/requestProcessor");
 const timer_1 = require("./utils/timer");
-const BehaviorExecutor_1 = require("./behavior/BehaviorExecutor");
-const Executor_1 = require("./behavior/Executor");
 const GameLoader_1 = require("./database/GameLoader");
-const AllManifests_1 = require("./cards/AllManifests");
-const GlobalEventDealer_1 = require("./turmoil/globalEvents/GlobalEventDealer");
+const globalInitialize_1 = require("./globalInitialize");
 process.on('uncaughtException', (err) => {
     console.error('UNCAUGHT EXCEPTION', err);
 });
@@ -66,8 +63,7 @@ async function start() {
         app: 'terraforming-mars-app',
     });
     prometheus.collectDefaultMetrics();
-    (0, GlobalEventDealer_1.initializeGlobalEventDealer)(AllManifests_1.ALL_MODULE_MANIFESTS);
-    (0, BehaviorExecutor_1.registerBehaviorExecutor)(new Executor_1.Executor());
+    (0, globalInitialize_1.globalInitialize)();
     const server = createServer();
     await (0, timer_1.timeAsync)(Database_1.Database.getInstance().initialize())
         .then((v) => {

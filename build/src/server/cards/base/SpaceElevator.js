@@ -22,7 +22,7 @@ class SpaceElevator extends ActionCard_1.ActionCard {
             },
             victoryPoints: 2,
             metadata: {
-                cardNumber: '203',
+                cardNumber: '013',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 1 steel to gain 5 M€.', (eb) => {
                         eb.steel(1).startAction.megacredits(5);

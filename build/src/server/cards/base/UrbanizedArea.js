@@ -4,7 +4,7 @@ exports.UrbanizedArea = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
-const SelectSpace_1 = require("../../inputs/SelectSpace");
+const PlaceCityTile_1 = require("../../deferredActions/PlaceCityTile");
 const CardName_1 = require("../../../common/cards/CardName");
 const Board_1 = require("../../boards/Board");
 const CardRenderer_1 = require("../render/CardRenderer");
@@ -38,11 +38,11 @@ class UrbanizedArea extends Card_1.Card {
         return this.getAvailableSpaces(player, canAffordOptions).length > 0;
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player))
-            .andThen((space) => {
-            player.game.addCity(player, space);
-            return undefined;
-        });
+        player.game.defer(new PlaceCityTile_1.PlaceCityTile(player, {
+            title: 'Select space next to at least 2 other city tiles',
+            spaces: this.getAvailableSpaces(player),
+        }));
+        return undefined;
     }
 }
 exports.UrbanizedArea = UrbanizedArea;

@@ -25,7 +25,7 @@ export class DactylAndIda extends Card implements IProjectCard {
         cardNumber: 'L411',
         renderData: CardRenderer.builder((b) => {
           b.temperature(1).oxygen(1).br;
-          b.asteroids(2).asterix();
+          b.resource(CardResource.ASTEROID,2);
         }),
       },
     });

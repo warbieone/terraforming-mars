@@ -5,7 +5,6 @@ const Card_1 = require("../Card");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 const Tag_1 = require("../../../common/cards/Tag");
 class RobotPollinators extends Card_1.Card {
     constructor() {
@@ -21,7 +20,7 @@ class RobotPollinators extends Card_1.Card {
             metadata: {
                 cardNumber: 'X45',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => pb.plants(1)).br.plants(1).slash().plants(1, { played: Options_1.played });
+                    b.production((pb) => pb.plants(1)).br.plants(1).slash().tag(Tag_1.Tag.PLANT);
                 }),
                 description: 'Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.',
             },

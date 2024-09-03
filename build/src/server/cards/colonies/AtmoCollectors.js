@@ -49,12 +49,12 @@ class AtmoCollectors extends ActionCard_1.ActionCard {
                 cardNumber: 'C03',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add one floater here.', (eb) => {
-                        eb.empty().startAction.floaters(1).or(Size_1.Size.SMALL);
+                        eb.empty().startAction.resource(CardResource_1.CardResource.FLOATER).or(Size_1.Size.SMALL);
                     }).br;
                     b.action('Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.', (eb) => {
-                        eb.floaters(1).startAction.titanium(2, { digit: Options_1.digit }).slash(Size_1.Size.SMALL).energy(3, { digit: Options_1.digit }).slash(Size_1.Size.SMALL).heat(4, { digit: Options_1.digit });
+                        eb.resource(CardResource_1.CardResource.FLOATER).startAction.titanium(2, { digit: Options_1.digit }).slash(Size_1.Size.SMALL).energy(3, { digit: Options_1.digit }).slash(Size_1.Size.SMALL).heat(4, { digit: Options_1.digit });
                     }).br;
-                    b.floaters(2).asterix();
+                    b.resource(CardResource_1.CardResource.FLOATER, 2).asterix();
                 }),
             },
         });

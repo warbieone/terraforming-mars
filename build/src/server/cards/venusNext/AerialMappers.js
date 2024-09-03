@@ -40,11 +40,11 @@ class AerialMappers extends ActionCard_1.ActionCard {
                 cardNumber: '213',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add floater to ANY card.', (be) => {
-                        be.empty().startAction.floaters(1).asterix();
+                        be.empty().startAction.resource(CardResource_1.CardResource.FLOATER).asterix();
                     }).br;
                     b.or(Size_1.Size.SMALL).br;
                     b.action('Spend one floater here to draw 1 card.', (be) => {
-                        be.floaters(1).startAction.cards(1);
+                        be.resource(CardResource_1.CardResource.FLOATER).startAction.cards(1);
                     });
                 }),
             },

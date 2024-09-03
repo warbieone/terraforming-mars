@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const CardResource_1 = require("../../../common/CardResource");
 const PathfindersData_1 = require("../../pathfinders/PathfindersData");
-const Options_1 = require("../Options");
 const Size_1 = require("../../../common/cards/render/Size");
 const AltSecondaryTag_1 = require("../../../common/cards/render/AltSecondaryTag");
 class AdhaiHighOrbitConstructions extends CorporationCard_1.CorporationCard {
@@ -24,13 +23,13 @@ class AdhaiHighOrbitConstructions extends CorporationCard_1.CorporationCard {
                 cardNumber: 'PfC23',
                 description: 'You start with 43 M€.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.megacredits(43).nbsp.nbsp.space({ played: Options_1.played, secondaryTag: AltSecondaryTag_1.AltSecondaryTag.NO_PLANETARY_TAG }).colon().orbital().br;
+                    b.megacredits(43).nbsp.nbsp.tag(Tag_1.Tag.SPACE, { secondaryTag: AltSecondaryTag_1.AltSecondaryTag.NO_PLANETARY_TAG }).colon().resource(CardResource_1.CardResource.ORBITAL).br;
                     b.text('(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)', Size_1.Size.SMALL, false, false);
                     b.br;
                     b.effect('For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.', (eb) => {
-                        eb.space({ played: Options_1.played, secondaryTag: AltSecondaryTag_1.AltSecondaryTag.NO_PLANETARY_TAG }).slash(Size_1.Size.SMALL).colonies(1, { size: Size_1.Size.SMALL }).slash(Size_1.Size.SMALL).trade({ size: Size_1.Size.SMALL })
+                        eb.tag(Tag_1.Tag.SPACE, { secondaryTag: AltSecondaryTag_1.AltSecondaryTag.NO_PLANETARY_TAG }).slash(Size_1.Size.SMALL).colonies(1, { size: Size_1.Size.SMALL }).slash(Size_1.Size.SMALL).trade({ size: Size_1.Size.SMALL })
                             .startEffect
-                            .minus().megacredits(1).text('/2').orbital();
+                            .minus().megacredits(1).text('/2').resource(CardResource_1.CardResource.ORBITAL);
                     });
                 }),
             },

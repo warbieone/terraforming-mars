@@ -26,7 +26,7 @@ class BreedingFarms extends ActionCard_1.ActionCard {
                 cardNumber: 'Pf01',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 1 plant to add 1 animal to ANY card.', (eb) => {
-                        eb.plants(1).startAction.animals(1);
+                        eb.plants(1).startAction.resource(CardResource_1.CardResource.ANIMAL);
                     });
                     b.br;
                     b.temperature(1);

@@ -6,8 +6,8 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 const Resource_1 = require("../../../common/Resource");
+const Options_1 = require("../Options");
 class TollStation extends Card_1.Card {
     constructor() {
         super({
@@ -19,7 +19,7 @@ class TollStation extends Card_1.Card {
                 cardNumber: '099',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => {
-                        pb.megacredits(1).slash().space({ played: Options_1.played, all: Options_1.all }).asterix();
+                        pb.megacredits(1).slash().tag(Tag_1.Tag.SPACE, { all: Options_1.all }).asterix();
                     });
                 }),
                 description: 'Increase your M€ production 1 step for each space tag of the OPPONENT who has the most space tags.',

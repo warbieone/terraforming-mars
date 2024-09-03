@@ -14,7 +14,7 @@ class PersonalAgenda extends PreludeCard_1.PreludeCard {
                 production: { megacredits: 3 },
             },
             metadata: {
-                cardNumber: 'P08',
+                cardNumber: 'PfP10',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.megacredits(3)).br;
                     b.cards(3, { secondaryTag: Tag_1.Tag.EVENT }).asterix();

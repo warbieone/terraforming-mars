@@ -13,7 +13,7 @@ class NewPartner extends PreludeCard_1.PreludeCard {
                 production: { megacredits: 1 },
             },
             metadata: {
-                cardNumber: 'P43',
+                cardNumber: 'X42',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.megacredits(1)).prelude().asterix();
                 }),
@@ -31,7 +31,7 @@ class NewPartner extends PreludeCard_1.PreludeCard {
     bespokePlay(player) {
         const game = player.game;
         const cards = game.preludeDeck.drawN(game, 2);
-        return PreludesExpansion_1.PreludesExpansion.playPrelude(player, cards);
+        return PreludesExpansion_1.PreludesExpansion.selectPreludeToPlay(player, cards);
     }
 }
 exports.NewPartner = NewPartner;

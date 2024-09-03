@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const Options_1 = require("../Options");
 class SpaceRelay extends Card_1.Card {
     constructor() {
         super({
@@ -21,7 +20,7 @@ class SpaceRelay extends Card_1.Card {
                 cardNumber: 'Pf33',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('Whenever you play a card with a Jovian tag, including this, draw a card.', (eb) => {
-                        eb.jovian({ amount: 1, played: Options_1.played }).startEffect.cards(1);
+                        eb.tag(Tag_1.Tag.JOVIAN).startEffect.cards(1);
                     }).br;
                     b.production((pb) => pb.megacredits(1));
                 }),

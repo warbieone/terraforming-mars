@@ -30,9 +30,9 @@ class GeologicalSurvey extends SurveyCard_1.SurveyCard {
         });
     }
     checkForBonuses(cardOwner, space) {
-        super.testForStandardResource(cardOwner, space, Resource_1.Resource.STEEL, SpaceBonus_1.SpaceBonus.STEEL);
-        super.testForStandardResource(cardOwner, space, Resource_1.Resource.TITANIUM, SpaceBonus_1.SpaceBonus.TITANIUM);
-        super.testForStandardResource(cardOwner, space, Resource_1.Resource.HEAT, SpaceBonus_1.SpaceBonus.HEAT);
+        super.maybeRewardStandardResource(cardOwner, space, Resource_1.Resource.STEEL, SpaceBonus_1.SpaceBonus.STEEL);
+        super.maybeRewardStandardResource(cardOwner, space, Resource_1.Resource.TITANIUM, SpaceBonus_1.SpaceBonus.TITANIUM);
+        super.maybeRewardStandardResource(cardOwner, space, Resource_1.Resource.HEAT, SpaceBonus_1.SpaceBonus.HEAT);
     }
 }
 exports.GeologicalSurvey = GeologicalSurvey;

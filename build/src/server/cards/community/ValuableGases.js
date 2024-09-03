@@ -22,7 +22,7 @@ class ValuableGases extends PreludeCard_1.PreludeCard {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.megacredits(6).br.br;
                     b.text('play', Size_1.Size.MEDIUM, true).cards(1, { secondaryTag: Tag_1.Tag.VENUS }).colon();
-                    b.floaters(4, { digit: Options_1.digit });
+                    b.resource(CardResource_1.CardResource.FLOATER, { amount: 4, digit: Options_1.digit });
                 }),
                 description: 'Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.',
             },

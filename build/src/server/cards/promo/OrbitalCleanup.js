@@ -6,7 +6,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class OrbitalCleanup extends ActionCard_1.ActionCard {
     constructor() {
         super({
@@ -25,7 +24,7 @@ class OrbitalCleanup extends ActionCard_1.ActionCard {
                 cardNumber: 'X08',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Gain 1 M€ per 2 science tags you have.', (eb) => {
-                        eb.empty().startAction.megacredits(1).slash().science(2, { played: Options_1.played });
+                        eb.empty().startAction.megacredits(1).slash().tag(Tag_1.Tag.SCIENCE, 2);
                     }).br;
                     b.production((pb) => {
                         pb.megacredits(-2);

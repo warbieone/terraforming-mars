@@ -4,7 +4,7 @@ exports.NoctisCity = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
-const SelectSpace_1 = require("../../inputs/SelectSpace");
+const PlaceCityTile_1 = require("../../deferredActions/PlaceCityTile");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const MessageBuilder_1 = require("../../logs/MessageBuilder");
@@ -43,13 +43,13 @@ class NoctisCity extends Card_1.Card {
         if (noctisCitySpaceId !== undefined) {
             const space = player.game.board.getSpaceOrThrow(noctisCitySpaceId);
             player.game.addCity(player, space);
-            return undefined;
         }
-        return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)), player.game.board.getAvailableSpacesForCity(player))
-            .andThen((space) => {
-            player.game.addCity(player, space);
-            return undefined;
-        });
+        else {
+            player.game.defer(new PlaceCityTile_1.PlaceCityTile(player, {
+                title: (0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)),
+            }));
+        }
+        return undefined;
     }
 }
 exports.NoctisCity = NoctisCity;

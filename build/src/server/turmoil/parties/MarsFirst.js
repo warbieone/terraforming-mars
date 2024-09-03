@@ -5,7 +5,9 @@ const Party_1 = require("./Party");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
+const Bonus_1 = require("../Bonus");
 const SpaceType_1 = require("../../../common/boards/SpaceType");
+const Policy_1 = require("../Policy");
 const Phase_1 = require("../../../common/Phase");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const constants_1 = require("../../../common/constants");
@@ -19,22 +21,22 @@ class MarsFirst extends Party_1.Party {
     }
 }
 exports.MarsFirst = MarsFirst;
-class MarsFirstBonus01 {
+class MarsFirstBonus01 extends Bonus_1.Bonus {
     constructor() {
+        super(...arguments);
         this.id = 'mb01';
         this.description = 'Gain 1 M€ for each building tag you have';
     }
     getScore(player) {
         return player.tags.count(Tag_1.Tag.BUILDING, 'raw');
     }
-    grant(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
-        });
+    grantForPlayer(player) {
+        player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
     }
 }
-class MarsFirstBonus02 {
+class MarsFirstBonus02 extends Bonus_1.Bonus {
     constructor() {
+        super(...arguments);
         this.id = 'mb02';
         this.description = 'Gain 1 M€ for each tile you have ON MARS';
     }
@@ -42,10 +44,8 @@ class MarsFirstBonus02 {
         const boardSpaces = player.game.board.spaces;
         return boardSpaces.filter((space) => space.tile !== undefined && space.player === player && space.spaceType !== SpaceType_1.SpaceType.COLONY).length;
     }
-    grant(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
-        });
+    grantForPlayer(player) {
+        player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
     }
 }
 class MarsFirstPolicy01 {
@@ -69,20 +69,17 @@ class MarsFirstPolicy02 {
             player.stock.add(Resource_1.Resource.MEGACREDITS, 2);
     }
 }
-class MarsFirstPolicy03 {
+class MarsFirstPolicy03 extends Policy_1.Policy {
     constructor() {
+        super(...arguments);
         this.id = 'mfp03';
         this.description = 'Your steel resources are worth 1 M€ extra';
     }
-    onPolicyStart(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.increaseSteelValue();
-        });
+    onPolicyStartForPlayer(player) {
+        player.increaseSteelValue();
     }
-    onPolicyEnd(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.decreaseSteelValue();
-        });
+    onPolicyEndForPlayer(player) {
+        player.decreaseSteelValue();
     }
 }
 class MarsFirstPolicy04 {

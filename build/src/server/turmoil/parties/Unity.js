@@ -5,6 +5,8 @@ const Party_1 = require("./Party");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
+const Bonus_1 = require("../Bonus");
+const Policy_1 = require("../Policy");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
 const constants_1 = require("../../../common/constants");
 const OrOptions_1 = require("../../inputs/OrOptions");
@@ -23,8 +25,9 @@ class Unity extends Party_1.Party {
     }
 }
 exports.Unity = Unity;
-class UnityBonus01 {
+class UnityBonus01 extends Bonus_1.Bonus {
     constructor() {
+        super(...arguments);
         this.id = 'ub01';
         this.description = 'Gain 1 M€ for each Venus, Earth and Jovian tag you have';
     }
@@ -32,40 +35,34 @@ class UnityBonus01 {
         const tags = [Tag_1.Tag.VENUS, Tag_1.Tag.EARTH, Tag_1.Tag.JOVIAN];
         return (0, utils_1.sum)(tags.map((tag) => player.tags.count(tag, 'raw')));
     }
-    grant(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
-        });
+    grantForPlayer(player) {
+        player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
     }
 }
-class UnityBonus02 {
+class UnityBonus02 extends Bonus_1.Bonus {
     constructor() {
+        super(...arguments);
         this.id = 'ub02';
         this.description = 'Gain 1 M€ for each Space tag you have';
     }
     getScore(player) {
         return player.tags.count(Tag_1.Tag.SPACE, 'raw');
     }
-    grant(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
-        });
+    grantForPlayer(player) {
+        player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
     }
 }
-class UnityPolicy01 {
+class UnityPolicy01 extends Policy_1.Policy {
     constructor() {
+        super(...arguments);
         this.id = 'up01';
         this.description = 'Your titanium resources are worth 1 M€ extra';
     }
-    onPolicyStart(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.increaseTitaniumValue();
-        });
+    onPolicyStartForPlayer(player) {
+        player.increaseTitaniumValue();
     }
-    onPolicyEnd(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.decreaseTitaniumValue();
-        });
+    onPolicyEndForPlayer(player) {
+        player.decreaseTitaniumValue();
     }
 }
 class UnityPolicy02 {

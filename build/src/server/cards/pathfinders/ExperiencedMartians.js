@@ -15,7 +15,7 @@ class ExperiencedMartians extends PreludeCard_1.PreludeCard {
                 turmoil: { sendDelegates: { count: 1 } },
             },
             metadata: {
-                cardNumber: 'P08',
+                cardNumber: 'PfP13',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.delegates(1).cards(1, { secondaryTag: Tag_1.Tag.MARS }).cards(1, { secondaryTag: Tag_1.Tag.MARS }).production((pb) => pb.megacredits(2));
                 }),

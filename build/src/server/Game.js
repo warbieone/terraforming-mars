@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Game = void 0;
+exports.Game = exports.setGameLog = void 0;
 const constants = require("../common/constants");
 const BeginnerCorporation_1 = require("./cards/corporation/BeginnerCorporation");
 const Board_1 = require("./boards/Board");
@@ -57,13 +57,22 @@ const SpaceType_1 = require("../common/boards/SpaceType");
 const SendDelegateToArea_1 = require("./deferredActions/SendDelegateToArea");
 const BuildColony_1 = require("./deferredActions/BuildColony");
 const Draft_1 = require("./Draft");
+const utils_2 = require("../common/utils/utils");
+const OrOptions_1 = require("./inputs/OrOptions");
+const SelectOption_1 = require("./inputs/SelectOption");
+const SelectSpace_1 = require("./inputs/SelectSpace");
+let createGameLog = () => [];
+function setGameLog(f) {
+    createGameLog = f;
+}
+exports.setGameLog = setGameLog;
 class Game {
     constructor(id, players, first, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck) {
         this.lastSaveId = 0;
         this.deferredActions = new DeferredActionsQueue_1.DeferredActionsQueue();
         this.createdTime = new Date(0);
         this.gameAge = 0;
-        this.gameLog = [];
+        this.gameLog = createGameLog();
         this.undoCount = 0;
         this.inputsThisRound = 0;
         this.resettable = false;
@@ -260,7 +269,7 @@ class Game {
     serialize() {
         const result = {
             activePlayer: this.activePlayer,
-            awards: this.awards.map((a) => a.name),
+            awards: this.awards.map(utils_2.toName),
             beholdTheEmperor: this.beholdTheEmperor,
             board: this.board.serialize(),
             claimedMilestones: (0, ClaimedMilestone_1.serializeClaimedMilestones)(this.claimedMilestones),
@@ -285,7 +294,7 @@ class Game {
             id: this.id,
             initialDraftIteration: this.initialDraftIteration,
             lastSaveId: this.lastSaveId,
-            milestones: this.milestones.map((m) => m.name),
+            milestones: this.milestones.map(utils_2.toName),
             moonData: MoonData_1.MoonData.serialize(this.moonData),
             oxygenLevel: this.oxygenLevel,
             passedPlayers: Array.from(this.passedPlayers),
@@ -568,6 +577,9 @@ class Game {
         this.incrementFirstPlayer();
         this.players.forEach((player) => {
             player.hasIncreasedTerraformRatingThisGeneration = false;
+            if (player.cardIsInEffect(CardName_1.CardName.PRESERVATION_PROGRAM)) {
+                player.preservationProgram = true;
+            }
         });
         if (this.gameOptions.draftVariant) {
             this.gotoDraftPhase();
@@ -577,7 +589,68 @@ class Game {
         }
     }
     gotoWorldGovernmentTerraforming() {
-        this.first.worldGovernmentTerraforming();
+        this.worldGovernmentTerraforming(this.first);
+    }
+    worldGovernmentTerraformingInput(player) {
+        const orOptions = new OrOptions_1.OrOptions();
+        orOptions.title = 'Select action for World Government Terraforming';
+        orOptions.buttonLabel = 'Confirm';
+        if (this.getTemperature() < constants.MAX_TEMPERATURE) {
+            orOptions.options.push(new SelectOption_1.SelectOption('Increase temperature', 'Increase').andThen(() => {
+                this.increaseTemperature(player, 1);
+                this.log('${0} acted as World Government and increased temperature', (b) => b.player(player));
+                return undefined;
+            }));
+        }
+        if (this.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
+            orOptions.options.push(new SelectOption_1.SelectOption('Increase oxygen', 'Increase').andThen(() => {
+                this.increaseOxygenLevel(player, 1);
+                this.log('${0} acted as World Government and increased oxygen level', (b) => b.player(player));
+                return undefined;
+            }));
+        }
+        if (this.canAddOcean()) {
+            orOptions.options.push(new SelectSpace_1.SelectSpace('Add an ocean', this.board.getAvailableSpacesForOcean(player))
+                .andThen((space) => {
+                this.addOcean(player, space);
+                this.log('${0} acted as World Government and placed an ocean', (b) => b.player(player));
+                return undefined;
+            }));
+        }
+        if (this.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && this.gameOptions.venusNextExtension) {
+            orOptions.options.push(new SelectOption_1.SelectOption('Increase Venus scale', 'Increase').andThen(() => {
+                this.increaseVenusScaleLevel(player, 1);
+                this.log('${0} acted as World Government and increased Venus scale', (b) => b.player(player));
+                return undefined;
+            }));
+        }
+        MoonExpansion_1.MoonExpansion.ifMoon(this, (moonData) => {
+            if (moonData.habitatRate < constants.MAXIMUM_HABITAT_RATE) {
+                orOptions.options.push(new SelectOption_1.SelectOption('Increase the Moon habitat rate', 'Increase').andThen(() => {
+                    MoonExpansion_1.MoonExpansion.raiseHabitatRate(player, 1);
+                    return undefined;
+                }));
+            }
+            if (moonData.miningRate < constants.MAXIMUM_MINING_RATE) {
+                orOptions.options.push(new SelectOption_1.SelectOption('Increase the Moon mining rate', 'Increase').andThen(() => {
+                    MoonExpansion_1.MoonExpansion.raiseMiningRate(player, 1);
+                    return undefined;
+                }));
+            }
+            if (moonData.logisticRate < constants.MAXIMUM_LOGISTICS_RATE) {
+                orOptions.options.push(new SelectOption_1.SelectOption('Increase the Moon logistics rate', 'Increase').andThen(() => {
+                    MoonExpansion_1.MoonExpansion.raiseLogisticRate(player, 1);
+                    return undefined;
+                }));
+            }
+        });
+        return orOptions;
+    }
+    worldGovernmentTerraforming(player) {
+        player.defer(this.worldGovernmentTerraformingInput(player).andThen(() => {
+            this.doneWorldGovernmentTerraforming();
+            return undefined;
+        }));
     }
     doneWorldGovernmentTerraforming() {
         this.gotoEndGeneration();
@@ -596,18 +669,11 @@ class Game {
     hasResearched(player) {
         return this.researchedPlayers.has(player.id);
     }
-    allPlayersHaveFinishedResearch() {
-        for (const player of this.players) {
-            if (!this.hasResearched(player)) {
-                return false;
-            }
-        }
-        return true;
-    }
     playerIsFinishedWithResearchPhase(player) {
         this.deferredActions.runAllFor(player, () => {
             this.researchedPlayers.add(player.id);
-            if (this.allPlayersHaveFinishedResearch()) {
+            if (this.researchedPlayers.size === this.players.length) {
+                this.researchedPlayers.clear();
                 this.phase = Phase_1.Phase.ACTION;
                 this.passedPlayers.clear();
                 TheNewSpaceRace_1.TheNewSpaceRace.potentiallyChangeFirstPlayer(this);
@@ -659,7 +725,7 @@ class Game {
         }
         const scores = [];
         this.players.forEach((player) => {
-            const corporation = player.corporations.map((c) => c.name).join('|');
+            const corporation = player.corporations.map(utils_2.toName).join('|');
             const vpb = player.getVictoryPoints();
             scores.push({ corporation: corporation, playerScore: vpb.total });
         });
@@ -668,8 +734,6 @@ class Game {
         const gameLoader = GameLoader_1.GameLoader.getInstance();
         await gameLoader.saveGame(this);
         gameLoader.completeGame(this);
-        gameLoader.mark(this.id);
-        gameLoader.maintenance();
     }
     canPlaceGreenery(player) {
         return !this.donePlayers.has(player.id) &&
@@ -763,6 +827,7 @@ class Game {
                     this.defer(new GrantVenusAltTrackBonusDeferred_1.GrantVenusAltTrackBonusDeferred(player, standardResourcesGranted, grantWildResource));
                 }
             }
+            player.playedCards.forEach((card) => card.onGlobalParameterIncrease?.(player, GlobalParameter_1.GlobalParameter.VENUS, steps));
             TurmoilHandler_1.TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter_1.GlobalParameter.VENUS, steps);
             player.increaseTerraformRating(steps);
         }
@@ -867,7 +932,7 @@ class Game {
             }
         }
     }
-    grantPlacementBonuses(player, space, coveringExistingTile, arcadianCommunityBonus = false) {
+    grantPlacementBonuses(player, space, coveringExistingTile = false, arcadianCommunityBonus = false) {
         if (!coveringExistingTile) {
             this.grantSpaceBonuses(player, space);
         }

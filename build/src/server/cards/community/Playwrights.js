@@ -46,7 +46,7 @@ class Playwrights extends CorporationCard_1.CorporationCard {
     action(player) {
         const players = player.game.getPlayers();
         const replayableEvents = this.getReplayableEvents(player);
-        return new SelectCard_1.SelectCard('Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents)
+        return new SelectCard_1.SelectCard('Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents, { played: false })
             .andThen(([card]) => {
             const selectedCard = card;
             players.forEach((p) => {

@@ -7,7 +7,6 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardResource_1 = require("../../../common/CardResource");
-const Options_1 = require("../Options");
 class MartianRepository extends Card_1.Card {
     constructor() {
         super({
@@ -24,7 +23,7 @@ class MartianRepository extends Card_1.Card {
                 cardNumber: 'Pf29',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('For every science or Mars tag you play (including these) add 1 data to this card.', (eb) => {
-                        eb.science(1, { played: Options_1.played }).mars(1, { played: Options_1.played }).startEffect.data();
+                        eb.tag(Tag_1.Tag.SCIENCE).tag(Tag_1.Tag.MARS).startEffect.resource(CardResource_1.CardResource.DATA);
                     }).br;
                     b.minus().production((pb) => pb.energy(1));
                 }),

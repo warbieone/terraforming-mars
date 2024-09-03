@@ -17,7 +17,7 @@ class Quill extends CeoCard_1.CeoCard {
                 cardNumber: 'L17',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.opgArrow().text('ACTIVATE THE BELOW ABILITY').br;
-                    b.cards(1, { secondaryTag: AltSecondaryTag_1.AltSecondaryTag.FLOATER }).colon().floaters(2).megacredits(1).asterix();
+                    b.cards(1, { secondaryTag: AltSecondaryTag_1.AltSecondaryTag.FLOATER }).colon().resource(CardResource_1.CardResource.FLOATER, 2).megacredits(1).asterix();
                 }),
                 description: 'Once per game, add 2 floaters to each of your cards that collect floaters, then add 2 floaters to ANY card. Gain 1 M€ for every 2 floaters added this way.',
             },

@@ -21,7 +21,7 @@ class SolarProbe extends Card_1.Card {
             metadata: {
                 cardNumber: 'C37',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.cards(1).slash().science(3, { digit: Options_1.digit, played: Options_1.played });
+                    b.cards(1).slash().tag(Tag_1.Tag.SCIENCE, { amount: 3, digit: Options_1.digit });
                 }),
                 description: 'Draw 1 card for every 3 science tags you have, including this.',
             },

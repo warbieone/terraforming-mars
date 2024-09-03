@@ -21,7 +21,7 @@ class GrandLunaAcademy extends Card_1.Card {
                 description: 'Draw 1 card per 2 Moon tags you have, including this.',
                 cardNumber: 'M83',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.cards(1).slash().moon(2, { digit: Options_1.digit, played: Options_1.played });
+                    b.cards(1).slash().tag(Tag_1.Tag.MOON, { amount: 2, digit: Options_1.digit });
                 }),
             },
         });

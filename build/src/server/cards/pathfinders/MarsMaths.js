@@ -16,7 +16,7 @@ class MarsMaths extends CorporationCard_1.CorporationCard {
                 drawCard: { count: 2 },
             },
             metadata: {
-                cardNumber: 'PfCXX',
+                cardNumber: 'PfC10',
                 description: 'You start with 40 M€. As your first action, draw 2 cards',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.megacredits(40).nbsp.cards(2).br;

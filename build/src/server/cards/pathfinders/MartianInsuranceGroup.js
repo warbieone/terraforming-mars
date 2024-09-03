@@ -7,7 +7,6 @@ const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class MartianInsuranceGroup extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -25,7 +24,7 @@ class MartianInsuranceGroup extends CorporationCard_1.CorporationCard {
                     b.megacredits(42).production((pb) => pb.megacredits(1));
                     b.corpBox('effect', (ce) => {
                         ce.effect('Whenever you play an event card, raise your M€ production 1 step.', (eb) => {
-                            eb.event({ played: Options_1.played }).startEffect.production((pb) => pb.megacredits(1));
+                            eb.tag(Tag_1.Tag.EVENT).startEffect.production((pb) => pb.megacredits(1));
                         });
                     });
                 }),

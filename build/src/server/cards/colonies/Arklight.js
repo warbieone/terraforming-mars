@@ -6,7 +6,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 const Resource_1 = require("../../../common/Resource");
 class Arklight extends CorporationCard_1.CorporationCard {
     constructor() {
@@ -27,7 +26,7 @@ class Arklight extends CorporationCard_1.CorporationCard {
                     b.megacredits(50);
                     b.corpBox('effect', (ce) => {
                         ce.effect('When you play an animal or plant tag, including this, gain 1 M€ production and add 1 animal to this card.', (eb) => {
-                            eb.animals(1, { played: Options_1.played }).slash().plants(1, { played: Options_1.played }).startEffect.production((pb) => pb.megacredits(1)).animals(1);
+                            eb.tag(Tag_1.Tag.ANIMAL).slash().tag(Tag_1.Tag.PLANT).startEffect.production((pb) => pb.megacredits(1)).resource(CardResource_1.CardResource.ANIMAL);
                         });
                         ce.vSpace();
                     });

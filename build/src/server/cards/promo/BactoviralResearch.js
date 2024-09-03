@@ -6,7 +6,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 const CardResource_1 = require("../../../common/CardResource");
 class BactoviralResearch extends Card_1.Card {
     constructor() {
@@ -23,7 +22,7 @@ class BactoviralResearch extends Card_1.Card {
                 cardNumber: 'X35',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.cards(1).br.br;
-                    b.microbes(1).asterix().slash().microbes(1, { played: Options_1.played });
+                    b.resource(CardResource_1.CardResource.MICROBE).asterix().slash().tag(Tag_1.Tag.MICROBE);
                 }),
                 description: 'Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each mirobe tag you have, including this.',
             },

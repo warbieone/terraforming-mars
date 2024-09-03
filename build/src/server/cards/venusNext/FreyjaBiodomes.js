@@ -23,7 +23,7 @@ class FreyjaBiodomes extends Card_1.Card {
             metadata: {
                 cardNumber: '227',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.microbes(2, { secondaryTag: Tag_1.Tag.VENUS }).or().animals(2, { secondaryTag: Tag_1.Tag.VENUS }).br;
+                    b.resource(CardResource_1.CardResource.MICROBE, { amount: 2, secondaryTag: Tag_1.Tag.VENUS }).or().resource(CardResource_1.CardResource.ANIMAL, { amount: 2, secondaryTag: Tag_1.Tag.VENUS }).br;
                     b.production((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));
                 }),
                 description: {

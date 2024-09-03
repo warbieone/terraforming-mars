@@ -26,4 +26,7 @@ var ColonyBenefit;
     ColonyBenefit[ColonyBenefit["GIVE_MC_PER_DELEGATE"] = 20] = "GIVE_MC_PER_DELEGATE";
     ColonyBenefit[ColonyBenefit["GAIN_SCIENCE_TAGS_AND_CLONE_TAG"] = 21] = "GAIN_SCIENCE_TAGS_AND_CLONE_TAG";
     ColonyBenefit[ColonyBenefit["RAISE_PLANETARY_TRACK"] = 22] = "RAISE_PLANETARY_TRACK";
+    ColonyBenefit[ColonyBenefit["PLACE_HAZARD_TILE"] = 23] = "PLACE_HAZARD_TILE";
+    ColonyBenefit[ColonyBenefit["ERODE_SPACES_ADJACENT_TO_HAZARDS"] = 24] = "ERODE_SPACES_ADJACENT_TO_HAZARDS";
+    ColonyBenefit[ColonyBenefit["GAIN_MC_PER_HAZARD_TILE"] = 25] = "GAIN_MC_PER_HAZARD_TILE";
 })(ColonyBenefit = exports.ColonyBenefit || (exports.ColonyBenefit = {}));

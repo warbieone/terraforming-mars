@@ -83,6 +83,7 @@ const Supermarkets_1 = require("./Supermarkets");
 const Teslaract_1 = require("./Teslaract");
 const TopsoilContract_1 = require("./TopsoilContract");
 const TychoMagnetics_1 = require("./TychoMagnetics");
+const StrategicBasePlanning_1 = require("./StrategicBasePlanning");
 exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     module: 'promo',
     projectCards: {
@@ -158,6 +159,7 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.DOUBLE_DOWN]: { Factory: DoubleDown_1.DoubleDown, compatibility: 'prelude' },
         [CardName_1.CardName.ANTI_DESERTIFICATION_TECHNIQUES]: { Factory: AntidesertificationTechniques_1.AntidesertificationTechniques },
         [CardName_1.CardName.GIANT_SOLAR_COLLECTOR]: { Factory: GiantSolarCollector_1.GiantSolarCollector, compatibility: 'venus' },
+        [CardName_1.CardName.STRATEGIC_BASE_PLANNING]: { Factory: StrategicBasePlanning_1.StrategicBasePlanning, compatibility: 'colonies' },
     },
     cardsToRemove: [
         CardName_1.CardName.DEIMOS_DOWN,

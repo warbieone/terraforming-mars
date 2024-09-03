@@ -26,9 +26,9 @@ class BioengineeringEnclosure extends Card_1.Card {
                 cardNumber: 'A01',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Remove 1 animal from THIS card to add 1 animal to ANOTHER card.', (eb) => {
-                        eb.animals(1).asterix().startAction.animals(1).asterix();
+                        eb.resource(CardResource_1.CardResource.ANIMAL).asterix().startAction.resource(CardResource_1.CardResource.ANIMAL).asterix();
                     }).br;
-                    b.animals(2);
+                    b.resource(CardResource_1.CardResource.ANIMAL, 2);
                 }),
             },
         });

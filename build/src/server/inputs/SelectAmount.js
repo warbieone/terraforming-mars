@@ -10,6 +10,7 @@ class SelectAmount extends PlayerInput_1.BasePlayerInput {
         this.min = min;
         this.max = max;
         this.maxByDefault = maxByDefault;
+        this.selected = -1;
         this.buttonLabel = buttonLabel;
     }
     toModel() {
@@ -35,6 +36,7 @@ class SelectAmount extends PlayerInput_1.BasePlayerInput {
         if (input.amount < this.min) {
             throw new InputError_1.InputError('Amount provided too low (min ' + String(this.min) + ')');
         }
+        this.selected = input.amount;
         return this.cb(input.amount);
     }
 }

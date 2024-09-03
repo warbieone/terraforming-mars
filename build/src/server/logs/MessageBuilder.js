@@ -51,31 +51,26 @@ class MessageBuilder {
         this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.COLONY, value: value.name });
         return this;
     }
-    standardProject(value) {
-        this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.STANDARD_PROJECT, value });
-        return this;
-    }
     party(value) {
-        this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.PARTY, value: value.name });
-        return this;
+        return this.partyName(value.name);
     }
     partyName(value) {
         this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.PARTY, value });
         return this;
     }
     tileType(value) {
-        this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.TILE_TYPE, value: value.toString() });
+        this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.TILE_TYPE, value: value });
         return this;
     }
     spaceBonus(value) {
-        this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.SPACE_BONUS, value: value.toString() });
+        this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.SPACE_BONUS, value: value });
         return this;
     }
     globalEvent(value) {
         return this.globalEventName(value.name);
     }
     globalEventName(value) {
-        this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.GLOBAL_EVENT, value: value.toString() });
+        this.message.data.push({ type: LogMessageDataType_1.LogMessageDataType.GLOBAL_EVENT, value: value });
         return this;
     }
     getMessage() {

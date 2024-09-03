@@ -25,7 +25,7 @@ class RefugeeCamps extends ActionCard_1.ActionCard {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Decrease your M€ production 1 step to add a camp resource to this card.', (eb) => {
                         eb.production((pb) => pb.megacredits(1));
-                        eb.startAction.camps();
+                        eb.startAction.resource(CardResource_1.CardResource.CAMP);
                     }).br;
                     b.vpText('1 VP for each camp resource on this card.');
                 }),

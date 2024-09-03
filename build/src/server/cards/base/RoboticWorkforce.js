@@ -7,7 +7,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Size_1 = require("../../../common/cards/render/Size");
-const Options_1 = require("../Options");
 const Priority_1 = require("../../deferredActions/Priority");
 class RoboticWorkforce extends RoboticWorkforceBase_1.RoboticWorkforceBase {
     constructor() {
@@ -21,7 +20,7 @@ class RoboticWorkforce extends RoboticWorkforceBase_1.RoboticWorkforceBase {
                 hasExternalHelp: true,
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.text('Copy A', Size_1.Size.SMALL, true).nbsp;
-                    b.production((pb) => pb.building(1, { played: Options_1.played }));
+                    b.production((pb) => pb.tag(Tag_1.Tag.BUILDING));
                 }),
                 description: 'Duplicate only the production box of one of your building cards.',
             },

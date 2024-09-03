@@ -12,6 +12,7 @@ const Size_1 = require("../../../common/cards/render/Size");
 const Resource_1 = require("../../../common/Resource");
 const Options_1 = require("../Options");
 const MessageBuilder_1 = require("../../logs/MessageBuilder");
+const GainResources_1 = require("../../deferredActions/GainResources");
 class Splice extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -30,12 +31,12 @@ class Splice extends CorporationCard_1.CorporationCard {
                     b.corpBox('effect', (ce) => {
                         ce.vSpace(Size_1.Size.LARGE);
                         ce.effect(undefined, (eb) => {
-                            eb.microbes(1, { played: Options_1.played, all: Options_1.all }).startEffect;
-                            eb.megacredits(2, { all: Options_1.all }).or().microbes(1, { all: Options_1.all }).asterix();
+                            eb.tag(Tag_1.Tag.MICROBE, { all: Options_1.all }).startEffect;
+                            eb.megacredits(2, { all: Options_1.all }).or().resource(CardResource_1.CardResource.MICROBE, { all: Options_1.all }).asterix();
                         });
                         ce.vSpace();
                         ce.effect('when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.', (eb) => {
-                            eb.microbes(1, { played: Options_1.played, all: Options_1.all }).startEffect;
+                            eb.tag(Tag_1.Tag.MICROBE, { all: Options_1.all }).startEffect;
                             eb.megacredits(2);
                         });
                     });
@@ -47,29 +48,30 @@ class Splice extends CorporationCard_1.CorporationCard {
         return this.onCardPlayed(player, card);
     }
     onCardPlayed(player, card) {
-        if (card.tags.includes(Tag_1.Tag.MICROBE) === false) {
-            return undefined;
+        const game = player.game;
+        const microbeTags = player.tags.cardTagCount(card, Tag_1.Tag.MICROBE);
+        if (microbeTags === 0) {
+            return;
         }
-        const gainPerMicrobe = 2;
-        const microbeTagsCount = player.tags.cardTagCount(card, Tag_1.Tag.MICROBE);
-        const megacreditsGain = microbeTagsCount * gainPerMicrobe;
-        const addResource = new SelectOption_1.SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
+        const gain = microbeTags * 2;
+        const gainResource = new SelectOption_1.SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
             player.addResourceTo(card);
             return undefined;
         });
-        const getMegacredits = new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Gain ${0} M€', (b) => b.number(megacreditsGain)), 'Gain M€')
+        const gainMC = new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Gain ${0} M€', (b) => b.number(gain)), 'Gain M€')
             .andThen(() => {
-            player.stock.add(Resource_1.Resource.MEGACREDITS, megacreditsGain, { log: true });
+            game.defer(new GainResources_1.GainResources(player, Resource_1.Resource.MEGACREDITS, { count: gain, log: true, from: this }));
             return undefined;
         });
-        player.game.getCardPlayerOrThrow(this.name).stock.add(Resource_1.Resource.MEGACREDITS, megacreditsGain, { log: true });
+        const cardPlayer = game.getCardPlayerOrThrow(this.name);
+        game.defer(new GainResources_1.GainResources(cardPlayer, Resource_1.Resource.MEGACREDITS, { count: gain, log: true, from: this }));
         if (card.resourceType === CardResource_1.CardResource.MICROBE) {
-            return new OrOptions_1.OrOptions(addResource, getMegacredits);
+            player.defer(new OrOptions_1.OrOptions(gainResource, gainMC));
         }
         else {
-            player.stock.add(Resource_1.Resource.MEGACREDITS, megacreditsGain, { log: true });
-            return undefined;
+            gainMC.cb(undefined);
         }
+        return undefined;
     }
 }
 exports.Splice = Splice;

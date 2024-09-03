@@ -18,7 +18,7 @@ class LobbyHalls extends Card_1.Card {
                 turmoil: { sendDelegates: { count: 1 } },
             },
             metadata: {
-                cardNumber: 'PfTBD',
+                cardNumber: 'PfT1',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.megacredits(2)).delegates(1);
                 }),

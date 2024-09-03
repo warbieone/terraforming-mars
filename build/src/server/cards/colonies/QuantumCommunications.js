@@ -18,7 +18,7 @@ class QuantumCommunications extends Card_1.Card {
             requirements: { tag: Tag_1.Tag.SCIENCE, count: 4 },
             victoryPoints: 1,
             metadata: {
-                cardNumber: '079',
+                cardNumber: 'C31',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => {
                         pb.megacredits(1).slash().colonies(1, { size: Size_1.Size.SMALL, all: Options_1.all });

@@ -21,8 +21,13 @@ const Tag_1 = require("../../common/cards/Tag");
 const SendDelegateToArea_1 = require("../deferredActions/SendDelegateToArea");
 const Turmoil_1 = require("../turmoil/Turmoil");
 const IColonyMetadata_1 = require("../../common/colonies/IColonyMetadata");
+const ColonyName_1 = require("../../common/colonies/ColonyName");
 const utils_1 = require("../../common/utils/utils");
 const MessageBuilder_1 = require("../logs/MessageBuilder");
+const PlaceHazardTile_1 = require("../deferredActions/PlaceHazardTile");
+const TileType_1 = require("../../../src/common/TileType");
+const ErodeSpacesDeferred_1 = require("../underworld/ErodeSpacesDeferred");
+const CardName_1 = require("../../common/cards/CardName");
 var ShouldIncreaseTrack;
 (function (ShouldIncreaseTrack) {
     ShouldIncreaseTrack[ShouldIncreaseTrack["YES"] = 0] = "YES";
@@ -77,6 +82,11 @@ class Colony {
                 card.onColonyAdded?.(player, cardOwner);
             }
         }
+        if (this.name === ColonyName_1.ColonyName.LEAVITT) {
+            for (const card of player.tableau) {
+                card.onColonyAddedToLeavitt?.(player);
+            }
+        }
     }
     trade(player, tradeOptions = {}, bonusTradeOffset = 0) {
         const tradeOffset = player.colonies.tradeOffset + bonusTradeOffset;
@@ -106,6 +116,9 @@ class Colony {
         if (options.usesTradeFleet !== false) {
             this.visitor = player.id;
             player.colonies.tradesThisGeneration++;
+        }
+        if (player.cardIsInEffect(CardName_1.CardName.VENUS_TRADE_HUB)) {
+            player.stock.add(Resource_1.Resource.MEGACREDITS, 3, { log: true });
         }
         if (options.decreaseTrackAfterTrade !== false) {
             player.defer(() => {
@@ -203,6 +216,21 @@ class Colony {
                     const partyDelegateCount = (0, utils_1.sum)(turmoil.parties.map((party) => party.delegates.get(player)));
                     player.stock.add(Resource_1.Resource.MEGACREDITS, partyDelegateCount, { log: true });
                 });
+                break;
+            case ColonyBenefit_1.ColonyBenefit.PLACE_HAZARD_TILE:
+                const spaces = game.board.getAvailableSpacesOnLand(player)
+                    .filter(((space) => space.tile === undefined))
+                    .filter((space) => {
+                    const adjacentSpaces = game.board.getAdjacentSpaces(space);
+                    return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
+                });
+                game.defer(new PlaceHazardTile_1.PlaceHazardTile(player, TileType_1.TileType.EROSION_MILD, { title: 'Select space next to no other tile for hazard', spaces }));
+                break;
+            case ColonyBenefit_1.ColonyBenefit.ERODE_SPACES_ADJACENT_TO_HAZARDS:
+                game.defer(new ErodeSpacesDeferred_1.ErodeSpacesDeferred(player, quantity));
+                break;
+            case ColonyBenefit_1.ColonyBenefit.GAIN_MC_PER_HAZARD_TILE:
+                player.stock.megacredits += game.board.getHazards().length;
                 break;
             case ColonyBenefit_1.ColonyBenefit.GAIN_TR:
                 if (quantity > 0) {

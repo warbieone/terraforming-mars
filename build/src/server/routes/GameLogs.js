@@ -55,7 +55,7 @@ class GameLogs {
                 case LogMessageDataType_1.LogMessageDataType.TILE_TYPE:
                 case LogMessageDataType_1.LogMessageDataType.COLONY:
                 default:
-                    return datum.value;
+                    return datum.value.toString();
             }
         }));
     }

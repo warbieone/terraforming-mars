@@ -5,7 +5,8 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const PreludeCard_1 = require("../prelude/PreludeCard");
 const Size_1 = require("../../../common/cards/render/Size");
-const SelectCard_1 = require("../../inputs/SelectCard");
+const DrawCeoCardFromDeck_1 = require("../../deferredActions/DrawCeoCardFromDeck");
+const Phase_1 = require("../../../common/Phase");
 class CoLeadership extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
@@ -26,25 +27,23 @@ class CoLeadership extends PreludeCard_1.PreludeCard {
     }
     bespokePlay(player) {
         const game = player.game;
-        let ceosDrawn = game.ceoDeck.drawN(game, 3);
-        ceosDrawn = ceosDrawn.filter((ceo) => {
-            if (ceo.canPlay?.(player) === false) {
-                game.ceoDeck.discard(ceo);
-                game.log('${0} was discarded as ${1} could not play it.', (b) => b.card(ceo).player(player), { reservedFor: player });
-                return false;
+        game.defer(new DrawCeoCardFromDeck_1.DrawCeoCardFromDeck(player, 3)).andThen((card) => {
+            if (card !== undefined) {
+                if (game.phase === Phase_1.Phase.ACTION) {
+                    if (player.canPlay(card)) {
+                        player.playCard(card);
+                    }
+                    else {
+                        game.log('Discarding ${0} because it is not playable', (b) => b.card(card));
+                        game.ceoDeck.discard(card);
+                    }
+                }
+                else {
+                    player.ceoCardsInHand.push(card);
+                }
             }
-            return true;
         });
-        if (ceosDrawn.length === 0) {
-            game.log('${0} drew no playable CEO cards', (b) => b.player(player));
-            return undefined;
-        }
-        return new SelectCard_1.SelectCard('Choose CEO card', 'Take', ceosDrawn)
-            .andThen(([chosenCeo]) => {
-            ceosDrawn.filter((c) => c !== chosenCeo).forEach((c) => game.ceoDeck.discard(c));
-            player.ceoCardsInHand.push(chosenCeo);
-            return undefined;
-        });
+        return undefined;
     }
 }
 exports.CoLeadership = CoLeadership;

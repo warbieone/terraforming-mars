@@ -19,7 +19,7 @@ class MediaArchives extends Card_1.Card {
             metadata: {
                 cardNumber: '107',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.megacredits(1).slash().event({ played: Options_1.played, all: Options_1.all });
+                    b.megacredits(1).slash().tag(Tag_1.Tag.EVENT, { all: Options_1.all });
                 }),
                 description: 'Gain 1 M€ for each event EVER PLAYED by all players.',
             },

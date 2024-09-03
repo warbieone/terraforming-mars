@@ -26,7 +26,7 @@ class BioSol extends CorporationCard_1.ActiveCorporationCard {
                 description: 'You start with 42 M€. As your first action, draw 2 cards with a microbe tag.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.megacredits(42).cards(2, { secondaryTag: Tag_1.Tag.MICROBE }).br;
-                    b.corpBox('action', (corpbox) => corpbox.action('Add 1 microbe to ANY card', (ab) => ab.empty().startAction.microbes(1).asterix()));
+                    b.corpBox('action', (corpbox) => corpbox.action('Add 1 microbe to ANY card', (ab) => ab.empty().startAction.resource(CardResource_1.CardResource.MICROBE).asterix()));
                 }),
             },
         });

@@ -97,6 +97,7 @@ class GameLoader {
     async restoreGameAt(gameId, saveId) {
         const current = await this.getGame(gameId);
         if (current === undefined) {
+            console.error('GameLoader cannot find game ' + gameId);
             throw new Error('Cannot find game');
         }
         const currentSaveId = current.lastSaveId;

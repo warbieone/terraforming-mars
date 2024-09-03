@@ -15,7 +15,7 @@ class Kickstarter extends Card_1.Card {
             name: CardName_1.CardName.KICKSTARTER,
             cost: 12,
             metadata: {
-                cardNumber: 'PfTBD',
+                cardNumber: 'Pf41',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.planetaryTrack().text('3');
                 }),

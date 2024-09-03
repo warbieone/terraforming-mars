@@ -22,7 +22,7 @@ class UrbanDecomposers extends Card_1.Card {
             metadata: {
                 cardNumber: 'C48',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => pb.plants(1)).microbes(2).asterix();
+                    b.production((pb) => pb.plants(1)).resource(CardResource_1.CardResource.MICROBE, 2).asterix();
                 }),
                 description: 'Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.',
             },

@@ -33,7 +33,7 @@ class BiofertilizerFacility extends Card_1.Card {
                 cardNumber: 'A02',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.plants(1));
-                    b.microbes(2);
+                    b.resource(CardResource_1.CardResource.MICROBE, 2);
                     b.br;
                     b.tile(TileType_1.TileType.BIOFERTILIZER_FACILITY, false, true);
                 }),

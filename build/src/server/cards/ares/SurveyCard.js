@@ -12,12 +12,13 @@ const SpaceType_1 = require("../../../common/boards/SpaceType");
 const PartyHooks_1 = require("../../turmoil/parties/PartyHooks");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Board_1 = require("../../boards/Board");
+const AresHandler_1 = require("../../ares/AresHandler");
 class SurveyCard extends Card_1.Card {
     constructor(properties) {
         super(properties);
     }
-    anyAdjacentSpaceGivesBonus(player, space, bonus) {
-        return player.game.board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
+    anyAdjacentSpaceGivesBonus(board, space, bonus) {
+        return board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
     }
     grantsBonusNow(space, bonus) {
         return space.tile?.covers === undefined && space.bonus.includes(bonus);
@@ -34,8 +35,9 @@ class SurveyCard extends Card_1.Card {
     log(cardOwner, resource) {
         cardOwner.game.log('${0} gained a bonus ${1} because of ${2}', (b) => b.player(cardOwner).string(resource).cardName(this.name));
     }
-    testForStandardResource(cardOwner, space, resource, bonus) {
-        let grant = this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus);
+    maybeRewardStandardResource(cardOwner, space, resource, bonus) {
+        const board = cardOwner.game.board;
+        let grant = this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(board, space, bonus);
         if (!grant) {
             switch (resource) {
                 case Resource_1.Resource.STEEL:
@@ -51,9 +53,10 @@ class SurveyCard extends Card_1.Card {
             cardOwner.game.defer(new GainResources_1.GainResources(cardOwner, resource).andThen(() => this.log(cardOwner, resource)));
         }
     }
-    testForCardResource(cardOwner, space, resource, bonus) {
+    maybeRewardCardResource(cardOwner, space, resource, bonus) {
+        const board = cardOwner.game.board;
         if (cardOwner.playedCards.some((card) => card.resourceType === resource) &&
-            (this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus))) {
+            (this.grantsBonusNow(space, bonus) || AresHandler_1.AresHandler.anyAdjacentSpaceGivesBonus(board, space, bonus))) {
             cardOwner.game.defer(new AddResourcesToCard_1.AddResourcesToCard(cardOwner, resource, { log: false }))
                 .andThen(() => this.log(cardOwner, resource));
         }

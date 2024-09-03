@@ -28,11 +28,11 @@ class ExtractorBalloons extends Card_1.Card {
                 description: 'Add 3 floaters to this card',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 floater to this card.', (eb) => {
-                        eb.empty().startAction.floaters(1);
+                        eb.empty().startAction.resource(CardResource_1.CardResource.FLOATER);
                     }).br;
                     b.action('Remove 2 floaters here to raise Venus 1 step.', (eb) => {
-                        eb.or(Size_1.Size.SMALL).floaters(2).startAction.venus(1);
-                    }).br.floaters(3);
+                        eb.or(Size_1.Size.SMALL).resource(CardResource_1.CardResource.FLOATER, 2).startAction.venus(1);
+                    }).br.resource(CardResource_1.CardResource.FLOATER, 3);
                 }),
             },
         });

@@ -35,11 +35,11 @@ class LocalShading extends ActionCard_1.ActionCard {
                 cardNumber: '235',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 floater to this card.', (eb) => {
-                        eb.empty().startAction.floaters(1);
+                        eb.empty().startAction.resource(CardResource_1.CardResource.FLOATER);
                     }).br;
                     b.or().br;
                     b.action('Spend 1 floater here to raise your M€ production 1 step.', (eb) => {
-                        eb.floaters(1).startAction.production((pb) => pb.megacredits(1));
+                        eb.resource(CardResource_1.CardResource.FLOATER).startAction.production((pb) => pb.megacredits(1));
                     });
                 }),
             },

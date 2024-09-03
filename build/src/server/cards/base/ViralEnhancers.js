@@ -9,7 +9,6 @@ const SelectOption_1 = require("../../inputs/SelectOption");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardResource_1 = require("../../../common/CardResource");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class ViralEnhancers extends Card_1.Card {
     constructor() {
@@ -21,10 +20,10 @@ class ViralEnhancers extends Card_1.Card {
             metadata: {
                 cardNumber: '074',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.plants(1, { played: Options_1.played }).slash().microbes(1, { played: Options_1.played }).slash().animals(1, { played: Options_1.played }).br;
+                    b.tag(Tag_1.Tag.PLANT).slash().tag(Tag_1.Tag.MICROBE).slash().tag(Tag_1.Tag.ANIMAL).br;
                     b.effect('When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.', (eb) => {
                         eb.empty().startEffect;
-                        eb.plants(1).slash().microbes(1).asterix().slash().animals(1).asterix();
+                        eb.plants(1).slash().resource(CardResource_1.CardResource.MICROBE).asterix().slash().resource(CardResource_1.CardResource.ANIMAL).asterix();
                     });
                 }),
             },

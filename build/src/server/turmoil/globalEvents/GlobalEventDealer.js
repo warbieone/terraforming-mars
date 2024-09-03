@@ -4,6 +4,7 @@ exports.GlobalEventDealer = exports.getGlobalEventByName = exports.initializeGlo
 const ModuleManifest_1 = require("../../cards/ModuleManifest");
 const ICardFactory_1 = require("../../cards/ICardFactory");
 const shuffle_1 = require("../../utils/shuffle");
+const utils_1 = require("../../../common/utils/utils");
 const RENAMED_GLOBAL_EVENTS = [];
 const ALL_EVENTS = new Map();
 const ALL_MODULE_MANIFESTS = [];
@@ -81,8 +82,8 @@ class GlobalEventDealer {
     }
     serialize() {
         return {
-            deck: this.deck.map((card) => card.name),
-            discarded: this.discards.map((card) => card.name),
+            deck: this.deck.map(utils_1.toName),
+            discarded: this.discards.map(utils_1.toName),
         };
     }
     static deserialize(d) {

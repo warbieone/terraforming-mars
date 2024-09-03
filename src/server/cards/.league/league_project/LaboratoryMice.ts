@@ -29,9 +29,9 @@ export class LaboratoryMice extends ActionCard implements IProjectCard {
         cardNumber: 'L305',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Animal to this card.', (eb) => {
-            eb.empty().startAction.animals(1);
+            eb.empty().resource(CardResource.ANIMAL).startAction;
           }).br;
-          b.animals(1).br;
+          b.resource(CardResource.ANIMAL).br;
           b.vpText('1 VP per 3 Animals on this card.');
         }),
         description: 'Add 1 Animal to this card.',

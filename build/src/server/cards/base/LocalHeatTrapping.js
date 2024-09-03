@@ -24,7 +24,7 @@ class LocalHeatTrapping extends Card_1.Card {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.minus().heat(5, { digit: Options_1.digit });
                     b.plus().plants(4, { digit: Options_1.digit });
-                    b.or().animals(2, { digit: Options_1.digit }).asterix();
+                    b.or().resource(CardResource_1.CardResource.ANIMAL, { amount: 2, digit: Options_1.digit }).asterix();
                 }),
                 description: 'Spend 5 heat to gain either 4 plants, or to add 2 animals to ANOTHER card.',
             },

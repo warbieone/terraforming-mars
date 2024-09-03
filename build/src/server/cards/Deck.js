@@ -5,6 +5,7 @@ const createCard_1 = require("../createCard");
 const CardName_1 = require("../../common/cards/CardName");
 const LogHelper_1 = require("../LogHelper");
 const shuffle_1 = require("../utils/shuffle");
+const utils_1 = require("../../common/utils/utils");
 class Deck {
     static shuffle(array, random) {
         (0, shuffle_1.inplaceShuffle)(array, random);
@@ -40,9 +41,6 @@ class Deck {
             this.drawPile.push(...rest, ...top);
         }
     }
-    drawLegacy(logger, source = 'top') {
-        return this.drawOrThrow(logger, source);
-    }
     draw(logger, source = 'top') {
         this.shuffleIfNecessary(logger);
         const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
@@ -67,8 +65,11 @@ class Deck {
         }
         return cards;
     }
+    size() {
+        return this.drawPile.length + this.discardPile.length;
+    }
     canDraw(count) {
-        return this.drawPile.length + this.discardPile.length > count;
+        return this.size() >= count;
     }
     shuffleIfNecessary(logger) {
         if (this.drawPile.length === 0 && this.discardPile.length !== 0) {
@@ -83,7 +84,10 @@ class Deck {
         }
         return card;
     }
-    drawByCondition(logger, total, include) {
+    drawByConditionLegacy(logger, total, include) {
+        return this.drawByConditionOrThrow(logger, total, include);
+    }
+    drawByConditionOrThrow(logger, total, include) {
         const result = [];
         const discardedCards = new Set();
         while (result.length < total) {
@@ -91,7 +95,7 @@ class Deck {
                 logger.log(`discarded every ${this.type} card without a match`);
                 break;
             }
-            const projectCard = this.drawLegacy(logger);
+            const projectCard = this.drawOrThrow(logger);
             if (include(projectCard)) {
                 result.push(projectCard);
             }
@@ -113,8 +117,8 @@ class Deck {
     }
     serialize() {
         return {
-            drawPile: this.drawPile.map((c) => c.name),
-            discardPile: this.discardPile.map((c) => c.name),
+            drawPile: this.drawPile.map(utils_1.toName),
+            discardPile: this.discardPile.map(utils_1.toName),
         };
     }
 }

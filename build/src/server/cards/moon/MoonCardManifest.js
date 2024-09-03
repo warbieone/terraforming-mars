@@ -72,13 +72,12 @@ const MiningComplex_1 = require("./MiningComplex");
 const MiningRobotsManufCenter_1 = require("./MiningRobotsManufCenter");
 const MomentumViriumHabitat_1 = require("./MomentumViriumHabitat");
 const MoonHabitatStandardProject_1 = require("./MoonHabitatStandardProject");
-const MoonStandardProjectVariants_1 = require("./MoonStandardProjectVariants");
+const MoonStandardProjectVariants1_1 = require("./MoonStandardProjectVariants1");
+const MoonStandardProjectVariants2_1 = require("./MoonStandardProjectVariants2");
 const MooncrateBlockFactory_1 = require("./MooncrateBlockFactory");
 const MooncrateConvoysToMars_1 = require("./MooncrateConvoysToMars");
 const MoonMineStandardProject_1 = require("./MoonMineStandardProject");
-const MoonStandardProjectVariants_2 = require("./MoonStandardProjectVariants");
 const MoonRoadStandardProject_1 = require("./MoonRoadStandardProject");
-const MoonStandardProjectVariants_3 = require("./MoonStandardProjectVariants");
 const MoonTether_1 = require("./MoonTether");
 const NanotechIndustries_1 = require("./NanotechIndustries");
 const NewColonyPlanningInitiatives_1 = require("./NewColonyPlanningInitiatives");
@@ -218,11 +217,14 @@ exports.MOON_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     },
     standardProjects: {
         [CardName_1.CardName.MOON_HABITAT_STANDARD_PROJECT]: { Factory: MoonHabitatStandardProject_1.MoonHabitatStandardProject },
-        [CardName_1.CardName.MOON_HABITAT_STANDARD_PROJECT_V2]: { Factory: MoonStandardProjectVariants_1.MoonHabitatStandardProjectVariant2 },
+        [CardName_1.CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_1]: { Factory: MoonStandardProjectVariants1_1.MoonHabitatStandardProjectVariant1 },
+        [CardName_1.CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_2]: { Factory: MoonStandardProjectVariants2_1.MoonHabitatStandardProjectVariant2 },
         [CardName_1.CardName.MOON_MINE_STANDARD_PROJECT]: { Factory: MoonMineStandardProject_1.MoonMineStandardProject },
-        [CardName_1.CardName.MOON_MINE_STANDARD_PROJECT_V2]: { Factory: MoonStandardProjectVariants_2.MoonMineStandardProjectVariant2 },
+        [CardName_1.CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_1]: { Factory: MoonStandardProjectVariants1_1.MoonMineStandardProjectVariant1 },
+        [CardName_1.CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_2]: { Factory: MoonStandardProjectVariants2_1.MoonMineStandardProjectVariant2 },
         [CardName_1.CardName.MOON_ROAD_STANDARD_PROJECT]: { Factory: MoonRoadStandardProject_1.MoonRoadStandardProject },
-        [CardName_1.CardName.MOON_ROAD_STANDARD_PROJECT_V2]: { Factory: MoonStandardProjectVariants_3.MoonRoadStandardProjectVariant2 },
+        [CardName_1.CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_1]: { Factory: MoonStandardProjectVariants1_1.MoonRoadStandardProjectVariant1 },
+        [CardName_1.CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_2]: { Factory: MoonStandardProjectVariants2_1.MoonRoadStandardProjectVariant2 },
     },
     preludeCards: {
         [CardName_1.CardName.FIRST_LUNAR_SETTLEMENT]: { Factory: FirstLunarSettlement_1.FirstLunarSettlement, compatibility: 'moon' },

@@ -18,10 +18,10 @@ class NobelLabs extends Card_1.Card {
             tags: [Tag_1.Tag.SCIENCE],
             requirements: { tag: Tag_1.Tag.SCIENCE, count: 4 },
             metadata: {
-                cardNumber: 'Pf55',
+                cardNumber: 'Pf60',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 2 microbes OR 2 data OR 2 floaters to ANY card.', (eb) => {
-                        eb.empty().startAction.microbes(2, { digit: Options_1.digit }).slash().data({ amount: 2, digit: Options_1.digit }).slash().floaters(2, { digit: Options_1.digit }).asterix();
+                        eb.empty().startAction.resource(CardResource_1.CardResource.MICROBE, { amount: 2, digit: Options_1.digit }).slash().resource(CardResource_1.CardResource.DATA, { amount: 2, digit: Options_1.digit }).slash().resource(CardResource_1.CardResource.FLOATER, { amount: 2, digit: Options_1.digit }).asterix();
                     });
                 }),
                 description: 'Requires 4 science tags.',

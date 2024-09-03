@@ -22,10 +22,10 @@ class Cryptocurrency extends Card_1.Card {
                 cardNumber: 'Pf51',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 1 energy to add 1 data to this card.', (eb) => {
-                        eb.energy(1).startAction.data({ amount: 1 }).or();
+                        eb.energy(1).startAction.resource(CardResource_1.CardResource.DATA).or();
                     }).br;
                     b.action('Remove all data from this card to gain 3M€ per data removed.', (eb) => {
-                        eb.text('x').data({ amount: 1 }).startAction.text('x').megacredits(3);
+                        eb.text('x').resource(CardResource_1.CardResource.DATA).startAction.text('x').megacredits(3);
                     });
                 }),
             },

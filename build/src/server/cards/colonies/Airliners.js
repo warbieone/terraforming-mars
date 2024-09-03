@@ -23,7 +23,7 @@ class Airliners extends Card_1.Card {
                 description: 'Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.megacredits(2)).br;
-                    b.floaters(2).asterix();
+                    b.resource(CardResource_1.CardResource.FLOATER, 2).asterix();
                 }),
             },
         });

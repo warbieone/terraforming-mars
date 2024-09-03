@@ -24,11 +24,11 @@ class JetStreamMicroscrappers extends Card_1.Card {
                 cardNumber: '234',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 1 titanium to add 2 floaters here', (eb) => {
-                        eb.titanium(1).startAction.floaters(2);
+                        eb.titanium(1).startAction.resource(CardResource_1.CardResource.FLOATER, 2);
                     }).br;
                     b.or().br;
                     b.action('Spend 2 floaters here to raise Venus 1 step', (eb) => {
-                        eb.floaters(2).startAction.venus(1);
+                        eb.resource(CardResource_1.CardResource.FLOATER, 2).startAction.venus(1);
                     });
                 }),
             },

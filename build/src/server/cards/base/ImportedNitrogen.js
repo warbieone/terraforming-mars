@@ -28,8 +28,8 @@ class ImportedNitrogen extends Card_1.Card {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.tr(1).br;
                     b.plants(4, { digit: Options_1.digit });
-                    b.microbes(3, { digit: Options_1.digit }).asterix().nbsp;
-                    b.animals(2, { digit: Options_1.digit }).asterix();
+                    b.resource(CardResource_1.CardResource.MICROBE, { amount: 3, digit: Options_1.digit }).asterix().nbsp;
+                    b.resource(CardResource_1.CardResource.ANIMAL, { amount: 2, digit: Options_1.digit }).asterix();
                 }),
                 description: 'Raise your TR 1 step and gain 4 plants. Add 3 microbes to ANOTHER card and 2 animals to ANOTHER card.',
             },

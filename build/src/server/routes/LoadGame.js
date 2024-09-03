@@ -11,6 +11,16 @@ class LoadGame extends Handler_1.Handler {
     constructor() {
         super();
     }
+    async getGameId(id) {
+        if ((0, Types_1.isGameId)(id)) {
+            return id;
+        }
+        if ((0, Types_1.isPlayerId)(id) || (0, Types_1.isSpectatorId)(id)) {
+            console.log(`Finding game for player/spectator ${id}`);
+            return await Database_1.Database.getInstance().getGameId(id);
+        }
+        return undefined;
+    }
     put(req, res, _ctx) {
         return new Promise((resolve) => {
             let body = '';
@@ -20,8 +30,8 @@ class LoadGame extends Handler_1.Handler {
             req.once('end', async () => {
                 try {
                     const gameReq = JSON.parse(body);
-                    const gameId = gameReq.gameId;
-                    if (!(0, Types_1.isGameId)(gameId)) {
+                    const gameId = await this.getGameId(gameReq.gameId);
+                    if (gameId === undefined) {
                         throw new Error('Invalid game id');
                     }
                     const rollbackCount = gameReq.rollbackCount;

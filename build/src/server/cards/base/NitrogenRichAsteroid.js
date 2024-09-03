@@ -24,7 +24,7 @@ class NitrogenRichAsteroid extends Card_1.Card {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => {
                         pb.plants(1).nbsp.or().br;
-                        pb.plants(3, { played: Options_1.played, digit: Options_1.digit }).colon().nbsp.plants(4, { digit: Options_1.digit });
+                        pb.tag(Tag_1.Tag.PLANT, { amount: 3, digit: Options_1.digit }).colon().nbsp.plants(4, { digit: Options_1.digit });
                     }).br;
                     b.tr(2).temperature(1);
                 }),

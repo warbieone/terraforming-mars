@@ -20,7 +20,7 @@ class ColoniesHandler {
     static tradeableColonies(game) {
         return game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
     }
-    static onCardPlayed(game, card) {
+    static maybeActivateColonies(game, card) {
         if (!game.gameOptions.coloniesExtension)
             return;
         game.colonies.forEach((colony) => {

@@ -5,7 +5,9 @@ const Party_1 = require("./Party");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Tag_1 = require("../../../common/cards/Tag");
 const Resource_1 = require("../../../common/Resource");
+const Bonus_1 = require("../Bonus");
 const SelectPaymentDeferred_1 = require("../../deferredActions/SelectPaymentDeferred");
+const Policy_1 = require("../Policy");
 const titles_1 = require("../../inputs/titles");
 class Scientists extends Party_1.Party {
     constructor() {
@@ -16,32 +18,30 @@ class Scientists extends Party_1.Party {
     }
 }
 exports.Scientists = Scientists;
-class ScientistsBonus01 {
+class ScientistsBonus01 extends Bonus_1.Bonus {
     constructor() {
+        super(...arguments);
         this.id = 'sb01';
         this.description = 'Gain 1 M€ for each science tag you have';
     }
     getScore(player) {
         return player.tags.count(Tag_1.Tag.SCIENCE, 'raw-pf');
     }
-    grant(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
-        });
+    grantForPlayer(player) {
+        player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
     }
 }
-class ScientistsBonus02 {
+class ScientistsBonus02 extends Bonus_1.Bonus {
     constructor() {
+        super(...arguments);
         this.id = 'sb02';
         this.description = 'Gain 1 M€ for every 3 cards in hand';
     }
     getScore(player) {
         return Math.floor(player.cardsInHand.length / 3);
     }
-    grant(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
-        });
+    grantForPlayer(player) {
+        player.stock.add(Resource_1.Resource.MEGACREDITS, this.getScore(player));
     }
 }
 class ScientistsPolicy01 {
@@ -75,20 +75,17 @@ class ScientistsPolicy03 {
         this.description = 'When you raise a global parameter, draw a card per step raised';
     }
 }
-class ScientistsPolicy04 {
+class ScientistsPolicy04 extends Policy_1.Policy {
     constructor() {
+        super(...arguments);
         this.id = 'sp04';
         this.description = 'Cards with Science tag requirements may be played with 1 less Science tag';
     }
-    onPolicyStart(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.hasTurmoilScienceTagBonus = true;
-        });
+    onPolicyStartForPlayer(player) {
+        player.hasTurmoilScienceTagBonus = true;
     }
-    onPolicyEnd(game) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-            player.hasTurmoilScienceTagBonus = false;
-        });
+    onPolicyEndForPlayer(player) {
+        player.hasTurmoilScienceTagBonus = false;
     }
 }
 exports.SCIENTISTS_BONUS_1 = new ScientistsBonus01();

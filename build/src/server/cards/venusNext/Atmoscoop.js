@@ -30,7 +30,7 @@ class Atmoscoop extends Card_1.Card {
                 description: 'Requires 3 science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 floaters to ANY card.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.temperature(2).or(Size_1.Size.SMALL).venus(2).br;
-                    b.floaters(2).asterix();
+                    b.resource(CardResource_1.CardResource.FLOATER, 2).asterix();
                 }),
             },
         });

@@ -25,7 +25,7 @@ class PhysicsComplex extends ActionCard_1.ActionCard {
                 cardNumber: '095',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 6 energy to add a science resource to this card.', (eb) => {
-                        eb.energy(6, { digit: Options_1.digit }).startAction.science();
+                        eb.energy(6, { digit: Options_1.digit }).startAction.resource(CardResource_1.CardResource.SCIENCE);
                     }).br;
                     b.vpText('2 VP for each science resource on this card.');
                 }),

@@ -6,7 +6,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class Worms extends Card_1.Card {
     constructor() {
         super({
@@ -19,9 +18,9 @@ class Worms extends Card_1.Card {
             },
             requirements: { oxygen: 4 },
             metadata: {
-                cardNumber: '129',
+                cardNumber: '130',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => pb.plants(1).slash().microbes(2, { played: Options_1.played }));
+                    b.production((pb) => pb.plants(1).slash().tag(Tag_1.Tag.MICROBE, 2));
                 }),
                 description: 'Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.',
             },

@@ -8,7 +8,7 @@ const TileType_1 = require("../../../common/TileType");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const Board_1 = require("../../boards/Board");
-const SelectSpace_1 = require("../../inputs/SelectSpace");
+const PlaceTile_1 = require("../../deferredActions/PlaceTile");
 const MessageBuilder_1 = require("../../logs/MessageBuilder");
 class GreatDamPromo extends Card_1.Card {
     constructor(name = CardName_1.CardName.GREAT_DAM_PROMO, adjacencyBonus = undefined, metadata = {
@@ -36,15 +36,13 @@ class GreatDamPromo extends Card_1.Card {
         return this.getAvailableSpaces(player, canAffordOptions).length > 0;
     }
     bespokePlay(player) {
-        const availableSpaces = this.getAvailableSpaces(player);
-        if (availableSpaces.length < 1)
-            return undefined;
-        return new SelectSpace_1.SelectSpace((0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)), availableSpaces)
-            .andThen((space) => {
-            player.game.addTile(player, space, { tileType: TileType_1.TileType.GREAT_DAM });
-            space.adjacency = this.adjacencyBonus;
-            return undefined;
-        });
+        player.game.defer(new PlaceTile_1.PlaceTile(player, {
+            tile: { tileType: TileType_1.TileType.GREAT_DAM, card: this.name },
+            on: () => this.getAvailableSpaces(player),
+            title: (0, MessageBuilder_1.message)('Select space for ${0}', (b) => b.card(this)),
+            adjacencyBonus: this.adjacencyBonus,
+        }));
+        return undefined;
     }
     getAvailableSpaces(player, canAffordOptions) {
         return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)

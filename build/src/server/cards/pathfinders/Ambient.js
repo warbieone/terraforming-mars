@@ -26,7 +26,7 @@ class Ambient extends CorporationCard_1.CorporationCard {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.megacredits(38).venus(2, { size: Size_1.Size.SMALL }).br;
                     b.effect('When you play a card with a Venus tag (including this) increase your heat production 1 step.', (eb) => {
-                        eb.venus(1, { played: Options_1.played }).startEffect.production((pb) => pb.heat(1));
+                        eb.tag(Tag_1.Tag.VENUS).startEffect.production((pb) => pb.heat(1));
                     }).br;
                     b.action('When temperature is maxed, spend 8 heat gain 1 TR. ' +
                         'You may repeat this action like a standard project.', (ab) => {

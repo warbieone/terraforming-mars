@@ -24,9 +24,9 @@ class BotanicalExperience extends Card_1.Card {
                 cardNumber: 'Pf50',
                 hasExternalHelp: true,
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.greenery({ size: Size_1.Size.SMALL, withO2: false, any: true }).colon().data({ size: Size_1.Size.SMALL });
+                    b.greenery({ size: Size_1.Size.SMALL, withO2: false, any: true }).colon().resource(CardResource_1.CardResource.DATA, { size: Size_1.Size.SMALL });
                     b.nbsp;
-                    b.data({ amount: 3, digit: true }).asterix().colon().production((pb) => pb.plants(1));
+                    b.resource(CardResource_1.CardResource.DATA, { amount: 3, digit: Options_1.digit }).asterix().colon().production((pb) => pb.plants(1));
                     b.br;
                     b.text('(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) ' +
                         '(EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.) ' +

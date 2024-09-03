@@ -194,6 +194,9 @@ class Board {
     static spaceOwnedBy(space, player) {
         return Board.ownedBy(player)(space);
     }
+    getHazards() {
+        return this.spaces.filter((space) => space.tile && (0, AresTileType_1.isHazardTileType)(space.tile.tileType));
+    }
     serialize() {
         return {
             spaces: this.spaces.map((space) => {

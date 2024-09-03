@@ -19,7 +19,7 @@ class Heather extends Card_1.Card {
             },
             requirements: { temperature: -14 },
             metadata: {
-                cardNumber: '178',
+                cardNumber: '88',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.production((pb) => pb.plants(1)).plants(1);
                 }),

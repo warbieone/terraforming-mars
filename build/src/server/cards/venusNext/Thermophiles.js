@@ -39,11 +39,11 @@ class Thermophiles extends ActionCard_1.ActionCard {
                 cardNumber: '253',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 microbe to ANY Venus CARD.', (eb) => {
-                        eb.empty().startAction.microbes(1, { secondaryTag: Tag_1.Tag.VENUS });
+                        eb.empty().startAction.resource(CardResource_1.CardResource.MICROBE, { secondaryTag: Tag_1.Tag.VENUS });
                     }).br;
                     b.or().br;
                     b.action('Remove 2 microbes to raise Venus 1 step', (eb) => {
-                        eb.microbes(2).startAction.venus(1);
+                        eb.resource(CardResource_1.CardResource.MICROBE, 2).startAction.venus(1);
                     });
                 }),
                 description: 'Requires Venus 6%',

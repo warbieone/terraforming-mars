@@ -24,8 +24,8 @@ class MoholeLake extends Card_1.Card {
                 cardNumber: 'X27',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add a microbe or animal to ANOTHER card.', (eb) => {
-                        eb.empty().startAction.microbes(1).asterix();
-                        eb.nbsp.or().nbsp.animals(1).asterix();
+                        eb.empty().startAction.resource(CardResource_1.CardResource.MICROBE).asterix();
+                        eb.nbsp.or().nbsp.resource(CardResource_1.CardResource.ANIMAL).asterix();
                     }).br;
                     b.plants(3).temperature(1).oceans(1);
                 }),

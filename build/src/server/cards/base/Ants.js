@@ -25,7 +25,7 @@ class Ants extends Card_1.Card {
                 description: 'Requires 4% oxygen.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Remove 1 microbe from any card to add 1 to this card.', (eb) => {
-                        eb.microbes(1, { all: Options_1.all }).startAction.microbes(1);
+                        eb.resource(CardResource_1.CardResource.MICROBE, { all: Options_1.all }).startAction.resource(CardResource_1.CardResource.MICROBE);
                     }).br;
                     b.vpText('1 VP per 2 microbes on this card.');
                 }),

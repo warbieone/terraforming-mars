@@ -27,10 +27,11 @@ class HiTechLab extends Card_1.Card {
         });
     }
     canAct(player) {
-        return player.energy > 0;
+        return player.energy > 0 && player.game.projectDeck.canDraw(1);
     }
     action(player) {
-        return new SelectAmount_1.SelectAmount('Select amount of energy to spend', 'OK', 1, player.energy)
+        const max = Math.min(player.energy, player.game.projectDeck.size());
+        return new SelectAmount_1.SelectAmount('Select amount of energy to spend', 'OK', 1, max)
             .andThen((amount) => {
             player.stock.deduct(Resource_1.Resource.ENERGY, amount);
             player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));

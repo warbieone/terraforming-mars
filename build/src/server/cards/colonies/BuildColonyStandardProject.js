@@ -4,7 +4,6 @@ exports.BuildColonyStandardProject = void 0;
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const StandardProjectCard_1 = require("../StandardProjectCard");
-const ColonyName_1 = require("../../../common/colonies/ColonyName");
 const BuildColony_1 = require("../../deferredActions/BuildColony");
 class BuildColonyStandardProject extends StandardProjectCard_1.StandardProjectCard {
     constructor() {
@@ -23,18 +22,8 @@ class BuildColonyStandardProject extends StandardProjectCard_1.StandardProjectCa
         const adhaiDiscount = Math.floor(player.resourcesOnCard(CardName_1.CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) / 2);
         return adhaiDiscount + super.discount(player);
     }
-    getOpenColonies(player) {
-        let openColonies = player.game.colonies.filter((colony) => !colony.isFull() &&
-            colony.colonies.includes(player.id) === false &&
-            colony.isActive);
-        const canAffordVenus = player.canAfford({ cost: this.cost, tr: { venus: 1 } });
-        if (!canAffordVenus) {
-            openColonies = openColonies.filter((colony) => colony.name !== ColonyName_1.ColonyName.VENUS);
-        }
-        return openColonies;
-    }
     canAct(player) {
-        return super.canAct(player) && this.getOpenColonies(player).length > 0;
+        return super.canAct(player) && player.colonies.getPlayableColonies(false, this.cost).length > 0;
     }
     actionEssence(player) {
         player.game.defer(new BuildColony_1.BuildColony(player));

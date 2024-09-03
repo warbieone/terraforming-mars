@@ -1,12 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Counter = void 0;
+const utils = require("../../common/utils/utils");
 const Units_1 = require("../../common/Units");
 const TileType_1 = require("../../common/TileType");
-const utils_1 = require("../../common/utils/utils");
 const MoonExpansion_1 = require("../moon/MoonExpansion");
 const CardResource_1 = require("../../common/CardResource");
-const utils = require("../../common/utils/utils");
 class Counter {
     constructor(player, card) {
         this.player = player;
@@ -48,13 +47,13 @@ class Counter {
         if (countable.tag !== undefined) {
             const tag = countable.tag;
             if (Array.isArray(tag)) {
-                if (this.cardIsUnplayed && (0, utils_1.hasIntersection)(tag, card.tags)) {
-                    throw new Error(`Not supporting the case counting tags ${tag} when played card tags are ${card.tags}`);
-                }
                 if (countable.others === true) {
                     throw new Error('Not counting others\' multiple Tags.');
                 }
                 sum += player.tags.multipleCount(tag);
+                if (this.cardIsUnplayed) {
+                    sum += player.tags.cardTagCount(card, tag);
+                }
             }
             else {
                 if (countable.others !== true) {

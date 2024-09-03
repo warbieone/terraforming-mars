@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.copyAndClear = exports.deNull = exports.definedOrThrow = exports.asArray = exports.zip = exports.partition = exports.sum = exports.inplaceRemoveIf = exports.inplaceRemove = exports.twoWayDifference = exports.oneWayDifference = exports.hasIntersection = exports.intersection = exports.range = exports.playerColorClass = void 0;
+exports.toName = exports.copyAndClear = exports.deNull = exports.definedOrThrow = exports.asArray = exports.zip = exports.partition = exports.sum = exports.inplaceRemoveIf = exports.inplaceRemove = exports.twoWayDifference = exports.oneWayDifference = exports.hasIntersection = exports.intersection = exports.range = exports.playerColorClass = void 0;
 const playerColorClass = (color, type) => {
     const prefix = {
         shadow: 'player_shadow_color_',
@@ -86,3 +86,7 @@ function copyAndClear(array) {
     return copy;
 }
 exports.copyAndClear = copyAndClear;
+function toName(item) {
+    return item.name;
+}
+exports.toName = toName;

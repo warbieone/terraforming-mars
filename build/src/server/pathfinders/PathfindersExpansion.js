@@ -13,7 +13,7 @@ const PlaceOceanTile_1 = require("../deferredActions/PlaceOceanTile");
 const PlanetaryTracks_1 = require("../../common/pathfinders/PlanetaryTracks");
 const Resource_1 = require("../../common/Resource");
 const CardResource_1 = require("../../common/CardResource");
-const SelectResourcesDeferred_1 = require("../deferredActions/SelectResourcesDeferred");
+const GainResources_1 = require("../inputs/GainResources");
 const SendDelegateToArea_1 = require("../deferredActions/SendDelegateToArea");
 const Turmoil_1 = require("../turmoil/Turmoil");
 const Priority_1 = require("../deferredActions/Priority");
@@ -168,7 +168,7 @@ class PathfindersExpansion {
                 player.production.add(Resource_1.Resource.PLANTS, 1, { log: true });
                 break;
             case 'resource':
-                game.defer(new SelectResourcesDeferred_1.SelectResourcesDeferred(player, 1, 'Gain 1 resource for your Planetary track bonus.'));
+                player.defer(new GainResources_1.GainResources(player, 1, 'Gain 1 resource for your Planetary track bonus.'));
                 break;
             case 'steel':
                 player.stock.add(Resource_1.Resource.STEEL, 1, { log: true });

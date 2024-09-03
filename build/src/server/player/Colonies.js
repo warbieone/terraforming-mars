@@ -17,6 +17,7 @@ const MessageBuilder_1 = require("../logs/MessageBuilder");
 const DarksideSmugglersUnion_1 = require("../cards/moon/DarksideSmugglersUnion");
 const Payment_1 = require("../../common/inputs/Payment");
 const HecateSpeditions_1 = require("../cards/underworld/HecateSpeditions");
+const ColonyName_1 = require("../../../src/common/colonies/ColonyName");
 class Colonies {
     constructor(player) {
         this.fleetSize = 1;
@@ -78,10 +79,32 @@ class Colonies {
         trade.buttonLabel = 'Trade';
         return trade;
     }
-    getPlayableColonies(allowDuplicate = false) {
+    getPlayableColonies(allowDuplicate = false, cost = 0) {
         return this.player.game.colonies
-            .filter((colony) => colony.isActive && !colony.isFull())
-            .filter((colony) => allowDuplicate || !colony.colonies.includes(this.player.id));
+            .filter((colony) => {
+            if (colony.isActive === false) {
+                return false;
+            }
+            if (colony.isFull()) {
+                return false;
+            }
+            if (!allowDuplicate && colony.colonies.includes(this.player.id)) {
+                return false;
+            }
+            if (colony.name === ColonyName_1.ColonyName.VENUS && !this.player.canAfford({ cost: cost, tr: { venus: 1 } })) {
+                return false;
+            }
+            if (colony.name === ColonyName_1.ColonyName.EUROPA && !this.player.canAfford({ cost: cost, tr: { oceans: 1 } })) {
+                return false;
+            }
+            if (colony.name === ColonyName_1.ColonyName.LEAVITT) {
+                const pharmacyUnion = this.player.getCorporation(CardName_1.CardName.PHARMACY_UNION);
+                if ((pharmacyUnion?.resourceCount ?? 0) > 0 && !this.player.canAfford({ cost: cost, tr: { tr: 1 } })) {
+                    return false;
+                }
+            }
+            return true;
+        });
     }
     calculateVictoryPoints(victoryPointsBreakdown) {
         if (this.player.colonies.victoryPoints > 0) {

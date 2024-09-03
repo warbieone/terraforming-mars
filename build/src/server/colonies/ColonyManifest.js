@@ -21,6 +21,7 @@ const Venus_1 = require("../cards/community/Venus");
 const Leavitt_1 = require("../cards/community/Leavitt");
 const Pallas_1 = require("../cards/community/Pallas");
 const IapetusII_1 = require("../cards/pathfinders/IapetusII");
+const Deimos_1 = require("./Deimos");
 exports.BASE_COLONIES_TILES = [
     { colonyName: ColonyName_1.ColonyName.CERES, Factory: Ceres_1.Ceres },
     { colonyName: ColonyName_1.ColonyName.ENCELADUS, Factory: Enceladus_1.Enceladus },
@@ -42,6 +43,7 @@ exports.COMMUNITY_COLONIES_TILES = [
     { colonyName: ColonyName_1.ColonyName.VENUS, Factory: Venus_1.Venus },
     { colonyName: ColonyName_1.ColonyName.LEAVITT, Factory: Leavitt_1.Leavitt },
     { colonyName: ColonyName_1.ColonyName.PALLAS, Factory: Pallas_1.Pallas },
+    { colonyName: ColonyName_1.ColonyName.DEIMOS, Factory: Deimos_1.Deimos },
 ];
 exports.PATHFINDERS_COLONIES_TILES = [
     { colonyName: ColonyName_1.ColonyName.IAPETUS_II, Factory: IapetusII_1.IapetusII },

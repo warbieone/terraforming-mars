@@ -13,6 +13,7 @@ const AwardScorer_1 = require("../awards/AwardScorer");
 const ModelUtils_1 = require("./ModelUtils");
 const server_ids_1 = require("../utils/server-ids");
 const UnderworldExpansion_1 = require("../underworld/UnderworldExpansion");
+const utils_1 = require("../../common/utils/utils");
 class Server {
     static getSimpleGameModel(game) {
         return {
@@ -37,7 +38,7 @@ class Server {
             awards: this.getAwards(game),
             colonies: (0, ModelUtils_1.coloniesToModel)(game, game.colonies, false, true),
             deckSize: game.projectDeck.drawPile.length,
-            discardedColonies: game.discardedColonies.map((c) => c.name),
+            discardedColonies: game.discardedColonies.map(utils_1.toName),
             expectedPurgeTimeMs: game.expectedPurgeTimeMs(),
             gameAge: game.gameAge,
             gameOptions: this.getGameOptionsAsModel(game.gameOptions),
@@ -206,6 +207,7 @@ class Server {
             victoryPointsByGeneration: player.victoryPointsByGeneration,
             corruption: player.underworldData.corruption,
             excavations: UnderworldExpansion_1.UnderworldExpansion.excavationMarkerCount(player),
+            alliedParty: player.alliedParty,
         };
     }
     static getResourceProtections(player) {

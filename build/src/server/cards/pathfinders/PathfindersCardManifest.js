@@ -104,7 +104,6 @@ const SpaceRaceToMars_1 = require("./SpaceRaceToMars");
 const SpaceRelay_1 = require("./SpaceRelay");
 const SpecializedSettlement_1 = require("./SpecializedSettlement");
 const Steelaris_1 = require("./Steelaris");
-const StrategicBasePlanning_1 = require("./StrategicBasePlanning");
 const SurveyMission_1 = require("./SurveyMission");
 const TerraformingControlStation_1 = require("./TerraformingControlStation");
 const TerraformingRobots_1 = require("./TerraformingRobots");
@@ -116,6 +115,7 @@ const VeneraBase_1 = require("./VeneraBase");
 const VenusFirst_1 = require("./VenusFirst");
 const VitalColony_1 = require("./VitalColony");
 const Wetlands_1 = require("./Wetlands");
+const MarsFrontierAlliance_1 = require("./MarsFrontierAlliance");
 exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     module: 'pathfinders',
     projectCards: {
@@ -210,6 +210,7 @@ exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.ROBIN_HAULINGS]: { Factory: RobinHaulings_1.RobinHaulings, compatibility: ['venus', 'pathfinders'] },
         [CardName_1.CardName.ODYSSEY]: { Factory: Odyssey_1.Odyssey },
         [CardName_1.CardName.GAGARIN_MOBILE_BASE]: { Factory: GagarinMobileBase_1.GagarinMobileBase },
+        [CardName_1.CardName.MARS_FRONTIER_ALLIANCE]: { Factory: MarsFrontierAlliance_1.MarsFrontierAlliance, compatibility: 'turmoil' },
         [CardName_1.CardName.MIND_SET_MARS]: { Factory: MindSetMars_1.MindSetMars, compatibility: 'turmoil' },
         [CardName_1.CardName.HABITAT_MARTE]: { Factory: HabitatMarte_1.HabitatMarte, compatibility: 'pathfinders' },
         [CardName_1.CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: { Factory: AdhaiHighOrbitConstructions_1.AdhaiHighOrbitConstructions, compatibility: 'colonies' },
@@ -225,7 +226,6 @@ exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.DESIGN_COMPANY]: { Factory: DesignCompany_1.DesignCompany },
         [CardName_1.CardName.PERSONAL_AGENDA]: { Factory: PersonalAgenda_1.PersonalAgenda },
         [CardName_1.CardName.VITAL_COLONY]: { Factory: VitalColony_1.VitalColony, compatibility: 'colonies' },
-        [CardName_1.CardName.STRATEGIC_BASE_PLANNING]: { Factory: StrategicBasePlanning_1.StrategicBasePlanning, compatibility: 'colonies' },
         [CardName_1.CardName.DEEP_SPACE_OPERATIONS]: { Factory: DeepSpaceOperations_1.DeepSpaceOperations },
         [CardName_1.CardName.EXPERIENCED_MARTIANS]: { Factory: ExperiencedMartians_1.ExperiencedMartians, compatibility: ['turmoil', 'pathfinders'] },
         [CardName_1.CardName.THE_NEW_SPACE_RACE]: { Factory: TheNewSpaceRace_1.TheNewSpaceRace, compatibility: 'turmoil' },

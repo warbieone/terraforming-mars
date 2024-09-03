@@ -30,7 +30,7 @@ class Birds extends ActionCard_1.ActionCard {
                 description: 'Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add an animal to this card.', (eb) => {
-                        eb.empty().startAction.animals(1);
+                        eb.empty().startAction.resource(CardResource_1.CardResource.ANIMAL);
                     }).br;
                     b.production((pb) => {
                         pb.minus().plants(-2, { all: Options_1.all });

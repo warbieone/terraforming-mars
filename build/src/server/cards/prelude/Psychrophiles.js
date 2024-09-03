@@ -24,10 +24,10 @@ class Psychrophiles extends ActionCard_1.ActionCard {
                 cardNumber: 'P39',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 microbe to this card.', (eb) => {
-                        eb.empty().startAction.microbes(1);
+                        eb.empty().startAction.resource(CardResource_1.CardResource.MICROBE);
                     }).br;
                     b.effect('When paying for a plant card, microbes here may be used as 2 M€ each.', (eb) => {
-                        eb.plants(1, { played: Options_1.played }).startEffect.microbes(1).equals().megacredits(2);
+                        eb.tag(Tag_1.Tag.PLANT).startEffect.resource(CardResource_1.CardResource.MICROBE).equals().megacredits(2);
                     });
                 }),
                 description: 'Temperature must be -20 C or lower.',

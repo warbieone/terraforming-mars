@@ -5,7 +5,6 @@ const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class HabitatMarte extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -19,7 +18,7 @@ class HabitatMarte extends CorporationCard_1.CorporationCard {
                     b.megacredits(40);
                     b.corpBox('effect', (ce) => {
                         ce.effect('Mars tags also count as science tags.', (eb) => {
-                            eb.mars(1, { played: Options_1.played }).startEffect.science(1, { played: Options_1.played });
+                            eb.tag(Tag_1.Tag.MARS).startEffect.tag(Tag_1.Tag.SCIENCE);
                         });
                     });
                 }),

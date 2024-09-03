@@ -45,12 +45,12 @@ export class SpaceDebrisCollection extends ActionCard implements IActionCard {
         description: 'Add 2 asteroids to this card.',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 asteroid to this card.', (eb) => {
-            eb.empty().startAction.asteroids(1).nbsp.or();
+            eb.empty().startAction.resource(CardResource.ASTEROID).nbsp.or();
           }).br;
           b.action('Spend 1 asteroid here to draw a card.', (eb) => {
-            eb.asteroids(1).startAction.cards(1);
+            eb.resource(CardResource.ASTEROID).startAction.cards(1);
           }).br;
-          b.asteroids(2);
+          b.resource(CardResource.ASTEROID,2);
         }),
       },
     });

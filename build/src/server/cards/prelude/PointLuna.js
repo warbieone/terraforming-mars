@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CorporationCard_1 = require("../corporation/CorporationCard");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 const DiscardCards_1 = require("../../deferredActions/DiscardCards");
 const Resource_1 = require("../../../common/Resource");
 class PointLuna extends CorporationCard_1.CorporationCard {
@@ -22,7 +21,7 @@ class PointLuna extends CorporationCard_1.CorporationCard {
                     b.production((pb) => pb.titanium(1)).nbsp.megacredits(48);
                     b.corpBox('effect', (ce) => {
                         ce.effect('When you play an Earth tag, including this, draw a card then discard a card.', (eb) => {
-                            eb.earth(1, { played: Options_1.played }).startEffect.cards(1).minus().cards(1);
+                            eb.tag(Tag_1.Tag.EARTH).startEffect.cards(1).minus().cards(1);
                         });
                     });
                 }),

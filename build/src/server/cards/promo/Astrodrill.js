@@ -28,15 +28,15 @@ class Astrodrill extends CorporationCard_1.CorporationCard {
                 description: 'You start with 40 M€ and 4 asteroid resources.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br;
-                    b.megacredits(40).nbsp.asteroids(4, { digit: Options_1.digit });
+                    b.megacredits(40).nbsp.resource(CardResource_1.CardResource.ASTEROID, { amount: 4, digit: Options_1.digit });
                     b.corpBox('action', (ce) => {
                         ce.vSpace(Size_1.Size.LARGE);
                         ce.action(undefined, (eb) => {
-                            eb.empty().startAction.asteroids(1).asterix().slash().wild(1).or();
+                            eb.empty().startAction.resource(CardResource_1.CardResource.ASTEROID).asterix().slash().wild(1).or();
                         });
                         ce.vSpace();
                         ce.action('Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.', (eb) => {
-                            eb.asteroids(1).startAction.titanium(3, { digit: Options_1.digit });
+                            eb.resource(CardResource_1.CardResource.ASTEROID).startAction.titanium(3, { digit: Options_1.digit });
                         });
                     });
                 }),

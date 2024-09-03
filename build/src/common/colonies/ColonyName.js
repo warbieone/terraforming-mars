@@ -21,6 +21,7 @@ var ColonyName;
     ColonyName["VENUS"] = "Venus";
     ColonyName["LEAVITT"] = "Leavitt";
     ColonyName["PALLAS"] = "Pallas";
+    ColonyName["DEIMOS"] = "Deimos";
     ColonyName["LEAVITT_II"] = "Leavitt II";
     ColonyName["IAPETUS_II"] = "Iapetus II";
 })(ColonyName = exports.ColonyName || (exports.ColonyName = {}));

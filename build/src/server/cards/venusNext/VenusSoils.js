@@ -23,7 +23,7 @@ class VenusSoils extends Card_1.Card {
                 cardNumber: '257',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.venus(1).br;
-                    b.production((pb) => pb.plants(1)).microbes(2).asterix();
+                    b.production((pb) => pb.plants(1)).resource(CardResource_1.CardResource.MICROBE, 2).asterix();
                 }),
                 description: 'Raise Venus 1 step. Increase your plant production 1 step. Add 2 microbes to ANOTHER card',
             },

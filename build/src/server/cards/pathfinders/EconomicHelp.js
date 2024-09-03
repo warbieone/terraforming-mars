@@ -9,7 +9,6 @@ const PathfindersData_1 = require("../../pathfinders/PathfindersData");
 const PathfindersExpansion_1 = require("../../pathfinders/PathfindersExpansion");
 const Tag_1 = require("../../../common/cards/Tag");
 const Size_1 = require("../../../common/cards/render/Size");
-const Options_1 = require("../Options");
 class EconomicHelp extends Card_1.Card {
     constructor() {
         super({
@@ -23,11 +22,11 @@ class EconomicHelp extends Card_1.Card {
                 cardNumber: 'Pf42',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.planetaryTrack().text('3').or().text('2')
-                        .venus(1, { played: Options_1.played }).or(Size_1.Size.SMALL)
-                        .earth(1, { played: Options_1.played }).or(Size_1.Size.SMALL).br;
-                    b.mars(1, { played: Options_1.played }).or(Size_1.Size.SMALL)
-                        .jovian({ amount: 1, played: Options_1.played }).or(Size_1.Size.SMALL)
-                        .moon(1, { played: Options_1.played }).br;
+                        .tag(Tag_1.Tag.VENUS).or(Size_1.Size.SMALL)
+                        .tag(Tag_1.Tag.EARTH).or(Size_1.Size.SMALL).br;
+                    b.tag(Tag_1.Tag.MARS).or(Size_1.Size.SMALL)
+                        .tag(Tag_1.Tag.JOVIAN).or(Size_1.Size.SMALL)
+                        .tag(Tag_1.Tag.MOON).br;
                     b.production((pb) => pb.megacredits(1));
                 }),
                 description: 'Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. ' +

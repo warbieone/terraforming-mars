@@ -6,8 +6,9 @@ const GlobalEventName_1 = require("../../../common/turmoil/globalEvents/GlobalEv
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const CorrosiveRainDeferredAction_1 = require("../../deferredActions/CorrosiveRainDeferredAction");
 const CardRenderer_1 = require("../../cards/render/CardRenderer");
+const CardResource_1 = require("../../../common/CardResource");
 const RENDER_DATA = CardRenderer_1.CardRenderer.builder((b) => {
-    b.minus().floaters(2).or().megacredits(-10).nbsp.nbsp.cards(1).slash().influence();
+    b.minus().resource(CardResource_1.CardResource.FLOATER, 2).or().megacredits(-10).nbsp.nbsp.cards(1).slash().influence();
 });
 class CorrosiveRain extends GlobalEvent_1.GlobalEvent {
     constructor() {

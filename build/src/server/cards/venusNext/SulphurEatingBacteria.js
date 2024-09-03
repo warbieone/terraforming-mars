@@ -23,11 +23,11 @@ class SulphurEatingBacteria extends Card_1.Card {
                 cardNumber: '251',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 microbe to this card.', (eb) => {
-                        eb.empty().startAction.microbes(1);
+                        eb.empty().startAction.resource(CardResource_1.CardResource.MICROBE);
                     }).br;
                     b.or().br;
                     b.action('Spend any number of microbes here to gain triple amount of M€.', (eb) => {
-                        eb.text('x').microbes(1).startAction.megacredits(1, { text: '3x' });
+                        eb.text('x').resource(CardResource_1.CardResource.MICROBE).startAction.megacredits(1, { text: '3x' });
                     });
                 }),
                 description: 'Requires Venus 6%',

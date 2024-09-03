@@ -24,8 +24,8 @@ class VenusianPlants extends Card_1.Card {
                 cardNumber: '261',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.venus(1).br.br;
-                    b.microbes(1, { secondaryTag: Tag_1.Tag.VENUS }).nbsp;
-                    b.or().nbsp.animals(1, { secondaryTag: Tag_1.Tag.VENUS });
+                    b.resource(CardResource_1.CardResource.MICROBE, { secondaryTag: Tag_1.Tag.VENUS }).nbsp;
+                    b.or().nbsp.resource(CardResource_1.CardResource.ANIMAL, { secondaryTag: Tag_1.Tag.VENUS });
                 }),
                 description: {
                     text: 'Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD',

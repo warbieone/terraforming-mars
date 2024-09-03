@@ -22,7 +22,7 @@ class Virus extends Card_1.Card {
             metadata: {
                 cardNumber: '050',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.minus().animals(2, { all: Options_1.all, digit: Options_1.digit }).nbsp;
+                    b.minus().resource(CardResource_1.CardResource.ANIMAL, { amount: 2, all: Options_1.all, digit: Options_1.digit }).nbsp;
                     b.or().nbsp.minus().plants(5, { all: Options_1.all, digit: Options_1.digit });
                 }),
                 description: 'Remove up to 2 animals or 5 plants from any player.',

@@ -6,7 +6,6 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const CeoCard_1 = require("./CeoCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const GlobalParameter_1 = require("../../../common/GlobalParameter");
-const Options_1 = require("../Options");
 class Rogers extends CeoCard_1.CeoCard {
     constructor() {
         super({
@@ -16,9 +15,9 @@ class Rogers extends CeoCard_1.CeoCard {
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
                     b.br;
-                    b.venus(1, { played: Options_1.played }).colon().projectRequirements();
+                    b.tag(Tag_1.Tag.VENUS).colon().projectRequirements();
                     b.br;
-                    b.venus(1, { played: Options_1.played }).colon().megacredits(-3);
+                    b.tag(Tag_1.Tag.VENUS).colon().megacredits(-3);
                 }),
                 description: 'Ignore global requirements for your Venus cards THIS GENERATION. When you play a Venus tag THIS GENERATION, you pay 3 M€ less for it.',
             },

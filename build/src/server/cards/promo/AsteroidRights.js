@@ -25,19 +25,19 @@ class AsteroidRights extends Card_1.Card {
                 addResources: 2,
             },
             metadata: {
-                cardNumber: 'X31',
+                cardNumber: 'X34',
                 description: 'Add 2 asteroids to this card.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Spend 1 M€ to add 1 asteroid to ANY card.', (eb) => {
-                        eb.megacredits(1).startAction.asteroids(1).asterix().nbsp.or();
+                        eb.megacredits(1).startAction.resource(CardResource_1.CardResource.ASTEROID).asterix().nbsp.or();
                     }).br;
                     b.action('Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.', (eb) => {
-                        eb.asteroids(1)
+                        eb.resource(CardResource_1.CardResource.ASTEROID)
                             .startAction.production((pb) => pb.megacredits(1))
                             .or()
                             .titanium(2);
                     }).br;
-                    b.asteroids(2);
+                    b.resource(CardResource_1.CardResource.ASTEROID, 2);
                 }),
             },
         });

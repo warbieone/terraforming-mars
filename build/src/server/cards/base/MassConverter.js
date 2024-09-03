@@ -6,7 +6,6 @@ const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class MassConverter extends Card_1.Card {
     constructor() {
         super({
@@ -23,7 +22,7 @@ class MassConverter extends Card_1.Card {
                 cardNumber: '094',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you play a space card, you pay 2 M€ less for it.', (eb) => {
-                        eb.space({ played: Options_1.played }).startEffect.megacredits(-2);
+                        eb.tag(Tag_1.Tag.SPACE).startEffect.megacredits(-2);
                     }).br;
                     b.production((pb) => pb.energy(6));
                 }),

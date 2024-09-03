@@ -7,7 +7,6 @@ const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const Options_1 = require("../Options");
 class HydrogenToVenus extends Card_1.Card {
     constructor() {
         super({
@@ -23,7 +22,7 @@ class HydrogenToVenus extends Card_1.Card {
                 cardNumber: '231',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.venus(1).br.br;
-                    b.floaters(1, { secondaryTag: Tag_1.Tag.VENUS }).slash().jovian({ played: Options_1.played });
+                    b.resource(CardResource_1.CardResource.FLOATER, { secondaryTag: Tag_1.Tag.VENUS }).slash().tag(Tag_1.Tag.JOVIAN);
                 }),
                 description: 'Raise Venus 1 step. Add 1 floater to A VENUS CARD for each Jovian tag you have.',
             },

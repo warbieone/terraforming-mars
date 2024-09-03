@@ -7,7 +7,6 @@ const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const ActionCard_1 = require("../ActionCard");
-const Options_1 = require("../Options");
 class Dirigibles extends ActionCard_1.ActionCard {
     constructor() {
         super({
@@ -23,10 +22,10 @@ class Dirigibles extends ActionCard_1.ActionCard {
                 cardNumber: '222',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 floater to ANY card', (eb) => {
-                        eb.empty().startAction.floaters(1).asterix();
+                        eb.empty().startAction.resource(CardResource_1.CardResource.FLOATER).asterix();
                     }).br;
                     b.effect('When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.', (eb) => {
-                        eb.venus(1, { played: Options_1.played }).startEffect.floaters(1).equals().megacredits(3);
+                        eb.tag(Tag_1.Tag.VENUS).startEffect.resource(CardResource_1.CardResource.FLOATER).equals().megacredits(3);
                     });
                 }),
             },

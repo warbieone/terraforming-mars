@@ -10,7 +10,6 @@ const CardResource_1 = require("../../../common/CardResource");
 const CardName_1 = require("../../../common/cards/CardName");
 const Priority_1 = require("../../deferredActions/Priority");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class OlympusConference extends Card_1.Card {
     constructor() {
         super({
@@ -23,9 +22,9 @@ class OlympusConference extends Card_1.Card {
             metadata: {
                 cardNumber: '185',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.science(1, { played: Options_1.played }).colon().science().br;
+                    b.tag(Tag_1.Tag.SCIENCE).colon().resource(CardResource_1.CardResource.SCIENCE).br;
                     b.or().br;
-                    b.minus().science().plus().cards(1);
+                    b.minus().resource(CardResource_1.CardResource.SCIENCE).plus().cards(1);
                 }),
                 description: 'When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.',
             },
@@ -33,7 +32,13 @@ class OlympusConference extends Card_1.Card {
     }
     onCardPlayed(player, card) {
         const scienceTags = player.tags.cardTagCount(card, Tag_1.Tag.SCIENCE);
-        for (let i = 0; i < scienceTags; i++) {
+        this.onScienceTagAdded(player, scienceTags);
+    }
+    onColonyAddedToLeavitt(player) {
+        this.onScienceTagAdded(player, 1);
+    }
+    onScienceTagAdded(player, count) {
+        for (let i = 0; i < count; i++) {
             player.defer(() => {
                 if (this.resourceCount === 0) {
                     player.addResourceTo(this, 1);

@@ -25,10 +25,10 @@ class CommunicationCenter extends Card_1.Card {
             metadata: {
                 cardNumber: 'Pf28',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.event({ all: Options_1.all, played: Options_1.played }).colon().data({ amount: 1 }).nbsp.data({ amount: 3, digit: true }).colon().cards(1).br;
+                    b.tag(Tag_1.Tag.EVENT, { all: Options_1.all }).colon().resource(CardResource_1.CardResource.DATA).nbsp.resource(CardResource_1.CardResource.DATA, { amount: 3, digit: Options_1.digit }).colon().cards(1).br;
                     b.text('(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)', Size_1.Size.TINY, false, false).br;
                     b.text('(Effect: Remove 3 data to draw a card automatically.)', Size_1.Size.TINY, false, false).br;
-                    b.minus().production((pb) => pb.energy(1)).data({ amount: 2 });
+                    b.minus().production((pb) => pb.energy(1)).resource(CardResource_1.CardResource.DATA, 2);
                 }),
                 description: 'Decrease your energy production 1 step. Place 2 data on this card.',
             },

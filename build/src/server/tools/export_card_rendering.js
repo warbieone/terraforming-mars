@@ -11,7 +11,7 @@ const ColonyManifest_1 = require("../colonies/ColonyManifest");
 const Milestones_1 = require("../milestones/Milestones");
 const Awards_1 = require("../awards/Awards");
 const CardType_1 = require("../../common/cards/CardType");
-const GlobalEventDealer_1 = require("../turmoil/globalEvents/GlobalEventDealer");
+const globalInitialize_1 = require("../globalInitialize");
 class CardProcessor {
     static makeJson() {
         AllManifests_1.ALL_MODULE_MANIFESTS.forEach(this.processManifest);
@@ -138,7 +138,7 @@ MAProcessor.json = [];
 if (!fs.existsSync('src/genfiles')) {
     fs.mkdirSync('src/genfiles');
 }
-(0, GlobalEventDealer_1.initializeGlobalEventDealer)(AllManifests_1.ALL_MODULE_MANIFESTS);
+(0, globalInitialize_1.globalInitialize)();
 CardProcessor.makeJson();
 GlobalEventProcessor.makeJson();
 ColoniesProcessor.makeJson();

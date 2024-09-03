@@ -5,7 +5,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
-const BoardName_1 = require("../../../common/boards/BoardName");
 const PlaceCityTile_1 = require("../../deferredActions/PlaceCityTile");
 const CardRenderer_1 = require("../render/CardRenderer");
 class LavaTubeSettlement extends Card_1.Card {
@@ -32,10 +31,8 @@ class LavaTubeSettlement extends Card_1.Card {
         });
     }
     getSpacesForCity(player) {
-        if (player.game.gameOptions.boardName === BoardName_1.BoardName.HELLAS) {
-            return player.game.board.getAvailableSpacesForType(player, 'city');
-        }
-        return player.game.board.getAvailableSpacesForType(player, 'volcanic');
+        const spaceType = player.game.board.volcanicSpaceIds.length === 0 ? 'city' : 'volcanic';
+        return player.game.board.getAvailableSpacesForType(player, spaceType);
     }
     bespokeCanPlay(player) {
         return this.getSpacesForCity(player).length > 0 && player.production.energy >= 1;

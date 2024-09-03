@@ -8,7 +8,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const PartyName_1 = require("../../../common/turmoil/PartyName");
 const Resource_1 = require("../../../common/Resource");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 class GMOContract extends Card_1.Card {
     constructor() {
         super({
@@ -22,7 +21,7 @@ class GMOContract extends Card_1.Card {
                 cardNumber: 'T06',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('Each time you play a plant, animal or microbe tag, including this, gain 2 M€.', (be) => {
-                        be.animals(1, { played: Options_1.played }).slash().plants(1, { played: Options_1.played }).slash().microbes(1, { played: Options_1.played });
+                        be.tag(Tag_1.Tag.ANIMAL).slash().tag(Tag_1.Tag.PLANT).slash().tag(Tag_1.Tag.MICROBE);
                         be.startEffect.megacredits(2);
                     });
                 }),

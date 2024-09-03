@@ -5,7 +5,6 @@ const CorporationCard_1 = require("../corporation/CorporationCard");
 const Tag_1 = require("../../../common/cards/Tag");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
-const Options_1 = require("../Options");
 const CardResource_1 = require("../../../common/CardResource");
 const ColoniesHandler_1 = require("../../colonies/ColoniesHandler");
 const SelectColony_1 = require("../../inputs/SelectColony");
@@ -29,16 +28,16 @@ class CollegiumCopernicus extends CorporationCard_1.CorporationCard {
                 drawCard: { count: 2, tag: Tag_1.Tag.SCIENCE },
             },
             metadata: {
-                cardNumber: 'PfC4',
+                cardNumber: 'PfC16',
                 description: 'You start with 33 M€. As your first action, draw 2 cards with a science tag.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br;
                     b.megacredits(33).cards(2, { secondaryTag: Tag_1.Tag.SCIENCE }).br;
                     b.effect('When you play a card with a science tag (including this) Add 1 data to ANY card.', (eb) => {
-                        eb.science(1, { played: Options_1.played }).startEffect.data().asterix();
+                        eb.tag(Tag_1.Tag.SCIENCE).startEffect.resource(CardResource_1.CardResource.DATA).asterix();
                     }).br;
                     b.action('Spend 3 data from this card to trade.', (eb) => {
-                        eb.data({ amount: 3 }).startAction.trade();
+                        eb.resource(CardResource_1.CardResource.DATA, 3).startAction.trade();
                     });
                 }),
             },

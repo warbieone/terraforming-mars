@@ -22,7 +22,7 @@ class ImportedNutrients extends Card_1.Card {
             metadata: {
                 cardNumber: 'X22',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.plants(4, { digit: Options_1.digit }).nbsp.microbes(4, { digit: Options_1.digit }).asterix();
+                    b.plants(4, { digit: Options_1.digit }).nbsp.resource(CardResource_1.CardResource.MICROBE, { amount: 4, digit: Options_1.digit }).asterix();
                 }),
                 description: 'Gain 4 plants and add 4 microbes to ANOTHER CARD.',
             },

@@ -22,7 +22,7 @@ class AirScrappingExpedition extends Card_1.Card {
                 cardNumber: '215',
                 description: 'Raise Venus 1 step. Add 3 floaters to ANY Venus CARD.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.venus(1).floaters(3, { secondaryTag: Tag_1.Tag.VENUS });
+                    b.venus(1).resource(CardResource_1.CardResource.FLOATER, { amount: 3, secondaryTag: Tag_1.Tag.VENUS });
                 }),
             },
         });

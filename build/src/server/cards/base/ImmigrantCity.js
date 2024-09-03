@@ -4,7 +4,7 @@ exports.ImmigrantCity = void 0;
 const Tag_1 = require("../../../common/cards/Tag");
 const Card_1 = require("../Card");
 const CardType_1 = require("../../../common/cards/CardType");
-const SelectSpace_1 = require("../../inputs/SelectSpace");
+const PlaceCityTile_1 = require("../../deferredActions/PlaceCityTile");
 const Resource_1 = require("../../../common/Resource");
 const CardName_1 = require("../../../common/cards/CardName");
 const Priority_1 = require("../../deferredActions/Priority");
@@ -44,13 +44,11 @@ class ImmigrantCity extends Card_1.Card {
         }
     }
     bespokePlay(player) {
-        return new SelectSpace_1.SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player))
-            .andThen((space) => {
-            player.game.addCity(player, space);
+        player.game.defer(new PlaceCityTile_1.PlaceCityTile(player)).andThen(() => {
             player.game.defer(new LoseProduction_1.LoseProduction(player, Resource_1.Resource.ENERGY, { count: 1 }));
             player.game.defer(new LoseProduction_1.LoseProduction(player, Resource_1.Resource.MEGACREDITS, { count: 2 }));
-            return undefined;
         });
+        return undefined;
     }
 }
 exports.ImmigrantCity = ImmigrantCity;

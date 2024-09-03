@@ -16,7 +16,7 @@ class TheNewSpaceRace extends PreludeCard_1.PreludeCard {
                 stock: { megacredits: 12 },
             },
             metadata: {
-                cardNumber: '',
+                cardNumber: 'PfP14',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.firstPlayer().rulingParty().megacredits(12).br;
                 }),

@@ -6,8 +6,6 @@ class CardRenderItem {
         this.type = type;
         this.amount = amount;
         this.is = 'item';
-        this.clone = false;
-        this.cancelled = false;
         switch (options?.digit) {
             case true:
                 this.showDigit = true;
@@ -25,7 +23,6 @@ class CardRenderItem {
             this.amount = options.amount;
         }
         this.anyPlayer = options.all;
-        this.isPlayed = options.played;
         this.secondaryTag = options.secondaryTag;
         if (options.clone === true) {
             this.amountInside = false;
@@ -38,6 +35,12 @@ class CardRenderItem {
         }
         if (options.superscript === true) {
             this.isSuperscript = true;
+        }
+        if (options.resource !== undefined) {
+            this.resource = options.resource;
+        }
+        if (options.tag !== undefined) {
+            this.tag = options.tag;
         }
         return this;
     }

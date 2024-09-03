@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const Options_1 = require("../Options");
 class VenusWaystation extends Card_1.Card {
     constructor() {
         super({
@@ -20,7 +19,7 @@ class VenusWaystation extends Card_1.Card {
                 cardNumber: '258',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you play a Venus tag, you pay 2 M€ less for it.', (eb) => {
-                        eb.venus(1, { played: Options_1.played }).startEffect.megacredits(-2);
+                        eb.tag(Tag_1.Tag.VENUS).startEffect.megacredits(-2);
                     });
                 }),
             },

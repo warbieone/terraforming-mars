@@ -21,18 +21,18 @@ class TheArchaicFoundationInstitute extends CorporationCard_1.CorporationCard {
             },
             metadata: {
                 hasExternalHelp: true,
-                cardNumber: '',
+                cardNumber: 'MC10',
                 description: 'You start with 55 M€.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.megacredits(55).nbsp;
                     b.effect('When you play a Moon tag, including these, add a cube to this card.', (eb) => {
-                        eb.moon().startEffect.resourceCube();
+                        eb.tag(Tag_1.Tag.MOON).startEffect.resource(CardResource_1.CardResource.RESOURCE_CUBE);
                     }).br;
                     b.effect('Automatically remove 3 cubes here and gain 1 TR.', (eb) => {
-                        eb.resourceCube(3, { digit: Options_1.digit }).startEffect.tr(1, { size: Size_1.Size.TINY });
+                        eb.resource(CardResource_1.CardResource.RESOURCE_CUBE, { amount: 3, digit: Options_1.digit }).startEffect.tr(1, { size: Size_1.Size.TINY });
                     }).br;
                     b.action('Remove 3 cubes here; gain 1 TR.', (ab) => {
-                        ab.resourceCube(3, { digit: Options_1.digit }).startAction.tr(1, { size: Size_1.Size.TINY });
+                        ab.resource(CardResource_1.CardResource.RESOURCE_CUBE, { amount: 3, digit: Options_1.digit }).startAction.tr(1, { size: Size_1.Size.TINY });
                     });
                 }),
             },

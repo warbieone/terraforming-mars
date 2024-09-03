@@ -8,6 +8,7 @@ const constants_1 = require("../../../common/constants");
 const SelectParty_1 = require("../../inputs/SelectParty");
 const Resource_1 = require("../../../common/Resource");
 const Size_1 = require("../../../common/cards/render/Size");
+const utils_1 = require("../../../common/utils/utils");
 class Petra extends CeoCard_1.CeoCard {
     constructor() {
         super({
@@ -56,7 +57,7 @@ class Petra extends CeoCard_1.CeoCard {
         }
         player.totalDelegatesPlaced += count;
         player.stock.add(Resource_1.Resource.MEGACREDITS, count * 3, { log: true });
-        const availableParties = turmoil.parties.map((party) => party.name);
+        const availableParties = turmoil.parties.map(utils_1.toName);
         const title = 'Select where to send a Neutral delegate';
         const previousDominantParty = turmoil.dominantParty.name;
         for (let i = 0; i < 3; i++) {

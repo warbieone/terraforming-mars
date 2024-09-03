@@ -17,7 +17,7 @@ class LTFPrivileges extends Card_1.Card {
                 cardNumber: 'M82',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When playing a Moon tag, you do not pay additional steel or titanium for playing it.', (eb) => {
-                        eb.moon().startEffect.text('0').steel(1).nbsp.text('0').titanium(1);
+                        eb.tag(Tag_1.Tag.MOON).startEffect.text('0').steel(1).nbsp.text('0').titanium(1);
                     });
                 }),
             },

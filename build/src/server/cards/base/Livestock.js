@@ -27,7 +27,7 @@ class Livestock extends ActionCard_1.ActionCard {
                 cardNumber: '184',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 1 animal to this card.', (eb) => {
-                        eb.empty().startAction.animals(1);
+                        eb.empty().startAction.resource(CardResource_1.CardResource.ANIMAL);
                     }).br;
                     b.production((pb) => {
                         pb.minus().plants(1).nbsp.plus().megacredits(2);

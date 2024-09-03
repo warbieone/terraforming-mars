@@ -6,6 +6,7 @@ const ICeoCard_1 = require("./ceos/ICeoCard");
 const ICloneTagCard_1 = require("./pathfinders/ICloneTagCard");
 const SelfReplicatingRobots_1 = require("./promo/SelfReplicatingRobots");
 const CardType_1 = require("../../common/cards/CardType");
+const utils_1 = require("../../common/utils/utils");
 function serializeProjectCard(card) {
     const serialized = {
         name: card.name,
@@ -77,7 +78,7 @@ function deserializeProjectCard(element) {
     }
     if (!(card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots)) {
         if (element.bonusResource !== undefined) {
-            card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
+            card.bonusResource = (0, utils_1.asArray)(element.bonusResource);
         }
     }
     if ((0, ICeoCard_1.isCeoCard)(card)) {

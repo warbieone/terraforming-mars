@@ -20,7 +20,7 @@ class HE3Lobbyists extends Card_1.Card {
                 description: 'Increase your M€ production 1 step for each Moon tag you have (including this).',
                 cardNumber: 'M50',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.production((pb) => pb.megacredits(1)).slash().moon();
+                    b.production((pb) => pb.megacredits(1)).slash().tag(Tag_1.Tag.MOON);
                 }),
             },
         });

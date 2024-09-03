@@ -13,7 +13,7 @@ class DrawCards extends DeferredAction_1.DeferredAction {
     execute() {
         this.player.game.resettable = false;
         const game = this.player.game;
-        const cards = game.projectDeck.drawByCondition(game, this.count, (card) => {
+        const cards = game.projectDeck.drawByConditionLegacy(game, this.count, (card) => {
             if (this.options.resource !== undefined && this.options.resource !== card.resourceType) {
                 return false;
             }

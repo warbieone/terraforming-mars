@@ -29,12 +29,12 @@ class TitanFloatingLaunchPad extends Card_1.Card {
                 cardNumber: 'C44',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action(undefined, (eb) => {
-                        eb.empty().startAction.floaters(1, { secondaryTag: Tag_1.Tag.JOVIAN }).nbsp.or();
+                        eb.empty().startAction.resource(CardResource_1.CardResource.FLOATER, { secondaryTag: Tag_1.Tag.JOVIAN }).nbsp.or();
                     }).br;
                     b.action('Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.', (eb) => {
-                        eb.floaters(1).startAction.trade();
+                        eb.resource(CardResource_1.CardResource.FLOATER).startAction.trade();
                     }).br.br;
-                    b.floaters(2, { secondaryTag: Tag_1.Tag.JOVIAN });
+                    b.resource(CardResource_1.CardResource.FLOATER, { amount: 2, secondaryTag: Tag_1.Tag.JOVIAN });
                 }),
                 description: {
                     text: 'Add two floaters to ANY JOVIAN CARD.',

@@ -113,6 +113,9 @@ class TurmoilHandler {
             }
         });
         total += tr.tr ?? 0;
+        if (player.preservationProgram === true) {
+            total = Math.max(total - 1, 0);
+        }
         return total;
     }
 }

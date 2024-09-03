@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
-const Options_1 = require("../Options");
 class SulphurExports extends Card_1.Card {
     constructor() {
         super({
@@ -22,7 +21,7 @@ class SulphurExports extends Card_1.Card {
                 cardNumber: '250',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.venus(1).br;
-                    b.production((pb) => pb.megacredits(1).slash().venus(1, { played: Options_1.played }));
+                    b.production((pb) => pb.megacredits(1).slash().tag(Tag_1.Tag.VENUS));
                 }),
                 description: 'Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.',
             },

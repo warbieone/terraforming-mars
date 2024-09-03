@@ -15,7 +15,7 @@ class LuxuryFoods extends Card_1.Card {
             requirements: [{ tag: Tag_1.Tag.VENUS }, { tag: Tag_1.Tag.EARTH }, { tag: Tag_1.Tag.JOVIAN }],
             metadata: {
                 description: 'Requires that you have a Venus tag, an Earth tag and a Jovian tag.',
-                cardNumber: 'T10',
+                cardNumber: '237',
             },
         });
     }

@@ -27,9 +27,9 @@ class Solarpedia extends ActionCard_1.ActionCard {
                 cardNumber: 'Pf54',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.action('Add 2 data to ANY card.', (ab) => {
-                        ab.empty().startAction.data({ amount: 2 }).asterix();
+                        ab.empty().startAction.resource(CardResource_1.CardResource.DATA, 2).asterix();
                     }).br;
-                    b.data({ amount: 2 }).asterix();
+                    b.resource(CardResource_1.CardResource.DATA, 2).asterix();
                 }),
                 description: 'Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.',
             },

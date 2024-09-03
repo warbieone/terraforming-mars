@@ -15,8 +15,6 @@
                                     "type": "megacredits",
                                     "amount": 1,
                                     "is": "item",
-                                    "clone": false,
-                                    "cancelled": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
@@ -26,44 +24,41 @@
                         "is": "production-box"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "colonies",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "titanium",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -83,33 +78,29 @@
                         "type": "megacredits",
                         "amount": -3,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "colonies",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "size": "M"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -129,48 +120,48 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "secondaryTag": "floater"
+                        "secondaryTag": "floater",
+                        "cancelled": false
                     },
                     {
+                        "is": "symbol",
                         "type": ":",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "floaters",
-                        "amount": 1,
+                        "type": "resource",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "cancelled": false,
+                        "resource": "Floater"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "floaters",
-                        "amount": 1,
+                        "type": "resource",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "cancelled": false,
+                        "resource": "Floater"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -187,65 +178,64 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "floaters",
+                        "type": "resource",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "cancelled": false,
+                        "resource": "Floater"
                     },
                     {
+                        "is": "symbol",
                         "type": "OR",
                         "size": "S",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "megacredits",
                         "amount": -10,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "cards",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -265,33 +255,30 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "venus",
-                        "amount": 1,
+                        "type": "tag",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "venus"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -311,48 +298,44 @@
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "secondaryTag": "wild-resource"
+                        "secondaryTag": "wild-resource",
+                        "cancelled": false
                     },
                     {
+                        "is": "symbol",
                         "type": ":",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "wild",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "cards",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -371,31 +354,28 @@
                     {
                         "type": "titanium",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "jovian",
+                        "type": "tag",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "jovian"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -415,38 +395,35 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "+",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "tr",
                         "amount": 5,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": true,
+                        "cancelled": false,
                         "over": 15
                     }
                 ],
@@ -468,15 +445,14 @@
                     {
                         "type": "plants",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "rows": [
@@ -484,27 +460,25 @@
                                 {
                                     "type": "plants",
                                     "amount": 1,
-                                    "is": "item",
-                                    "clone": false,
-                                    "cancelled": false
+                                    "is": "item"
                                 }
                             ]
                         ],
                         "is": "production-box"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -523,15 +497,14 @@
                     {
                         "type": "steel",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "rows": [
@@ -539,27 +512,25 @@
                                 {
                                     "type": "steel",
                                     "amount": 1,
-                                    "is": "item",
-                                    "clone": false,
-                                    "cancelled": false
+                                    "is": "item"
                                 }
                             ]
                         ],
                         "is": "production-box"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -579,33 +550,30 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "earth",
-                        "amount": 1,
+                        "type": "tag",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "earth"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -624,15 +592,14 @@
                     {
                         "type": "temperature",
                         "amount": 2,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "rows": [
@@ -640,26 +607,23 @@
                                 {
                                     "type": "heat",
                                     "amount": 1,
-                                    "is": "item",
-                                    "clone": false,
-                                    "cancelled": false
+                                    "is": "item"
                                 }
                             ]
                         ],
                         "is": "production-box"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -679,8 +643,6 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "9",
                         "size": "M",
                         "isUppercase": false,
@@ -689,31 +651,26 @@
                     {
                         "type": "diverse_tag",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "isPlayed": true
+                        "is": "item"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     },
                     {
+                        "is": "symbol",
                         "type": ":",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "megacredits",
                         "amount": 10,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -738,35 +695,32 @@
                                 {
                                     "type": "energy",
                                     "amount": 1,
-                                    "is": "item",
-                                    "clone": false,
-                                    "cancelled": false
+                                    "is": "item"
                                 }
                             ]
                         ],
                         "is": "production-box"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "energy",
+                        "type": "tag",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "power"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -786,33 +740,30 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "space",
+                        "type": "tag",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "space"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -832,33 +783,30 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "event",
+                        "type": "tag",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "event"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -878,33 +826,30 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "science",
-                        "amount": 1,
+                        "type": "tag",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "science"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -923,44 +868,43 @@
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "+",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "building",
-                        "amount": 1,
+                        "type": "tag",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "size": "S",
-                        "isPlayed": true
+                        "cancelled": false,
+                        "tag": "building"
                     },
                     {
+                        "is": "symbol",
                         "type": "+",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "city",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "M"
+                        "size": "M",
+                        "cancelled": false
                     },
                     {
+                        "is": "symbol",
                         "type": ":",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     }
                 ],
                 [
@@ -968,8 +912,6 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "1st:",
                         "size": "S",
                         "isUppercase": false,
@@ -979,22 +921,20 @@
                         "type": "tr",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "XS"
+                        "size": "XS",
+                        "cancelled": false
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "2nd:",
                         "size": "S",
                         "isUppercase": false,
@@ -1004,9 +944,8 @@
                         "type": "tr",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "XS"
+                        "size": "XS",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1025,42 +964,36 @@
                     {
                         "type": "oceans",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "plants",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
                         "type": "steel",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -1080,32 +1013,28 @@
                         "type": "megacredits",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "cards",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1125,33 +1054,29 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "city",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "size": "M"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1171,8 +1096,6 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "Lose all",
                         "size": "M",
                         "isUppercase": false,
@@ -1181,47 +1104,43 @@
                     {
                         "type": "heat",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "megacredits",
                         "amount": -2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "building",
-                        "amount": 1,
+                        "type": "tag",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "building"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1241,8 +1160,6 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "max 3",
                         "size": "M",
                         "isUppercase": false,
@@ -1251,17 +1168,14 @@
                     {
                         "type": "plants",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1278,39 +1192,37 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "titanium",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "jovian",
+                        "type": "tag",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "jovian"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1327,49 +1239,44 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "megacredits",
                         "amount": 4,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "oceans",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
                         "type": "empty_tile",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "size": "M"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1386,32 +1293,31 @@
             "rows": [
                 [
                     {
-                        "type": "earth",
-                        "amount": 1,
+                        "type": "tag",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "size": "S",
-                        "isPlayed": true
+                        "cancelled": false,
+                        "tag": "earth"
                     },
                     {
+                        "is": "symbol",
                         "type": "+",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": ":",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     }
                 ],
                 [
@@ -1419,57 +1325,54 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "1st:",
                         "size": "S",
                         "isUppercase": false,
                         "isBold": true
                     },
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "tr",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "XS"
+                        "size": "XS",
+                        "cancelled": false
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "2nd:",
                         "size": "S",
                         "isUppercase": false,
                         "isBold": true
                     },
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "tr",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "XS"
+                        "size": "XS",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1486,42 +1389,39 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "megacredits",
                         "amount": 4,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "city",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "size": "M"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1541,61 +1441,58 @@
                         "rows": [
                             [
                                 {
+                                    "is": "symbol",
                                     "type": "-",
                                     "size": "M",
                                     "isIcon": true,
-                                    "is": "symbol"
+                                    "isSuperscript": false
                                 },
                                 {
                                     "type": "energy",
                                     "amount": 1,
-                                    "is": "item",
-                                    "clone": false,
-                                    "cancelled": false
+                                    "is": "item"
                                 },
                                 {
                                     "type": "steel",
                                     "amount": 1,
-                                    "is": "item",
-                                    "clone": false,
-                                    "cancelled": false
+                                    "is": "item"
                                 }
                             ]
                         ],
                         "is": "production-box"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "steel",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "M"
+                        "size": "M",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1612,43 +1509,40 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "temperature",
                         "amount": 2,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "cards",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -1668,33 +1562,30 @@
                         "type": "megacredits",
                         "amount": -3,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "building",
-                        "amount": 1,
+                        "type": "tag",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "building"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1711,17 +1602,16 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "4",
                         "size": "M",
                         "isUppercase": false,
@@ -1730,17 +1620,14 @@
                     {
                         "type": "tr",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -1757,46 +1644,43 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "cards",
                         "amount": 2,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -1813,49 +1697,47 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "oceans",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "wild",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -1875,32 +1757,31 @@
                         "type": "megacredits",
                         "amount": -3,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "tr",
                         "amount": 5,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": true,
+                        "cancelled": false,
                         "over": 10
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "rows": [
@@ -1909,8 +1790,6 @@
                                     "type": "megacredits",
                                     "amount": 1,
                                     "is": "item",
-                                    "clone": false,
-                                    "cancelled": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
@@ -1920,17 +1799,16 @@
                         "is": "production-box"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ],
                 []
@@ -1948,42 +1826,40 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "megacredits",
                         "amount": 3,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "secondaryTag": "blue"
+                        "secondaryTag": "blue",
+                        "cancelled": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2000,42 +1876,40 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "megacredits",
                         "amount": 3,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "space",
+                        "type": "tag",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "space"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2054,35 +1928,31 @@
                     {
                         "type": "cards",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "party_leaders",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "+",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -2102,33 +1972,30 @@
                         "type": "megacredits",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "mars",
-                        "amount": 1,
+                        "type": "tag",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "mars"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2151,8 +2018,6 @@
                                     "type": "megacredits",
                                     "amount": 1,
                                     "is": "item",
-                                    "clone": false,
-                                    "cancelled": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
@@ -2162,43 +2027,40 @@
                         "is": "production-box"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "empty_tile_special",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "energy",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -2215,17 +2077,16 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "megacredits",
                         "amount": 10,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
@@ -2234,23 +2095,18 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     },
                     {
                         "type": "plantary-track",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "2",
                         "size": "M",
                         "isUppercase": false,
@@ -2271,39 +2127,37 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "plants",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "earth",
-                        "amount": 1,
+                        "type": "tag",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
-                        "isPlayed": true
+                        "tag": "earth"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2320,36 +2174,35 @@
             "rows": [
                 [
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "temperature",
                         "amount": 2,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
+                        "is": "symbol",
                         "type": "-",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "oxygen",
                         "amount": 2,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -2369,56 +2222,56 @@
                         "type": "megacredits",
                         "amount": -10,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "data resource",
+                        "type": "resource",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "cancelled": false,
+                        "resource": "Data"
                     },
                     {
+                        "is": "symbol",
                         "type": "*",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
-                        "type": "data resource",
-                        "amount": 1,
+                        "type": "resource",
+                        "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "cancelled": false,
+                        "resource": "Data"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],
@@ -2437,29 +2290,24 @@
                     {
                         "type": "corruption",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": ":",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "1st/2nd",
                         "size": "S",
                         "isUppercase": false,
@@ -2468,9 +2316,7 @@
                     {
                         "type": "corruption",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
                         "rows": [
@@ -2479,24 +2325,21 @@
                                     "type": "megacredits",
                                     "amount": 3,
                                     "is": "item",
-                                    "clone": false,
-                                    "cancelled": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
                                 },
                                 {
+                                    "is": "symbol",
                                     "type": "/",
                                     "size": "M",
                                     "isIcon": false,
-                                    "is": "symbol"
+                                    "isSuperscript": false
                                 },
                                 {
                                     "type": "megacredits",
                                     "amount": 1,
                                     "is": "item",
-                                    "clone": false,
-                                    "cancelled": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
@@ -2526,8 +2369,6 @@
                                     "type": "megacredits",
                                     "amount": 1,
                                     "is": "item",
-                                    "clone": false,
-                                    "cancelled": false,
                                     "showDigit": false,
                                     "amountInside": true,
                                     "size": "M"
@@ -2537,26 +2378,25 @@
                         "is": "production-box"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "excavate",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "showDigit": true
+                        "showDigit": true,
+                        "cancelled": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2576,23 +2416,21 @@
                         "type": "megacredits",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "cards",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": false,
                         "over": 6
                     },
@@ -2600,22 +2438,20 @@
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "MAX 6",
                         "size": "M",
                         "isUppercase": false,
@@ -2624,23 +2460,21 @@
                     {
                         "type": "cards",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": ":",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "cards",
                         "amount": 2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "showDigit": true
+                        "showDigit": true,
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2660,8 +2494,6 @@
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "ALL",
                         "size": "M",
                         "isUppercase": false,
@@ -2671,52 +2503,49 @@
                         "type": "underground-resources",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
                         "cancelled": true
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "megacredits",
                         "amount": -2,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "empty_tile",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "*",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     }
                 ]
             ],
@@ -2736,45 +2565,40 @@
                         "type": "megacredits",
                         "amount": -3,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "showDigit": false,
                         "amountInside": true,
                         "size": "M"
                     },
                     {
+                        "is": "symbol",
                         "type": "/",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "corruption",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
                         "type": "influence",
                         "amount": 1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
-                        "size": "S"
+                        "size": "S",
+                        "cancelled": false
                     },
                     {
+                        "is": "symbol",
                         "type": "nbsp",
                         "size": "M",
                         "isIcon": true,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "text",
                         "amount": -1,
                         "is": "item",
-                        "clone": false,
-                        "cancelled": false,
                         "text": "0",
                         "size": "M",
                         "isUppercase": false,
@@ -2783,22 +2607,19 @@
                     {
                         "type": "corruption",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     },
                     {
+                        "is": "symbol",
                         "type": ":",
                         "size": "M",
                         "isIcon": false,
-                        "is": "symbol"
+                        "isSuperscript": false
                     },
                     {
                         "type": "tr",
                         "amount": 1,
-                        "is": "item",
-                        "clone": false,
-                        "cancelled": false
+                        "is": "item"
                     }
                 ]
             ],

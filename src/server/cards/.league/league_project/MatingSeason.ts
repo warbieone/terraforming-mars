@@ -5,6 +5,8 @@ import {CardName} from '../../../../common/cards/CardName';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
 import {IPlayer} from '../../../../server/IPlayer';
+import {CardResource} from '../../../../common/CardResource';
+
 
 
 export class MatingSeason extends Card implements IProjectCard {
@@ -20,7 +22,7 @@ export class MatingSeason extends Card implements IProjectCard {
         cardNumber: 'L306',
         renderData: CardRenderer.builder((b) => {
           b.action(undefined, (eb) => {
-            eb.text('2').animals(1).startAction.text('+1').animals(1);
+            eb.text('2').resource(CardResource.MICROBE).startAction.text('+1').resource(CardResource.MICROBE,2);
           }).br;
         }),
         description: 'Add an animal to each of your cards with at least two animals on it.',

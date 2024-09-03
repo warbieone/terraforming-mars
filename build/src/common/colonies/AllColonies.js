@@ -23,6 +23,7 @@ exports.COMMUNITY_COLONY_NAMES = [
     ColonyName_1.ColonyName.LEAVITT,
     ColonyName_1.ColonyName.VENUS,
     ColonyName_1.ColonyName.PALLAS,
+    ColonyName_1.ColonyName.DEIMOS,
 ];
 exports.PATHFINDERS_COLONY_NAMES = [
     ColonyName_1.ColonyName.IAPETUS_II,

@@ -17,7 +17,7 @@ class MoonRoadStandardProject extends StandardProjectCard_1.StandardProjectCard 
         tilesBuilt: [TileType_1.TileType.MOON_ROAD],
         metadata: {
             cardNumber: '',
-            renderData: CardRenderer_1.CardRenderer.builder((b) => b.standardProject('Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.', (eb) => {
+            renderData: CardRenderer_1.CardRenderer.builder((b) => b.standardProject('Spend 18 M€ and 1 steel to place a road on The Moon and raise the Logistics Rate 1 step.', (eb) => {
                 eb.megacredits(18).steel(1).startAction.moonRoad({ secondaryTag: AltSecondaryTag_1.AltSecondaryTag.MOON_LOGISTICS_RATE });
             })),
         },

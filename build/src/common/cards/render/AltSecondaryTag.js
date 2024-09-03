@@ -15,4 +15,5 @@ var AltSecondaryTag;
     AltSecondaryTag["NO_PLANETARY_TAG"] = "no_planetary_tag";
     AltSecondaryTag["WILD_RESOURCE"] = "wild-resource";
     AltSecondaryTag["DIVERSE"] = "diverse";
+    AltSecondaryTag["ARES"] = "ares";
 })(AltSecondaryTag = exports.AltSecondaryTag || (exports.AltSecondaryTag = {}));

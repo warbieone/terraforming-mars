@@ -23,7 +23,7 @@ class ControlledBloom extends Card_1.Card {
             metadata: {
                 cardNumber: 'PFTmp',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.microbes(3).asterix().br;
+                    b.resource(CardResource_1.CardResource.MICROBE, 3).asterix().br;
                     b.plants(3);
                 }),
                 description: 'Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.',

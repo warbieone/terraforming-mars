@@ -15,7 +15,7 @@ class Neil extends CeoCard_1.CeoCard {
             metadata: {
                 cardNumber: 'L34',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.moon(1, { played: Options_1.played, all: Options_1.all }).colon().megacredits(1);
+                    b.tag(Tag_1.Tag.MOON, { all: Options_1.all }).colon().megacredits(1);
                     b.br.br;
                     b.opgArrow().production((pb) => pb.megacredits(1, { text: '?' })).asterix();
                 }),
@@ -23,12 +23,13 @@ class Neil extends CeoCard_1.CeoCard {
             },
         });
     }
-    onCardPlayed(player, card) {
+    onCardPlayedFromAnyPlayer(thisCardOwner, _playedCardOwner, card) {
         for (const tag of card.tags) {
             if (tag === Tag_1.Tag.MOON) {
-                player.game.getCardPlayerOrThrow(this.name).stock.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
+                thisCardOwner.game.getCardPlayerOrThrow(this.name).stock.add(Resource_1.Resource.MEGACREDITS, 1, { log: true });
             }
         }
+        return undefined;
     }
     action(player) {
         this.isDisabled = true;

@@ -6,7 +6,6 @@ const CardType_1 = require("../../../common/cards/CardType");
 const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
-const Options_1 = require("../Options");
 class TerraformingControlStation extends Card_1.Card {
     constructor() {
         super({
@@ -22,7 +21,7 @@ class TerraformingControlStation extends Card_1.Card {
                 cardNumber: 'Pf12',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you play a Venus or Mars tag, pay 2 M€ less.', (eb) => {
-                        eb.venus(1, { played: Options_1.played }).slash().mars(1, { played: Options_1.played }).startEffect.megacredits(-2);
+                        eb.tag(Tag_1.Tag.VENUS).slash().tag(Tag_1.Tag.MARS).startEffect.megacredits(-2);
                     });
                     b.br.tr(2);
                 }),

@@ -7,7 +7,6 @@ const Tag_1 = require("../../../common/cards/Tag");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const PathfindersExpansion_1 = require("../../pathfinders/PathfindersExpansion");
-const Options_1 = require("../Options");
 class MartianEmbassy extends Card_1.Card {
     constructor() {
         super({
@@ -19,7 +18,7 @@ class MartianEmbassy extends Card_1.Card {
                 cardNumber: 'M76',
                 description: 'Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.mars(1, { played: Options_1.played }).planetaryTrack().text('+1').slash().moon(3);
+                    b.tag(Tag_1.Tag.MARS).planetaryTrack().text('+1').slash().tag(Tag_1.Tag.MOON, 3);
                 }),
             },
         });

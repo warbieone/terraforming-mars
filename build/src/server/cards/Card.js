@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateBehavior = exports.Card = void 0;
 const CardType_1 = require("../../common/cards/CardType");
-const Tag_1 = require("../../common/cards/Tag");
 const Units_1 = require("../../common/Units");
 const CardRenderDynamicVictoryPoints_1 = require("./render/CardRenderDynamicVictoryPoints");
 const CardRenderItemType_1 = require("../../common/cards/render/CardRenderItemType");
@@ -30,15 +29,21 @@ class Card {
                 throw new Error(`${name} must have a cost property`);
             }
         }
+        let step = 0;
         try {
             Card.autopopulateMetadataVictoryPoints(external);
+            step = 1;
             validateBehavior(external.behavior, name);
+            step = 2;
             validateBehavior(external.firstAction, name);
+            step = 3;
             validateBehavior(external.action, name);
+            step = 4;
             Card.validateTilesBuilt(external);
+            step = 5;
         }
         catch (e) {
-            throw new Error(`Cannot validate ${name}: ${e}`);
+            throw new Error(`Cannot validate ${name} (${step}): ${e}`);
         }
         const translatedRequirements = (0, utils_1.asArray)(external.requirements ?? []).map((req) => populateCount(req));
         const compiledRequirements = CardRequirements_1.CardRequirements.compile(translatedRequirements);
@@ -201,23 +206,14 @@ class Card {
         }
         let units = 0;
         switch (vps.item?.type) {
-            case CardRenderItemType_1.CardRenderItemType.MICROBES:
-            case CardRenderItemType_1.CardRenderItemType.ANIMALS:
-            case CardRenderItemType_1.CardRenderItemType.FIGHTER:
-            case CardRenderItemType_1.CardRenderItemType.FLOATERS:
-            case CardRenderItemType_1.CardRenderItemType.ASTEROIDS:
-            case CardRenderItemType_1.CardRenderItemType.PRESERVATION:
-            case CardRenderItemType_1.CardRenderItemType.DATA_RESOURCE:
-            case CardRenderItemType_1.CardRenderItemType.RESOURCE_CUBE:
-            case CardRenderItemType_1.CardRenderItemType.SCIENCE:
-            case CardRenderItemType_1.CardRenderItemType.CAMPS:
+            case CardRenderItemType_1.CardRenderItemType.RESOURCE:
                 units = this.resourceCount;
                 break;
-            case CardRenderItemType_1.CardRenderItemType.JOVIAN:
-                units = player?.tags.count(Tag_1.Tag.JOVIAN, 'raw');
-                break;
-            case CardRenderItemType_1.CardRenderItemType.MOON:
-                units = player?.tags.count(Tag_1.Tag.MOON, 'raw');
+            case CardRenderItemType_1.CardRenderItemType.TAG:
+                if (vps.item.tag === undefined) {
+                    throw new Error('tag attribute missing');
+                }
+                units = player.tags.count(vps.item.tag, 'raw');
                 break;
         }
         if (units === undefined) {
@@ -299,7 +295,7 @@ class Card {
             return 0;
         }
         let sum = 0;
-        const discounts = Array.isArray(this.cardDiscount) ? this.cardDiscount : [this.cardDiscount];
+        const discounts = (0, utils_1.asArray)(this.cardDiscount);
         for (const discount of discounts) {
             if (discount.tag === undefined) {
                 sum += discount.amount;

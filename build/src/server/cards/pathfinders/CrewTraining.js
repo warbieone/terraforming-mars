@@ -7,7 +7,6 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const Tag_1 = require("../../../common/cards/Tag");
 const DeclareCloneTag_1 = require("../../pathfinders/DeclareCloneTag");
 const Size_1 = require("../../../common/cards/render/Size");
-const Options_1 = require("../Options");
 class CrewTraining extends PreludeCard_1.PreludeCard {
     constructor() {
         super({
@@ -16,14 +15,14 @@ class CrewTraining extends PreludeCard_1.PreludeCard {
                 tr: 2,
             },
             metadata: {
-                cardNumber: 'P08',
+                cardNumber: 'PfP06',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.planetaryTrack().text('2')
-                        .venus(1, { played: Options_1.played }).or(Size_1.Size.SMALL)
-                        .earth(1, { played: Options_1.played }).or(Size_1.Size.SMALL).br;
-                    b.mars(1, { played: Options_1.played }).or(Size_1.Size.SMALL)
-                        .jovian({ amount: 1, played: Options_1.played }).or(Size_1.Size.SMALL)
-                        .moon(1, { played: Options_1.played }).br;
+                        .tag(Tag_1.Tag.VENUS).or(Size_1.Size.SMALL)
+                        .tag(Tag_1.Tag.EARTH).or(Size_1.Size.SMALL).br;
+                    b.tag(Tag_1.Tag.MARS).or(Size_1.Size.SMALL)
+                        .tag(Tag_1.Tag.JOVIAN).or(Size_1.Size.SMALL)
+                        .tag(Tag_1.Tag.MOON).br;
                     b.tr(2);
                 }),
                 description: 'Choose a planet tag. This card counts as having 2 of that tag. ' +

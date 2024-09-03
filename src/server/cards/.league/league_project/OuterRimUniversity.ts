@@ -27,7 +27,7 @@ export class OuterRimUniversity extends Card implements IProjectCard {
         cardNumber: 'L418',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Jovian tag, including this, you may discard a card from hand to draw a card.', (eb) => {
-            eb.jovian().startEffect.minus().cards(1).nbsp.plus().cards(1);
+            eb.tag(Tag.JOVIAN).startEffect.minus().cards(1).nbsp.plus().cards(1);
           });
         }),
       },

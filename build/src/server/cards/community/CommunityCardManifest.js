@@ -1,18 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.COMMUNITY_CARD_MANIFEST = void 0;
-const CardName_1 = require("../../../common/cards/CardName");
-const ModuleManifest_1 = require("../ModuleManifest");
-const GlobalEventName_1 = require("../../../common/turmoil/globalEvents/GlobalEventName");
 const AerospaceMission_1 = require("./AerospaceMission");
 const AgricolaInc_1 = require("./AgricolaInc");
+const Athena_1 = require("./Athena");
 const ByElection_1 = require("./ByElection");
+const CardName_1 = require("../../../common/cards/CardName");
 const CuriosityII_1 = require("./CuriosityII");
+const Eris_1 = require("./Eris");
 const ExecutiveOrder_1 = require("./ExecutiveOrder");
+const GlobalEventName_1 = require("../../../common/turmoil/globalEvents/GlobalEventName");
 const Incite_1 = require("./Incite");
 const JunkVentures_1 = require("./JunkVentures");
 const LeadershipSummit_1 = require("./LeadershipSummit");
 const Midas_1 = require("./Midas");
+const ModuleManifest_1 = require("../ModuleManifest");
 const Playwrights_1 = require("./Playwrights");
 const PoliticalUprising_1 = require("./PoliticalUprising");
 const ProjectWorkshop_1 = require("./ProjectWorkshop");
@@ -32,6 +34,8 @@ exports.COMMUNITY_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.MIDAS]: { Factory: Midas_1.Midas },
         [CardName_1.CardName.UNITED_NATIONS_MISSION_ONE]: { Factory: UnitedNationsMissionOne_1.UnitedNationsMissionOne },
         [CardName_1.CardName.JUNK_VENTURES]: { Factory: JunkVentures_1.JunkVentures },
+        [CardName_1.CardName.ERIS]: { Factory: Eris_1.Eris, compatibility: 'ares' },
+        [CardName_1.CardName.ATHENA]: { Factory: Athena_1.Athena, compatibility: 'ares' },
     },
     preludeCards: {
         [CardName_1.CardName.RESEARCH_GRANT]: { Factory: ResearchGrant_1.ResearchGrant },

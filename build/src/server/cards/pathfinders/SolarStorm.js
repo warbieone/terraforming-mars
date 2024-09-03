@@ -24,7 +24,7 @@ class SolarStorm extends Card_1.Card {
             metadata: {
                 cardNumber: 'Pf32',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.minus().plants(2, { all: Options_1.all }).asterix().nbsp.minus().data({ amount: 3, digit: Options_1.digit, all: Options_1.all }).br;
+                    b.minus().plants(2, { all: Options_1.all }).asterix().nbsp.minus().resource(CardResource_1.CardResource.DATA, { amount: 3, digit: Options_1.digit, all: Options_1.all }).br;
                     b.production((pb) => pb.heat(1)).nbsp.temperature(1);
                 }),
                 description: 'Every player loses 2 plants. Remove up to 3 data from any player. ' +

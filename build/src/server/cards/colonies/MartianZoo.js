@@ -23,10 +23,10 @@ class MartianZoo extends Card_1.Card {
                 cardNumber: 'C24',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.effect('When you play an Earth tag, place an animal here.', (eb) => {
-                        eb.earth(1, { played: Options_1.played }).startEffect.animals(1);
+                        eb.tag(Tag_1.Tag.EARTH).startEffect.resource(CardResource_1.CardResource.ANIMAL);
                     }).br;
                     b.action('Gain 1M€ per animal here.', (eb) => {
-                        eb.empty().startAction.megacredits(1).slash().animals(1);
+                        eb.empty().startAction.megacredits(1).slash().resource(CardResource_1.CardResource.ANIMAL);
                     });
                 }),
                 description: {

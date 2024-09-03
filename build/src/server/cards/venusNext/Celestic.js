@@ -31,7 +31,7 @@ class Celestic extends CorporationCard_1.ActiveCorporationCard {
                     b.megacredits(42).nbsp.cards(2, { secondaryTag: AltSecondaryTag_1.AltSecondaryTag.FLOATER });
                     b.corpBox('action', (ce) => {
                         ce.action('Add a floater to ANY card. 1 VP per 3 floaters on this card.', (eb) => {
-                            eb.empty().startAction.floaters(1).asterix();
+                            eb.empty().startAction.resource(CardResource_1.CardResource.FLOATER).asterix();
                         });
                         ce.vSpace();
                     });

@@ -27,10 +27,10 @@ class MindSetMars extends CorporationCard_1.CorporationCard {
                 description: 'You start with 44 M€ and 1 agenda resource to this card.',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br;
-                    b.megacredits(44).agenda().nbsp.building(1, { played: Options_1.played }).colon(Size_1.Size.SMALL).agenda().br;
+                    b.megacredits(44).resource(CardResource_1.CardResource.AGENDA).nbsp.tag(Tag_1.Tag.BUILDING).colon(Size_1.Size.SMALL).resource(CardResource_1.CardResource.AGENDA).br;
                     b.text('(Action: When you play a card with a building tag, add 1 agenda on this card.)', Size_1.Size.SMALL, false, false).br;
-                    b.agenda({ amount: 2, digit: true }).arrow(Size_1.Size.SMALL).delegates(1).nbsp;
-                    b.agenda({ amount: 5, digit: true }).arrow(Size_1.Size.SMALL).city().br;
+                    b.resource(CardResource_1.CardResource.AGENDA, { amount: 2, digit: Options_1.digit }).arrow(Size_1.Size.SMALL).delegates(1).nbsp;
+                    b.resource(CardResource_1.CardResource.AGENDA, { amount: 5, digit: Options_1.digit }).arrow(Size_1.Size.SMALL).city().br;
                     b.text('(Action: Spend 2 agenda resources to place 1 delegate in any party.)', Size_1.Size.SMALL, false, false).br;
                     b.text('(Action: Spend 5 agenda resources to place a city tile on Mars.)', Size_1.Size.SMALL, false, false);
                 }),

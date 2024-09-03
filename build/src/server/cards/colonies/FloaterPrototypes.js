@@ -19,7 +19,7 @@ class FloaterPrototypes extends Card_1.Card {
             },
             metadata: {
                 cardNumber: 'C11',
-                renderData: CardRenderer_1.CardRenderer.builder((b) => b.floaters(2).asterix()),
+                renderData: CardRenderer_1.CardRenderer.builder((b) => b.resource(CardResource_1.CardResource.FLOATER, 2).asterix()),
                 description: 'Add two floaters to ANOTHER card.',
             },
         });
