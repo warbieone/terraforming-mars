@@ -169,6 +169,7 @@ class Turmoil {
         });
     }
     endGeneration(game) {
+        game.log('All players lose 1 TR.');
         game.getPlayers().forEach((player) => {
             player.decreaseTerraformRating();
         });

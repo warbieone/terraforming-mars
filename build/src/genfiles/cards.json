@@ -21308,6 +21308,155 @@
     },
     {
         "module": "promo",
+        "name": "Hospitals",
+        "tags": [
+            "building"
+        ],
+        "victoryPoints": 1,
+        "cost": 8,
+        "type": "active",
+        "requirements": [],
+        "metadata": {
+            "cardNumber": "X69",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "city",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "size": "S",
+                                        "anyPlayer": true,
+                                        "cancelled": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "is": "symbol",
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "isSuperscript": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "resource",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "cancelled": false,
+                                        "resource": "Disease"
+                                    },
+                                    "Effect: Each time a city is placed gain a disease here."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "type": "resource",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "cancelled": false,
+                                        "resource": "Disease"
+                                    },
+                                    {
+                                        "is": "symbol",
+                                        "type": "*",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "isSuperscript": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "is": "symbol",
+                                        "type": "->",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "isSuperscript": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "type": "megacredits",
+                                        "amount": 1,
+                                        "is": "item",
+                                        "showDigit": false,
+                                        "amountInside": true,
+                                        "size": "M"
+                                    },
+                                    {
+                                        "is": "symbol",
+                                        "type": "/",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "isSuperscript": false
+                                    },
+                                    {
+                                        "type": "city",
+                                        "amount": -1,
+                                        "is": "item",
+                                        "size": "S",
+                                        "anyPlayer": true,
+                                        "cancelled": false
+                                    },
+                                    "Action: Remove a disease from ANY OF YOUR CARDS to gain 1M€ per city in play."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "is": "symbol",
+                                        "type": "-",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "isSuperscript": false
+                                    },
+                                    {
+                                        "type": "energy",
+                                        "amount": 1,
+                                        "is": "item"
+                                    }
+                                ]
+                            ],
+                            "is": "production-box"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": {
+                "text": "Decrease your energy production 1 step.",
+                "align": "left"
+            },
+            "victoryPoints": 1
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "resourceType": "Disease",
+        "compatibility": []
+    },
+    {
+        "module": "promo",
         "name": "Arcadian Communities",
         "tags": [],
         "cost": 0,
@@ -54262,7 +54411,7 @@
                                         "cancelled": false,
                                         "tag": "earth"
                                     },
-                                    "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa."
+                                    "Effect: When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa."
                                 ]
                             ],
                             "is": "effect"

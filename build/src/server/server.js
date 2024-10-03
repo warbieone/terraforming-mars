@@ -8,6 +8,7 @@ const fs = require("fs");
 const raw_settings = require("../genfiles/settings.json");
 const prometheus = require("prom-client");
 const responses = require("./server/responses");
+const ansi = require("ansi-escape-sequences");
 const Database_1 = require("./database/Database");
 const server_ids_1 = require("./utils/server-ids");
 const requestProcessor_1 = require("./server/requestProcessor");
@@ -82,7 +83,7 @@ async function start() {
     console.log(`Starting server on port ${port}`);
     server.listen(port);
     if (!process.env.SERVER_ID) {
-        console.log(`The secret serverId for this server is \x1b[1m${server_ids_1.serverId}\x1b[0m.`);
+        console.log(`The secret serverId for this server is ${ansi.style.bold}${server_ids_1.serverId}${ansi.style.reset}.`);
         console.log(`Administrative routes can be found at admin?serverId=${server_ids_1.serverId}`);
     }
     console.log(`The public run ID is ${server_ids_1.runId}`);

@@ -551,6 +551,7 @@ var CardName;
     CardName["SUPERMARKETS"] = "Supermarkets";
     CardName["HOSPITALS"] = "Hospitals";
     CardName["FLOYD_CONTINUUM"] = "Floyd Continuum";
+    CardName["CASINOS"] = "Casinos";
     CardName["AGRICOLA_INC"] = "Agricola Inc";
     CardName["CURIOSITY_II"] = "Curiosity II";
     CardName["INCITE"] = "Incite";

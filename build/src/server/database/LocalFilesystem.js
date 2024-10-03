@@ -82,7 +82,8 @@ class LocalFilesystem {
     }
     getGameVersion(gameId, saveId) {
         try {
-            console.log(`Loading ${gameId} at ${saveId}`);
+            if (!LocalFilesystem.quiet)
+                console.log(`Loading ${gameId} at ${saveId}`);
             const text = (0, fs_1.readFileSync)(this.historyFilename(gameId, saveId));
             const serializedGame = JSON.parse(text.toString());
             return Promise.resolve(serializedGame);
@@ -183,3 +184,4 @@ class LocalFilesystem {
     }
 }
 exports.LocalFilesystem = LocalFilesystem;
+LocalFilesystem.quiet = false;

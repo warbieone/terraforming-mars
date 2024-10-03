@@ -15,6 +15,7 @@ const Astrodrill_1 = require("./Astrodrill");
 const BactoviralResearch_1 = require("./BactoviralResearch");
 const BioPrintingFacility_1 = require("./BioPrintingFacility");
 const CarbonNanosystems_1 = require("./CarbonNanosystems");
+const Casinos_1 = require("./Casinos");
 const CityPark_1 = require("./CityPark");
 const CometAiming_1 = require("./CometAiming");
 const CorporateArchives_1 = require("./CorporateArchives");
@@ -153,6 +154,7 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.CITY_PARK]: { Factory: CityPark_1.CityPark },
         [CardName_1.CardName.SUPERMARKETS]: { Factory: Supermarkets_1.Supermarkets },
         [CardName_1.CardName.HOSPITALS]: { Factory: Hospitals_1.Hospitals },
+        [CardName_1.CardName.CASINOS]: { Factory: Casinos_1.Casinos },
     },
     preludeCards: {
         [CardName_1.CardName.NEW_PARTNER]: { Factory: NewPartner_1.NewPartner },

@@ -1164,7 +1164,7 @@ class Game {
         if (this.createdTime.getTime() === 0) {
             return 0;
         }
-        const days = (0, utils_1.dayStringToDays)(process.env.MAX_GAME_DAYS, 10);
+        const days = (0, utils_1.stringToNumber)(process.env.MAX_GAME_DAYS, 10);
         return (0, utils_1.addDays)(this.createdTime, days).getTime();
     }
     static deserialize(d) {

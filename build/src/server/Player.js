@@ -315,15 +315,13 @@ class Player {
             if (this.alloysAreProtected())
                 return false;
         }
-        if (this.game.gameOptions.pathfindersExpansion && this.productionIsProtected(attacker))
+        if (attacker !== this && this.cardIsInEffect(CardName_1.CardName.PRIVATE_SECURITY)) {
             return false;
+        }
         return true;
     }
     maybeBlockAttack(perpetrator, cb) {
         this.defer(UnderworldExpansion_1.UnderworldExpansion.maybeBlockAttack(this, perpetrator, cb));
-    }
-    productionIsProtected(attacker) {
-        return attacker !== this && this.cardIsInEffect(CardName_1.CardName.PRIVATE_SECURITY);
     }
     resolveInsurance() {
         const game = this.game;

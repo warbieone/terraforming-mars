@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const ansi = require("ansi-escape-sequences");
 const fs_1 = require("fs");
 const Types_1 = require("../../common/Types");
 const Database_1 = require("../database/Database");
@@ -15,6 +16,7 @@ if (process.env.LOCAL_FS_DB !== undefined) {
 }
 const db = Database_1.Database.getInstance();
 const localDb = new LocalFilesystem_1.LocalFilesystem();
+LocalFilesystem_1.LocalFilesystem.quiet = true;
 async function getGameId(id) {
     if ((0, Types_1.isGameId)(id)) {
         return id;
@@ -34,6 +36,17 @@ async function main() {
     }
     await load(gameId);
 }
+function showProgressBar(current, total, width = process.stdout.columns ?? 40) {
+    const bar = '█';
+    const emptyBar = ' ';
+    width = width - 10;
+    const filledLength = Math.floor((current / total) * width);
+    const emptyLength = width - filledLength;
+    const progressString = bar.repeat(filledLength) + emptyBar.repeat(emptyLength);
+    const percentage = Math.round((current / total) * 100);
+    const ansiEscapeCode = `${ansi.cursor.horizontalAbsolute(0)}${progressString} ${percentage}% ${current}`;
+    process.stdout.write(ansiEscapeCode);
+}
 async function load(gameId) {
     await localDb.initialize();
     console.log(`Loading game ${gameId}`);
@@ -45,7 +58,7 @@ async function load(gameId) {
     for (const saveId of saveIds) {
         try {
             const serialized = await db.getGameVersion(gameId, saveId);
-            console.log(`Storing version ${saveId}`);
+            showProgressBar(saveId, game.lastSaveId);
             localDb.saveSerializedGame(serialized);
             writes++;
         }
@@ -53,6 +66,12 @@ async function load(gameId) {
             console.log(`failed to process saveId ${saveId}: ${err}`);
             errors++;
         }
+    }
+    console.log();
+    try {
+        (0, fs_1.mkdirSync)('logs');
+    }
+    catch (_) {
     }
     const logs = await (0, exportLogs_1.exportLogs)(localDb, gameId);
     const logFilename = `logs/${gameId}.log`;

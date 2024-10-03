@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostgreSQL = void 0;
+exports.PostgreSQL = exports.POSTGRESQL_TABLES = void 0;
 const Types_1 = require("../../common/Types");
 const utils_1 = require("./utils");
-const utils_2 = require("../../common/utils/utils");
+exports.POSTGRESQL_TABLES = ['game', 'games', 'game_results', 'participants', 'completed_game'];
+const POSTGRES_TRIM_COUNT = (0, utils_1.stringToNumber)(process.env.POSTGRES_TRIM_COUNT, 10);
 class PostgreSQL {
     get client() {
         if (this._client === undefined) {
@@ -16,6 +17,7 @@ class PostgreSQL {
     }) {
         this.config = config;
         this.databaseName = undefined;
+        this.trimCount = POSTGRES_TRIM_COUNT;
         this.statistics = {
             saveCount: 0,
             saveErrorCount: 0,
@@ -52,6 +54,16 @@ class PostgreSQL {
       created_time timestamp default now(),
       PRIMARY KEY (game_id, save_id));
 
+    /* A single game, storing the log and the options. Normalizing out some of the game state. */
+    CREATE TABLE IF NOT EXISTS game(
+      game_id varchar NOT NULL,
+      log text NOT NULL,
+      options text NOT NULL,
+      status text default 'running' NOT NULL,
+      created_time timestamp default now() NOT NULL,
+      PRIMARY KEY (game_id));
+
+    /* A list of the players and spectator IDs, which optimizes loading unloaded for a specific player. */
     CREATE TABLE IF NOT EXISTS participants(
       game_id varchar,
       participants varchar[],
@@ -98,13 +110,18 @@ class PostgreSQL {
         const res = await this.client.query(sql);
         return res.rows.map((row) => row.game_id);
     }
-    async getGame(gameId) {
-        const res = await this.client.query('SELECT game game FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT 1', [gameId]);
-        if (res.rows.length === 0 || res.rows[0] === undefined) {
-            throw new Error(`Game ${gameId} not found`);
+    compose(game, log, options) {
+        const stored = JSON.parse(game);
+        const { logLength, ...remainder } = stored;
+        if (stored.logLength !== undefined) {
+            const gameLog = JSON.parse(log);
+            gameLog.length = logLength;
+            const gameOptions = JSON.parse(options);
+            return { ...remainder, gameOptions, gameLog };
         }
-        const json = JSON.parse(res.rows[0].game);
-        return json;
+        else {
+            return remainder;
+        }
     }
     async getGameId(participantId) {
         try {
@@ -127,12 +144,35 @@ class PostgreSQL {
         });
         return Promise.resolve(allSaveIds);
     }
+    async getGame(gameId) {
+        const res = await this.client.query(`SELECT
+        games.game as game,
+        game.log as log,
+        game.options as options
+      FROM games
+      LEFT JOIN game on game.game_id = games.game_id
+      WHERE games.game_id = $1
+      ORDER BY save_id DESC LIMIT 1`, [gameId]);
+        if (res.rows.length === 0 || res.rows[0] === undefined) {
+            throw new Error(`Game ${gameId} not found`);
+        }
+        const row = res.rows[0];
+        return this.compose(row.game, row.log, row.options);
+    }
     async getGameVersion(gameId, saveId) {
-        const res = await this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [gameId, saveId]);
+        const res = await this.client.query(`SELECT
+        games.game as game,
+        game.log as log,
+        game.options as options
+      FROM games
+      LEFT JOIN game on game.game_id = games.game_id
+      WHERE games.game_id = $1
+      AND games.save_id = $2`, [gameId, saveId]);
         if (res.rowCount === 0) {
             throw new Error(`Game ${gameId} not found at save_id ${saveId}`);
         }
-        return JSON.parse(res.rows[0].game);
+        const row = res.rows[0];
+        return this.compose(row.game, row.log, row.options);
     }
     saveGameResults(gameId, players, generations, gameOptions, scores) {
         this.client.query('INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)', [gameId, gameOptions.clonedGamedId, players, generations, gameOptions, JSON.stringify(scores)], (err) => {
@@ -200,16 +240,25 @@ class PostgreSQL {
         });
     }
     async saveGame(game) {
-        const gameJSON = JSON.stringify(game.serialize());
+        const serialized = game.serialize();
+        const options = JSON.stringify(serialized.gameOptions);
+        const log = JSON.stringify(serialized.gameLog);
+        const storedSerialized = { ...serialized, logLength: game.gameLog.length };
+        storedSerialized.gameLog = [];
+        storedSerialized.gameOptions = {};
+        const gameJSON = JSON.stringify(storedSerialized);
         this.statistics.saveCount++;
-        if (game.gameOptions.undoOption)
-            logForUndo(game.id, 'start save', game.lastSaveId);
         try {
+            await this.client.query('BEGIN');
             const thisSaveId = game.lastSaveId;
             const res = await this.client.query(`INSERT INTO games (game_id, save_id, game, players)
         VALUES ($1, $2, $3, $4)
         ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3
         RETURNING (xmax = 0) AS inserted`, [game.id, game.lastSaveId, gameJSON, game.getPlayers().length]);
+            await this.client.query(`INSERT INTO game (game_id, log, options)
+        VALUES ($1, $2, $3)
+        ON CONFLICT (game_id)
+        DO UPDATE SET log = $2`, [game.id, log, options]);
             game.lastSaveId = thisSaveId + 1;
             let inserted = true;
             try {
@@ -232,26 +281,31 @@ class PostgreSQL {
                     participantIds.push(game.spectatorId);
                 await this.storeParticipants({ gameId: game.id, participantIds: participantIds });
             }
-            if (game.gameOptions.undoOption)
-                logForUndo(game.id, 'increment save id, now', game.lastSaveId);
+            await this.client.query('COMMIT');
         }
         catch (err) {
+            await this.client.query('ROLLBACK');
             this.statistics.saveErrorCount++;
             console.error('PostgreSQL:saveGame', err);
         }
+        this.trim(game);
+    }
+    async trim(game) {
+        if (this.trimCount <= 0) {
+            return;
+        }
+        if (game.lastSaveId % this.trimCount === 0) {
+            const maxSaveId = game.lastSaveId - this.trimCount;
+            await this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id > 0 AND save_id < $2', [game.id, maxSaveId]);
+        }
+        return Promise.resolve();
     }
     async deleteGameNbrSaves(gameId, rollbackCount) {
         if (rollbackCount <= 0) {
             console.error(`invalid rollback count for ${gameId}: ${rollbackCount}`);
             return;
         }
-        logForUndo(gameId, 'deleting', rollbackCount, 'saves');
-        const first = await this.getSaveIds(gameId);
-        const res = await this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [gameId, rollbackCount]);
-        logForUndo(gameId, 'deleted', res?.rowCount, 'rows');
-        const second = await this.getSaveIds(gameId);
-        logForUndo(gameId, 'second', second);
-        logForUndo(gameId, 'Rollback difference', (0, utils_2.oneWayDifference)(first, second));
+        await this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [gameId, rollbackCount]);
     }
     async storeParticipants(entry) {
         await this.client.query('INSERT INTO participants (game_id, participants) VALUES($1, $2)', [entry.gameId, entry.participantIds]);
@@ -273,27 +327,18 @@ class PostgreSQL {
             'save-conflict-normal-count': this.statistics.saveConflictNormalCount,
             'save-conflict-undo-count': this.statistics.saveConflictUndoCount,
         };
-        const dbsizes = await this.client.query(`
-    SELECT
-      pg_size_pretty(pg_total_relation_size('games')) as game_size,
-      pg_size_pretty(pg_total_relation_size('game_results')) as game_results_size,
-      pg_size_pretty(pg_total_relation_size('participants')) as participants_size,
-      pg_size_pretty(pg_database_size($1)) as db_size
-    `, [this.databaseName]);
-        map['size-bytes-games'] = dbsizes.rows[0].game_size;
-        map['size-bytes-game-results'] = dbsizes.rows[0].game_results_size;
-        map['size-bytes-participants'] = dbsizes.rows[0].participants_size;
+        const columns = exports.POSTGRESQL_TABLES.map((table_name) => `pg_size_pretty(pg_total_relation_size('${table_name}')) as ${table_name}_size`);
+        const dbsizes = await this.client.query(`SELECT ${columns.join(', ')}, pg_size_pretty(pg_database_size('${this.databaseName}')) as db_size`);
+        function varz(x) {
+            return x.replaceAll('_', '-');
+        }
+        exports.POSTGRESQL_TABLES.forEach((table) => map['size-bytes-' + varz(table)] = dbsizes.rows[0][table + '_size']);
         map['size-bytes-database'] = dbsizes.rows[0].db_size;
-        for (const table of ['games', 'game_results', 'participants']) {
+        for (const table of exports.POSTGRESQL_TABLES) {
             const result = await this.client.query('select count(*) as rowcount from ' + table);
-            map['rows-' + table] = result.rows[0].rowcount;
+            map['rows-' + varz(table)] = result.rows[0].rowcount;
         }
         return map;
     }
 }
 exports.PostgreSQL = PostgreSQL;
-function logForUndo(gameId, ...message) {
-    if (process.env.LOG_FOR_UNDO) {
-        console.error(['TRACKING:', gameId, ...message]);
-    }
-}

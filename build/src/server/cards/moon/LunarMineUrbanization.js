@@ -46,9 +46,14 @@ class LunarMineUrbanization extends Card_1.Card {
             if (space.tile === undefined) {
                 throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
             }
+            const owner = space.player;
+            const coOwner = space.coOwner;
             space.tile = undefined;
             space.player = undefined;
+            space.coOwner = undefined;
             MoonExpansion_1.MoonExpansion.addTile(player, space.id, { tileType: TileType_1.TileType.LUNAR_MINE_URBANIZATION, card: this.name });
+            space.player = owner;
+            space.coOwner = coOwner;
             MoonExpansion_1.MoonExpansion.raiseHabitatRate(player);
             return undefined;
         });
