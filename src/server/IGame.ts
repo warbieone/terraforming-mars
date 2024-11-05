@@ -82,9 +82,10 @@ export interface IGame extends Logger {
   underworldData: UnderworldData;
 
   // Card-specific data
-  // Mons Insurance promo corp
+
+  /* An optimization to see if anyone owns Mons Insurance */
   monsInsuranceOwner?: PlayerId; // Not serialized
-  // Crash Site promo project
+  /* For the promo Crash Site. */
   someoneHasRemovedOtherPlayersPlants: boolean;
   // Syndicate Pirate Raids
   syndicatePirateRaider?: PlayerId;
@@ -103,6 +104,9 @@ export interface IGame extends Logger {
   tradeEmbargo: boolean;
   /** True when Behold The Emperor is in effect this coming Turmoil phase */
   beholdTheEmperor: boolean;
+
+  /* Double Down: tracking when an action is due to double down. Does not need to be serialized. */
+  inDoubleDown: boolean;
 
   /** The set of tags available in this game. */
   readonly tags: ReadonlyArray<Tag>;
@@ -137,7 +141,6 @@ export interface IGame extends Logger {
   readonly first: IPlayer;
   gameIsOver(): boolean;
   isDoneWithFinalProduction(): boolean;
-  doneWorldGovernmentTerraforming(): void;
   playerHasPassed(player: IPlayer): void;
   hasResearched(player: IPlayer): boolean;
   playerIsFinishedWithResearchPhase(player: IPlayer): void;
@@ -161,7 +164,7 @@ export interface IGame extends Logger {
    * If nobody can add a greenery, end the game.
    */
   /* for testing */ takeNextFinalGreeneryAction(): void;
-  /* for testing */ worldGovernmentTerraforming(player: IPlayer): void;
+  /* for testing */ worldGovernmentTerraforming(): void;
   /* for World Government Advisor */
   worldGovernmentTerraformingInput(player: IPlayer): OrOptions;
   increaseOxygenLevel(player: IPlayer, increments: -2 | -1 | 1 | 2): void;
@@ -204,7 +207,7 @@ export interface IGame extends Logger {
   addOcean(player: IPlayer, space: Space): void;
   removeTile(spaceId: string): void;
   getPlayers(): ReadonlyArray<IPlayer>;
-  // Players returned in play order starting with first player this generation.
+  /* Players returned in play order starting with first player this generation. */
   getPlayersInGenerationOrder(): ReadonlyArray<IPlayer>;
   /**
    * Returns the Player holding this card, or throws.

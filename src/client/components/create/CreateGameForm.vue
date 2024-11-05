@@ -414,9 +414,9 @@
                                               <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(index)" v-model="newPlayer.name" />
                                           </div>
                                           <div class="create-game-page-color-row">
-                                              <template v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple', 'Orange', 'Pink']">
+                                              <template v-for="color in PLAYER_COLORS">
                                                 <div v-bind:key="color">
-                                                  <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + (index + 1)" v-model="newPlayer.color" :id="'radioBox' + color + (index + 1)">
+                                                  <input type="radio" :value="color" :name="'playerColor' + (index + 1)" v-model="newPlayer.color" :id="'radioBox' + color + (index + 1)">
                                                   <label :for="'radioBox' + color + (index + 1)">
                                                       <div :class="'create-game-colorbox '+getPlayerCubeColorClass(color)"></div>
                                                   </label>
@@ -504,6 +504,8 @@
                   v-bind:communityCardsOption="communityCardsOption"
                   v-bind:moonExpansion="moonExpansion"
                   v-bind:pathfindersExpansion="pathfindersExpansion"
+                  v-bind:ceoExtension="ceoExtension"
+                  v-bind:underworldExpansion="underworldExpansion"
                   v-bind:prelude2Expansion="prelude2Expansion"
               ></PreludesFilter>
             </div>
@@ -731,6 +733,9 @@ export default (Vue as WithRefs<Refs>).extend({
     constants(): typeof constants {
       return constants;
     },
+    PLAYER_COLORS(): typeof PLAYER_COLORS {
+      return PLAYER_COLORS;
+    },
   },
   methods: {
     async downloadSettings() {
@@ -946,11 +951,11 @@ export default (Vue as WithRefs<Refs>).extend({
         return 'create-game-board-hexagon create-game-random';
       }
     },
-    getPlayerCubeColorClass(color: string): string {
-      return playerColorClass(color.toLowerCase(), 'bg');
+    getPlayerCubeColorClass(color: Color): string {
+      return playerColorClass(color, 'bg');
     },
-    getPlayerContainerColorClass(color: string): string {
-      return playerColorClass(color.toLowerCase(), 'bg_transparent');
+    getPlayerContainerColorClass(color: Color): string {
+      return playerColorClass(color, 'bg_transparent');
     },
     isEnabled(module: GameModule): boolean {
       const model: CreateGameModel = this;

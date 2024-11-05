@@ -1,3 +1,4 @@
+
 import * as constants from '../common/constants';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
@@ -79,6 +80,8 @@ import {toName} from '../common/utils/utils';
 import {OrOptions} from './inputs/OrOptions';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectSpace} from './inputs/SelectSpace';
+import {maybeRenamedMilestone} from '../common/ma/MilestoneName';
+import {maybeRenamedAward} from '../common/ma/AwardName';
 
 // Can be overridden by tests
 
@@ -166,9 +169,17 @@ export class Game implements IGame, Logger {
   public tradeEmbargo: boolean = false;
   // Behold The Emperor
   public beholdTheEmperor: boolean = false;
+  // Double Down
+  public inDoubleDown: boolean = false;
 
-  // The set of tags available in this game.
+  /* The set of tags available in this game. */
   public readonly tags: ReadonlyArray<Tag>;
+
+  /*
+   * An optimized list of the players, in generation order. This is erased every time first placer changes,
+   * and refilled on calls to getPlayersInGenerationOrder
+   */
+  playersInGenerationOrder: Array<IPlayer> = [];
 
   private constructor(
     id: GameId,
@@ -187,17 +198,17 @@ export class Game implements IGame, Logger {
     this.players = players;
     const playerIds = players.map((p) => p.id);
     if (playerIds.includes(first.id) === false) {
-      throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
+      throw new Error('Cannot find first player ' + first.id + ' in [' + playerIds + ']');
     }
     if (playerIds.includes(activePlayer) === false) {
-      throw new Error('Cannot find active player ' + activePlayer + ' in ' + playerIds);
+      throw new Error('Cannot find active player ' + activePlayer + ' in [' + playerIds + ']');
     }
     if (new Set(playerIds).size !== players.length) {
-      throw new Error('Duplicate player found: ' + playerIds);
+      throw new Error('Duplicate player found: [' + playerIds + ']');
     }
     const colors = players.map((p) => p.color);
     if (new Set(colors).size !== players.length) {
-      throw new Error('Duplicate color found: ' + colors);
+      throw new Error('Duplicate color found: [' + colors + ']');
     }
 
     this.activePlayer = activePlayer;
@@ -379,11 +390,11 @@ export class Game implements IGame, Logger {
           player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
         }
         if (gameOptions.preludeExtension) {
-          if (gameOptions.startingPreludes !== undefined) {
-            player.dealtPreludeCards.push(...preludeDeck.drawN(game, gameOptions.startingPreludes));
-          }
+          gameOptions.startingPreludes = Math.max(gameOptions.startingPreludes ?? 0, constants.PRELUDE_CARDS_DEALT_PER_PLAYER);
+          player.dealtPreludeCards.push(...preludeDeck.drawN(game, gameOptions.startingPreludes));
         }
         if (gameOptions.ceoExtension) {
+          gameOptions.startingCeos = Math.max(gameOptions.startingCeos ?? 0, constants.CEO_CARDS_DEALT_PER_PLAYER);
           player.dealtCeoCards.push(...ceoDeck.drawN(game, gameOptions.startingCeos));
         }
       } else {
@@ -651,6 +662,7 @@ export class Game implements IGame, Logger {
     }
     firstIndex = (firstIndex + 1) % this.players.length;
     this.first = this.players[firstIndex];
+    this.playersInGenerationOrder.length = 0;
   }
 
   // Only used in the prelude The New Space Race.
@@ -659,6 +671,7 @@ export class Game implements IGame, Logger {
       throw new Error(`player ${newFirstPlayer.id} is not part of this game`);
     }
     this.first = newFirstPlayer;
+    this.playersInGenerationOrder.length = 0;
   }
 
   public gotoInitialResearchPhase(): void {
@@ -752,6 +765,11 @@ export class Game implements IGame, Logger {
   }
 
   private gotoEndGeneration() {
+    if (this.deferredActions.length > 0) {
+      this.deferredActions.runAll(() => this.gotoEndGeneration());
+      return;
+    }
+
     this.endGenerationForColonies();
 
     Turmoil.ifTurmoil(this, (turmoil) => {
@@ -818,7 +836,7 @@ export class Game implements IGame, Logger {
   }
 
   private gotoWorldGovernmentTerraforming() {
-    this.worldGovernmentTerraforming(this.first);
+    this.worldGovernmentTerraforming();
   }
 
   public worldGovernmentTerraformingInput(player: IPlayer): OrOptions {
@@ -895,16 +913,12 @@ export class Game implements IGame, Logger {
     return orOptions;
   }
 
-  public worldGovernmentTerraforming(player: IPlayer): void {
+  public worldGovernmentTerraforming(): void {
+    const player = this.first;
     const input = this.worldGovernmentTerraformingInput(player);
     player.setWaitingFor(input, () => {
-      this.doneWorldGovernmentTerraforming();
+      this.gotoEndGeneration();
     });
-  }
-
-  public doneWorldGovernmentTerraforming() {
-    // Carry on to next phase
-    this.gotoEndGeneration();
   }
 
   private allPlayersHavePassed(): boolean {
@@ -1456,17 +1470,12 @@ export class Game implements IGame, Logger {
 
   // Players returned in play order starting with first player this generation.
   public getPlayersInGenerationOrder(): ReadonlyArray<IPlayer> {
-    const ret: Array<IPlayer> = [];
-    let insertIdx = 0;
-    for (const p of this.players) {
-      if (p.id === this.first.id || insertIdx > 0) {
-        ret.splice(insertIdx, 0, p);
-        insertIdx ++;
-      } else {
-        ret.push(p);
-      }
+    if (this.playersInGenerationOrder.length === 0) {
+      const e = [...this.players, ...this.players];
+      const idx = e.findIndex((p) => p.id === this.first.id);
+      this.playersInGenerationOrder = e.slice(idx, idx + this.players.length);
     }
-    return ret;
+    return this.playersInGenerationOrder;
   }
 
   /**
@@ -1600,8 +1609,8 @@ export class Game implements IGame, Logger {
     game.createdTime = new Date(d.createdTimeMs);
 
     const milestones: Array<IMilestone> = [];
-    d.milestones.forEach((element: IMilestone | string) => {
-      const milestoneName = typeof element === 'string' ? element : element.name;
+    d.milestones.forEach((milestoneName) => {
+      milestoneName = maybeRenamedMilestone(milestoneName);
       const foundMilestone = ALL_MILESTONES.find((milestone) => milestone.name === milestoneName);
       if (foundMilestone !== undefined) {
         milestones.push(foundMilestone);
@@ -1612,8 +1621,8 @@ export class Game implements IGame, Logger {
     game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, players, milestones);
 
     const awards: Array<IAward> = [];
-    d.awards.forEach((element: IAward | string) => {
-      const awardName = typeof element === 'string' ? element : element.name;
+    d.awards.forEach((awardName) => {
+      awardName = maybeRenamedAward(awardName);
       const foundAward = ALL_AWARDS.find((award) => award.name === awardName);
       if (foundAward !== undefined) {
         awards.push(foundAward);

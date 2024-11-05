@@ -43,8 +43,10 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
   }
 
   private discard(player: IPlayer, prelude: IPreludeCard) {
-    player.game.log('${0} drew and discarded a prelude', (b) => b.player(player));
-    player.game.preludeDeck.discard(prelude);
+    const game = player.game;
+    game.log('${0} drew and discarded a prelude', (b) => b.player(player));
+    game.log('You drew and discarded ${0}', (b) => b.card(prelude), {reservedFor: player});
+    game.preludeDeck.discard(prelude);
   }
 
   public action(player: IPlayer) {
@@ -52,6 +54,10 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
     const prelude = game.preludeDeck.drawOrThrow(player.game);
 
     if (player.canAfford(12)) {
+      if (prelude.canPlay?.(player, {cost: 12}) === false) {
+        prelude.warnings.add('preludeFizzle');
+      }
+
       return new SelectCard(
         message('Would you like pay 12 M€ and one Director to play ${0}', (b)=> b.card(prelude)),
         'Buy', [prelude], {min: 0, max: 1}).andThen((selected) => {

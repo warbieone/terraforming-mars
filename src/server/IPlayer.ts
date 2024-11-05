@@ -50,7 +50,7 @@ export type CanAffordOptions = Partial<PaymentOptions> & {
  *   only play the card (used for replaying a card)
  *   or do nothing.
  */
-export type CardAction = 'add' | 'discard' | 'nothing' | 'action-only';
+export type CardAction = 'add' | 'discard' | 'nothing' | 'double-down';
 
 export interface IPlayer {
   readonly id: PlayerId;
@@ -102,7 +102,7 @@ export interface IPlayer {
   dealtCeoCards: Array<ICeoCard>;
   dealtProjectCards: Array<IProjectCard>;
   cardsInHand: Array<IProjectCard>;
-  preludeCardsInHand: Array<IProjectCard>;
+  preludeCardsInHand: Array<IPreludeCard>;
   ceoCardsInHand: Array<IProjectCard>;
   playedCards: Array<IProjectCard>;
   cardCost: number;
@@ -171,6 +171,10 @@ export interface IPlayer {
    * Return the corporation card this player has played by the given name, or throw an Error.
    */
   getCorporationOrThrow(corporationName: CardName): ICorporationCard;
+  /**
+   * Return the card this player has played by the given name, or `undefined`.
+   */
+  getPlayedCard(cardName: CardName): ICard | undefined;
   getTitaniumValue(): number;
   increaseTitaniumValue(): void;
   decreaseTitaniumValue(): void;
@@ -187,6 +191,7 @@ export interface IPlayer {
   getActionsThisGeneration(): Set<CardName>;
   addActionThisGeneration(cardName: CardName): void;
   getVictoryPoints(): IVictoryPointsBreakdown;
+  /* A card is in effect if it is played. This does not apply to corporations. It could. */
   cardIsInEffect(cardName: CardName): boolean;
   hasProtectedHabitats(): boolean;
   plantsAreProtected(): boolean;
