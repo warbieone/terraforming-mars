@@ -24,7 +24,7 @@ export const MODULE_NAMES: Readonly<Record<GameModule, string>> = {
   corpera: 'Corporate Era',
   promo: 'Promo',
   venus: 'Venus Next',
-  league: 'league,',
+  league: 'league',
   colonies: 'Colonies',
   prelude: 'Prelude',
   prelude2: 'Prelude 2',

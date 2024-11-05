@@ -33,8 +33,10 @@ class Sabotage extends Card_1.Card {
         return (0, MessageBuilder_1.message)('Remove ${0} ${1} from ${2}', (b) => b.number(amount).string(type).player(target));
     }
     bespokePlay(player) {
-        if (player.game.isSoloMode())
+        if (player.game.isSoloMode()) {
+            player.resolveInsuranceInSoloGame();
             return undefined;
+        }
         const availableActions = new OrOptions_1.OrOptions();
         player.getOpponents().forEach((target) => {
             if (target.titanium > 0 && !target.alloysAreProtected()) {

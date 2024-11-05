@@ -42,7 +42,7 @@ export const milestoneNames = [
   'Pioneer',
   'Land Specialist',
   'Martian',
-  'Terran',
+  'Businessperson',
 
   // Terra Cimmeria
   'T. Collector',

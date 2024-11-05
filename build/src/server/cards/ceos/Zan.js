@@ -15,12 +15,11 @@ class Zan extends CeoCard_1.CeoCard {
             metadata: {
                 cardNumber: 'L26',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.br.br;
-                    b.redsInactive().asterix();
+                    b.effect('You are immune to Reds\' ruling policy.', (eb) => eb.startEffect.redsInactive().asterix());
                     b.br.br;
                     b.opgArrow().text('ALL', Size_1.Size.SMALL).delegates(1).colon().reds().megacredits(1);
                 }),
-                description: 'You are immune to Reds\' ruling policy. Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.',
+                description: 'Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.',
             },
         });
     }

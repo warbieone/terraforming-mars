@@ -6,6 +6,7 @@ const CardName_1 = require("../../../common/cards/CardName");
 const CardRenderer_1 = require("../render/CardRenderer");
 const Card_1 = require("../Card");
 const Size_1 = require("../../../common/cards/render/Size");
+const ColonyName_1 = require("../../../common/colonies/ColonyName");
 class ProductiveOutpost extends Card_1.Card {
     constructor() {
         super({
@@ -21,7 +22,17 @@ class ProductiveOutpost extends Card_1.Card {
         });
     }
     bespokePlay(player) {
-        player.game.colonies.forEach((colony) => {
+        const value = (c) => {
+            if (c.name === ColonyName_1.ColonyName.TITANIA) {
+                return 1;
+            }
+            if (c.name === ColonyName_1.ColonyName.LEAVITT) {
+                return -1;
+            }
+            return 0;
+        };
+        const sorted = [...player.game.colonies].sort((a, b) => value(b) - value(a));
+        sorted.forEach((colony) => {
             colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
                 player.defer(() => colony.giveColonyBonus(player.game.getPlayerById(owner)));
             });

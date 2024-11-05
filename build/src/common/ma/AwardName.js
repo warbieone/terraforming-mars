@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.awardNames = void 0;
+exports.maybeRenamedAward = exports.AWARD_RENAMES = exports.awardNames = void 0;
 exports.awardNames = [
     'Landlord',
     'Scientist',
@@ -28,11 +28,11 @@ exports.awardNames = [
     'Cosmic Settler',
     'Botanist',
     'Coordinator',
-    'Manufacturer',
+    'A. Manufacturer',
     'Zoologist',
     'Biologist',
     'T. Economizer',
-    'Politician',
+    'T. Politician',
     'Urbanist',
     'Warmonger',
     'Adapter',
@@ -42,4 +42,18 @@ exports.awardNames = [
     'Voyager',
     'Kingpin',
     'EdgeLord',
+    'Administrator',
+    'Constructor',
+    'Investor',
+    'Mogul',
+    'Traveller',
 ];
+exports.AWARD_RENAMES = new Map([
+    ['Manufacturer', 'A. Manufacturer'],
+    ['Politician', 'T. Politician'],
+]);
+function maybeRenamedAward(name) {
+    const renamed = exports.AWARD_RENAMES.get(name);
+    return renamed ?? name;
+}
+exports.maybeRenamedAward = maybeRenamedAward;

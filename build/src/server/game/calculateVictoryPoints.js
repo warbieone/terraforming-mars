@@ -46,7 +46,10 @@ function calculateVictoryPoints(player) {
             victoryPointsBreakdown.setVictoryPoints('victoryPoints', turmoil.getPlayerVictoryPoints(player), 'Turmoil Points');
         }
     });
-    player.colonies.calculateVictoryPoints(victoryPointsBreakdown);
+    const coloniesVP = player.colonies.getVictoryPoints();
+    if (coloniesVP > 0) {
+        victoryPointsBreakdown.setVictoryPoints('victoryPoints', coloniesVP, 'Colony VP');
+    }
     MoonExpansion_1.MoonExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
     PathfindersExpansion_1.PathfindersExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
     if (player.game.gameOptions.underworldExpansion === true) {

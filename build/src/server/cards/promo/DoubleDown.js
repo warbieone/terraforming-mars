@@ -41,7 +41,8 @@ class DoubleDown extends PreludeCard_1.PreludeCard {
             PreludesExpansion_1.PreludesExpansion.fizzle(player, this);
             return undefined;
         }
-        return PreludesExpansion_1.PreludesExpansion.selectPreludeToPlay(player, preludes, undefined, 'action-only');
+        player.game.inDoubleDown = true;
+        return PreludesExpansion_1.PreludesExpansion.selectPreludeToPlay(player, preludes, undefined, 'double-down');
     }
 }
 exports.DoubleDown = DoubleDown;

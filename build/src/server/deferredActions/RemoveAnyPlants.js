@@ -34,16 +34,26 @@ class RemoveAnyPlants extends DeferredAction_1.DeferredAction {
         });
     }
     execute() {
-        if (this.player.game.isSoloMode()) {
-            this.player.game.someoneHasRemovedOtherPlayersPlants = true;
-            this.player.resolveInsuranceInSoloGame();
-            return undefined;
+        const player = this.player;
+        const game = player.game;
+        const removalOptions = [];
+        if (game.isSoloMode()) {
+            const option = new SelectOption_1.SelectOption('Remove plants from the neutral oppponent', {
+                buttonLabel: 'Remove plants',
+            })
+                .andThen(() => {
+                game.someoneHasRemovedOtherPlayersPlants = true;
+                player.resolveInsuranceInSoloGame();
+                return undefined;
+            });
+            removalOptions.push(option);
+            if (game.monsInsuranceOwner !== player.id) {
+                option.cb(undefined);
+                return undefined;
+            }
         }
-        const candidates = this.player.getOpponents().filter((p) => !p.plantsAreProtected() && p.plants > 0);
-        if (candidates.length === 0) {
-            return undefined;
-        }
-        const removalOptions = candidates.map((target) => {
+        const candidates = player.getOpponents().filter((p) => !p.plantsAreProtected() && p.plants > 0);
+        removalOptions.push(...candidates.map((target) => {
             let qtyToRemove = Math.min(target.plants, this.count);
             if (target.cardIsInEffect(CardName_1.CardName.BOTANICAL_EXPERIENCE)) {
                 qtyToRemove = Math.ceil(qtyToRemove / 2);
@@ -54,9 +64,9 @@ class RemoveAnyPlants extends DeferredAction_1.DeferredAction {
                 .getMessage();
             return new SelectOption_1.SelectOption(message, {
                 buttonLabel: 'Remove plants',
-                warnings: (target === this.player) ? ['removeOwnPlants'] : undefined,
+                warnings: (target === player) ? ['removeOwnPlants'] : undefined,
             }).andThen(() => {
-                target.maybeBlockAttack(this.player, (proceed) => {
+                target.maybeBlockAttack(player, (proceed) => {
                     if (proceed === true) {
                         target.stock.deduct(Resource_1.Resource.PLANTS, qtyToRemove, { log: true, from: this.player });
                     }
@@ -64,12 +74,15 @@ class RemoveAnyPlants extends DeferredAction_1.DeferredAction {
                 });
                 return undefined;
             });
-        });
+        }));
         removalOptions.push(new SelectOption_1.SelectOption('Skip removing plants').andThen(() => {
             return undefined;
         }));
+        if (removalOptions.length === 1) {
+            return undefined;
+        }
         if (this.player.plants > 0) {
-            const option = this.createOption(this.player);
+            const option = this.createOption(player);
             option.warnings = ['removeOwnPlants'];
             removalOptions.push(option);
         }

@@ -248,9 +248,10 @@ class Colony {
                 game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(quantity));
                 break;
             case ColonyBenefit_1.ColonyBenefit.LOSE_RESOURCES:
-                if (resource === undefined)
+                if (resource === undefined) {
                     throw new Error('Resource cannot be undefined');
-                player.stock.deduct(resource, quantity);
+                }
+                player.stock.deduct(resource, Math.min(player.stock.get(resource), quantity), { log: true });
                 break;
             case ColonyBenefit_1.ColonyBenefit.OPPONENT_DISCARD:
                 if (game.isSoloMode())

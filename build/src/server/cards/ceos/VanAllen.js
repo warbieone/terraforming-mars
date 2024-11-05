@@ -12,13 +12,12 @@ class VanAllen extends CeoCard_1.CeoCard {
             metadata: {
                 cardNumber: 'L22',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
+                    b.effect('MILESTONES ALWAYS COST 0 M€ FOR YOU.', (eb) => {
+                        eb.plate('Milestones').startEffect.megacredits(1, { text: '0' });
+                    });
                     b.br;
-                    b.milestone().colon().text('=').megacredits(0, { digit: Options_1.digit });
-                    b.br;
-                    b.milestone({ all: Options_1.all }).colon().megacredits(3);
-                    b.br.br;
+                    b.effect('When any milestone is claimed, gain 3 M€.', (eb) => eb.milestone({ all: Options_1.all }).startEffect.megacredits(3));
                 }),
-                description: 'You may claim milestones for free (you must still meet the requirements). When any milestone is claimed, gain 3 M€.',
             },
         });
     }

@@ -25,7 +25,7 @@ exports.MODULE_NAMES = {
     corpera: 'Corporate Era',
     promo: 'Promo',
     venus: 'Venus Next',
-    league: 'league,',
+    league: 'league',
     colonies: 'Colonies',
     prelude: 'Prelude',
     prelude2: 'Prelude 2',

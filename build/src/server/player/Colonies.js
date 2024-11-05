@@ -106,10 +106,8 @@ class Colonies {
             return true;
         });
     }
-    calculateVictoryPoints(victoryPointsBreakdown) {
-        if (this.player.colonies.victoryPoints > 0) {
-            victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.victoryPoints, 'Colony VP');
-        }
+    getVictoryPoints() {
+        return this.player.colonies.victoryPoints;
     }
     getFleetSize() {
         return this.fleetSize;

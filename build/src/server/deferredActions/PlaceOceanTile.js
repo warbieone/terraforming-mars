@@ -12,7 +12,7 @@ class PlaceOceanTile extends DeferredAction_1.DeferredAction {
     }
     execute() {
         if (!this.player.game.canAddOcean()) {
-            const whales = this.player.playedCards.find((card) => card.name === CardName_1.CardName.WHALES);
+            const whales = this.player.getPlayedCard(CardName_1.CardName.WHALES);
             if (whales !== undefined) {
                 this.player.addResourceTo(whales, { qty: 1, log: true });
             }

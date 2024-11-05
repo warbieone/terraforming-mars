@@ -61,6 +61,8 @@ const utils_2 = require("../common/utils/utils");
 const OrOptions_1 = require("./inputs/OrOptions");
 const SelectOption_1 = require("./inputs/SelectOption");
 const SelectSpace_1 = require("./inputs/SelectSpace");
+const MilestoneName_1 = require("../common/ma/MilestoneName");
+const AwardName_1 = require("../common/ma/AwardName");
 let createGameLog = () => [];
 function setGameLog(f) {
     createGameLog = f;
@@ -100,22 +102,24 @@ class Game {
         this.nomadSpace = undefined;
         this.tradeEmbargo = false;
         this.beholdTheEmperor = false;
+        this.inDoubleDown = false;
+        this.playersInGenerationOrder = [];
         this.id = id;
         this.gameOptions = { ...gameOptions };
         this.players = players;
         const playerIds = players.map((p) => p.id);
         if (playerIds.includes(first.id) === false) {
-            throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
+            throw new Error('Cannot find first player ' + first.id + ' in [' + playerIds + ']');
         }
         if (playerIds.includes(activePlayer) === false) {
-            throw new Error('Cannot find active player ' + activePlayer + ' in ' + playerIds);
+            throw new Error('Cannot find active player ' + activePlayer + ' in [' + playerIds + ']');
         }
         if (new Set(playerIds).size !== players.length) {
-            throw new Error('Duplicate player found: ' + playerIds);
+            throw new Error('Duplicate player found: [' + playerIds + ']');
         }
         const colors = players.map((p) => p.color);
         if (new Set(colors).size !== players.length) {
-            throw new Error('Duplicate color found: ' + colors);
+            throw new Error('Duplicate color found: [' + colors + ']');
         }
         this.activePlayer = activePlayer;
         this.first = first;
@@ -231,9 +235,11 @@ class Game {
                     player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
                 }
                 if (gameOptions.preludeExtension) {
-                    player.dealtPreludeCards.push(...preludeDeck.drawN(game, constants.PRELUDE_CARDS_DEALT_PER_PLAYER));
+                    gameOptions.startingPreludes = Math.max(gameOptions.startingPreludes ?? 0, constants.PRELUDE_CARDS_DEALT_PER_PLAYER);
+                    player.dealtPreludeCards.push(...preludeDeck.drawN(game, gameOptions.startingPreludes));
                 }
                 if (gameOptions.ceoExtension) {
+                    gameOptions.startingCeos = Math.max(gameOptions.startingCeos ?? 0, constants.CEO_CARDS_DEALT_PER_PLAYER);
                     player.dealtCeoCards.push(...ceoDeck.drawN(game, gameOptions.startingCeos));
                 }
             }
@@ -445,12 +451,14 @@ class Game {
         }
         firstIndex = (firstIndex + 1) % this.players.length;
         this.first = this.players[firstIndex];
+        this.playersInGenerationOrder.length = 0;
     }
     overrideFirstPlayer(newFirstPlayer) {
         if (newFirstPlayer.game.id !== this.id) {
             throw new Error(`player ${newFirstPlayer.id} is not part of this game`);
         }
         this.first = newFirstPlayer;
+        this.playersInGenerationOrder.length = 0;
     }
     gotoInitialResearchPhase() {
         this.phase = Phase_1.Phase.RESEARCH;
@@ -529,6 +537,10 @@ class Game {
         }
     }
     gotoEndGeneration() {
+        if (this.deferredActions.length > 0) {
+            this.deferredActions.runAll(() => this.gotoEndGeneration());
+            return;
+        }
         this.endGenerationForColonies();
         Turmoil_1.Turmoil.ifTurmoil(this, (turmoil) => {
             turmoil.endGeneration(this);
@@ -586,7 +598,7 @@ class Game {
         }
     }
     gotoWorldGovernmentTerraforming() {
-        this.worldGovernmentTerraforming(this.first);
+        this.worldGovernmentTerraforming();
     }
     worldGovernmentTerraformingInput(player) {
         const orOptions = new OrOptions_1.OrOptions();
@@ -643,14 +655,12 @@ class Game {
         });
         return orOptions;
     }
-    worldGovernmentTerraforming(player) {
+    worldGovernmentTerraforming() {
+        const player = this.first;
         const input = this.worldGovernmentTerraformingInput(player);
         player.setWaitingFor(input, () => {
-            this.doneWorldGovernmentTerraforming();
+            this.gotoEndGeneration();
         });
-    }
-    doneWorldGovernmentTerraforming() {
-        this.gotoEndGeneration();
     }
     allPlayersHavePassed() {
         for (const player of this.players) {
@@ -1072,18 +1082,12 @@ class Game {
         return this.players;
     }
     getPlayersInGenerationOrder() {
-        const ret = [];
-        let insertIdx = 0;
-        for (const p of this.players) {
-            if (p.id === this.first.id || insertIdx > 0) {
-                ret.splice(insertIdx, 0, p);
-                insertIdx++;
-            }
-            else {
-                ret.push(p);
-            }
+        if (this.playersInGenerationOrder.length === 0) {
+            const e = [...this.players, ...this.players];
+            const idx = e.findIndex((p) => p.id === this.first.id);
+            this.playersInGenerationOrder = e.slice(idx, idx + this.players.length);
         }
-        return ret;
+        return this.playersInGenerationOrder;
     }
     getCardPlayerOrThrow(name) {
         const player = this.getCardPlayerOrUndefined(name);
@@ -1185,8 +1189,8 @@ class Game {
         game.spectatorId = d.spectatorId;
         game.createdTime = new Date(d.createdTimeMs);
         const milestones = [];
-        d.milestones.forEach((element) => {
-            const milestoneName = typeof element === 'string' ? element : element.name;
+        d.milestones.forEach((milestoneName) => {
+            milestoneName = (0, MilestoneName_1.maybeRenamedMilestone)(milestoneName);
             const foundMilestone = Milestones_1.ALL_MILESTONES.find((milestone) => milestone.name === milestoneName);
             if (foundMilestone !== undefined) {
                 milestones.push(foundMilestone);
@@ -1195,8 +1199,8 @@ class Game {
         game.milestones = milestones;
         game.claimedMilestones = (0, ClaimedMilestone_1.deserializeClaimedMilestones)(d.claimedMilestones, players, milestones);
         const awards = [];
-        d.awards.forEach((element) => {
-            const awardName = typeof element === 'string' ? element : element.name;
+        d.awards.forEach((awardName) => {
+            awardName = (0, AwardName_1.maybeRenamedAward)(awardName);
             const foundAward = Awards_1.ALL_AWARDS.find((award) => award.name === awardName);
             if (foundAward !== undefined) {
                 awards.push(foundAward);

@@ -16,10 +16,11 @@ class Xu extends CeoCard_1.CeoCard {
             metadata: {
                 cardNumber: 'L37',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.opgArrow().tag(Tag_1.Tag.VENUS, { all: Options_1.all }).colon().megacredits(2).megacredits(8).asterix();
-                    b.br.br;
+                    b.opgArrow().tag(Tag_1.Tag.VENUS, { all: Options_1.all }).colon().megacredits(2).br;
+                    b.text('Most').tag(Tag_1.Tag.VENUS).colon().megacredits(8);
+                    b.br;
                 }),
-                description: 'Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you Have the most Venus tags in play.',
+                description: 'Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you have the most Venus tags in play.',
             },
         });
     }

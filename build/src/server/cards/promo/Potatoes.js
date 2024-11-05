@@ -26,7 +26,7 @@ class Potatoes extends Card_1.Card {
         });
     }
     bespokeCanPlay(player) {
-        const viralEnhancers = player.playedCards.find((card) => card.name === CardName_1.CardName.VIRAL_ENHANCERS);
+        const viralEnhancers = player.getPlayedCard(CardName_1.CardName.VIRAL_ENHANCERS);
         const hasEnoughPlants = player.plants >= 2 || player.plants >= 1 && viralEnhancers !== undefined;
         return hasEnoughPlants;
     }

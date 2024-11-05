@@ -70,7 +70,7 @@ exports.TitanFloatingLaunchPad = TitanFloatingLaunchPad;
 class TradeWithTitanFloatingLaunchPad {
     constructor(player) {
         this.player = player;
-        const card = player.playedCards.find((card) => card.name === CardName_1.CardName.TITAN_FLOATING_LAUNCHPAD);
+        const card = player.getPlayedCard(CardName_1.CardName.TITAN_FLOATING_LAUNCHPAD);
         this.titanFloatingLaunchPad = card === undefined ? undefined : card;
     }
     canUse() {

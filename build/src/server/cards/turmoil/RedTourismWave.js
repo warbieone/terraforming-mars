@@ -42,6 +42,9 @@ class RedTourismWave extends Card_1.Card {
             if (space.spaceType === SpaceType_1.SpaceType.COLONY) {
                 return false;
             }
+            if (space.spaceType === SpaceType_1.SpaceType.RESTRICTED) {
+                return false;
+            }
             if (this.hasRealTile(space)) {
                 return false;
             }

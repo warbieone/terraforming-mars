@@ -25,7 +25,7 @@ class MoonRoadStandardProject extends StandardProjectCard_1.StandardProjectCard 
         super(properties);
     }
     discount(player) {
-        if (player.playedCards.find((card) => card.name === CardName_1.CardName.MOONCRATE_BLOCK_FACTORY)) {
+        if (player.getPlayedCard(CardName_1.CardName.MOONCRATE_BLOCK_FACTORY)) {
             return 4;
         }
         return super.discount(player);

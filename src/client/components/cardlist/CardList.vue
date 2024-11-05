@@ -185,40 +185,6 @@ import Award from '@/client/components/Award.vue';
 import {MACompatibility} from '@/common/ma/compatibilities';
 import {TypeOption, CardListModel, hashToModel, modelToHash} from '@/client/components/cardlist/CardListModel';
 
-const moduleAbbreviations: Record<GameModule, string> = {
-  base: 'b',
-  corpera: 'c',
-  prelude: 'p',
-  prelude2: '2',
-  venus: 'v',
-  colonies: 'C',
-  turmoil: 't',
-  community: '*',
-  promo: 'r',
-  league: 'e',
-  ares: 'a',
-  moon: 'm',
-  pathfinders: 'P',
-  ceo: 'l', // ceo abbreviation is 'l' for leader, since 'c' and 'C' are already taken
-  starwars: 'w',
-  underworld: 'u',
-};
-
-const ALL_MODULES = GAME_MODULES.map((m) => moduleAbbreviations[m]).join('');
-
-type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
-type TagOption = Tag | 'none';
-
-type CardListModel = {
-  filterText: string,
-  namesOnly: boolean,
-  expansions: Record<GameModule, boolean>,
-  types: Record<TypeOption, boolean>,
-  tags: Record<TagOption, boolean>,
-  searchIndex: CardListSearchIndex,
-  showAdvanced: boolean;
-}
-
 type Refs = {
   filter: HTMLInputElement,
 };

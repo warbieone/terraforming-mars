@@ -6,7 +6,6 @@ const CardRenderer_1 = require("../render/CardRenderer");
 const CeoCard_1 = require("./CeoCard");
 const shuffle_1 = require("../../utils/shuffle");
 const Random_1 = require("../../../common/utils/Random");
-const constants_1 = require("../../../common/constants");
 const OrOptions_1 = require("../../inputs/OrOptions");
 const SelectOption_1 = require("../../inputs/SelectOption");
 const Size_1 = require("../../../common/cards/render/Size");
@@ -21,11 +20,13 @@ class Asimov extends CeoCard_1.CeoCard {
                 cardNumber: 'L01',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
                     b.br.br;
-                    b.award().nbsp.colon().text('+' + constants_1.ASIMOV_AWARD_BONUS, Size_1.Size.LARGE);
+                    b.effect('You have +2 score for all awards.', (eb) => {
+                        eb.award().startEffect.text('+2', Size_1.Size.LARGE);
+                    });
                     b.br.br.br;
                     b.opgArrow().text('10-X').award().asterix();
                 }),
-                description: 'You have +' + constants_1.ASIMOV_AWARD_BONUS + ' score for all awards. Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.',
+                description: 'Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.',
             },
         });
     }
@@ -72,7 +73,7 @@ class Asimov extends CeoCard_1.CeoCard {
                 return false;
             if (!gameOptions.venusNextExtension && award.name === 'Venuphile')
                 return false;
-            if (!gameOptions.turmoilExtension && award.name === 'Politician')
+            if (!gameOptions.turmoilExtension && award.name === 'T. Politician')
                 return false;
             if (!gameOptions.aresExtension && award.name === 'Entrepreneur')
                 return false;

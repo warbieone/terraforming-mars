@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.milestoneNames = void 0;
+exports.maybeRenamedMilestone = exports.milestoneNames = void 0;
 exports.milestoneNames = [
     'Terraformer',
     'Mayor',
@@ -30,17 +30,31 @@ exports.milestoneNames = [
     'Pioneer',
     'Land Specialist',
     'Martian',
-    'Terran',
-    'Collector',
+    'Businessperson',
+    'T. Collector',
     'Firestarter',
     'Terra Pioneer',
     'Spacefarer',
     'Gambler',
-    'Electrician',
+    'V. Electrician',
     'Smith',
     'Tradesman',
     'Irrigator',
     'Capitalist',
     'Tunneler',
     'Risktaker',
+    'Fundraiser',
+    'Philantropist',
+    'Producer',
+    'Researcher',
+    'Sponsor',
 ];
+const MILESTONE_RENAMES = new Map([
+    ['Electrician', 'V. Electrician'],
+    ['Collector', 'T. Collector'],
+]);
+function maybeRenamedMilestone(name) {
+    const renamed = MILESTONE_RENAMES.get(name);
+    return renamed ?? name;
+}
+exports.maybeRenamedMilestone = maybeRenamedMilestone;

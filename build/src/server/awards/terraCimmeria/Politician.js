@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Politician = void 0;
 class Politician {
     constructor() {
-        this.name = 'Politician';
+        this.name = 'T. Politician';
         this.description = 'Place the most delegates';
     }
     getScore(player) {

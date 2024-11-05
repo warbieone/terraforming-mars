@@ -140,7 +140,7 @@ function getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraint
             (0, utils_1.inplaceRemove)(candidateMilestones, 'Pioneer');
         }
         if (!gameOptions.turmoilExtension) {
-            (0, utils_1.inplaceRemove)(candidateAwards, 'Politician');
+            (0, utils_1.inplaceRemove)(candidateAwards, 'T. Politician');
         }
     }
     (0, shuffle_1.inplaceShuffle)(candidateMilestones, Random_1.UnseededRandom.INSTANCE);

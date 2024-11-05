@@ -27,7 +27,7 @@ class Moss extends Card_1.Card {
         });
     }
     bespokeCanPlay(player) {
-        const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName_1.CardName.VIRAL_ENHANCERS);
+        const hasViralEnhancers = player.getPlayedCard(CardName_1.CardName.VIRAL_ENHANCERS);
         const hasEnoughPlants = player.plants >= 1 || hasViralEnhancers !== undefined || player.isCorporation(CardName_1.CardName.MANUTECH);
         return hasEnoughPlants;
     }

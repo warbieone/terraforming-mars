@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deserializeClaimedMilestones = exports.serializeClaimedMilestones = void 0;
+const MilestoneName_1 = require("../../common/ma/MilestoneName");
 function serializeClaimedMilestones(claimedMilestones) {
     return claimedMilestones.map((claimedMilestone) => {
         return {
@@ -32,7 +33,7 @@ function deserializeClaimedMilestones(claimedMilestones, players, milestones) {
         }
     }
     return filtered.map((element) => {
-        const milestoneName = element.name;
+        const milestoneName = (0, MilestoneName_1.maybeRenamedMilestone)(element.name);
         const milestone = milestones.find((milestone) => milestone.name === milestoneName);
         if (milestone === undefined) {
             throw new Error(`Milestone ${milestoneName} not found when rebuilding Claimed Milestone`);

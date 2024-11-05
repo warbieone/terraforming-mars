@@ -12,6 +12,7 @@ const Size_1 = require("../../../common/cards/render/Size");
 const MoonExpansion_1 = require("../../moon/MoonExpansion");
 const Options_1 = require("../Options");
 const SpecialDesignProxy_1 = require("./SpecialDesignProxy");
+const utils_1 = require("../../../common/utils/utils");
 class Playwrights extends CorporationCard_1.CorporationCard {
     constructor() {
         super({
@@ -50,9 +51,9 @@ class Playwrights extends CorporationCard_1.CorporationCard {
             .andThen(([card]) => {
             const selectedCard = card;
             players.forEach((p) => {
-                const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
-                if (cardIndex !== -1) {
-                    p.playedCards.splice(cardIndex, 1);
+                const card = p.getPlayedCard(selectedCard.name);
+                if (card !== undefined) {
+                    (0, utils_1.inplaceRemove)(p.playedCards, card);
                 }
             });
             const cost = player.getCardCost(selectedCard);

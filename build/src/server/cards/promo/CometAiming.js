@@ -35,14 +35,17 @@ class CometAiming extends Card_1.Card {
             },
         });
     }
-    canPlaceOcean(player) {
-        return player.game.canAddOcean() && player.canAfford({ cost: 0, tr: { oceans: 1 } });
+    canAffordOcean(player) {
+        return player.canAfford({ cost: 0, tr: { oceans: 1 } });
     }
     canAct(player) {
         if (player.titanium > 0) {
             return true;
         }
-        return this.resourceCount > 0 && this.canPlaceOcean(player);
+        if (this.resourceCount > 0 && this.canAffordOcean(player)) {
+            return true;
+        }
+        return false;
     }
     action(player) {
         const asteroidCards = player.getResourceCards(CardResource_1.CardResource.ASTEROID);
@@ -64,15 +67,18 @@ class CometAiming extends Card_1.Card {
             return undefined;
         };
         if (this.resourceCount === 0) {
-            if (asteroidCards.length === 1)
-                return addAsteroidToSelf();
-            return addAsteroidToCard;
+            return asteroidCards.length === 1 ? addAsteroidToSelf() : addAsteroidToCard;
         }
-        if (player.titanium === 0)
+        if (player.titanium === 0) {
             return spendAsteroidResource();
+        }
         const availableActions = [];
-        if (this.canPlaceOcean(player)) {
-            availableActions.push(new SelectOption_1.SelectOption('Remove an asteroid resource to place an ocean', 'Remove asteroid').andThen(spendAsteroidResource));
+        if (this.canAffordOcean(player)) {
+            const placeOceanOption = new SelectOption_1.SelectOption('Remove an asteroid resource to place an ocean', 'Remove asteroid').andThen(spendAsteroidResource);
+            if (!player.game.canAddOcean()) {
+                placeOceanOption.warnings = ['maxoceans'];
+            }
+            availableActions.push(placeOceanOption);
         }
         if (asteroidCards.length === 1) {
             availableActions.push(new SelectOption_1.SelectOption('Spend 1 titanium to gain 1 asteroid resource', 'Spend titanium').andThen(addAsteroidToSelf));

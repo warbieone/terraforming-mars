@@ -17,10 +17,10 @@ class Gordon extends CeoCard_1.CeoCard {
             metadata: {
                 cardNumber: 'L07',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.greenery().city().colon().megacredits(2).asterix();
-                    b.br.br;
+                    b.effect('Ignore placement restrictions for greenery and city tiles on Mars.', (eb) => eb.greenery().city().startEffect.asterix());
+                    b.br;
+                    b.effect('Gain 2 M€ when you place a greenery or city tile on Mars.', (eb) => eb.greenery().city().startEffect.megacredits(2));
                 }),
-                description: 'Ignore placement restrictions for greenery and city tiles on Mars. Gain 2 M€ when you place a greenery or city tile on Mars.',
             },
         });
     }
@@ -28,12 +28,18 @@ class Gordon extends CeoCard_1.CeoCard {
         return false;
     }
     onTilePlaced(cardOwner, activePlayer, space, boardType) {
-        if (cardOwner.id !== activePlayer.id)
+        if (cardOwner.id !== activePlayer.id) {
             return;
-        if (boardType !== BoardType_1.BoardType.MARS || space.spaceType !== SpaceType_1.SpaceType.LAND)
+        }
+        if (boardType !== BoardType_1.BoardType.MARS) {
             return;
-        if (cardOwner.game.phase === Phase_1.Phase.SOLAR)
+        }
+        if (space.spaceType === SpaceType_1.SpaceType.COLONY) {
             return;
+        }
+        if (cardOwner.game.phase === Phase_1.Phase.SOLAR) {
+            return;
+        }
         if (Board_1.Board.isCitySpace(space) || Board_1.Board.isGreenerySpace(space)) {
             cardOwner.game.defer(new GainResources_1.GainResources(cardOwner, Resource_1.Resource.MEGACREDITS, { count: 2, log: true }));
         }

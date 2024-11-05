@@ -99,6 +99,7 @@ export const ARABIA_TERRA_MILESTONES = [
   new Pioneer(),
   new LandSpecialist(),
   new Martian(),
+  new Businessperson(),
 ];
 
 export const TERRA_CIMMERIA_MILESTONES = [

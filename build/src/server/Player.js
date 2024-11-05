@@ -183,6 +183,9 @@ class Player {
         }
         return corporation;
     }
+    getPlayedCard(cardName) {
+        return this.playedCards.find((card) => card.name === cardName);
+    }
     getTitaniumValue() {
         return this.titaniumValue;
     }
@@ -195,7 +198,7 @@ class Player {
         }
     }
     getSelfReplicatingRobotsTargetCards() {
-        const selfReplicatingRobots = this.playedCards.find((card) => card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots);
+        const selfReplicatingRobots = this.getPlayedCard(CardName_1.CardName.SELF_REPLICATING_ROBOTS);
         if (selfReplicatingRobots instanceof SelfReplicatingRobots_1.SelfReplicatingRobots) {
             return selfReplicatingRobots.targetCards;
         }
@@ -424,7 +427,6 @@ class Player {
         const result = [];
         for (const card of this.tableau) {
             if ((0, ICard_1.isIActionCard)(card) && !this.actionsThisGeneration.has(card.name) && !(0, ICeoCard_1.isCeoCard)(card)) {
-                card.warnings.clear();
                 if (card.canAct(this)) {
                     result.push(card);
                 }
@@ -613,7 +615,7 @@ class Player {
             else if (preludeCardIndex !== -1) {
                 this.preludeCardsInHand.splice(preludeCardIndex, 1);
             }
-            const selfReplicatingRobots = this.playedCards.find((card) => card.name === CardName_1.CardName.SELF_REPLICATING_ROBOTS);
+            const selfReplicatingRobots = this.getPlayedCard(CardName_1.CardName.SELF_REPLICATING_ROBOTS);
             if (selfReplicatingRobots instanceof SelfReplicatingRobots_1.SelfReplicatingRobots) {
                 if ((0, utils_1.inplaceRemove)(selfReplicatingRobots.targetCards, selectedCard)) {
                     selectedCard.resourceCount = 0;
@@ -631,10 +633,10 @@ class Player {
                 break;
             case 'nothing':
                 break;
-            case 'action-only':
+            case 'double-down':
                 break;
         }
-        if (!selectedCard.tags.includes(Tag_1.Tag.CLONE) && cardAction !== 'action-only') {
+        if (!selectedCard.tags.includes(Tag_1.Tag.CLONE) && cardAction !== 'double-down') {
             this.onCardPlayed(selectedCard);
         }
         return undefined;
@@ -805,7 +807,7 @@ class Player {
         if (owner === undefined) {
             return false;
         }
-        const stagedProtests = owner.playedCards.find((card) => card.name === CardName_1.CardName.STAGED_PROTESTS);
+        const stagedProtests = owner.getPlayedCard(CardName_1.CardName.STAGED_PROTESTS);
         return stagedProtests?.generationUsed === this.game.generation;
     }
     milestoneCost() {
@@ -887,7 +889,7 @@ class Player {
     }
     getPlayableCards() {
         const candidateCards = [...this.cardsInHand];
-        const card = this.playedCards.find((card) => card.name === CardName_1.CardName.SELF_REPLICATING_ROBOTS);
+        const card = this.getPlayedCard(CardName_1.CardName.SELF_REPLICATING_ROBOTS);
         if (card instanceof SelfReplicatingRobots_1.SelfReplicatingRobots) {
             candidateCards.push(...card.targetCards);
         }
@@ -1098,17 +1100,18 @@ class Player {
             this.passOption().cb();
         }
         const headStartIsInEffect = this.headStartIsInEffect();
+        this.game.inDoubleDown = false;
         if (!headStartIsInEffect) {
             if (this.preludeCardsInHand.length > 0) {
                 game.phase = Phase_1.Phase.PRELUDES;
                 const selectPrelude = PreludesExpansion_1.PreludesExpansion.selectPreludeToPlay(this, this.preludeCardsInHand);
-                this.setWaitingFor(selectPrelude, () => {
+                this.setWaitingFor(selectPrelude, this.runWhenEmpty(() => {
                     if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
                         game.playerIsFinishedTakingActions();
                         return;
                     }
                     this.takeAction();
-                });
+                }));
                 return;
             }
             if (this.ceoCardsInHand.length > 0) {
@@ -1498,6 +1501,16 @@ class Player {
         const cb = typeof (input) === 'function' ? input : () => input;
         const action = new DeferredAction_1.SimpleDeferredAction(this, cb, priority);
         this.game.defer(action);
+    }
+    runWhenEmpty(cb) {
+        const f = () => {
+            if (this.game.deferredActions.length === 0) {
+                cb();
+                return;
+            }
+            this.game.deferredActions.runAll(() => f());
+        };
+        return f;
     }
 }
 exports.Player = Player;

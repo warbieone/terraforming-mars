@@ -115,7 +115,6 @@ const VeneraBase_1 = require("./VeneraBase");
 const VenusFirst_1 = require("./VenusFirst");
 const VitalColony_1 = require("./VitalColony");
 const Wetlands_1 = require("./Wetlands");
-const MarsFrontierAlliance_1 = require("./MarsFrontierAlliance");
 exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
     module: 'pathfinders',
     projectCards: {
@@ -210,7 +209,6 @@ exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.ROBIN_HAULINGS]: { Factory: RobinHaulings_1.RobinHaulings, compatibility: ['venus', 'pathfinders'] },
         [CardName_1.CardName.ODYSSEY]: { Factory: Odyssey_1.Odyssey },
         [CardName_1.CardName.GAGARIN_MOBILE_BASE]: { Factory: GagarinMobileBase_1.GagarinMobileBase },
-        [CardName_1.CardName.MARS_FRONTIER_ALLIANCE]: { Factory: MarsFrontierAlliance_1.MarsFrontierAlliance, compatibility: 'turmoil' },
         [CardName_1.CardName.MIND_SET_MARS]: { Factory: MindSetMars_1.MindSetMars, compatibility: 'turmoil' },
         [CardName_1.CardName.HABITAT_MARTE]: { Factory: HabitatMarte_1.HabitatMarte, compatibility: 'pathfinders' },
         [CardName_1.CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: { Factory: AdhaiHighOrbitConstructions_1.AdhaiHighOrbitConstructions, compatibility: 'colonies' },

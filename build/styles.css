@@ -8671,14 +8671,14 @@ body {
 .tag-overview .ma-block .ma-name--zoologist {
   background-image: url(./assets/ma/zoologist.png);
 }
-.milestones .ma-block .ma-name--manufacturer,
-.awards .ma-block .ma-name--manufacturer,
-.tag-overview .ma-block .ma-name--manufacturer {
+.milestones .ma-block .ma-name--a-manufacturer,
+.awards .ma-block .ma-name--a-manufacturer,
+.tag-overview .ma-block .ma-name--a-manufacturer {
   background-image: url(./assets/ma/manufacturer.png);
 }
-.milestones .ma-block .ma-name--electrician,
-.awards .ma-block .ma-name--electrician,
-.tag-overview .ma-block .ma-name--electrician {
+.milestones .ma-block .ma-name--v-electrician,
+.awards .ma-block .ma-name--v-electrician,
+.tag-overview .ma-block .ma-name--v-electrician {
   background-image: url(./assets/ma/electrician.png);
   padding-top: 61px;
 }
@@ -8824,6 +8824,10 @@ body {
   display: inline-block;
   vertical-align: top;
   margin: 0px 0px 10px 0px;
+}
+.player_home_colony_cont .inactiveColony {
+  transform: scale(0.9);
+  opacity: 0.7;
 }
 .discarded-colonies-for-aridor {
   margin-bottom: 25px;
@@ -9217,15 +9221,17 @@ body {
 }
 .player-info .player-tags .player-tags-main {
   display: flex;
-  align-items: center;
+  align-items: initial;
   margin-left: 0;
+  margin-top: 8px;
 }
 .player-info .player-tags .player-tags-secondary {
   display: flex;
   flex-flow: row;
-  align-items: center;
+  align-items: initial;
   position: relative;
   margin-left: 5px;
+  margin-top: 8px;
 }
 .player-info .player-tags .tag-separator {
   width: 2px;
@@ -9608,6 +9614,9 @@ body {
 }
 /* Remove background */
 .preferences_remove_background #player-home {
+  background: #222;
+}
+.preferences_remove_background #spectator-home {
   background: #222;
 }
 /* Card Magnification */
@@ -12057,7 +12066,7 @@ input[type="radio"]:checked + .party-container::after {
 .ma-name--a-zoologist {
   background-image: url(./assets/ma/fanmade/zoologist.png);
 }
-.ma-name--collector {
+.ma-name--t-collector {
   background-image: url(./assets/ma/fanmade/collector.png);
   padding-top: 61px;
 }
@@ -12083,7 +12092,7 @@ input[type="radio"]:checked + .party-container::after {
 .ma-name--t-economizer {
   background-image: url(./assets/ma/fanmade/economizer.png);
 }
-.ma-name--politician {
+.ma-name--t-politician {
   background-image: url(./assets/ma/fanmade/politician.png);
 }
 .ma-name--urbanist {

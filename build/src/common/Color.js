@@ -14,4 +14,4 @@ var Color;
     Color["NEUTRAL"] = "neutral";
     Color["BRONZE"] = "bronze";
 })(Color = exports.Color || (exports.Color = {}));
-exports.PLAYER_COLORS = [Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK, Color.PURPLE, Color.ORANGE, Color.PINK];
+exports.PLAYER_COLORS = [Color.RED, Color.GREEN, Color.YELLOW, Color.BLUE, Color.BLACK, Color.PURPLE, Color.ORANGE, Color.PINK];

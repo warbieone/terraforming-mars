@@ -4,6 +4,7 @@ require('dotenv').config();
 const fs = require("fs");
 const AllManifests_1 = require("../cards/AllManifests");
 const ModuleManifest_1 = require("../cards/ModuleManifest");
+const ICard_1 = require("../cards/ICard");
 const ICorporationCard_1 = require("../cards/corporation/ICorporationCard");
 const IPreludeCard_1 = require("../cards/prelude/IPreludeCard");
 const Units_1 = require("../../common/Units");
@@ -57,6 +58,7 @@ class CardProcessor {
             startingMegaCredits: startingMegaCredits,
             cardCost: cardCost,
             compatibility: [],
+            hasAction: (0, ICard_1.isIActionCard)(card),
         };
         if (Array.isArray(compatibility)) {
             clientCard.compatibility.push(...compatibility);

@@ -37,8 +37,10 @@ class RotatorImpacts extends Card_1.Card {
         });
     }
     canAct(player) {
-        const venusMaxed = player.game.getVenusScaleLevel() === constants_1.MAX_VENUS_SCALE;
-        const canSpendResource = this.resourceCount > 0 && !venusMaxed;
+        if (player.game.getVenusScaleLevel() === constants_1.MAX_VENUS_SCALE) {
+            this.warnings.add('maxvenus');
+        }
+        const canSpendResource = this.resourceCount > 0;
         return player.canAfford({ cost: 6, titanium: true }) || (canSpendResource && player.canAfford({ cost: 0, tr: { venus: 1 } }));
     }
     action(player) {

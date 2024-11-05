@@ -20,10 +20,11 @@ const RimSettler_1 = require("./RimSettler");
 const Networker_1 = require("./Networker");
 const OneGiantStep_1 = require("../moon/OneGiantStep");
 const Lunarchitect_1 = require("../moon/Lunarchitect");
-const Economizer_1 = require("./Economizer");
-const Pioneer_1 = require("./Pioneer");
-const LandSpecialist_1 = require("./LandSpecialist");
-const Martian_1 = require("./Martian");
+const Economizer_1 = require("./arabiaTerra/Economizer");
+const Pioneer_1 = require("./arabiaTerra/Pioneer");
+const LandSpecialist_1 = require("./arabiaTerra/LandSpecialist");
+const Martian_1 = require("./arabiaTerra/Martian");
+const Businessperson_1 = require("./arabiaTerra/Businessperson");
 const Capitalist_1 = require("./Capitalist");
 const Electrician_1 = require("./Electrician");
 const Irrigator_1 = require("./Irrigator");
@@ -85,6 +86,7 @@ exports.ARABIA_TERRA_MILESTONES = [
     new Pioneer_1.Pioneer(),
     new LandSpecialist_1.LandSpecialist(),
     new Martian_1.Martian(),
+    new Businessperson_1.Businessperson(),
 ];
 exports.TERRA_CIMMERIA_MILESTONES = [
     new Collector_1.Collector(),

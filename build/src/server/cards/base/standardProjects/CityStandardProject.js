@@ -22,13 +22,13 @@ class CityStandardProject extends StandardProjectCard_1.StandardProjectCard {
         });
     }
     discount(player) {
-        if (player.playedCards.find((card) => card.name === CardName_1.CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
+        if (player.getPlayedCard(CardName_1.CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
             return 2 + super.discount(player);
         }
         return super.discount(player);
     }
     canPayWith(player) {
-        if (player.playedCards.find((card) => card.name === CardName_1.CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
+        if (player.getPlayedCard(CardName_1.CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
             return { steel: true };
         }
         else {

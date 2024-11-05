@@ -147,7 +147,9 @@ class Executor {
             }
         }
         if (behavior.greenery !== undefined) {
-            if (game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery', canAffordOptions).length === 0) {
+            const spaces = game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery', canAffordOptions);
+            const filtered = game.board.filterSpacesAroundRedCity(spaces);
+            if (filtered.length === 0) {
                 return false;
             }
         }
@@ -371,11 +373,16 @@ class Executor {
         }
         const addResources = behavior.addResources;
         if (addResources !== undefined) {
-            const count = ctx.count(addResources);
-            player.defer(() => {
-                player.addResourceTo(card, { qty: count, log: true });
-                return undefined;
-            });
+            if (player.game.inDoubleDown) {
+                player.game.log('Resources from ${1} cannot be added to ${2}', (b) => b.card(card).cardName(CardName_1.CardName.DOUBLE_DOWN));
+            }
+            else {
+                const count = ctx.count(addResources);
+                player.defer(() => {
+                    player.addResourceTo(card, { qty: count, log: true });
+                    return undefined;
+                });
+            }
         }
         if (behavior.addResourcesToAnyCard) {
             const array = (0, utils_1.asArray)(behavior.addResourcesToAnyCard);

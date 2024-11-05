@@ -26,7 +26,7 @@ class MoonHabitatStandardProject extends StandardProjectCard_1.StandardProjectCa
         super(properties);
     }
     discount(player) {
-        if (player.playedCards.find((card) => card.name === CardName_1.CardName.MOONCRATE_BLOCK_FACTORY)) {
+        if (player.getPlayedCard(CardName_1.CardName.MOONCRATE_BLOCK_FACTORY)) {
             return 4;
         }
         return super.discount(player);

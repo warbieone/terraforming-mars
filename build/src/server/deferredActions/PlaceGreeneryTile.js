@@ -10,12 +10,14 @@ class PlaceGreeneryTile extends DeferredAction_1.DeferredAction {
         this.on = on;
     }
     execute() {
-        const availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, this.on);
-        if (availableSpaces.length === 0) {
+        const board = this.player.game.board;
+        const spacesForType = board.getAvailableSpacesForType(this.player, this.on);
+        const filtered = board.filterSpacesAroundRedCity(spacesForType);
+        if (filtered.length === 0) {
             this.cb(undefined);
             return undefined;
         }
-        return new SelectSpace_1.SelectSpace(this.getTitle(), availableSpaces)
+        return new SelectSpace_1.SelectSpace(this.getTitle(), filtered)
             .andThen((space) => {
             this.player.game.addGreenery(this.player, space);
             this.cb(space);

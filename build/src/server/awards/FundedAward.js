@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deserializeFundedAwards = exports.serializeFundedAwards = void 0;
+const AwardName_1 = require("../../common/ma/AwardName");
 function serializeFundedAwards(fundedAwards) {
     return fundedAwards.map((fundedAward) => {
         return {
@@ -32,7 +33,7 @@ function deserializeFundedAwards(fundedAwards, players, awards) {
         }
     }
     return filtered.map((element) => {
-        const awardName = element.name;
+        const awardName = (0, AwardName_1.maybeRenamedAward)(element.name);
         const award = awards.find((award) => award.name === awardName);
         if (award === undefined) {
             throw new Error(`Award ${awardName} not found when rebuilding Funded Award`);

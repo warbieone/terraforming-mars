@@ -143,6 +143,7 @@ class GameHandler extends Handler_1.Handler {
                         soloTR: gameReq.soloTR,
                         startingCeos: gameReq.startingCeos,
                         startingCorporations: gameReq.startingCorporations,
+                        startingPreludes: gameReq.startingPreludes,
                         starWarsExpansion: gameReq.starWarsExpansion,
                         turmoilExtension: gameReq.turmoil,
                         twoCorpsVariant: gameReq.twoCorpsVariant,
