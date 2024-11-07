@@ -8421,6 +8421,7 @@ body {
   margin: 5px;
   vertical-align: top;
   cursor: pointer;
+  /* TODO(kberg): move these files up a level. */
 }
 .milestones .ma-block .award-block,
 .awards .ma-block .award-block,
@@ -8474,262 +8475,419 @@ body {
 .milestones .ma-block .ma-name--terraformer,
 .awards .ma-block .ma-name--terraformer,
 .tag-overview .ma-block .ma-name--terraformer {
-  background-image: url(./assets/ma/terraformer.png);
+  background-image: url("assets/ma/terraformer.png");
 }
 .milestones .ma-block .ma-name--mayor,
 .awards .ma-block .ma-name--mayor,
 .tag-overview .ma-block .ma-name--mayor {
-  background-image: url(./assets/ma/mayor.png);
+  background-image: url("assets/ma/mayor.png");
 }
 .milestones .ma-block .ma-name--gardener,
 .awards .ma-block .ma-name--gardener,
 .tag-overview .ma-block .ma-name--gardener {
-  background-image: url(./assets/ma/gardener.png);
+  background-image: url("assets/ma/gardener.png");
 }
 .milestones .ma-block .ma-name--builder,
 .awards .ma-block .ma-name--builder,
 .tag-overview .ma-block .ma-name--builder {
-  background-image: url(./assets/ma/builder.png);
+  background-image: url("assets/ma/builder.png");
 }
 .milestones .ma-block .ma-name--planner,
 .awards .ma-block .ma-name--planner,
 .tag-overview .ma-block .ma-name--planner {
-  background-image: url(./assets/ma/planner.png);
-}
-.milestones .ma-block .ma-name--generalist,
-.awards .ma-block .ma-name--generalist,
-.tag-overview .ma-block .ma-name--generalist {
-  background-image: url(./assets/ma/generalist.png);
-}
-.milestones .ma-block .ma-name--specialist,
-.awards .ma-block .ma-name--specialist,
-.tag-overview .ma-block .ma-name--specialist {
-  background-image: url(./assets/ma/specialist.png);
-}
-.milestones .ma-block .ma-name--ecologist,
-.awards .ma-block .ma-name--ecologist,
-.tag-overview .ma-block .ma-name--ecologist {
-  background-image: url(./assets/ma/ecologist.png);
-}
-.milestones .ma-block .ma-name--tycoon,
-.awards .ma-block .ma-name--tycoon,
-.tag-overview .ma-block .ma-name--tycoon {
-  background-image: url(./assets/ma/tycoon.png);
-}
-.milestones .ma-block .ma-name--legend,
-.awards .ma-block .ma-name--legend,
-.tag-overview .ma-block .ma-name--legend {
-  background-image: url(./assets/ma/legend.png);
-}
-.milestones .ma-block .ma-name--diversifier,
-.awards .ma-block .ma-name--diversifier,
-.tag-overview .ma-block .ma-name--diversifier {
-  background-image: url(./assets/ma/diversifier.png);
-}
-.milestones .ma-block .ma-name--tactician,
-.awards .ma-block .ma-name--tactician,
-.tag-overview .ma-block .ma-name--tactician {
-  background-image: url(./assets/ma/tactician.png);
-}
-.milestones .ma-block .ma-name--polar-explorer,
-.awards .ma-block .ma-name--polar-explorer,
-.tag-overview .ma-block .ma-name--polar-explorer {
-  background-image: url(./assets/ma/polar_explorer.png);
-}
-.milestones .ma-block .ma-name--energizer,
-.awards .ma-block .ma-name--energizer,
-.tag-overview .ma-block .ma-name--energizer {
-  background-image: url(./assets/ma/energizer.png);
-}
-.milestones .ma-block .ma-name--rim-settler,
-.awards .ma-block .ma-name--rim-settler,
-.tag-overview .ma-block .ma-name--rim-settler {
-  background-image: url(./assets/ma/rim_settler.png);
-}
-.milestones .ma-block .ma-name--hoverlord,
-.awards .ma-block .ma-name--hoverlord,
-.tag-overview .ma-block .ma-name--hoverlord {
-  background-image: url(./assets/ma/hoverlord.png);
+  background-image: url("assets/ma/planner.png");
 }
 .milestones .ma-block .ma-name--landlord,
 .awards .ma-block .ma-name--landlord,
 .tag-overview .ma-block .ma-name--landlord {
-  background-image: url(./assets/ma/landlord.png);
+  background-image: url("assets/ma/landlord.png");
 }
 .milestones .ma-block .ma-name--banker,
 .awards .ma-block .ma-name--banker,
 .tag-overview .ma-block .ma-name--banker {
-  background-image: url(./assets/ma/banker.png);
+  background-image: url("assets/ma/banker.png");
 }
 .milestones .ma-block .ma-name--scientist,
 .awards .ma-block .ma-name--scientist,
 .tag-overview .ma-block .ma-name--scientist {
-  background-image: url(./assets/ma/scientist.png);
+  background-image: url("assets/ma/scientist.png");
 }
 .milestones .ma-block .ma-name--thermalist,
 .awards .ma-block .ma-name--thermalist,
 .tag-overview .ma-block .ma-name--thermalist {
-  background-image: url(./assets/ma/thermalist.png);
+  background-image: url("assets/ma/thermalist.png");
 }
 .milestones .ma-block .ma-name--miner,
 .awards .ma-block .ma-name--miner,
 .tag-overview .ma-block .ma-name--miner {
-  background-image: url(./assets/ma/miner.png);
+  background-image: url("assets/ma/miner.png");
+}
+.milestones .ma-block .ma-name--generalist,
+.awards .ma-block .ma-name--generalist,
+.tag-overview .ma-block .ma-name--generalist {
+  background-image: url("assets/ma/generalist.png");
+}
+.milestones .ma-block .ma-name--specialist,
+.awards .ma-block .ma-name--specialist,
+.tag-overview .ma-block .ma-name--specialist {
+  background-image: url("assets/ma/specialist.png");
+}
+.milestones .ma-block .ma-name--ecologist,
+.awards .ma-block .ma-name--ecologist,
+.tag-overview .ma-block .ma-name--ecologist {
+  background-image: url("assets/ma/ecologist.png");
+}
+.milestones .ma-block .ma-name--tycoon,
+.awards .ma-block .ma-name--tycoon,
+.tag-overview .ma-block .ma-name--tycoon {
+  background-image: url("assets/ma/tycoon.png");
+}
+.milestones .ma-block .ma-name--legend,
+.awards .ma-block .ma-name--legend,
+.tag-overview .ma-block .ma-name--legend {
+  background-image: url("assets/ma/legend.png");
 }
 .milestones .ma-block .ma-name--celebrity,
 .awards .ma-block .ma-name--celebrity,
 .tag-overview .ma-block .ma-name--celebrity {
-  background-image: url(./assets/ma/celebrity.png);
+  background-image: url("assets/ma/celebrity.png");
 }
 .milestones .ma-block .ma-name--industrialist,
 .awards .ma-block .ma-name--industrialist,
 .tag-overview .ma-block .ma-name--industrialist {
-  background-image: url(./assets/ma/industrialist.png);
+  background-image: url("assets/ma/industrialist.png");
 }
 .milestones .ma-block .ma-name--desert-settler,
 .awards .ma-block .ma-name--desert-settler,
 .tag-overview .ma-block .ma-name--desert-settler {
-  background-image: url(./assets/ma/desert_settler.png);
+  background-image: url("assets/ma/desert-settler.png");
 }
 .milestones .ma-block .ma-name--estate-dealer,
 .awards .ma-block .ma-name--estate-dealer,
 .tag-overview .ma-block .ma-name--estate-dealer {
-  background-image: url(./assets/ma/estate_dealer.png);
+  background-image: url("assets/ma/estate-dealer.png");
 }
 .milestones .ma-block .ma-name--benefactor,
 .awards .ma-block .ma-name--benefactor,
 .tag-overview .ma-block .ma-name--benefactor {
-  background-image: url(./assets/ma/benefactor.png);
+  background-image: url("assets/ma/benefactor.png");
+}
+.milestones .ma-block .ma-name--diversifier,
+.awards .ma-block .ma-name--diversifier,
+.tag-overview .ma-block .ma-name--diversifier {
+  background-image: url("assets/ma/diversifier.png");
+}
+.milestones .ma-block .ma-name--tactician,
+.awards .ma-block .ma-name--tactician,
+.tag-overview .ma-block .ma-name--tactician {
+  background-image: url("assets/ma/tactician.png");
+}
+.milestones .ma-block .ma-name--polar-explorer,
+.awards .ma-block .ma-name--polar-explorer,
+.tag-overview .ma-block .ma-name--polar-explorer {
+  background-image: url("assets/ma/polar-explorer.png");
+}
+.milestones .ma-block .ma-name--energizer,
+.awards .ma-block .ma-name--energizer,
+.tag-overview .ma-block .ma-name--energizer {
+  background-image: url("assets/ma/energizer.png");
+}
+.milestones .ma-block .ma-name--rim-settler,
+.awards .ma-block .ma-name--rim-settler,
+.tag-overview .ma-block .ma-name--rim-settler {
+  background-image: url("assets/ma/rim-settler.png");
 }
 .milestones .ma-block .ma-name--cultivator,
 .awards .ma-block .ma-name--cultivator,
 .tag-overview .ma-block .ma-name--cultivator {
-  background-image: url(./assets/ma/cultivator.png);
+  background-image: url("assets/ma/cultivator.png");
 }
 .milestones .ma-block .ma-name--magnate,
 .awards .ma-block .ma-name--magnate,
 .tag-overview .ma-block .ma-name--magnate {
-  background-image: url(./assets/ma/magnate.png);
+  background-image: url("assets/ma/magnate.png");
 }
 .milestones .ma-block .ma-name--space-baron,
 .awards .ma-block .ma-name--space-baron,
 .tag-overview .ma-block .ma-name--space-baron {
-  background-image: url(./assets/ma/space_baron.png);
+  background-image: url("assets/ma/space-baron.png");
 }
 .milestones .ma-block .ma-name--excentric,
 .awards .ma-block .ma-name--excentric,
 .tag-overview .ma-block .ma-name--excentric {
-  background-image: url(./assets/ma/excentric.png);
+  background-image: url("assets/ma/excentric.png");
 }
 .milestones .ma-block .ma-name--contractor,
 .awards .ma-block .ma-name--contractor,
 .tag-overview .ma-block .ma-name--contractor {
-  background-image: url(./assets/ma/contractor.png);
+  background-image: url("assets/ma/contractor.png");
+}
+.milestones .ma-block .ma-name--hoverlord,
+.awards .ma-block .ma-name--hoverlord,
+.tag-overview .ma-block .ma-name--hoverlord {
+  background-image: url("assets/ma/hoverlord.png");
 }
 .milestones .ma-block .ma-name--venuphile,
 .awards .ma-block .ma-name--venuphile,
 .tag-overview .ma-block .ma-name--venuphile {
-  background-image: url(./assets/ma/venuphile.png);
+  background-image: url("assets/ma/venuphile.png");
+}
+.milestones .ma-block .ma-name--networker,
+.awards .ma-block .ma-name--networker,
+.tag-overview .ma-block .ma-name--networker {
+  background-image: url("assets/ma/networker.png");
+}
+.milestones .ma-block .ma-name--entrepreneur,
+.awards .ma-block .ma-name--entrepreneur,
+.tag-overview .ma-block .ma-name--entrepreneur {
+  background-image: url("assets/ma/entrepreneur.png");
+}
+.milestones .ma-block .ma-name--lunar-magnate,
+.awards .ma-block .ma-name--lunar-magnate,
+.tag-overview .ma-block .ma-name--lunar-magnate {
+  background-image: url("assets/ma/lunar-magnate.png");
+}
+.milestones .ma-block .ma-name--lunarchitect,
+.awards .ma-block .ma-name--lunarchitect,
+.tag-overview .ma-block .ma-name--lunarchitect {
+  background-image: url("assets/ma/lunarchitect.png");
+}
+.milestones .ma-block .ma-name--full-moon,
+.awards .ma-block .ma-name--full-moon,
+.tag-overview .ma-block .ma-name--full-moon {
+  background-image: url("assets/ma/full-moon.png");
+}
+.milestones .ma-block .ma-name--one-giant-step,
+.awards .ma-block .ma-name--one-giant-step,
+.tag-overview .ma-block .ma-name--one-giant-step {
+  background-image: url("assets/ma/one-giant-step.png");
 }
 .milestones .ma-block .ma-name--economizer,
 .awards .ma-block .ma-name--economizer,
 .tag-overview .ma-block .ma-name--economizer {
-  background-image: url(./assets/ma/economizer.png);
+  background-image: url("assets/ma/economizer.png");
 }
 .milestones .ma-block .ma-name--pioneer,
 .awards .ma-block .ma-name--pioneer,
 .tag-overview .ma-block .ma-name--pioneer {
-  background-image: url(./assets/ma/pioneer.png);
+  background-image: url("assets/ma/pioneer.png");
 }
 .milestones .ma-block .ma-name--land-specialist,
 .awards .ma-block .ma-name--land-specialist,
 .tag-overview .ma-block .ma-name--land-specialist {
-  background-image: url(./assets/ma/land-specialist.png);
+  background-image: url("assets/ma/land-specialist.png");
 }
 .milestones .ma-block .ma-name--martian,
 .awards .ma-block .ma-name--martian,
 .tag-overview .ma-block .ma-name--martian {
-  background-image: url(./assets/ma/martian.png);
+  background-image: url("assets/ma/martian.png");
+}
+.milestones .ma-block .ma-name--businessperson,
+.awards .ma-block .ma-name--businessperson,
+.tag-overview .ma-block .ma-name--businessperson {
+  background-image: url("assets/ma/businessperson.png");
 }
 .milestones .ma-block .ma-name--cosmic-settler,
 .awards .ma-block .ma-name--cosmic-settler,
 .tag-overview .ma-block .ma-name--cosmic-settler {
-  background-image: url(./assets/ma/cosmic-settler.png);
+  background-image: url("assets/ma/cosmic-settler.png");
 }
 .milestones .ma-block .ma-name--botanist,
 .awards .ma-block .ma-name--botanist,
 .tag-overview .ma-block .ma-name--botanist {
-  background-image: url(./assets/ma/botanist.png);
+  background-image: url("assets/ma/botanist.png");
 }
 .milestones .ma-block .ma-name--coordinator,
 .awards .ma-block .ma-name--coordinator,
 .tag-overview .ma-block .ma-name--coordinator {
-  background-image: url(./assets/ma/coordinator.png);
+  background-image: url("assets/ma/coordinator.png");
 }
 .milestones .ma-block .ma-name--zoologist,
 .awards .ma-block .ma-name--zoologist,
 .tag-overview .ma-block .ma-name--zoologist {
-  background-image: url(./assets/ma/zoologist.png);
+  background-image: url("assets/ma/zoologist.png");
 }
 .milestones .ma-block .ma-name--a-manufacturer,
 .awards .ma-block .ma-name--a-manufacturer,
 .tag-overview .ma-block .ma-name--a-manufacturer {
-  background-image: url(./assets/ma/manufacturer.png);
+  background-image: url("assets/ma/a-manufacturer.png");
 }
 .milestones .ma-block .ma-name--v-electrician,
 .awards .ma-block .ma-name--v-electrician,
 .tag-overview .ma-block .ma-name--v-electrician {
-  background-image: url(./assets/ma/electrician.png);
-  padding-top: 61px;
+  background-image: url("assets/ma/v-electrician.png");
 }
 .milestones .ma-block .ma-name--smith,
 .awards .ma-block .ma-name--smith,
 .tag-overview .ma-block .ma-name--smith {
-  background-image: url(./assets/ma/smith.png);
-  padding-top: 61px;
+  background-image: url("assets/ma/smith.png");
 }
 .milestones .ma-block .ma-name--tradesman,
 .awards .ma-block .ma-name--tradesman,
 .tag-overview .ma-block .ma-name--tradesman {
-  background-image: url(./assets/ma/tradesman.png);
-  padding-top: 61px;
+  background-image: url("assets/ma/tradesman.png");
 }
 .milestones .ma-block .ma-name--irrigator,
 .awards .ma-block .ma-name--irrigator,
 .tag-overview .ma-block .ma-name--irrigator {
-  background-image: url(./assets/ma/irrigator.png);
-  padding-top: 61px;
+  background-image: url("assets/ma/irrigator.png");
 }
 .milestones .ma-block .ma-name--capitalist,
 .awards .ma-block .ma-name--capitalist,
 .tag-overview .ma-block .ma-name--capitalist {
-  background-image: url(./assets/ma/capitalist.png);
-  padding-top: 61px;
+  background-image: url("assets/ma/capitalist.png");
 }
 .milestones .ma-block .ma-name--adapter,
 .awards .ma-block .ma-name--adapter,
 .tag-overview .ma-block .ma-name--adapter {
-  background-image: url(./assets/ma/adapter.png);
+  background-image: url("assets/ma/adapter.png");
 }
 .milestones .ma-block .ma-name--edgedancer,
 .awards .ma-block .ma-name--edgedancer,
 .tag-overview .ma-block .ma-name--edgedancer {
-  background-image: url(./assets/ma/edgedancer.png);
-}
-.milestones .ma-block .ma-name--naturalist,
-.awards .ma-block .ma-name--naturalist,
-.tag-overview .ma-block .ma-name--naturalist {
-  background-image: url(./assets/ma/naturalist.png);
+  background-image: url("assets/ma/edgedancer.png");
 }
 .milestones .ma-block .ma-name--hoarder,
 .awards .ma-block .ma-name--hoarder,
 .tag-overview .ma-block .ma-name--hoarder {
-  background-image: url(./assets/ma/hoarder.png);
+  background-image: url("assets/ma/hoarder.png");
+}
+.milestones .ma-block .ma-name--naturalist,
+.awards .ma-block .ma-name--naturalist,
+.tag-overview .ma-block .ma-name--naturalist {
+  background-image: url("assets/ma/naturalist.png");
 }
 .milestones .ma-block .ma-name--voyager,
 .awards .ma-block .ma-name--voyager,
 .tag-overview .ma-block .ma-name--voyager {
-  background-image: url(./assets/ma/voyager.png);
+  background-image: url("assets/ma/voyager.png");
+}
+.milestones .ma-block .ma-name--colonizer,
+.awards .ma-block .ma-name--colonizer,
+.tag-overview .ma-block .ma-name--colonizer {
+  background-image: url("assets/ma/fanmade/colonizer.png");
+}
+.milestones .ma-block .ma-name--farmer,
+.awards .ma-block .ma-name--farmer,
+.tag-overview .ma-block .ma-name--farmer {
+  background-image: url("assets/ma/fanmade/farmer.png");
+}
+.milestones .ma-block .ma-name--minimalist,
+.awards .ma-block .ma-name--minimalist,
+.tag-overview .ma-block .ma-name--minimalist {
+  background-image: url("assets/ma/fanmade/minimalist.png");
+}
+.milestones .ma-block .ma-name--terran,
+.awards .ma-block .ma-name--terran,
+.tag-overview .ma-block .ma-name--terran {
+  background-image: url("assets/ma/fanmade/terran.png");
+}
+.milestones .ma-block .ma-name--tropicalist,
+.awards .ma-block .ma-name--tropicalist,
+.tag-overview .ma-block .ma-name--tropicalist {
+  background-image: url("assets/ma/fanmade/tropicalist.png");
+}
+.milestones .ma-block .ma-name--curator,
+.awards .ma-block .ma-name--curator,
+.tag-overview .ma-block .ma-name--curator {
+  background-image: url("assets/ma/fanmade/curator.png");
+}
+.milestones .ma-block .ma-name--tourist,
+.awards .ma-block .ma-name--tourist,
+.tag-overview .ma-block .ma-name--tourist {
+  background-image: url("assets/ma/fanmade/tourist.png");
+}
+.milestones .ma-block .ma-name--engineer,
+.awards .ma-block .ma-name--engineer,
+.tag-overview .ma-block .ma-name--engineer {
+  background-image: url("assets/ma/fanmade/engineer.png");
+}
+.milestones .ma-block .ma-name--a-zoologist,
+.awards .ma-block .ma-name--a-zoologist,
+.tag-overview .ma-block .ma-name--a-zoologist {
+  background-image: url("assets/ma/fanmade/a-zoologist.png");
+}
+.milestones .ma-block .ma-name--t-collector,
+.awards .ma-block .ma-name--t-collector,
+.tag-overview .ma-block .ma-name--t-collector {
+  background-image: url("assets/ma/fanmade/t-collector.png");
+}
+.milestones .ma-block .ma-name--firestarter,
+.awards .ma-block .ma-name--firestarter,
+.tag-overview .ma-block .ma-name--firestarter {
+  background-image: url("assets/ma/fanmade/firestarter.png");
+}
+.milestones .ma-block .ma-name--terra-pioneer,
+.awards .ma-block .ma-name--terra-pioneer,
+.tag-overview .ma-block .ma-name--terra-pioneer {
+  background-image: url("assets/ma/fanmade/terra-pioneer.png");
+}
+.milestones .ma-block .ma-name--spacefarer,
+.awards .ma-block .ma-name--spacefarer,
+.tag-overview .ma-block .ma-name--spacefarer {
+  background-image: url("assets/ma/fanmade/spacefarer.png");
+}
+.milestones .ma-block .ma-name--gambler,
+.awards .ma-block .ma-name--gambler,
+.tag-overview .ma-block .ma-name--gambler {
+  background-image: url("assets/ma/fanmade/gambler.png");
+}
+.milestones .ma-block .ma-name--biologist,
+.awards .ma-block .ma-name--biologist,
+.tag-overview .ma-block .ma-name--biologist {
+  background-image: url("assets/ma/fanmade/biologist.png");
+}
+.milestones .ma-block .ma-name--t-economizer,
+.awards .ma-block .ma-name--t-economizer,
+.tag-overview .ma-block .ma-name--t-economizer {
+  background-image: url("assets/ma/fanmade/t-economizer.png");
+}
+.milestones .ma-block .ma-name--t-politician,
+.awards .ma-block .ma-name--t-politician,
+.tag-overview .ma-block .ma-name--t-politician {
+  background-image: url("assets/ma/fanmade/t-politician.png");
+}
+.milestones .ma-block .ma-name--urbanist,
+.awards .ma-block .ma-name--urbanist,
+.tag-overview .ma-block .ma-name--urbanist {
+  background-image: url("assets/ma/fanmade/urbanist.png");
+}
+.milestones .ma-block .ma-name--warmonger,
+.awards .ma-block .ma-name--warmonger,
+.tag-overview .ma-block .ma-name--warmonger {
+  background-image: url("assets/ma/fanmade/warmonger.png");
+}
+.milestones .ma-block .ma-name--kingpin,
+.awards .ma-block .ma-name--kingpin,
+.tag-overview .ma-block .ma-name--kingpin {
+  background-image: url(./assets/ma/underworld/kingpin.png);
+  background-repeat: no-repeat;
+  background-size: 153px !important;
+  background-position: -6px -5px !important;
+}
+.milestones .ma-block .ma-name--edgelord,
+.awards .ma-block .ma-name--edgelord,
+.tag-overview .ma-block .ma-name--edgelord {
+  background-image: url(./assets/ma/underworld/edgelord.png);
+  background-repeat: no-repeat;
+  background-size: 153px !important;
+  background-position: -6px -5px !important;
+}
+.milestones .ma-block .ma-name--tunneler,
+.awards .ma-block .ma-name--tunneler,
+.tag-overview .ma-block .ma-name--tunneler {
+  background-image: url(./assets/ma/underworld/tunneler.png);
+  background-repeat: no-repeat;
+  background-size: 180px !important;
+  background-position: -21px -7px !important;
+}
+.milestones .ma-block .ma-name--risktaker,
+.awards .ma-block .ma-name--risktaker,
+.tag-overview .ma-block .ma-name--risktaker {
+  background-image: url(./assets/ma/underworld/risktaker.png);
+  background-size: 165px !important;
+  background-position: -11px -5px !important;
+  background-repeat: no-repeat;
 }
 .milestones .ma-block .ma-description,
 .awards .ma-block .ma-description,
@@ -11122,12 +11280,6 @@ input[type="radio"]:checked + .party-container::after {
 .ares-global-parameter-option {
   padding-right: 16px;
 }
-.ma-name--networker {
-  background: url(./assets/ma/networker.png);
-}
-.ma-name--entrepreneur {
-  background: url(./assets/ma/entrepreneur.png);
-}
 .help-container .help-tabs {
   padding-top: 10px;
   display: flex;
@@ -11745,18 +11897,6 @@ input[type="radio"]:checked + .party-container::after {
   width: 30px;
   height: 30px;
 }
-.ma-name--lunar-magnate {
-  background-image: url(./assets/ma/lunar-magnate.png);
-}
-.ma-name--lunarchitect {
-  background-image: url(./assets/ma/lunarchitect.png);
-}
-.ma-name--full-moon {
-  background-image: url(./assets/ma/full-moon.png);
-}
-.ma-name--one-giant-step {
-  background-image: url(./assets/ma/one-giant-step.png);
-}
 .pathfinders_cont {
   margin: 20px;
   display: inline-block;
@@ -12034,73 +12174,6 @@ input[type="radio"]:checked + .party-container::after {
   height: 50px;
   padding: 10px;
 }
-.ma-name--colonizer {
-  background-image: url(./assets/ma/fanmade/colonizer.png);
-  padding-top: 61px;
-}
-.ma-name--farmer {
-  background-image: url(./assets/ma/fanmade/farmer.png);
-  padding-top: 61px;
-}
-.ma-name--minimalist {
-  background-image: url(./assets/ma/fanmade/minimalist.png);
-  padding-top: 61px;
-}
-.ma-name--terran {
-  background-image: url(./assets/ma/fanmade/terran.png);
-  padding-top: 61px;
-}
-.ma-name--tropicalist {
-  background-image: url(./assets/ma/fanmade/tropicalist.png);
-  padding-top: 61px;
-}
-.ma-name--curator {
-  background-image: url(./assets/ma/fanmade/curator.png);
-}
-.ma-name--tourist {
-  background-image: url(./assets/ma/fanmade/tourist.png);
-}
-.ma-name--engineer {
-  background-image: url(./assets/ma/fanmade/engineer.png);
-}
-.ma-name--a-zoologist {
-  background-image: url(./assets/ma/fanmade/zoologist.png);
-}
-.ma-name--t-collector {
-  background-image: url(./assets/ma/fanmade/collector.png);
-  padding-top: 61px;
-}
-.ma-name--firestarter {
-  background-image: url(./assets/ma/fanmade/firestarter.png);
-  padding-top: 61px;
-}
-.ma-name--terra-pioneer {
-  background-image: url(./assets/ma/fanmade/pioneer.png);
-  padding-top: 61px;
-}
-.ma-name--spacefarer {
-  background-image: url(./assets/ma/fanmade/spacefarer.png);
-  padding-top: 61px;
-}
-.ma-name--gambler {
-  background-image: url(./assets/ma/fanmade/gambler.png);
-  padding-top: 61px;
-}
-.ma-name--biologist {
-  background-image: url(./assets/ma/fanmade/biologist.png);
-}
-.ma-name--t-economizer {
-  background-image: url(./assets/ma/fanmade/economizer.png);
-}
-.ma-name--t-politician {
-  background-image: url(./assets/ma/fanmade/politician.png);
-}
-.ma-name--urbanist {
-  background-image: url(./assets/ma/fanmade/urbanist.png);
-}
-.ma-name--warmonger {
-  background-image: url(./assets/ma/fanmade/warmonger.png);
-}
 .language-switcher {
   text-align: center;
   position: relative;
@@ -12176,30 +12249,6 @@ input[type="radio"]:checked + .party-container::after {
 }
 .language-text {
   cursor: pointer;
-}
-.ma-name--kingpin {
-  background-image: url(./assets/ma/underworld/kingpin.png);
-  background-repeat: no-repeat;
-  background-size: 153px !important;
-  background-position: -6px -5px !important;
-}
-.ma-name--edgelord {
-  background-image: url(./assets/ma/underworld/edgelord.png);
-  background-repeat: no-repeat;
-  background-size: 153px !important;
-  background-position: -6px -5px !important;
-}
-.ma-name--tunneler {
-  background-image: url(./assets/ma/underworld/tunneler.png);
-  background-repeat: no-repeat;
-  background-size: 180px !important;
-  background-position: -21px -7px !important;
-}
-.ma-name--risktaker {
-  background-image: url(./assets/ma/underworld/risktaker.png);
-  background-size: 165px !important;
-  background-position: -11px -5px !important;
-  background-repeat: no-repeat;
 }
 .card-tile-man-made-volcano {
   background: url("./assets/underworld/volcanic-tile.png");

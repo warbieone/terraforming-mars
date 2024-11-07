@@ -60,6 +60,7 @@ const LunarEmbassy_1 = require("./LunarEmbassy");
 const LuxuryEstate_1 = require("./LuxuryEstate");
 const MagneticFieldStimulationDelays_1 = require("./MagneticFieldStimulationDelays");
 const MarsDirect_1 = require("./MarsDirect");
+const MarsFrontierAlliance_1 = require("./MarsFrontierAlliance");
 const MarsMaths_1 = require("./MarsMaths");
 const MartianCulture_1 = require("./MartianCulture");
 const MartianDustProcessingPlant_1 = require("./MartianDustProcessingPlant");
@@ -209,6 +210,7 @@ exports.PATHFINDERS_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.ROBIN_HAULINGS]: { Factory: RobinHaulings_1.RobinHaulings, compatibility: ['venus', 'pathfinders'] },
         [CardName_1.CardName.ODYSSEY]: { Factory: Odyssey_1.Odyssey },
         [CardName_1.CardName.GAGARIN_MOBILE_BASE]: { Factory: GagarinMobileBase_1.GagarinMobileBase },
+        [CardName_1.CardName.MARS_FRONTIER_ALLIANCE]: { Factory: MarsFrontierAlliance_1.MarsFrontierAlliance, compatibility: 'turmoil' },
         [CardName_1.CardName.MIND_SET_MARS]: { Factory: MindSetMars_1.MindSetMars, compatibility: 'turmoil' },
         [CardName_1.CardName.HABITAT_MARTE]: { Factory: HabitatMarte_1.HabitatMarte, compatibility: 'pathfinders' },
         [CardName_1.CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: { Factory: AdhaiHighOrbitConstructions_1.AdhaiHighOrbitConstructions, compatibility: 'colonies' },
