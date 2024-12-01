@@ -21822,6 +21822,52 @@
     },
     {
         "module": "promo",
+        "name": "Public Baths",
+        "tags": [
+            "building"
+        ],
+        "victoryPoints": 1,
+        "cost": 6,
+        "type": "automated",
+        "requirements": [
+            {
+                "oceans": 6,
+                "count": 6
+            }
+        ],
+        "metadata": {
+            "cardNumber": "X70",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "megacredits",
+                            "amount": 6,
+                            "is": "item",
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        }
+                    ]
+                ],
+                "is": "root"
+            },
+            "description": "Requires 6 oceans. Gain 6 M€",
+            "victoryPoints": 1
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "compatibility": [],
+        "hasAction": false
+    },
+    {
+        "module": "promo",
         "name": "Arcadian Communities",
         "tags": [],
         "cost": 0,
@@ -60067,27 +60113,29 @@
                 "rows": [
                     [
                         {
-                            "is": "symbol",
-                            "type": "-",
-                            "size": "M",
-                            "isIcon": true,
-                            "isSuperscript": false
-                        },
-                        {
                             "rows": [
                                 [
+                                    {
+                                        "is": "symbol",
+                                        "type": "-",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "isSuperscript": false
+                                    },
                                     {
                                         "type": "energy",
                                         "amount": 1,
                                         "is": "item"
                                     }
-                                ]
-                            ],
-                            "is": "production-box"
-                        },
-                        {
-                            "rows": [
+                                ],
                                 [
+                                    {
+                                        "is": "symbol",
+                                        "type": "+",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "isSuperscript": false
+                                    },
                                     {
                                         "type": "megacredits",
                                         "amount": 3,
@@ -60099,9 +60147,7 @@
                                 ]
                             ],
                             "is": "production-box"
-                        }
-                    ],
-                    [
+                        },
                         {
                             "type": "resource",
                             "amount": -1,
@@ -61420,7 +61466,7 @@
                 ],
                 "is": "root"
             },
-            "description": "Requires any 2 Mars tags in play.  1 VP for every 2 data here.",
+            "description": "Requires ANY 2 Mars tags in play.  1 VP for every 2 data here.",
             "victoryPoints": {
                 "item": {
                     "type": "resource",
@@ -66930,6 +66976,107 @@
         "startingMegaCredits": 42,
         "compatibility": [],
         "hasAction": true
+    },
+    {
+        "module": "pathfinders",
+        "name": "Mars Frontier Alliance",
+        "tags": [],
+        "cost": 0,
+        "type": "corporation",
+        "requirements": [],
+        "metadata": {
+            "cardNumber": "PfC20",
+            "hasExternalHelp": true,
+            "description": "You start with 40 M€. When you reveal this card, select any remaining political program tile (you may use its effect as a passive effect of your corporation or as ruling party this generation).",
+            "renderData": {
+                "rows": [
+                    [
+                        {
+                            "type": "megacredits",
+                            "amount": 40,
+                            "is": "item",
+                            "showDigit": false,
+                            "amountInside": true,
+                            "size": "M"
+                        },
+                        {
+                            "is": "symbol",
+                            "type": "nbsp",
+                            "size": "M",
+                            "isIcon": true,
+                            "isSuperscript": false
+                        },
+                        {
+                            "type": "policy",
+                            "amount": -1,
+                            "is": "item"
+                        }
+                    ],
+                    [
+                        {
+                            "rows": [
+                                [
+                                    {
+                                        "is": "symbol",
+                                        "type": " ",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "isSuperscript": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "is": "symbol",
+                                        "type": ":",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "isSuperscript": false
+                                    }
+                                ],
+                                [
+                                    {
+                                        "is": "symbol",
+                                        "type": "+",
+                                        "size": "M",
+                                        "isIcon": true,
+                                        "isSuperscript": false
+                                    },
+                                    {
+                                        "type": "policy",
+                                        "amount": -1,
+                                        "is": "item"
+                                    },
+                                    {
+                                        "is": "symbol",
+                                        "type": "*",
+                                        "size": "M",
+                                        "isIcon": false,
+                                        "isSuperscript": false
+                                    },
+                                    "Effect: After new ruling party is chosen, place the political program tile of the second most popular party on this card (you may use its effect as a passive effect of your corporation or as ruling party this generation)."
+                                ]
+                            ],
+                            "is": "effect"
+                        }
+                    ],
+                    []
+                ],
+                "is": "root"
+            }
+        },
+        "productionBox": {
+            "megacredits": 0,
+            "steel": 0,
+            "titanium": 0,
+            "plants": 0,
+            "energy": 0,
+            "heat": 0
+        },
+        "startingMegaCredits": 40,
+        "compatibility": [
+            "turmoil"
+        ],
+        "hasAction": false
     },
     {
         "module": "pathfinders",

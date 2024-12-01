@@ -122,6 +122,7 @@ class GameHandler extends Handler_1.Handler {
                         includeFanMA: gameReq.includeFanMA,
                         includeVenusMA: gameReq.includeVenusMA,
                         initialDraftVariant: gameReq.initialDraft,
+                        modularMA: gameReq.modularMA,
                         moonExpansion: gameReq.moonExpansion,
                         moonStandardProjectVariant: gameReq.moonStandardProjectVariant,
                         moonStandardProjectVariant1: gameReq.moonStandardProjectVariant1,

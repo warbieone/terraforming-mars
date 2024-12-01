@@ -24,7 +24,10 @@ class EarlyExpedition extends Card_1.Card {
             metadata: {
                 cardNumber: 'Pf18',
                 renderData: CardRenderer_1.CardRenderer.builder((b) => {
-                    b.minus().production((pb) => pb.energy(1)).production((pb) => pb.megacredits(3)).br;
+                    b.production((pb) => {
+                        pb.minus().energy(1).br;
+                        pb.plus().megacredits(3);
+                    });
                     b.resource(CardResource_1.CardResource.DATA).asterix().city().asterix();
                 }),
                 description: 'Temperature must be -18 C or lower. Decrease your energy production 1 step and ' +

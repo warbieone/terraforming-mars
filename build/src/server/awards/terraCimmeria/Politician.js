@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Politician = void 0;
-class Politician {
+exports.TPolitician = void 0;
+class TPolitician {
     constructor() {
         this.name = 'T. Politician';
         this.description = 'Place the most delegates';
@@ -10,4 +10,4 @@ class Politician {
         return player.totalDelegatesPlaced;
     }
 }
-exports.Politician = Politician;
+exports.TPolitician = TPolitician;

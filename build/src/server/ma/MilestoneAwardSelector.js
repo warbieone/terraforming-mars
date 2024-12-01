@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifySynergyRules = exports.chooseMilestonesAndAwards = exports.LIMITED_SYNERGY = exports.maximumSynergy = void 0;
+exports.verifySynergyRules = exports.getCandidates = exports.chooseMilestonesAndAwards = exports.LIMITED_SYNERGY = exports.maximumSynergy = void 0;
 const Awards_1 = require("../awards/Awards");
 const BoardName_1 = require("../../common/boards/BoardName");
 const Milestones_1 = require("../milestones/Milestones");
@@ -103,35 +103,28 @@ function chooseMilestonesAndAwards(gameOptions) {
     return drawnMilestonesAndAwards;
 }
 exports.chooseMilestonesAndAwards = chooseMilestonesAndAwards;
-function getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt = 1) {
-    const maxAttempts = 5;
-    if (attempt > maxAttempts) {
-        throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
-    }
-    function toName(e) {
-        return e.name;
-    }
-    const candidateMilestones = [...Milestones_1.THARSIS_MILESTONES, ...Milestones_1.ELYSIUM_MILESTONES, ...Milestones_1.HELLAS_MILESTONES].map(toName);
-    const candidateAwards = [...Awards_1.THARSIS_AWARDS, ...Awards_1.ELYSIUM_AWARDS, ...Awards_1.HELLAS_AWARDS].map(toName);
+function getCandidates(gameOptions) {
+    const candidateMilestones = [...Milestones_1.THARSIS_MILESTONES, ...Milestones_1.ELYSIUM_MILESTONES, ...Milestones_1.HELLAS_MILESTONES].map(utils_1.toName);
+    const candidateAwards = [...Awards_1.THARSIS_AWARDS, ...Awards_1.ELYSIUM_AWARDS, ...Awards_1.HELLAS_AWARDS].map(utils_1.toName);
     if (gameOptions.venusNextExtension && gameOptions.includeVenusMA) {
-        candidateMilestones.push(...Milestones_1.VENUS_MILESTONES.map(toName));
-        candidateAwards.push(...Awards_1.VENUS_AWARDS.map(toName));
+        candidateMilestones.push(...Milestones_1.VENUS_MILESTONES.map(utils_1.toName));
+        candidateAwards.push(...Awards_1.VENUS_AWARDS.map(utils_1.toName));
     }
     if (gameOptions.aresExtension) {
-        candidateMilestones.push(...Milestones_1.ARES_MILESTONES.map(toName));
-        candidateAwards.push(...Awards_1.ARES_AWARDS.map(toName));
+        candidateMilestones.push(...Milestones_1.ARES_MILESTONES.map(utils_1.toName));
+        candidateAwards.push(...Awards_1.ARES_AWARDS.map(utils_1.toName));
     }
     if (gameOptions.moonExpansion) {
-        candidateMilestones.push(...Milestones_1.MOON_MILESTONES.map(toName));
-        candidateAwards.push(...Awards_1.MOON_AWARDS.map(toName));
+        candidateMilestones.push(...Milestones_1.MOON_MILESTONES.map(utils_1.toName));
+        candidateAwards.push(...Awards_1.MOON_AWARDS.map(utils_1.toName));
     }
     if (gameOptions.underworldExpansion) {
-        candidateMilestones.push(...Milestones_1.UNDERWORLD_MILESTONES.map(toName));
-        candidateAwards.push(...Awards_1.UNDERWORLD_AWARDS.map(toName));
+        candidateMilestones.push(...Milestones_1.UNDERWORLD_MILESTONES.map(utils_1.toName));
+        candidateAwards.push(...Awards_1.UNDERWORLD_AWARDS.map(utils_1.toName));
     }
     if (gameOptions.includeFanMA) {
-        candidateMilestones.push(...Milestones_1.ARABIA_TERRA_MILESTONES.map(toName), ...Milestones_1.AMAZONIS_PLANITIA_MILESTONES.map(toName), ...Milestones_1.TERRA_CIMMERIA_MILESTONES.map(toName), ...Milestones_1.VASTITAS_BOREALIS_MILESTONES.map(toName));
-        candidateAwards.push(...Awards_1.ARABIA_TERRA_AWARDS.map(toName), ...Awards_1.AMAZONIS_PLANITIA_AWARDS.map(toName), ...Awards_1.TERRA_CIMMERIA_AWARDS.map(toName), ...Awards_1.VASTITAS_BOREALIS_AWARDS.map(toName));
+        candidateMilestones.push(...Milestones_1.ARABIA_TERRA_MILESTONES.map(utils_1.toName), ...Milestones_1.AMAZONIS_PLANITIA_MILESTONES.map(utils_1.toName), ...Milestones_1.TERRA_CIMMERIA_MILESTONES.map(utils_1.toName), ...Milestones_1.VASTITAS_BOREALIS_MILESTONES.map(utils_1.toName));
+        candidateAwards.push(...Awards_1.ARABIA_TERRA_AWARDS.map(utils_1.toName), ...Awards_1.AMAZONIS_PLANITIA_AWARDS.map(utils_1.toName), ...Awards_1.TERRA_CIMMERIA_AWARDS.map(utils_1.toName), ...Awards_1.VASTITAS_BOREALIS_AWARDS.map(utils_1.toName));
         if (!gameOptions.pathfindersExpansion) {
             (0, utils_1.inplaceRemove)(candidateMilestones, 'Martian');
         }
@@ -143,6 +136,15 @@ function getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraint
             (0, utils_1.inplaceRemove)(candidateAwards, 'T. Politician');
         }
     }
+    return [candidateMilestones, candidateAwards];
+}
+exports.getCandidates = getCandidates;
+function getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt = 1) {
+    const maxAttempts = 5;
+    if (attempt > maxAttempts) {
+        throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
+    }
+    const [candidateMilestones, candidateAwards] = getCandidates(gameOptions);
     (0, shuffle_1.inplaceShuffle)(candidateMilestones, Random_1.UnseededRandom.INSTANCE);
     (0, shuffle_1.inplaceShuffle)(candidateAwards, Random_1.UnseededRandom.INSTANCE);
     const accum = new Accumulator(constraints);
@@ -166,8 +168,8 @@ function getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraint
         throw new Error('The randomized milestones and awards set does not satisfy the given synergy rules.');
     }
     return {
-        milestones: accum.milestones.map((name) => Milestones_1.Milestones.getByName(name)),
-        awards: accum.awards.map((name) => Awards_1.Awards.getByName(name)),
+        milestones: accum.milestones.map((name) => (0, Milestones_1.getMilestoneByNameOrThrow)(name)),
+        awards: accum.awards.map((name) => (0, Awards_1.getAwardByNameOrThrow)(name)),
     };
 }
 function verifySynergyRules(mas, constraints) {

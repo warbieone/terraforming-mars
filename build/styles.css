@@ -8857,6 +8857,116 @@ body {
 .tag-overview .ma-block .ma-name--warmonger {
   background-image: url("assets/ma/fanmade/warmonger.png");
 }
+.milestones .ma-block .ma-name--administrator,
+.awards .ma-block .ma-name--administrator,
+.tag-overview .ma-block .ma-name--administrator {
+  background-image: url("assets/ma/modular/administrator.png");
+}
+.milestones .ma-block .ma-name--constructor,
+.awards .ma-block .ma-name--constructor,
+.tag-overview .ma-block .ma-name--constructor {
+  background-image: url("assets/ma/modular/constructor.png");
+}
+.milestones .ma-block .ma-name--founder,
+.awards .ma-block .ma-name--founder,
+.tag-overview .ma-block .ma-name--founder {
+  background-image: url("assets/ma/modular/founder.png");
+}
+.milestones .ma-block .ma-name--highlander,
+.awards .ma-block .ma-name--highlander,
+.tag-overview .ma-block .ma-name--highlander {
+  background-image: url("assets/ma/modular/highlander.png");
+}
+.milestones .ma-block .ma-name--hydrologist,
+.awards .ma-block .ma-name--hydrologist,
+.tag-overview .ma-block .ma-name--hydrologist {
+  background-image: url("assets/ma/modular/hydrologist.png");
+}
+.milestones .ma-block .ma-name--investor,
+.awards .ma-block .ma-name--investor,
+.tag-overview .ma-block .ma-name--investor {
+  background-image: url("assets/ma/modular/investor.png");
+}
+.milestones .ma-block .ma-name--landscaper,
+.awards .ma-block .ma-name--landscaper,
+.tag-overview .ma-block .ma-name--landscaper {
+  background-image: url("assets/ma/modular/landscaper.png");
+}
+.milestones .ma-block .ma-name--metropolist,
+.awards .ma-block .ma-name--metropolist,
+.tag-overview .ma-block .ma-name--metropolist {
+  background-image: url("assets/ma/modular/metropolist.png");
+}
+.milestones .ma-block .ma-name--mogul,
+.awards .ma-block .ma-name--mogul,
+.tag-overview .ma-block .ma-name--mogul {
+  background-image: url("assets/ma/modular/mogul.png");
+}
+.milestones .ma-block .ma-name--thawer,
+.awards .ma-block .ma-name--thawer,
+.tag-overview .ma-block .ma-name--thawer {
+  background-image: url("assets/ma/modular/thawer.png");
+}
+.milestones .ma-block .ma-name--traveller,
+.awards .ma-block .ma-name--traveller,
+.tag-overview .ma-block .ma-name--traveller {
+  background-image: url("assets/ma/modular/traveller.png");
+}
+.milestones .ma-block .ma-name--collector,
+.awards .ma-block .ma-name--collector,
+.tag-overview .ma-block .ma-name--collector {
+  background-image: url("assets/ma/modular/collector.png");
+}
+.milestones .ma-block .ma-name--electrician,
+.awards .ma-block .ma-name--electrician,
+.tag-overview .ma-block .ma-name--electrician {
+  background-image: url("assets/ma/modular/electrician.png");
+}
+.milestones .ma-block .ma-name--fundraiser,
+.awards .ma-block .ma-name--fundraiser,
+.tag-overview .ma-block .ma-name--fundraiser {
+  background-image: url("assets/ma/modular/fundraiser.png");
+}
+.milestones .ma-block .ma-name--geologist,
+.awards .ma-block .ma-name--geologist,
+.tag-overview .ma-block .ma-name--geologist {
+  background-image: url("assets/ma/modular/geologist.png");
+}
+.milestones .ma-block .ma-name--landshaper,
+.awards .ma-block .ma-name--landshaper,
+.tag-overview .ma-block .ma-name--landshaper {
+  background-image: url("assets/ma/modular/landshaper.png");
+}
+.milestones .ma-block .ma-name--lobbyist,
+.awards .ma-block .ma-name--lobbyist,
+.tag-overview .ma-block .ma-name--lobbyist {
+  background-image: url("assets/ma/modular/lobbyist.png");
+}
+.milestones .ma-block .ma-name--philantropist,
+.awards .ma-block .ma-name--philantropist,
+.tag-overview .ma-block .ma-name--philantropist {
+  background-image: url("assets/ma/modular/philantropist.png");
+}
+.milestones .ma-block .ma-name--planetologist,
+.awards .ma-block .ma-name--planetologist,
+.tag-overview .ma-block .ma-name--planetologist {
+  background-image: url("assets/ma/modular/planetologist.png");
+}
+.milestones .ma-block .ma-name--producer,
+.awards .ma-block .ma-name--producer,
+.tag-overview .ma-block .ma-name--producer {
+  background-image: url("assets/ma/modular/producer.png");
+}
+.milestones .ma-block .ma-name--researcher,
+.awards .ma-block .ma-name--researcher,
+.tag-overview .ma-block .ma-name--researcher {
+  background-image: url("assets/ma/modular/researcher.png");
+}
+.milestones .ma-block .ma-name--sponsor,
+.awards .ma-block .ma-name--sponsor,
+.tag-overview .ma-block .ma-name--sponsor {
+  background-image: url("assets/ma/modular/sponsor.png");
+}
 .milestones .ma-block .ma-name--kingpin,
 .awards .ma-block .ma-name--kingpin,
 .tag-overview .ma-block .ma-name--kingpin {

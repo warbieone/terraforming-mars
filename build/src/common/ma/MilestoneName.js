@@ -43,16 +43,23 @@ exports.milestoneNames = [
     'Capitalist',
     'Tunneler',
     'Risktaker',
+    'Breeder',
+    'Briber',
     'Fundraiser',
+    'Geologist',
+    'Hydrologist',
+    'Landshaper',
+    'Lobbyist',
+    'Merchant',
     'Philantropist',
+    'Planetologist',
     'Producer',
     'Researcher',
     'Sponsor',
+    'Thawer',
+    'ThermoEngineer',
 ];
-const MILESTONE_RENAMES = new Map([
-    ['Electrician', 'V. Electrician'],
-    ['Collector', 'T. Collector'],
-]);
+const MILESTONE_RENAMES = new Map([]);
 function maybeRenamedMilestone(name) {
     const renamed = MILESTONE_RENAMES.get(name);
     return renamed ?? name;

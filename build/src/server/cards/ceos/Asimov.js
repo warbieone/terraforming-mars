@@ -12,6 +12,7 @@ const Size_1 = require("../../../common/cards/render/Size");
 const Awards_1 = require("../../awards/Awards");
 const AwardScorer_1 = require("../../awards/AwardScorer");
 const MessageBuilder_1 = require("../../logs/MessageBuilder");
+const compatibilities_1 = require("../../../common/ma/compatibilities");
 class Asimov extends CeoCard_1.CeoCard {
     constructor() {
         super({
@@ -71,20 +72,14 @@ class Asimov extends CeoCard_1.CeoCard {
         const validAwards = Awards_1.ALL_AWARDS.filter((award) => {
             if (player.game.awards.includes(award))
                 return false;
-            if (!gameOptions.venusNextExtension && award.name === 'Venuphile')
-                return false;
-            if (!gameOptions.turmoilExtension && award.name === 'T. Politician')
-                return false;
-            if (!gameOptions.aresExtension && award.name === 'Entrepreneur')
-                return false;
-            if (!gameOptions.moonExpansion && award.name === 'Full Moon')
-                return false;
-            if (!gameOptions.moonExpansion && award.name === 'Lunar Magnate')
-                return false;
-            if (!gameOptions.underworldExpansion && award.name === 'Kingpin')
-                return false;
-            if (!gameOptions.underworldExpansion && award.name === 'EdgeLord')
-                return false;
+            switch (compatibilities_1.AWARD_COMPATIBILITY[award.name].compatibility) {
+                case 'venus': return gameOptions.venusNextExtension;
+                case 'colonies': return gameOptions.coloniesExtension;
+                case 'turmoil': return gameOptions.turmoilExtension;
+                case 'ares': return gameOptions.aresExtension;
+                case 'moon': return gameOptions.moonExpansion;
+                case 'underworld': return gameOptions.underworldExpansion;
+            }
             return true;
         });
         if (validAwards.length === 0)

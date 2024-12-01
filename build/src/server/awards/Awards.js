@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Awards = exports.ALL_AWARDS = exports.UNDERWORLD_AWARDS = exports.VASTITAS_BOREALIS_AWARDS = exports.TERRA_CIMMERIA_AWARDS = exports.ARABIA_TERRA_AWARDS = exports.AMAZONIS_PLANITIA_AWARDS = exports.MOON_AWARDS = exports.ARES_AWARDS = exports.HELLAS_AWARDS = exports.UTOPIA_PLANITIA_AWARDS = exports.ELYSIUM_AWARDS = exports.VENUS_AWARDS = exports.THARSIS_AWARDS = void 0;
+exports.getAwardByNameOrThrow = exports.getAwardByName = exports.ALL_AWARDS = exports.MODULAR_AWARDS = exports.UNDERWORLD_AWARDS = exports.VASTITAS_BOREALIS_AWARDS = exports.TERRA_CIMMERIA_AWARDS = exports.ARABIA_TERRA_AWARDS = exports.AMAZONIS_PLANITIA_AWARDS = exports.MOON_AWARDS = exports.ARES_AWARDS = exports.HELLAS_AWARDS = exports.UTOPIA_PLANITIA_AWARDS = exports.ELYSIUM_AWARDS = exports.VENUS_AWARDS = exports.THARSIS_AWARDS = void 0;
 const Landlord_1 = require("./Landlord");
 const Banker_1 = require("./Banker");
 const Scientist_1 = require("./Scientist");
@@ -31,7 +31,7 @@ const Hoarder_1 = require("./Hoarder");
 const Naturalist_1 = require("./Naturalist");
 const Voyager_1 = require("./Voyager");
 const Curator_1 = require("./amazonisPlanitia/Curator");
-const Engineer_1 = require("./amazonisPlanitia/Engineer");
+const AmazonisEngineer_1 = require("./amazonisPlanitia/AmazonisEngineer");
 const Tourist_1 = require("./amazonisPlanitia/Tourist");
 const Biologist_1 = require("./terraCimmeria/Biologist");
 const Economizer2_1 = require("./terraCimmeria/Economizer2");
@@ -41,6 +41,19 @@ const Warmonger_1 = require("./terraCimmeria/Warmonger");
 const Zoologist_2 = require("./amazonisPlanitia/Zoologist");
 const Kingpin_1 = require("./underworld/Kingpin");
 const EdgeLord_1 = require("./underworld/EdgeLord");
+const Administrator_1 = require("./modular/Administrator");
+const Constructor_1 = require("./modular/Constructor");
+const Founder_1 = require("./modular/Founder");
+const Highlander_1 = require("./modular/Highlander");
+const Investor_1 = require("./modular/Investor");
+const Landscaper_1 = require("./modular/Landscaper");
+const Metropolist_1 = require("./modular/Metropolist");
+const Mogul_1 = require("./modular/Mogul");
+const Traveller_1 = require("./modular/Traveller");
+const Electrician_1 = require("./modular/Electrician");
+const Collector_1 = require("./modular/Collector");
+const Politician_2 = require("./modular/Politician");
+const Manufacturer_2 = require("./modular/Manufacturer");
 exports.THARSIS_AWARDS = [
     new Landlord_1.Landlord(),
     new Scientist_1.Scientist(),
@@ -75,7 +88,7 @@ exports.MOON_AWARDS = [
 ];
 exports.AMAZONIS_PLANITIA_AWARDS = [
     new Curator_1.Curator(),
-    new Engineer_1.Engineer(),
+    new AmazonisEngineer_1.AmazonisEngineer(),
     new Coordinator_1.Coordinator(),
     new Tourist_1.Tourist(),
     new Zoologist_2.Zoologist2(),
@@ -85,12 +98,12 @@ exports.ARABIA_TERRA_AWARDS = [
     new Botanist_1.Botanist(),
     new Coordinator_1.Coordinator(),
     new Zoologist_1.Zoologist(),
-    new Manufacturer_1.Manufacturer(),
+    new Manufacturer_1.AManufacturer(),
 ];
 exports.TERRA_CIMMERIA_AWARDS = [
     new Biologist_1.Biologist(),
     new Economizer2_1.Economizer2(),
-    new Politician_1.Politician(),
+    new Politician_1.TPolitician(),
     new Urbanist_1.Urbanist(),
     new Warmonger_1.Warmonger(),
 ];
@@ -105,6 +118,21 @@ exports.UNDERWORLD_AWARDS = [
     new Kingpin_1.Kingpin(),
     new EdgeLord_1.EdgeLord(),
 ];
+exports.MODULAR_AWARDS = [
+    new Administrator_1.Administrator(),
+    new Collector_1.Collector(),
+    new Constructor_1.Constructor(),
+    new Electrician_1.Electrician(),
+    new Founder_1.Founder(),
+    new Highlander_1.Highlander(),
+    new Investor_1.Investor(),
+    new Landscaper_1.Landscaper(),
+    new Manufacturer_2.Manufacturer(),
+    new Metropolist_1.Metropolist(),
+    new Mogul_1.Mogul(),
+    new Politician_2.Politician(),
+    new Traveller_1.Traveller(),
+];
 exports.ALL_AWARDS = [
     ...exports.THARSIS_AWARDS,
     ...exports.ELYSIUM_AWARDS,
@@ -118,16 +146,17 @@ exports.ALL_AWARDS = [
     ...exports.TERRA_CIMMERIA_AWARDS,
     ...exports.VASTITAS_BOREALIS_AWARDS,
     ...exports.UNDERWORLD_AWARDS,
+    ...exports.MODULAR_AWARDS,
 ];
-var Awards;
-(function (Awards) {
-    Awards.ALL = exports.ALL_AWARDS;
-    function getByName(name) {
-        const award = exports.ALL_AWARDS.find((a) => a.name === name);
-        if (award) {
-            return award;
-        }
-        throw new Error(`Award ${name} not found.`);
+function getAwardByName(name) {
+    return exports.ALL_AWARDS.find((a) => a.name === name);
+}
+exports.getAwardByName = getAwardByName;
+function getAwardByNameOrThrow(name) {
+    const award = getAwardByName(name);
+    if (award) {
+        return award;
     }
-    Awards.getByName = getByName;
-})(Awards = exports.Awards || (exports.Awards = {}));
+    throw new Error(`Award ${name} not found.`);
+}
+exports.getAwardByNameOrThrow = getAwardByNameOrThrow;

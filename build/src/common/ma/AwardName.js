@@ -22,7 +22,7 @@ exports.awardNames = [
     'Full Moon',
     'Lunar Magnate',
     'Curator',
-    'Engineer',
+    'A. Engineer',
     'Tourist',
     'A. Zoologist',
     'Cosmic Settler',
@@ -43,14 +43,21 @@ exports.awardNames = [
     'Kingpin',
     'EdgeLord',
     'Administrator',
+    'Collector',
     'Constructor',
+    'Electrician',
+    'Founder',
+    'Highlander',
     'Investor',
+    'Landscaper',
+    'Manufacturer',
+    'Metropolist',
     'Mogul',
+    'Politician',
     'Traveller',
 ];
 exports.AWARD_RENAMES = new Map([
-    ['Manufacturer', 'A. Manufacturer'],
-    ['Politician', 'T. Politician'],
+    ['Engineer', 'A. Engineer'],
 ]);
 function maybeRenamedAward(name) {
     const renamed = exports.AWARD_RENAMES.get(name);

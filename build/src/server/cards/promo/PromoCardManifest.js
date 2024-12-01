@@ -65,6 +65,7 @@ const Philares_1 = require("./Philares");
 const Potatoes_1 = require("./Potatoes");
 const ProjectInspection_1 = require("./ProjectInspection");
 const _16Psyche_1 = require("./16Psyche");
+const PublicBaths_1 = require("./PublicBaths");
 const Recyclon_1 = require("./Recyclon");
 const RedShips_1 = require("./RedShips");
 const RegoPlastics_1 = require("./RegoPlastics");
@@ -155,6 +156,7 @@ exports.PROMO_CARD_MANIFEST = new ModuleManifest_1.ModuleManifest({
         [CardName_1.CardName.SUPERMARKETS]: { Factory: Supermarkets_1.Supermarkets },
         [CardName_1.CardName.HOSPITALS]: { Factory: Hospitals_1.Hospitals },
         [CardName_1.CardName.CASINOS]: { Factory: Casinos_1.Casinos },
+        [CardName_1.CardName.PUBLIC_BATHS]: { Factory: PublicBaths_1.PublicBaths },
     },
     preludeCards: {
         [CardName_1.CardName.NEW_PARTNER]: { Factory: NewPartner_1.NewPartner },

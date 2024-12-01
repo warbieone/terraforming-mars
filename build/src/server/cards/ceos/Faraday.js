@@ -70,7 +70,7 @@ class Faraday extends CeoCard_1.CeoCard {
     effectOptions(player, tag) {
         if (!player.canAfford(3))
             return;
-        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Pay 3 M€ to draw a ${1} card', (b) => b.string(tag))).andThen(() => {
+        return new OrOptions_1.OrOptions(new SelectOption_1.SelectOption((0, MessageBuilder_1.message)('Pay 3 M€ to draw a ${0} card', (b) => b.string(tag))).andThen(() => {
             player.game.defer(new SelectPaymentDeferred_1.SelectPaymentDeferred(player, 3, { title: titles_1.TITLES.payForCardAction(this.name) }))
                 .andThen(() => player.drawCard(1, { tag: tag }));
             return undefined;

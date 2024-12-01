@@ -33,6 +33,7 @@ const Units_1 = require("../common/Units");
 const MoonExpansion_1 = require("./moon/MoonExpansion");
 const ConvertPlants_1 = require("./cards/base/standardActions/ConvertPlants");
 const ConvertHeat_1 = require("./cards/base/standardActions/ConvertHeat");
+const GlobalParameter_1 = require("../common/GlobalParameter");
 const LogHelper_1 = require("./LogHelper");
 const UndoActionOption_1 = require("./inputs/UndoActionOption");
 const Turmoil_1 = require("./turmoil/Turmoil");
@@ -58,6 +59,15 @@ const UnderworldExpansion_1 = require("./underworld/UnderworldExpansion");
 const Counter_1 = require("./behavior/Counter");
 const Draft_1 = require("./Draft");
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
+const DEFAULT_GLOBAL_PARAMETER_STEPS = {
+    [GlobalParameter_1.GlobalParameter.OCEANS]: 0,
+    [GlobalParameter_1.GlobalParameter.OXYGEN]: 0,
+    [GlobalParameter_1.GlobalParameter.TEMPERATURE]: 0,
+    [GlobalParameter_1.GlobalParameter.VENUS]: 0,
+    [GlobalParameter_1.GlobalParameter.MOON_HABITAT_RATE]: 0,
+    [GlobalParameter_1.GlobalParameter.MOON_MINING_RATE]: 0,
+    [GlobalParameter_1.GlobalParameter.MOON_LOGISTICS_RATE]: 0,
+};
 class Player {
     get megaCredits() {
         return this.stock.megacredits;
@@ -153,6 +163,7 @@ class Player {
         this.actionsTakenThisGame = 0;
         this.victoryPointsByGeneration = [];
         this.totalDelegatesPlaced = 0;
+        this.globalParameterSteps = { ...DEFAULT_GLOBAL_PARAMETER_STEPS };
         this.id = id;
         this.game = undefined;
         this.tags = new Tags_1.Tags(this);
@@ -362,6 +373,9 @@ class Player {
             requirementsBonus += 2;
         }
         return requirementsBonus;
+    }
+    onGlobalParameterIncrease(parameter, steps) {
+        this.globalParameterSteps[parameter] += steps;
     }
     removeResourceFrom(card, count = 1, options) {
         const removingPlayer = options?.removingPlayer;
@@ -1400,6 +1414,7 @@ class Player {
             alliedParty: this._alliedParty,
             draftHand: this.draftHand.map(utils_1.toName),
             autoPass: this.autopass,
+            globalParameterSteps: this.globalParameterSteps,
         };
         if (this.lastCardPlayed !== undefined) {
             result.lastCardPlayed = this.lastCardPlayed;
@@ -1489,6 +1504,9 @@ class Player {
             player._alliedParty = d.alliedParty;
         }
         player.draftHand = (0, createCard_1.cardsFromJSON)(d.draftHand);
+        if (d.globalParameterSteps) {
+            player.globalParameterSteps = { ...DEFAULT_GLOBAL_PARAMETER_STEPS, ...d.globalParameterSteps };
+        }
         return player;
     }
     getOpponents() {

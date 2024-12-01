@@ -164,6 +164,58 @@
         "description": "Have at least 7 excavation markers"
     },
     {
+        "name": "Breeder",
+        "description": "Have 5 animal and microbe resources on your cards"
+    },
+    {
+        "name": "Fundraiser",
+        "description": "Have 12 M€ production"
+    },
+    {
+        "name": "Geologist",
+        "description": "Own 3 tiles ON or ADJACENT to volcanic areas"
+    },
+    {
+        "name": "Hydrologist",
+        "description": "Have placed 4 oceans."
+    },
+    {
+        "name": "Landshaper",
+        "description": "Have 1 city tile, 1 greenery and 1 special tile"
+    },
+    {
+        "name": "Lobbyist",
+        "description": "Having all 7 delegates in parties (Party Leaders and Chairman also count)"
+    },
+    {
+        "name": "Philantropist",
+        "description": "Have 5 cards with non-negative VP"
+    },
+    {
+        "name": "Planetologist",
+        "description": "Have 2 Earth tags, 2 Venus tags, and 2 Jovian tags"
+    },
+    {
+        "name": "Producer",
+        "description": "Have a combined total production of at least 16"
+    },
+    {
+        "name": "Researcher",
+        "description": "Have 4 science tags in play"
+    },
+    {
+        "name": "Sponsor",
+        "description": "Have 3 cards that have cost of 20 M€ or more"
+    },
+    {
+        "name": "Thawer",
+        "description": "Have raised the temperature 5 steps."
+    },
+    {
+        "name": "ThermoEngineer",
+        "description": "Have a total of 10 energy and heat production"
+    },
+    {
         "name": "Landlord",
         "description": "Own the most tiles"
     },
@@ -244,7 +296,7 @@
         "description": "Have the most tags of any one type in play"
     },
     {
-        "name": "Engineer",
+        "name": "A. Engineer",
         "description": "Have the most cards in play that directly alter your own production"
     },
     {
@@ -326,5 +378,57 @@
     {
         "name": "EdgeLord",
         "description": "Have the highest number of excavation markers on the edges of the board."
+    },
+    {
+        "name": "Administrator",
+        "description": "Have the most cards with no tags"
+    },
+    {
+        "name": "Collector",
+        "description": "Have the most different types of resources, both on your player board and on your cards."
+    },
+    {
+        "name": "Constructor",
+        "description": "Have the most Colonies and Cities combined"
+    },
+    {
+        "name": "Electrician",
+        "description": "Have the most power tags in play."
+    },
+    {
+        "name": "Founder",
+        "description": "Have the most tiles adjacent to special tiles."
+    },
+    {
+        "name": "Highlander",
+        "description": "Own the most tiles that are NOT adjacent to ocean tiles"
+    },
+    {
+        "name": "Investor",
+        "description": "Have the most Earth tags in play"
+    },
+    {
+        "name": "Landscaper",
+        "description": "Most tiles connected together (each player counts largest group of tiles)"
+    },
+    {
+        "name": "Manufacturer",
+        "description": "Have the highest production of steel and heat combined."
+    },
+    {
+        "name": "Metropolist",
+        "description": "Own the most cities"
+    },
+    {
+        "name": "Mogul",
+        "description": "Have the highest production (excluding M€) combined"
+    },
+    {
+        "name": "Politician",
+        "description": "Have the most party leaders and influence combined."
+    },
+    {
+        "name": "Traveller",
+        "description": "Have the most Jovian and Earth tags in play combined"
     }
 ]

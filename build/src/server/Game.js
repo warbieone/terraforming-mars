@@ -792,6 +792,7 @@ class Game {
         const steps = Math.min(increments, constants.MAX_OXYGEN_LEVEL - this.oxygenLevel);
         if (this.phase !== Phase_1.Phase.SOLAR) {
             TurmoilHandler_1.TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter_1.GlobalParameter.OXYGEN, steps);
+            player.onGlobalParameterIncrease(GlobalParameter_1.GlobalParameter.OXYGEN, steps);
             player.increaseTerraformRating(steps);
         }
         if (this.oxygenLevel < constants.OXYGEN_LEVEL_FOR_TEMPERATURE_BONUS &&
@@ -836,6 +837,7 @@ class Game {
             }
             player.playedCards.forEach((card) => card.onGlobalParameterIncrease?.(player, GlobalParameter_1.GlobalParameter.VENUS, steps));
             TurmoilHandler_1.TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter_1.GlobalParameter.VENUS, steps);
+            player.onGlobalParameterIncrease(GlobalParameter_1.GlobalParameter.VENUS, steps);
             player.increaseTerraformRating(steps);
         }
         const aphrodite = this.players.find((player) => player.isCorporation(CardName_1.CardName.APHRODITE));
@@ -868,6 +870,7 @@ class Game {
                 player.production.add(Resource_1.Resource.HEAT, 1, { log: true });
             }
             player.playedCards.forEach((card) => card.onGlobalParameterIncrease?.(player, GlobalParameter_1.GlobalParameter.TEMPERATURE, steps));
+            player.onGlobalParameterIncrease(GlobalParameter_1.GlobalParameter.TEMPERATURE, steps);
             TurmoilHandler_1.TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter_1.GlobalParameter.TEMPERATURE, steps);
             player.increaseTerraformRating(steps);
         }
@@ -1067,6 +1070,7 @@ class Game {
         });
         if (this.phase !== Phase_1.Phase.SOLAR) {
             TurmoilHandler_1.TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter_1.GlobalParameter.OCEANS);
+            player.onGlobalParameterIncrease(GlobalParameter_1.GlobalParameter.OCEANS, 1);
             player.increaseTerraformRating();
         }
         AresHandler_1.AresHandler.ifAres(this, (aresData) => {
@@ -1191,9 +1195,9 @@ class Game {
         const milestones = [];
         d.milestones.forEach((milestoneName) => {
             milestoneName = (0, MilestoneName_1.maybeRenamedMilestone)(milestoneName);
-            const foundMilestone = Milestones_1.ALL_MILESTONES.find((milestone) => milestone.name === milestoneName);
-            if (foundMilestone !== undefined) {
-                milestones.push(foundMilestone);
+            const milestone = (0, Milestones_1.getMilestoneByName)(milestoneName);
+            if (milestone !== undefined) {
+                milestones.push(milestone);
             }
         });
         game.milestones = milestones;
@@ -1201,9 +1205,9 @@ class Game {
         const awards = [];
         d.awards.forEach((awardName) => {
             awardName = (0, AwardName_1.maybeRenamedAward)(awardName);
-            const foundAward = Awards_1.ALL_AWARDS.find((award) => award.name === awardName);
-            if (foundAward !== undefined) {
-                awards.push(foundAward);
+            const award = (0, Awards_1.getAwardByName)(awardName);
+            if (award !== undefined) {
+                awards.push(award);
             }
         });
         game.awards = awards;

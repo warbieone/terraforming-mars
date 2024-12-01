@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Milestones = exports.ALL_MILESTONES = exports.UNDERWORLD_MILESTONES = exports.VASTITAS_BOREALIS_MILESTONES = exports.TERRA_CIMMERIA_MILESTONES = exports.ARABIA_TERRA_MILESTONES = exports.AMAZONIS_PLANITIA_MILESTONES = exports.MOON_MILESTONES = exports.ARES_MILESTONES = exports.HELLAS_MILESTONES = exports.UTOPIA_PLANITIA_MILESTONES = exports.ELYSIUM_MILESTONES = exports.VENUS_MILESTONES = exports.THARSIS_MILESTONES = void 0;
+exports.getMilestoneByNameOrThrow = exports.getMilestoneByName = exports.ALL_MILESTONES = exports.MODULAR_MILESTONES = exports.UNDERWORLD_MILESTONES = exports.VASTITAS_BOREALIS_MILESTONES = exports.TERRA_CIMMERIA_MILESTONES = exports.ARABIA_TERRA_MILESTONES = exports.AMAZONIS_PLANITIA_MILESTONES = exports.MOON_MILESTONES = exports.ARES_MILESTONES = exports.HELLAS_MILESTONES = exports.UTOPIA_PLANITIA_MILESTONES = exports.ELYSIUM_MILESTONES = exports.VENUS_MILESTONES = exports.THARSIS_MILESTONES = void 0;
 const Terraformer_1 = require("./Terraformer");
 const Mayor_1 = require("./Mayor");
 const Gardener_1 = require("./Gardener");
@@ -42,6 +42,19 @@ const Spacefarer_1 = require("./terraCimmeria/Spacefarer");
 const TerraPioneer_1 = require("./terraCimmeria/TerraPioneer");
 const Risktaker_1 = require("./underworld/Risktaker");
 const Tunneler_1 = require("./underworld/Tunneler");
+const Fundraiser_1 = require("./modular/Fundraiser");
+const Geologist_1 = require("./modular/Geologist");
+const Landshaper_1 = require("./modular/Landshaper");
+const Philantropist_1 = require("./modular/Philantropist");
+const Planetologist_1 = require("./modular/Planetologist");
+const Producer_1 = require("./modular/Producer");
+const Researcher_1 = require("./modular/Researcher");
+const Sponsor_1 = require("./modular/Sponsor");
+const Lobbyist_1 = require("./modular/Lobbyist");
+const Breeder_1 = require("./modular/Breeder");
+const ThermoEngineer_1 = require("./modular/ThermoEngineer");
+const Hydrologist_1 = require("./modular/Hydrologist");
+const Thawer_1 = require("./modular/Thawer");
 exports.THARSIS_MILESTONES = [
     new Terraformer_1.Terraformer(),
     new Mayor_1.Mayor(),
@@ -106,6 +119,21 @@ exports.UNDERWORLD_MILESTONES = [
     new Risktaker_1.Risktaker(),
     new Tunneler_1.Tunneler(),
 ];
+exports.MODULAR_MILESTONES = [
+    new Breeder_1.Breeder(),
+    new Fundraiser_1.Fundraiser(),
+    new Geologist_1.Geologist(),
+    new Hydrologist_1.Hydrologist(),
+    new Landshaper_1.Landshaper(),
+    new Lobbyist_1.Lobbyist(),
+    new Philantropist_1.Philantropist(),
+    new Planetologist_1.Planetologist(),
+    new Producer_1.Producer(),
+    new Researcher_1.Researcher(),
+    new Sponsor_1.Sponsor(),
+    new Thawer_1.Thawer(),
+    new ThermoEngineer_1.ThermoEngineer(),
+];
 exports.ALL_MILESTONES = [
     ...exports.THARSIS_MILESTONES,
     ...exports.ELYSIUM_MILESTONES,
@@ -119,16 +147,17 @@ exports.ALL_MILESTONES = [
     ...exports.TERRA_CIMMERIA_MILESTONES,
     ...exports.VASTITAS_BOREALIS_MILESTONES,
     ...exports.UNDERWORLD_MILESTONES,
+    ...exports.MODULAR_MILESTONES,
 ];
-var Milestones;
-(function (Milestones) {
-    Milestones.ALL = exports.ALL_MILESTONES;
-    function getByName(name) {
-        const milestone = exports.ALL_MILESTONES.find((m) => m.name === name);
-        if (milestone) {
-            return milestone;
-        }
-        throw new Error(`Milestone ${name} not found.`);
+function getMilestoneByName(name) {
+    return exports.ALL_MILESTONES.find((m) => m.name === name);
+}
+exports.getMilestoneByName = getMilestoneByName;
+function getMilestoneByNameOrThrow(name) {
+    const milestone = getMilestoneByName(name);
+    if (milestone) {
+        return milestone;
     }
-    Milestones.getByName = getByName;
-})(Milestones = exports.Milestones || (exports.Milestones = {}));
+    throw new Error(`Milestone ${name} not found.`);
+}
+exports.getMilestoneByNameOrThrow = getMilestoneByNameOrThrow;

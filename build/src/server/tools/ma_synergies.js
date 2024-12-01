@@ -8,10 +8,10 @@ const Milestones_1 = require("../milestones/Milestones");
 const Awards_1 = require("../awards/Awards");
 function get(name) {
     try {
-        return Milestones_1.Milestones.getByName(name);
+        return (0, Milestones_1.getMilestoneByNameOrThrow)(name);
     }
     catch (err) {
-        return Awards_1.Awards.getByName(name);
+        return (0, Awards_1.getAwardByNameOrThrow)(name);
     }
 }
 const manames = [...MilestoneName_1.milestoneNames, ...AwardName_1.awardNames];

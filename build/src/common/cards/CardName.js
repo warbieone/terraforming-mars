@@ -550,6 +550,7 @@ var CardName;
     CardName["CITY_PARK"] = "City Park";
     CardName["SUPERMARKETS"] = "Supermarkets";
     CardName["HOSPITALS"] = "Hospitals";
+    CardName["PUBLIC_BATHS"] = "Public Baths";
     CardName["FLOYD_CONTINUUM"] = "Floyd Continuum";
     CardName["CASINOS"] = "Casinos";
     CardName["AGRICOLA_INC"] = "Agricola Inc";
